@@ -1,0 +1,9 @@
+addReviewers: true
+
+addAssignees: author
+
+reviewers:
+  - Jo-Minseok
+  - imyourmxxn
+
+numberOfReviewers: 1
