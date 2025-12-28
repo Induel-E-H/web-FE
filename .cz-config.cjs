@@ -34,8 +34,8 @@ module.exports = {
     },
   ],
   messages: {
-    type: "커밋 메세지 타입을 선택해주세요: ",
-    subject: "커밋 메세지 내용을 입력해주세요: ",
+    type: "커밋 메시지 타입을 선택해주세요: ",
+    subject: "커밋 메시지 내용을 입력해주세요: ",
     confirmCommit: "커밋 내용이 확실한가요?",
   },
   allowCustomScopes: false,
