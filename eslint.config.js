@@ -12,7 +12,7 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      eslintPluginPrettier,
+      prettier: eslintPluginPrettier,
     },
     rules: {
       'prettier/prettier': 'error', // Prettier 규칙 위반 시 에러
