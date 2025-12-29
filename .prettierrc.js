@@ -10,6 +10,9 @@ const config = {
   semi: true, // 마지막 ';' 세미 콜론 추가
   singleQuote: true, // 모든 문자열은 싱글 쿼터 사용
   jsxSingleQuote: true, // jsx 안 HTML 내에서 싱글 쿼터 사용
+  printWidth: 100, // 한 줄 최대 길이
+  arrowParens: 'always', // 화살표 함수 인자값 괄호 여부
+  endOfLine: 'lf', // 파일 EOF
 };
 
 export default config;
