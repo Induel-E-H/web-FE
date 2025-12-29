@@ -14,6 +14,9 @@ export default defineConfig([
     plugins: {
       eslintPluginPrettier,
     },
+    rules: {
+      'prettier/prettier': 'error', // Prettier 규칙 위반 시 에러
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
