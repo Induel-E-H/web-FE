@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "docker:dev:build": "docker build -t induel-fe-dev .",
+    "docker:dev:run": "docker run -it --name induel-fe-dev -p 5173:5173 -v .:/home/induel -v /home/induel/node_modules induel-fe-dev",
+    "docker:dev": "npm run docker:dev:build && npm run docker:dev:run",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
