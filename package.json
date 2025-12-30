@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "docker:dev:build": "docker build -t induel-fe-dev .",
+    "docker:dev:run": "docker run -it --name induel-fe-dev -p 5173:5173 -v .:/home/induel -v /home/induel/node_modules induel-fe-dev",
+    "docker:dev": "npm run docker:dev:build && npm run docker:dev:run",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier . --write",
     "prepare": "husky"
+    "commit": "cz"
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -23,6 +27,7 @@
     "@vitejs/plugin-react": "^5.1.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "commitizen": "^4.3.1",
+    "cz-customizable": "^7.5.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -40,5 +45,12 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.cjs"
+    }
   }
 }
