@@ -17,9 +17,9 @@ export default defineConfig([
       ...tseslint.configs.recommendedTypeChecked,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      eslintConfigPrettier,
       reactX.configs['recommended-typescript'],
       reactDom.configs.recommended,
+      eslintConfigPrettier,
     ],
     languageOptions: {
       parserOptions: {
