@@ -12,6 +12,19 @@ const config = {
   jsxSingleQuote: true, // jsx 안 HTML 내에서 싱글 쿼터 사용
   arrowParens: 'always', // 화살표 함수 인자값 괄호 여부
   endOfLine: 'lf', // 파일 EOF
+  plugins: ['@trivago/prettier-plugin-sort-imports'],
+  // Import 정렬 설정
+  importOrder: [
+    '^react',
+    '<THIRD_PARTY_MODULES>',
+    '^@/(.*)$',
+    '^@assets/(.*)$',
+    '^[./]',
+  ],
+  importOrderSeparation: true, // 그룹 간 빈 줄 추가
+  importOrderSortSpecifiers: true, // import 내부 specifier 정렬
+  importOrderGroupNamespaceSpecifiers: true, // namespace import 그룹화
+  importOrderCaseInsensitive: true, // 대소문자 구분 없이 정렬
 };
 
 export default config;
