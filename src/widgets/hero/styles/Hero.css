@@ -88,7 +88,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 41.67vmin;
+    height: 31.25vmax;
   }
 
   .hero__company-text {
