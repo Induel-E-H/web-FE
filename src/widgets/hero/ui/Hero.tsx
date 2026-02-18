@@ -5,7 +5,7 @@ import '../styles/Hero.css';
 function Hero() {
   return (
     <section className='hero'>
-      <div className='hero__background' />
+      <div className='hero__background' aria-hidden='true' />
       <div className='hero__company'>
         <img
           src='/induel-icon.svg'
@@ -17,7 +17,9 @@ function Hero() {
           <p className='hero__company-name-en'>Induel Engineering & Holdings</p>
         </div>
       </div>
-      <p className='hero__established'>SINCE 2000.04.27</p>
+      <time className='hero__established' dateTime='2000-04-27'>
+        SINCE 2000.04.27
+      </time>
       <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
     </section>
   );
