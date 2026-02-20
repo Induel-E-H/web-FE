@@ -28,6 +28,11 @@ function Hero() {
           width: '100%',
           textAlign: 'center',
           whiteSpace: 'nowrap',
+          textShadow: `
+            0 0 40px rgba(0, 0, 0, 1),
+            0 0 20px rgba(0, 0, 0, 1),
+            0 0 60px rgba(0, 0, 0, 1)
+          `,
         }}
       >
         현재 개발중입니다!
