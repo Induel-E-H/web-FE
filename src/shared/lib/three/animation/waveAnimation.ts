@@ -8,7 +8,7 @@ export function startWaveAnimation(
   camera: Three.Camera,
   tubes: TubeData[],
 ) {
-  const WAVE_AMP = 1;
+  const WAVE_AMP = 0.6;
   const WAVE_FREQ = 0.4;
   const WAVE_SPEED = 0.3;
 
