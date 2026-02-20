@@ -7,7 +7,7 @@ export function createWaveTubes(scene: Three.Scene): {
   tubes: TubeData[];
 } {
   const TUBE_COUNT = 30;
-  const TUBE_RADIUS = 1;
+  const TUBE_RADIUS = 2;
   const TUBE_LENGTH = 24;
   const TUBE_RAD_SEGS = 16;
   const TUBE_HEIGHT_SEGS = 120;
