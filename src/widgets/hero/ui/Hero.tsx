@@ -1,11 +1,12 @@
 import { IoIosArrowDown } from 'react-icons/io';
 
 import '../styles/Hero.css';
+import HeroBackground from './HeroBackground';
 
 function Hero() {
   return (
     <section className='hero'>
-      <div className='hero__background' aria-hidden='true' />
+      <HeroBackground />
       <div className='hero__company'>
         <img
           src='/induel-icon.svg'
