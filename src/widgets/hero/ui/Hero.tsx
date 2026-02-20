@@ -1,5 +1,4 @@
-import { IoIosArrowDown } from 'react-icons/io';
-
+// import { IoIosArrowDown } from 'react-icons/io';
 import '../styles/Hero.css';
 import HeroBackground from './HeroBackground';
 
@@ -21,7 +20,18 @@ function Hero() {
       <time className='hero__established' dateTime='2000-04-27'>
         SINCE 2000.04.27
       </time>
-      <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
+      {/* <IoIosArrowDown className='hero__down-icon' aria-hidden='true' /> */}
+      <p
+        style={{
+          position: 'absolute',
+          bottom: '2.34%',
+          width: '100%',
+          textAlign: 'center',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        현재 개발중입니다!
+      </p>
     </section>
   );
 }
