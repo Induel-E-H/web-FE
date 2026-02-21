@@ -1,26 +1,42 @@
-import * as Three from 'three';
+import {
+  BufferAttribute,
+  Color,
+  CylinderGeometry,
+  Group,
+  Mesh,
+  MeshStandardMaterial,
+  Scene,
+} from 'three';
 
 import type { TubeData } from './type';
 
-export function createWaveTubes(scene: Three.Scene): {
-  group: Three.Group;
+export function createWaveTubes(scene: Scene): {
+  group: Group;
   tubes: TubeData[];
 } {
-  const TUBE_COUNT = 30;
+  const isMobile = window.innerWidth < 768;
+
+  const TUBE_COUNT = isMobile ? 20 : 30;
   const TUBE_RADIUS = 2;
   const TUBE_LENGTH = 24;
-  const TUBE_RAD_SEGS = 16;
-  const TUBE_HEIGHT_SEGS = 120;
-  const TUBE_SPACING = 0.7;
+  const TUBE_RAD_SEGS = isMobile ? 8 : 12;
+  const TUBE_HEIGHT_SEGS = isMobile ? 60 : 80;
+  const TUBE_SPACING = isMobile ? 1.05 : 0.7;
 
-  const group = new Three.Group();
+  const group = new Group();
   group.rotation.y = -Math.PI / 4;
   scene.add(group);
 
+  const color = new Color(0x000000);
+  const sharedMaterial = new MeshStandardMaterial({
+    color,
+    roughness: 0.35,
+    metalness: 0.05,
+  });
+
   const tubes: TubeData[] = [];
   for (let i = 0; i < TUBE_COUNT; i++) {
-    const color = new Three.Color(0x000000);
-    const geometry = new Three.CylinderGeometry(
+    const geometry = new CylinderGeometry(
       TUBE_RADIUS,
       TUBE_RADIUS,
       TUBE_LENGTH,
@@ -29,19 +45,16 @@ export function createWaveTubes(scene: Three.Scene): {
       true,
     );
     geometry.rotateX(Math.PI / 2);
-    const posAttr = geometry.attributes.position as Three.BufferAttribute;
+
+    const posAttr = geometry.attributes.position as BufferAttribute;
     const baseY = new Float32Array(posAttr.count);
     for (let j = 0; j < posAttr.count; j++) {
       baseY[j] = posAttr.getY(j);
     }
-    const material = new Three.MeshStandardMaterial({
-      color,
-      roughness: 0.35,
-      metalness: 0.05,
-      // wireframe: true,
-    });
-    const mesh = new Three.Mesh(geometry, material);
+
+    const mesh = new Mesh(geometry, sharedMaterial);
     mesh.position.set((i - (TUBE_COUNT - 1) / 2) * TUBE_SPACING, 0, -i * 0.18);
+    mesh.frustumCulled = false;
     group.add(mesh);
     tubes.push({ posAttr, baseY, geo: geometry });
   }
