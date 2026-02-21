@@ -23,10 +23,12 @@
   flex-direction: row;
   align-items: center;
   gap: 3.64vw;
+  animation: fade-in 1.2s ease-out forwards;
 }
 
 .hero__logo {
   height: 16.67vmax;
+  aspect-ratio: 649 / 748;
   filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1))
     drop-shadow(0 0 20px rgba(0, 0, 0, 1))
     drop-shadow(0 0 60px rgba(0, 0, 0, 1));
@@ -59,7 +61,7 @@
 
 .hero__established {
   position: absolute;
-  transform: translate(-50%);
+  transform: translateX(-50%);
   bottom: 8%;
   left: 50%;
   white-space: nowrap;
@@ -68,6 +70,39 @@
     0 0 40px rgba(0, 0, 0, 1),
     0 0 20px rgba(0, 0, 0, 1),
     0 0 60px rgba(0, 0, 0, 1);
+  opacity: 0;
+  animation: fade-in-established 1s ease-out 0.6s forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes fade-in-mobile {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-established {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 @keyframes bounce-down {
@@ -97,6 +132,7 @@
     transform: none;
     display: block;
     filter: none;
+    animation: fade-in-mobile 1.2s ease-out forwards;
   }
 
   .hero__logo {
