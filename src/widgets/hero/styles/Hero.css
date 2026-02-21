@@ -112,30 +112,38 @@
 
 @media (max-width: 1024px) {
   .hero__company {
-    position: static;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     transform: none;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     filter: none;
     animation: fade-in-mobile 1.2s ease-out forwards;
+    gap: 0;
   }
 
   .hero__logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 31.25%;
+    position: static;
+    transform: none;
+    order: 2;
     width: 36.17%;
+    max-height: 32dvh;
+    height: auto;
     filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
+    margin: auto;
   }
 
   .hero__company-text {
-    position: absolute;
-    top: 9.28%;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    transform: none;
+    order: 1;
     align-items: center;
-    gap: 2.6vmin;
+    gap: 1.82vmin;
+    padding-top: 9.77%;
   }
 
   .hero__company-name {
