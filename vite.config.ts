@@ -19,4 +19,8 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  build: {
+    target: 'esnext',
+    chunkSizeWarningLimit: 500,
+  },
 });
