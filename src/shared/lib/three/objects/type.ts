@@ -1,7 +1,7 @@
-import * as Three from 'three';
+import type { BufferAttribute, BufferGeometry } from 'three';
 
 export type TubeData = {
-  posAttr: Three.BufferAttribute;
+  posAttr: BufferAttribute;
   baseY: Float32Array;
-  geo: Three.BufferGeometry;
+  geo: BufferGeometry;
 };

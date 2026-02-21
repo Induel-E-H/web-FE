@@ -1,8 +1,8 @@
-import * as Three from 'three';
+import type { PerspectiveCamera, WebGLRenderer } from 'three';
 
 export function attachResizeHandler(
-  camera: Three.PerspectiveCamera,
-  renderer: Three.WebGLRenderer,
+  camera: PerspectiveCamera,
+  renderer: WebGLRenderer,
 ) {
   function onResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
