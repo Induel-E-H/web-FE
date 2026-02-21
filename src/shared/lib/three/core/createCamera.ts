@@ -1,7 +1,7 @@
-import * as Three from 'three';
+import { PerspectiveCamera } from 'three';
 
 export function createCamera() {
-  const camera = new Three.PerspectiveCamera(
+  const camera = new PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
     0.1,
