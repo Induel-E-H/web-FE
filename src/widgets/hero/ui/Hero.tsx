@@ -15,11 +15,11 @@ function Hero() {
         <div className='hero__company-text'>
           <h1 className='hero__company-name'>(주) 인들이앤에이치</h1>
           <p className='hero__company-name-en'>Induel Engineering & Holdings</p>
+          <time className='hero__established' dateTime='2000-04-27'>
+            SINCE 2000.04.27
+          </time>
         </div>
       </div>
-      <time className='hero__established' dateTime='2000-04-27'>
-        SINCE 2000.04.27
-      </time>
       {/* <IoIosArrowDown className='hero__down-icon' aria-hidden='true' /> */}
       <p
         style={{
