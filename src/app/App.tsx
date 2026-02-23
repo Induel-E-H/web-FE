@@ -1,9 +1,9 @@
-import Hero from '@widgets/hero/ui/Hero';
+import Home from '@pages/home';
 
 function App() {
   return (
     <>
-      <Hero />
+      <Home />
     </>
   );
 }
