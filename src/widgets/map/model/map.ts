@@ -18,10 +18,15 @@ export function makeMap(el: HTMLDivElement): () => void {
     },
   });
   const marker = makeMapMarker(map);
-  makeInfoCard(map, marker);
+  const infoWindow = makeInfoCard(map, marker);
 
   const onResize = () => {
+    const wasOpen = !!infoWindow.getMap();
     updateMarkerIcon(marker);
+    if (wasOpen) {
+      infoWindow.close();
+      infoWindow.open(map, marker);
+    }
   };
   window.addEventListener('resize', onResize);
   return () => window.removeEventListener('resize', onResize);
