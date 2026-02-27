@@ -117,7 +117,7 @@
   font-size: 0.65vw;
 }
 
-/*========= 태블릿 =========*/
+/* ========= 태블릿 ========= */
 @media (max-width: 1023px) {
   .footer {
     font-size: 1.302vw;
@@ -174,14 +174,14 @@
   }
 }
 
-/*========= 모바일 =========*/
+/* ========= 모바일 ========= */
 @media (max-width: 767px) {
   .footer {
     font-size: 2.08vw;
     padding: 4.16vw;
   }
 
-  /*footer top (grid 2*2) */
+  /* footer top (grid 2*2) */
   .footer__top {
     display: grid;
     grid-template-columns: repeat(2, auto);
