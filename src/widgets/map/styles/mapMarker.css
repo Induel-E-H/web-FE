@@ -1,0 +1,20 @@
+.map__marker {
+  width: 2.292vmax;
+  aspect-ratio: 11/14;
+}
+
+.map__marker__shadow {
+  fill: rgba(0, 0, 0, 0.22);
+}
+
+.map__marker__body {
+  fill: url(#pinGrad);
+}
+
+.map__marker__highlight {
+  fill: rgba(255, 255, 255, 0.12);
+}
+
+.map__marker__circle {
+  fill: white;
+}
