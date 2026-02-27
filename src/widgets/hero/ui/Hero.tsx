@@ -8,7 +8,7 @@ function Hero() {
       <HeroBackground />
       <div className='hero__company'>
         <img
-          src='/induel-icon.svg'
+          src='/src/shared/assets/induel-icon.svg'
           alt='인들이앤에이치 로고'
           className='hero__logo'
         />
