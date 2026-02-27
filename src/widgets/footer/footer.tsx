@@ -33,7 +33,7 @@ function Footer() {
           </div>
           <div className='footer__contact-row'>
             <span>Fax</span>
-            <a href='tel:051-625-6279'>051-625-6279</a>
+            <p>051-625-6279</p>
           </div>
           <div className='footer__contact-row'>
             <span>Email</span>

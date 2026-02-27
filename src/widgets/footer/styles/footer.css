@@ -76,7 +76,7 @@
 }
 
 /* 연락처, 이메일, 주소 */
-h3 {
+.footer h3 {
   font-size: 1.04vw;
   font-weight: 900;
 }
@@ -85,6 +85,11 @@ h3 {
   display: flex;
   column-gap: 0.781vw;
   font-weight: 600;
+}
+
+.footer__contact-row a {
+  text-decoration: none;
+  color: var(--white);
 }
 
 .footer__contact-row span {
@@ -115,7 +120,7 @@ h3 {
 /*========= 태블릿 =========*/
 @media (max-width: 1023px) {
   .footer {
-    font-size: 1.302vw; /*기본 10px*/
+    font-size: 1.302vw;
     padding: 2.604vw 5.21vw;
   }
 
@@ -182,7 +187,7 @@ h3 {
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(2, auto);
     align-items: start;
-    row-gap: 3.08vh;
+    row-gap: 5.2vw;
     column-gap: 22vw;
   }
 
