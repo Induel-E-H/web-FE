@@ -76,7 +76,7 @@
 }
 
 /* 연락처, 이메일, 주소 */
-.footer h3 {
+.footer__title {
   font-size: 1.04vw;
   font-weight: 900;
 }
@@ -152,7 +152,7 @@
   }
 
   /* 연락처, 주소 */
-  .footer h3 {
+  .footer__title {
     font-size: 1.823vw;
   }
 
@@ -230,7 +230,7 @@
   }
 
   /* Contact & Address */
-  .footer h3 {
+  .footer__title {
     font-size: 2.5vw;
   }
 

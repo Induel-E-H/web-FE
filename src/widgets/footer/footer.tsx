@@ -26,7 +26,7 @@ function Footer() {
         </div>
 
         <address className='footer__contact'>
-          <h3>Contact</h3>
+          <span className='footer__title'>Contact</span>
           <div className='footer__contact-row'>
             <span>Tel</span>
             <a href='tel:051-626-6277'>051-626-6277</a>
@@ -42,7 +42,7 @@ function Footer() {
         </address>
 
         <address className='footer__address'>
-          <h3>Address</h3>
+          <span className='footer__title'>Address</span>
           <span>부산광역시 남구 수영로 274-16</span>
         </address>
       </div>
