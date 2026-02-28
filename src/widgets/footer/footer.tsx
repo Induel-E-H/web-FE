@@ -1,6 +1,6 @@
 import './styles/footer.css';
 
-function Footer() {
+export function Footer() {
   return (
     <footer className='footer'>
       <div className='footer__top'>
@@ -54,4 +54,3 @@ function Footer() {
     </footer>
   );
 }
-export default Footer;
