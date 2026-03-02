@@ -48,6 +48,9 @@ updates:
           - 'husky'
           - 'lint-staged'
     ignore:
+      - dependency-name: '*'
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: 'vite'
         versions:
           - '>= 7'
