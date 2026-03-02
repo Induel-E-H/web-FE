@@ -1,4 +1,4 @@
-import './styles/footer.css';
+import './styles/Footer.css';
 
 export function Footer() {
   return (
@@ -37,7 +37,7 @@ export function Footer() {
           </div>
           <div className='footer__contact-row'>
             <span>Email</span>
-            <a href='mailto:seven@induel.com'>seven@induel.com</a>
+            <a href='mailto:seven@induel.com'>seven@induel.co.kr</a>
           </div>
         </address>
 
