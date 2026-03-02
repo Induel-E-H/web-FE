@@ -15,14 +15,19 @@ updates:
         patterns:
           - 'react'
           - 'react-dom'
+        dependency-type: 'production'
+      react-types:
+        patterns:
           - '@types/react'
           - '@types/react-dom'
+        dependency-type: 'development'
       vite:
         patterns:
           - 'vite'
           - 'rolldown-vite'
           - '@vitejs/*'
           - 'vite-*'
+        dependency-type: 'development'
       eslint:
         patterns:
           - 'eslint'
@@ -30,23 +35,30 @@ updates:
           - '@eslint/*'
           - 'typescript-eslint'
           - 'globals'
+        dependency-type: 'development'
       typescript:
         patterns:
           - 'typescript'
           - '@types/*'
+        dependency-type: 'development'
       prettier:
         patterns:
           - 'prettier'
           - '@trivago/prettier-plugin-sort-imports'
+        dependency-type: 'development'
       commitizen:
         patterns:
           - 'commitizen'
           - 'cz-customizable'
           - '@commitlint/*'
+        dependency-type: 'development'
       husky:
         patterns:
           - 'husky'
           - 'lint-staged'
+        dependency-type: 'development'
+      dev-dependencies:
+        dependency-type: 'development'
     ignore:
       - dependency-name: '*'
         update-types:
