@@ -41,6 +41,11 @@
   color: inherit;
 }
 
+.history__category span {
+  font-weight: 600;
+  font-size: 1.04vmax;
+}
+
 .history__category button.active {
   color: var(--brown-300);
 }
