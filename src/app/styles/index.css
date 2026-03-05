@@ -70,7 +70,7 @@
   /* Book */
   --book-cover: var(--mauve-500);
   --book-center: var(--mauve-600);
-  --book-centerDeep: var(--mauve-700);
+  --book-center-deep: var(--mauve-700);
   --book-page: var(--white);
 }
 
