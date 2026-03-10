@@ -1,5 +1,6 @@
 [
   {
+    "titleEng": "Marine Fisheries Academy",
     "title": "해양수산 아카데미관",
     "description": "해양수산 아카데미관 구축 기본 및 실시설계",
     "address": "부산광역시 기장군 일광면 이동길 4-1 해조류육종융합연구센터",
@@ -8,6 +9,7 @@
     "area": ["1,044.33m²"]
   },
   {
+    "titleEng": "Yongdang Elementary School",
     "title": "용당초등학교",
     "description": "용당초등학교 학교공간혁신사업",
     "address": "부산광역시 남구 신선로 3",
@@ -16,6 +18,7 @@
     "area": ["940m²"]
   },
   {
+    "titleEng": "ASEAN Republic of KOREA Commemorative of KOREA",
     "title": "한아세안 특별정상회의장",
     "description": "2019 한·아세안 특별정상회의장 정상회의장 및 부대시설 조성사업",
     "address": "부산광역시 해운대구 APEC로 컨벤션홀, 동백섬 두리마루 APEC 하우스",
@@ -24,6 +27,7 @@
     "area": ["5,026m²"]
   },
   {
+    "titleEng": "Busan Safety & Experience Center",
     "title": "부산 119안전체험관",
     "description": "부산119안전체험관 체험콘텐츠 리뉴얼 설계 및 구축",
     "address": "부산 동래구 우장춘로 117 부산 119안전체험관",
@@ -32,6 +36,7 @@
     "area": ["820m² 중 일부"]
   },
   {
+    "titleEng": "Waseok Elementary School",
     "title": "와석초등학교",
     "description": "와석초등학교 교실형 안전체험시설 구축",
     "address": "부산광역시 북구 화명대로94번길 83",
@@ -40,6 +45,7 @@
     "area": ["165.27m²"]
   },
   {
+    "titleEng": "Gyeongnam Comprehensive Safety Experience Hall",
     "title": "경남학생종합안전체험관",
     "description": "경남학생종합안전체험관 전시체험시설 설계 및 제작설치",
     "address": "경상남도 진주시 문산읍 삼곡리640-1",
@@ -48,6 +54,7 @@
     "area": ["3288.59m²(지상1층~3층)"]
   },
   {
+    "titleEng": "Ulsan Safety Experience Center",
     "title": "울산안전체험관",
     "description": "울산 시민안전체험 교육센터 전시・체험시설 설계 및 제작 설치・설치시험",
     "address": "울산광역시 북구 정자동 산27번지 일월(강동관광단지)",
@@ -56,6 +63,7 @@
     "area": ["건축면적 3,304m²", "연면적 7,000m²", "부지면적 114,882m²"]
   },
   {
+    "titleEng": "Busan City Hall",
     "title": "부산시청사",
     "description": "부산시청사 로비 리모델링 사업",
     "address": "부산광역시 연제구 중앙대로 1001(부산시청)",
@@ -64,6 +72,7 @@
     "area": ["8,688,57m²", "1층 4,906,15m²", "2층 2,603,66m²"]
   },
   {
+    "titleEng": "K-Shoes Center",
     "title": "한국신발관",
     "description": "K-슈즈비즈센터 리모델링사업",
     "address": "부산 부산진구 백양대로 227 한국신발관",
@@ -72,6 +81,7 @@
     "area": ["전시시설(지상1,2층): 983.62m²", "연면적 : 1500.42m²"]
   },
   {
+    "titleEng": "Jung-gu Entertainer Street",
     "title": "중구엔터테이너거리",
     "description": "부산광역시 중구 엔터테이너거리 조성사업",
     "address": "BIFF 광장입구~광복쉼터 일원",
@@ -80,6 +90,7 @@
     "area": ["L: 630m", "W:4~8m"]
   },
   {
+    "titleEng": "Busan Technical High School History Museum",
     "title": "부산공업고등학교 역사관",
     "description": "부산공업고등학교 역사관 인테리어 사업",
     "address": "부산광역시 남구 수영로 196번길 80 부산공업고등학교",
@@ -88,6 +99,7 @@
     "area": ["239.9m²"]
   },
   {
+    "titleEng": "Busan Citizens' Park Ecological Tunnel",
     "title": "부산시민공원 생태터널",
     "description": "부산시민공원 우회도록(2단계) 디자인사업",
     "address": "부산진구 연지동 53-13번지 일원",
@@ -96,6 +108,7 @@
     "area": []
   },
   {
+    "titleEng": "Summit Conference Hall (Bexco/Nurimaru)",
     "title": "정상회의장 조성 (벡스코/누리마루)",
     "description": "정상회의장 벡스코 누리마루 조성사업",
     "address": "부산광역시 해운대구 우1동 1291/부산광역시 해운대구 우동 714-1",
@@ -104,6 +117,7 @@
     "area": ["5,026m²"]
   },
   {
+    "titleEng": "Gudeok Traditional Culture Experience Center",
     "title": "구덕전통문화체험관",
     "description": "구덕전통문화체험관 건축설계 및 전시설계·제작설치공사",
     "address": "부산광역시 서구 서대신동3가 산18-1번지 (구덕문화공원내)",
@@ -112,6 +126,7 @@
     "area": ["4,950㎡"]
   },
   {
+    "titleEng": "Koon Busan Store",
     "title": "쿤 부산 스토어",
     "description": "쿤 인테리어 제작·설치",
     "address": "부산광역시 해운대구 우1동 763 스타제이드 2F",
@@ -120,6 +135,7 @@
     "area": ["1,220m²"]
   },
   {
+    "titleEng": "Kyungsung University Public Relations Hall",
     "title": "경성대학교 홍보홀",
     "description": "경성대학교 홍보홀(웰컴스퀘어) 조성사업",
     "address": "부산광역시 남구 대연3동 산 37-1 멀티미디어 정보관 1층",
@@ -128,6 +144,7 @@
     "area": ["446㎡"]
   },
   {
+    "titleEng": "Korea Maritime Institute Busan Government Office Building",
     "title": "한국해양수산개발원(KMI) 부산 신청사",
     "description": "한국해양수산개발원(KMI) 부산 신청사 내부시설공사",
     "address": "부산광역시 영도구 동삼동 1161",
@@ -136,6 +153,7 @@
     "area": ["729.94m²"]
   },
   {
+    "titleEng": "2014 ITU Plenipotentiary Conference",
     "title": "ITU전권회의",
     "description": "2014 ITU 전권회의 기획 및 준비대행 용역",
     "address": "부산광역시 해운대구 우1동 1291 BEXCO",
@@ -144,6 +162,7 @@
     "area": ["41,442.85㎡"]
   },
   {
+    "titleEng": "United Nation Peace Memorial Hall",
     "title": "UN평화기념관",
     "description": "UN평화기념관 전시 설계 및 제작설치공사",
     "address": "부산광역시 남구 대연4동 747-97",
@@ -152,6 +171,7 @@
     "area": ["연면적 3,090㎡(지상2층~지상1층)"]
   },
   {
+    "titleEng": "Protected Horticulture Research Station",
     "title": "국립시설원예시험장",
     "description": "국립시설원예시험장 홍보관 및 기념관 전시시설 제작·설치",
     "address": "경상남도 함안군 함안면 봉성리 290 시설원예 시험장 종합연구동 2층",
@@ -160,6 +180,7 @@
     "area": ["310.52㎡"]
   },
   {
+    "titleEng": "Busan Chamber Square",
     "title": "부산 챔버스퀘어",
     "description": "부산 챔버스퀘어 건립 설계 및 전시 시설 제작·설치 공사",
     "address": "부산광역시 부산진구 범천 1동 853-1 부산 상공 회의소",
@@ -168,6 +189,7 @@
     "area": ["835㎡"]
   },
   {
+    "titleEng": "Busan Citizens Parks History Museum",
     "title": "부산시민공원역사관",
     "description": "부산시민공원역사관 전시설계 및 전시공사",
     "address": "부산시민공원 내 (구)하야리아 부대 장교클럽",
@@ -176,6 +198,7 @@
     "area": ["678㎡(205평)", "연면적 1,060㎡(320평)"]
   },
   {
+    "titleEng": "The container art terminal(CATS)",
     "title": "컨테이너 아트터미널(CATS)",
     "description": "컨테이너 아트터미널 (CATS) 조성사업",
     "address": "부산광역시 사상구 괘법동 572-1번지 일원 (사상경전철역 앞 잔디광장)",
@@ -188,6 +211,7 @@
     ]
   },
   {
+    "titleEng": "Sachun Hi-tech AeroSpace Science museum",
     "title": "사천 첨단항공우주과학관",
     "description": "사천 첨단항공우주과학관 임대형 민간투자시설사업 기본계획 공모 당선",
     "address": "경상남도 사천시 사남면 유천리 908번지 일원",
@@ -196,6 +220,7 @@
     "area": ["지상3층 건축면적 : 3,063.47㎡", "연면적 : 4,377.96㎡"]
   },
   {
+    "titleEng": "BEXCO Exhibition 2",
     "title": "벡스코 제2전시장",
     "description": "벡스코시설확충공사 중 인테리어공사 수주",
     "address": "부산광역시 해운대구 APEC로 43 벡스코 제2전시장",
@@ -204,6 +229,7 @@
     "area": ["19,872㎡", "1층 9,936m²"]
   },
   {
+    "titleEng": "Gyeongnam Goseong Dinosaur World EXPO Theme Science Hall",
     "title": "고성 공룡테마과학관 및 한반도 공룡발자국화석관",
     "description": "고성 공룡테마과학관 및 한반도 공룡발자국화석관 사업 현상공모 당선",
     "address": "경상남도 고성군 당항포관광지 內",
@@ -216,6 +242,7 @@
     ]
   },
   {
+    "titleEng": "2011 Gyeongju World Culture EXPO",
     "title": "2011 경주세계문화엑스포 주제전시관",
     "description": "2011 경주세계문화엑스포 주제전시관 현상공모 당선",
     "address": "경상북도 경주시 천군동 230번지 '천마의 궁전'",
@@ -224,6 +251,7 @@
     "area": ["천마의 궁전 2,116㎡"]
   },
   {
+    "titleEng": "Busan Cinema Center",
     "title": "영화의 전당",
     "description": "영화의 전당 부대시설 인테리어 설계 및 제작·설치 제안 공모",
     "address": "부산광역시 해운대구 우동 146번지",
@@ -232,6 +260,7 @@
     "area": ["1,396m²", "공연장 대기실, 분장실 등 부대시설"]
   },
   {
+    "titleEng": "Chairman opened meeting hall renovation",
     "title": "부산광역시청 \"열린행사장\"",
     "description": "열린행사장 대연회장 개·보수공사",
     "address": "부산광역시 수영구 남천동 59-6번지 열린행사장",
@@ -247,6 +276,7 @@
     ]
   },
   {
+    "titleEng": "Joseon Tongsinsa History Museum",
     "title": "조선통신사 역사관",
     "description": "조선통신사 역사관 전시·영상물 제작·설치사업 현상공모 당선",
     "address": "부산광역시 동구 범일동 380-4번지 자성대 공원 內",
@@ -259,6 +289,7 @@
     ]
   },
   {
+    "titleEng": "Busan Climate Change Experience Education Center",
     "title": "부산 기후변화체험관",
     "description": "부산 기후변화체험관 건립 건축설계 및 전시물 제작·설치 공사",
     "address": "부산광역시 북구 화명동 2292-1",
@@ -267,6 +298,7 @@
     "area": ["11,977.50㎡", "지상1층, 지상2층 연면적 1,905.21㎡"]
   },
   {
+    "titleEng": "Beakje's Historic Reemergence Area",
     "title": "백제역사재현단지",
     "description": "백제역사재현단지 전시시설 제작설치 수주",
     "address": "충청남도 부여군 규암면 합정리 117번지 백제역사재현단지",
@@ -275,6 +307,7 @@
     "area": ["충청남도 부여군 규암면 합정리 117번지 백제역사재현단지"]
   },
   {
+    "titleEng": "Street Park of Light and Water, Model Project of Public Design",
     "title": "포항 공공디자인 시범사업 빛과 물의 가로공원",
     "description": "포항 공공디자인 시범사업 빛과 물의 가로공원 조성공사 공모 당선",
     "address": "경상북도 포항시 북구 죽도동 한국은행 앞 가각부 및 교통섬",
@@ -283,6 +316,7 @@
     "area": ["포항시 북구 죽도동 한국은행 앞 가각부 및 교통섬"]
   },
   {
+    "titleEng": "National Archives of Korea, History Archives, The annals of the Joseon Dynasty Gallery",
     "title": "국가기록원 역사기록관 조선왕조실록실",
     "description": "국가기록원 역사기록관 조선왕조실록실 전시사업 현상공모 당선",
     "address": "부산광역시 연제구 월드컵길 81 (거제2동 산 126번지)",
@@ -291,6 +325,7 @@
     "area": ["국가기록원 역사기록관 본관동 1층 280㎡"]
   },
   {
+    "titleEng": "Remodeling project of Forest Publicity Hall",
     "title": "산림홍보관 리모델링 사업",
     "description": "산림홍보관 리모델링 사업",
     "address": "대전광역시 서구 선사로 139 정부대전청사 1동 1층",
@@ -299,6 +334,7 @@
     "area": ["407㎡", "1층: 337㎡", "2층: 70㎡"]
   },
   {
+    "titleEng": "Memorial Hall of Saemaeul Birthplace at Pohang-si",
     "title": "포항시 새마을 발상지 기념관",
     "description": "포항시 새마을운동발상지기념관 전시시설 설계 및 제작·설치사업",
     "address": "경상북도 포항시 북구 기계면 문성리 357-1번지 새마을 기념관",
@@ -313,6 +349,7 @@
     ]
   },
   {
+    "titleEng": "Commemorative sculpture of Gyeongju Citizens' Day",
     "title": "경주시민의 날 제정기념 조형물",
     "description": "경주시민의 날 제정기념 조형물 제작 설치사업 현상공모 당선",
     "address": "경상북도 경주시 황성동 429번지 일원(황성공원 실내체육관 북면)",
@@ -321,6 +358,7 @@
     "area": ["경주시 황성동 429번지 일원 (황성공원 실내체육관 북편)"]
   },
   {
+    "titleEng": "Symbolic sculpture for safety at Daegu Safety Theme Park",
     "title": "대구 시민안전테마파크 안전상징 조형물",
     "description": "대구 시민안전테이파크 안전성징 조형물 제작·설치사업 현상공모 당선",
     "address": "대구광역시 동구 용수동 89-13번지",
@@ -329,6 +367,7 @@
     "area": ["대구시민안전 테마파크 부지 내 624m²"]
   },
   {
+    "titleEng": "Kwangbokro Public Design Production and Installation",
     "title": "광복로 조형물 제작·설치",
     "description": "광복로 조형물 제작·설치 현상공모 당선",
     "address": "부산광역시 중구 광복로 시범 가로사업 구간 가로변 10여 개소",
@@ -337,6 +376,7 @@
     "area": ["0.2m²(중구 전체 7.50%)"]
   },
   {
+    "titleEng": "Model Signboard & Public Design For Tongyeong Street",
     "title": "통영 옥외광고 시범거리",
     "description": "통명 옥외광고 시범거리조성 현상공모 당선",
     "address": "경상남도 통영시 통영 해인로 54번지",
@@ -349,6 +389,7 @@
     ]
   },
   {
+    "titleEng": "BJFEZ 2020 Vision Hall",
     "title": "부산 진해 경제자유구역청 홍보관",
     "description": "부산 진해 경제자유구역청 현상공모 당선",
     "address": "부산광역시 강서구 녹산산업 16길 151구역 청사 1층",
@@ -357,6 +398,7 @@
     "area": ["부산진해경제자유구역 청사1층(400㎡)"]
   },
   {
+    "titleEng": "Geumjeong Cyclodrome Birth Story Exhibition",
     "title": "금정경륜장 탄생의 신비관",
     "description": "금정경륜장 성문화교육전시관 및 전시조형물구성 현상공모 당선",
     "address": "부산광역시 금정구 두구동 669번지 금정경륜장",
@@ -365,6 +407,7 @@
     "area": ["지하1층 1,938㎡"]
   },
   {
+    "titleEng": "Youngduk Fisheries, Animals And Plants Pavilion",
     "title": "영덕 수산동식물 전시관",
     "description": "영덕 수산동식물 전시관 설치사업 현상전국공모 당선",
     "address": "경상북도 영덕군 감사면 삼사리 산6-17번지 영덕 어촌민속전시관 內 지하1층",
@@ -373,6 +416,7 @@
     "area": ["부지면적 8,245m²", "건평 2,397m²", "지하 1층, 지상 1~3층"]
   },
   {
+    "titleEng": "Design Center Busan",
     "title": "부산디자인센터",
     "description": "부산디자인센터 체험관 설치 용역 공모 당선",
     "address": "부산광역시 해운대구 우동 1457번지 부산디자인센터 4층",
@@ -381,6 +425,7 @@
     "area": ["1,594㎡ 체험영역 3개존과 기타 부대시설로 구성"]
   },
   {
+    "titleEng": "Busan International Games Museum",
     "title": "부산 국제경기대회기념 전시관",
     "description": "부산 국제경기대회 기념자료 전시관 설치공사 설계 경기공모 당신",
     "address": "부산광역시 동래구 사직동 749-6번지 부산광역시 체육회관 1층",
@@ -389,6 +434,7 @@
     "area": ["부산광역시 체육회관 약 13120.7m² 중 1322.3m²"]
   },
   {
+    "titleEng": "Busan Global Village",
     "title": "부산글로벌빌리지 체험학습 전시시설",
     "description": "Busan Global Village 체험학습 전시시설 기술 용역 건설기술공모 당선",
     "address": "부산광역시 부산진구 부전동 389-25번지",
@@ -397,6 +443,7 @@
     "area": ["체험학습동 3,36,766m²", "행정동 26,137m²"]
   },
   {
+    "titleEng": "Nakdong River Estuary ECO Center",
     "title": "낙동강하구 에코 센터",
     "description": "낙동강하구 에코 센터 내부 전시시설 공모 당선",
     "address": "부산광역시 사하구 하단동 1207-2번지 낙동강하구 에코 센터",
@@ -405,6 +452,7 @@
     "area": ["대지 66,979m²", "건축물 3,302m²"]
   },
   {
+    "titleEng": "Pohang I-JOA PLAZA",
     "title": "포항시 아이조아플라자",
     "description": "영유아플라자 실내체험시설 설계 및 제작설치",
     "address": "포항시 남구 대도동 328-15번지 일원 포항어린이타운 內 포항시 아이조아 플라자",
@@ -417,6 +465,7 @@
     ]
   },
   {
+    "titleEng": "Busan Gyeongnam Racecourse Main Gate",
     "title": "부산 경남 경마공원 정문 조형물",
     "description": "부산 경남 경마공원 정문 조형물 현상공모 당선",
     "address": "부산광역시 강서구 병방동 152번지 부산경남 경마공원",
@@ -425,6 +474,7 @@
     "area": ["부산광역시 강서구 병방동 152번지 부산경남경마공원"]
   },
   {
+    "titleEng": "Dongnae Eupseong History Hall",
     "title": "동래읍성 역사관",
     "description": "동래읍성 역사관 내부 전시실 공사",
     "address": "부산광역시 동래구 복천동 1-28번지",
@@ -439,6 +489,7 @@
     ]
   },
   {
+    "titleEng": "Busan PR in the APEC Economic Leader's Meeting Hall",
     "title": "APEC정상회의장 內 도시홍보물 설치",
     "description": "APEC 정상회의장 內 도시홍보물 설치 및 기념사업 현상공모 당선",
     "address": "부산광역시 해운대구 우동 1291번지 BEXCO",
@@ -449,6 +500,7 @@
     ]
   },
   {
+    "titleEng": "Busan Economic Leader's Meeting Hall Display",
     "title": "APEC정상회의장 디스플레이 사업",
     "description": "APEC 정상회의장 디스플레이 현상공모 당선",
     "address": "부산광역시 해운대구 BEXCO, 누리마루 APEC하우스",
@@ -460,6 +512,7 @@
     ]
   },
   {
+    "titleEng": "Nakdong River Estuary Amisan Observatory",
     "title": "낙동강하구 아미산 전망대",
     "description": "낙동강하구 아미산 전망대 전시시설 사업 현상공모 당선",
     "address": "부산광역시 사하구 다대동 1548-1번지",
@@ -473,6 +526,7 @@
     ]
   },
   {
+    "titleEng": "U.N. Memorial Cemetery Memorabilia Hall",
     "title": "UN 기념관",
     "description": "UN 기념공원관리처 기념관내부 전시실 공사",
     "address": "부산광역시 남구 대연4동 720번지",
@@ -481,6 +535,7 @@
     "area": ["부산광역시 남구 대연4동 720번지"]
   },
   {
+    "titleEng": "Skyway Friendly Parking",
     "title": "친환경 스카이웨이 주차장",
     "description": "친환경 스카이웨이 주차장 건설 사업",
     "address": "부산광역시 동구 ~~ 금수사 컴퓨터과학고등학교 주변 (191p 글자깨짐)",
