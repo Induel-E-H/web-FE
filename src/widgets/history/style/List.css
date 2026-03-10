@@ -14,6 +14,10 @@
   gap: 1.851vh;
 }
 
+.list__title--hidden {
+  visibility: hidden;
+}
+
 .list__title hr {
   width: 41.32%;
   height: 0.094vh;
@@ -32,7 +36,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
-  row-gap: 1.5vh;
+  row-gap: 1.3vh;
   padding: 0;
   margin: 0;
 }
@@ -41,12 +45,12 @@
   display: flex;
   align-items: center;
   gap: 1.93%;
+  font-size: 0.83vmax;
 }
 
 .list__ul li::before {
   content: '•';
   color: var(--typo-contentW);
-  font-size: 0.83vmax;
   flex-shrink: 0;
 }
 
@@ -57,5 +61,5 @@
   color: var(--typo-contentW);
   text-align: left;
   font-weight: 600;
-  font-size: 0.83vmax;
+  font-size: inherit;
 }
