@@ -126,6 +126,8 @@
   background-color: var(--book-page);
   flex: 1;
   height: 100%;
+  padding: 2.061%;
+  box-sizing: border-box;
 }
 
 .history__book-page-outer-shadow {
