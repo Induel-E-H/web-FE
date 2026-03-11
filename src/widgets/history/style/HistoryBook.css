@@ -194,6 +194,20 @@
   background: linear-gradient(to left, #ffffff 50%, #999999 100%);
 }
 
+.history__book-page-left--clickable {
+  cursor:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><polyline points='18,5 8,14 18,23' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/><polyline points='18,5 8,14 18,23' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+      8 14,
+    w-resize;
+}
+
+.history__book-page-right--clickable {
+  cursor:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><polyline points='10,5 20,14 10,23' stroke='white' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/><polyline points='10,5 20,14 10,23' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+      20 14,
+    e-resize;
+}
+
 @media (max-width: 1024px) {
   .history__book {
     width: 78.125vw;
