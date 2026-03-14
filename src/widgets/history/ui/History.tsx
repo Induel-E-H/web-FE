@@ -95,6 +95,11 @@ function History() {
     };
   }, [activeItem, contentPage, activeIndex]);
 
+  function handleListItemClick(index: number) {
+    setContentPage(Math.floor(index / 2));
+    setActiveItem('Content');
+  }
+
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const holdIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -156,7 +161,9 @@ function History() {
               onMouseUp={stopHold}
               onMouseLeave={stopHold}
             >
-              {activeItem === 'List' && <ListPage side='left' />}
+              {activeItem === 'List' && (
+                <ListPage side='left' onItemClick={handleListItemClick} />
+              )}
               {activeItem === 'Content' && (
                 <ContentPage side='left' pageIndex={contentPage} />
               )}
@@ -172,7 +179,9 @@ function History() {
               onMouseUp={stopHold}
               onMouseLeave={stopHold}
             >
-              {activeItem === 'List' && <ListPage side='right' />}
+              {activeItem === 'List' && (
+                <ListPage side='right' onItemClick={handleListItemClick} />
+              )}
               {activeItem === 'Content' && (
                 <ContentPage side='right' pageIndex={contentPage} />
               )}
