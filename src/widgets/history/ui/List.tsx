@@ -1,4 +1,4 @@
-import artworks from '../data/artwork.json';
+import artworks from '../asset/data/artwork.json';
 import type { PageSide } from '../model/types';
 import '../style/List.css';
 
