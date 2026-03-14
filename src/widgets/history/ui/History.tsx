@@ -1,7 +1,7 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, type RefObject, useEffect, useRef, useState } from 'react';
 
-import { CONTENT_TOTAL_PAGES } from '../model/constants';
-import type { PageSide } from '../model/types';
+import { CONTENT_TOTAL_PAGES, INDEX_LIST, PAGE_SIDE } from '../model/constants';
+import type { IndexItem, PageSide } from '../model/types';
 import '../style/History.css';
 import '../style/HistoryBook.css';
 import { AwardPage } from './Award';
@@ -10,7 +10,7 @@ import { HistoryPage } from './HistoryPage';
 import { ListPage } from './List';
 
 function BookPageOuterShadow({ side }: { side: PageSide }) {
-  const levels = side === 'left' ? [3, 2, 1] : [1, 2, 3];
+  const levels = side === PAGE_SIDE.LEFT ? [3, 2, 1] : [1, 2, 3];
   return (
     <div className='history__book-page-outer-shadow'>
       {levels.map((level) => (
@@ -47,9 +47,9 @@ function BookPage({
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseLeave}
     >
-      {side === 'left' ? (
+      {side === PAGE_SIDE.LEFT ? (
         <>
-          <BookPageOuterShadow side='left' />
+          <BookPageOuterShadow side={PAGE_SIDE.LEFT} />
           <div
             className={`history__book-page-flip${animClass ? ` ${animClass}` : ''}`}
           >
@@ -65,19 +65,17 @@ function BookPage({
             <div className='history__book-page-inner-shadow' />
             <div className='history__book-page-content'>{children}</div>
           </div>
-          <BookPageOuterShadow side='right' />
+          <BookPageOuterShadow side={PAGE_SIDE.RIGHT} />
         </>
       )}
     </div>
   );
 }
 
-const INDEX_LIST = ['List', 'Content', 'History', 'Award'];
-
-type FlipState = { side: 'left' | 'right' } | null;
+type FlipState = { side: PageSide } | null;
 
 function History() {
-  const [activeItem, setActiveItem] = useState('List');
+  const [activeItem, setActiveItem] = useState<IndexItem>('List');
   const [contentPage, setContentPage] = useState(0);
   const [flipState, setFlipState] = useState<FlipState>(null);
 
@@ -105,7 +103,7 @@ function History() {
     }
   }
 
-  function triggerFlip(side: 'left' | 'right', nav: () => void) {
+  function triggerFlip(side: PageSide, nav: () => void) {
     if (isAnimatingRef.current) return;
     stopHold();
     isAnimatingRef.current = true;
@@ -119,7 +117,7 @@ function History() {
 
   function handleLeftClick() {
     if (!canGoLeft) return;
-    triggerFlip('left', () => {
+    triggerFlip(PAGE_SIDE.LEFT, () => {
       if (activeItem === 'Content' && contentPage > 0) {
         setContentPage((p) => p - 1);
       } else if (activeIndex > 0) {
@@ -132,7 +130,7 @@ function History() {
 
   function handleRightClick() {
     if (!canGoRight) return;
-    triggerFlip('right', () => {
+    triggerFlip(PAGE_SIDE.RIGHT, () => {
       if (activeItem === 'Content' && contentPage < CONTENT_TOTAL_PAGES - 1) {
         setContentPage((p) => p + 1);
       } else if (activeIndex < INDEX_LIST.length - 1) {
@@ -145,23 +143,23 @@ function History() {
 
   function handleListItemClick(index: number) {
     const page = Math.floor(index / 2);
-    triggerFlip('right', () => {
+    triggerFlip(PAGE_SIDE.RIGHT, () => {
       setContentPage(page);
       setActiveItem('Content');
     });
   }
 
-  function handleCategoryClick(item: string) {
+  function handleCategoryClick(item: IndexItem) {
     const newIndex = INDEX_LIST.indexOf(item);
     if (newIndex === activeIndex) return;
-    const side: 'left' | 'right' = newIndex > activeIndex ? 'right' : 'left';
+    const side = newIndex > activeIndex ? PAGE_SIDE.RIGHT : PAGE_SIDE.LEFT;
     triggerFlip(side, () => {
       if (item === 'Content') setContentPage(0);
       setActiveItem(item);
     });
   }
 
-  function startHold(clickRef: React.MutableRefObject<() => void>) {
+  function startHold(clickRef: RefObject<() => void>) {
     clickRef.current();
     holdTimerRef.current = setTimeout(() => {
       holdIntervalRef.current = setInterval(() => clickRef.current(), 150);
@@ -191,9 +189,9 @@ function History() {
 
   const isAnimating = flipState !== null;
   const leftAnimClass =
-    flipState?.side === 'left' ? 'page-flip-out' : undefined;
+    flipState?.side === PAGE_SIDE.LEFT ? 'page-flip-out' : undefined;
   const rightAnimClass =
-    flipState?.side === 'right' ? 'page-flip-out' : undefined;
+    flipState?.side === PAGE_SIDE.RIGHT ? 'page-flip-out' : undefined;
 
   return (
     <>
@@ -219,7 +217,7 @@ function History() {
         <div className='history__book'>
           <div className='history__book-page'>
             <BookPage
-              side='left'
+              side={PAGE_SIDE.LEFT}
               clickable={canGoLeft && !isAnimating}
               onMouseDown={
                 canGoLeft && !isAnimating
@@ -231,16 +229,21 @@ function History() {
               animClass={leftAnimClass}
             >
               {activeItem === 'List' && (
-                <ListPage side='left' onItemClick={handleListItemClick} />
+                <ListPage
+                  side={PAGE_SIDE.LEFT}
+                  onItemClick={handleListItemClick}
+                />
               )}
               {activeItem === 'Content' && (
-                <ContentPage side='left' pageIndex={contentPage} />
+                <ContentPage side={PAGE_SIDE.LEFT} pageIndex={contentPage} />
               )}
-              {activeItem === 'History' && <HistoryPage side='left' />}
-              {activeItem === 'Award' && <AwardPage side='left' />}
+              {activeItem === 'History' && (
+                <HistoryPage side={PAGE_SIDE.LEFT} />
+              )}
+              {activeItem === 'Award' && <AwardPage side={PAGE_SIDE.LEFT} />}
             </BookPage>
             <BookPage
-              side='right'
+              side={PAGE_SIDE.RIGHT}
               clickable={canGoRight && !isAnimating}
               onMouseDown={
                 canGoRight && !isAnimating
@@ -252,13 +255,18 @@ function History() {
               animClass={rightAnimClass}
             >
               {activeItem === 'List' && (
-                <ListPage side='right' onItemClick={handleListItemClick} />
+                <ListPage
+                  side={PAGE_SIDE.RIGHT}
+                  onItemClick={handleListItemClick}
+                />
               )}
               {activeItem === 'Content' && (
-                <ContentPage side='right' pageIndex={contentPage} />
+                <ContentPage side={PAGE_SIDE.RIGHT} pageIndex={contentPage} />
               )}
-              {activeItem === 'History' && <HistoryPage side='right' />}
-              {activeItem === 'Award' && <AwardPage side='right' />}
+              {activeItem === 'History' && (
+                <HistoryPage side={PAGE_SIDE.RIGHT} />
+              )}
+              {activeItem === 'Award' && <AwardPage side={PAGE_SIDE.RIGHT} />}
             </BookPage>
           </div>
           <div className='history__book-cover'>
