@@ -30,6 +30,7 @@ function BookPage({
   onMouseUp,
   onMouseLeave,
   clickable,
+  animClass,
 }: {
   side: PageSide;
   children?: React.ReactNode;
@@ -37,6 +38,7 @@ function BookPage({
   onMouseUp?: () => void;
   onMouseLeave?: () => void;
   clickable?: boolean;
+  animClass?: string;
 }) {
   return (
     <div
@@ -48,13 +50,21 @@ function BookPage({
       {side === 'left' ? (
         <>
           <BookPageOuterShadow side='left' />
-          <div className='history__book-page-content'>{children}</div>
-          <div className='history__book-page-inner-shadow' />
+          <div
+            className={`history__book-page-flip${animClass ? ` ${animClass}` : ''}`}
+          >
+            <div className='history__book-page-content'>{children}</div>
+            <div className='history__book-page-inner-shadow' />
+          </div>
         </>
       ) : (
         <>
-          <div className='history__book-page-inner-shadow' />
-          <div className='history__book-page-content'>{children}</div>
+          <div
+            className={`history__book-page-flip${animClass ? ` ${animClass}` : ''}`}
+          >
+            <div className='history__book-page-inner-shadow' />
+            <div className='history__book-page-content'>{children}</div>
+          </div>
           <BookPageOuterShadow side='right' />
         </>
       )}
@@ -64,51 +74,25 @@ function BookPage({
 
 const INDEX_LIST = ['List', 'Content', 'History', 'Award'];
 
+type FlipState = { side: 'left' | 'right' } | null;
+
 function History() {
   const [activeItem, setActiveItem] = useState('List');
   const [contentPage, setContentPage] = useState(0);
+  const [flipState, setFlipState] = useState<FlipState>(null);
 
   const activeIndex = INDEX_LIST.indexOf(activeItem);
+  const canGoLeft =
+    activeIndex > 0 || (activeItem === 'Content' && contentPage > 0);
+  const canGoRight =
+    activeIndex < INDEX_LIST.length - 1 ||
+    (activeItem === 'Content' && contentPage < CONTENT_TOTAL_PAGES - 1);
 
-  const leftClickRef = useRef<() => void>(() => {});
-  const rightClickRef = useRef<() => void>(() => {});
-
-  useEffect(() => {
-    leftClickRef.current = () => {
-      if (activeItem === 'Content' && contentPage > 0) {
-        setContentPage((p) => p - 1);
-      } else if (activeIndex > 0) {
-        const prev = INDEX_LIST[activeIndex - 1];
-        if (prev === 'Content') setContentPage(CONTENT_TOTAL_PAGES - 1);
-        setActiveItem(prev);
-      }
-    };
-
-    rightClickRef.current = () => {
-      if (activeItem === 'Content' && contentPage < CONTENT_TOTAL_PAGES - 1) {
-        setContentPage((p) => p + 1);
-      } else if (activeIndex < INDEX_LIST.length - 1) {
-        const next = INDEX_LIST[activeIndex + 1];
-        if (next === 'Content') setContentPage(0);
-        setActiveItem(next);
-      }
-    };
-  }, [activeItem, contentPage, activeIndex]);
-
-  function handleListItemClick(index: number) {
-    setContentPage(Math.floor(index / 2));
-    setActiveItem('Content');
-  }
-
+  const isAnimatingRef = useRef(false);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const holdIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  function startHold(fnRef: React.MutableRefObject<() => void>) {
-    fnRef.current();
-    holdTimerRef.current = setTimeout(() => {
-      holdIntervalRef.current = setInterval(() => fnRef.current(), 150);
-    }, 500);
-  }
+  const leftClickRef = useRef<() => void>(() => {});
+  const rightClickRef = useRef<() => void>(() => {});
 
   function stopHold() {
     if (holdTimerRef.current) {
@@ -121,7 +105,73 @@ function History() {
     }
   }
 
-  useEffect(() => stopHold, []);
+  function triggerFlip(side: 'left' | 'right', nav: () => void) {
+    if (isAnimatingRef.current) return;
+    stopHold();
+    isAnimatingRef.current = true;
+    setFlipState({ side });
+    setTimeout(() => {
+      nav();
+      setFlipState(null);
+      isAnimatingRef.current = false;
+    }, 250);
+  }
+
+  function handleLeftClick() {
+    if (!canGoLeft) return;
+    triggerFlip('left', () => {
+      if (activeItem === 'Content' && contentPage > 0) {
+        setContentPage((p) => p - 1);
+      } else if (activeIndex > 0) {
+        const prev = INDEX_LIST[activeIndex - 1];
+        if (prev === 'Content') setContentPage(CONTENT_TOTAL_PAGES - 1);
+        setActiveItem(prev);
+      }
+    });
+  }
+
+  function handleRightClick() {
+    if (!canGoRight) return;
+    triggerFlip('right', () => {
+      if (activeItem === 'Content' && contentPage < CONTENT_TOTAL_PAGES - 1) {
+        setContentPage((p) => p + 1);
+      } else if (activeIndex < INDEX_LIST.length - 1) {
+        const next = INDEX_LIST[activeIndex + 1];
+        if (next === 'Content') setContentPage(0);
+        setActiveItem(next);
+      }
+    });
+  }
+
+  function handleListItemClick(index: number) {
+    const page = Math.floor(index / 2);
+    triggerFlip('right', () => {
+      setContentPage(page);
+      setActiveItem('Content');
+    });
+  }
+
+  function handleCategoryClick(item: string) {
+    const newIndex = INDEX_LIST.indexOf(item);
+    if (newIndex === activeIndex) return;
+    const side: 'left' | 'right' = newIndex > activeIndex ? 'right' : 'left';
+    triggerFlip(side, () => {
+      if (item === 'Content') setContentPage(0);
+      setActiveItem(item);
+    });
+  }
+
+  function startHold(clickRef: React.MutableRefObject<() => void>) {
+    clickRef.current();
+    holdTimerRef.current = setTimeout(() => {
+      holdIntervalRef.current = setInterval(() => clickRef.current(), 150);
+    }, 800);
+  }
+
+  useEffect(() => {
+    leftClickRef.current = handleLeftClick;
+    rightClickRef.current = handleRightClick;
+  });
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -132,11 +182,18 @@ function History() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const canGoLeft =
-    activeIndex > 0 || (activeItem === 'Content' && contentPage > 0);
-  const canGoRight =
-    activeIndex < INDEX_LIST.length - 1 ||
-    (activeItem === 'Content' && contentPage < CONTENT_TOTAL_PAGES - 1);
+  useEffect(() => {
+    return () => {
+      if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+      if (holdIntervalRef.current) clearInterval(holdIntervalRef.current);
+    };
+  }, []);
+
+  const isAnimating = flipState !== null;
+  const leftAnimClass =
+    flipState?.side === 'left' ? 'page-flip-out' : undefined;
+  const rightAnimClass =
+    flipState?.side === 'right' ? 'page-flip-out' : undefined;
 
   return (
     <>
@@ -149,7 +206,7 @@ function History() {
                 role='tab'
                 aria-selected={activeItem === item}
                 className={activeItem === item ? 'active' : ''}
-                onClick={() => setActiveItem(item)}
+                onClick={() => handleCategoryClick(item)}
               >
                 {item}
               </button>
@@ -163,12 +220,15 @@ function History() {
           <div className='history__book-page'>
             <BookPage
               side='left'
-              clickable={canGoLeft}
+              clickable={canGoLeft && !isAnimating}
               onMouseDown={
-                canGoLeft ? () => startHold(leftClickRef) : undefined
+                canGoLeft && !isAnimating
+                  ? () => startHold(leftClickRef)
+                  : undefined
               }
               onMouseUp={stopHold}
               onMouseLeave={stopHold}
+              animClass={leftAnimClass}
             >
               {activeItem === 'List' && (
                 <ListPage side='left' onItemClick={handleListItemClick} />
@@ -181,12 +241,15 @@ function History() {
             </BookPage>
             <BookPage
               side='right'
-              clickable={canGoRight}
+              clickable={canGoRight && !isAnimating}
               onMouseDown={
-                canGoRight ? () => startHold(rightClickRef) : undefined
+                canGoRight && !isAnimating
+                  ? () => startHold(rightClickRef)
+                  : undefined
               }
               onMouseUp={stopHold}
               onMouseLeave={stopHold}
+              animClass={rightAnimClass}
             >
               {activeItem === 'List' && (
                 <ListPage side='right' onItemClick={handleListItemClick} />
