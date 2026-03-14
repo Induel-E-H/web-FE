@@ -123,6 +123,15 @@ function History() {
 
   useEffect(() => stopHold, []);
 
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'ArrowLeft') leftClickRef.current();
+      else if (e.key === 'ArrowRight') rightClickRef.current();
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const canGoLeft =
     activeIndex > 0 || (activeItem === 'Content' && contentPage > 0);
   const canGoRight =
