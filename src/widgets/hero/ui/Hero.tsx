@@ -1,4 +1,6 @@
 // import { IoIosArrowDown } from 'react-icons/io';
+import { COMPANY } from '@shared/constant';
+
 import '../styles/Hero.css';
 import HeroBackground from './HeroBackground';
 
@@ -13,10 +15,10 @@ function Hero() {
           className='hero__logo'
         />
         <div className='hero__company-text'>
-          <h1 className='hero__company-name'>(주) 인들이앤에이치</h1>
-          <p className='hero__company-name-en'>Induel Engineering & Holdings</p>
-          <time className='hero__established' dateTime='2000-04-27'>
-            SINCE 2000.04.27
+          <h1 className='hero__company-name'>(주) {COMPANY.NAME_KO}</h1>
+          <p className='hero__company-name-en'>{COMPANY.NAME_EN_FULL}</p>
+          <time className='hero__established' dateTime={COMPANY.ESTABLISHED}>
+            SINCE {COMPANY.ESTABLISHED_DISPLAY}
           </time>
         </div>
       </div>
