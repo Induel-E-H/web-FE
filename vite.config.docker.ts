@@ -1,26 +1,11 @@
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
-// https://vite.dev/config/
+import { baseConfig } from './vite.config';
+
 export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: ['babel-plugin-react-compiler'],
-      },
-    }),
-    tsconfigPaths(),
-  ],
+  ...baseConfig,
   server: {
-    host: true,
-    port: 5173,
-    watch: {
-      usePolling: true,
-    },
-  },
-  build: {
-    target: 'esnext',
-    chunkSizeWarningLimit: 500,
+    ...baseConfig.server,
+    watch: { usePolling: true },
   },
 });

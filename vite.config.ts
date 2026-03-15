@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
-export default defineConfig({
+export const baseConfig = {
   plugins: [
     react({
       babel: {
@@ -20,4 +20,6 @@ export default defineConfig({
     target: 'esnext',
     chunkSizeWarningLimit: 500,
   },
-});
+};
+
+export default defineConfig(baseConfig);
