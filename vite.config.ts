@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
-export default defineConfig({
+export const baseConfig = {
   plugins: [
     react({
       babel: {
@@ -15,12 +15,11 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
-    watch: {
-      usePolling: true,
-    },
   },
   build: {
     target: 'esnext',
     chunkSizeWarningLimit: 500,
   },
-});
+};
+
+export default defineConfig(baseConfig);
