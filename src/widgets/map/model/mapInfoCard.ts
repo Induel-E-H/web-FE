@@ -1,3 +1,5 @@
+import { COMPANY } from '@shared/constant';
+
 import rawInduelIcon from '@assets/induel-icon.svg?raw';
 
 const ICON_INNER = rawInduelIcon
@@ -13,8 +15,8 @@ const INFO_CONTENT = `
         ${ICON_INNER}
       </svg>
       <div>
-        <p class="map__info__name">인들이앤에이치</p>
-        <p class="map__info__subtitle">INDUEL E&amp;H</p>
+        <p class="map__info__name">${COMPANY.NAME_KO}</p>
+        <p class="map__info__subtitle">${COMPANY.NAME_EN}</p>
       </div>
     </div>
     <div class="map__info__body">
@@ -24,7 +26,7 @@ const INFO_CONTENT = `
             <path class="map__info__icon-path" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
           </svg>
         </div>
-        <a href="tel:0516266277" class="map__info__phone">051-626-6277</a>
+        <a href="tel:${COMPANY.PHONE}" class="map__info__phone">${COMPANY.PHONE_DISPLAY}</a>
       </div>
       <div class="map__info__row map__info__row--top">
         <div class="map__info__icon-box">
@@ -33,8 +35,8 @@ const INFO_CONTENT = `
           </svg>
         </div>
         <div>
-          <p class="map__info__address-main">부산 남구 수영로 274-16</p>
-          <p class="map__info__address-sub">2호선 경성대부경대역 5번 출구 348m</p>
+          <p class="map__info__address-main">${COMPANY.ADDRESS_MAIN}</p>
+          <p class="map__info__address-sub">${COMPANY.ADDRESS_SUB}</p>
         </div>
       </div>
     </div>
