@@ -1,4 +1,4 @@
-import './styles/Footer.css';
+import '../styles/Footer.css';
 
 export function Footer() {
   const email = 'seven@induel.co.kr';
