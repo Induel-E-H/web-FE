@@ -1,6 +1,8 @@
 // import { IoIosArrowDown } from 'react-icons/io';
 import { COMPANY } from '@shared/constant';
 
+import induelIcon from '@assets/induel-icon.svg';
+
 import '../styles/Hero.css';
 import HeroBackground from './HeroBackground';
 
@@ -10,7 +12,7 @@ function Hero() {
       <HeroBackground />
       <div className='hero__company'>
         <img
-          src='/src/shared/assets/induel-icon.svg'
+          src={induelIcon}
           alt='인들이앤에이치 로고'
           className='hero__logo'
         />
