@@ -6,7 +6,7 @@ export const CONTENT_TOTAL_PAGES = Math.ceil(artworks.length / 2);
 export const INDEX_LIST: readonly IndexItem[] = [
   'List',
   'Content',
-  'History',
+  'Timeline',
   'Award',
 ];
 

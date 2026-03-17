@@ -6,8 +6,8 @@ import '../style/History.css';
 import '../style/HistoryBook.css';
 import { AwardPage } from './Award';
 import { ContentPage } from './Content';
-import { HistoryPage } from './HistoryPage';
 import { ListPage } from './List';
+import { TimelinePage } from './Timeline';
 
 function BookPageOuterShadow({ side }: { side: PageSide }) {
   const levels = side === PAGE_SIDE.LEFT ? [3, 2, 1] : [1, 2, 3];
@@ -237,8 +237,8 @@ function History() {
               {activeItem === 'Content' && (
                 <ContentPage side={PAGE_SIDE.LEFT} pageIndex={contentPage} />
               )}
-              {activeItem === 'History' && (
-                <HistoryPage side={PAGE_SIDE.LEFT} />
+              {activeItem === 'Timeline' && (
+                <TimelinePage side={PAGE_SIDE.LEFT} />
               )}
               {activeItem === 'Award' && <AwardPage side={PAGE_SIDE.LEFT} />}
             </BookPage>
@@ -263,8 +263,8 @@ function History() {
               {activeItem === 'Content' && (
                 <ContentPage side={PAGE_SIDE.RIGHT} pageIndex={contentPage} />
               )}
-              {activeItem === 'History' && (
-                <HistoryPage side={PAGE_SIDE.RIGHT} />
+              {activeItem === 'Timeline' && (
+                <TimelinePage side={PAGE_SIDE.RIGHT} />
               )}
               {activeItem === 'Award' && <AwardPage side={PAGE_SIDE.RIGHT} />}
             </BookPage>
