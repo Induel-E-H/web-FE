@@ -1,6 +1,7 @@
-import timelineItem from '../asset/data/timeline.json';
+import timelineItem from '../model/data/timeline.json';
 import type { PageSide } from '../model/types';
-import '../style/Timeline.css';
+import '../styles/Timeline.css';
+import { BookPageTitle } from './BookPageTitle';
 
 const maxPerPage = Math.ceil(timelineItem.length / 2);
 const leftItems = timelineItem.slice(0, maxPerPage);
@@ -11,13 +12,7 @@ export function TimelinePage({ side }: { side: PageSide }) {
 
   return (
     <div className='timeline__container'>
-      <div
-        className={`timeline__title${side === 'right' ? ' timeline__title--hidden' : ''}`}
-      >
-        <hr />
-        <h3>Timeline</h3>
-        <hr />
-      </div>
+      <BookPageTitle title='Timeline' hidden={side === 'right'} />
       <ul className='timeline__ul'>
         {Array.from({ length: maxPerPage }, (_, i) => {
           const item = items[i];

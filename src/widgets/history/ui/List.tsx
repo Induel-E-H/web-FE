@@ -1,6 +1,7 @@
-import artworks from '../asset/data/artwork.json';
+import artworks from '../model/data/artwork.json';
 import type { PageSide } from '../model/types';
-import '../style/List.css';
+import '../styles/List.css';
+import { BookPageTitle } from './BookPageTitle';
 
 const midpoint = Math.ceil(artworks.length / 2);
 const leftItems = artworks.slice(0, midpoint);
@@ -18,13 +19,7 @@ export function ListPage({
 
   return (
     <div className='list__container'>
-      <div
-        className={`list__title${side === 'right' ? ' list__title--hidden' : ''}`}
-      >
-        <hr />
-        <h3>List</h3>
-        <hr />
-      </div>
+      <BookPageTitle title='List' hidden={side === 'right'} hrWidth='41.32%' />
       <ul className='list__ul'>
         {items.map((item, i) => (
           <li key={item.title}>

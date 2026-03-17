@@ -1,7 +1,9 @@
-import awardData from '../asset/data/award.json';
-import { AWARD_YEAR_RANGES } from '../model/constants';
+import awardData from '../model/data/award.json';
+import { getDataIndex } from '../model/helpers';
+import { AWARD_YEAR_RANGES } from '../model/pageRegistry';
 import type { PageSide } from '../model/types';
-import '../style/Award.css';
+import '../styles/Award.css';
+import { BookPageTitle } from './BookPageTitle';
 
 function getItemsByRange(start: number, end: number) {
   return awardData.filter((item) => item.year >= start && item.year <= end);
@@ -18,19 +20,13 @@ export function AwardPage({
   side: PageSide;
   pageIndex: number;
 }) {
-  const dataIndex = pageIndex * 2 + (side === 'left' ? 0 : 1);
+  const dataIndex = getDataIndex(pageIndex, side);
   const items = pages[dataIndex] ?? [];
   const showTitle = dataIndex === 0;
 
   return (
     <div className='award__container'>
-      {showTitle && (
-        <div className='award__title'>
-          <hr />
-          <h3>Award</h3>
-          <hr />
-        </div>
-      )}
+      {showTitle && <BookPageTitle title='Award' />}
       <div className='award__content'>
         {items.map((group) => (
           <div key={group.year} className='award__year-group'>

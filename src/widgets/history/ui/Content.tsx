@@ -1,14 +1,15 @@
-import artworks from '../asset/data/artwork.json';
+import artworks from '../model/data/artwork.json';
+import { getDataIndex } from '../model/helpers';
 import type { PageSide } from '../model/types';
-import '../style/Content.css';
+import '../styles/Content.css';
 
-const contentImages = import.meta.glob('../asset/content/*.webp', {
+const contentImages = import.meta.glob('../assets/content/*.webp', {
   eager: true,
   import: 'default',
 });
 
 function getContentImage(index: number): string | undefined {
-  const src = contentImages[`../asset/content/${index}.webp`];
+  const src = contentImages[`../assets/content/${index}.webp`];
   return typeof src === 'string' ? src : undefined;
 }
 
@@ -87,7 +88,7 @@ function ContentItem({
 }
 
 export function ContentPage({ side, pageIndex }: ContentPageProps) {
-  const itemIndex = pageIndex * 2 + (side === 'left' ? 0 : 1);
+  const itemIndex = getDataIndex(pageIndex, side);
   const item = artworks[itemIndex] ?? null;
 
   return (
