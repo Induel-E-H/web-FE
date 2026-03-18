@@ -12,8 +12,6 @@
   grid-template-columns: 1fr 1fr;
   list-style: none;
   row-gap: 0.926vh;
-  padding: 0;
-  margin: 0;
 }
 
 .list__ul li {
@@ -37,4 +35,23 @@
   text-align: left;
   font-weight: 600;
   font-size: inherit;
+}
+
+@media (max-width: 1024px) {
+  .list__container {
+    gap: 0.98vh;
+    justify-content: baseline;
+  }
+
+  .history__book-page-right .list__container .book-page-title {
+    display: none;
+  }
+
+  .list__ul {
+    row-gap: 0.98vh;
+  }
+
+  .list__ul li {
+    font-size: 1.2vmin;
+  }
 }
