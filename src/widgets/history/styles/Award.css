@@ -50,10 +50,10 @@
 
 @media (max-width: 1024px) {
   .award__year {
-    font-size: 1.07vh;
+    font-size: 1.07vmax;
   }
 
   .award__ul li {
-    font-size: 0.78vh;
+    font-size: 0.78vmax;
   }
 }

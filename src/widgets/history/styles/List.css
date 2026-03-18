@@ -40,7 +40,7 @@
 @media (max-width: 1024px) {
   .list__container {
     gap: 0.98vh;
-    justify-content: baseline;
+    justify-content: start;
   }
 
   .list__ul {
@@ -48,6 +48,6 @@
   }
 
   .list__ul li {
-    font-size: 1.2vmin;
+    font-size: 0.9vmax;
   }
 }
