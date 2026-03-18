@@ -22,3 +22,13 @@
   color: #000000;
   text-shadow: 0 4px 4px #00000040;
 }
+
+@media (max-width: 1024px) {
+  .book-page-title hr {
+    display: none;
+  }
+
+  .book-page-title h3 {
+    font-size: 2.73vmax;
+  }
+}
