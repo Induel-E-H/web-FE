@@ -19,9 +19,13 @@ function History() {
     currentPageIndex,
     canGoLeft,
     canGoRight,
-    isAnimating,
-    leftAnimClass,
-    rightAnimClass,
+    isFlipping,
+    flipDirection,
+    onFlipComplete,
+    nextPageIndex,
+    nextActiveItem,
+    prevPageIndex,
+    prevActiveItem,
     goToItem,
     stopHold,
     startHold,
@@ -37,24 +41,52 @@ function History() {
     goToItem(item);
   }
 
-  function renderPage(side: 'left' | 'right') {
+  function renderPage(
+    side: 'left' | 'right',
+    pageIndex: number,
+    item: IndexItem,
+  ) {
     const pageSide = side === 'left' ? PAGE_SIDE.LEFT : PAGE_SIDE.RIGHT;
-    switch (activeItem) {
+    switch (item) {
       case 'List':
         return <ListPage side={pageSide} onItemClick={handleListItemClick} />;
       case 'Content':
-        return <ContentPage side={pageSide} pageIndex={currentPageIndex} />;
+        return <ContentPage side={pageSide} pageIndex={pageIndex} />;
       case 'Timeline':
         return <TimelinePage side={pageSide} />;
       case 'Award':
         return (
           <AwardPage
             side={pageSide}
-            pageIndex={currentPageIndex}
+            pageIndex={pageIndex}
             breakpoint={breakpoint}
           />
         );
     }
+  }
+
+  // 4-slot 콘텐츠 결정
+  let staticLeftContent;
+  let staticRightContent;
+  let flipFrontContent;
+  let flipBackContent;
+
+  if (flipDirection === 'forward') {
+    staticLeftContent = renderPage('left', currentPageIndex, activeItem);
+    staticRightContent = renderPage('right', nextPageIndex, nextActiveItem);
+    flipFrontContent = renderPage('right', currentPageIndex, activeItem);
+    flipBackContent = renderPage('left', nextPageIndex, nextActiveItem);
+  } else if (flipDirection === 'backward') {
+    staticLeftContent = renderPage('left', prevPageIndex, prevActiveItem);
+    staticRightContent = renderPage('right', currentPageIndex, activeItem);
+    flipFrontContent = renderPage('left', currentPageIndex, activeItem);
+    flipBackContent = renderPage('right', prevPageIndex, prevActiveItem);
+  } else {
+    // Idle 상태
+    staticLeftContent = renderPage('left', currentPageIndex, activeItem);
+    staticRightContent = renderPage('right', currentPageIndex, activeItem);
+    flipFrontContent = renderPage('right', currentPageIndex, activeItem);
+    flipBackContent = null;
   }
 
   return (
@@ -78,33 +110,20 @@ function History() {
       <div className='history__book'>
         <div className='history__book-page'>
           <BookPage
-            side={PAGE_SIDE.LEFT}
-            clickable={canGoLeft && !isAnimating}
-            onMouseDown={
-              canGoLeft && !isAnimating
-                ? () => startHold(leftClickRef)
-                : undefined
-            }
+            staticLeftContent={staticLeftContent}
+            staticRightContent={staticRightContent}
+            flipFrontContent={flipFrontContent}
+            flipBackContent={flipBackContent}
+            isFlipping={isFlipping}
+            flipDirection={flipDirection}
+            canGoLeft={canGoLeft && !isFlipping}
+            canGoRight={canGoRight && !isFlipping}
+            onTransitionEnd={onFlipComplete}
+            onLeftMouseDown={() => startHold(leftClickRef)}
+            onRightMouseDown={() => startHold(rightClickRef)}
             onMouseUp={stopHold}
             onMouseLeave={stopHold}
-            animClass={leftAnimClass}
-          >
-            {renderPage('left')}
-          </BookPage>
-          <BookPage
-            side={PAGE_SIDE.RIGHT}
-            clickable={canGoRight && !isAnimating}
-            onMouseDown={
-              canGoRight && !isAnimating
-                ? () => startHold(rightClickRef)
-                : undefined
-            }
-            onMouseUp={stopHold}
-            onMouseLeave={stopHold}
-            animClass={rightAnimClass}
-          >
-            {renderPage('right')}
-          </BookPage>
+          />
         </div>
         <div className='history__book-cover'>
           <div className='history__book-cover-left'></div>

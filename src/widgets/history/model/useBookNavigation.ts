@@ -2,15 +2,12 @@ import { type RefObject, useEffect, useRef, useState } from 'react';
 
 import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
-import { INDEX_LIST, PAGE_SIDE } from './constants';
+import { INDEX_LIST } from './constants';
 import { getPageRegistry } from './pageRegistry';
-import type { IndexItem, PageSide } from './types';
-
-type FlipState = { side: PageSide } | null;
+import type { IndexItem } from './types';
 
 const HOLD_DELAY = 800;
 const HOLD_INTERVAL = 150;
-const FLIP_DURATION = 250;
 
 export function useBookNavigation(breakpoint: Breakpoint) {
   const pageRegistry = getPageRegistry(breakpoint);
@@ -23,7 +20,10 @@ export function useBookNavigation(breakpoint: Breakpoint) {
         number
       >,
   );
-  const [flipState, setFlipState] = useState<FlipState>(null);
+  const [flipDirection, setFlipDirection] = useState<
+    'forward' | 'backward' | null
+  >(null);
+  const [isFlipping, setIsFlipping] = useState(false);
 
   const activeIndex = INDEX_LIST.indexOf(activeItem);
   const rawPageIndex = pageIndices[activeItem];
@@ -35,10 +35,33 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     activeIndex < INDEX_LIST.length - 1 || currentPageIndex < totalPages - 1;
 
   const isAnimatingRef = useRef(false);
+  const pendingNavRef = useRef<(() => void) | null>(null);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const holdIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const leftClickRef = useRef<() => void>(() => {});
   const rightClickRef = useRef<() => void>(() => {});
+
+  // 다음 페이지 계산 (forward)
+  let nextPageIndex = currentPageIndex;
+  let nextActiveItem: IndexItem = activeItem;
+  if (currentPageIndex < totalPages - 1) {
+    nextPageIndex = currentPageIndex + 1;
+    nextActiveItem = activeItem;
+  } else if (activeIndex < INDEX_LIST.length - 1) {
+    nextActiveItem = INDEX_LIST[activeIndex + 1];
+    nextPageIndex = 0;
+  }
+
+  // 이전 페이지 계산 (backward)
+  let prevPageIndex = currentPageIndex;
+  let prevActiveItem: IndexItem = activeItem;
+  if (currentPageIndex > 0) {
+    prevPageIndex = currentPageIndex - 1;
+    prevActiveItem = activeItem;
+  } else if (activeIndex > 0) {
+    prevActiveItem = INDEX_LIST[activeIndex - 1];
+    prevPageIndex = pageRegistry[prevActiveItem].totalPages - 1;
+  }
 
   function stopHold() {
     if (holdTimerRef.current) {
@@ -51,21 +74,27 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     }
   }
 
-  function triggerFlip(side: PageSide, nav: () => void) {
+  function onFlipComplete() {
+    const nav = pendingNavRef.current;
+    pendingNavRef.current = null;
+    if (nav) nav();
+    setFlipDirection(null);
+    setIsFlipping(false);
+    isAnimatingRef.current = false;
+  }
+
+  function triggerFlip(direction: 'forward' | 'backward', nav: () => void) {
     if (isAnimatingRef.current) return;
     stopHold();
     isAnimatingRef.current = true;
-    setFlipState({ side });
-    setTimeout(() => {
-      nav();
-      setFlipState(null);
-      isAnimatingRef.current = false;
-    }, FLIP_DURATION);
+    pendingNavRef.current = nav;
+    setFlipDirection(direction);
+    setIsFlipping(true);
   }
 
   function goLeft() {
     if (!canGoLeft) return;
-    triggerFlip(PAGE_SIDE.LEFT, () => {
+    triggerFlip('backward', () => {
       if (currentPageIndex > 0) {
         setPageIndices((prev) => ({
           ...prev,
@@ -82,7 +111,7 @@ export function useBookNavigation(breakpoint: Breakpoint) {
 
   function goRight() {
     if (!canGoRight) return;
-    triggerFlip(PAGE_SIDE.RIGHT, () => {
+    triggerFlip('forward', () => {
       if (currentPageIndex < totalPages - 1) {
         setPageIndices((prev) => ({
           ...prev,
@@ -99,8 +128,8 @@ export function useBookNavigation(breakpoint: Breakpoint) {
   function goToItem(item: IndexItem, pageIndex = 0) {
     const newIndex = INDEX_LIST.indexOf(item);
     if (newIndex === activeIndex && pageIndex === currentPageIndex) return;
-    const side = newIndex >= activeIndex ? PAGE_SIDE.RIGHT : PAGE_SIDE.LEFT;
-    triggerFlip(side, () => {
+    const direction = newIndex >= activeIndex ? 'forward' : 'backward';
+    triggerFlip(direction, () => {
       setPageIndices((prev) => ({ ...prev, [item]: pageIndex }));
       setActiveItem(item);
     });
@@ -137,20 +166,18 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     };
   }, []);
 
-  const isAnimating = flipState !== null;
-  const leftAnimClass =
-    flipState?.side === PAGE_SIDE.LEFT ? 'page-flip-out' : undefined;
-  const rightAnimClass =
-    flipState?.side === PAGE_SIDE.RIGHT ? 'page-flip-out' : undefined;
-
   return {
     activeItem,
     currentPageIndex,
     canGoLeft,
     canGoRight,
-    isAnimating,
-    leftAnimClass,
-    rightAnimClass,
+    isFlipping,
+    flipDirection,
+    onFlipComplete,
+    nextPageIndex,
+    nextActiveItem,
+    prevPageIndex,
+    prevActiveItem,
     goToItem,
     stopHold,
     startHold,

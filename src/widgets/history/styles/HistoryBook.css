@@ -110,6 +110,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  perspective: 1200px;
 }
 
 .history__book-page-left,
@@ -208,45 +209,124 @@
     e-resize;
 }
 
-.history__book-page-flip {
+/* === 180도 플립 패널 === */
+
+.history__book-static-left,
+.history__book-static-right {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
   display: flex;
   flex-direction: row;
-  flex: 1;
+  background-color: var(--book-page);
+  transform: translateZ(0);
+}
+
+.history__book-static-left {
+  left: 0;
+}
+
+.history__book-static-right {
+  right: 0;
+}
+
+.history__book-flip-panel {
+  position: absolute;
+  top: 0;
+  width: 50%;
   height: 100%;
+  z-index: 10;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-.history__book-page-right .history__book-page-flip.page-flip-out {
-  animation: page-flip-out-right 0.25s cubic-bezier(0.4, 0, 1, 1) both;
+.history__book-flip-panel--forward {
+  right: 0;
   transform-origin: left center;
-  will-change: transform;
-  backface-visibility: hidden;
 }
 
-.history__book-page-left .history__book-page-flip.page-flip-out {
-  animation: page-flip-out-left 0.25s cubic-bezier(0.4, 0, 1, 1) both;
+.history__book-flip-panel--forward.flipping {
+  transform: rotateY(-180deg);
+}
+
+.history__book-flip-panel--backward {
+  left: 0;
   transform-origin: right center;
-  will-change: transform;
+}
+
+.history__book-flip-panel--backward.flipping {
+  transform: rotateY(180deg);
+}
+
+.history__book-flip-panel--no-transition {
+  transition: none !important;
+}
+
+.history__book-flip-panel--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.history__book-flip-front,
+.history__book-flip-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--book-page);
 }
 
-@keyframes page-flip-out-right {
+.history__book-flip-back {
+  transform: rotateY(180deg);
+}
+
+.history__book-flip-panel.flipping {
+  animation: flip-shadow 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) both;
+}
+
+@keyframes flip-shadow {
   0% {
-    transform: perspective(1500px) rotateY(0deg);
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   }
   100% {
-    transform: perspective(1500px) rotateY(-90deg);
+    box-shadow: none;
   }
 }
 
-@keyframes page-flip-out-left {
-  0% {
-    transform: perspective(1500px) rotateY(0deg);
-  }
-  100% {
-    transform: perspective(1500px) rotateY(90deg);
-  }
+.history__book-flip-panel--animating {
+  will-change: transform;
 }
 
+/* 클릭 영역 — content 영역에만 대응 */
+.history__book-click-zone {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: 20;
+  background: transparent;
+}
+
+.history__book-click-zone--left {
+  left: calc(50% * 0.03435);
+  width: calc(50% * (1 - 0.03435));
+}
+
+.history__book-click-zone--right {
+  right: calc(50% * 0.03435);
+  width: calc(50% * (1 - 0.03435));
+}
+
+/* === 모바일 === */
 @media (max-width: 1024px) {
   .history__book {
     width: 78.125vw;
@@ -312,6 +392,7 @@
     height: 97.5%;
     width: 96.67%;
     flex-direction: column;
+    perspective: 1200px;
   }
 
   .history__book-page-left,
@@ -397,35 +478,79 @@
       s-resize;
   }
 
-  .history__book-page-flip {
+  /* 모바일 static 슬롯 */
+  .history__book-static-left,
+  .history__book-static-right {
     width: 100%;
-    height: 0%;
+    height: 50%;
     flex-direction: column;
   }
 
-  .history__book-page-right .history__book-page-flip.page-flip-out {
+  .history__book-static-left {
+    top: 0;
+    left: 0;
+  }
+
+  .history__book-static-right {
+    bottom: 0;
+    right: 0;
+    top: auto;
+  }
+
+  /* 모바일 플립 패널 */
+  .history__book-flip-panel {
+    width: 100%;
+    height: 50%;
+  }
+
+  .history__book-flip-panel--forward {
+    bottom: 0;
+    top: auto;
+    right: auto;
     transform-origin: center top;
   }
 
-  .history__book-page-left .history__book-page-flip.page-flip-out {
+  .history__book-flip-panel--forward.flipping {
+    transform: rotateX(180deg);
+  }
+
+  .history__book-flip-panel--backward {
+    top: 0;
+    left: auto;
     transform-origin: center bottom;
   }
 
-  @keyframes page-flip-out-right {
-    0% {
-      transform: perspective(1500px) rotateX(0deg);
-    }
-    100% {
-      transform: perspective(1500px) rotateX(90deg);
-    }
+  .history__book-flip-panel--backward.flipping {
+    transform: rotateX(-180deg);
   }
 
-  @keyframes page-flip-out-left {
-    0% {
-      transform: perspective(1500px) rotateX(0deg);
-    }
-    100% {
-      transform: perspective(1500px) rotateX(-90deg);
-    }
+  .history__book-flip-back {
+    transform: rotateX(180deg);
+  }
+
+  .history__book-flip-front,
+  .history__book-flip-back {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  /* 모바일 클릭 영역 — content 영역에만 대응 */
+  .history__book-click-zone {
+    width: 100%;
+    height: calc(50% * (1 - 0.0231));
+  }
+
+  .history__book-click-zone--left {
+    top: calc(50% * 0.0231);
+    left: 0;
+    width: 100%;
+  }
+
+  .history__book-click-zone--right {
+    top: auto;
+    bottom: calc(50% * 0.0231);
+    right: 0;
+    width: 100%;
   }
 }
