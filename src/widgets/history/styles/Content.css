@@ -71,7 +71,7 @@
 
 .content__image {
   height: 100%;
-  border-radius: 0.463vh;
+  border-radius: 0.26vmax;
   overflow: hidden;
 }
 
