@@ -30,8 +30,7 @@
 }
 
 .timeline__ul li span:first-of-type {
-  flex-shrink: 0;
-  width: 5.5em;
+  flex-shrink: 1;
 }
 
 .timeline__ul-placeholder {
