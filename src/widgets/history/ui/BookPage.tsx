@@ -96,14 +96,24 @@ export function BookPage({
   return (
     <>
       {/* Static Left (z:1) */}
-      <div className='history__book-static-left history__book-page-left'>
+      <div
+        className={`history__book-static-left history__book-page-left${canGoLeft ? ' history__book-page-left--clickable' : ''}`}
+        onMouseDown={canGoLeft ? onLeftMouseDown : undefined}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseLeave}
+      >
         <BookPageOuterShadow side={PAGE_SIDE.LEFT} />
         <div className='history__book-page-content'>{staticLeftContent}</div>
         <div className='history__book-page-inner-shadow' />
       </div>
 
       {/* Static Right (z:1) */}
-      <div className='history__book-static-right history__book-page-right'>
+      <div
+        className={`history__book-static-right history__book-page-right${canGoRight ? ' history__book-page-right--clickable' : ''}`}
+        onMouseDown={canGoRight ? onRightMouseDown : undefined}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseLeave}
+      >
         <div className='history__book-page-inner-shadow' />
         <div className='history__book-page-content'>{staticRightContent}</div>
         <BookPageOuterShadow side={PAGE_SIDE.RIGHT} />
@@ -154,22 +164,6 @@ export function BookPage({
           )}
         </div>
       </div>
-
-      {/* Click zone left (z:20) */}
-      <div
-        className={`history__book-click-zone history__book-click-zone--left${canGoLeft ? ' history__book-page-left--clickable' : ''}`}
-        onMouseDown={canGoLeft ? onLeftMouseDown : undefined}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseLeave}
-      />
-
-      {/* Click zone right (z:20) */}
-      <div
-        className={`history__book-click-zone history__book-click-zone--right${canGoRight ? ' history__book-page-right--clickable' : ''}`}
-        onMouseDown={canGoRight ? onRightMouseDown : undefined}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseLeave}
-      />
     </>
   );
 }
