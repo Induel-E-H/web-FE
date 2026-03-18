@@ -50,3 +50,28 @@
 .history__category button.active {
   color: var(--brown-300);
 }
+
+@media (max-width: 1024px) {
+  .history {
+    padding: 2.605% 3.908%;
+  }
+  .history__title {
+    font-size: 5.86vmax;
+  }
+
+  .history__category {
+    gap: 1.465vmax;
+  }
+
+  .history__last {
+    font-size: 1.563vmax;
+  }
+
+  .history__category button {
+    font-size: 1.46vmax;
+  }
+
+  .history__category span {
+    font-size: 1.46vmax;
+  }
+}
