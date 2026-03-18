@@ -1,10 +1,11 @@
 import { type RefObject, useEffect, useRef, useState } from 'react';
 
+import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+
 import { INDEX_LIST, PAGE_SIDE } from './constants';
 import { getPageRegistry } from './pageRegistry';
 import type { IndexItem, PageSide } from './types';
 
-type Breakpoint = 'desktop' | 'tablet';
 type FlipState = { side: PageSide } | null;
 
 const HOLD_DELAY = 800;

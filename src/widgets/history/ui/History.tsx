@@ -47,7 +47,13 @@ function History() {
       case 'Timeline':
         return <TimelinePage side={pageSide} />;
       case 'Award':
-        return <AwardPage side={pageSide} pageIndex={currentPageIndex} />;
+        return (
+          <AwardPage
+            side={pageSide}
+            pageIndex={currentPageIndex}
+            breakpoint={breakpoint}
+          />
+        );
     }
   }
 

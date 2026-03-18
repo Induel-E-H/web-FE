@@ -1,18 +1,17 @@
 import { useSyncExternalStore } from 'react';
 
-type Breakpoint = 'desktop' | 'tablet';
+export type Breakpoint = 'desktop' | 'tablet';
 
 const TABLET_QUERY = '(max-width: 1024px)';
+const tabletMql = window.matchMedia(TABLET_QUERY);
 
 function getBreakpoint(): Breakpoint {
-  if (window.matchMedia(TABLET_QUERY).matches) return 'tablet';
-  return 'desktop';
+  return tabletMql.matches ? 'tablet' : 'desktop';
 }
 
 let cached: Breakpoint = getBreakpoint();
 
 function subscribe(callback: () => void) {
-  const tabletMql = window.matchMedia(TABLET_QUERY);
   const handler = () => {
     cached = getBreakpoint();
     callback();

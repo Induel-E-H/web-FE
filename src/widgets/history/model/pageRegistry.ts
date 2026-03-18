@@ -1,8 +1,7 @@
 import { artworks } from '@entities/history';
+import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import type { IndexItem } from './types';
-
-type Breakpoint = 'desktop' | 'tablet';
 
 export const AWARD_YEAR_RANGES_BY_BREAKPOINT: Record<
   Breakpoint,
@@ -27,14 +26,21 @@ type PageConfig = {
   totalPages: number;
 };
 
+const cache = new Map<Breakpoint, Record<IndexItem, PageConfig>>();
+
 export function getPageRegistry(
   breakpoint: Breakpoint,
 ): Record<IndexItem, PageConfig> {
+  const hit = cache.get(breakpoint);
+  if (hit) return hit;
+
   const ranges = AWARD_YEAR_RANGES_BY_BREAKPOINT[breakpoint];
-  return {
+  const registry: Record<IndexItem, PageConfig> = {
     List: { totalPages: 1 },
     Content: { totalPages: Math.ceil(artworks.length / 2) },
     Timeline: { totalPages: 1 },
     Award: { totalPages: Math.ceil(ranges.length / 2) },
   };
+  cache.set(breakpoint, registry);
+  return registry;
 }
