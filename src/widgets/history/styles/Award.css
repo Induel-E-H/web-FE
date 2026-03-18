@@ -47,3 +47,13 @@
   content: '•';
   flex-shrink: 0;
 }
+
+@media (max-width: 1024px) {
+  .award__year {
+    font-size: 1.07vh;
+  }
+
+  .award__ul li {
+    font-size: 0.78vh;
+  }
+}

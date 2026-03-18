@@ -1,7 +1,8 @@
 import { awardData } from '@entities/history';
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import { getDataIndex } from '../model/helpers';
-import { AWARD_YEAR_RANGES } from '../model/pageRegistry';
+import { AWARD_YEAR_RANGES_BY_BREAKPOINT } from '../model/pageRegistry';
 import type { PageSide } from '../model/types';
 import '../styles/Award.css';
 import { BookPageTitle } from './BookPageTitle';
@@ -10,10 +11,6 @@ function getItemsByRange(start: number, end: number) {
   return awardData.filter((item) => item.year >= start && item.year <= end);
 }
 
-const pages = AWARD_YEAR_RANGES.map(([start, end]) =>
-  getItemsByRange(start, end),
-);
-
 export function AwardPage({
   side,
   pageIndex,
@@ -21,6 +18,9 @@ export function AwardPage({
   side: PageSide;
   pageIndex: number;
 }) {
+  const breakpoint = useBreakpoint();
+  const ranges = AWARD_YEAR_RANGES_BY_BREAKPOINT[breakpoint];
+  const pages = ranges.map(([start, end]) => getItemsByRange(start, end));
   const dataIndex = getDataIndex(pageIndex, side);
   const items = pages[dataIndex] ?? [];
   const showTitle = dataIndex === 0;

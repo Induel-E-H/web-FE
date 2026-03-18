@@ -1,5 +1,7 @@
 import { Fragment } from 'react';
 
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+
 import { INDEX_LIST, PAGE_SIDE } from '../model/constants';
 import type { IndexItem } from '../model/types';
 import { useBookNavigation } from '../model/useBookNavigation';
@@ -11,6 +13,7 @@ import { ListPage } from './List';
 import { TimelinePage } from './Timeline';
 
 function History() {
+  const breakpoint = useBreakpoint();
   const {
     activeItem,
     currentPageIndex,
@@ -24,7 +27,7 @@ function History() {
     startHold,
     leftClickRef,
     rightClickRef,
-  } = useBookNavigation();
+  } = useBookNavigation(breakpoint);
 
   function handleListItemClick(index: number) {
     goToItem('Content', Math.floor(index / 2));

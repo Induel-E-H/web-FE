@@ -1,16 +1,19 @@
 import { type RefObject, useEffect, useRef, useState } from 'react';
 
 import { INDEX_LIST, PAGE_SIDE } from './constants';
-import { PAGE_REGISTRY } from './pageRegistry';
+import { getPageRegistry } from './pageRegistry';
 import type { IndexItem, PageSide } from './types';
 
+type Breakpoint = 'desktop' | 'tablet';
 type FlipState = { side: PageSide } | null;
 
 const HOLD_DELAY = 800;
 const HOLD_INTERVAL = 150;
 const FLIP_DURATION = 250;
 
-export function useBookNavigation() {
+export function useBookNavigation(breakpoint: Breakpoint) {
+  const pageRegistry = getPageRegistry(breakpoint);
+
   const [activeItem, setActiveItem] = useState<IndexItem>('List');
   const [pageIndices, setPageIndices] = useState<Record<IndexItem, number>>(
     () =>
@@ -22,8 +25,9 @@ export function useBookNavigation() {
   const [flipState, setFlipState] = useState<FlipState>(null);
 
   const activeIndex = INDEX_LIST.indexOf(activeItem);
-  const currentPageIndex = pageIndices[activeItem];
-  const totalPages = PAGE_REGISTRY[activeItem].totalPages;
+  const rawPageIndex = pageIndices[activeItem];
+  const totalPages = pageRegistry[activeItem].totalPages;
+  const currentPageIndex = Math.min(rawPageIndex, totalPages - 1);
 
   const canGoLeft = activeIndex > 0 || currentPageIndex > 0;
   const canGoRight =
@@ -68,7 +72,7 @@ export function useBookNavigation() {
         }));
       } else if (activeIndex > 0) {
         const prev = INDEX_LIST[activeIndex - 1];
-        const prevTotalPages = PAGE_REGISTRY[prev].totalPages;
+        const prevTotalPages = pageRegistry[prev].totalPages;
         setPageIndices((p) => ({ ...p, [prev]: prevTotalPages - 1 }));
         setActiveItem(prev);
       }
