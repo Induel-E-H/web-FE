@@ -52,7 +52,6 @@
 .content__caption-col {
   display: flex;
   flex-direction: column;
-  gap: 0.19vh;
 }
 
 .content__caption-col:last-child {
@@ -80,4 +79,39 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+@media (max-width: 1024px) {
+  .content__item {
+    gap: 1.172vh;
+  }
+
+  .content__text {
+    gap: 0.684vh;
+  }
+
+  .content__text * {
+    font-family: 'BookendBatang', sans-serif;
+  }
+
+  .content__title-eng {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.87vmin;
+  }
+
+  .content__title-kor {
+    font-size: 2.61vmin;
+  }
+
+  .content__subtitle {
+    font-size: 1.83vmin;
+  }
+
+  .content__body {
+    font-size: 1.56vmin;
+  }
+
+  .content__caption span {
+    font-size: 1.04vmin;
+  }
 }
