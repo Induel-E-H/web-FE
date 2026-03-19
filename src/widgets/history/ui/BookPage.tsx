@@ -49,20 +49,17 @@ export function BookPage({
     if (!panel) return;
 
     if (!isFlipping) {
-      // 플립 완료: transition 없이 즉시 리셋, 숨김
       panel.style.transition = 'none';
       panel.classList.remove('flipping');
       panel.classList.remove('history__book-flip-panel--animating');
       panel.classList.add('history__book-flip-panel--hidden');
 
-      // 다음 프레임에서 transition 복원
       requestAnimationFrame(() => {
         if (flipPanelRef.current) {
           flipPanelRef.current.style.transition = '';
         }
       });
     } else {
-      // 새 플립 시작: 리셋 → reflow → transition 복원 → flipping 추가
       panel.style.transition = 'none';
       panel.classList.remove('history__book-flip-panel--hidden');
       panel.classList.remove('flipping');

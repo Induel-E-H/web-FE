@@ -304,6 +304,26 @@
   will-change: transform;
 }
 
+/* === Rapid flip (인덱스 점프) === */
+
+.history__book-page--rapid .history__book-page-content {
+  filter: blur(15px);
+  clip-path: inset(0);
+}
+
+.history__book-page--rapid .history__book-flip-panel {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.history__book-page--rapid .history__book-flip-panel.flipping {
+  animation: none;
+}
+
+/* 빠른 플립 사이 패널 깜빡임 방지 */
+.history__book-page--rapid .history__book-flip-panel--hidden {
+  opacity: 1;
+}
+
 /* === 모바일 === */
 @media (max-width: 1024px) {
   .history__book {

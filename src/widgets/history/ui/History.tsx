@@ -16,11 +16,13 @@ function History() {
   const breakpoint = useBreakpoint();
   const {
     activeItem,
+    tabActiveItem,
     currentPageIndex,
     canGoLeft,
     canGoRight,
     isFlipping,
     flipDirection,
+    isRapidFlipping,
     nextPageIndex,
     nextActiveItem,
     prevPageIndex,
@@ -30,11 +32,11 @@ function History() {
   } = useBookNavigation(breakpoint);
 
   function handleListItemClick(index: number) {
-    goToItem('Content', Math.floor(index / 2));
+    goToItem('Content', Math.floor(index / 2), true);
   }
 
   function handleCategoryClick(item: IndexItem) {
-    goToItem(item);
+    goToItem(item, 0, true);
   }
 
   function renderPage(
@@ -61,7 +63,6 @@ function History() {
     }
   }
 
-  // 4-slot 콘텐츠 결정
   let staticLeftContent;
   let staticRightContent;
   let flipFrontContent;
@@ -78,7 +79,6 @@ function History() {
     flipFrontContent = renderPage('left', currentPageIndex, activeItem);
     flipBackContent = renderPage('right', prevPageIndex, prevActiveItem);
   } else {
-    // Idle 상태
     staticLeftContent = renderPage('left', currentPageIndex, activeItem);
     staticRightContent = renderPage('right', currentPageIndex, activeItem);
     flipFrontContent = renderPage('right', currentPageIndex, activeItem);
@@ -93,8 +93,8 @@ function History() {
           <Fragment key={item}>
             <button
               role='tab'
-              aria-selected={activeItem === item}
-              className={activeItem === item ? 'active' : ''}
+              aria-selected={tabActiveItem === item}
+              className={tabActiveItem === item ? 'active' : ''}
               onClick={() => handleCategoryClick(item)}
             >
               {item}
@@ -104,7 +104,9 @@ function History() {
         ))}
       </div>
       <div className='history__book'>
-        <div className='history__book-page'>
+        <div
+          className={`history__book-page${isRapidFlipping ? ' history__book-page--rapid' : ''}`}
+        >
           <BookPage
             staticLeftContent={staticLeftContent}
             staticRightContent={staticRightContent}
