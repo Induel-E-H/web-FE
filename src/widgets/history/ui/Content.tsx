@@ -1,8 +1,13 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { IoMdClose } from 'react-icons/io';
+import { MdOutlineZoomOutMap } from 'react-icons/md';
 
 import { artworks } from '@entities/history';
 
 import {
+  getAllContentImages,
   getArtworkIndex,
   getContentImage,
   preloadContentImages,
@@ -46,6 +51,112 @@ function SubTitleContent({
   );
 }
 
+function ImageGalleryPopup({
+  title,
+  images,
+  onClose,
+}: {
+  title: string;
+  images: string[];
+  onClose: () => void;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const holdTimerRef = useRef<ReturnType<typeof setInterval>>(null);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  }, [images.length]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  }, [images.length]);
+
+  function startHold(fn: () => void) {
+    fn();
+    holdTimerRef.current = setInterval(fn, 400);
+  }
+
+  function stopHold() {
+    if (holdTimerRef.current) {
+      clearInterval(holdTimerRef.current);
+      holdTimerRef.current = null;
+    }
+  }
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('mouseup', stopHold);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('mouseup', stopHold);
+      stopHold();
+    };
+  }, [handlePrev, handleNext]);
+
+  return (
+    <div
+      className='gallery-overlay'
+      onMouseDown={(e) => {
+        e.stopPropagation();
+        if (e.target === e.currentTarget) onClose();
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className='gallery-popup'>
+        <div className='gallery-popup__header'>
+          <h3 className='gallery-popup__title'>{title}</h3>
+          <button
+            className='gallery-popup__close'
+            onClick={onClose}
+            aria-label='닫기'
+          >
+            <IoMdClose size='1.6vmax' />
+          </button>
+        </div>
+        <hr />
+        <div className='gallery-popup__viewer'>
+          <div className='gallery-popup__image-frame'>
+            <div
+              className='gallery-popup__track'
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {images.map((src, i) => (
+                <div key={i} className='gallery-popup__slide'>
+                  <img src={src} alt={`${title} - ${i + 1}`} />
+                </div>
+              ))}
+            </div>
+            <div className='gallery-popup__indicator'>
+              {currentIndex + 1} / {images.length}
+            </div>
+            <button
+              className='gallery-popup__nav gallery-popup__nav--prev'
+              onMouseDown={() => startHold(handlePrev)}
+              aria-label='이전 이미지'
+            >
+              <IoIosArrowBack size='1.25vmax' />
+            </button>
+            <button
+              className='gallery-popup__nav gallery-popup__nav--next'
+              onMouseDown={() => startHold(handleNext)}
+              aria-label='다음 이미지'
+            >
+              <IoIosArrowForward size='1.25vmax' />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ContentItem({
   item,
   index,
@@ -53,7 +164,14 @@ function ContentItem({
   item: (typeof artworks)[0];
   index: number;
 }) {
+  const [showGallery, setShowGallery] = useState(false);
   const imageSrc = getContentImage(index);
+
+  function handleImageClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    e.preventDefault();
+    setShowGallery(true);
+  }
 
   return (
     <article className='content__item'>
@@ -95,9 +213,29 @@ function ContentItem({
           </div>
         </dl>
       </div>
-      <figure className='content__image'>
-        {imageSrc && <img src={imageSrc} alt={item.title} />}
+      <figure
+        className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
+        onMouseDown={(e) => imageSrc && e.stopPropagation()}
+        onClick={imageSrc ? handleImageClick : undefined}
+      >
+        {imageSrc && (
+          <>
+            <img src={imageSrc} alt={item.title} />
+            <div className='content__image-zoom'>
+              <MdOutlineZoomOutMap size='1.25vmax' color='white' />
+            </div>
+          </>
+        )}
       </figure>
+      {showGallery &&
+        createPortal(
+          <ImageGalleryPopup
+            title={item.title}
+            images={getAllContentImages(index)}
+            onClose={() => setShowGallery(false)}
+          />,
+          document.body,
+        )}
     </article>
   );
 }

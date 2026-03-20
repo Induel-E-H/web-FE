@@ -11,9 +11,26 @@ const contentImages = import.meta.glob('../assets/content/*/0.webp', {
   import: 'default',
 });
 
+const allContentImages = import.meta.glob('../assets/content/*/*.webp', {
+  eager: true,
+  import: 'default',
+});
+
 export function getContentImage(index: number): string | undefined {
   const src = contentImages[`../assets/content/${index}/0.webp`];
   return typeof src === 'string' ? src : undefined;
+}
+
+export function getAllContentImages(index: number): string[] {
+  const images: string[] = [];
+  let i = 0;
+  while (true) {
+    const src = allContentImages[`../assets/content/${index}/${i}.webp`];
+    if (typeof src !== 'string') break;
+    images.push(src);
+    i++;
+  }
+  return images;
 }
 
 export function preloadContentImages(pageIndex: number): void {

@@ -1,3 +1,5 @@
+@import './ContentPopup.css';
+
 .content__item {
   width: 100%;
   height: 100%;
@@ -86,9 +88,14 @@
 }
 
 .content__image {
+  position: relative;
   height: 100%;
   border-radius: 0.26vmax;
   overflow: hidden;
+}
+
+.content__image--has-image {
+  cursor: pointer;
 }
 
 .content__image img {
@@ -96,6 +103,26 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.content__image-zoom {
+  position: absolute;
+  top: 0.52vmax;
+  right: 0.52vmax;
+  width: 2.08vmax;
+  height: 2.08vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0.52vmax;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.content__image--has-image:hover .content__image-zoom {
+  opacity: 1;
 }
 
 @media (max-width: 1024px) {
