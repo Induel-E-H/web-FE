@@ -1,10 +1,7 @@
 import { useRef, useState } from 'react';
 
+import { RAPID_FLIP_DURATION } from '../constants';
 import type { FlipDirection, IndexItem, NavigationStep } from '../types';
-
-const RAPID_FLIP_DURATION = 300;
-
-export { RAPID_FLIP_DURATION };
 
 export function useRapidFlip(
   startFlipAnimation: (

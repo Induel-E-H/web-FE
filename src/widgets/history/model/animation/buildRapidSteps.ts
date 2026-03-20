@@ -1,7 +1,5 @@
-import { INDEX_LIST } from '../constants';
+import { INDEX_LIST, MIN_RAPID_FLIPS } from '../constants';
 import type { FlipDirection, IndexItem, NavigationStep } from '../types';
-
-const MIN_RAPID_FLIPS = 3;
 
 export function buildRapidSteps(params: {
   activeItem: IndexItem;

@@ -8,7 +8,7 @@ import { useBookNavigation } from '../model/useBookNavigation';
 import '../styles/History.css';
 import { AwardPage } from './Award';
 import { BookPage } from './BookPage';
-import { ContentPage } from './Content';
+import { ContentPage } from './ContentPage';
 import { ListPage } from './List';
 import { TimelinePage } from './Timeline';
 

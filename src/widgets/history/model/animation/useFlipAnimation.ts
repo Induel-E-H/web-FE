@@ -1,9 +1,8 @@
 import { useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 
+import { FLIP_DURATION } from '../constants';
 import type { FlipDirection } from '../types';
-
-const FLIP_DURATION = 800;
 
 export function useFlipAnimation() {
   const [isFlipping, setIsFlipping] = useState(false);
