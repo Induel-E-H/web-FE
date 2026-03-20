@@ -6,13 +6,13 @@ export function getArtworkIndex(pageIndex: number, side: PageSide): number {
   return pageIndex * 2 + (side === 'left' ? 0 : 1);
 }
 
-const contentImages = import.meta.glob('../assets/content/*.webp', {
+const contentImages = import.meta.glob('../assets/content/*/0.webp', {
   eager: true,
   import: 'default',
 });
 
 export function getContentImage(index: number): string | undefined {
-  const src = contentImages[`../assets/content/${index}.webp`];
+  const src = contentImages[`../assets/content/${index}/0.webp`];
   return typeof src === 'string' ? src : undefined;
 }
 
