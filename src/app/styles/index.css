@@ -29,6 +29,7 @@
   --brown-500: #6b4f3a;
   --brown-600: #5a4231;
   --brown-700: #4a3527;
+  --brown-750: #4a2814cc;
   --brown-800: #38271d;
   --brown-900: #241812;
 
@@ -73,6 +74,9 @@
   --book-center: var(--mauve-600);
   --book-centerDeep: var(--mauve-700);
   --book-page: var(--white);
+
+  /* Vision */
+  --vision-background: var(--brown-750);
 }
 
 h1,
