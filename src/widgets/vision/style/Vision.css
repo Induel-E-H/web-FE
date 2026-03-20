@@ -1,0 +1,82 @@
+기본 초기화 body {
+  margin: 0;
+}
+
+/* 섹션 전체 */
+.vision {
+  width: 100%;
+  min-height: 100vh;
+  background:
+    linear-gradient(var(--vision-background), var(--vision-background)),
+    url('../assets/vision_background.jpg') center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 5.21vw 7.812vw;
+  box-sizing: border-box;
+}
+
+/* SectionLayout */
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 핵심 */
+  width: 100%;
+  height: 100%;
+}
+
+.section--reverse {
+  flex-direction: row-reverse;
+}
+
+/* 왼쪽 (이미지 + 텍스트 묶음) */
+.vision__media-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.56vw;
+  width: 28.64vw;
+  height: 36.77vw;
+}
+
+/* 이미지 */
+.vision__media-group img {
+  width: 28.64vw;
+  height: 28.64vw;
+  object-fit: cover;
+  border-radius: 40px 0 40px 0;
+}
+
+.section--reverse .vision__media-group img {
+  border-radius: 0 40px 0 40px;
+}
+
+/* 텍스트 영역 */
+.vision__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.042vw;
+}
+
+/* 제목 */
+.vision__title {
+  font-size: 2.083vw;
+  font-weight: 800;
+  color: white;
+}
+
+/* 설명 */
+.vision__description {
+  font-size: 0.937vw;
+  width: 28.64vw;
+  line-height: 1.6;
+}
+
+/* 오른쪽 키워드 */
+.vision__keyword {
+  font-size: 9.375vw;
+  font-weight: 700;
+  -webkit-text-stroke: 2px #ffffffcc;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  width: 49.48vw;
+  margin-left: auto;
+}
