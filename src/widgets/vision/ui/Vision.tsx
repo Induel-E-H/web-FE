@@ -4,6 +4,7 @@ import visionSculpt from '@widgets/vision/assets/vision_sculpt.jpg';
 import '@widgets/vision/style/Vision.css';
 
 import { VisionData } from '../model/VisionData';
+import { useScrollFadeIn } from './ScrollFadeIn';
 import { VisionItem } from './VisionItem';
 
 const imageMap = {
@@ -13,6 +14,8 @@ const imageMap = {
 };
 
 export function Vision() {
+  useScrollFadeIn();
+
   return (
     <>
       {VisionData.map((item) => (

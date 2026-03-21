@@ -1,18 +1,18 @@
 interface SectionLayoutProps {
   reverse?: boolean;
-  left: React.ReactNode;
-  right: React.ReactNode;
+  content: React.ReactNode;
+  keyword: React.ReactNode;
 }
 
 export function SectionLayout({
   reverse = false,
-  left,
-  right,
+  content,
+  keyword,
 }: SectionLayoutProps) {
   return (
     <section className={`section ${reverse ? 'section--reverse' : ''}`}>
-      <div className='section__left'>{left}</div>
-      <div className='section__right'>{right}</div>
+      <div className='vision__content-group fade-section'>{content}</div>
+      <div className='vision__keyword-group fade-section'>{keyword}</div>
     </section>
   );
 }

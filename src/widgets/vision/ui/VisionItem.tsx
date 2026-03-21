@@ -18,16 +18,16 @@ export function VisionItem({
   return (
     <SectionLayout
       reverse={reverse}
-      left={
-        <div className='vision__media-group'>
+      content={
+        <div className='vision__content'>
           <img src={image} alt={title} />
-          <div className='vision__content'>
+          <div className='vision__context'>
             <span className='vision__title'>{title}</span>
-            <p className='vision__description'>{description}</p>
+            <span className='vision__description'>{description}</span>
           </div>
         </div>
       }
-      right={<p className='vision__keyword'>{keyword}</p>}
+      keyword={<p className='vision__keyword'>{keyword}</p>}
     />
   );
 }
