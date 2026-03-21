@@ -7,7 +7,7 @@ import { artworks } from '@entities/history';
 import {
   getAllContentImages,
   getArtworkIndex,
-  getContentImage,
+  getThumbnailImage,
   preloadContentImages,
 } from '../model/helpers';
 import type { PageSide } from '../model/types';
@@ -57,13 +57,13 @@ function ContentItem({
   item: (typeof artworks)[0];
   index: number;
 }) {
-  const [showGallery, setShowGallery] = useState(false);
-  const imageSrc = getContentImage(index);
+  const [showPopup, setShowPopup] = useState(false);
+  const imageSrc = getThumbnailImage(index);
 
   function handleImageClick(e: React.MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
-    setShowGallery(true);
+    setShowPopup(true);
   }
 
   return (
@@ -120,12 +120,12 @@ function ContentItem({
           </>
         )}
       </figure>
-      {showGallery &&
+      {showPopup &&
         createPortal(
           <ImageGalleryPopup
             title={item.title}
             images={getAllContentImages(index)}
-            onClose={() => setShowGallery(false)}
+            onClose={() => setShowPopup(false)}
           />,
           document.body,
         )}
