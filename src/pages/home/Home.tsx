@@ -11,9 +11,9 @@ function Home() {
     <>
       <Hero></Hero>
       {/* <History></History> */}
+      <Award></Award>
       {/* <Map></Map> */}
       {/* <Footer></Footer> */}
-      <Award></Award>
     </>
   );
 }
