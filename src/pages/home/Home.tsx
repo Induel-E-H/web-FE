@@ -8,7 +8,7 @@ function Home() {
   return (
     <>
       <Hero></Hero>
-      <History></History>
+      {/* <History></History> */}
       {/* <Map></Map> */}
       {/* <Footer></Footer> */}
     </>
