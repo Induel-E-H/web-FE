@@ -1,0 +1,64 @@
+.image-gallery-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.image-gallery-popup {
+  width: 50%;
+  height: 80%;
+  background: #ffffff;
+  border-radius: 0.52vmax;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6vmax;
+  gap: 0.8vmax;
+}
+
+.image-gallery-popup__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-gallery-popup__title {
+  font-family: 'BookendBatang', sans-serif;
+  font-size: 1.667vmax;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.image-gallery-popup__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.26vmax;
+  color: var(--gray-600);
+}
+
+.image-gallery-popup__close:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 1024px) {
+  .image-gallery-popup {
+    width: 85%;
+    height: 70%;
+    border-radius: 1.04vmin;
+    padding: 3.13vmin;
+    gap: 1.56vmin;
+  }
+
+  .image-gallery-popup__title {
+    font-size: 3.13vmin;
+  }
+}
