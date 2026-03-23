@@ -2,9 +2,11 @@ import { useState } from 'react';
 
 import '../styles/YearCategory.css';
 
-const INDEX_LIST = ['전체', 2024, 2023, 2022, 2021, 2020];
+interface YearCategoryProps {
+  yearList: (string | number)[];
+}
 
-export function YearCategory() {
+export function YearCategory({ yearList }: YearCategoryProps) {
   const [tabActiveItem, setTabActiveItem] = useState<string | number>('전체');
 
   function handleYearClick(year: number | string) {
@@ -13,7 +15,7 @@ export function YearCategory() {
 
   return (
     <div className='award__year_category'>
-      {INDEX_LIST.map((year) => (
+      {yearList.map((year) => (
         <button
           role='tab'
           key={year}
