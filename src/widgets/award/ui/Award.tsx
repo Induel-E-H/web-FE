@@ -1,10 +1,14 @@
 import '../styles/Award.css';
 import { AwardTitle } from './Title';
+import { YearCategory } from './YearCategory';
 
 function Award() {
   return (
     <section className='award'>
-      <AwardTitle></AwardTitle>
+      <div className='award__top'>
+        <AwardTitle></AwardTitle>
+        <YearCategory></YearCategory>
+      </div>
     </section>
   );
 }

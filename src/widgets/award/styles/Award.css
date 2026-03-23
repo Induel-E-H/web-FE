@@ -8,3 +8,9 @@
   align-items: center;
   padding: 2.605vmax;
 }
+
+.award__top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05vmax;
+}
