@@ -1,0 +1,6 @@
+.award {
+  width: 100%;
+  height: 74.07dvh;
+  background-color: var(--white);
+  overflow: hidden;
+}
