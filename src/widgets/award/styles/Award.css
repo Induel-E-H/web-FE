@@ -17,11 +17,21 @@
   width: 100%;
 }
 
-.award__card_wrapper {
-  display: grid;
+.award__card_viewport {
   width: 88.54vmax;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.award__card_slider {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.award__card_page {
+  display: grid;
+  min-width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(14.58vmax, 1fr));
   grid-auto-rows: 20vmax;
-  flex-shrink: 0;
   gap: 3.906vmax;
 }

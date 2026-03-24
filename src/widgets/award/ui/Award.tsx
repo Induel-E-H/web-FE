@@ -14,10 +14,6 @@ const ITEMS_PER_PAGE = 5;
 function Award() {
   const [page, setPage] = useState(0);
   const totalPages = Math.ceil(awards.length / ITEMS_PER_PAGE);
-  const currentAwards = awards.slice(
-    page * ITEMS_PER_PAGE,
-    (page + 1) * ITEMS_PER_PAGE,
-  );
 
   return (
     <section className='award'>
@@ -25,15 +21,29 @@ function Award() {
         <AwardTitle></AwardTitle>
         <YearCategory yearList={YEAR_LIST}></YearCategory>
       </div>
-      <div className='award__card_wrapper'>
-        {currentAwards.map((award) => (
-          <Card
-            key={award.id}
-            name={award.title}
-            year={award.time}
-            imageUrl={getAwardImage(award.id)}
-          />
-        ))}
+      <div className='award__card_viewport'>
+        <div
+          className='award__card_slider'
+          style={{ transform: `translateX(-${page * 100}%)` }}
+        >
+          {Array.from({ length: totalPages }, (_, pageIndex) => (
+            <div key={pageIndex} className='award__card_page'>
+              {awards
+                .slice(
+                  pageIndex * ITEMS_PER_PAGE,
+                  (pageIndex + 1) * ITEMS_PER_PAGE,
+                )
+                .map((award) => (
+                  <Card
+                    key={award.id}
+                    name={award.title}
+                    year={award.time}
+                    imageUrl={getAwardImage(award.id)}
+                  />
+                ))}
+            </div>
+          ))}
+        </div>
       </div>
       <Pagination
         currentPage={page}
