@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import awards from '../../../entities/award/model/award.json';
 import { YEAR_LIST } from '../model/constant';
@@ -13,13 +13,32 @@ const ITEMS_PER_PAGE = 5;
 
 function Award() {
   const [page, setPage] = useState(0);
-  const totalPages = Math.ceil(awards.length / ITEMS_PER_PAGE);
+  const [activeYear, setActiveYear] = useState<string | number>('전체');
+
+  const filteredAwards = useMemo(
+    () =>
+      activeYear === '전체'
+        ? awards
+        : awards.filter((a) => a.time.startsWith(String(activeYear))),
+    [activeYear],
+  );
+
+  const totalPages = Math.ceil(filteredAwards.length / ITEMS_PER_PAGE);
+
+  function handleYearChange(year: string | number) {
+    setActiveYear(year);
+    setPage(0);
+  }
 
   return (
     <section className='award'>
       <div className='award__top'>
         <AwardTitle></AwardTitle>
-        <YearCategory yearList={YEAR_LIST}></YearCategory>
+        <YearCategory
+          yearList={YEAR_LIST}
+          activeYear={activeYear}
+          onYearChange={handleYearChange}
+        />
       </div>
       <div className='award__card_viewport'>
         <div
@@ -30,7 +49,7 @@ function Award() {
         >
           {Array.from({ length: totalPages }, (_, pageIndex) => (
             <div key={pageIndex} className='award__card_page'>
-              {awards
+              {filteredAwards
                 .slice(
                   pageIndex * ITEMS_PER_PAGE,
                   (pageIndex + 1) * ITEMS_PER_PAGE,
