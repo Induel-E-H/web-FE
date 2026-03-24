@@ -22,12 +22,12 @@ export function VisionItem({
         <div className='vision__content'>
           <img src={image} alt={title} />
           <div className='vision__context'>
-            <span className='vision__title'>{title}</span>
+            <h2 className='vision__title'>{title}</h2>
             <span className='vision__description'>{description}</span>
           </div>
         </div>
       }
-      keyword={<p className='vision__keyword'>{keyword}</p>}
+      keyword={<h1 className='vision__keyword'>{keyword}</h1>}
     />
   );
 }
