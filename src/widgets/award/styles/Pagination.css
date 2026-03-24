@@ -31,7 +31,7 @@
   border: 1px solid var(--brown-400);
   background: transparent;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s;
 }
 
 .award__pagination_dot--active {
