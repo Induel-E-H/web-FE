@@ -9,6 +9,7 @@
   background:
     linear-gradient(var(--vision-background), var(--vision-background)),
     url('../assets/vision_background.jpg') center / cover no-repeat;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   padding: 5.21vw 7.812vw;
@@ -95,6 +96,8 @@
   .vision {
     align-items: flex-start; /* 상단 패딩에 딱 붙이기 */
     padding: 2.604vw 5.208vw;
+    height: auto;
+    min-height: 100vh;
   }
 
   .section {
