@@ -1,8 +1,3 @@
-/* body {
-  margin: 0;
-} */
-
-/* 섹션 전체 */
 .vision {
   width: 100%;
   height: 100vh;
@@ -28,14 +23,12 @@
   flex-direction: row-reverse;
 }
 
-/* 왼쪽 (이미지 + 텍스트 묶음) */
 .vision__content {
   display: flex;
   flex-direction: column;
-  gap: 1.56vw; /* 기존 텍스트 간격 유지 */
+  gap: 1.56vw;
 }
 
-/* 이미지 */
 .vision__content img {
   width: 28.64vw;
   height: 28.64vw;
@@ -47,13 +40,11 @@
   border-radius: 0 40px 0 40px;
 }
 
-/* 제목 */
 .vision__title {
   font-size: 2.083vw;
   font-weight: 600;
 }
 
-/* 설명 */
 .vision__description {
   font-size: 0.937vw;
   font-weight: 300;
@@ -67,14 +58,13 @@
   color: white;
 }
 
-/* 오른쪽 키워드 */
 .vision__keyword {
   font-size: 9.375vw;
   font-weight: 700;
   text-align: center;
   width: 49.48vw;
-  -webkit-text-stroke: 2px #ffffff99; /* 선 두께 + 색 */
-  -webkit-text-fill-color: transparent; /* 내부 투명 */
+  -webkit-text-stroke: 2px #ffffff99;
+  -webkit-text-fill-color: transparent;
 }
 
 .fade-section {
@@ -94,7 +84,7 @@
 /* Tablet */
 @media (max-width: 1023px) {
   .vision {
-    align-items: flex-start; /* 상단 패딩에 딱 붙이기 */
+    align-items: flex-start;
     padding: 2.604vw 5.208vw;
     height: auto;
     min-height: 100vh;
@@ -116,7 +106,7 @@
 
   .vision__keyword-group {
     order: 1;
-    width: 100%; /* 오른쪽 정렬을 위해 full width */
+    width: 100%;
   }
 
   .vision__content {
@@ -155,7 +145,7 @@
 /* Mobile */
 @media (max-width: 767px) {
   .vision {
-    align-items: flex-start; /* 상단 패딩에 딱 붙이기 */
+    align-items: flex-start;
     padding: 3.125vw 6.25vw;
   }
 
@@ -175,7 +165,7 @@
 
   .vision__keyword-group {
     order: 1;
-    width: 100%; /* 오른쪽 정렬을 위해 full width */
+    width: 100%;
   }
 
   .vision__content {
