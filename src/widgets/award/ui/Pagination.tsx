@@ -19,7 +19,7 @@ export function Pagination({
           onPageChange(currentPage === 0 ? totalPages - 1 : currentPage - 1)
         }
       >
-        <IoIosArrowBack size={15} />
+        <IoIosArrowBack />
       </button>
 
       <div className='award__pagination_dots'>
@@ -42,7 +42,7 @@ export function Pagination({
           onPageChange(currentPage === totalPages - 1 ? 0 : currentPage + 1)
         }
       >
-        <IoIosArrowForward size={15} />
+        <IoIosArrowForward />
       </button>
     </div>
   );

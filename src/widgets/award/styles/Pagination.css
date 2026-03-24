@@ -12,6 +12,7 @@
   border-radius: 0.27vmax;
   cursor: pointer;
   color: var(--black);
+  font-size: 0.78vmax;
   display: flex;
   align-items: center;
   justify-content: center;
