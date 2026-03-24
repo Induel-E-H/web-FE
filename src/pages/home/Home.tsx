@@ -1,9 +1,11 @@
-import Hero from '@widgets/hero';
+// import Hero from '@widgets/hero';
+import { Vision } from '@widgets/vision';
 
 function Home() {
   return (
     <>
-      <Hero></Hero>
+      {/* <Hero></Hero> */}
+      <Vision></Vision>
     </>
   );
 }
