@@ -29,7 +29,6 @@
 }
 
 .award__card_page {
-  --grid-rows: 1;
   display: grid;
   min-width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(14.375vmax, 1fr));
