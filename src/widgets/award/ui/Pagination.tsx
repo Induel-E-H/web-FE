@@ -1,5 +1,6 @@
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
+import { wrapPage } from '../model/helper';
 import '../styles/Pagination.css';
 
 export function Pagination({
@@ -17,24 +18,25 @@ export function Pagination({
         className='award__pagination_arrow'
         type='button'
         aria-label='Previous page'
-        onClick={() =>
-          onPageChange(currentPage === 0 ? totalPages - 1 : currentPage - 1)
-        }
+        onClick={() => onPageChange(wrapPage(currentPage - 1, totalPages))}
       >
         <IoIosArrowBack />
       </button>
 
       <div className='award__pagination_dots'>
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            type='button'
-            aria-label={`Go to page ${i + 1}`}
-            aria-current={i === currentPage ? 'page' : undefined}
-            className={`award__pagination_dot ${i === currentPage ? 'award__pagination_dot--active' : ''}`}
-            onClick={() => onPageChange(i)}
-          />
-        ))}
+        {Array.from({ length: totalPages }, (_, pageIndex) => {
+          const isActive = pageIndex === currentPage;
+          return (
+            <button
+              key={pageIndex}
+              type='button'
+              aria-label={`Go to page ${pageIndex + 1}`}
+              aria-current={isActive ? 'page' : undefined}
+              className={`award__pagination_dot ${isActive ? 'award__pagination_dot--active' : ''}`}
+              onClick={() => onPageChange(pageIndex)}
+            />
+          );
+        })}
       </div>
 
       <span className='award__pagination_info'>
@@ -45,9 +47,7 @@ export function Pagination({
         className='award__pagination_arrow'
         type='button'
         aria-label='Next page'
-        onClick={() =>
-          onPageChange(currentPage === totalPages - 1 ? 0 : currentPage + 1)
-        }
+        onClick={() => onPageChange(wrapPage(currentPage + 1, totalPages))}
       >
         <IoIosArrowForward />
       </button>

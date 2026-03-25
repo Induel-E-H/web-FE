@@ -5,3 +5,5 @@ const years = [...new Set(awards.map((a) => Number(a.time.slice(0, 4))))].sort(
 );
 
 export const YEAR_LIST: (string | number)[] = ['전체', ...years];
+
+export const DEFAULT_COLUMNS = 5;

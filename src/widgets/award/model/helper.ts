@@ -11,3 +11,7 @@ export function getAwardImage(id: number): string {
   }
   return image;
 }
+
+export function wrapPage(page: number, totalPages: number) {
+  return ((page % totalPages) + totalPages) % totalPages;
+}
