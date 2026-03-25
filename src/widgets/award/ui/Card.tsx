@@ -12,7 +12,7 @@ export function Card({
   return (
     <div className='award__card'>
       <div className='award__card_image'>
-        <img src={imageUrl}></img>
+        <img src={imageUrl} alt={name}></img>
       </div>
       <div className='award__card_title'>
         <h4>{name}</h4>
