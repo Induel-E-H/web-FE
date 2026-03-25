@@ -15,6 +15,8 @@ export function Pagination({
     <div className='award__pagination'>
       <button
         className='award__pagination_arrow'
+        type='button'
+        aria-label='Previous page'
         onClick={() =>
           onPageChange(currentPage === 0 ? totalPages - 1 : currentPage - 1)
         }
@@ -26,6 +28,9 @@ export function Pagination({
         {Array.from({ length: totalPages }, (_, i) => (
           <button
             key={i}
+            type='button'
+            aria-label={`Go to page ${i + 1}`}
+            aria-current={i === currentPage ? 'page' : undefined}
             className={`award__pagination_dot ${i === currentPage ? 'award__pagination_dot--active' : ''}`}
             onClick={() => onPageChange(i)}
           />
@@ -38,6 +43,8 @@ export function Pagination({
 
       <button
         className='award__pagination_arrow'
+        type='button'
+        aria-label='Next page'
         onClick={() =>
           onPageChange(currentPage === totalPages - 1 ? 0 : currentPage + 1)
         }
