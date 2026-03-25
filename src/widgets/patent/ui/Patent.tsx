@@ -14,6 +14,7 @@ function Patent() {
           유효 특허 5건, 권리 소멸 10건
         </span>
       </div>
+
       <div className='patent__content'>
         <div className='patent__content-main'>
           <button className='nav__left'></button>
@@ -28,6 +29,7 @@ function Patent() {
 
           <button className='nav__right'></button>
         </div>
+
         <div className='patent__content-sub'>
           <div className='patent__content-sub-title'>
             <button></button>
