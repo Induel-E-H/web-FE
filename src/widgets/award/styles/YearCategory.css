@@ -8,11 +8,10 @@
   border: none;
   cursor: pointer;
   padding: 0 1.25vw;
-  font-family: inherit;
-  font-size: 1.25vw;
+  font-size: 1.25vmax;
   font-weight: 400;
   color: var(--brown-200);
-  border-bottom: 0.16vmax solid var(--brown-200);
+  border-bottom: 0.12vmax solid var(--brown-200);
   transition:
     color 0.3s,
     border-color 0.3s;
