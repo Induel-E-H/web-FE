@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import awards from '../../../entities/award/model/award.json';
 import { YEAR_LIST } from '../model/constant';
@@ -9,11 +9,30 @@ import { Pagination } from './Pagination';
 import { AwardTitle } from './Title';
 import { YearCategory } from './YearCategory';
 
-const ITEMS_PER_PAGE = 5;
+const BASE_ITEMS = 5;
+
+function useGridColumns() {
+  const [columns, setColumns] = useState(BASE_ITEMS);
+
+  const ref = useCallback((node: HTMLDivElement | null) => {
+    if (!node) return;
+
+    const observer = new ResizeObserver(() => {
+      const style = getComputedStyle(node);
+      const cols = style.gridTemplateColumns.split(' ').length;
+      setColumns(cols);
+    });
+
+    observer.observe(node);
+  }, []);
+
+  return { ref, columns };
+}
 
 function Award() {
   const [page, setPage] = useState(0);
   const [activeYear, setActiveYear] = useState<string | number>('전체');
+  const { ref: gridRef, columns } = useGridColumns();
 
   const filteredAwards = useMemo(
     () =>
@@ -23,7 +42,9 @@ function Award() {
     [activeYear],
   );
 
-  const totalPages = Math.ceil(filteredAwards.length / ITEMS_PER_PAGE);
+  const rows = Math.ceil(BASE_ITEMS / columns);
+  const itemsPerPage = columns * rows;
+  const totalPages = Math.ceil(filteredAwards.length / itemsPerPage);
 
   function handleYearChange(year: string | number) {
     setActiveYear(year);
@@ -47,11 +68,15 @@ function Award() {
             }}
           >
             {Array.from({ length: totalPages }, (_, pageIndex) => (
-              <div key={pageIndex} className='award__card_page'>
+              <div
+                key={pageIndex}
+                ref={pageIndex === 0 ? gridRef : undefined}
+                className='award__card_page'
+              >
                 {filteredAwards
                   .slice(
-                    pageIndex * ITEMS_PER_PAGE,
-                    (pageIndex + 1) * ITEMS_PER_PAGE,
+                    pageIndex * itemsPerPage,
+                    (pageIndex + 1) * itemsPerPage,
                   )
                   .map((award) => (
                     <Card

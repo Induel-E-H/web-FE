@@ -1,6 +1,6 @@
 .award {
   width: 100%;
-  height: 84.89dvh;
+  min-height: 84.89dvh;
   background-color: var(--surface-light);
   overflow: hidden;
   display: flex;
@@ -19,7 +19,7 @@
 .award__card_viewport {
   width: 88.54vmax;
   overflow-x: clip;
-  padding: 0 0.56%;
+  padding: 0.56%;
 }
 
 .award__card_slider {
@@ -31,7 +31,7 @@
 .award__card_page {
   display: grid;
   min-width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(16.47%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
   grid-auto-rows: 20vmax;
   column-gap: 4.41%;
   row-gap: 3.906vmax;
