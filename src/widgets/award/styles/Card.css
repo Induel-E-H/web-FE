@@ -40,7 +40,6 @@
 }
 
 .award__card_title {
-  height: 31.25%;
   flex-shrink: 0;
   padding: 8.93%;
   background-color: var(--white);
