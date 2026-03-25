@@ -66,6 +66,8 @@
   --book-center: var(--mauve-600);
   --book-center-deep: var(--mauve-700);
   --book-page: var(--white);
+
+  --surface-light: #f9fafb;
 }
 
 * {
