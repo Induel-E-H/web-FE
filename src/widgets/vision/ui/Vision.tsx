@@ -1,6 +1,6 @@
-import visionInvest from '@widgets/vision/assets/webp/vision_invest.webp';
-import visionParam from '@widgets/vision/assets/webp/vision_param.webp';
-import visionSculpt from '@widgets/vision/assets/webp/vision_sculpt.webp';
+import visionInvest from '@widgets/vision/assets/vision_invest.webp';
+import visionParam from '@widgets/vision/assets/vision_param.webp';
+import visionSculpt from '@widgets/vision/assets/vision_sculpt.webp';
 import '@widgets/vision/style/Vision.css';
 
 import { VisionData } from '../model/VisionData';
