@@ -31,7 +31,7 @@
   height: 100%;
   gap: 1vmax;
   transition: transform 0.4s ease;
-  align-items: start;
+  align-items: center;
 }
 
 .award__card_page {
