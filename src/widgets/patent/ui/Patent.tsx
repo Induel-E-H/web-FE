@@ -1,3 +1,6 @@
+import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward } from 'react-icons/io';
+
 import patent00 from '../assets/0.webp';
 import patent01 from '../assets/1.webp';
 import patent02 from '../assets/2.webp';
@@ -17,7 +20,7 @@ function Patent() {
 
       <div className='patent__content'>
         <div className='patent__content-main'>
-          <button className='nav__left'></button>
+          <IoIosArrowBack size='70' color='var(--gray-400)' />
 
           <div className='patent__card'>
             <img className='card' src={patent00}></img>
@@ -26,8 +29,7 @@ function Patent() {
             <img className='card' src={patent03}></img>
             <img className='card' src={patent04}></img>
           </div>
-
-          <button className='nav__right'></button>
+          <IoIosArrowForward size='70' color='var(--gray-400)' />
         </div>
 
         <div className='patent__content-sub'>
