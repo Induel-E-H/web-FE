@@ -10,6 +10,7 @@ module.exports = {
     },
     upload: {
       target: 'filesystem',
+      outputDir: './lhci_reports/desktop',
     },
   },
 };

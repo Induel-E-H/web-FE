@@ -34,26 +34,11 @@ jobs:
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
-      - name: Save mobile results
-        run: |
-          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
-          echo "=== .lighthouseci/ after mobile run ==="
-          ls -la "$GITHUB_WORKSPACE/.lighthouseci/" || echo "Directory not found"
-          cp "$GITHUB_WORKSPACE/.lighthouseci/manifest.json" "$GITHUB_WORKSPACE/.lighthouseci/manifest.mobile.json" || echo "manifest copy failed"
-          cp "$GITHUB_WORKSPACE/.lighthouseci/links.json" "$GITHUB_WORKSPACE/.lighthouseci/links.mobile.json" || echo "links copy failed"
-
       - name: Run Lighthouse CI (Desktop)
         run: npx lhci autorun --config=.lighthouserc.desktop.cjs
         continue-on-error: true
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-
-      - name: Save desktop results
-        run: |
-          echo "=== .lighthouseci/ after desktop run ==="
-          ls -la "$GITHUB_WORKSPACE/.lighthouseci/" || echo "Directory not found"
-          cp "$GITHUB_WORKSPACE/.lighthouseci/manifest.json" "$GITHUB_WORKSPACE/.lighthouseci/manifest.desktop.json" || echo "manifest copy failed"
-          cp "$GITHUB_WORKSPACE/.lighthouseci/links.json" "$GITHUB_WORKSPACE/.lighthouseci/links.desktop.json" || echo "links copy failed"
 
       - name: Post PR Comment
         uses: actions/github-script@v7
@@ -118,12 +103,12 @@ jobs:
             }
 
             const mobile = buildSection(
-              path.join(ws, '.lighthouseci/manifest.mobile.json'),
-              path.join(ws, '.lighthouseci/links.mobile.json')
+              path.join(ws, 'lhci_reports/mobile/manifest.json'),
+              path.join(ws, 'lhci_reports/mobile/links.json')
             );
             const desktop = buildSection(
-              path.join(ws, '.lighthouseci/manifest.desktop.json'),
-              path.join(ws, '.lighthouseci/links.desktop.json')
+              path.join(ws, 'lhci_reports/desktop/manifest.json'),
+              path.join(ws, 'lhci_reports/desktop/links.json')
             );
 
             if (!mobile && !desktop) {
