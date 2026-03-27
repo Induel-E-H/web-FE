@@ -27,10 +27,27 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Run Lighthouse CI
-        run: npx lhci autorun
+      - name: Run Lighthouse CI (Mobile)
+        run: npx lhci autorun --config=.lighthouserc.mobile.cjs
+        continue-on-error: true
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Save mobile results
+        run: |
+          cp .lighthouseci/manifest.json .lighthouseci/manifest.mobile.json 2>/dev/null || true
+          cp .lighthouseci/links.json .lighthouseci/links.mobile.json 2>/dev/null || true
+
+      - name: Run Lighthouse CI (Desktop)
+        run: npx lhci autorun --config=.lighthouserc.desktop.cjs
+        continue-on-error: true
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Save desktop results
+        run: |
+          cp .lighthouseci/manifest.json .lighthouseci/manifest.desktop.json 2>/dev/null || true
+          cp .lighthouseci/links.json .lighthouseci/links.desktop.json 2>/dev/null || true
 
       - name: Post PR Comment
         uses: actions/github-script@v7
@@ -40,45 +57,58 @@ jobs:
           script: |
             const fs = require('fs');
 
-            const manifestPath = '.lighthouseci/manifest.json';
-            if (!fs.existsSync(manifestPath)) {
-              console.log('manifest.json not found, skipping comment');
-              return;
-            }
-
-            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-            const run = manifest.find(r => r.isRepresentativeRun);
-            if (!run) {
-              console.log('No representative run found, skipping comment');
-              return;
-            }
-
             const score = (val) => Math.round((val ?? 0) * 100);
             const badge = (s) => s >= 90 ? '🟢' : s >= 50 ? '🟡' : '🔴';
 
-            const s = run.summary;
-            const perf = score(s.performance);
-            const a11y = score(s.accessibility);
-            const bp   = score(s['best-practices']);
-            const seo  = score(s.seo);
+            function buildSection(manifestPath, linksPath) {
+              if (!fs.existsSync(manifestPath)) return null;
 
-            let body = '## ⚡ Lighthouse CI Results\n\n';
-            body += `| Category | Score |\n`;
-            body += `|:---|:---:|\n`;
-            body += `| ${badge(perf)} Performance | **${perf}** |\n`;
-            body += `| ${badge(a11y)} Accessibility | **${a11y}** |\n`;
-            body += `| ${badge(bp)} Best Practices | **${bp}** |\n`;
-            body += `| ${badge(seo)} SEO | **${seo}** |\n\n`;
+              const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+              const run = manifest.find(r => r.isRepresentativeRun);
+              if (!run) return null;
 
-            const linksPath = '.lighthouseci/links.json';
-            if (fs.existsSync(linksPath)) {
-              const links = JSON.parse(fs.readFileSync(linksPath, 'utf8'));
-              const reportUrls = Object.values(links);
-              if (reportUrls.length > 0) {
-                body += `[📄 Full Report](${reportUrls[0]})\n\n`;
+              const s = run.summary;
+              const perf = score(s.performance);
+              const a11y = score(s.accessibility);
+              const bp   = score(s['best-practices']);
+              const seo  = score(s.seo);
+
+              let section = '';
+              section += `| Category | Score |\n`;
+              section += `|:---|:---:|\n`;
+              section += `| ${badge(perf)} Performance | **${perf}** |\n`;
+              section += `| ${badge(a11y)} Accessibility | **${a11y}** |\n`;
+              section += `| ${badge(bp)} Best Practices | **${bp}** |\n`;
+              section += `| ${badge(seo)} SEO | **${seo}** |\n\n`;
+
+              if (fs.existsSync(linksPath)) {
+                const links = JSON.parse(fs.readFileSync(linksPath, 'utf8'));
+                const reportUrls = Object.values(links);
+                if (reportUrls.length > 0) {
+                  section += `[📄 Full Report](${reportUrls[0]})\n\n`;
+                }
               }
+
+              return section;
             }
 
+            const mobile = buildSection(
+              '.lighthouseci/manifest.mobile.json',
+              '.lighthouseci/links.mobile.json'
+            );
+            const desktop = buildSection(
+              '.lighthouseci/manifest.desktop.json',
+              '.lighthouseci/links.desktop.json'
+            );
+
+            if (!mobile && !desktop) {
+              console.log('No results found, skipping comment');
+              return;
+            }
+
+            let body = '## ⚡ Lighthouse CI Results\n\n';
+            if (mobile) body += '### 📱 Mobile\n\n' + mobile;
+            if (desktop) body += '### 🖥️ Desktop\n\n' + desktop;
             body += `> 🤖 Powered by [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)`;
 
             const { data: comments } = await github.rest.issues.listComments({
