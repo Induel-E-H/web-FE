@@ -6,6 +6,7 @@ module.exports = {
       numberOfRuns: 5,
       settings: {
         preset: 'desktop',
+        chromeFlags: '--no-sandbox --disable-gpu --disable-dev-shm-usage',
       },
     },
     upload: {

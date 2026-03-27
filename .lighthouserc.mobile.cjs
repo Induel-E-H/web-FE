@@ -4,6 +4,9 @@ module.exports = {
       staticDistDir: './dist',
       url: ['/'],
       numberOfRuns: 5,
+      settings: {
+        chromeFlags: '--no-sandbox --disable-gpu --disable-dev-shm-usage',
+      },
     },
     upload: {
       target: 'temporary-public-storage',
