@@ -3,7 +3,7 @@ module.exports = {
     collect: {
       staticDistDir: './dist',
       url: ['/'],
-      numberOfRuns: 3,
+      numberOfRuns: 5,
       settings: {
         chromeFlags: '--no-sandbox --disable-gpu --disable-dev-shm-usage',
       },
