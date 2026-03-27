@@ -15,23 +15,30 @@ function HeroBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const scene = createScene();
-    const camera = createCamera();
-    const renderer = createRenderer(canvas);
+    let stopAnimation: (() => void) | undefined;
+    let detachResize: (() => void) | undefined;
+    let renderer: ReturnType<typeof createRenderer> | undefined;
 
-    createLights(scene);
+    try {
+      const scene = createScene();
+      const camera = createCamera();
+      renderer = createRenderer(canvas);
 
-    const { group, tubes } = createWaveTubes(scene);
-    scene.add(group);
+      createLights(scene);
 
-    const stopAnimation = startWaveAnimation(renderer, scene, camera, tubes);
+      const { group, tubes } = createWaveTubes(scene);
+      scene.add(group);
 
-    const detachResize = attachResizeHandler(camera, renderer);
+      stopAnimation = startWaveAnimation(renderer, scene, camera, tubes);
+      detachResize = attachResizeHandler(camera, renderer);
+    } catch {
+      return;
+    }
 
     return () => {
-      stopAnimation();
-      detachResize();
-      renderer.dispose();
+      stopAnimation?.();
+      detachResize?.();
+      renderer?.dispose();
     };
   }, []);
 
