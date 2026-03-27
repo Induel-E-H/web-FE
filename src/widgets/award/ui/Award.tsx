@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { award as awards } from '../../../entities/award';
+import { AWARD_LIST } from '../../../entities/award';
 import { YEAR_LIST } from '../model/constant';
 import { getAwardImage } from '../model/helper';
 import '../styles/Award.css';
@@ -28,20 +28,22 @@ function Award() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const filteredAwards = useMemo(
+  const filteredAWARD_LIST = useMemo(
     () =>
       activeYear === '전체'
-        ? awards
-        : awards.filter((award) => award.time.startsWith(String(activeYear))),
+        ? AWARD_LIST
+        : AWARD_LIST.filter((award) =>
+            award.date.startsWith(String(activeYear)),
+          ),
     [activeYear],
   );
 
-  const totalPages = Math.ceil(filteredAwards.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredAWARD_LIST.length / itemsPerPage);
   const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
 
   function getPageItems(pageIndex: number) {
     const start = pageIndex * itemsPerPage;
-    return filteredAwards.slice(start, start + itemsPerPage);
+    return filteredAWARD_LIST.slice(start, start + itemsPerPage);
   }
 
   function handleYearChange(year: string | number) {
@@ -71,7 +73,7 @@ function Award() {
                   <Card
                     key={award.id}
                     name={award.title}
-                    year={award.time}
+                    year={award.date}
                     imageUrl={getAwardImage(award.id)}
                   />
                 ))}
