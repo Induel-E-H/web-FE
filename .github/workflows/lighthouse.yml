@@ -31,6 +31,8 @@ jobs:
       - name: Run Lighthouse CI (Mobile)
         run: npx lhci autorun --config=.lighthouserc.mobile.cjs
         continue-on-error: true
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
       - name: Save mobile results
         run: |
@@ -43,6 +45,8 @@ jobs:
       - name: Run Lighthouse CI (Desktop)
         run: npx lhci autorun --config=.lighthouserc.desktop.cjs
         continue-on-error: true
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
       - name: Save desktop results
         run: |

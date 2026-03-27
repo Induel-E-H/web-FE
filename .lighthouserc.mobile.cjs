@@ -7,8 +7,6 @@ module.exports = {
     },
     upload: {
       target: 'filesystem',
-      outputDir: './lhci_reports/mobile',
-      reportFilenamePattern: '%%PATHNAME%%-%%DATETIME%%-report.%%EXTENSION%%',
     },
   },
 };
