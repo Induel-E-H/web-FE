@@ -57,11 +57,14 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
+            const path = require('path');
 
+            const ws = process.env.GITHUB_WORKSPACE;
             const score = (val) => Math.round((val ?? 0) * 100);
             const badge = (s) => s >= 90 ? '🟢' : s >= 50 ? '🟡' : '🔴';
 
             function buildSection(manifestPath, linksPath) {
+              console.log(`Checking: ${manifestPath} → exists=${fs.existsSync(manifestPath)}`);
               if (!fs.existsSync(manifestPath)) return null;
 
               const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
@@ -94,12 +97,12 @@ jobs:
             }
 
             const mobile = buildSection(
-              '.lighthouseci/manifest.mobile.json',
-              '.lighthouseci/links.mobile.json'
+              path.join(ws, '.lighthouseci/manifest.mobile.json'),
+              path.join(ws, '.lighthouseci/links.mobile.json')
             );
             const desktop = buildSection(
-              '.lighthouseci/manifest.desktop.json',
-              '.lighthouseci/links.desktop.json'
+              path.join(ws, '.lighthouseci/manifest.desktop.json'),
+              path.join(ws, '.lighthouseci/links.desktop.json')
             );
 
             if (!mobile && !desktop) {
