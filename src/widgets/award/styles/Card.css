@@ -84,16 +84,24 @@
   }
 
   .award__card_content {
-    padding: 3.3vmin;
-    gap: 2.7vmin;
+    padding: 1.3vmin;
+    gap: 1.31vmin;
+  }
+
+  .award__card_text {
+    gap: 0.66vmin;
+  }
+
+  .award__card_category {
+    font-size: 1.563vmin;
   }
 
   .award__card_title {
-    font-size: 2.87vmin;
+    font-size: 1.823vmin;
   }
 
   .award__card_year {
-    font-size: 2.35vmin;
+    font-size: 1.563vmin;
   }
 }
 
@@ -104,15 +112,23 @@
   }
 
   .award__card_content {
-    padding: 5.4vmin;
-    gap: 5.4vmin;
+    padding: 3.733vmin;
+    gap: 2.666vmin;
+  }
+
+  .award__card_text {
+    gap: 1.334vmin;
+  }
+
+  .award__card_category {
+    font-size: 3.2vmin;
   }
 
   .award__card_title {
-    font-size: 4.27vmin;
+    font-size: 3.735vmin;
   }
 
   .award__card_year {
-    font-size: 3.734vmin;
+    font-size: 3.2vmin;
   }
 }
