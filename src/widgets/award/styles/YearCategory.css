@@ -29,16 +29,16 @@
   }
 
   .award__year_category button {
-    padding: 0 2.92vw;
-    font-size: 2.344vmin;
+    padding: 0 1.6vw;
+    font-size: 1.823vmin;
     border-bottom: 0.3vmin solid var(--brown-200);
   }
 }
 
 @media (max-width: 767px) {
   .award__year_category button {
-    padding: 0 2.34vw;
-    font-size: 3.734vmin;
+    padding: 0 2.5vw;
+    font-size: 3.74vmin;
     border-bottom: 0.7vmin solid var(--brown-200);
   }
 }
