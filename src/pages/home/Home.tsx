@@ -1,5 +1,5 @@
 // import { Footer } from '@widgets/footer';
-import Award from '@widgets/award';
+// import Award from '@widgets/award';
 import Hero from '@widgets/hero';
 
 // import History from '@widgets/history';
@@ -11,7 +11,7 @@ function Home() {
     <>
       <Hero></Hero>
       {/* <History></History> */}
-      <Award></Award>
+      {/* <Award></Award> */}
       {/* <Map></Map> */}
       {/* <Footer></Footer> */}
     </>
