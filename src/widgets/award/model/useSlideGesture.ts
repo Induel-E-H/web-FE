@@ -2,7 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
 const TOUCH_THRESHOLD = 50;
 const WHEEL_THRESHOLD = 30;
-const COOLDOWN_MS = 200;
+const COOLDOWN_MS = 400;
 
 export function useSlideGesture(
   setPage: React.Dispatch<React.SetStateAction<number>>,
