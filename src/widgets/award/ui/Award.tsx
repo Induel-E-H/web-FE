@@ -1,20 +1,23 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { AWARD_LIST } from '../../../entities/award';
-import { YEAR_LIST } from '../model/constant';
+import { AWARD_LIST } from '@entities/award';
+import { Pagination, useYearFilter, YearCategory } from '@features/award';
+
 import { getIsMobile, getItemsPerPage } from '../model/responsive';
 import { useSlideGesture } from '../model/useSlideGesture';
 import '../styles/Award.css';
 import { Card } from './Card';
-import { Pagination } from './Pagination';
 import { AwardTitle } from './Title';
-import { YearCategory } from './YearCategory';
 
 function Award() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [activeYear, setActiveYear] = useState<string | number>('전체');
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage);
   const [isMobile, setIsMobile] = useState(getIsMobile);
+  const {
+    activeYear,
+    yearList,
+    handleYearChange: changeYear,
+  } = useYearFilter();
 
   useEffect(() => {
     function handleResize() {
@@ -24,6 +27,11 @@ function Award() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  function handleYearChange(year: string | number): void {
+    changeYear(year);
+    setCurrentPage(0);
+  }
 
   const filteredAWARD_LIST = useMemo(() => {
     const list =
@@ -43,11 +51,6 @@ function Award() {
     return filteredAWARD_LIST.slice(start, start + itemsPerPage);
   }
 
-  function handleYearChange(year: string | number) {
-    setActiveYear(year);
-    setCurrentPage(0);
-  }
-
   const { ref, onTouchStart, onTouchEnd } = useSlideGesture(
     setCurrentPage,
     totalPages,
@@ -58,7 +61,7 @@ function Award() {
       <AwardTitle />
       <div className='award__content'>
         <YearCategory
-          yearList={YEAR_LIST}
+          yearList={yearList}
           activeYear={activeYear}
           onYearChange={handleYearChange}
         />
