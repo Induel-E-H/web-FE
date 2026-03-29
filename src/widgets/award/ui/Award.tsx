@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { AWARD_LIST } from '../../../entities/award';
 import { YEAR_LIST } from '../model/constant';
 import { getIsMobile, getItemsPerPage } from '../model/responsive';
+import { useSlideGesture } from '../model/useSlideGesture';
 import '../styles/Award.css';
 import { Card } from './Card';
 import { Pagination } from './Pagination';
@@ -47,6 +48,11 @@ function Award() {
     setCurrentPage(0);
   }
 
+  const { ref, onTouchStart, onTouchEnd } = useSlideGesture(
+    setCurrentPage,
+    totalPages,
+  );
+
   return (
     <section className='award'>
       <AwardTitle />
@@ -56,7 +62,12 @@ function Award() {
           activeYear={activeYear}
           onYearChange={handleYearChange}
         />
-        <div className='award__card_viewport'>
+        <div
+          ref={ref}
+          className='award__card_viewport'
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
           <div
             className='award__card_slider'
             style={{
