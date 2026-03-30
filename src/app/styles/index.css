@@ -1,7 +1,7 @@
 @import './fonts.css';
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
