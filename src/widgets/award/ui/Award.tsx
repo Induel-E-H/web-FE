@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { AWARD_LIST } from '@entities/award';
 import { Pagination, useYearFilter, YearCategory } from '@features/award';
 
-import { getIsMobile, getItemsPerPage } from '../model/responsive';
+import { getItemsPerPage } from '../model/responsive';
 import { useSlideGesture } from '../model/useSlideGesture';
 import '../styles/Award.css';
 import { Card } from './Card';
@@ -13,7 +13,7 @@ import { AwardTitle } from './Title';
 function Award() {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage);
-  const [isMobile, setIsMobile] = useState(getIsMobile);
+  const isMobile = itemsPerPage < 8;
   const {
     activeYear,
     yearList,
@@ -32,7 +32,6 @@ function Award() {
   useEffect(() => {
     function handleResize() {
       setItemsPerPage(getItemsPerPage());
-      setIsMobile(getIsMobile());
     }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
