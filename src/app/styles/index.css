@@ -78,6 +78,8 @@
   padding: 0;
   box-sizing: border-box;
   letter-spacing: -0.025em;
+  background-color: transparent;
+  border: none;
 }
 
 *:focus {
