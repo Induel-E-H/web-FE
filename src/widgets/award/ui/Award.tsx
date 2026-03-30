@@ -7,6 +7,7 @@ import { getIsMobile, getItemsPerPage } from '../model/responsive';
 import { useSlideGesture } from '../model/useSlideGesture';
 import '../styles/Award.css';
 import { Card } from './Card';
+import { AwardPopup } from './Popup';
 import { AwardTitle } from './Title';
 
 function Award() {
@@ -18,6 +19,15 @@ function Award() {
     yearList,
     handleYearChange: changeYear,
   } = useYearFilter();
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  function handleCardClick(id: number) {
+    setSelectedId(id);
+  }
+
+  function handlePopupClose() {
+    setSelectedId(null);
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -80,7 +90,11 @@ function Award() {
             {Array.from({ length: totalPages }, (_, pageIndex) => (
               <div key={pageIndex} className='award__card_page'>
                 {getPageItems(pageIndex).map((award) => (
-                  <Card key={award.id} award={award} />
+                  <Card
+                    key={award.id}
+                    award={award}
+                    onClick={handleCardClick}
+                  />
                 ))}
               </div>
             ))}
@@ -92,6 +106,9 @@ function Award() {
             totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
+        )}
+        {selectedId !== null && (
+          <AwardPopup awardId={selectedId} onClose={handlePopupClose} />
         )}
       </div>
     </section>

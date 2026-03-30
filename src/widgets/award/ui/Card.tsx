@@ -3,9 +3,15 @@ import type { AwardItem } from '@entities/award';
 import { getAwardImage } from '../model/image';
 import '../styles/Card.css';
 
-export function Card({ award }: { award: AwardItem }) {
+export function Card({
+  award,
+  onClick,
+}: {
+  award: AwardItem;
+  onClick: (id: number) => void;
+}) {
   return (
-    <div className='award__card'>
+    <article className='award__card' onClick={() => onClick(award.id)}>
       <div className='award__card_image'>
         <img src={getAwardImage(award.id)} alt={award.title} loading='lazy' />
       </div>
@@ -16,6 +22,6 @@ export function Card({ award }: { award: AwardItem }) {
         </div>
         <p className='award__card_year'>{award.date.slice(0, 4)}</p>
       </div>
-    </div>
+    </article>
   );
 }
