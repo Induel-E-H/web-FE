@@ -12,7 +12,7 @@
   text-shadow: 0 4px 4px #00000040;
 }
 
-.award__title h3 {
+.award__title p {
   color: var(--gray-600);
   font-weight: 800;
   font-size: 0.938vmax;
@@ -27,7 +27,7 @@
     font-size: 4.69vmin;
   }
 
-  .award__title h3 {
+  .award__title p {
     font-size: 1.83vmin;
   }
 }
@@ -41,7 +41,7 @@
     font-size: 5.88vmin;
   }
 
-  .award__title h3 {
+  .award__title p {
     font-size: 3.2vmin;
   }
 }
