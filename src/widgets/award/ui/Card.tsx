@@ -11,17 +11,21 @@ export function Card({
   onClick: (id: number) => void;
 }) {
   return (
-    <article className='award__card' onClick={() => onClick(award.id)}>
+    <button
+      type='button'
+      className='award__card'
+      onClick={() => onClick(award.id)}
+    >
       <div className='award__card_image'>
         <img src={getAwardImage(award.id)} alt={award.title} loading='lazy' />
       </div>
       <div className='award__card_content'>
         <div className='award__card_text'>
           <p className='award__card_category'>{award.category}</p>
-          <h4 className='award__card_title'>{award.title}</h4>
+          <strong className='award__card_title'>{award.title}</strong>
         </div>
         <p className='award__card_year'>{award.date.slice(0, 4)}</p>
       </div>
-    </article>
+    </button>
   );
 }

@@ -18,6 +18,7 @@ export function YearCategory({
           type='button'
           role='tab'
           key={year}
+          aria-selected={activeYear === year}
           className={activeYear === year ? 'active' : ''}
           onClick={() => onYearChange(year)}
         >

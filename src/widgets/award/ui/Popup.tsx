@@ -12,7 +12,13 @@ export function AwardPopup({
 }) {
   return (
     <div className='award__popup__overlay' onClick={onClose}>
-      <div className='award__popup' onClick={(e) => e.stopPropagation()}>
+      <div
+        role='dialog'
+        aria-modal='true'
+        aria-label='당선작 상세보기'
+        className='award__popup'
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className='award__popup_header'>
           <button
             aria-label='닫기'
