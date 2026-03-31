@@ -2,12 +2,12 @@ import type { IconType } from 'react-icons';
 import { MdDirectionsBus, MdSubway } from 'react-icons/md';
 import { TbWalk } from 'react-icons/tb';
 
-export interface TransportItem {
+export type TransportItem = {
   id: string;
   Icon: IconType;
   label: string;
   lines: string[];
-}
+};
 
 export const TRANSPORT_ITEMS: TransportItem[] = [
   {

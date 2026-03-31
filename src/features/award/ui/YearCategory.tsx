@@ -1,10 +1,10 @@
 import '../styles/YearCategory.css';
 
-interface YearCategoryProps {
+type YearCategoryProps = {
   yearList: (string | number)[];
   activeYear: string | number;
   onYearChange: (year: string | number) => void;
-}
+};
 
 export function YearCategory({
   yearList,
