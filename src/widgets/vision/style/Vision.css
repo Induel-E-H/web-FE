@@ -18,14 +18,14 @@
   z-index: 0;
 }
 
-.section {
+.vision__section {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
 
-.section--reverse {
+.vision__section-reverse {
   flex-direction: row-reverse;
 }
 
@@ -42,7 +42,7 @@
   border-radius: 2.083vw 0 2.083vw 0;
 }
 
-.section--reverse .vision__content img {
+.vision__section-reverse .vision__content img {
   border-radius: 0 2.083vw 0 2.083vw;
 }
 
@@ -96,13 +96,13 @@
     min-height: 100vh;
   }
 
-  .section {
+  .vision__section {
     flex-direction: column;
     align-items: flex-start;
     gap: 19.53vw;
   }
 
-  .section--reverse .vision__content-group {
+  .vision__section-reverse .vision__content-group {
     align-self: flex-end;
   }
 
@@ -143,7 +143,7 @@
     text-align: right;
   }
 
-  .section--reverse .vision__keyword {
+  .vision__section-reverse .vision__keyword {
     text-align: left;
   }
 }
@@ -155,13 +155,13 @@
     padding: 3.125vw 6.25vw;
   }
 
-  .section {
+  .vision__section {
     flex-direction: column;
     align-items: center;
     gap: 9.375vw;
   }
 
-  .section--reverse .vision__content-group {
+  .vision__section-reverse .vision__content-group {
     align-self: center;
   }
 
@@ -193,7 +193,7 @@
     text-align: center;
   }
 
-  .section--reverse .vision__keyword {
+  .vision__section-reverse .vision__keyword {
     text-align: center;
   }
 }

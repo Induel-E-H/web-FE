@@ -12,7 +12,9 @@ export function SectionLayout({
   keyword,
 }: SectionLayoutProps) {
   return (
-    <section className={`section ${reverse ? 'section--reverse' : ''}`}>
+    <section
+      className={`vision__section ${reverse ? 'vision__section-reverse' : ''}`}
+    >
       <div className='vision__content-group fade-section'>{content}</div>
       <div className='vision__keyword-group fade-section'>{keyword}</div>
     </section>
