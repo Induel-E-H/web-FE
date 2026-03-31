@@ -19,7 +19,7 @@ export function Vision() {
   return (
     <>
       {VISION_DATA.map((item, index) => (
-        <section className='vision' key={item.id}>
+        <section className='vision' key={item.title}>
           <VisionItem
             title={item.title}
             description={item.description}
