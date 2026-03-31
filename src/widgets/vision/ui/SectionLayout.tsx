@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react';
+
 interface SectionLayoutProps {
   reverse?: boolean;
-  content: React.ReactNode;
-  keyword: React.ReactNode;
+  content: ReactNode;
+  keyword: ReactNode;
 }
 
 export function SectionLayout({
