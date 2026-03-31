@@ -1,7 +1,6 @@
 module.exports = {
   ci: {
     collect: {
-      buildCommand: 'npm run build:prod',
       staticDistDir: './dist',
       url: ['/'],
       numberOfRuns: 3,
