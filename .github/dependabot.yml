@@ -1,0 +1,68 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'Asia/Seoul'
+    open-pull-requests-limit: 10
+    labels:
+      - '🤖 Dependency'
+    groups:
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+        dependency-type: 'production'
+      react-types:
+        patterns:
+          - '@types/react'
+          - '@types/react-dom'
+        dependency-type: 'development'
+      vite:
+        patterns:
+          - 'vite'
+          - 'rolldown-vite'
+          - '@vitejs/*'
+          - 'vite-*'
+        dependency-type: 'development'
+      eslint:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'typescript-eslint'
+          - 'globals'
+        dependency-type: 'development'
+      typescript:
+        patterns:
+          - 'typescript'
+          - '@types/*'
+        dependency-type: 'development'
+      prettier:
+        patterns:
+          - 'prettier'
+          - '@trivago/prettier-plugin-sort-imports'
+        dependency-type: 'development'
+      commitizen:
+        patterns:
+          - 'commitizen'
+          - 'cz-customizable'
+          - '@commitlint/*'
+        dependency-type: 'development'
+      husky:
+        patterns:
+          - 'husky'
+          - 'lint-staged'
+        dependency-type: 'development'
+      dev-dependencies:
+        dependency-type: 'development'
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'vite'
+        versions:
+          - '>= 7'

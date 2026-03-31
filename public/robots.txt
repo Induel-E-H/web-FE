@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://induel.co.kr/sitemap.xml

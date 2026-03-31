@@ -1,9 +1,10 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import sitemap from 'vite-plugin-sitemap';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
-export default defineConfig({
+export const baseConfig = {
   plugins: [
     react({
       babel: {
@@ -11,16 +12,16 @@ export default defineConfig({
       },
     }),
     tsconfigPaths(),
+    sitemap({ hostname: 'https://induel.co.kr' }),
   ],
   server: {
     host: true,
     port: 5173,
-    watch: {
-      usePolling: true,
-    },
   },
   build: {
     target: 'esnext',
     chunkSizeWarningLimit: 500,
   },
-});
+};
+
+export default defineConfig(baseConfig);
