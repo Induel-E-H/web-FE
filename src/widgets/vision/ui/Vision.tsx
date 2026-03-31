@@ -3,7 +3,7 @@ import visionParam from '@widgets/vision/assets/vision_param.webp';
 import visionSculpt from '@widgets/vision/assets/vision_sculpt.webp';
 import '@widgets/vision/style/Vision.css';
 
-import { VisionData } from '../model/VisionData';
+import { VISION_DATA } from '../model/VisionData';
 import { useScrollFadeIn } from './ScrollFadeIn';
 import { VisionItem } from './VisionItem';
 
@@ -18,14 +18,14 @@ export function Vision() {
 
   return (
     <>
-      {VisionData.map((item) => (
+      {VISION_DATA.map((item, index) => (
         <section className='vision' key={item.id}>
           <VisionItem
             title={item.title}
             description={item.description}
             keyword={item.keyword}
             image={imageMap[item.image as keyof typeof imageMap]}
-            reverse={item.id === 'sculpt'}
+            reverse={index % 2 === 1}
           />
         </section>
       ))}

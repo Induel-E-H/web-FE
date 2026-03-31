@@ -1,4 +1,4 @@
-export const VisionData = [
+export const VISION_DATA = [
   {
     id: 'param',
     title: 'Parametric Design',
