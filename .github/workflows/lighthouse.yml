@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: npm run build:prod
 
       - name: Run Lighthouse CI (Mobile)
         run: npx lhci autorun --config=.lighthouserc.mobile.cjs
