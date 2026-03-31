@@ -8,9 +8,9 @@ import { useScrollFadeIn } from './ScrollFadeIn';
 import { VisionItem } from './VisionItem';
 
 const imageMap = {
-  'vision_param.jpg': visionParam,
-  'vision_sculpt.jpg': visionSculpt,
-  'vision_invest.jpg': visionInvest,
+  'vision_param.webp': visionParam,
+  'vision_sculpt.webp': visionSculpt,
+  'vision_invest.webp': visionInvest,
 };
 
 export function Vision() {
