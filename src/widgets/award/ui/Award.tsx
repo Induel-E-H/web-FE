@@ -23,10 +23,12 @@ function Award() {
 
   function handleCardClick(id: number) {
     setSelectedId(id);
+    document.body.style.overflow = 'hidden';
   }
 
   function handlePopupClose() {
     setSelectedId(null);
+    document.body.style.overflow = '';
   }
 
   useEffect(() => {
@@ -35,6 +37,12 @@ function Award() {
     }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, []);
 
   function handleYearChange(year: string | number): void {
