@@ -1,4 +1,4 @@
-import { SectionLayout } from '../ui/SectionLayout';
+import { SectionLayout } from './SectionLayout';
 
 interface VisionItemProps {
   title: string;
