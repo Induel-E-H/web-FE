@@ -37,13 +37,13 @@
 
 .vision__content img {
   width: 28.64vw;
-  height: 28.64vw;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 40px 0 40px 0;
+  border-radius: 2.083vw 0 2.083vw 0;
 }
 
 .section--reverse .vision__content img {
-  border-radius: 0 40px 0 40px;
+  border-radius: 0 2.083vw 0 2.083vw;
 }
 
 .vision__title {
