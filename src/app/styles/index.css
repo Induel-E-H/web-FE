@@ -1,7 +1,7 @@
 @import './fonts.css';
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -68,6 +68,9 @@
   --book-page: var(--white);
 
   --surface-light: #f9fafb;
+
+  /* Vision */
+  --vision-background: #4a2814cc;
 }
 
 * {

@@ -1,3 +1,4 @@
+// import { Vision } from '@widgets/vision';
 // import { Footer } from '@widgets/footer';
 // import Award from '@widgets/award';
 import Hero from '@widgets/hero';
@@ -10,6 +11,7 @@ function Home() {
   return (
     <>
       <Hero></Hero>
+      {/* <Vision></Vision> */}
       {/* <History></History> */}
       {/* <Award></Award> */}
       {/* <Map></Map> */}
