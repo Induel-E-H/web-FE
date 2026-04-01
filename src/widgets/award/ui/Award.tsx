@@ -39,12 +39,6 @@ function Award() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
-
   function handleYearChange(year: string | number): void {
     changeYear(year);
     setCurrentPage(0);
