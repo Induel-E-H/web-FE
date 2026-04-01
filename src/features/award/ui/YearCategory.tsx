@@ -13,18 +13,22 @@ export function YearCategory({
 }: YearCategoryProps) {
   return (
     <div className='award__year_category' role='tablist' aria-label='연도 필터'>
-      {yearList.map((year) => (
-        <button
-          type='button'
-          role='tab'
-          key={year}
-          aria-selected={activeYear === year}
-          className={activeYear === year ? 'active' : ''}
-          onClick={() => onYearChange(year)}
-        >
-          {year}
-        </button>
-      ))}
+      {yearList.map((year) => {
+        const isActive = activeYear === year;
+        return (
+          <button
+            type='button'
+            role='tab'
+            key={year}
+            aria-selected={isActive}
+            tabIndex={isActive ? 0 : -1}
+            className={isActive ? 'active' : ''}
+            onClick={() => onYearChange(year)}
+          >
+            {year}
+          </button>
+        );
+      })}
     </div>
   );
 }
