@@ -24,7 +24,8 @@
     "format": "prettier . --write",
     "prepare": "husky",
     "commit": "cz",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "react": "^19.2.4",
@@ -44,6 +45,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/three": "^0.183.1",
     "@vitejs/plugin-react": "^5.1.4",
+    "@vitest/ui": "^4.1.2",
     "babel-plugin-react-compiler": "^1.0.0",
     "commitizen": "^4.3.1",
     "cross-env": "^10.1.0",
