@@ -7,7 +7,8 @@ export function getAwardImage(id: number): string {
   const key = `../assets/${id}.webp`;
   const image = awardImages[key];
   if (!image) {
-    throw new Error(`Award image not found for id: ${id}`);
+    console.warn(`[award] image not found for id: ${id}`);
+    return '';
   }
   return image;
 }
