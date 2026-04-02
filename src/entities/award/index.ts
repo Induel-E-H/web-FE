@@ -1,2 +1,2 @@
-export type { AwardItem } from './model/awardData';
-export { AWARD_LIST } from './model/awardData';
+export type { AwardItem } from './model/types';
+export { AWARD_LIST } from './model/awardList';

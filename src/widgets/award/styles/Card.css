@@ -1,0 +1,135 @@
+.award__card {
+  height: 100%;
+  border-radius: 0.521vmax;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
+  text-align: left;
+  cursor: pointer;
+}
+
+.award__card_image {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.award__card_image::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.award__card:hover .award__card_image::after {
+  opacity: 1;
+}
+
+.award__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 5%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.award__card_content {
+  padding: 7.15%;
+  gap: 0.521vmax;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.award__card_text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2605vmax;
+}
+
+.award__card_category {
+  font-weight: 600;
+  font-size: 0.73vmax;
+  color: var(--footer-background);
+}
+
+.award__card_title {
+  font-weight: 400;
+  font-size: 0.833vmax;
+  color: var(--black);
+}
+
+.award__card_year {
+  font-weight: 300;
+  font-size: 0.729vmax;
+  color: var(--gray-500);
+}
+
+@media (max-width: 1024px) {
+  .award__card {
+    border-radius: 1.31vmin;
+    box-shadow: 0 0.521vmin 0.521vmin rgba(0, 0, 0, 0.25);
+  }
+
+  .award__card_content {
+    padding: 1.3vmin;
+    gap: 1.31vmin;
+  }
+
+  .award__card_text {
+    gap: 0.66vmin;
+  }
+
+  .award__card_category {
+    font-size: 1.563vmin;
+  }
+
+  .award__card_title {
+    font-size: 1.823vmin;
+  }
+
+  .award__card_year {
+    font-size: 1.563vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .award__card {
+    border-radius: 2.667vmin;
+    box-shadow: 0 1.07vmin 1.07vmin rgba(0, 0, 0, 0.25);
+  }
+
+  .award__card_content {
+    padding: 3.733vmin;
+    gap: 2.666vmin;
+  }
+
+  .award__card_text {
+    gap: 1.334vmin;
+  }
+
+  .award__card_category {
+    font-size: 3.2vmin;
+  }
+
+  .award__card_title {
+    font-size: 3.735vmin;
+  }
+
+  .award__card_year {
+    font-size: 3.2vmin;
+  }
+}

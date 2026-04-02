@@ -1,11 +1,4 @@
-export type AwardItem = {
-  id: number;
-  title: string;
-  category: string;
-  date: string;
-  serialNumber?: string;
-  issuer: string;
-};
+import type { AwardItem } from './types';
 
 export const AWARD_LIST: AwardItem[] = [
   {
@@ -19,7 +12,7 @@ export const AWARD_LIST: AwardItem[] = [
   {
     id: 1,
     title: '낙동강에코 센터 내부전시 시설 국내 공모전',
-    category: '당선증',
+    category: '당선작',
     date: '2004. 12. 27',
     serialNumber: '제 3226호',
     issuer: '부산광역시장 허남식',
