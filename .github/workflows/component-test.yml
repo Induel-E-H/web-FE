@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Run Vitest with coverage
-        run: npx vitest run --environment jsdom --coverage --coverage.reporter=text --coverage.reporter=json-summary --passWithNoTests
+        run: npm run test:coverage
 
       - name: Save PR number
         if: always() && github.event_name == 'pull_request'
