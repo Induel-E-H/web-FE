@@ -1,0 +1,44 @@
+.award__year_category {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.award__year_category button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0.8vw;
+  font-size: 0.834vmax;
+  font-weight: 400;
+  color: var(--brown-200);
+  border-bottom: 0.12vmax solid var(--brown-200);
+  transition:
+    color 0.3s,
+    border-color 0.3s;
+}
+
+.award__year_category button.active {
+  color: var(--brown-500);
+  border-bottom-color: var(--brown-500);
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .award__year_category {
+    justify-content: center;
+  }
+
+  .award__year_category button {
+    padding: 0 1.6vw;
+    font-size: 2.084vmin;
+    border-bottom: 0.3vmin solid var(--brown-200);
+  }
+}
+
+@media (max-width: 767px) {
+  .award__year_category button {
+    padding: 0 2.5vw;
+    font-size: 3.74vmin;
+    border-bottom: 0.7vmin solid var(--brown-200);
+  }
+}
