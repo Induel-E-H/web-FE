@@ -1,4 +1,4 @@
-Create a Pull Request from the current branch to `Induel-E-H/web-FE:main`.
+Create a Pull Request from the current branch to `Induel-E-H/web-FE:develop`.
 
 > Upstream repository: https://github.com/Induel-E-H/web-FE
 
@@ -10,8 +10,8 @@ Run these commands:
 
 ```bash
 git branch --show-current
-git log upstream/main..HEAD --oneline
-git diff upstream/main..HEAD --stat
+git log upstream/develop..HEAD --oneline
+git diff upstream/develop..HEAD --stat
 gh issue list -R Induel-E-H/web-FE --state open --json number,title,labels --limit 50
 ```
 
@@ -53,7 +53,7 @@ BRANCH=$(git branch --show-current)
 GH_USER=$(gh api user --jq '.login')
 gh pr create \
   --repo Induel-E-H/web-FE \
-  --base main \
+  --base develop \
   --head $GH_USER:$BRANCH \
   --title "[PREFIX] [concise title]" \
   --label "[selected label]" \
