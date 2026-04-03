@@ -31,7 +31,7 @@ describe('useScrollFadeIn', () => {
     };
     const observed = observedElements;
 
-    global.IntersectionObserver = class MockIntersectionObserver {
+    globalThis.IntersectionObserver = class MockIntersectionObserver {
       constructor(
         callback: IntersectionObserverCallback,
         options?: IntersectionObserverInit,
