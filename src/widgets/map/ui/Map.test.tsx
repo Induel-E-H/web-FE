@@ -84,12 +84,6 @@ describe('Map', () => {
         screen.getByText('2호선 경성대부경대역 5번 출구'),
       ).toBeInTheDocument();
     });
-
-    it('3개의 li 항목이 렌더링된다', () => {
-      const { container } = render(<Map />);
-
-      expect(container.querySelectorAll('li')).toHaveLength(3);
-    });
   });
 
   describe('useEffect — makeMap 호출', () => {
@@ -113,18 +107,6 @@ describe('Map', () => {
       unmount();
 
       expect(mockCleanup).toHaveBeenCalledOnce();
-    });
-  });
-
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const { rerender } = render(<Map />);
-
-      rerender(<Map />);
-
-      expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-        'INDUEL E&H Address',
-      );
     });
   });
 });

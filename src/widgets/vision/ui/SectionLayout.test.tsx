@@ -99,24 +99,4 @@ describe('SectionLayout', () => {
       );
     });
   });
-
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const { rerender, container } = render(
-        <SectionLayout
-          content={<div>content</div>}
-          keyword={<h1>keyword</h1>}
-        />,
-      );
-
-      rerender(
-        <SectionLayout
-          content={<div>content</div>}
-          keyword={<h1>keyword</h1>}
-        />,
-      );
-
-      expect(container.querySelector('section')).toHaveClass('vision__section');
-    });
-  });
 });

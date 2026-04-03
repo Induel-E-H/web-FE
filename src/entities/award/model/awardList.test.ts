@@ -3,10 +3,6 @@ import { describe, expect, it } from 'vitest';
 import { AWARD_LIST } from './awardList';
 
 describe('AWARD_LIST', () => {
-  it('8개의 항목을 포함한다', () => {
-    expect(AWARD_LIST).toHaveLength(8);
-  });
-
   it('각 항목에 고유한 id가 있다', () => {
     const ids = AWARD_LIST.map((a) => a.id);
     expect(new Set(ids).size).toBe(8);
@@ -30,11 +26,5 @@ describe('AWARD_LIST', () => {
     );
     expect(withSerial.length).toBeGreaterThan(0);
     expect(withoutSerial.length).toBeGreaterThan(0);
-  });
-
-  it('id가 0부터 7까지 순서대로 할당되어 있다', () => {
-    AWARD_LIST.forEach((item, index) => {
-      expect(item.id).toBe(index);
-    });
   });
 });

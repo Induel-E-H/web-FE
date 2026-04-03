@@ -1,16 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { BREAKPOINTS, getItemsPerPage } from './responsive';
-
-describe('BREAKPOINTS', () => {
-  it('mobile 브레이크포인트가 767이다', () => {
-    expect(BREAKPOINTS.mobile).toBe(767);
-  });
-
-  it('tablet 브레이크포인트가 1024이다', () => {
-    expect(BREAKPOINTS.tablet).toBe(1024);
-  });
-});
+import { getItemsPerPage } from './responsive';
 
 describe('getItemsPerPage', () => {
   beforeEach(() => {

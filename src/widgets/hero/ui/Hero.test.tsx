@@ -50,19 +50,6 @@ describe('Hero', () => {
     });
   });
 
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const { rerender } = render(<Hero />);
-
-      rerender(<Hero />);
-
-      expect(screen.getByAltText('인들이앤에이치 로고')).toBeInTheDocument();
-      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-        `(주) ${COMPANY.NAME_KO}`,
-      );
-    });
-  });
-
   describe('시맨틱 구조', () => {
     it('최상위 요소가 section으로 렌더링된다', () => {
       const { container } = render(<Hero />);

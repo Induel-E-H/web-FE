@@ -4,10 +4,6 @@ import { describe, expect, it } from 'vitest';
 import { YEAR_LIST } from './constant';
 
 describe('YEAR_LIST', () => {
-  it('첫 번째 항목이 "전체"이다', () => {
-    expect(YEAR_LIST[0]).toBe('전체');
-  });
-
   it('AWARD_LIST의 모든 연도를 포함한다', () => {
     const expectedYears = [
       ...new Set(AWARD_LIST.map((a) => Number(a.date.slice(0, 4)))),

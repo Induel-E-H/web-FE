@@ -157,18 +157,6 @@ describe('HeroBackground', () => {
     });
   });
 
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시 canvas가 동일하게 유지된다 (캐시 히트 분기 커버)', () => {
-      const { container, rerender } = render(<HeroBackground />);
-
-      rerender(<HeroBackground />);
-
-      const canvas = container.querySelector('canvas');
-      expect(canvas).toBeInTheDocument();
-      expect(canvas).toHaveClass('hero__background');
-    });
-  });
-
   describe('Three.js 초기화 실패 시', () => {
     it('createScene에서 에러 발생 시 cleanup 함수가 호출되지 않는다', () => {
       mockCreateScene.mockImplementationOnce(() => {

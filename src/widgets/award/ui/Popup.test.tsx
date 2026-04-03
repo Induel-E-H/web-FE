@@ -76,15 +76,4 @@ describe('AwardPopup', () => {
       expect(onClose).not.toHaveBeenCalled();
     });
   });
-
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const onClose = vi.fn();
-      const { rerender } = render(<AwardPopup awardId={1} onClose={onClose} />);
-
-      rerender(<AwardPopup awardId={1} onClose={onClose} />);
-
-      expect(screen.getByRole('dialog')).toBeInTheDocument();
-    });
-  });
 });

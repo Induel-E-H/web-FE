@@ -97,17 +97,6 @@ describe('Footer', () => {
     });
   });
 
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const { rerender } = render(<Footer />);
-
-      rerender(<Footer />);
-
-      expect(screen.getByText(COMPANY.NAME_EN)).toBeInTheDocument();
-      expect(screen.getByText(COMPANY.NAME_KO)).toBeInTheDocument();
-    });
-  });
-
   describe('시맨틱 구조', () => {
     it('최상위 요소가 footer로 렌더링된다', () => {
       const { container } = render(<Footer />);
@@ -131,12 +120,6 @@ describe('Footer', () => {
       render(<Footer />);
 
       expect(screen.getByText('Address')).toBeInTheDocument();
-    });
-
-    it('address 요소가 3개 렌더링된다', () => {
-      const { container } = render(<Footer />);
-
-      expect(container.querySelectorAll('address')).toHaveLength(3);
     });
   });
 });

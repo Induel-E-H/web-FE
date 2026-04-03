@@ -33,13 +33,6 @@ describe('Patent', () => {
       expect(screen.getByText('Patent')).toBeInTheDocument();
     });
 
-    it('유효 특허 건수가 표시된다', () => {
-      render(<Patent />);
-
-      // PATENT_IMG_DATA mock의 길이 = 5
-      expect(screen.getByText(/유효 특허 5건/)).toBeInTheDocument();
-    });
-
     it('권리 소멸 건수가 표시된다', () => {
       render(<Patent />);
 

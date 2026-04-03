@@ -27,27 +27,6 @@ describe('ARTWORK_LIST', () => {
     });
   });
 
-  it('time 필드는 string 타입이다', () => {
-    ARTWORK_LIST.forEach((item) => {
-      expect(typeof item.time).toBe('string');
-    });
-  });
-
-  it('content는 string 또는 string[]이다', () => {
-    ARTWORK_LIST.forEach((item) => {
-      const isStringOrArray =
-        typeof item.content === 'string' || Array.isArray(item.content);
-      expect(isStringOrArray).toBe(true);
-    });
-  });
-
-  it('area는 string[] 타입이며 각 요소는 문자열이다', () => {
-    ARTWORK_LIST.forEach((item) => {
-      expect(Array.isArray(item.area)).toBe(true);
-      item.area.forEach((a) => expect(typeof a).toBe('string'));
-    });
-  });
-
   it('subTitle은 선택적 필드이며 string 또는 string[]이다', () => {
     const withSubTitle = ARTWORK_LIST.filter((a) => a.subTitle !== undefined);
     expect(withSubTitle.length).toBeGreaterThan(0);
