@@ -7,13 +7,13 @@ vi.mock('./ScrollFadeIn', () => ({
   useScrollFadeIn: vi.fn(),
 }));
 
-vi.mock('@widgets/vision/assets/vision_param.webp', () => ({
+vi.mock('@entities/vision/assets/vision_param.webp', () => ({
   default: 'vision_param.webp',
 }));
-vi.mock('@widgets/vision/assets/vision_sculpt.webp', () => ({
+vi.mock('@entities/vision/assets/vision_sculpt.webp', () => ({
   default: 'vision_sculpt.webp',
 }));
-vi.mock('@widgets/vision/assets/vision_invest.webp', () => ({
+vi.mock('@entities/vision/assets/vision_invest.webp', () => ({
   default: 'vision_invest.webp',
 }));
 
