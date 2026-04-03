@@ -54,7 +54,7 @@ function Home() {
       <Vision />
       <History />
       <Award />
-      {/* <Patent /> */}
+      <Patent />
       <Map />
       <Footer />
     </>

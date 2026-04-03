@@ -1,10 +1,10 @@
 import { Fragment } from 'react';
 
+import { INDEX_LIST, PAGE_SIDE } from '@features/history/model/constants';
+import type { IndexItem } from '@features/history/model/types';
+import { useBookNavigation } from '@features/history/model/useBookNavigation';
 import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
-import { INDEX_LIST, PAGE_SIDE } from '../model/constants';
-import type { IndexItem } from '../model/types';
-import { useBookNavigation } from '../model/useBookNavigation';
 import '../styles/History.css';
 import { AwardPage } from './Award';
 import { BookPage } from './BookPage';

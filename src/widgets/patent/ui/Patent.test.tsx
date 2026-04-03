@@ -1,11 +1,11 @@
+import PATENT_LIST_DATA from '@entities/patent/model/patentListData';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import PATENT_LIST_DATA from '../model/PatentListData';
 import Patent from './Patent';
 
 // .webp 이미지 import 모킹
-vi.mock('../model/PatentImgData', () => ({
+vi.mock('@entities/patent/model/patentImgData', () => ({
   default: ['img-0', 'img-1', 'img-2', 'img-3', 'img-4'],
 }));
 

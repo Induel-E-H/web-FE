@@ -1,9 +1,9 @@
+import { VISION_DATA } from '@entities/vision/model/visionData';
 import visionInvest from '@widgets/vision/assets/vision_invest.webp';
 import visionParam from '@widgets/vision/assets/vision_param.webp';
 import visionSculpt from '@widgets/vision/assets/vision_sculpt.webp';
 import '@widgets/vision/styles/Vision.css';
 
-import { VISION_DATA } from '../model/VisionData';
 import { useScrollFadeIn } from './ScrollFadeIn';
 import { VisionItem } from './VisionItem';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-import PATENT_LIST_DATA from '../model/PatentListData';
+import PATENT_LIST_DATA from '@entities/patent/model/patentListData';
 
 function PatentList() {
   const [isOpen, setIsOpen] = useState(false);

@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { AWARD_LIST } from '@entities/award';
 import { Pagination, useYearFilter, YearCategory } from '@features/award';
+import { useSlideGesture } from '@shared/lib/useSlideGesture/useSlideGesture';
 
 import { getItemsPerPage } from '../model/responsive';
-import { useSlideGesture } from '../model/useSlideGesture';
 import '../styles/Award.css';
 import { Card } from './Card';
 import { AwardPopup } from './Popup';
