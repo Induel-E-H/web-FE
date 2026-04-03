@@ -1,12 +1,8 @@
-import { IoIosArrowBack } from 'react-icons/io';
-import { IoIosArrowForward } from 'react-icons/io';
-
-import patent00 from '../assets/0.webp';
-import patent01 from '../assets/1.webp';
-import patent02 from '../assets/2.webp';
-import patent03 from '../assets/3.webp';
-import patent04 from '../assets/4.webp';
+import PATENT_IMG_DATA from '../model/PatentImgData';
+import PATENT_LIST_DATA from '../model/PatentListData';
 import '../styles/Patent.css';
+import PatentCarousel from './PatentCarousel';
+import PatentList from './PatentList';
 
 function Patent() {
   return (
@@ -14,31 +10,14 @@ function Patent() {
       <div className='patent__title'>
         <span className='patent__title-main'>Patent</span>
         <span className='patent__title-descript'>
-          유효 특허 5건, 권리 소멸 10건
+          유효 특허 {PATENT_IMG_DATA.length}건, 권리 소멸{' '}
+          {PATENT_LIST_DATA.length}건
         </span>
       </div>
 
       <div className='patent__content'>
-        <div className='patent__content-main'>
-          <IoIosArrowBack size='70' color='var(--gray-400)' />
-
-          <div className='patent__card'>
-            <img className='card' src={patent00}></img>
-            <img className='card' src={patent01}></img>
-            <img className='card active' src={patent02}></img>
-            <img className='card' src={patent03}></img>
-            <img className='card' src={patent04}></img>
-          </div>
-          <IoIosArrowForward size='70' color='var(--gray-400)' />
-        </div>
-
-        <div className='patent__content-sub'>
-          <div className='patent__content-sub-title'>
-            <button></button>
-            <span>권리 소멸 목록 (10건)</span>
-          </div>
-          <div className='patent__content-sub-list'></div>
-        </div>
+        <PatentCarousel images={PATENT_IMG_DATA} />
+        <PatentList />
       </div>
     </section>
   );
