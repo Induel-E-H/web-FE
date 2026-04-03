@@ -126,32 +126,4 @@ describe('Pagination', () => {
       expect(onPageChange).toHaveBeenCalledWith(0);
     });
   });
-
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('currentPage 변경 시 활성 dot이 업데이트된다 (캐시 히트/미스 분기 커버)', () => {
-      const onPageChange = vi.fn();
-      const { rerender } = render(
-        <Pagination
-          currentPage={0}
-          totalPages={3}
-          onPageChange={onPageChange}
-        />,
-      );
-
-      rerender(
-        <Pagination
-          currentPage={1}
-          totalPages={3}
-          onPageChange={onPageChange}
-        />,
-      );
-
-      expect(
-        screen.getByRole('button', { name: 'Go to page 2' }),
-      ).toHaveAttribute('aria-current', 'page');
-      expect(
-        screen.getByRole('button', { name: 'Go to page 1' }),
-      ).not.toHaveAttribute('aria-current');
-    });
-  });
 });

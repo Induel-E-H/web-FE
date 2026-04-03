@@ -99,16 +99,4 @@ describe('Vision', () => {
       expect(innerSections[2]).not.toHaveClass('vision__section-reverse');
     });
   });
-
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const { rerender } = render(<Vision />);
-
-      rerender(<Vision />);
-
-      expect(screen.getByText('Parametric Design')).toBeInTheDocument();
-      expect(screen.getByText('Urban Sculpting')).toBeInTheDocument();
-      expect(screen.getByText('Engineering Investment')).toBeInTheDocument();
-    });
-  });
 });

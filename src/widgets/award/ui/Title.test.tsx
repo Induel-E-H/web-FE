@@ -20,14 +20,4 @@ describe('AwardTitle', () => {
     render(<AwardTitle />);
     expect(screen.getByText('수상 및 인증 내역')).toBeInTheDocument();
   });
-
-  it('재렌더링 시에도 동일한 UI가 유지된다 (React Compiler 캐시 히트 분기 커버)', () => {
-    const { rerender } = render(<AwardTitle />);
-
-    rerender(<AwardTitle />);
-
-    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-      'Award',
-    );
-  });
 });

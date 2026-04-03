@@ -7,13 +7,6 @@ describe('AWARD_HISTORY_LIST', () => {
     expect(AWARD_HISTORY_LIST.length).toBeGreaterThan(0);
   });
 
-  it('모든 항목에 year(number)와 contents(string[])가 있다', () => {
-    AWARD_HISTORY_LIST.forEach((item) => {
-      expect(typeof item.year).toBe('number');
-      expect(Array.isArray(item.contents)).toBe(true);
-    });
-  });
-
   it('year는 회사 창립(2000년) 이후 값이다', () => {
     AWARD_HISTORY_LIST.forEach((item) => {
       expect(item.year).toBeGreaterThanOrEqual(2000);

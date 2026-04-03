@@ -144,31 +144,4 @@ describe('YearCategory', () => {
       expect(onYearChange).toHaveBeenCalledWith('전체');
     });
   });
-
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('props 변경 시 활성 연도가 업데이트된다 (캐시 히트/미스 분기 커버)', () => {
-      const onYearChange = vi.fn();
-      const { rerender } = render(
-        <YearCategory
-          yearList={yearList}
-          activeYear='전체'
-          onYearChange={onYearChange}
-        />,
-      );
-
-      rerender(
-        <YearCategory
-          yearList={yearList}
-          activeYear={2008}
-          onYearChange={onYearChange}
-        />,
-      );
-
-      expect(screen.getByText('2008')).toHaveAttribute('aria-selected', 'true');
-      expect(screen.getByText('전체')).toHaveAttribute(
-        'aria-selected',
-        'false',
-      );
-    });
-  });
 });

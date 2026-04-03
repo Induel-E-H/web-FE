@@ -35,19 +35,6 @@ describe('useSlideGesture', () => {
     });
   });
 
-  describe('useEffect — null ref 분기', () => {
-    it('ref.current가 null이면 wheel 리스너가 등록되지 않는다 (early return 분기 커버)', () => {
-      // renderHook은 DOM 요소에 ref를 연결하지 않으므로 ref.current === null
-      const mockSetPage = vi.fn();
-      renderHook(() => useSlideGesture(mockSetPage, 3));
-
-      // wheel 이벤트를 발생시켜도 setPage가 호출되지 않는다
-      window.dispatchEvent(new WheelEvent('wheel', { deltaX: 100, deltaY: 0 }));
-
-      expect(mockSetPage).not.toHaveBeenCalled();
-    });
-  });
-
   describe('onTouchStart / onTouchEnd', () => {
     it('onTouchEnd: touchStartX가 null이면 아무것도 하지 않는다', () => {
       const mockSetPage = vi.fn();

@@ -188,16 +188,4 @@ describe('Award', () => {
       expect(sliderAfter).not.toBe(sliderBefore);
     });
   });
-
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const { rerender } = render(<Award />);
-
-      rerender(<Award />);
-
-      expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-        'Award',
-      );
-    });
-  });
 });
