@@ -59,21 +59,24 @@ describe('mapInfoCard', () => {
     it('InfoWindow content에 회사 한글 이름이 포함된다', () => {
       makeInfoCard(mockMap, mockMarker);
 
-      const content = MockInfoWindow.mock.calls[0][0].content as string;
+      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
+        .content;
       expect(content).toContain(COMPANY.NAME_KO);
     });
 
     it('InfoWindow content에 회사 영문 약칭이 포함된다', () => {
       makeInfoCard(mockMap, mockMarker);
 
-      const content = MockInfoWindow.mock.calls[0][0].content as string;
+      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
+        .content;
       expect(content).toContain(COMPANY.NAME_EN);
     });
 
     it('InfoWindow content에 전화번호 tel: 링크가 포함된다', () => {
       makeInfoCard(mockMap, mockMarker);
 
-      const content = MockInfoWindow.mock.calls[0][0].content as string;
+      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
+        .content;
       expect(content).toContain(`tel:${COMPANY.PHONE}`);
       expect(content).toContain(COMPANY.PHONE_DISPLAY);
     });
@@ -81,7 +84,8 @@ describe('mapInfoCard', () => {
     it('InfoWindow content에 회사 주소가 포함된다', () => {
       makeInfoCard(mockMap, mockMarker);
 
-      const content = MockInfoWindow.mock.calls[0][0].content as string;
+      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
+        .content;
       expect(content).toContain(COMPANY.ADDRESS_FULL);
       expect(content).toContain(COMPANY.ADDRESS_SUB);
     });
