@@ -70,9 +70,11 @@ describe('mapMarker', () => {
 
       expect(MockMarker).toHaveBeenCalledWith(
         expect.objectContaining({
-          position: expect.anything(),
+          position: expect.anything() as unknown,
           map: mockMap,
-          icon: expect.objectContaining({ content: expect.any(String) }),
+          icon: expect.objectContaining({
+            content: expect.any(String) as unknown,
+          }) as unknown,
         }),
       );
     });
@@ -89,7 +91,9 @@ describe('mapMarker', () => {
       updateMarkerIcon(mockMarker as unknown as naver.maps.Marker);
 
       expect(mockSetIcon).toHaveBeenCalledWith(
-        expect.objectContaining({ content: expect.any(String) }),
+        expect.objectContaining({
+          content: expect.any(String) as unknown,
+        }) as unknown,
       );
     });
 
