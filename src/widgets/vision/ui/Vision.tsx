@@ -1,7 +1,7 @@
+import visionInvest from '@entities/vision/assets/vision_invest.webp';
+import visionParam from '@entities/vision/assets/vision_param.webp';
+import visionSculpt from '@entities/vision/assets/vision_sculpt.webp';
 import { VISION_DATA } from '@entities/vision/model/visionData';
-import visionInvest from '@widgets/vision/assets/vision_invest.webp';
-import visionParam from '@widgets/vision/assets/vision_param.webp';
-import visionSculpt from '@widgets/vision/assets/vision_sculpt.webp';
 import '@widgets/vision/styles/Vision.css';
 
 import { useScrollFadeIn } from './ScrollFadeIn';
