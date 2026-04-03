@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 
+import Award from '@widgets/award';
 import { Footer } from '@widgets/footer';
 import Hero from '@widgets/hero';
 import History from '@widgets/history';
@@ -13,7 +14,7 @@ const WIDGET_MAP: Record<string, ReactNode> = {
   hero: <Hero />,
   vision: <Vision />,
   history: <History />,
-  // award: <Award />,
+  award: <Award />,
   // patent: <Patent />,
   map: <Map />,
   footer: <Footer />,
@@ -51,7 +52,7 @@ function Home() {
       <Hero />
       <Vision />
       <History />
-      {/* <Award /> */}
+      <Award />
       {/* <Patent /> */}
       <Map />
       <Footer />

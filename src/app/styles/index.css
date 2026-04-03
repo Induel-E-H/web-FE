@@ -67,6 +67,8 @@
   --book-center-deep: var(--mauve-700);
   --book-page: var(--white);
 
+  --surface-light: #f9fafb;
+
   /* Vision */
   --vision-background: #4a2814cc;
 }
@@ -79,6 +81,8 @@
   padding: 0;
   box-sizing: border-box;
   letter-spacing: -0.025em;
+  background-color: transparent;
+  border: none;
 }
 
 *:focus {
