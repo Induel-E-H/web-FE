@@ -1,6 +1,6 @@
 import { timelineData } from '@entities/history';
+import type { PageSide } from '@features/history/model/types';
 
-import type { PageSide } from '../model/types';
 import '../styles/Timeline.css';
 import { BookPageTitle } from './BookPageTitle';
 

@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
 import { useLayoutEffect, useRef } from 'react';
 
-import { PAGE_SIDE } from '../model/constants';
-import type { PageSide } from '../model/types';
+import { PAGE_SIDE } from '@features/history/model/constants';
+import type { PageSide } from '@features/history/model/types';
+
 import '../styles/HistoryBook.css';
 
 function BookPageOuterShadow({ side }: { side: PageSide }) {

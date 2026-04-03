@@ -1,9 +1,9 @@
 import { awardData } from '@entities/history';
+import { getArtworkIndex } from '@features/history/model/helpers';
+import { AWARD_YEAR_RANGES_BY_BREAKPOINT } from '@features/history/model/pageRegistry';
+import type { PageSide } from '@features/history/model/types';
 import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
-import { getArtworkIndex } from '../model/helpers';
-import { AWARD_YEAR_RANGES_BY_BREAKPOINT } from '../model/pageRegistry';
-import type { PageSide } from '../model/types';
 import '../styles/Award.css';
 import { BookPageTitle } from './BookPageTitle';
 

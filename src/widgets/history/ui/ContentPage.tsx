@@ -3,14 +3,14 @@ import { createPortal } from 'react-dom';
 import { MdOutlineZoomOutMap } from 'react-icons/md';
 
 import { artworks } from '@entities/history';
-
 import {
   getAllContentImages,
   getArtworkIndex,
   getThumbnailImage,
   preloadContentImages,
-} from '../model/helpers';
-import type { PageSide } from '../model/types';
+} from '@features/history/model/helpers';
+import type { PageSide } from '@features/history/model/types';
+
 import '../styles/ContentPage.css';
 import { ImageGalleryPopup } from './ImageGalleryPopup';
 

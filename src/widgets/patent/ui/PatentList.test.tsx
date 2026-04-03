@@ -1,7 +1,7 @@
+import PATENT_LIST_DATA from '@entities/patent/model/patentListData';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import PATENT_LIST_DATA from '../model/PatentListData';
 import PatentList from './PatentList';
 
 describe('PatentList', () => {

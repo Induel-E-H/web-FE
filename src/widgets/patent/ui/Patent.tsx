@@ -1,5 +1,6 @@
-import PATENT_IMG_DATA from '../model/PatentImgData';
-import PATENT_LIST_DATA from '../model/PatentListData';
+import PATENT_IMG_DATA from '@entities/patent/model/patentImgData';
+import PATENT_LIST_DATA from '@entities/patent/model/patentListData';
+
 import '../styles/Patent.css';
 import PatentCarousel from './PatentCarousel';
 import PatentList from './PatentList';

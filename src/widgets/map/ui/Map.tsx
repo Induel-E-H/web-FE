@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 
+import { TRANSPORT_ITEMS } from '@entities/map/model/transportInfo';
+
 import { makeMap } from '../model/map';
-import { TRANSPORT_ITEMS } from '../model/transportInfo';
 import '../styles/Map.css';
 import '../styles/mapInfoCard.css';
 import '../styles/mapMarker.css';
