@@ -14,7 +14,6 @@
   padding: 1.04% 2.6%;
   align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
 }
 
 .map__title h2 {
@@ -46,7 +45,6 @@
 .map__description {
   color: var(--typo-titleB);
   padding: 2.625% 2.625%;
-  box-sizing: border-box;
 }
 
 .map__description ul {

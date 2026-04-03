@@ -1,0 +1,164 @@
+.content__item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.852vh;
+}
+
+.content__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.39vh;
+}
+
+.content__text * {
+  font-family: 'BookendBatang', sans-serif;
+}
+
+.content__title-eng {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.46vmax;
+  font-weight: 800;
+  color: var(--black);
+}
+
+.content__title-kor {
+  font-size: 1.46vmax;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.content__subtitle {
+  font-size: 0.89vmax;
+  font-weight: 600;
+  color: var(--black);
+  white-space: pre-line;
+}
+
+.content__body {
+  font-size: 0.78vmax;
+  font-weight: 600;
+  color: var(--typo-contentW);
+  white-space: pre-line;
+}
+
+.content__caption {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content__caption-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.content__caption-col:last-child {
+  align-items: flex-end;
+}
+
+.content__caption-row {
+  display: flex;
+  gap: 0.3em;
+}
+
+.content__caption dt {
+  font-size: 0.68vmax;
+  font-weight: 400;
+  color: var(--typo-contentW);
+  white-space: nowrap;
+}
+
+.content__caption dd {
+  font-size: 0.68vmax;
+  font-weight: 400;
+  color: var(--typo-contentW);
+  white-space: pre-line;
+}
+
+.content__caption-col:last-child dd {
+  text-align: right;
+}
+
+.content__empty {
+  flex: 1;
+}
+
+.content__image {
+  position: relative;
+  height: 100%;
+  border-radius: 0.26vmax;
+  overflow: hidden;
+}
+
+.content__image--has-image {
+  cursor: pointer;
+}
+
+.content__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.content__image-zoom {
+  position: absolute;
+  top: 0.52vmax;
+  right: 0.52vmax;
+  width: 2.08vmax;
+  height: 2.08vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0.52vmax;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.content__image--has-image:hover .content__image-zoom {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .content__item {
+    gap: 1.172vh;
+  }
+
+  .content__text {
+    gap: 0.684vh;
+  }
+
+  .content__text * {
+    font-family: 'BookendBatang', sans-serif;
+  }
+
+  .content__title-eng {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.87vmin;
+  }
+
+  .content__title-kor {
+    font-size: 2.61vmin;
+  }
+
+  .content__subtitle {
+    font-size: 1.83vmin;
+  }
+
+  .content__body {
+    font-size: 1.56vmin;
+  }
+
+  .content__caption dt,
+  .content__caption dd {
+    font-size: 1.04vmin;
+  }
+
+  .content__caption-col:last-child .content__caption-row {
+    justify-content: flex-end;
+  }
+}

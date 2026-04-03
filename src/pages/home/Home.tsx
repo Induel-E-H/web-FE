@@ -3,6 +3,7 @@ import { type ReactNode } from 'react';
 import Award from '@widgets/award';
 import { Footer } from '@widgets/footer';
 import Hero from '@widgets/hero';
+import History from '@widgets/history';
 import Map from '@widgets/map';
 import Patent from '@widgets/patent';
 import { Vision } from '@widgets/vision';
@@ -13,7 +14,7 @@ const isStaging = import.meta.env.MODE === 'staging';
 const WIDGET_MAP: Record<string, ReactNode> = {
   hero: <Hero />,
   vision: <Vision />,
-  // history: <History />,
+  history: <History />,
   award: <Award />,
   patent: <Patent />,
   map: <Map />,
@@ -51,7 +52,7 @@ function Home() {
     <>
       <Hero />
       <Vision />
-      {/* <History /> */}
+      <History />
       <Award />
       {/* <Patent /> */}
       <Map />

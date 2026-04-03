@@ -4,7 +4,6 @@
   color: var(--typo-titleW);
   font-size: 0.73vw;
   padding: 3.125vw 6.25vw;
-  box-sizing: border-box;
   text-align: left;
 }
 

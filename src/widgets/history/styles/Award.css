@@ -1,0 +1,57 @@
+.award__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.85vh;
+}
+
+.award__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.award__year-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.465vh;
+}
+
+.award__year {
+  font-size: 0.89vmax;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.award__ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.award__ul li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.93%;
+  font-size: 0.73vmax;
+  font-weight: 400;
+  color: var(--typo-contentW);
+}
+
+.award__ul li::before {
+  content: '•';
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .award__year {
+    font-size: 1.07vmax;
+  }
+
+  .award__ul li {
+    font-size: 0.78vmax;
+  }
+}
