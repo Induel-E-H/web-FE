@@ -60,14 +60,14 @@
   object-fit: contain;
 }
 
-.header__logo p {
+.header__logo span {
   font-weight: 700;
   font-size: 0.938vw;
   color: #38271d;
   transition: color 0.3s ease;
 }
 
-.header--hero .header__logo p {
+.header--hero .header__logo span {
   color: #ffffff;
 }
 
@@ -165,7 +165,7 @@
     box-shadow: 0 0 0.44vh rgba(0, 0, 0, 0.5);
   }
 
-  .header__logo p {
+  .header__logo span {
     font-size: 1.778vh;
   }
 
@@ -194,7 +194,7 @@
     border-radius: 0.73vh;
   }
 
-  .header__logo p {
+  .header__logo span {
     font-size: 2.353vh;
   }
 

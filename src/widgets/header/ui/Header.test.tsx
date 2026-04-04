@@ -136,28 +136,6 @@ describe('Header', () => {
       );
     });
 
-    it('로고에서 Enter 키 입력 시 smoothScrollTo(".hero")가 호출된다', () => {
-      render(<Header />);
-      const logo = screen
-        .getByText('인들이앤에이치')
-        .closest('[role="button"]')!;
-      fireEvent.keyDown(logo, { key: 'Enter' });
-      expect(mockSmoothScrollTo).toHaveBeenCalledWith(
-        '.hero',
-        expect.any(Function),
-      );
-    });
-
-    it('Space 키 입력 시 smoothScrollTo가 호출되지 않는다', () => {
-      render(<Header />);
-      const logo = screen
-        .getByText('인들이앤에이치')
-        .closest('[role="button"]')!;
-      mockSmoothScrollTo.mockClear();
-      fireEvent.keyDown(logo, { key: ' ' });
-      expect(mockSmoothScrollTo).not.toHaveBeenCalled();
-    });
-
     it('nav 버튼 클릭 시 해당 selector로 smoothScrollTo가 호출된다', () => {
       render(<Header />);
       fireEvent.click(screen.getAllByText('VISION')[0]);

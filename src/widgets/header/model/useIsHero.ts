@@ -4,14 +4,15 @@ export function useIsHero(): boolean {
   const [isHero, setIsHero] = useState(true);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const hero = document.querySelector('.hero');
-      if (hero) {
-        setIsHero(hero.getBoundingClientRect().bottom > 0);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHero(entry.isIntersecting),
+      { threshold: 0 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   return isHero;
