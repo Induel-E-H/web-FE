@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  height: 100svh;
   font-weight: 700;
   overflow: hidden;
 }
@@ -120,7 +120,7 @@
     transform: none;
     order: 2;
     width: 47%;
-    max-height: 32dvh;
+    max-height: 32vh;
     height: auto;
     filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
     margin: auto;
@@ -132,7 +132,7 @@
     order: 1;
     align-items: center;
     gap: 1.82vmin;
-    padding-top: 9.77%;
+    padding-top: 6.222vh;
   }
 
   .hero__company-name {
@@ -153,5 +153,11 @@
     --size: 6.51vmin;
     width: var(--size);
     height: var(--size);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero__company-text {
+    padding-top: 8.24vh;
   }
 }
