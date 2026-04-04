@@ -21,13 +21,7 @@ export function Header() {
     <header
       className={`header${isHero ? ' header--hero' : ''}${menuOpen && isHero ? ' header--menu-open' : ''}`}
     >
-      <div
-        className='header__logo'
-        onClick={() => scrollTo('.hero')}
-        role='button'
-        tabIndex={0}
-        onKeyDown={(e) => e.key === 'Enter' && scrollTo('.hero')}
-      >
+      <button className='header__logo' onClick={() => scrollTo('.hero')}>
         <div className='header__logo_icon-frame'>
           <img
             src={induelIcon}
@@ -35,10 +29,10 @@ export function Header() {
             className='header__logo_icon'
           />
         </div>
-        <p>인들이앤에이치</p>
-      </div>
+        <span>인들이앤에이치</span>
+      </button>
 
-      <nav className='header__nav'>
+      <nav className='header__nav' aria-label='데스크탑 메뉴'>
         {NAV_ITEMS.map(({ label, selector }) => (
           <button key={label} onClick={() => scrollTo(selector)}>
             {label}
@@ -51,18 +45,23 @@ export function Header() {
         onClick={() => setMenuOpen((prev) => !prev)}
         aria-label='메뉴 열기'
         aria-expanded={menuOpen}
+        aria-controls='mobile-menu'
       >
-        <RxHamburgerMenu />
+        <RxHamburgerMenu aria-hidden='true' />
       </button>
 
       {menuOpen && (
-        <div className='header__mobile-menu'>
+        <nav
+          id='mobile-menu'
+          className='header__mobile-menu'
+          aria-label='모바일 메뉴'
+        >
           {NAV_ITEMS.map(({ label, selector }) => (
             <button key={label} onClick={() => scrollTo(selector)}>
               {label}
             </button>
           ))}
-        </div>
+        </nav>
       )}
     </header>
   );
