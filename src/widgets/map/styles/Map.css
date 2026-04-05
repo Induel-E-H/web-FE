@@ -4,8 +4,8 @@
   width: 100%;
   height: 85.11vh;
   align-items: center;
-  justify-content: space-between;
-  padding: 3.125vmax 0 2.34vmax 0;
+  gap: 3.125vmax;
+  padding: 3.125vmax 14.58vmax 2.34vmax 14.58vmax;
   overflow: hidden;
   background-color: #faf9f8;
 }
@@ -46,8 +46,8 @@
 .map__card {
   display: flex;
   flex-direction: row;
-  width: 70.83vmax;
-  height: 27.6vmax;
+  width: 100%;
+  height: 100%;
   gap: 0;
   border-radius: 1.04vmax;
   background-color: var(--white);
