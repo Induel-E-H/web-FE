@@ -120,7 +120,7 @@
     content: '';
     display: block;
     order: 3;
-    height: calc(9.11vmin+ 4.56vmin);
+    height: calc(9.11vmin + 4.56vmin * 1.4);
   }
 
   .hero__logo {
@@ -169,7 +169,7 @@
     padding-top: 16vmin;
   }
   .hero__company::after {
-    height: calc(13.33vmin + 4.53vmin);
+    height: calc(13.33vmin + 4.53vmin * 1.4);
   }
 
   .hero__logo {
