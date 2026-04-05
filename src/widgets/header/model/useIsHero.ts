@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export function useIsHero(): boolean {
-  const [isHero, setIsHero] = useState(true);
+  const [isHero, setIsHero] = useState(() => !!document.querySelector('.hero'));
 
   useEffect(() => {
     const hero = document.querySelector('.hero');
