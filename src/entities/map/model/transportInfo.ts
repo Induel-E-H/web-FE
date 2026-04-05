@@ -1,6 +1,6 @@
 import type { IconType } from 'react-icons';
+import { FaMapMarkedAlt } from 'react-icons/fa';
 import { MdDirectionsBus, MdSubway } from 'react-icons/md';
-import { TbWalk } from 'react-icons/tb';
 
 export type TransportItem = {
   id: string;
@@ -12,7 +12,7 @@ export type TransportItem = {
 export const TRANSPORT_ITEMS: TransportItem[] = [
   {
     id: 'map__walk',
-    Icon: TbWalk,
+    Icon: FaMapMarkedAlt,
     label: '도보',
     lines: ['부산 남구 수영로 274-16', '프렌즈 스크린 부산 대연점 옆 건물'],
   },
