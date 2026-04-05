@@ -40,7 +40,7 @@
 .map__title hr {
   width: 3.65vmax;
   border: none;
-  border-top: 3.5px solid var(--brown-800);
+  border-top: 0.18vmax solid var(--brown-800);
 }
 
 .map__card {
@@ -49,7 +49,7 @@
   width: 70.83vmax;
   height: 27.6vmax;
   gap: 0;
-  border-radius: 20px;
+  border-radius: 1.04vmax;
   background-color: var(--white);
   box-shadow: 0 0 0.42vmax rgba(0, 0, 0, 0.25);
 }
@@ -131,7 +131,7 @@
 .map__card_content hr {
   width: 100%;
   border: none;
-  border-top: 1px solid var(--brown-200);
+  border-top: 0.05vmax solid var(--brown-200);
 }
 
 .map__description_call {
@@ -142,7 +142,7 @@
   justify-content: center;
   gap: 0.52vmax;
   padding: 0.78vmax 0;
-  border-radius: 7px;
+  border-radius: 0.36vmax;
   background-color: var(--brown-800);
   box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
   cursor: pointer;
