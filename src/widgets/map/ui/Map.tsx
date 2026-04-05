@@ -17,9 +17,7 @@ function Map() {
   return (
     <section className='map'>
       <div className='map__title'>
-        <hr aria-hidden='true' />
         <h2>INDUEL E&H Address</h2>
-        <hr aria-hidden='true' />
       </div>
       <div className='map__wrapper'>
         <div ref={mapRef} className='map__content'></div>

@@ -24,13 +24,6 @@
   text-shadow: 0 4px 4px #00000040;
 }
 
-.map__title hr {
-  width: 31.25%;
-  height: 0.05vh;
-  background-color: var(--gray-700);
-  border-radius: 999px;
-}
-
 .map__wrapper {
   position: relative;
   width: 100%;
