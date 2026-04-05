@@ -16,7 +16,7 @@ const INFO_CONTENT = `
       </svg>
       <div>
         <p class="map__info__name">${COMPANY.NAME_KO}</p>
-        <p class="map__info__subtitle">${COMPANY.NAME_EN}</p>
+        <p class="map__info__subtitle">INDUEL ENGINEERING & HOLDINGS</p>
       </div>
     </div>
     <div class="map__info__body">
