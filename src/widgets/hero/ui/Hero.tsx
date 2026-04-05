@@ -19,8 +19,10 @@ function Hero() {
           className='hero__logo'
         />
         <div className='hero__company-text'>
-          <h1 className='hero__company-name'>(주) {COMPANY.NAME_KO}</h1>
-          <p className='hero__company-name-en'>{COMPANY.NAME_EN_FULL}</p>
+          <hgroup>
+            <h1 className='hero__company-name'>(주) {COMPANY.NAME_KO}</h1>
+            <p className='hero__company-name-en'>{COMPANY.NAME_EN_FULL}</p>
+          </hgroup>
           <time className='hero__established' dateTime={COMPANY.ESTABLISHED}>
             SINCE {COMPANY.ESTABLISHED_DISPLAY}
           </time>

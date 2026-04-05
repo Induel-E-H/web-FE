@@ -25,6 +25,14 @@ describe('Hero', () => {
       expect(logo.getAttribute('src')).not.toBe('');
     });
 
+    it('로고 이미지에 hero__logo 클래스가 적용된다', () => {
+      render(<Hero />);
+
+      expect(screen.getByAltText('인들이앤에이치 로고')).toHaveClass(
+        'hero__logo',
+      );
+    });
+
     it('회사 한글 이름이 h1 요소로 표시된다', () => {
       render(<Hero />);
 
@@ -63,6 +71,23 @@ describe('Hero', () => {
       const { container } = render(<Hero />);
 
       expect(container.querySelector('canvas')).toBeInTheDocument();
+    });
+
+    it('회사명과 영문명이 hgroup으로 묶인다', () => {
+      const { container } = render(<Hero />);
+
+      const hgroup = container.querySelector('hgroup');
+      expect(hgroup).toBeInTheDocument();
+      expect(hgroup?.querySelector('h1')).toBeInTheDocument();
+      expect(hgroup?.querySelector('p')).toBeInTheDocument();
+    });
+
+    it('설립일 time 요소는 hgroup 밖에 위치한다', () => {
+      const { container } = render(<Hero />);
+
+      const hgroup = container.querySelector('hgroup');
+      expect(hgroup?.querySelector('time')).not.toBeInTheDocument();
+      expect(container.querySelector('time')).toBeInTheDocument();
     });
   });
 
