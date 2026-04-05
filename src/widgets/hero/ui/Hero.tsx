@@ -7,7 +7,9 @@ import induelIcon from '@assets/induel-icon.svg';
 import '../styles/Hero.css';
 import HeroBackground from './HeroBackground';
 
-const isProd = import.meta.env.MODE === 'production';
+const showDownIcon =
+  import.meta.env.MODE === 'production' ||
+  import.meta.env.VITE_SHOW_DOWN_ICON === 'true';
 
 function Hero() {
   return (
@@ -27,7 +29,7 @@ function Hero() {
           </time>
         </div>
       </div>
-      {isProd ? (
+      {showDownIcon ? (
         <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
       ) : (
         <p
