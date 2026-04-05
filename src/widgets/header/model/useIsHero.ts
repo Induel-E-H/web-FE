@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
+const DEV_WIDGET: string | undefined = import.meta.env.VITE_DEV_WIDGET;
+
 export function useIsHero(): boolean {
-  const [isHero, setIsHero] = useState(() => !!document.querySelector('.hero'));
+  const [isHero, setIsHero] = useState(
+    DEV_WIDGET === undefined || DEV_WIDGET === 'hero',
+  );
 
   useEffect(() => {
     const hero = document.querySelector('.hero');
