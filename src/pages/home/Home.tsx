@@ -43,7 +43,12 @@ function Home() {
         </div>
       );
     }
-    return <>{widget}</>;
+    return (
+      <>
+        {DEV_WIDGET !== 'footer' ? <Header /> : null}
+        {widget}
+      </>
+    );
   }
 
   if (isStaging) {
