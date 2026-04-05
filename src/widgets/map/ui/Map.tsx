@@ -47,13 +47,13 @@ function Map() {
             ))}
           </ul>
           <hr />
-          <div className='map__description_call'>
+          <a href={`tel:${COMPANY.PHONE}`} className='map__description_call'>
             <FiPhoneCall aria-hidden='true' />
             <div className='map__description_call_text'>
               <span>문의 전화:</span>
               <span>{COMPANY.PHONE_DISPLAY}</span>
             </div>
-          </div>
+          </a>
         </address>
       </div>
     </section>

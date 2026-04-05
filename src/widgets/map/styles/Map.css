@@ -145,11 +145,28 @@
   border-radius: 7px;
   background-color: var(--brown-800);
   box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.map__description_call:hover {
+  background-color: var(--brown-900);
+  box-shadow: 0 0.31vmax 0.42vmax rgba(0, 0, 0, 0.35);
+}
+
+.map__description_call:active {
+  background-color: var(--brown-900);
+  box-shadow: none;
+  transform: translateY(1px);
 }
 
 .map__description_call svg {
   width: 0.94vmax;
   height: 0.94vmax;
+  color: var(--white);
 }
 
 .map__description_call_text {
