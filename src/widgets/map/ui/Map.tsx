@@ -26,19 +26,17 @@ function Map() {
         <hr />
       </div>
       <div className='map__card'>
-        <div className='map__wrapper'>
-          <div ref={mapRef} className='map__content' />
-        </div>
+        <div ref={mapRef} className='map__content' />
         <address className='map__card_content'>
-          <p>(주) 인들이앤에이치 본사</p>
-          <ul>
+          <h3>(주) 인들이앤에이치 본사</h3>
+          <ul className='map__description'>
             {TRANSPORT_ITEMS.map(({ id, Icon, label, lines }) => (
               <li key={id}>
                 <div className='map__icon_frame'>
                   <Icon className='map__icon' id={id} aria-hidden='true' />
                 </div>
                 <div className='map__description_text'>
-                  <h3>{label}</h3>
+                  <h4>{label}</h4>
                   <div className='map__description__content'>
                     {lines.map((line) => (
                       <p key={line}>{line}</p>
