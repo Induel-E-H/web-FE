@@ -66,21 +66,9 @@ describe('map', () => {
   });
 
   describe('getZoom (makeMap을 통해 간접 검증)', () => {
-    it('physicalWidth < 3840이면 zoom 15로 지도가 생성된다', () => {
+    it('physicalWidth < 7680이면 zoom 17로 지도가 생성된다', () => {
       vi.stubGlobal('screen', { width: 1920 });
       vi.stubGlobal('devicePixelRatio', 1); // 1920 * 1 = 1920
-
-      lastCleanup = makeMap(mockEl);
-
-      expect(MockNaverMap).toHaveBeenCalledWith(
-        mockEl,
-        expect.objectContaining({ zoom: 15 }),
-      );
-    });
-
-    it('physicalWidth === 3840이면 zoom 17로 지도가 생성된다', () => {
-      vi.stubGlobal('screen', { width: 3840 });
-      vi.stubGlobal('devicePixelRatio', 1); // 3840 * 1 = 3840
 
       lastCleanup = makeMap(mockEl);
 
@@ -90,9 +78,21 @@ describe('map', () => {
       );
     });
 
-    it('physicalWidth === 7680이면 zoom 20으로 지도가 생성된다', () => {
+    it('physicalWidth >= 7680이면 zoom 20으로 지도가 생성된다', () => {
       vi.stubGlobal('screen', { width: 7680 });
       vi.stubGlobal('devicePixelRatio', 1); // 7680 * 1 = 7680
+
+      lastCleanup = makeMap(mockEl);
+
+      expect(MockNaverMap).toHaveBeenCalledWith(
+        mockEl,
+        expect.objectContaining({ zoom: 20 }),
+      );
+    });
+
+    it('devicePixelRatio 2에서 physicalWidth >= 7680이면 zoom 20으로 지도가 생성된다', () => {
+      vi.stubGlobal('screen', { width: 3840 });
+      vi.stubGlobal('devicePixelRatio', 2); // 3840 * 2 = 7680
 
       lastCleanup = makeMap(mockEl);
 
