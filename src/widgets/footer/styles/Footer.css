@@ -43,11 +43,6 @@
   row-gap: 0.26vw;
 }
 
-.footer__company-name-eng {
-  font-size: 1.04vw;
-  font-weight: 900;
-}
-
 .footer__company-name-kor {
   font-size: 0.83vw;
   font-weight: 800;
@@ -132,11 +127,6 @@
     row-gap: 0.65vw;
   }
 
-  /* 회사명 */
-  .footer__company-name-eng {
-    font-size: 2.344vw;
-  }
-
   .footer__company-name-kor {
     font-size: 1.823vw;
   }
@@ -205,10 +195,6 @@
   /* 회사이름 */
   .footer__company-name {
     row-gap: 1.041vw;
-  }
-
-  .footer__company-name-eng {
-    font-size: 3.13vw;
   }
 
   .footer__company-name-kor {

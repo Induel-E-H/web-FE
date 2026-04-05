@@ -8,8 +8,9 @@ export function Footer() {
       <div className='footer__top'>
         <div className='footer__company'>
           <div className='footer__company-name'>
-            <span className='footer__company-name-eng'>{COMPANY.NAME_EN}</span>
-            <span className='footer__company-name-kor'>{COMPANY.NAME_KO}</span>
+            <span className='footer__company-name-kor'>
+              (주) {COMPANY.NAME_KO}
+            </span>
             <span className='footer__company-name-full'>
               {COMPANY.NAME_EN_FULL}
             </span>
