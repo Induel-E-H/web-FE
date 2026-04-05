@@ -4,12 +4,9 @@ import { COMPANY } from '@shared/constant';
 
 import induelIcon from '@assets/induel-icon.svg';
 
+import { showScrollArrow } from '../model/heroConfig';
 import '../styles/Hero.css';
 import HeroBackground from './HeroBackground';
-
-const showDownIcon =
-  import.meta.env.MODE === 'production' ||
-  import.meta.env.VITE_SHOW_DOWN_ICON === 'true';
 
 function Hero() {
   return (
@@ -29,7 +26,7 @@ function Hero() {
           </time>
         </div>
       </div>
-      {showDownIcon ? (
+      {showScrollArrow ? (
         <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
       ) : (
         <p
