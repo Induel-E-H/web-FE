@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { FiPhoneCall } from 'react-icons/fi';
 
 import { TRANSPORT_ITEMS } from '@entities/map/model/transportInfo';
+import { COMPANY } from '@shared/constant';
 
 import { makeMap } from '../model/map';
 import '../styles/Map.css';
@@ -17,26 +19,45 @@ function Map() {
   return (
     <section className='map'>
       <div className='map__title'>
-        <h2>INDUEL E&H Address</h2>
+        <hgroup className='map__title_text'>
+          <p>LOCATION</p>
+          <h2>찾아오시는 길</h2>
+        </hgroup>
+        <hr />
       </div>
-      <div className='map__wrapper'>
-        <div ref={mapRef} className='map__content'></div>
+      <div className='map__card'>
+        <div className='map__wrapper'>
+          <div ref={mapRef} className='map__content' />
+        </div>
+        <address className='map__card_content'>
+          <p>(주) 인들이앤에이치 본사</p>
+          <ul>
+            {TRANSPORT_ITEMS.map(({ id, Icon, label, lines }) => (
+              <li key={id}>
+                <div className='map__icon_frame'>
+                  <Icon className='map__icon' id={id} aria-hidden='true' />
+                </div>
+                <div className='map__description_text'>
+                  <h3>{label}</h3>
+                  <div className='map__description__content'>
+                    {lines.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <hr />
+          <div className='map__description_call'>
+            <FiPhoneCall aria-hidden='true' />
+            <div className='map__description_call_text'>
+              <span>문의 전화:</span>
+              <span>{COMPANY.PHONE_DISPLAY}</span>
+            </div>
+          </div>
+        </address>
       </div>
-      <address className='map__description'>
-        <ul>
-          {TRANSPORT_ITEMS.map(({ id, Icon, label, lines }) => (
-            <li key={id}>
-              <div className='map__description_title'>
-                <Icon className='map__icon' id={id} aria-hidden='true' />
-                <h3>{label}</h3>
-              </div>
-              {lines.map((line) => (
-                <p key={line}>{line}</p>
-              ))}
-            </li>
-          ))}
-        </ul>
-      </address>
     </section>
   );
 }
