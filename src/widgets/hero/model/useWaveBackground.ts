@@ -26,7 +26,7 @@ export function useWaveBackground() {
 
       createLights(scene);
 
-      const { group, tubes } = createWaveTubes(scene);
+      const { group, tubes } = createWaveTubes();
       scene.add(group);
 
       cancelAnimation = startWaveAnimation(renderer, scene, camera, tubes);

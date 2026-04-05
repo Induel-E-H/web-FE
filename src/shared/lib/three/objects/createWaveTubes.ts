@@ -1,19 +1,15 @@
 import {
-  BufferAttribute,
+  type BufferAttribute,
   Color,
   CylinderGeometry,
   Group,
   Mesh,
   MeshStandardMaterial,
-  Scene,
 } from 'three';
 
 import type { TubeData } from './type';
 
-export function createWaveTubes(scene: Scene): {
-  group: Group;
-  tubes: TubeData[];
-} {
+export function createWaveTubes(): { group: Group; tubes: TubeData[] } {
   const isMobile = window.innerWidth < 768;
 
   const TUBE_COUNT = isMobile ? 20 : 30;
@@ -25,7 +21,6 @@ export function createWaveTubes(scene: Scene): {
 
   const group = new Group();
   group.rotation.y = -Math.PI / 4;
-  scene.add(group);
 
   const color = new Color(0x000000);
   const sharedMaterial = new MeshStandardMaterial({
@@ -48,15 +43,17 @@ export function createWaveTubes(scene: Scene): {
 
     const posAttr = geometry.attributes.position as BufferAttribute;
     const baseY = new Float32Array(posAttr.count);
+    const baseZ = new Float32Array(posAttr.count);
     for (let j = 0; j < posAttr.count; j++) {
       baseY[j] = posAttr.getY(j);
+      baseZ[j] = posAttr.getZ(j);
     }
 
     const mesh = new Mesh(geometry, sharedMaterial);
     mesh.position.set((i - (TUBE_COUNT - 1) / 2) * TUBE_SPACING, 0, -i * 0.18);
     mesh.frustumCulled = false;
     group.add(mesh);
-    tubes.push({ posAttr, baseY, geo: geometry });
+    tubes.push({ posAttr, baseY, baseZ });
   }
 
   return { group, tubes };

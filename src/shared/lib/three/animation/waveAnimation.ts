@@ -1,4 +1,4 @@
-import { Camera, Scene, WebGLRenderer } from 'three';
+import type { Camera, Scene, WebGLRenderer } from 'three';
 
 import type { TubeData } from '../objects/type';
 
@@ -31,18 +31,16 @@ export function startWaveAnimation(
     if (startTime === null) startTime = currentTime;
     const time = (currentTime - startTime) / 1000;
 
-    for (const { posAttr, baseY, geo } of tubes) {
+    for (const { posAttr, baseY, baseZ } of tubes) {
       const count = posAttr.count;
       for (let i = 0; i < count; i++) {
-        const z = posAttr.getZ(i);
         posAttr.setY(
           i,
-          baseY[i] + Math.sin(z * WAVE_FREQ + time * WAVE_SPEED) * WAVE_AMP,
+          baseY[i] +
+            Math.sin(baseZ[i] * WAVE_FREQ + time * WAVE_SPEED) * WAVE_AMP,
         );
       }
       posAttr.needsUpdate = true;
-
-      geo.computeVertexNormals();
     }
 
     renderer.render(scene, camera);
