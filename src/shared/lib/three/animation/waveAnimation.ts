@@ -1,4 +1,4 @@
-import { Camera, Clock, Scene, WebGLRenderer } from 'three';
+import { Camera, Scene, WebGLRenderer } from 'three';
 
 import type { TubeData } from '../objects/type';
 
@@ -16,8 +16,8 @@ export function startWaveAnimation(
   const targetFPS = isMobile ? 30 : 60;
   const frameInterval = 1000 / targetFPS;
 
-  const clock = new Clock();
   let rafId: number;
+  let startTime: number | null = null;
   let lastFrameTime = 0;
 
   function animate(currentTime: number) {
@@ -28,7 +28,8 @@ export function startWaveAnimation(
 
     lastFrameTime = currentTime - (deltaTime % frameInterval);
 
-    const time = clock.getElapsedTime();
+    if (startTime === null) startTime = currentTime;
+    const time = (currentTime - startTime) / 1000;
 
     for (const { posAttr, baseY, geo } of tubes) {
       const count = posAttr.count;
