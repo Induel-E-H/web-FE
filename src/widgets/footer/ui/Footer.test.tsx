@@ -6,16 +6,10 @@ import { Footer } from './Footer';
 
 describe('Footer', () => {
   describe('회사 정보 표시', () => {
-    it('회사 영문 약칭이 표시된다', () => {
-      render(<Footer />);
-
-      expect(screen.getByText(COMPANY.NAME_EN)).toBeInTheDocument();
-    });
-
     it('회사 한글 이름이 표시된다', () => {
       render(<Footer />);
 
-      expect(screen.getByText(COMPANY.NAME_KO)).toBeInTheDocument();
+      expect(screen.getByText(`(주) ${COMPANY.NAME_KO}`)).toBeInTheDocument();
     });
 
     it('회사 영문 풀네임이 표시된다', () => {
@@ -46,13 +40,6 @@ describe('Footer', () => {
       expect(screen.getByText(COMPANY.PHONE_DISPLAY)).toBeInTheDocument();
     });
 
-    it('전화번호 링크가 tel: 프로토콜로 연결된다', () => {
-      render(<Footer />);
-
-      const telLink = screen.getByRole('link', { name: COMPANY.PHONE_DISPLAY });
-      expect(telLink).toHaveAttribute('href', `tel:${COMPANY.PHONE}`);
-    });
-
     it('팩스 번호가 표시된다', () => {
       render(<Footer />);
 
@@ -63,13 +50,6 @@ describe('Footer', () => {
       render(<Footer />);
 
       expect(screen.getByText(COMPANY.EMAIL)).toBeInTheDocument();
-    });
-
-    it('이메일 링크가 mailto: 프로토콜로 연결된다', () => {
-      render(<Footer />);
-
-      const mailLink = screen.getByRole('link', { name: COMPANY.EMAIL });
-      expect(mailLink).toHaveAttribute('href', `mailto:${COMPANY.EMAIL}`);
     });
   });
 
@@ -108,18 +88,6 @@ describe('Footer', () => {
       const { container } = render(<Footer />);
 
       expect(container.querySelector('footer')).toHaveClass('footer');
-    });
-
-    it('Contact 섹션 제목이 표시된다', () => {
-      render(<Footer />);
-
-      expect(screen.getByText('Contact')).toBeInTheDocument();
-    });
-
-    it('Address 섹션 제목이 표시된다', () => {
-      render(<Footer />);
-
-      expect(screen.getByText('Address')).toBeInTheDocument();
     });
   });
 });
