@@ -89,7 +89,8 @@
   align-items: center;
 }
 
-.footer__left {
+.footer__left,
+.footer__right {
   display: flex;
   flex-direction: column;
   gap: 0.26vmax;
@@ -126,14 +127,143 @@
 }
 
 .footer__right {
-  display: flex;
-  flex-direction: column;
   align-items: flex-end;
-  gap: 0.26vmax;
 }
 
 .footer__copyright {
   font-weight: 100;
   font-size: 0.625vmax;
   color: var(--footer-copyright);
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    height: 20vh;
+    padding: 2.6vmin 3.91vmin;
+  }
+
+  .footer__company {
+    gap: 1.95vmin;
+  }
+
+  .footer__icon-frame {
+    width: 4.69vmin;
+    height: 4.69vmin;
+    padding: 0.651vmin;
+    border-radius: 0.651vmin;
+  }
+
+  .footer__company_name-kor {
+    font-size: 2.08vmin;
+  }
+
+  .footer__company_name-eng {
+    font-size: 1.3vmin;
+  }
+
+  .footer__information {
+    gap: 3.26vmin;
+  }
+
+  .footer__information button {
+    font-size: 1.82vmin;
+  }
+
+  .footer hr {
+    border-top: 0.13vmin solid var(--footer-divider);
+  }
+
+  .footer__left,
+  .footer__right {
+    gap: 0.65vmin;
+  }
+
+  .footer__company_owner,
+  .footer__contact {
+    gap: 1.3vmin;
+  }
+
+  .footer__row {
+    gap: 1.3vmin;
+    font-size: 1.82vmin;
+  }
+
+  .footer__company_split {
+    font-size: 1.82vmin;
+  }
+
+  .footer__copyright {
+    font-size: 1.56vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    height: 23.53vh;
+    padding: 4vmin 4vmin;
+  }
+
+  .footer__company {
+    gap: 4vmin;
+  }
+
+  .footer__icon-frame {
+    width: 7.47vmin;
+    height: 7.47vmin;
+    padding: 1.33vmin;
+    border-radius: 1.33vmin;
+  }
+
+  .footer__company_name-kor {
+    font-size: 3.2vmin;
+  }
+
+  .footer__company_name-eng {
+    font-size: 2.13vmin;
+  }
+
+  .footer__information {
+    gap: 2.67vmin;
+  }
+
+  .footer__information button {
+    font-size: 2.67vmin;
+  }
+
+  .footer hr {
+    border-top: 0.267vmin solid var(--footer-divider);
+  }
+
+  .footer__content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.33vmin;
+  }
+
+  .footer__left,
+  .footer__right {
+    gap: 1.33vmin;
+  }
+
+  .footer__right {
+    align-items: flex-start;
+  }
+
+  .footer__company_owner,
+  .footer__contact {
+    gap: 1.3vmin;
+  }
+
+  .footer__row {
+    gap: 2.67vmin;
+    font-size: 2.13vmin;
+  }
+
+  .footer__company_split {
+    font-size: 2.13vmin;
+  }
+
+  .footer__copyright {
+    font-size: 1.6vmin;
+  }
 }
