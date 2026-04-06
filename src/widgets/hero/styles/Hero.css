@@ -28,9 +28,7 @@
 
 .hero__logo {
   height: 16.67vmax;
-  filter: drop-shadow(0 0 2.08vmax rgba(0, 0, 0, 1))
-    drop-shadow(0 0 1.04vmax rgba(0, 0, 0, 1))
-    drop-shadow(0 0 3.125vmax rgba(0, 0, 0, 1));
+  filter: drop-shadow(0 0 2.08vmax rgba(0, 0, 0, 1));
 }
 
 .hero__company-text {
@@ -39,10 +37,7 @@
   align-items: flex-end;
   white-space: nowrap;
   gap: 0.52vmax;
-  text-shadow:
-    0 0 2.08vmax rgba(0, 0, 0, 1),
-    0 0 1.04vmax rgba(0, 0, 0, 1),
-    0 0 3.125vmax rgba(0, 0, 0, 1);
+  text-shadow: 0 0 2.08vmax rgba(0, 0, 0, 1);
 }
 
 .hero__company-text hgroup {
@@ -103,9 +98,7 @@
   --size: 3.13vmax;
   width: var(--size);
   height: var(--size);
-  filter: drop-shadow(0 0 2.08vmax rgba(0, 0, 0, 1))
-    drop-shadow(0 0 1.04vmax rgba(0, 0, 0, 1))
-    drop-shadow(0 0 3.125vmax rgba(0, 0, 0, 1));
+  filter: drop-shadow(0 0 2.08vmax rgba(0, 0, 0, 1));
 }
 
 @media (max-width: 1024px) {
@@ -139,9 +132,7 @@
     order: 2;
     height: 37.5vmin;
     width: auto;
-    filter: drop-shadow(0 0 5.21vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 2.6vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 7.81vmin rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 5.21vmin rgba(0, 0, 0, 1));
   }
 
   .hero__company-text {
@@ -150,10 +141,7 @@
     order: 1;
     align-items: center;
     gap: 1.82vmin;
-    text-shadow:
-      0 0 5.21vmin rgba(0, 0, 0, 1),
-      0 0 2.6vmin rgba(0, 0, 0, 1),
-      0 0 7.81vmin rgba(0, 0, 0, 1);
+    text-shadow: 0 0 5.21vmin rgba(0, 0, 0, 1);
   }
 
   .hero__company-text hgroup {
@@ -182,9 +170,7 @@
     --size: 6.51vmin;
     width: var(--size);
     height: var(--size);
-    filter: drop-shadow(0 0 5.21vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 2.6vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 7.81vmin rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 5.21vmin rgba(0, 0, 0, 1));
   }
 }
 
@@ -198,17 +184,12 @@
 
   .hero__logo {
     height: 54.13vmin;
-    filter: drop-shadow(0 0 10.67vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 5.33vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 16vmin rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 10.67vmin rgba(0, 0, 0, 1));
   }
 
   .hero__company-text {
     gap: 2.13vmin;
-    text-shadow:
-      0 0 10.67vmin rgba(0, 0, 0, 1),
-      0 0 5.33vmin rgba(0, 0, 0, 1),
-      0 0 16vmin rgba(0, 0, 0, 1);
+    text-shadow: 0 0 10.67vmin rgba(0, 0, 0, 1);
   }
 
   .hero__company-text hgroup {
@@ -233,8 +214,6 @@
     --size: 10.93vmin;
     width: var(--size);
     height: var(--size);
-    filter: drop-shadow(0 0 10.67vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 5.33vmin rgba(0, 0, 0, 1))
-      drop-shadow(0 0 16vmin rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 10.67vmin rgba(0, 0, 0, 1));
   }
 }
