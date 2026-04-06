@@ -1,7 +1,7 @@
 export const COMPANY = {
   NAME_KO: '인들이앤에이치',
   NAME_EN: 'INDUEL E&H',
-  NAME_EN_FULL: 'Induel Engineering & Holdings',
+  NAME_EN_FULL: 'INDUEL ENGINEERING & HOLDINGS',
   CEO: '이선학',
   BUSINESS_NO: '617-81-27655',
   PHONE: '0516266277',
