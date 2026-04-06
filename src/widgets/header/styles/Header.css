@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 5.208vw;
-  height: 6.809vh;
+  padding: 0 5.208vmax;
+  height: 3.33vmax;
   justify-content: space-between;
   background-color: #ffffff;
   transition:
@@ -28,22 +28,22 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.521vw;
+  gap: 0.521vmax;
   cursor: pointer;
   user-select: none;
 }
 
 .header__logo_icon-frame {
   flex-shrink: 0;
-  width: 1.667vw;
-  height: 1.667vw;
+  width: 1.667vmax;
+  height: 1.667vmax;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.26vw;
-  border-radius: 0.26vw;
+  padding: 0.26vmax;
+  border-radius: 0.26vmax;
   background-color: #ffffff;
-  box-shadow: 0 0 0.208vw rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0.208vmax rgba(0, 0, 0, 0.5);
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
@@ -62,7 +62,7 @@
 
 .header__logo span {
   font-weight: 700;
-  font-size: 0.938vw;
+  font-size: 0.938vmax;
   color: #38271d;
   transition: color 0.3s ease;
 }
@@ -75,12 +75,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2.604vw;
+  gap: 2.604vmax;
 }
 
 .header__nav button {
   font-weight: 600;
-  font-size: 0.833vw;
+  font-size: 0.833vmax;
   color: #38271d;
   background: none;
   border: none;
@@ -99,7 +99,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  font-size: 1.667vw;
+  font-size: 1.667vmax;
   align-items: center;
   justify-content: center;
   color: #38271d;
@@ -118,13 +118,13 @@
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  border-top: 0.052vw solid rgba(56, 39, 29, 0.08);
+  border-top: 0.052vmax solid rgba(56, 39, 29, 0.08);
 }
 
 .header__mobile-menu button {
-  padding: 0.729vw 0.781vw;
+  padding: 0.729vmax 0.781vmax;
   font-weight: 600;
-  font-size: 0.729vw;
+  font-size: 0.729vmax;
   color: #38271d;
   background: none;
   border: none;
@@ -149,53 +149,53 @@
 
 @media (max-width: 1024px) {
   .header {
-    padding: 0 3.333vh;
-    height: 6.222vh;
+    padding: 0 3.91vmin;
+    height: 7.29vmin;
   }
 
   .header__logo {
-    gap: 1.11vh;
+    gap: 1.3vmin;
   }
 
   .header__logo_icon-frame {
-    width: 3.111vh;
-    height: 3.111vh;
+    width: 3.65vmin;
+    height: 3.65vmin;
     padding: 3.8%;
-    border-radius: 0.56vh;
-    box-shadow: 0 0 0.44vh rgba(0, 0, 0, 0.5);
+    border-radius: 0.66vmin;
+    box-shadow: 0 0 0.52vmin rgba(0, 0, 0, 0.5);
   }
 
   .header__logo span {
-    font-size: 1.778vh;
+    font-size: 2.08vmin;
   }
 
   .header__nav {
-    gap: 2.778vh;
+    gap: 3.26vmin;
   }
 
   .header__nav button {
-    font-size: 1.556vh;
+    font-size: 1.82vmin;
   }
 }
 
 @media (max-width: 767px) {
   .header {
-    padding: 0 2.206vh;
-    height: 8.24vh;
+    padding: 0 4vmin;
+    height: 14.94vmin;
   }
 
   .header__logo {
-    gap: 1.47vh;
+    gap: 2.67vmin;
   }
 
   .header__logo_icon-frame {
-    width: 4.118vh;
-    height: 4.118vh;
-    border-radius: 0.73vh;
+    width: 7.47vmin;
+    height: 7.47vmin;
+    border-radius: 1.32vmin;
   }
 
   .header__logo span {
-    font-size: 2.353vh;
+    font-size: 4.27vmin;
   }
 
   .header__nav {
@@ -204,13 +204,13 @@
 
   .header__hamburger {
     display: flex;
-    width: 4.706vh;
-    height: 4.706vh;
-    font-size: 3.5vh;
+    width: 8.53vmin;
+    height: 8.53vmin;
+    font-size: 6.35vmin;
   }
 
   .header__mobile-menu button {
-    padding: 2.059vh 2.206vh;
-    font-size: 2.059vh;
+    padding: 3.73vmin 4vmin;
+    font-size: 3.73vmin;
   }
 }
