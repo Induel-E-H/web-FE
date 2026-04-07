@@ -45,6 +45,9 @@
 
 .vision__title h2:last-of-type {
   color: #c9a96e;
+  transform: skewX(-8deg);
+  display: inline-block;
+  line-height: 100%;
 }
 
 .vision__main {
@@ -159,7 +162,6 @@
 
 @media (max-width: 1024px) {
   .vision {
-    width: 100%;
     height: 172.33vh;
     gap: 2.6vmin;
     padding: 7.81vmin 6.51vmin 6.51vmin 6.51vmin;
@@ -227,5 +229,80 @@
 
   .vision__content__description {
     font-size: 1.56vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .vision {
+    height: 397.33vh;
+    gap: 4vmin;
+    padding: 16vmin 4vmin 4vmin 4vmin;
+  }
+
+  .vision__title__description {
+    gap: 4vmin;
+  }
+
+  .vision__title__description hr {
+    width: 16vmin;
+    border-top: 0.53vmin solid #e7c889;
+  }
+
+  .vision__title__description p {
+    font-size: 2.13vmin;
+  }
+
+  .vision__title h2 {
+    font-size: 8vmin;
+  }
+
+  .vision__main {
+    gap: 4vmin;
+  }
+
+  .vision__content {
+    flex-direction: column;
+    height: 113.33vmin;
+  }
+
+  .vision__content__image {
+    width: 100%;
+    height: 54.4vmin;
+  }
+
+  .vision__content_text {
+    width: 100%;
+    height: 58.93vmin;
+    gap: 4vmin;
+    padding: 0 8vmin;
+  }
+
+  .vision__content__title {
+    gap: 2.67vmin;
+  }
+
+  .vision__content__index {
+    font-size: 2.13vmin;
+  }
+
+  .vision__content__title__main {
+    gap: 1.33vmin;
+  }
+
+  .vision__content__title__main h3 {
+    font-size: 8vmin;
+  }
+
+  .vision__content__title__main h4 {
+    font-size: 3.2vmin;
+  }
+
+  .vision__content__title hr {
+    width: 9.33vmin;
+    border-top: 0.27vmin solid var(--color-hr);
+  }
+
+  .vision__content__description {
+    font-size: 2.67vmin;
   }
 }
