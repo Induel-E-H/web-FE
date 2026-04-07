@@ -40,6 +40,14 @@ export const AWARD_LIST: AwardItem[] = [
   },
   {
     id: 5,
+    title: 'APEC 정상회의 개최유공자',
+    category: '표창장',
+    date: '2006. 02. 07',
+    serialNumber: '제 6563호',
+    issuer: '외교통상부장관 반기문',
+  },
+  {
+    id: 6,
     title: '부산경남경마공원 정문조형물 출품 공모 작품 심사',
     category: '당선작',
     date: '2006. 07. 27',
@@ -47,7 +55,7 @@ export const AWARD_LIST: AwardItem[] = [
     issuer: 'KRA 부산경남본부장',
   },
   {
-    id: 6,
+    id: 7,
     title: '해기사 명예의 전당 조형물 현상 공모전',
     category: '우수작',
     date: '2008. 03. 05',
@@ -55,11 +63,19 @@ export const AWARD_LIST: AwardItem[] = [
     issuer: '부산지방해양항만청장 곽인섭',
   },
   {
-    id: 7,
+    id: 8,
     title: '국제경기대회기념전시관 시설공사',
     category: '표창장',
     date: '2008. 07. 25',
     serialNumber: '제 1681호',
+    issuer: '부산광역시장 허남식',
+  },
+  {
+    id: 9,
+    title: '부산시민공원 조성',
+    category: '표창장',
+    date: '2014. 05. 01',
+    serialNumber: '제 926호',
     issuer: '부산광역시장 허남식',
   },
 ];
