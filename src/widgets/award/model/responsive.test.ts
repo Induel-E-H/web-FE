@@ -24,11 +24,11 @@ describe('getItemsPerPage', () => {
     expect(getItemsPerPage()).toBe(6);
   });
 
-  it('데스크탑(>1024)에서 8을 반환한다', () => {
+  it('데스크탑(>1024)에서 10을 반환한다', () => {
     vi.stubGlobal('innerWidth', 1025);
-    expect(getItemsPerPage()).toBe(8);
+    expect(getItemsPerPage()).toBe(10);
 
     vi.stubGlobal('innerWidth', 1920);
-    expect(getItemsPerPage()).toBe(8);
+    expect(getItemsPerPage()).toBe(10);
   });
 });
