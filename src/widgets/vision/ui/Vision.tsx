@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import visionInvest from '@entities/vision/assets/vision_invest.webp';
 import visionParam from '@entities/vision/assets/vision_param.webp';
 import visionSculpt from '@entities/vision/assets/vision_sculpt.webp';
@@ -13,9 +15,30 @@ const imageMap = {
 };
 
 export function Vision() {
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = titleRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('is-visible');
+        } else if (entry.boundingClientRect.top > 0) {
+          el.classList.remove('is-visible');
+        }
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className='vision'>
-      <div className='vision__title'>
+      <div ref={titleRef} className='vision__title'>
         <div className='vision__title__description'>
           <hr />
           <p>FUTURE VISION</p>

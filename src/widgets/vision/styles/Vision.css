@@ -11,6 +11,16 @@
 .vision__title {
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transform: translateY(2.5vmax);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.vision__title.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .vision__title__description {
@@ -53,6 +63,19 @@
   flex-direction: column;
   width: 100%;
   gap: 0.52vmax;
+}
+
+.vision__content {
+  opacity: 0;
+  transform: translateY(2.5vmax);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.vision__content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .vision__content {
@@ -138,6 +161,7 @@
 .vision__content__title__main h3 {
   font-size: 3.13vmax;
   color: var(--color-main-h3);
+  transform: skewX(-10deg);
 }
 
 .vision__content__title__main h4 {

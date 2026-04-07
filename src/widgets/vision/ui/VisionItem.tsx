@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 interface VisionItemProps {
   title: string;
   description: string;
@@ -14,9 +16,30 @@ export function VisionItem({
   index,
 }: VisionItemProps) {
   const isReverse = index % 2 !== 0;
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('is-visible');
+        } else if (entry.boundingClientRect.top > 0) {
+          el.classList.remove('is-visible');
+        }
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
+      ref={ref}
       className={`vision__content${isReverse ? ' vision__content--reverse' : ''}`}
     >
       <div className='vision__content__image'>
