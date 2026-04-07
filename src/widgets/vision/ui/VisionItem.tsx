@@ -1,11 +1,9 @@
-import { SectionLayout } from './SectionLayout';
-
 interface VisionItemProps {
   title: string;
   description: string;
   keyword: string;
   image: string;
-  reverse?: boolean;
+  index: number;
 }
 
 export function VisionItem({
@@ -13,21 +11,28 @@ export function VisionItem({
   description,
   keyword,
   image,
-  reverse = false,
+  index,
 }: VisionItemProps) {
+  const isReverse = index % 2 !== 0;
+
   return (
-    <SectionLayout
-      reverse={reverse}
-      content={
-        <div className='vision__content'>
-          <img src={image} alt={title} />
-          <div className='vision__context'>
-            <h2 className='vision__title'>{title}</h2>
-            <span className='vision__description'>{description}</span>
+    <div
+      className={`vision__content${isReverse ? ' vision__content--reverse' : ''}`}
+    >
+      <div className='vision__content__image'>
+        <img src={image} alt={title} />
+      </div>
+      <div className='vision__content_text'>
+        <div className='vision__content__title'>
+          <p className='vision__content__index'>VISION {index + 1}</p>
+          <div className='vision__content__title__main'>
+            <h3>{keyword}</h3>
+            <h4>{title}</h4>
           </div>
+          <hr />
         </div>
-      }
-      keyword={<h1 className='vision__keyword'>{keyword}</h1>}
-    />
+        <p className='vision__content__description'>{description}</p>
+      </div>
+    </div>
   );
 }

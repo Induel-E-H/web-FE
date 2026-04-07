@@ -4,7 +4,6 @@ import visionSculpt from '@entities/vision/assets/vision_sculpt.webp';
 import { VISION_DATA } from '@entities/vision/model/visionData';
 import '@widgets/vision/styles/Vision.css';
 
-import { useScrollFadeIn } from './ScrollFadeIn';
 import { VisionItem } from './VisionItem';
 
 const imageMap = {
@@ -14,21 +13,28 @@ const imageMap = {
 };
 
 export function Vision() {
-  useScrollFadeIn();
-
   return (
-    <>
-      {VISION_DATA.map((item, index) => (
-        <section className='vision' key={item.title}>
+    <section className='vision'>
+      <div className='vision__title'>
+        <div className='vision__title__description'>
+          <hr />
+          <p>FUTURE VISION</p>
+        </div>
+        <h2>미래를 향한</h2>
+        <h2>세 가지 방향</h2>
+      </div>
+      <div className='vision__main'>
+        {VISION_DATA.map((item, index) => (
           <VisionItem
+            key={item.keyword}
             title={item.title}
             description={item.description}
             keyword={item.keyword}
             image={imageMap[item.image as keyof typeof imageMap]}
-            reverse={index % 2 === 1}
+            index={index}
           />
-        </section>
-      ))}
-    </>
+        ))}
+      </div>
+    </section>
   );
 }

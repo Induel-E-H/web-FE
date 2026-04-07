@@ -1,200 +1,193 @@
 .vision {
-  width: 100%;
-  height: 100vh;
-  background-attachment: fixed;
   display: flex;
-  align-items: center;
-  padding: 5.21vw 7.812vw;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.vision::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('/src/entities/vision/assets/vision_background.webp') center /
-    cover no-repeat;
-  background-attachment: fixed;
-  z-index: 0;
-}
-
-.vision__section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
+  height: 174vh;
+  gap: 0.78vmax;
+  padding: 3.65vmax 13.54vmax;
+  overflow: hidden;
+  background-color: #faf7f2;
 }
 
-.vision__section-reverse {
-  flex-direction: row-reverse;
+.vision__title {
+  display: flex;
+  flex-direction: column;
+}
+
+.vision__title__description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.78vmax;
+}
+
+.vision__title__description hr {
+  width: 4.167vmax;
+  border: none;
+  border-top: 0.104vmax solid #e7c889;
+}
+
+.vision__title__description p {
+  font-weight: 700;
+  font-size: 0.63vmax;
+  letter-spacing: 0.15em;
+  color: #e7c889;
+}
+
+.vision__title h2:first-of-type {
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 3.13vmax;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  color: #38271d;
+}
+
+.vision__title h2:last-of-type {
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 3.13vmax;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  color: #c9a96e;
+}
+
+.vision__main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.52vmax;
 }
 
 .vision__content {
   display: flex;
-  flex-direction: column;
-  gap: 1.56vw;
+  flex-direction: row;
+  width: 100%;
+  height: 22.14vmax;
+  overflow: hidden;
 }
 
-.vision__content img {
-  width: 28.64vw;
-  aspect-ratio: 1 / 1;
+.vision__content--reverse {
+  flex-direction: row-reverse;
+}
+
+.vision__content__image {
+  width: 39.79vmax;
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.vision__content__image img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 2.083vw 0 2.083vw 0;
+  transition: transform 0.4s ease;
 }
 
-.vision__section-reverse .vision__content img {
-  border-radius: 0 2.083vw 0 2.083vw;
+.vision__content__image:hover .vision__content__image img {
+  transform: scale(1.08);
 }
 
-.vision__title {
-  font-size: 2.083vw;
-  font-weight: 600;
-}
-
-.vision__description {
-  font-size: 0.937vw;
-  font-weight: 300;
-  width: 28.64vw;
-}
-
-.vision__context {
+.vision__content_text {
   display: flex;
   flex-direction: column;
-  gap: 1.04vw;
-  color: white;
+  width: 33.13vmax;
+  height: 100%;
+  justify-content: center;
+  gap: 1.3vmax;
+  padding: 0 3.39vmax;
 }
 
-.vision__keyword {
-  font-size: 9.375vw;
+.vision__content .vision__content_text {
+  background-color: #f0ead6;
+}
+
+.vision__content--reverse .vision__content_text {
+  background-color: #38271d;
+}
+
+.vision__content__title {
+  display: flex;
+  flex-direction: column;
+  gap: 1.04vmax;
+  color: #38271d;
+}
+
+.vision__content__title p {
+  font-weight: 400;
+  font-size: 0.52vmax;
+}
+
+.vision__content .vision__content__index {
+  color: #8c8672;
+}
+
+.vision__content--reverse .vision__content__index {
+  color: #977449;
+}
+
+.vision__content__title__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.26vmax;
+}
+
+.vision__content__title__main h3,
+.vision__content__title__main h4 {
+  font-family: 'BookendBatang';
   font-weight: 700;
-  text-align: center;
-  width: 49.48vw;
-  -webkit-text-stroke: 2px #ffffff99;
-  -webkit-text-fill-color: transparent;
 }
 
-.fade-section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
-  will-change: opacity, transform;
+.vision__content__title__main h3 {
+  font-size: 3.13vmax;
+  line-height: 100%;
 }
 
-.fade-section.show {
-  opacity: 1;
-  transform: translateY(0);
+.vision__content__title__main h4 {
+  font-size: 1.04vmax;
+  line-height: 100%;
 }
 
-/* Tablet */
-@media (max-width: 1023px) {
-  .vision {
-    align-items: flex-start;
-    padding: 2.604vw 5.208vw;
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .vision__section {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 19.53vw;
-  }
-
-  .vision__section-reverse .vision__content-group {
-    align-self: flex-end;
-  }
-
-  .vision__content-group {
-    order: 2;
-  }
-
-  .vision__keyword-group {
-    order: 1;
-    width: 100%;
-  }
-
-  .vision__content {
-    gap: 2.604vw;
-  }
-
-  .vision__content img {
-    width: 45.572vw;
-    height: 45.572vw;
-  }
-
-  .vision__title {
-    font-size: 3.125vw;
-  }
-
-  .vision__description {
-    font-size: 1.823vw;
-    width: 45.572vw;
-  }
-
-  .vision__context {
-    gap: 1.953vw;
-  }
-
-  .vision__keyword {
-    font-size: 19.53vw;
-    width: 100%;
-    text-align: right;
-  }
-
-  .vision__section-reverse .vision__keyword {
-    text-align: left;
-  }
+.vision__content .vision__content__title__main h3 {
+  color: #38271d;
 }
 
-/* Mobile */
-@media (max-width: 767px) {
-  .vision {
-    align-items: flex-start;
-    padding: 3.125vw 6.25vw;
-  }
+.vision__content .vision__content__title__main h4 {
+  color: var(--brown-900);
+}
 
-  .vision__section {
-    flex-direction: column;
-    align-items: center;
-    gap: 9.375vw;
-  }
+.vision__content--reverse .vision__content__title__main h3 {
+  color: #c9a96e;
+}
 
-  .vision__section-reverse .vision__content-group {
-    align-self: center;
-  }
+.vision__content--reverse .vision__content__title__main h4 {
+  color: #f5f5dc;
+}
 
-  .vision__content {
-    gap: 3.125vw;
-  }
+.vision__content__title hr {
+  width: 2.083vmax;
+  border: none;
+}
 
-  .vision__content img {
-    width: 83.333vw;
-    height: 83.333vw;
-  }
+.vision__content .vision__content__title hr {
+  border-top: 0.052vmax solid #38271d;
+}
 
-  .vision__title {
-    font-size: 4.167vw;
-  }
+.vision__content--reverse .vision__content__title hr {
+  border-top: 0.052vmax solid #c9a96e;
+}
 
-  .vision__description {
-    font-size: 2.5vw;
-    width: 83.333vw;
-  }
+.vision__content_text p {
+  font-weight: 400;
+  font-size: 0.78vmax;
+  line-height: 200%;
+}
 
-  .vision__context {
-    gap: 2.038vw;
-  }
+.vision__content .vision__content__description {
+  color: #38271d;
+}
 
-  .vision__keyword {
-    font-size: 16.67vw;
-    width: 100%;
-    text-align: center;
-  }
-
-  .vision__section-reverse .vision__keyword {
-    text-align: center;
-  }
+.vision__content--reverse .vision__content__description {
+  color: #f5f5dc;
 }
