@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 174vh;
   gap: 0.78vmax;
   padding: 3.65vmax 13.54vmax;
   overflow: hidden;
@@ -16,7 +15,6 @@
 
 .vision__title__description {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 0.78vmax;
 }
@@ -47,7 +45,7 @@
   color: #c9a96e;
   transform: skewX(-8deg);
   display: inline-block;
-  line-height: 100%;
+  line-height: 1;
 }
 
 .vision__main {
@@ -84,7 +82,7 @@
 }
 
 .vision__content__image {
-  width: 39.79vmax;
+  width: 54.57%;
   height: 100%;
   overflow: hidden;
   flex-shrink: 0;
@@ -104,7 +102,7 @@
 .vision__content_text {
   display: flex;
   flex-direction: column;
-  width: 33.13vmax;
+  width: 45.43%;
   height: 100%;
   justify-content: center;
   gap: 1.3vmax;
@@ -134,7 +132,7 @@
 .vision__content__title__main h4 {
   font-family: 'BookendBatang';
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .vision__content__title__main h3 {
@@ -162,7 +160,6 @@
 
 @media (max-width: 1024px) {
   .vision {
-    height: 172.33vh;
     gap: 2.6vmin;
     padding: 7.81vmin 6.51vmin 6.51vmin 6.51vmin;
   }
@@ -173,7 +170,7 @@
 
   .vision__title__description hr {
     width: 9.11vmin;
-    border-top: 0.26vmin solid #e7c889;
+    border-top-width: 0.26vmin;
   }
 
   .vision__title__description p {
@@ -224,7 +221,7 @@
 
   .vision__content__title hr {
     width: 4.56vmin;
-    border-top: 0.13vmin solid var(--color-hr);
+    border-top-width: 0.13vmin;
   }
 
   .vision__content__description {
@@ -234,7 +231,6 @@
 
 @media (max-width: 767px) {
   .vision {
-    height: 397.33vh;
     gap: 4vmin;
     padding: 16vmin 4vmin 4vmin 4vmin;
   }
@@ -245,7 +241,7 @@
 
   .vision__title__description hr {
     width: 16vmin;
-    border-top: 0.53vmin solid #e7c889;
+    border-top-width: 0.53vmin;
   }
 
   .vision__title__description p {
@@ -299,7 +295,7 @@
 
   .vision__content__title hr {
     width: 9.33vmin;
-    border-top: 0.27vmin solid var(--color-hr);
+    border-top-width: 0.27vmin;
   }
 
   .vision__content__description {
