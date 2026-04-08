@@ -7,7 +7,10 @@ import img1 from '@entities/patent/assets/1.webp';
 import img2 from '@entities/patent/assets/2.webp';
 import img3 from '@entities/patent/assets/3.webp';
 import img4 from '@entities/patent/assets/4.webp';
-import { useScrollLock } from '@shared/lib/useScrollLock/useScrollLock';
+import {
+  lockScroll,
+  unlockScroll,
+} from '@shared/lib/useScrollLock/useScrollLock';
 import { Popup } from '@shared/ui/Popup';
 
 import '../styles/ValidContent.css';
@@ -17,15 +20,13 @@ const PATENT_IMAGES = [img0, img1, img2, img3, img4];
 
 export function PatentValidContent() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const { lock, unlock } = useScrollLock();
-
   const handleOpen = (index: number) => {
-    lock();
+    lockScroll();
     setSelectedIndex(index);
   };
 
   const handleClose = () => {
-    unlock();
+    unlockScroll();
     setSelectedIndex(null);
   };
 

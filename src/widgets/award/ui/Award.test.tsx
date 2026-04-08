@@ -25,10 +25,12 @@ describe('Award', () => {
     vi.clearAllMocks();
     mockGetItemsPerPage.mockReturnValue(8);
     document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   });
 
   afterEach(() => {
     document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   });
 
   describe('시맨틱 구조', () => {
