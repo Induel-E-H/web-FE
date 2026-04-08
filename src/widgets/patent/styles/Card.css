@@ -100,8 +100,6 @@
   .patent__card__content__icon {
     width: 4.82vmin;
     height: 4.82vmin;
-
-    color: #c9a96e;
   }
 
   .patent__card__text {
@@ -118,5 +116,47 @@
 
   .patent__card__text__year {
     font-size: 1.04vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .patent__card {
+    width: 44.67vmin;
+    height: 63.65vmin;
+
+    padding: 2.13vmin;
+  }
+
+  .patent__card_frame {
+    padding: 1.07vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e1d1b2;
+  }
+
+  .patent__card__content {
+    gap: 4.27vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e9dec8;
+  }
+
+  .patent__card__content__icon {
+    width: 9.87vmin;
+    height: 9.87vmin;
+  }
+
+  .patent__card__text {
+    gap: 2.13vmin;
+  }
+
+  .patent__card__text__title {
+    font-size: 3.73vmin;
+  }
+
+  .patent__card__text__serial {
+    font-size: 2.666vmin;
+  }
+
+  .patent__card__text__year {
+    font-size: 2.13vmin;
   }
 }

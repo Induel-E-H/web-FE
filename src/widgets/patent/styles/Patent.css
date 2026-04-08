@@ -20,3 +20,11 @@
     padding: 7.81vmin 3.91vmin 5.86vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .patent {
+    gap: 8vmin;
+
+    padding: 16vmin 4vmin 4vmin;
+  }
+}

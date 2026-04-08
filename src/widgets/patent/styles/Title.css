@@ -36,3 +36,17 @@
     font-size: 1.56vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .patent__title_eng {
+    font-size: 3.2vmin;
+  }
+
+  .patent__title_kor {
+    font-size: 8vmin;
+  }
+
+  .patent__title_description {
+    font-size: 3.2vmin;
+  }
+}

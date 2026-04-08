@@ -90,3 +90,38 @@
     column-gap: 1.95vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .patent__content {
+    gap: 5.33vmin;
+  }
+
+  .patent__content__title {
+    gap: 3.2vmin;
+  }
+
+  .patent__content__title__text {
+    gap: 1.33vmin;
+  }
+
+  .patent__content__icon {
+    width: 4.8vmin;
+    height: 4.8vmin;
+  }
+
+  .patent__content__title__text p {
+    font-size: 4.27vmin;
+  }
+
+  .patent__content__title hr {
+    border-top: 0.27vmin solid #60524a;
+  }
+
+  .patent__content__item__list {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+
+    row-gap: 2.67vmin;
+    column-gap: 2.67vmin;
+  }
+}
