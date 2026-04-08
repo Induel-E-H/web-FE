@@ -6,11 +6,11 @@ import { useBookNavigation } from '@features/history/model/useBookNavigation';
 import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import '../styles/History.css';
-import { AwardPage } from './book_page/Award';
-import { BookPage } from './book_page/BookPage';
-import { ContentPage } from './book_page/ContentPage';
-import { ListPage } from './book_page/List';
-import { TimelinePage } from './Timeline';
+import { BookPage } from './BookPage';
+import { AwardPage } from './content_container/Award';
+import { ContentPage } from './content_container/ContentPage';
+import { ListPage } from './content_container/List';
+import { TimelinePage } from './content_container/Timeline';
 
 function History() {
   const breakpoint = useBreakpoint();
