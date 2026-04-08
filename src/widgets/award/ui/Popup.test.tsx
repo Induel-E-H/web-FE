@@ -60,7 +60,7 @@ describe('AwardPopup', () => {
       const { container } = render(
         <AwardPopup awardId={1} onClose={onClose} />,
       );
-      const overlay = container.querySelector('.award__popup__overlay')!;
+      const overlay = container.querySelector('.popup__overlay')!;
 
       fireEvent.click(overlay);
 
