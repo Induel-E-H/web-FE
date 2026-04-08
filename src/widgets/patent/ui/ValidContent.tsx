@@ -2,7 +2,7 @@ import { FaRegCheckCircle } from 'react-icons/fa';
 
 import { PATENT_VALID_LIST } from '@entities/patent';
 
-import '../styles/ValidaContent.css';
+import '../styles/ValidContent.css';
 import { PatentCard } from './Card';
 
 export function PatentValidContent() {
