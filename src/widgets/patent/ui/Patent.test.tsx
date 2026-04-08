@@ -24,7 +24,7 @@ describe('Patent', () => {
   it('만료 특허 항목 목록이 렌더링된다', () => {
     const { container } = render(<Patent />);
     expect(
-      container.querySelector('div.patent__expiration'),
+      container.querySelector('article.patent__expiration'),
     ).toBeInTheDocument();
   });
 });

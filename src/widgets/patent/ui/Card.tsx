@@ -19,9 +19,12 @@ export function PatentCard({
           <div className='patent__card__text'>
             <p className='patent__card__text__title'>{item.title}</p>
             <p className='patent__card__text__serial'>{item.serialNumber}</p>
-            <p className='patent__card__text__year'>
+            <time
+              className='patent__card__text__year'
+              dateTime={item.filingDate.replace(/\. /g, '-')}
+            >
               {item.filingDate.slice(0, 4)}년 출원
-            </p>
+            </time>
           </div>
         </div>
       </div>

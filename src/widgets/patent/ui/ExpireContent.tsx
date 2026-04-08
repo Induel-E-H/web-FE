@@ -6,17 +6,17 @@ import '../styles/ExpireContent.css';
 
 export function PatentExpireContent() {
   return (
-    <div className='patent__expiration'>
-      <div className='patent__expiration__title'>
+    <article className='patent__expiration'>
+      <header className='patent__expiration__title'>
         <div className='patent__expiration__title__text'>
           <FaRegFileExcel className='patent__expiration__icon' />
-          <p>만료 특허 이력 ({PATENT_EXPIRE_LIST.length}건)</p>
+          <h3>만료 특허 이력 ({PATENT_EXPIRE_LIST.length}건)</h3>
         </div>
         <hr />
-      </div>
-      <div className='patent__expiration__content'>
+      </header>
+      <ol className='patent__expiration__content'>
         {PATENT_EXPIRE_LIST.map((item, index) => (
-          <div className='patent__expiration__item' key={item.serialNumber}>
+          <li className='patent__expiration__item' key={item.serialNumber}>
             <div className='patent__expiration__item__text'>
               <div className='patent__expiration__item__content'>
                 <span>{index + 1}.</span>
@@ -24,9 +24,9 @@ export function PatentExpireContent() {
               </div>
             </div>
             <hr />
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ol>
+    </article>
   );
 }

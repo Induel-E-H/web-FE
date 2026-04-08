@@ -31,7 +31,7 @@
   color: #827671;
 }
 
-.patent__expiration__title__text p {
+.patent__expiration__title__text h3 {
   font-weight: 600;
   font-size: 1.04vmax;
   color: var(--white);
@@ -52,6 +52,10 @@
 
   column-gap: 2.08vmax;
   row-gap: 1.3vmax;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .patent__expiration__item {
@@ -118,7 +122,7 @@
     height: 2.6vmin;
   }
 
-  .patent__expiration__title__text p {
+  .patent__expiration__title__text h3 {
     font-size: 2.6vmin;
   }
 
@@ -174,7 +178,7 @@
     height: 5.33vmin;
   }
 
-  .patent__expiration__title__text p {
+  .patent__expiration__title__text h3 {
     font-size: 3.73vmin;
   }
 

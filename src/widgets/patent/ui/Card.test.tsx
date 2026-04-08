@@ -37,6 +37,14 @@ describe('PatentCard', () => {
     expect(screen.getByText('2013년 출원')).toBeInTheDocument();
   });
 
+  it('time 요소의 dateTime이 "YYYY-MM-DD" 형식이다', () => {
+    const { container } = render(
+      <PatentCard item={mockItem} onClick={vi.fn()} />,
+    );
+    const time = container.querySelector('time.patent__card__text__year');
+    expect(time).toHaveAttribute('dateTime', '2013-09-24');
+  });
+
   it('클릭 시 onClick이 호출된다', () => {
     const onClick = vi.fn();
     render(<PatentCard item={mockItem} onClick={onClick} />);

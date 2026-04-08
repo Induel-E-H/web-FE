@@ -31,23 +31,21 @@ export function PatentValidContent() {
   };
 
   return (
-    <div className='patent__content'>
-      <div className='patent__content__title'>
+    <article className='patent__content'>
+      <header className='patent__content__title'>
         <div className='patent__content__title__text'>
           <FaRegCheckCircle className='patent__content__icon' />
-          <p>유효 특허증 ({PATENT_VALID_LIST.length}건)</p>
+          <h3>유효 특허증 ({PATENT_VALID_LIST.length}건)</h3>
         </div>
         <hr />
-      </div>
-      <div className='patent__content__item__list'>
+      </header>
+      <ul className='patent__content__item__list'>
         {PATENT_VALID_LIST.map((item, index) => (
-          <PatentCard
-            key={item.serialNumber}
-            item={item}
-            onClick={() => handleOpen(index)}
-          />
+          <li key={item.serialNumber}>
+            <PatentCard item={item} onClick={() => handleOpen(index)} />
+          </li>
         ))}
-      </div>
+      </ul>
       {selectedIndex !== null && (
         <Popup
           ariaLabel={PATENT_VALID_LIST[selectedIndex].title}
@@ -59,6 +57,6 @@ export function PatentValidContent() {
           />
         </Popup>
       )}
-    </div>
+    </article>
   );
 }

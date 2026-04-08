@@ -8,7 +8,7 @@ describe('PatentExpireContent', () => {
   it('PATENT_EXPIRE_LIST 개수만큼 항목이 렌더링된다', () => {
     const { container } = render(<PatentExpireContent />);
     expect(
-      container.querySelectorAll('div.patent__expiration__item'),
+      container.querySelectorAll('li.patent__expiration__item'),
     ).toHaveLength(PATENT_EXPIRE_LIST.length);
   });
 
