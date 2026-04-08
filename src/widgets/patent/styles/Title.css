@@ -1,0 +1,24 @@
+.patent__title {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.patent__title_eng {
+  font-weight: 500;
+  font-size: 0.78vmax;
+  color: var(--white);
+}
+
+.patent__title_kor {
+  font-weight: 600;
+  font-size: 2.6vmax;
+  color: #c9a96e;
+}
+
+.patent__title_description {
+  font-weight: 600;
+  font-size: 0.78vmax;
+  color: #faf7f2;
+}
