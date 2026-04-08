@@ -1,7 +1,7 @@
 .award__popup__overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,8 +20,8 @@
 
 .award__popup {
   position: relative;
-  width: 29.688vmax;
-  height: 43.75vmax;
+  width: 24.38vmax;
+  height: 35.94vmax;
   padding: 0.782vmax;
   border-radius: 0.521vmax;
   overflow: hidden;
