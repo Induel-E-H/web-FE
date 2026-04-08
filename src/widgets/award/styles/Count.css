@@ -26,3 +26,22 @@
   font-weight: 600;
   font-size: 0.78vmax;
 }
+
+@media (max-width: 1024px) {
+  .award__count {
+    gap: 0.65vmin;
+
+    padding: 0.65vmin 1.3vmin;
+
+    border-radius: 2.6vmin;
+  }
+
+  .award__count__icon {
+    width: 2.21vmin;
+    height: 2.21vmin;
+  }
+
+  .award__count p {
+    font-size: 1.56vmin;
+  }
+}

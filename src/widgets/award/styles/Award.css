@@ -31,3 +31,21 @@
 
   gap: 1.04vmax;
 }
+
+@media (max-width: 1024px) {
+  .award {
+    height: 100vh;
+
+    gap: 1.95vmin;
+    padding: 7.81vmax 6.51vmax 3.91vmax;
+    overflow: clip;
+
+    background-color: #faf7f2;
+  }
+
+  .award__content {
+    align-items: center;
+
+    gap: 3.91vmin;
+  }
+}

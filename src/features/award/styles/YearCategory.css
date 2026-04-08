@@ -10,7 +10,7 @@
   border: none;
   cursor: pointer;
 
-  padding: 0 0.8vw;
+  padding: 0 0.8vmax;
 
   font-size: 0.834vmax;
   font-weight: 400;
@@ -28,4 +28,14 @@
 
   color: var(--brown-500);
   border-bottom-color: var(--brown-500);
+}
+
+@media (max-width: 1024px) {
+  .award__year_category button {
+    padding: 0 1.5vmin;
+
+    font-size: 2.08vmin;
+
+    border-bottom: 0.26vmin solid var(--brown-200);
+  }
 }

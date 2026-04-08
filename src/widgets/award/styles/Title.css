@@ -14,3 +14,13 @@
   font-size: 3.13vmax;
   color: #000000;
 }
+
+@media (max-width: 1024px) {
+  .award__title p {
+    font-size: 1.56vmin;
+  }
+
+  .award__title h2 {
+    font-size: 5.21vmin;
+  }
+}
