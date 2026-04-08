@@ -6,10 +6,10 @@ import { useBookNavigation } from '@features/history/model/useBookNavigation';
 import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import '../styles/History.css';
-import { AwardPage } from './Award';
-import { BookPage } from './BookPage';
-import { ContentPage } from './ContentPage';
-import { ListPage } from './List';
+import { AwardPage } from './book_page/Award';
+import { BookPage } from './book_page/BookPage';
+import { ContentPage } from './book_page/ContentPage';
+import { ListPage } from './book_page/List';
 import { TimelinePage } from './Timeline';
 
 function History() {
