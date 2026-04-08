@@ -8,7 +8,6 @@
   align-items: center;
   gap: 1.56vmax;
   padding: 3.13vmax 5.21vmax;
-  overflow: clip;
 
   background-color: #faf7f2;
 }
@@ -38,14 +37,24 @@
 
     gap: 1.95vmin;
     padding: 7.81vmax 6.51vmax 3.91vmax;
-    overflow: clip;
-
-    background-color: #faf7f2;
   }
 
   .award__content {
     align-items: center;
 
     gap: 3.91vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .award {
+    height: 100vh;
+
+    gap: 4vmin;
+    padding: 16vmin 4vmin 4vmin;
+  }
+
+  .award__content {
+    gap: 2.67vmin;
   }
 }

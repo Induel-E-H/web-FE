@@ -24,3 +24,13 @@
     font-size: 5.21vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .award__title p {
+    font-size: 3.2vmin;
+  }
+
+  .award__title h2 {
+    font-size: 5.33vmin;
+  }
+}

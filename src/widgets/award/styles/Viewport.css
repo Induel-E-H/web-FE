@@ -47,3 +47,21 @@
     row-gap: 2.6vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .award__card_viewport {
+    padding: 1vmin;
+  }
+
+  .award__card_slider {
+    gap: 2.67vmin;
+  }
+
+  .award__card_page {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+    column-gap: 4vmin;
+    row-gap: 4vmin;
+  }
+}

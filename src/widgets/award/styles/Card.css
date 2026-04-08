@@ -120,3 +120,44 @@
     font-size: 1.3vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .award__card {
+    padding: 2.13vmin;
+
+    box-shadow: 0 0 2.13vmin 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .award__card__frame {
+    padding: 1.07vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e1d1b2;
+  }
+
+  .award__card__content {
+    gap: 4.27vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e1d1b2;
+  }
+
+  .award__card__icon {
+    width: 9.87vmin;
+    height: 9.87vmin;
+  }
+
+  .award__card_text {
+    gap: 2.13vmin;
+  }
+
+  .award__card_text_year {
+    font-size: 2.67vmin;
+  }
+
+  .award__card_text_title {
+    font-size: 3.73vmin;
+  }
+
+  .award__card_text_issuer {
+    font-size: 2.67vmin;
+  }
+}
