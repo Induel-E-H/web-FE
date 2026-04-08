@@ -54,3 +54,39 @@
   align-items: center;
   justify-content: space-between;
 }
+
+@media (max-width: 1024px) {
+  .patent__content {
+    gap: 2.6vmin;
+  }
+
+  .patent__content__title {
+    gap: 1.56vmin;
+  }
+
+  .patent__content__title__text {
+    gap: 0.65vmin;
+  }
+
+  .patent__content__icon {
+    width: 2.86vmin;
+    height: 2.86vmin;
+  }
+
+  .patent__content__title__text p {
+    font-size: 2.86vmin;
+  }
+
+  .patent__content__title hr {
+    border-top: 0.13vmin solid #60524a;
+  }
+
+  .patent__content__item__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+
+    row-gap: 3.25vmin;
+    column-gap: 1.95vmin;
+  }
+}

@@ -12,3 +12,11 @@
 
   background-color: #38271d;
 }
+
+@media (max-width: 1024px) {
+  .patent {
+    gap: 5.21vmin;
+
+    padding: 7.81vmin 3.91vmin 5.86vmin;
+  }
+}

@@ -99,3 +99,59 @@
   border: none;
   border-top: 0.052vmax solid #4c3d34;
 }
+
+@media (max-width: 1024px) {
+  .patent__expiration {
+    gap: 2.6vmin;
+  }
+
+  .patent__expiration__title {
+    gap: 1.56vmin;
+  }
+
+  .patent__expiration__title__text {
+    gap: 1.3vmin;
+  }
+
+  .patent__expiration__icon {
+    width: 2.08vmin;
+    height: 2.6vmin;
+  }
+
+  .patent__expiration__title__text p {
+    font-size: 2.6vmin;
+  }
+
+  .patent__expiration__title hr {
+    border-top: 0.13vmin solid #60524a;
+  }
+
+  .patent__expiration__content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3.26vmin;
+  }
+
+  .patent__expiration__item {
+    width: 100%;
+
+    gap: 1.3vmin;
+  }
+
+  .patent__expiration__item__content {
+    gap: 3.13vmin;
+  }
+
+  .patent__expiration__item__content span:first-child {
+    font-size: 1.95vmin;
+  }
+
+  .patent__expiration__item__content span:last-child {
+    font-size: 1.95vmin;
+  }
+
+  .patent__expiration__item hr {
+    border-top: 0.13vmin solid #4c3d34;
+  }
+}
