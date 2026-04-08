@@ -8,7 +8,7 @@ import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 import '../styles/History.css';
 import { BookPage } from './BookPage';
 import { AwardPage } from './content_container/Award';
-import { ContentPage } from './content_container/ContentPage';
+import { ContentPage } from './content_container/Content';
 import { ListPage } from './content_container/List';
 import { TimelinePage } from './content_container/Timeline';
 
@@ -136,9 +136,6 @@ function History() {
           </div>
           <div className='history__book-cover-right'></div>
         </div>
-      </div>
-      <div className='history__last'>
-        <p>공간을 문화로 창조하는 기업</p>
       </div>
     </section>
   );
