@@ -1,0 +1,56 @@
+.patent__content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  gap: 1.56vmax;
+}
+
+.patent__content__title {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  gap: 0.52vmax;
+}
+
+.patent__content__title__text {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 0.52vmax;
+}
+
+.patent__content__icon {
+  width: 1.56vmax;
+  height: 1.56vmax;
+  color: #05df72;
+}
+
+.patent__content__title__text p {
+  font-weight: 600;
+  font-size: 1.3vmax;
+  color: var(--white);
+}
+
+.patent__content__title hr {
+  width: 100%;
+
+  border: none;
+  border-top: 0.052vmax solid #60524a;
+}
+
+.patent__content__item__list {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+
+  align-items: center;
+  justify-content: space-between;
+}
