@@ -14,7 +14,7 @@ describe('PatentValidContent', () => {
 
   it('PATENT_VALID_LIST 개수만큼 카드가 렌더링된다', () => {
     const { container } = render(<PatentValidContent />);
-    expect(container.querySelectorAll('div.patent__card')).toHaveLength(
+    expect(container.querySelectorAll('button.patent__card')).toHaveLength(
       PATENT_VALID_LIST.length,
     );
   });

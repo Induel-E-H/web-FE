@@ -4,9 +4,15 @@ import type { PatentValidType } from '@entities/patent';
 
 import '../styles/Card.css';
 
-export function PatentCard({ item }: { item: PatentValidType }) {
+export function PatentCard({
+  item,
+  onClick,
+}: {
+  item: PatentValidType;
+  onClick: () => void;
+}) {
   return (
-    <div className='patent__card'>
+    <button className='patent__card' onClick={onClick}>
       <div className='patent__card_frame'>
         <div className='patent__card__content'>
           <IoDocumentTextOutline className='patent__card__content__icon' />
@@ -19,6 +25,6 @@ export function PatentCard({ item }: { item: PatentValidType }) {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
