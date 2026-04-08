@@ -9,15 +9,15 @@ describe('AwardTitle', () => {
     expect(container.querySelector('hgroup.award__title')).toBeInTheDocument();
   });
 
-  it('h2 "Award"가 렌더링된다', () => {
+  it('h2 "수상 기록"이 렌더링된다', () => {
     render(<AwardTitle />);
     expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-      'Award',
+      '수상 기록',
     );
   });
 
-  it('"수상 및 인증 내역" 문구가 렌더링된다', () => {
+  it('"Award" 문구가 렌더링된다', () => {
     render(<AwardTitle />);
-    expect(screen.getByText('수상 및 인증 내역')).toBeInTheDocument();
+    expect(screen.getByText('Award')).toBeInTheDocument();
   });
 });

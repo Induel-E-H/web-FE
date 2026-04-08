@@ -5,7 +5,7 @@ import { AWARD_LIST } from './awardList';
 describe('AWARD_LIST', () => {
   it('각 항목에 고유한 id가 있다', () => {
     const ids = AWARD_LIST.map((a) => a.id);
-    expect(new Set(ids).size).toBe(8);
+    expect(new Set(ids).size).toBe(10);
   });
 
   it('모든 항목에 필수 필드(id, title, category, date, issuer)가 있다', () => {
