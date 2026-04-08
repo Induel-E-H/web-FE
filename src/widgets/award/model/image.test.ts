@@ -7,8 +7,8 @@ describe('getAwardImage', () => {
     vi.restoreAllMocks();
   });
 
-  it('유효한 id(0~7)에 대해 비어있지 않은 문자열을 반환한다', () => {
-    for (let id = 0; id <= 7; id++) {
+  it('유효한 id(0~9)에 대해 비어있지 않은 문자열을 반환한다', () => {
+    for (let id = 0; id <= 9; id++) {
       const result = getAwardImage(id);
       expect(typeof result).toBe('string');
       expect(result.length).toBeGreaterThan(0);

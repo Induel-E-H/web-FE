@@ -1,135 +1,161 @@
 .award__card {
-  height: 100%;
-  border-radius: 0.521vmax;
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
-  text-align: left;
-  cursor: pointer;
-}
+  flex-direction: row;
 
-.award__card_image {
-  position: relative;
-  flex: 1 1 0;
-  min-height: 0;
-}
-
-.award__card_image::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.35) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.award__card:hover .award__card_image::after {
-  opacity: 1;
-}
-
-.award__card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 5%;
-  user-select: none;
-  -webkit-user-drag: none;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.42vmax;
+
+  background-color: #f0eadc;
+  box-shadow: 0 0 0.42vmax 0 rgba(0, 0, 0, 0.25);
 }
 
-.award__card_content {
-  padding: 7.15%;
-  gap: 0.521vmax;
-  background-color: var(--white);
+.award__card__frame {
+  width: 100%;
+  height: 100%;
+
+  padding: 0.21vmax;
+
+  box-shadow: inset 0 0 0 0.05vmax #e1d1b2;
+}
+
+.award__card__content {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.83vmax;
+
+  box-shadow: inset 0 0 0 0.05vmax #e1d1b2;
+}
+
+.award__card__icon {
+  width: 1.93vmax;
+  height: 1.93vmax;
+
+  color: #c9a96e;
 }
 
 .award__card_text {
   display: flex;
   flex-direction: column;
-  gap: 0.2605vmax;
+
+  align-items: center;
+
+  gap: 0.42vmax;
 }
 
-.award__card_category {
-  font-weight: 600;
+.award__card_text_year {
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 0.52vmax;
+
+  color: #c9a96e;
+}
+
+.award__card_text_title {
+  font-family: 'BookendBatang';
+  font-weight: 700;
   font-size: 0.73vmax;
-  color: var(--footer-background);
+
+  color: #38271d;
 }
 
-.award__card_title {
-  font-weight: 400;
-  font-size: 0.833vmax;
-  color: var(--black);
-}
+.award__card_text_issuer {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 0.52vmax;
 
-.award__card_year {
-  font-weight: 300;
-  font-size: 0.729vmax;
-  color: var(--gray-500);
+  color: #8c8672;
 }
 
 @media (max-width: 1024px) {
   .award__card {
-    border-radius: 1.31vmin;
-    box-shadow: 0 0.521vmin 0.521vmin rgba(0, 0, 0, 0.25);
+    padding: 1.04vmin;
+
+    box-shadow: 0 0 1.04vmin 0 rgba(0, 0, 0, 0.25);
   }
 
-  .award__card_content {
-    padding: 1.3vmin;
-    gap: 1.31vmin;
+  .award__card__frame {
+    padding: 0.52vmin;
+
+    box-shadow: inset 0 0 0 0.13vmin #e1d1b2;
+  }
+
+  .award__card__content {
+    gap: 2.08vmin;
+
+    box-shadow: inset 0 0 0 0.13vmin #e1d1b2;
+  }
+
+  .award__card__icon {
+    width: 4.82vmin;
+    height: 4.82vmin;
   }
 
   .award__card_text {
-    gap: 0.66vmin;
+    gap: 1.04vmin;
   }
 
-  .award__card_category {
-    font-size: 1.563vmin;
+  .award__card_text_year {
+    font-size: 1.3vmin;
   }
 
-  .award__card_title {
-    font-size: 1.823vmin;
+  .award__card_text_title {
+    font-size: 1.82vmin;
   }
 
-  .award__card_year {
-    font-size: 1.563vmin;
+  .award__card_text_issuer {
+    font-size: 1.3vmin;
   }
 }
 
 @media (max-width: 767px) {
   .award__card {
-    border-radius: 2.667vmin;
-    box-shadow: 0 1.07vmin 1.07vmin rgba(0, 0, 0, 0.25);
+    padding: 2.13vmin;
+
+    box-shadow: 0 0 2.13vmin 0 rgba(0, 0, 0, 0.25);
   }
 
-  .award__card_content {
-    padding: 3.733vmin;
-    gap: 2.666vmin;
+  .award__card__frame {
+    padding: 1.07vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e1d1b2;
+  }
+
+  .award__card__content {
+    gap: 4.27vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e1d1b2;
+  }
+
+  .award__card__icon {
+    width: 9.87vmin;
+    height: 9.87vmin;
   }
 
   .award__card_text {
-    gap: 1.334vmin;
+    gap: 2.13vmin;
   }
 
-  .award__card_category {
-    font-size: 3.2vmin;
+  .award__card_text_year {
+    font-size: 2.67vmin;
   }
 
-  .award__card_title {
-    font-size: 3.735vmin;
+  .award__card_text_title {
+    font-size: 3.73vmin;
   }
 
-  .award__card_year {
-    font-size: 3.2vmin;
+  .award__card_text_issuer {
+    font-size: 2.67vmin;
   }
 }

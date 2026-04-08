@@ -4,10 +4,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { Card } from './Card';
 
-vi.mock('../model/image', () => ({
-  getAwardImage: vi.fn().mockReturnValue('test-image.webp'),
-}));
-
 const mockAward: AwardItem = {
   id: 1,
   title: '테스트 공모전',
@@ -25,9 +21,9 @@ describe('Card', () => {
       expect(container.querySelector('button.award__card')).toBeInTheDocument();
     });
 
-    it('카테고리가 표시된다', () => {
+    it('연도(date 앞 4자리)가 표시된다', () => {
       render(<Card award={mockAward} onClick={vi.fn()} />);
-      expect(screen.getByText('당선작')).toBeInTheDocument();
+      expect(screen.getByText('2008')).toBeInTheDocument();
     });
 
     it('제목이 표시된다', () => {
@@ -35,22 +31,9 @@ describe('Card', () => {
       expect(screen.getByText('테스트 공모전')).toBeInTheDocument();
     });
 
-    it('연도(date 앞 4자리)가 표시된다', () => {
+    it('발행자가 표시된다', () => {
       render(<Card award={mockAward} onClick={vi.fn()} />);
-      expect(screen.getByText('2008')).toBeInTheDocument();
-    });
-
-    it('이미지 alt 텍스트가 award.title이다', () => {
-      render(<Card award={mockAward} onClick={vi.fn()} />);
-      expect(screen.getByAltText('테스트 공모전')).toBeInTheDocument();
-    });
-
-    it('이미지 src가 getAwardImage 반환값이다', () => {
-      render(<Card award={mockAward} onClick={vi.fn()} />);
-      expect(screen.getByAltText('테스트 공모전')).toHaveAttribute(
-        'src',
-        'test-image.webp',
-      );
+      expect(screen.getByText('테스트 기관')).toBeInTheDocument();
     });
   });
 

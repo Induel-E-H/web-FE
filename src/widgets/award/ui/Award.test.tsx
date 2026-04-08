@@ -8,7 +8,7 @@ vi.mock('../model/responsive', () => ({
   getItemsPerPage: mockGetItemsPerPage,
 }));
 
-vi.mock('../model/useSlideGesture', () => ({
+vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
   useSlideGesture: vi.fn().mockReturnValue({
     ref: { current: null },
     onTouchStart: vi.fn(),
@@ -37,10 +37,10 @@ describe('Award', () => {
       expect(container.querySelector('section.award')).toBeInTheDocument();
     });
 
-    it('AwardTitle(h2 "Award")가 렌더링된다', () => {
+    it('AwardTitle(h2 "수상 기록")가 렌더링된다', () => {
       render(<Award />);
       expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-        'Award',
+        '수상 기록',
       );
     });
 
@@ -51,9 +51,9 @@ describe('Award', () => {
   });
 
   describe('카드 렌더링', () => {
-    it('데스크탑(8 items/page)에서 8개의 카드가 렌더링된다', () => {
+    it('데스크탑(10 items/page)에서 10개의 카드가 렌더링된다', () => {
       render(<Award />);
-      expect(document.querySelectorAll('button.award__card')).toHaveLength(8);
+      expect(document.querySelectorAll('button.award__card')).toHaveLength(10);
     });
   });
 
@@ -98,9 +98,9 @@ describe('Award', () => {
   });
 
   describe('연도 필터링', () => {
-    it('"전체" 필터에서는 8개 항목이 모두 표시된다', () => {
+    it('"전체" 필터에서는 10개 항목이 모두 표시된다', () => {
       render(<Award />);
-      expect(document.querySelectorAll('button.award__card')).toHaveLength(8);
+      expect(document.querySelectorAll('button.award__card')).toHaveLength(10);
     });
 
     it('2008년 클릭 시 해당 연도(2개) 항목만 표시된다', () => {
@@ -124,7 +124,7 @@ describe('Award', () => {
   });
 
   describe('모바일 Pagination', () => {
-    it('itemsPerPage < 8(모바일)이면 Pagination이 표시된다', () => {
+    it('itemsPerPage < 10(모바일)이면 Pagination이 표시된다', () => {
       mockGetItemsPerPage.mockReturnValue(4);
       render(<Award />);
 
@@ -133,7 +133,7 @@ describe('Award', () => {
       ).toBeInTheDocument();
     });
 
-    it('itemsPerPage >= 8(데스크탑)이면 Pagination이 표시되지 않는다', () => {
+    it('itemsPerPage >= 10(데스크탑)이면 Pagination이 표시되지 않는다', () => {
       render(<Award />);
 
       expect(
