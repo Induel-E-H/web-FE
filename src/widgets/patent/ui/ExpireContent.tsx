@@ -1,3 +1,5 @@
+import { FaRegFileExcel } from 'react-icons/fa';
+
 import { PATENT_EXPIRE_LIST } from '@entities/patent';
 
 import '../styles/ExpireContent.css';
@@ -6,7 +8,11 @@ export function PatentExpireContent() {
   return (
     <div className='patent__expiration'>
       <div className='patent__expiration__title'>
-        <div className='patent__expiration__title__text'></div>
+        <div className='patent__expiration__title__text'>
+          <FaRegFileExcel className='patent__expiration__icon' />
+          <p>만료 특허 이력 ({PATENT_EXPIRE_LIST.length}건)</p>
+        </div>
+        <hr />
       </div>
       <div className='patent__expiration__content'>
         {PATENT_EXPIRE_LIST.map((item, index) => (
