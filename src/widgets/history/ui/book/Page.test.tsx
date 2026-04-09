@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { BookPage } from './BookPage';
+import { BookPage } from './Page';
 
 const defaultProps = {
   staticLeftContent: <div>static-left</div>,
@@ -9,7 +9,7 @@ const defaultProps = {
   flipFrontContent: <div>flip-front</div>,
   flipBackContent: <div>flip-back</div>,
   isFlipping: false,
-  flipDirection: null as null,
+  flipDirection: null,
   canGoLeft: true,
   canGoRight: true,
 };

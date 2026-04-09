@@ -4,13 +4,13 @@ import { useBookNavigation } from '@features/history/model/useBookNavigation';
 import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import '../styles/History.css';
+import { AwardPage } from './book/content_container/Award';
+import { ContentPage } from './book/content_container/Content';
+import { ListPage } from './book/content_container/List';
+import { TimelinePage } from './book/content_container/Timeline';
 import { BookCover } from './book/Cover';
-import { BookPage } from './BookPage';
+import { BookPage } from './book/Page';
 import { HistoryCategory } from './Category';
-import { AwardPage } from './content_container/Award';
-import { ContentPage } from './content_container/Content';
-import { ListPage } from './content_container/List';
-import { TimelinePage } from './content_container/Timeline';
 import { HistoryTitle } from './Title';
 
 function History() {

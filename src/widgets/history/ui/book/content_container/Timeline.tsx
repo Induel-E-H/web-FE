@@ -1,8 +1,8 @@
 import { timelineData } from '@entities/history';
 import type { PageSide } from '@features/history/model/types';
 
-import '../../styles/Timeline.css';
-import { BookPageTitle } from '../BookPageTitle';
+import '../../../styles/book/content_container/Timeline.css';
+import { BookPageTitle } from '../PageTitle';
 
 const maxPerPage = Math.ceil(timelineData.length / 2);
 const leftItems = timelineData.slice(0, maxPerPage);

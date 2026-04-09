@@ -11,8 +11,8 @@ import {
 } from '@features/history/model/helpers';
 import type { PageSide } from '@features/history/model/types';
 
-import '../../styles/ContentPage.css';
-import { ImageGalleryPopup } from '../ImageGalleryPopup';
+import '../../../styles/book/content_container/Content.css';
+import { ImageGalleryPopup } from '../../ImageGalleryPopup';
 
 interface ContentPageProps {
   side: PageSide;

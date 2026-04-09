@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { BookPageTitle } from './BookPageTitle';
+import { BookPageTitle } from './PageTitle';
 
 describe('BookPageTitle', () => {
   describe('렌더링', () => {

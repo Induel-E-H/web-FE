@@ -4,8 +4,8 @@ import { AWARD_YEAR_RANGES_BY_BREAKPOINT } from '@features/history/model/pageReg
 import type { PageSide } from '@features/history/model/types';
 import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
-import '../../styles/Award.css';
-import { BookPageTitle } from '../BookPageTitle';
+import '../../../styles/book/content_container/Award.css';
+import { BookPageTitle } from '../PageTitle';
 
 function getItemsByRange(start: number, end: number) {
   return awardData.filter((item) => item.year >= start && item.year <= end);

@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { PAGE_SIDE } from '@features/history/model/constants';
 import type { PageSide } from '@features/history/model/types';
 
-import '../styles/HistoryBook.css';
+import '../../styles/book/Page.css';
 
 function BookPageOuterShadow({ side }: { side: PageSide }) {
   const levels = side === PAGE_SIDE.LEFT ? [3, 2, 1] : [1, 2, 3];

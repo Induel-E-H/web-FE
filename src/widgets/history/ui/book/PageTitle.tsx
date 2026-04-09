@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-import '../styles/BookPageTitle.css';
+import '../../styles/book/PageTitle.css';
 
 export function BookPageTitle({
   title,
