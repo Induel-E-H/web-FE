@@ -61,6 +61,26 @@
 .popup__header {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.popup__header:has(.popup__title) {
+  justify-content: space-between;
+}
+
+.popup__title {
+  font-family: 'BookendBatang', sans-serif;
+  font-size: 1.667vmax;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.popup--gallery {
+  width: 50vw;
+  height: 80vh;
+  padding: 1.6vmax;
+  gap: 0.8vmax;
+  border-radius: 0.52vmax;
 }
 
 @media (max-width: 1024px) {
@@ -75,6 +95,18 @@
   .popup__close {
     font-size: 2.685vmin;
   }
+
+  .popup--gallery {
+    width: 85vw;
+    height: 70vh;
+    padding: 3.13vmin;
+    gap: 1.56vmin;
+    border-radius: 1.04vmin;
+  }
+
+  .popup__title {
+    font-size: 3.13vmin;
+  }
 }
 
 @media (max-width: 767px) {
@@ -88,5 +120,17 @@
 
   .popup__close {
     font-size: 2.529vmax;
+  }
+
+  .popup--gallery {
+    width: 95vw;
+    height: 75vh;
+    padding: 4vmin;
+    gap: 2vmin;
+    border-radius: 2vmin;
+  }
+
+  .popup__title {
+    font-size: 4vmin;
   }
 }
