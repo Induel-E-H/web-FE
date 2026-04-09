@@ -12,3 +12,12 @@
 
   background-color: #1a1410;
 }
+
+.history__book {
+  position: relative;
+
+  width: 65.1vmax;
+  height: 34.38vmax;
+
+  box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
+}
