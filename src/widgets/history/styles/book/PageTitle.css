@@ -1,8 +1,9 @@
 .book-page-title {
   display: flex;
   flex-direction: column;
+
   align-items: center;
-  gap: 1.85vh;
+  gap: 1.04vmax;
 }
 
 .book-page-title--hidden {
@@ -10,17 +11,16 @@
 }
 
 .book-page-title hr {
-  width: var(--title-hr-width, 47.277%);
-  height: 0.094vh;
   border: none;
-  background-color: #606060;
-  box-shadow: 0 4px 4px #00000040;
+  border-top: 0.05vmax solid #606060;
+  width: 16.35vmax;
 }
 
 .book-page-title h3 {
-  font-size: 2.08vmax;
+  font-weight: 700;
+  font-size: 1.56vmax;
+
   color: #000000;
-  text-shadow: 0 4px 4px #00000040;
 }
 
 @media (max-width: 1024px) {
