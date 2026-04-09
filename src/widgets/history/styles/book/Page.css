@@ -1,0 +1,110 @@
+.history__book-page-left,
+.history__book-page-right {
+  display: flex;
+  flex-direction: row;
+
+  flex: 1;
+  height: 100%;
+
+  z-index: 3;
+  background-color: var(--white);
+}
+
+.history__book-page-left--clickable {
+  cursor:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><polyline points='24,10 12,20 24,30' fill='none' stroke='%23ffffff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/><polyline points='24,10 12,20 24,30' fill='none' stroke='%23222222' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+      12 20,
+    pointer;
+}
+
+.history__book-page-right--clickable {
+  cursor:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><polyline points='16,10 28,20 16,30' fill='none' stroke='%23ffffff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/><polyline points='16,10 28,20 16,30' fill='none' stroke='%23222222' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+      28 20,
+    pointer;
+}
+
+.history__book-flip-panel {
+  position: absolute;
+  inset: 0;
+}
+
+.history__book-page-outer-shadow {
+  display: flex;
+  flex-direction: row;
+
+  width: 4.1%;
+  height: 100%;
+}
+
+.history__book-page-content {
+  display: flex;
+  flex-direction: row;
+
+  width: 94.59%;
+  height: 100%;
+
+  padding: 0.78vmax;
+}
+
+.history__book-page-inner-shadow {
+  width: 1.31%;
+  height: 100%;
+}
+
+.history__book-page-left .history__book-page-inner-shadow {
+  background: linear-gradient(to right, #ffffff, #999999);
+}
+
+.history__book-page-right .history__book-page-inner-shadow {
+  background: linear-gradient(to left, #ffffff, #999999);
+}
+
+.history__book-page-outer-shadow-3 {
+  width: 56%;
+  height: 100%;
+
+  background-color: #b9b9b9;
+  background-image:
+    linear-gradient(#828282, #828282), linear-gradient(#828282, #828282),
+    linear-gradient(#828282, #828282), linear-gradient(#828282, #828282),
+    linear-gradient(#828282, #828282);
+  background-size: 0.05vmax 100%;
+  background-position:
+    16.67% 0,
+    33.33% 0,
+    50% 0,
+    66.67% 0,
+    83.33% 0;
+  background-repeat: no-repeat;
+}
+
+.history__book-page-outer-shadow-2 {
+  width: 32%;
+  height: 100%;
+
+  background-color: #cdcdcd;
+  background-image:
+    linear-gradient(#969696, #969696), linear-gradient(#969696, #969696),
+    linear-gradient(#969696, #969696);
+  background-size: 0.05vmax 100%;
+  background-position:
+    25% 0,
+    50% 0,
+    75% 0;
+  background-repeat: no-repeat;
+}
+
+.history__book-page-outer-shadow-1 {
+  width: 12%;
+  height: 100%;
+
+  background-color: #e1e1e1;
+  background-image:
+    linear-gradient(#b4b4b4, #b4b4b4), linear-gradient(#b4b4b4, #b4b4b4);
+  background-size: 0.05vmax 100%;
+  background-position:
+    33.33% 0,
+    66.67% 0;
+  background-repeat: no-repeat;
+}
