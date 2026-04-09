@@ -21,3 +21,14 @@
 
   box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
 }
+
+.history__book-page {
+  position: absolute;
+  top: 0.57vmax;
+  bottom: 0.57vmax;
+  left: 0.78vmax;
+  right: 0.78vmax;
+
+  display: flex;
+  flex-direction: row;
+}
