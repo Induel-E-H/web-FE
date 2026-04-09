@@ -1,24 +1,34 @@
 .list__container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
   justify-content: center;
-  gap: 4.629vh;
+
+  gap: 2.6vmax;
 }
 
 .list__ul {
+  width: 100%;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(14, auto);
+  grid-auto-flow: column;
   list-style: none;
-  row-gap: 0.926vh;
+
+  row-gap: 0.52vmax;
 }
 
 .list__ul li {
   display: flex;
+
   align-items: center;
+
   gap: 1.93%;
-  font-size: 0.83vmax;
 }
 
 .list__ul li::before {
@@ -28,13 +38,12 @@
 }
 
 .list__ul button {
-  background: none;
-  border: none;
   cursor: pointer;
-  color: var(--typo-contentW);
-  text-align: left;
+
   font-weight: 600;
-  font-size: inherit;
+  font-size: 0.73vmax;
+
+  color: var(--typo-contentW);
 }
 
 @media (max-width: 1024px) {
