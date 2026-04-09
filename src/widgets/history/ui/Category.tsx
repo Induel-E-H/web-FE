@@ -2,6 +2,8 @@ import { Fragment } from 'react/jsx-runtime';
 
 import { INDEX_LIST, type IndexItem } from '@features/history';
 
+import '../styles/Category.css';
+
 interface Props {
   tabActiveItem: IndexItem;
   navigateToCategory: (
