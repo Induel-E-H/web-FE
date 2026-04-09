@@ -1,8 +1,8 @@
 import { artworks } from '@entities/history';
 import type { PageSide } from '@features/history/model/types';
 
+import '../../styles/List.css';
 import { BookPageTitle } from '../BookPageTitle';
-import '../styles/List.css';
 
 const midpoint = Math.ceil(artworks.length / 2);
 const leftItems = artworks.slice(0, midpoint);

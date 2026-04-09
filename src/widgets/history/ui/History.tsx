@@ -1,16 +1,17 @@
-import { Fragment } from 'react';
-
-import { INDEX_LIST, PAGE_SIDE } from '@features/history/model/constants';
+import { PAGE_SIDE } from '@features/history/model/constants';
 import type { IndexItem } from '@features/history/model/types';
 import { useBookNavigation } from '@features/history/model/useBookNavigation';
 import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import '../styles/History.css';
+import { BookCover } from './book/Cover';
 import { BookPage } from './BookPage';
+import { HistoryCategory } from './Category';
 import { AwardPage } from './content_container/Award';
 import { ContentPage } from './content_container/Content';
 import { ListPage } from './content_container/List';
 import { TimelinePage } from './content_container/Timeline';
+import { HistoryTitle } from './Title';
 
 function History() {
   const breakpoint = useBreakpoint();
@@ -34,10 +35,6 @@ function History() {
 
   function handleListItemClick(index: number) {
     navigateToCategory('Content', Math.floor(index / 2), true);
-  }
-
-  function handleCategoryClick(item: IndexItem) {
-    navigateToCategory(item, 0, true);
   }
 
   function renderPage(
@@ -88,22 +85,11 @@ function History() {
 
   return (
     <section className='history'>
-      <h2 className='history__title'>History</h2>
-      <div className='history__category' role='tablist'>
-        {INDEX_LIST.map((item, index) => (
-          <Fragment key={item}>
-            <button
-              role='tab'
-              aria-selected={tabActiveItem === item}
-              className={tabActiveItem === item ? 'active' : ''}
-              onClick={() => handleCategoryClick(item)}
-            >
-              {item}
-            </button>
-            {index < INDEX_LIST.length - 1 && <span aria-hidden='true'>|</span>}
-          </Fragment>
-        ))}
-      </div>
+      <HistoryTitle />
+      <HistoryCategory
+        tabActiveItem={tabActiveItem}
+        navigateToCategory={navigateToCategory}
+      />
       <div className='history__book'>
         <div
           className={`history__book-page${isRapidFlipping ? ' history__book-page--rapid' : ''}${isHoldChaining ? ' history__book-page--hold' : ''}`}
@@ -121,21 +107,7 @@ function History() {
             onRightMouseDown={() => beginContinuousFlip('right')}
           />
         </div>
-        <div className='history__book-cover'>
-          <div className='history__book-cover-left'></div>
-          <div className='history__book-cover-center'>
-            <div className='history__book-cover-center-line'>
-              <div className='history__book-cover-center-line-top'></div>
-              <div className='history__book-cover-center-line-bottom'></div>
-            </div>
-            <div className='history__book-cover-center-spine'>
-              <div className='history__book-cover-center-spine-left'></div>
-              <div className='history__book-cover-center-spine-center'></div>
-              <div className='history__book-cover-center-spine-right'></div>
-            </div>
-          </div>
-          <div className='history__book-cover-right'></div>
-        </div>
+        <BookCover />
       </div>
     </section>
   );
