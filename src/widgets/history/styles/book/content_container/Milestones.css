@@ -1,4 +1,4 @@
-.award__container {
+.milestones__container {
   display: flex;
   flex-direction: column;
 
@@ -11,7 +11,7 @@
   gap: 1.04vmax;
 }
 
-.award__content {
+.milestones__content {
   display: flex;
   flex-direction: column;
 
@@ -22,26 +22,26 @@
   gap: 0;
 }
 
-.award__year-group {
+.milestones__year-group {
   display: flex;
   flex-direction: column;
 
   gap: 0.26vmax;
 }
 
-.award__year {
+.milestones__year {
   font-weight: 700;
   font-size: 0.83vmax;
   color: var(--black);
 }
 
-.award__ul {
+.milestones__ul {
   display: flex;
   flex-direction: column;
   list-style: none;
 }
 
-.award__ul li {
+.milestones__ul li {
   display: flex;
 
   gap: 1.93%;
@@ -52,7 +52,7 @@
   color: var(--black);
 }
 
-.award__ul li::before {
+.milestones__ul li::before {
   content: '•';
   flex-shrink: 0;
 
@@ -60,54 +60,54 @@
 }
 
 @media (max-width: 1024px) {
-  .award__container {
+  .milestones__container {
     gap: 1.3vmin;
   }
 
-  .award__content {
+  .milestones__content {
     align-items: flex-start;
     gap: 0;
   }
 
-  .award__year-group {
+  .milestones__year-group {
     gap: 0.39vmin;
   }
 
-  .award__year {
+  .milestones__year {
     font-size: 1.17vmin;
   }
 
-  .award__ul li {
+  .milestones__ul li {
     gap: 0.39vmin;
 
     font-size: 1.04vmin;
   }
 
-  .award__ul li::before {
+  .milestones__ul li::before {
     font-size: 1.04vmin;
   }
 }
 
 @media (max-width: 767px) {
-  .award__container {
+  .milestones__container {
     gap: 2.67vmin;
   }
 
-  .award__year-group {
+  .milestones__year-group {
     gap: 0.8vmin;
   }
 
-  .award__year {
+  .milestones__year {
     font-size: 2.4vmin;
   }
 
-  .award__ul li {
+  .milestones__ul li {
     gap: 1vmin;
 
     font-size: 2.13vmin;
   }
 
-  .award__ul li::before {
+  .milestones__ul li::before {
     font-size: 2.13vmin;
   }
 }

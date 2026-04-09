@@ -131,3 +131,25 @@
     height: 50%;
   }
 }
+
+@media (max-width: 767px) {
+  .history__book-cover-left {
+    border-radius: 4vmin 4vmin 0 0;
+  }
+
+  .history__book-cover-right {
+    border-radius: 0 0 4vmin 4vmin;
+  }
+
+  .history__book-cover-center {
+    height: 5.87vmin;
+  }
+
+  .history__book-cover-center-line {
+    padding: 0 1.33vmin;
+  }
+
+  .history__book-cover-center-line div {
+    width: 4vmin;
+  }
+}

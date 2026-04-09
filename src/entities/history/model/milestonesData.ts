@@ -1,9 +1,9 @@
-export type AwardHistoryItem = {
+export type MilestonesHistoryItem = {
   year: number;
   contents: string[];
 };
 
-export const AWARD_HISTORY_LIST: AwardHistoryItem[] = [
+export const MILESTONES_HISTORY_LIST: MilestonesHistoryItem[] = [
   {
     year: 2003,
     contents: [

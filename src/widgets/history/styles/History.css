@@ -6,9 +6,8 @@
   height: 100vh;
 
   align-items: center;
-  justify-content: space-between;
 
-  gap: 0;
+  gap: 1.3vmax;
 
   padding: 3.13vmax 4.17vmax 2.34vmax 4.17vmax;
 
@@ -19,7 +18,7 @@
   position: relative;
 
   width: 65.1vmax;
-  height: 34.38vmax;
+  height: 100%;
 
   box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
 }
@@ -44,12 +43,14 @@
   .history {
     height: 100vh;
 
+    gap: 1.11vmin;
+
     padding: 7.81vmin 6.51vmin 3.91vmin 6.51vmin;
   }
 
   .history__book {
     width: 68.49vmin;
-    height: 91.41vmin;
+    height: 100%;
 
     box-shadow: 0 0.52vmin 0.52vmin rgba(0, 0, 0, 0.25);
   }
@@ -63,6 +64,33 @@
 
     flex-direction: column;
 
-    perspective: 2500px;
+    perspective: 173vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .history {
+    height: 100vh;
+
+    gap: 2vmin;
+
+    padding: 16vmin 4vmin 4vmin 4vmin;
+  }
+
+  .history__book {
+    width: 83.2vmin;
+    height: 100%;
+
+    box-shadow: 0 1.07vmin 1.07vmin rgba(0, 0, 0, 0.25);
+  }
+
+  .history__book-page {
+    position: absolute;
+    top: 2.67vmin;
+    bottom: 2.67vmin;
+    left: 2.67vmin;
+    right: 2.67vmin;
+
+    perspective: 262vmin;
   }
 }

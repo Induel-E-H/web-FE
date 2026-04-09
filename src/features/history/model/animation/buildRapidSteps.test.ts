@@ -66,7 +66,7 @@ describe('buildRapidSteps', () => {
     });
 
     it('backward: 잔여 페이지가 스텝에 포함된다', () => {
-      // Award page 1 (index 3) → Timeline: source Award p0, then Timeline p0 terminal
+      // Milestones page 1 (index 3) → Timeline: source Milestones p0, then Timeline p0 terminal
       const steps = buildRapidSteps({
         activeIndex: 3,
         currentPageIndex: 1,
@@ -77,7 +77,7 @@ describe('buildRapidSteps', () => {
       });
       expect(steps[0]).toEqual(
         expect.objectContaining({
-          item: 'Award',
+          item: 'Milestones',
           pageIndex: 0,
           duration: PASS_THROUGH_FLIP_DURATION,
         }),
@@ -149,21 +149,21 @@ describe('buildRapidSteps', () => {
   });
 
   describe('forward 방향 카테고리 횡단', () => {
-    it('List → Award: Content, Timeline 통과 후 Award terminal', () => {
+    it('List → Milestones: Content, Timeline 통과 후 Milestones terminal', () => {
       const steps = buildRapidSteps({
         activeIndex: 0,
         currentPageIndex: 0,
-        targetItem: 'Award',
+        targetItem: 'Milestones',
         targetPageIndex: 0,
         direction: 'forward',
         getLastPageIndex,
       });
-      // List source 없음, Content 통과 (last=3), Timeline 통과 (last=0), Award terminal
+      // List source 없음, Content 통과 (last=3), Timeline 통과 (last=0), Milestones terminal
       expect(steps.some((s) => s.item === 'Content')).toBe(true);
       expect(steps.some((s) => s.item === 'Timeline')).toBe(true);
       expect(steps[steps.length - 1]).toEqual(
         expect.objectContaining({
-          item: 'Award',
+          item: 'Milestones',
           pageIndex: 0,
           duration: RAPID_FLIP_DURATION,
         }),
@@ -172,7 +172,7 @@ describe('buildRapidSteps', () => {
   });
 
   describe('backward 방향 카테고리 횡단', () => {
-    it('Award → List: Timeline, Content 통과 후 List terminal', () => {
+    it('Milestones → List: Timeline, Content 통과 후 List terminal', () => {
       const steps = buildRapidSteps({
         activeIndex: 3,
         currentPageIndex: 0,

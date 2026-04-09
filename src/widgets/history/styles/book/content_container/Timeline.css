@@ -36,6 +36,7 @@
 .timeline__ul li::before {
   content: '•';
   flex-shrink: 0;
+  font-size: 0.73vmax;
 }
 
 .timeline__ul-placeholder {
@@ -53,5 +54,27 @@
 
   .timeline__ul li {
     font-size: 1.56vmin;
+  }
+
+  .timeline__ul li::before {
+    font-size: 1.56vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .timeline__container {
+    gap: 2.67vmin;
+  }
+
+  .timeline__ul {
+    gap: 3.2vmin;
+  }
+
+  .timeline__ul li {
+    font-size: 2.13vmin;
+  }
+
+  .timeline__ul li::before {
+    font-size: 2.13vmin;
   }
 }

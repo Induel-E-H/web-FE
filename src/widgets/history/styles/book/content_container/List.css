@@ -13,6 +13,8 @@
 
 .list__ul {
   width: 100%;
+  flex: 1;
+  min-height: 0;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -20,7 +22,7 @@
   grid-auto-flow: column;
   list-style: none;
 
-  row-gap: 0.52vmax;
+  align-content: space-between;
 }
 
 .list__ul li {
@@ -46,17 +48,13 @@
   font-size: 0.73vmax;
 
   color: var(--typo-contentW);
+
+  text-align: left;
 }
 
 @media (max-width: 1024px) {
   .list__container {
     gap: 1.3vmin;
-  }
-
-  .list__ul {
-    grid-template-rows: repeat(14, auto);
-
-    row-gap: 0.76vmin;
   }
 
   .list__ul li::before {
@@ -65,5 +63,19 @@
 
   .list__ul button {
     font-size: 1.3vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .list__container {
+    gap: 1.33vmin;
+  }
+
+  .list__ul li::before {
+    font-size: 2.133vmin;
+  }
+
+  .list__ul button {
+    font-size: 2.133vmin;
   }
 }

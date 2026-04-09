@@ -2,19 +2,19 @@ import { artworks } from '@entities/history';
 import { describe, expect, it } from 'vitest';
 
 import {
-  AWARD_YEAR_RANGES_BY_BREAKPOINT,
   getPageRegistry,
+  MILESTONES_YEAR_RANGES_BY_BREAKPOINT,
 } from './pageRegistry';
 
-describe('AWARD_YEAR_RANGES_BY_BREAKPOINT', () => {
+describe('MILESTONES_YEAR_RANGES_BY_BREAKPOINT', () => {
   it('desktop과 tablet 브레이크포인트 키가 존재한다', () => {
-    expect(AWARD_YEAR_RANGES_BY_BREAKPOINT).toHaveProperty('desktop');
-    expect(AWARD_YEAR_RANGES_BY_BREAKPOINT).toHaveProperty('tablet');
+    expect(MILESTONES_YEAR_RANGES_BY_BREAKPOINT).toHaveProperty('desktop');
+    expect(MILESTONES_YEAR_RANGES_BY_BREAKPOINT).toHaveProperty('tablet');
   });
 
   it('각 브레이크포인트의 범위는 [시작연도, 끝연도] 쌍의 배열이다', () => {
     (['desktop', 'tablet'] as const).forEach((bp) => {
-      AWARD_YEAR_RANGES_BY_BREAKPOINT[bp].forEach((range) => {
+      MILESTONES_YEAR_RANGES_BY_BREAKPOINT[bp].forEach((range) => {
         expect(range).toHaveLength(2);
         expect(range[0]).toBeLessThanOrEqual(range[1]);
         expect(typeof range[0]).toBe('number');
@@ -24,20 +24,20 @@ describe('AWARD_YEAR_RANGES_BY_BREAKPOINT', () => {
   });
 
   it('desktop보다 tablet의 범위 개수가 더 많다(더 촘촘하게 분할)', () => {
-    expect(AWARD_YEAR_RANGES_BY_BREAKPOINT.tablet.length).toBeGreaterThan(
-      AWARD_YEAR_RANGES_BY_BREAKPOINT.desktop.length,
+    expect(MILESTONES_YEAR_RANGES_BY_BREAKPOINT.tablet.length).toBeGreaterThan(
+      MILESTONES_YEAR_RANGES_BY_BREAKPOINT.desktop.length,
     );
   });
 
   it('desktop 범위들은 연속적으로 이어진다', () => {
-    const ranges = AWARD_YEAR_RANGES_BY_BREAKPOINT.desktop;
+    const ranges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT.desktop;
     for (let i = 1; i < ranges.length; i++) {
       expect(ranges[i][0]).toBe(ranges[i - 1][1] + 1);
     }
   });
 
   it('tablet 범위들은 연속적으로 이어진다', () => {
-    const ranges = AWARD_YEAR_RANGES_BY_BREAKPOINT.tablet;
+    const ranges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT.tablet;
     for (let i = 1; i < ranges.length; i++) {
       expect(ranges[i][0]).toBe(ranges[i - 1][1] + 1);
     }
@@ -45,12 +45,12 @@ describe('AWARD_YEAR_RANGES_BY_BREAKPOINT', () => {
 });
 
 describe('getPageRegistry', () => {
-  it('List, Content, Timeline, Award 네 개의 카테고리를 반환한다', () => {
+  it('List, Content, Timeline, Milestones 네 개의 카테고리를 반환한다', () => {
     const registry = getPageRegistry('desktop');
     expect(registry).toHaveProperty('List');
     expect(registry).toHaveProperty('Content');
     expect(registry).toHaveProperty('Timeline');
-    expect(registry).toHaveProperty('Award');
+    expect(registry).toHaveProperty('Milestones');
   });
 
   it('List와 Timeline의 totalPages는 1이다', () => {
@@ -64,17 +64,19 @@ describe('getPageRegistry', () => {
     expect(registry.Content.totalPages).toBe(Math.ceil(artworks.length / 2));
   });
 
-  it('desktop Award의 totalPages는 범위 개수를 2로 나눈 올림값이다', () => {
+  it('desktop Milestones의 totalPages는 범위 개수를 2로 나눈 올림값이다', () => {
     const registry = getPageRegistry('desktop');
-    const desktopRanges = AWARD_YEAR_RANGES_BY_BREAKPOINT.desktop;
-    expect(registry.Award.totalPages).toBe(Math.ceil(desktopRanges.length / 2));
+    const desktopRanges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT.desktop;
+    expect(registry.Milestones.totalPages).toBe(
+      Math.ceil(desktopRanges.length / 2),
+    );
   });
 
-  it('tablet Award의 totalPages는 desktop보다 크다', () => {
+  it('tablet Milestones의 totalPages는 desktop보다 크다', () => {
     const desktopRegistry = getPageRegistry('desktop');
     const tabletRegistry = getPageRegistry('tablet');
-    expect(tabletRegistry.Award.totalPages).toBeGreaterThan(
-      desktopRegistry.Award.totalPages,
+    expect(tabletRegistry.Milestones.totalPages).toBeGreaterThan(
+      desktopRegistry.Milestones.totalPages,
     );
   });
 

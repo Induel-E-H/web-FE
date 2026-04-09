@@ -56,3 +56,22 @@
     font-size: 5.21vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .history__title__description {
+    gap: 4vmin;
+  }
+
+  .history__title__description hr {
+    border-top: 0.53vmin solid #e7c889;
+    width: 16vmin;
+  }
+
+  .history__title__description p {
+    font-size: 2.13vmin;
+  }
+
+  .history__title h2 {
+    font-size: 8vmin;
+  }
+}

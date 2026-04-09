@@ -189,8 +189,46 @@
     min-height: 0;
     border-radius: 0.65vmin;
   }
+}
 
-  .content__image--has-image:hover .content__image-zoom {
-    opacity: 1;
+@media (max-width: 767px) {
+  .content__item {
+    gap: 1.33vmin;
+  }
+
+  .content__text {
+    gap: 1.6vmin;
+  }
+
+  .content__title-eng {
+    font-size: 4.8vmin;
+  }
+
+  .content__title-kor {
+    font-size: 4.27vmin;
+  }
+
+  .content__subtitle {
+    font-size: 3.2vmin;
+  }
+
+  .content__body {
+    font-size: 2.67vmin;
+  }
+
+  .content__caption-row {
+    gap: 0.53vmin;
+  }
+
+  .content__caption dt {
+    font-size: 2.13vmin;
+  }
+
+  .content__caption dd {
+    font-size: 2.13vmin;
+  }
+
+  .content__image {
+    border-radius: 1.33vmin;
   }
 }

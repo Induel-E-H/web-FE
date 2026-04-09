@@ -1,24 +1,26 @@
-import { awardData } from '@entities/history';
+import { milestonesData } from '@entities/history';
 import { getArtworkIndex } from '@features/history/model/helpers';
-import { AWARD_YEAR_RANGES_BY_BREAKPOINT } from '@features/history/model/pageRegistry';
+import { MILESTONES_YEAR_RANGES_BY_BREAKPOINT } from '@features/history/model/pageRegistry';
 import type { PageSide } from '@features/history/model/types';
 import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
-import '../../../styles/book/content_container/Award.css';
+import '../../../styles/book/content_container/Milestones.css';
 import { BookPageTitle } from '../PageTitle';
 
 function getItemsByRange(start: number, end: number) {
-  return awardData.filter((item) => item.year >= start && item.year <= end);
+  return milestonesData.filter(
+    (item) => item.year >= start && item.year <= end,
+  );
 }
 
 const pagesByBreakpoint = Object.fromEntries(
-  Object.entries(AWARD_YEAR_RANGES_BY_BREAKPOINT).map(([bp, ranges]) => [
+  Object.entries(MILESTONES_YEAR_RANGES_BY_BREAKPOINT).map(([bp, ranges]) => [
     bp,
     ranges.map(([start, end]) => getItemsByRange(start, end)),
   ]),
 ) as Record<Breakpoint, ReturnType<typeof getItemsByRange>[]>;
 
-export function AwardPage({
+export function MilestonesPage({
   side,
   pageIndex,
   breakpoint,
@@ -33,13 +35,13 @@ export function AwardPage({
   const showTitle = dataIndex === 0;
 
   return (
-    <div className='award__container'>
-      {showTitle && <BookPageTitle title='Award' />}
-      <div className='award__content'>
+    <div className='milestones__container'>
+      {showTitle && <BookPageTitle title='Milestones' />}
+      <div className='milestones__content'>
         {items.map((group) => (
-          <div key={group.year} className='award__year-group'>
-            <h4 className='award__year'>{group.year}</h4>
-            <ul className='award__ul'>
+          <div key={group.year} className='milestones__year-group'>
+            <h4 className='milestones__year'>{group.year}</h4>
+            <ul className='milestones__ul'>
               {group.contents.map((text) => (
                 <li key={text}>{text}</li>
               ))}

@@ -86,9 +86,9 @@ describe('HistoryCategory', () => {
         />,
       );
 
-      fireEvent.click(screen.getByText('Award'));
+      fireEvent.click(screen.getByText('Milestones'));
 
-      expect(navigateToCategory).toHaveBeenCalledWith('Award', 0, true);
+      expect(navigateToCategory).toHaveBeenCalledWith('Milestones', 0, true);
     });
   });
 });

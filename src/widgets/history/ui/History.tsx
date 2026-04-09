@@ -4,9 +4,9 @@ import { useBookNavigation } from '@features/history/model/useBookNavigation';
 import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import '../styles/History.css';
-import { AwardPage } from './book/content_container/Award';
 import { ContentPage } from './book/content_container/Content';
 import { ListPage } from './book/content_container/List';
+import { MilestonesPage } from './book/content_container/Milestones';
 import { TimelinePage } from './book/content_container/Timeline';
 import { BookCover } from './book/Cover';
 import { BookPage } from './book/Page';
@@ -51,9 +51,9 @@ function History() {
         return <ContentPage side={pageSide} pageIndex={pageIndex} />;
       case 'Timeline':
         return <TimelinePage side={pageSide} />;
-      case 'Award':
+      case 'Milestones':
         return (
-          <AwardPage
+          <MilestonesPage
             side={pageSide}
             pageIndex={pageIndex}
             breakpoint={breakpoint}

@@ -4,7 +4,7 @@ export const INDEX_LIST: readonly IndexItem[] = [
   'List',
   'Content',
   'Timeline',
-  'Award',
+  'Milestones',
 ];
 
 export const PAGE_SIDE: { readonly LEFT: PageSide; readonly RIGHT: PageSide } =
