@@ -89,7 +89,6 @@ export function BookPage({
       >
         <BookPageOuterShadow side={PAGE_SIDE.LEFT} />
         <div className='history__book-page-content'>{staticLeftContent}</div>
-        <div className='history__book-page-inner-shadow' />
       </div>
 
       {/* history__book-page-right (z:3) */}
@@ -97,7 +96,6 @@ export function BookPage({
         className={`history__book-static-right history__book-page-right${canGoRight ? ' history__book-page-right--clickable' : ''}`}
         onMouseDown={canGoRight ? onRightMouseDown : undefined}
       >
-        <div className='history__book-page-inner-shadow' />
         <div className='history__book-page-content'>{staticRightContent}</div>
         <BookPageOuterShadow side={PAGE_SIDE.RIGHT} />
       </div>

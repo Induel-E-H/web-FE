@@ -6,6 +6,7 @@
   height: 100%;
 
   gap: 1.04vmax;
+  white-space: pre-line;
 }
 
 .content__text {

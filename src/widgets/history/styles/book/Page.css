@@ -7,7 +7,6 @@
   height: 100%;
 
   z-index: 3;
-  background-color: var(--white);
 }
 
 .history__book-page-left--clickable {
@@ -26,7 +25,55 @@
 
 .history__book-flip-panel {
   position: absolute;
+  top: 0;
+  width: 48%;
+  height: 100%;
+  transform-style: preserve-3d;
+  z-index: 10;
+}
+
+.history__book-flip-panel--hidden {
+  display: none;
+}
+
+.history__book-flip-panel--forward {
+  left: 50%;
+  transform-origin: left center;
+}
+
+.history__book-flip-panel--backward {
+  right: 50%;
+  transform-origin: right center;
+}
+
+.history__book-flip-panel--animating {
+  transition: transform 0.8s ease-in-out;
+}
+
+.history__book-page--rapid .history__book-flip-panel--animating,
+.history__book-page--hold .history__book-flip-panel--animating {
+  transition: transform 0.8s ease-in-out;
+}
+
+.history__book-flip-panel--forward.flipping {
+  transform: rotateY(-180deg);
+}
+
+.history__book-flip-panel--backward.flipping {
+  transform: rotateY(180deg);
+}
+
+.history__book-flip-front,
+.history__book-flip-back {
+  position: absolute;
   inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: auto;
+}
+
+.history__book-flip-back {
+  transform: rotateY(180deg);
 }
 
 .history__book-page-outer-shadow {
@@ -41,23 +88,26 @@
   display: flex;
   flex-direction: row;
 
-  width: 94.59%;
-  height: 100%;
-
-  padding: 0.78vmax;
-}
-
-.history__book-page-inner-shadow {
-  width: 1.31%;
+  width: 100%;
   height: 100%;
 }
 
-.history__book-page-left .history__book-page-inner-shadow {
-  background: linear-gradient(to right, #ffffff, #999999);
+.history__book-page-right .history__book-page-content {
+  padding: 0.78vmax 0.78vmax 0.78vmax 1.2vmax;
+
+  background:
+    linear-gradient(to right, #999999, #ffffff) left center / 1.31% 100%
+      no-repeat,
+    var(--white);
 }
 
-.history__book-page-right .history__book-page-inner-shadow {
-  background: linear-gradient(to left, #ffffff, #999999);
+.history__book-page-left .history__book-page-content {
+  padding: 0.78vmax 1.2vmax 0.78vmax 0.78vmax;
+
+  background:
+    linear-gradient(to left, #999999, #ffffff) right center / 1.31% 100%
+      no-repeat,
+    var(--white);
 }
 
 .history__book-page-outer-shadow-3 {
