@@ -1,28 +1,37 @@
 .award__container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
   justify-content: center;
-  gap: 1.85vh;
+  align-items: center;
+
+  gap: 1.04vmax;
 }
 
 .award__content {
-  flex: 1;
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
   justify-content: space-between;
+  gap: 0;
 }
 
 .award__year-group {
   display: flex;
   flex-direction: column;
-  gap: 0.465vh;
+
+  gap: 0.26vmax;
 }
 
 .award__year {
-  font-size: 0.89vmax;
   font-weight: 700;
+  font-size: 0.83vmax;
   color: var(--black);
 }
 
@@ -34,10 +43,12 @@
 
 .award__ul li {
   display: flex;
-  align-items: baseline;
+
   gap: 1.93%;
+
   font-size: 0.73vmax;
   font-weight: 400;
+
   color: var(--typo-contentW);
 }
 
