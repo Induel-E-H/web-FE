@@ -10,6 +10,7 @@ const defaultProps = {
   flipBackContent: <div>flip-back</div>,
   isFlipping: false,
   flipDirection: null,
+  flipDuration: 800,
   canGoLeft: true,
   canGoRight: true,
 };

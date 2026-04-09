@@ -5,11 +5,19 @@ import { RAPID_FLIP_DURATION } from '../constants';
 import { useRapidFlip } from './useRapidFlip';
 
 describe('useRapidFlip', () => {
-  let mockStartFlipAnimation: ReturnType<typeof vi.fn>;
+  let mockStartFlipAnimation: (
+    direction: import('../types').FlipDirection,
+    onComplete: () => void,
+    duration?: number,
+  ) => void;
 
   beforeEach(() => {
     vi.useFakeTimers();
-    mockStartFlipAnimation = vi.fn();
+    mockStartFlipAnimation = vi.fn() as unknown as (
+      direction: import('../types').FlipDirection,
+      onComplete: () => void,
+      duration?: number,
+    ) => void;
   });
 
   afterEach(() => {
@@ -61,7 +69,7 @@ describe('useRapidFlip', () => {
     const { result } = renderHook(() => useRapidFlip(mockStartFlipAnimation));
     let onCompleteCallback: (() => void) | undefined;
 
-    mockStartFlipAnimation.mockImplementation(
+    (mockStartFlipAnimation as ReturnType<typeof vi.fn>).mockImplementation(
       (_dir: string, onComplete: () => void) => {
         onCompleteCallback = onComplete;
       },

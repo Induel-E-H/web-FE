@@ -57,6 +57,7 @@ export function useBookNavigation(breakpoint: Breakpoint) {
   const {
     isFlipping,
     flipDirection,
+    currentFlipDuration,
     isAnimatingRef,
     setOnAnimationComplete,
     startFlipAnimation,
@@ -168,15 +169,23 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     }
 
     const steps = buildRapidSteps({
-      activeItem,
       activeIndex,
       currentPageIndex,
-      totalPages,
       targetItem: item,
       targetPageIndex: pageIndex,
-      targetTotalPages: pageRegistry[item].totalPages,
       direction,
+      getLastPageIndex: (i) => pageRegistry[i].totalPages - 1,
     });
+
+    // 카테고리 1칸 이동은 일반 flip으로 처리 (300ms rapid는 시각적으로 순간이동처럼 보임)
+    if (steps.length === 1) {
+      startFlipAnimation(direction, () => {
+        setPageIndices((prev) => ({ ...prev, [item]: pageIndex }));
+        setActiveItem(item);
+        updateTabActiveItem(item);
+      });
+      return;
+    }
 
     startRapidSequence(steps, direction, item, applyNavigationStep);
   }
@@ -209,6 +218,7 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     canGoRight,
     isFlipping,
     flipDirection,
+    currentFlipDuration,
     isRapidFlipping,
     isHoldChaining,
     nextPageIndex,

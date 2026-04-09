@@ -23,6 +23,7 @@ function History() {
     canGoRight,
     isFlipping,
     flipDirection,
+    currentFlipDuration,
     isRapidFlipping,
     isHoldChaining,
     nextPageIndex,
@@ -101,6 +102,7 @@ function History() {
             flipBackContent={flipBackContent}
             isFlipping={isFlipping}
             flipDirection={flipDirection}
+            flipDuration={currentFlipDuration}
             canGoLeft={canGoLeft && !isFlipping}
             canGoRight={canGoRight && !isFlipping}
             onLeftMouseDown={() => beginContinuousFlip('left')}

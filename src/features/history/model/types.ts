@@ -4,4 +4,8 @@ export type IndexItem = 'List' | 'Content' | 'Timeline' | 'Award';
 
 export type FlipDirection = 'forward' | 'backward';
 
-export type NavigationStep = { item: IndexItem; pageIndex: number };
+export type NavigationStep = {
+  item: IndexItem;
+  pageIndex: number;
+  duration?: number;
+};

@@ -15,4 +15,5 @@ export const PAGE_SIDE: { readonly LEFT: PageSide; readonly RIGHT: PageSide } =
 
 export const FLIP_DURATION = 800;
 export const RAPID_FLIP_DURATION = 300;
-export const MIN_RAPID_FLIPS = 3;
+export const PASS_THROUGH_FLIP_DURATION = 150;
+export const MAX_SOURCE_PAGE_FLIPS = 3;

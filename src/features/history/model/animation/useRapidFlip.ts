@@ -37,7 +37,7 @@ export function useRapidFlip(
         applyStep(firstStep);
         if (isLast) setIsRapidFlipping(false);
       },
-      RAPID_FLIP_DURATION,
+      firstStep.duration ?? RAPID_FLIP_DURATION,
     );
   }
 
@@ -54,7 +54,7 @@ export function useRapidFlip(
           applyStep(step);
           if (isLast) setIsRapidFlipping(false);
         },
-        RAPID_FLIP_DURATION,
+        step.duration ?? RAPID_FLIP_DURATION,
       );
     }, 0);
 

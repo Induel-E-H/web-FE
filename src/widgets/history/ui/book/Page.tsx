@@ -27,6 +27,7 @@ export function BookPage({
   flipBackContent,
   isFlipping,
   flipDirection,
+  flipDuration,
   canGoLeft,
   canGoRight,
   onLeftMouseDown,
@@ -38,6 +39,7 @@ export function BookPage({
   flipBackContent: ReactNode;
   isFlipping: boolean;
   flipDirection: 'forward' | 'backward' | null;
+  flipDuration: number;
   canGoLeft: boolean;
   canGoRight: boolean;
   onLeftMouseDown?: () => void;
@@ -68,7 +70,7 @@ export function BookPage({
 
       panel.getBoundingClientRect();
 
-      panel.style.transition = '';
+      panel.style.transition = `transform ${flipDuration / 1000}s ease-in-out`;
 
       requestAnimationFrame(() => {
         if (flipPanelRef.current) {
@@ -76,7 +78,7 @@ export function BookPage({
         }
       });
     }
-  }, [isFlipping]);
+  }, [isFlipping, flipDuration]);
 
   const panelDirection = flipDirection ?? 'forward';
 
