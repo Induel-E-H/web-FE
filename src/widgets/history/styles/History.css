@@ -8,6 +8,8 @@
   align-items: center;
   justify-content: space-between;
 
+  gap: 0;
+
   padding: 3.13vmax 4.17vmax 2.34vmax 4.17vmax;
 
   background-color: #1a1410;
@@ -32,6 +34,35 @@
   display: flex;
   flex-direction: row;
 
-  perspective: 2500px;
+  gap: 0;
+
+  perspective: 130.21vmax;
   z-index: 4;
+}
+
+@media (max-width: 1024px) {
+  .history {
+    height: 100vh;
+
+    padding: 7.81vmin 6.51vmin 3.91vmin 6.51vmin;
+  }
+
+  .history__book {
+    width: 68.49vmin;
+    height: 91.41vmin;
+
+    box-shadow: 0 0.52vmin 0.52vmin rgba(0, 0, 0, 0.25);
+  }
+
+  .history__book-page {
+    position: absolute;
+    top: 1.3vmin;
+    bottom: 1.3vmin;
+    left: 1.3vmin;
+    right: 1.3vmin;
+
+    flex-direction: column;
+
+    perspective: 2500px;
+  }
 }

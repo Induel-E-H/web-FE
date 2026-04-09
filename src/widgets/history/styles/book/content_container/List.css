@@ -35,6 +35,8 @@
   content: '•';
   color: var(--typo-contentW);
   flex-shrink: 0;
+
+  font-size: 0.73vmax;
 }
 
 .list__ul button {
@@ -48,15 +50,20 @@
 
 @media (max-width: 1024px) {
   .list__container {
-    gap: 0.98vh;
-    justify-content: start;
+    gap: 1.3vmin;
   }
 
   .list__ul {
-    row-gap: 0.98vh;
+    grid-template-rows: repeat(14, auto);
+
+    row-gap: 0.76vmin;
   }
 
-  .list__ul li {
-    font-size: 0.9vmax;
+  .list__ul li::before {
+    font-size: 1.3vmin;
+  }
+
+  .list__ul button {
+    font-size: 1.3vmin;
   }
 }

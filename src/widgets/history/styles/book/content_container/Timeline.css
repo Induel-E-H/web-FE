@@ -44,14 +44,14 @@
 
 @media (max-width: 1024px) {
   .timeline__container {
-    gap: 1.46vh;
+    gap: 1.3vmin;
   }
 
   .timeline__ul {
-    gap: 1.95vh;
+    gap: 2.6vmin;
   }
 
   .timeline__ul li {
-    font-size: 1.82vmin;
+    font-size: 1.56vmin;
   }
 }

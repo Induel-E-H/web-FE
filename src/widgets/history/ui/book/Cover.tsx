@@ -11,7 +11,7 @@ export function BookCover() {
           <div />
           <div />
         </div>
-        {/* history__book-cover-center-spine (z:) */}
+        {/* history__book-cover-center-spine (z:0) */}
         <div className='history__book-cover-center-spine'>
           <div className='history__book-cover-center-spine-left'></div>
           <div className='history__book-cover-center-spine-center'></div>

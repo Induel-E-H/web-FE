@@ -55,14 +55,35 @@
 .award__ul li::before {
   content: '•';
   flex-shrink: 0;
+
+  font-size: 0.73vmax;
 }
 
 @media (max-width: 1024px) {
+  .award__container {
+    gap: 1.3vmin;
+  }
+
+  .award__content {
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .award__year-group {
+    gap: 0.39vmin;
+  }
+
   .award__year {
-    font-size: 1.07vmax;
+    font-size: 1.17vmin;
   }
 
   .award__ul li {
-    font-size: 0.78vmax;
+    gap: 0.39vmin;
+
+    font-size: 1.04vmin;
+  }
+
+  .award__ul li::before {
+    font-size: 1.04vmin;
   }
 }

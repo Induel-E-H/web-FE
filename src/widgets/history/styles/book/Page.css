@@ -80,7 +80,7 @@
   display: flex;
   flex-direction: row;
 
-  width: 4.1%;
+  width: 1.3vmax;
   height: 100%;
 }
 
@@ -90,6 +90,7 @@
 
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .history__book-page-right .history__book-page-content {
@@ -157,4 +158,156 @@
     33.33% 0,
     66.67% 0;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 1024px) {
+  .history__book-page-left,
+  .history__book-page-right {
+    flex-direction: column;
+
+    min-height: 0;
+    width: 100%;
+  }
+
+  .history__book-page-left--clickable {
+    cursor:
+      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><polyline points='10,26 20,14 30,26' fill='none' stroke='%23ffffff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/><polyline points='10,26 20,14 30,26' fill='none' stroke='%23222222' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+        20 20,
+      pointer;
+  }
+
+  .history__book-page-right--clickable {
+    cursor:
+      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><polyline points='10,14 20,26 30,14' fill='none' stroke='%23ffffff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/><polyline points='10,14 20,26 30,14' fill='none' stroke='%23222222' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+        20 20,
+      pointer;
+  }
+
+  .history__book-flip-panel {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: calc(50% - 1.17vmin);
+    transform-style: preserve-3d;
+    z-index: 10;
+  }
+
+  .history__book-flip-panel--hidden {
+    display: none;
+  }
+
+  .history__book-flip-panel--forward {
+    top: 50%;
+    left: 0;
+    transform-origin: center top;
+  }
+
+  .history__book-flip-panel--backward {
+    top: 1.17vmin;
+    left: 0;
+    transform-origin: center bottom;
+  }
+
+  .history__book-flip-panel--forward.flipping {
+    transform: rotateX(180deg);
+  }
+
+  .history__book-flip-panel--backward.flipping {
+    transform: rotateX(-180deg);
+  }
+
+  .history__book-flip-front,
+  .history__book-flip-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    z-index: auto;
+  }
+
+  .history__book-flip-back {
+    transform: rotateX(180deg);
+  }
+
+  .history__book-page-outer-shadow {
+    flex-direction: column;
+
+    width: 100%;
+    height: 1.17vmin;
+  }
+
+  .history__book-page-content {
+    flex-direction: column;
+
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .history__book-page-right .history__book-page-content {
+    padding: 1.95vmin 1.3vmin 1.3vmin 1.3vmin;
+
+    background:
+      linear-gradient(to bottom, #999999, #ffffff) top center / 100% 0.78vmin
+        no-repeat,
+      var(--white);
+  }
+
+  .history__book-page-left .history__book-page-content {
+    padding: 1.3vmin 1.3vmin 1.95vmin 1.3vmin;
+
+    background:
+      linear-gradient(to top, #999999, #ffffff) bottom center / 100% 0.78vmin
+        no-repeat,
+      var(--white);
+  }
+
+  .history__book-page-outer-shadow-3 {
+    width: 100%;
+    height: 33.33%;
+
+    background-color: #b9b9b9;
+    background-image:
+      linear-gradient(#828282, #828282), linear-gradient(#828282, #828282),
+      linear-gradient(#828282, #828282), linear-gradient(#828282, #828282),
+      linear-gradient(#828282, #828282);
+    background-size: 100% 1px;
+    background-position:
+      0 16.67%,
+      0 33.33%,
+      0 50%,
+      0 66.67%,
+      0 83.33%;
+    background-repeat: no-repeat;
+  }
+
+  .history__book-page-outer-shadow-2 {
+    width: 100%;
+    height: 33.33%;
+
+    background-color: #cdcdcd;
+    background-image:
+      linear-gradient(#969696, #969696), linear-gradient(#969696, #969696),
+      linear-gradient(#969696, #969696);
+    background-size: 100% 1px;
+    background-position:
+      0 25%,
+      0 50%,
+      0 75%;
+    background-repeat: no-repeat;
+  }
+
+  .history__book-page-outer-shadow-1 {
+    width: 100%;
+    height: 33.33%;
+
+    background-color: #e1e1e1;
+    background-image:
+      linear-gradient(#b4b4b4, #b4b4b4), linear-gradient(#b4b4b4, #b4b4b4);
+    background-size: 100% 1px;
+    background-position:
+      0 33.33%,
+      0 66.67%;
+    background-repeat: no-repeat;
+  }
 }

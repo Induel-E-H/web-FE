@@ -25,6 +25,8 @@
 .image-gallery-popup__header {
   display: flex;
   justify-content: space-between;
+
+  gap: 0;
 }
 
 .image-gallery-popup__title {

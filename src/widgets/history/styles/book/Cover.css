@@ -43,6 +43,8 @@
 
   justify-content: space-between;
 
+  gap: 0;
+
   padding: 0.26vmax 0;
 
   z-index: 1;
@@ -78,4 +80,54 @@
   height: 100%;
 
   background-color: var(--mauve-700);
+}
+
+@media (max-width: 1024px) {
+  .history__book-cover {
+    flex-direction: column;
+  }
+
+  .history__book-cover-left,
+  .history__book-cover-right {
+    width: 100%;
+  }
+
+  .history__book-cover-left {
+    border-radius: 1.95vmin 1.95vmin 0 0;
+  }
+
+  .history__book-cover-right {
+    border-radius: 0 0 1.95vmin 1.95vmin;
+  }
+
+  .history__book-cover-center {
+    width: 100%;
+    height: 3.125vmin;
+  }
+
+  .history__book-cover-center-line {
+    flex-direction: row;
+
+    padding: 0 0.65vmin;
+  }
+
+  .history__book-cover-center-line div {
+    width: 2.6vmin;
+    height: 100%;
+  }
+
+  .history__book-cover-center-spine {
+    flex-direction: column;
+  }
+
+  .history__book-cover-center-spine-left,
+  .history__book-cover-center-spine-right {
+    width: 100%;
+    height: 25%;
+  }
+
+  .history__book-cover-center-spine-center {
+    width: 100%;
+    height: 50%;
+  }
 }

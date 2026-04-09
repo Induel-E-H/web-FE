@@ -63,6 +63,7 @@
   width: 100%;
 
   justify-content: space-between;
+  gap: 0;
 }
 
 .content__caption-col {
@@ -147,40 +148,49 @@
 
 @media (max-width: 1024px) {
   .content__item {
-    gap: 1.172vh;
+    gap: 1.04vmin;
   }
 
   .content__text {
-    gap: 0.684vh;
-  }
-
-  .content__text * {
-    font-family: 'BookendBatang', sans-serif;
+    gap: 1.04vmin;
   }
 
   .content__title-eng {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 2.87vmin;
+    font-size: 2.86vmin;
   }
 
   .content__title-kor {
-    font-size: 2.61vmin;
+    font-size: 2.6vmin;
   }
 
   .content__subtitle {
-    font-size: 1.83vmin;
+    font-size: 1.82vmin;
   }
 
   .content__body {
     font-size: 1.56vmin;
   }
 
-  .content__caption dt,
+  .content__caption-row {
+    gap: 0.26vmin;
+  }
+
+  .content__caption dt {
+    font-size: 1.04vmin;
+  }
+
   .content__caption dd {
     font-size: 1.04vmin;
   }
 
-  .content__caption-col:last-child .content__caption-row {
-    justify-content: flex-end;
+  .content__image {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    border-radius: 0.65vmin;
+  }
+
+  .content__image--has-image:hover .content__image-zoom {
+    opacity: 1;
   }
 }
