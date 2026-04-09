@@ -1,0 +1,36 @@
+.history__title {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.history__title__description {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  gap: 0.78vmax;
+
+  color: #e7c889;
+}
+
+.history__title__description hr {
+  border: none;
+  border-top: 0.1vmax solid #e7c889;
+  width: 4.17vmax;
+}
+
+.history__title__description p {
+  font-weight: 700;
+  font-size: 0.63vmax;
+  letter-spacing: 0.15em;
+}
+
+.history__title h2 {
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 3.13vmax;
+  color: #f0ead6;
+}
