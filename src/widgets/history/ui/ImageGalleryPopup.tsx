@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
+import {
+  lockScroll,
+  unlockScroll,
+} from '@shared/lib/useScrollLock/useScrollLock';
 import { ImageSlider, useSliderNavigation } from '@shared/ui/ImageSlider';
 
 import '../styles/ImageGalleryPopup.css';
@@ -25,7 +29,7 @@ export function ImageGalleryPopup({
   } = useSliderNavigation(images.length);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    lockScroll();
 
     function handleKeyDown(e: KeyboardEvent) {
       e.stopImmediatePropagation();
@@ -44,7 +48,7 @@ export function ImageGalleryPopup({
     window.addEventListener('keydown', handleKeyDown, { capture: true });
     window.addEventListener('keyup', handleKeyUp, { capture: true });
     return () => {
-      document.body.style.overflow = '';
+      unlockScroll();
       window.removeEventListener('keydown', handleKeyDown, { capture: true });
       window.removeEventListener('keyup', handleKeyUp, { capture: true });
     };

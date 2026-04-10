@@ -1,0 +1,162 @@
+.patent__card {
+  width: 10.78vmax;
+  height: 15.36vmax;
+
+  padding: 0.42vmax;
+
+  background-color: #f0eadc;
+
+  cursor: pointer;
+}
+
+.patent__card_frame {
+  width: 100%;
+  height: 100%;
+
+  padding: 0.21vmax;
+
+  box-shadow: inset 0 0 0 0.052vmax #e1d1b2;
+}
+
+.patent__card__content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.83vmax;
+
+  box-shadow: inset 0 0 0 0.052vmax #e9dec8;
+}
+
+.patent__card__content__icon {
+  width: 1.93vmax;
+  height: 1.93vmax;
+
+  color: #c9a96e;
+}
+
+.patent__card__text {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  align-items: center;
+
+  gap: 0.42vmax;
+}
+
+.patent__card__text__title {
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 0.73vmax;
+
+  text-align: center;
+
+  color: #38271d;
+}
+
+.patent__card__text__serial {
+  font-family: 'Pretendard';
+  font-weight: 600;
+  font-size: 0.52vmax;
+
+  color: #8c8672;
+}
+
+.patent__card__text__year {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-size: 0.42vmax;
+
+  color: #c9a96e;
+}
+
+@media (max-width: 1024px) {
+  .patent__card {
+    width: 28.54vmin;
+    height: 40.7vmin;
+
+    padding: 1.04vmin;
+  }
+
+  .patent__card_frame {
+    padding: 0.52vmin;
+
+    box-shadow: inset 0 0 0 0.13vmin #e1d1b2;
+  }
+
+  .patent__card__content {
+    gap: 2.08vmin;
+
+    box-shadow: inset 0 0 0 0.13vmin #e9dec8;
+  }
+
+  .patent__card__content__icon {
+    width: 4.82vmin;
+    height: 4.82vmin;
+  }
+
+  .patent__card__text {
+    gap: 1.04vmin;
+  }
+
+  .patent__card__text__title {
+    font-size: 1.82vmin;
+  }
+
+  .patent__card__text__serial {
+    font-size: 1.3vmin;
+  }
+
+  .patent__card__text__year {
+    font-size: 1.04vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .patent__card {
+    width: 44.67vmin;
+    height: 63.65vmin;
+
+    padding: 2.13vmin;
+  }
+
+  .patent__card_frame {
+    padding: 1.07vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e1d1b2;
+  }
+
+  .patent__card__content {
+    gap: 4.27vmin;
+
+    box-shadow: inset 0 0 0 0.27vmin #e9dec8;
+  }
+
+  .patent__card__content__icon {
+    width: 9.87vmin;
+    height: 9.87vmin;
+  }
+
+  .patent__card__text {
+    gap: 2.13vmin;
+  }
+
+  .patent__card__text__title {
+    font-size: 3.73vmin;
+  }
+
+  .patent__card__text__serial {
+    font-size: 2.666vmin;
+  }
+
+  .patent__card__text__year {
+    font-size: 2.13vmin;
+  }
+}

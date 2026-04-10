@@ -2,6 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { AWARD_LIST } from '@entities/award';
 import { Pagination, useYearFilter, YearCategory } from '@features/award';
+import {
+  lockScroll,
+  unlockScroll,
+} from '@shared/lib/useScrollLock/useScrollLock';
 
 import { getItemsPerPage } from '../model/responsive';
 import '../styles/Award.css';
@@ -20,15 +24,14 @@ function Award() {
     handleYearChange: changeYear,
   } = useYearFilter();
   const [selectedId, setSelectedId] = useState<number | null>(null);
-
   function handleCardClick(id: number) {
+    lockScroll();
     setSelectedId(id);
-    document.body.style.overflow = 'hidden';
   }
 
   function handlePopupClose() {
+    unlockScroll();
     setSelectedId(null);
-    document.body.style.overflow = '';
   }
 
   useEffect(() => {
