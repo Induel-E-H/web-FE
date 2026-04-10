@@ -6,6 +6,8 @@ import visionSculpt from '@entities/vision/assets/vision_sculpt.webp';
 import { VISION_DATA } from '@entities/vision/model/visionData';
 import '@widgets/vision/styles/Vision.css';
 
+import '../styles/Vision.css';
+import { VisionTitle } from './Title';
 import { VisionItem } from './VisionItem';
 
 const imageMap = {
@@ -38,14 +40,7 @@ export function Vision() {
 
   return (
     <section className='vision'>
-      <div ref={titleRef} className='vision__title'>
-        <div className='vision__title__description'>
-          <hr />
-          <p>FUTURE VISION</p>
-        </div>
-        <h2>미래를 향한</h2>
-        <h2>세 가지 방향</h2>
-      </div>
+      <VisionTitle ref={titleRef} />
       <div className='vision__main'>
         {VISION_DATA.map((item, index) => (
           <VisionItem

@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+import '../styles/VisionItem.css';
+
 interface VisionItemProps {
   title: string;
   description: string;
