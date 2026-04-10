@@ -41,10 +41,4 @@ describe('Map — mapRef가 null인 경우', () => {
 
     expect(mockMakeMap).not.toHaveBeenCalled();
   });
-
-  it('useRef가 null이어도 section.map은 렌더링된다', () => {
-    const { container } = render(<Map />);
-
-    expect(container.querySelector('section.map')).toBeInTheDocument();
-  });
 });

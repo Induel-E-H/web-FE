@@ -4,8 +4,7 @@ import { makeMapMarker, updateMarkerIcon } from './mapMarker';
 function getZoom(): number {
   const physicalWidth = window.screen.width * window.devicePixelRatio;
   if (physicalWidth >= 7680) return 20;
-  if (physicalWidth >= 3840) return 17;
-  return 15;
+  return 17;
 }
 
 export function makeMap(el: HTMLDivElement): () => void {

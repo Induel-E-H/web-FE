@@ -64,12 +64,12 @@ describe('mapInfoCard', () => {
       expect(content).toContain(COMPANY.NAME_KO);
     });
 
-    it('InfoWindow content에 회사 영문 약칭이 포함된다', () => {
+    it('InfoWindow content에 회사 영문 전체 명칭이 포함된다', () => {
       makeInfoCard(mockMap, mockMarker);
 
       const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
         .content;
-      expect(content).toContain(COMPANY.NAME_EN);
+      expect(content).toContain('INDUEL ENGINEERING & HOLDINGS');
     });
 
     it('InfoWindow content에 전화번호 tel: 링크가 포함된다', () => {
@@ -105,6 +105,22 @@ describe('mapInfoCard', () => {
 
       expect(MockInfoWindow).toHaveBeenCalledWith(
         expect.objectContaining({ borderWidth: 0 }),
+      );
+    });
+
+    it('InfoWindow에 disableAnchor: true가 설정된다', () => {
+      makeInfoCard(mockMap, mockMarker);
+
+      expect(MockInfoWindow).toHaveBeenCalledWith(
+        expect.objectContaining({ disableAnchor: true }),
+      );
+    });
+
+    it('InfoWindow에 backgroundColor가 transparent로 설정된다', () => {
+      makeInfoCard(mockMap, mockMarker);
+
+      expect(MockInfoWindow).toHaveBeenCalledWith(
+        expect.objectContaining({ backgroundColor: 'transparent' }),
       );
     });
   });
