@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:hero": "cross-env VITE_DEV_WIDGET=hero vite",
+    "dev:hero": "cross-env VITE_DEV_WIDGET=hero VITE_SHOW_DOWN_ICON=true vite",
     "dev:vision": "cross-env VITE_DEV_WIDGET=vision vite",
     "dev:history": "cross-env VITE_DEV_WIDGET=history vite",
     "dev:award": "cross-env VITE_DEV_WIDGET=award vite",
