@@ -84,6 +84,10 @@
   height: 100%;
 }
 
+.history__book-page-left .history__book-page-outer-shadow {
+  justify-content: flex-end;
+}
+
 .history__book-page-content {
   display: flex;
   flex-direction: row;
@@ -216,6 +220,14 @@
 
     width: 100%;
     height: 1.17vmin;
+  }
+
+  .history__book-page-left .history__book-page-outer-shadow {
+    justify-content: flex-end;
+  }
+
+  .history__book-page-right .history__book-page-outer-shadow {
+    justify-content: flex-start;
   }
 
   .history__book-page-content {

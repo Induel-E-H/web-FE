@@ -6,16 +6,28 @@ import type { PageSide } from '@features/history/model/types';
 
 import '../../styles/book/Page.css';
 
-function BookPageOuterShadow({ side }: { side: PageSide }) {
-  const levels = side === PAGE_SIDE.LEFT ? [3, 2, 1] : [1, 2, 3];
+function BookPageOuterShadow({
+  side,
+  count,
+}: {
+  side: PageSide;
+  count: number;
+}) {
+  const levels =
+    side === PAGE_SIDE.LEFT
+      ? Array.from({ length: count }, (_, i) => count - i)
+      : Array.from({ length: count }, (_, i) => i + 1);
+
   return (
     <div className='history__book-page-outer-shadow'>
-      {levels.map((level) => (
-        <div
-          key={level}
-          className={`history__book-page-outer-shadow-${level}`}
-        />
-      ))}
+      {count
+        ? levels.map((level) => (
+            <div
+              key={level}
+              className={`history__book-page-outer-shadow-${level}`}
+            />
+          ))
+        : null}
     </div>
   );
 }
@@ -32,6 +44,8 @@ export function BookPage({
   canGoRight,
   onLeftMouseDown,
   onRightMouseDown,
+  leftShadowCount,
+  rightShadowCount,
 }: {
   staticLeftContent: ReactNode;
   staticRightContent: ReactNode;
@@ -44,6 +58,8 @@ export function BookPage({
   canGoRight: boolean;
   onLeftMouseDown?: () => void;
   onRightMouseDown?: () => void;
+  leftShadowCount: number;
+  rightShadowCount: number;
 }) {
   const flipPanelRef = useRef<HTMLDivElement>(null);
 
@@ -89,7 +105,7 @@ export function BookPage({
         className={`history__book-static-left history__book-page-left${canGoLeft ? ' history__book-page-left--clickable' : ''}`}
         onMouseDown={canGoLeft ? onLeftMouseDown : undefined}
       >
-        <BookPageOuterShadow side={PAGE_SIDE.LEFT} />
+        <BookPageOuterShadow side={PAGE_SIDE.LEFT} count={leftShadowCount} />
         <div className='history__book-page-content'>{staticLeftContent}</div>
       </div>
 
@@ -99,7 +115,7 @@ export function BookPage({
         onMouseDown={canGoRight ? onRightMouseDown : undefined}
       >
         <div className='history__book-page-content'>{staticRightContent}</div>
-        <BookPageOuterShadow side={PAGE_SIDE.RIGHT} />
+        <BookPageOuterShadow side={PAGE_SIDE.RIGHT} count={rightShadowCount} />
       </div>
 
       {/* Flip Panel (z:10) */}

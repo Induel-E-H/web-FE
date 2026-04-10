@@ -32,6 +32,8 @@ function History() {
     prevActiveItem,
     navigateToCategory,
     beginContinuousFlip,
+    leftShadowCount,
+    rightShadowCount,
   } = useBookNavigation(breakpoint);
 
   function handleListItemClick(index: number) {
@@ -107,6 +109,8 @@ function History() {
             canGoRight={canGoRight && !isFlipping}
             onLeftMouseDown={() => beginContinuousFlip('left')}
             onRightMouseDown={() => beginContinuousFlip('right')}
+            leftShadowCount={leftShadowCount}
+            rightShadowCount={rightShadowCount}
           />
         </div>
         <BookCover />

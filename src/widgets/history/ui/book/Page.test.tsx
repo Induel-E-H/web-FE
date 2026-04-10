@@ -13,6 +13,8 @@ const defaultProps = {
   flipDuration: 800,
   canGoLeft: true,
   canGoRight: true,
+  leftShadowCount: 3,
+  rightShadowCount: 3,
 };
 
 describe('BookPage', () => {

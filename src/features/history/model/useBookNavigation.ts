@@ -7,8 +7,22 @@ import { useFlipAnimation } from './animation/useFlipAnimation';
 import { useRapidFlip } from './animation/useRapidFlip';
 import { INDEX_LIST, RAPID_FLIP_DURATION } from './constants';
 import { useHoldNavigation } from './events/useHoldNavigation';
+import type { PageConfig } from './pageRegistry';
 import { getPageRegistry } from './pageRegistry';
 import type { FlipDirection, IndexItem, NavigationStep } from './types';
+
+function computeGlobalSpreadIndex(
+  item: IndexItem,
+  pageIndex: number,
+  registry: Record<IndexItem, PageConfig>,
+): number {
+  const itemIdx = INDEX_LIST.indexOf(item);
+  let total = 0;
+  for (let i = 0; i < itemIdx; i++) {
+    total += registry[INDEX_LIST[i]].totalPages;
+  }
+  return total + pageIndex;
+}
 
 export function useBookNavigation(breakpoint: Breakpoint) {
   const pageRegistry = getPageRegistry(breakpoint);
@@ -210,6 +224,49 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Outer shadow count 계산
+  const totalSpreads = INDEX_LIST.reduce(
+    (sum, item) => sum + pageRegistry[item].totalPages,
+    0,
+  );
+
+  let staticLeftGlobalIdx: number;
+  let staticRightGlobalIdx: number;
+
+  if (flipDirection === 'forward') {
+    staticLeftGlobalIdx = computeGlobalSpreadIndex(
+      activeItem,
+      currentPageIndex,
+      pageRegistry,
+    );
+    staticRightGlobalIdx = computeGlobalSpreadIndex(
+      nextActiveItem,
+      nextPageIndex,
+      pageRegistry,
+    );
+  } else if (flipDirection === 'backward') {
+    staticLeftGlobalIdx = computeGlobalSpreadIndex(
+      prevActiveItem,
+      prevPageIndex,
+      pageRegistry,
+    );
+    staticRightGlobalIdx = computeGlobalSpreadIndex(
+      activeItem,
+      currentPageIndex,
+      pageRegistry,
+    );
+  } else {
+    staticLeftGlobalIdx = computeGlobalSpreadIndex(
+      activeItem,
+      currentPageIndex,
+      pageRegistry,
+    );
+    staticRightGlobalIdx = staticLeftGlobalIdx;
+  }
+
+  const leftShadowCount = Math.min(staticLeftGlobalIdx, 3);
+  const rightShadowCount = Math.min(totalSpreads - 1 - staticRightGlobalIdx, 3);
+
   return {
     activeItem,
     tabActiveItem,
@@ -227,5 +284,7 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     prevActiveItem,
     navigateToCategory,
     beginContinuousFlip,
+    leftShadowCount,
+    rightShadowCount,
   };
 }
