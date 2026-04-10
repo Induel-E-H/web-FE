@@ -78,6 +78,13 @@ describe('mapMarker', () => {
         }),
       );
     });
+
+    it('마커 SVG content에 map__marker 클래스가 포함된다', () => {
+      makeMapMarker(mockMap as unknown as naver.maps.Map);
+
+      const call = MockMarker.mock.calls[0][0] as { icon: { content: string } };
+      expect(call.icon.content).toContain('map__marker');
+    });
   });
 
   describe('updateMarkerIcon', () => {
@@ -102,6 +109,13 @@ describe('mapMarker', () => {
 
       expect(MockSize).toHaveBeenCalledOnce();
       expect(MockPoint).toHaveBeenCalledOnce();
+    });
+
+    it('setIcon에 전달된 content가 map__marker SVG를 포함한다', () => {
+      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker);
+
+      const icon = mockSetIcon.mock.calls[0][0] as { content: string };
+      expect(icon.content).toContain('map__marker');
     });
   });
 });

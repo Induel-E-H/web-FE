@@ -107,6 +107,22 @@ describe('mapInfoCard', () => {
         expect.objectContaining({ borderWidth: 0 }),
       );
     });
+
+    it('InfoWindow에 disableAnchor: true가 설정된다', () => {
+      makeInfoCard(mockMap, mockMarker);
+
+      expect(MockInfoWindow).toHaveBeenCalledWith(
+        expect.objectContaining({ disableAnchor: true }),
+      );
+    });
+
+    it('InfoWindow에 backgroundColor가 transparent로 설정된다', () => {
+      makeInfoCard(mockMap, mockMarker);
+
+      expect(MockInfoWindow).toHaveBeenCalledWith(
+        expect.objectContaining({ backgroundColor: 'transparent' }),
+      );
+    });
   });
 
   describe('click 핸들러 토글', () => {

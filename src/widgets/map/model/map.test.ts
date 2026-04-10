@@ -119,6 +119,19 @@ describe('map', () => {
       );
     });
 
+    it('zoomControlOptions에 TOP_RIGHT position이 설정된다', () => {
+      lastCleanup = makeMap(mockEl);
+
+      expect(MockNaverMap).toHaveBeenCalledWith(
+        mockEl,
+        expect.objectContaining({
+          zoomControlOptions: expect.objectContaining({
+            position: 'TOP_RIGHT',
+          }) as unknown,
+        }),
+      );
+    });
+
     it('makeMapMarker가 생성된 지도로 호출된다', () => {
       lastCleanup = makeMap(mockEl);
 
