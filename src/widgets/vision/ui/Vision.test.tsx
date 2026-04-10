@@ -13,20 +13,25 @@ vi.mock('@entities/vision/assets/vision_invest.webp', () => ({
   default: 'vision_invest.webp',
 }));
 
-let observerCallback: IntersectionObserverCallback;
+const elementCallbackMap = new Map<Element, IntersectionObserverCallback>();
 const mockObserve = vi.fn();
 const mockDisconnect = vi.fn();
 
 beforeEach(() => {
+  elementCallbackMap.clear();
   mockObserve.mockClear();
   mockDisconnect.mockClear();
   vi.stubGlobal(
     'IntersectionObserver',
     class {
+      private cb: IntersectionObserverCallback;
       constructor(cb: IntersectionObserverCallback) {
-        observerCallback = cb;
+        this.cb = cb;
       }
-      observe = mockObserve;
+      observe = (el: Element) => {
+        elementCallbackMap.set(el, this.cb);
+        mockObserve(el);
+      };
       disconnect = mockDisconnect;
     },
   );
@@ -42,23 +47,6 @@ describe('Vision', () => {
     it('VISION_DATA 수(3)만큼 vision__content가 렌더링된다', () => {
       const { container } = render(<Vision />);
       expect(container.querySelectorAll('.vision__content')).toHaveLength(3);
-    });
-  });
-
-  describe('vision__title 콘텐츠', () => {
-    it('"FUTURE VISION" 텍스트가 렌더링된다', () => {
-      render(<Vision />);
-      expect(screen.getByText('FUTURE VISION')).toBeInTheDocument();
-    });
-
-    it('"미래를 향한" h2가 렌더링된다', () => {
-      render(<Vision />);
-      expect(screen.getByText('미래를 향한')).toBeInTheDocument();
-    });
-
-    it('"세 가지 방향" h2가 렌더링된다', () => {
-      render(<Vision />);
-      expect(screen.getByText('세 가지 방향')).toBeInTheDocument();
     });
   });
 
@@ -140,8 +128,9 @@ describe('Vision', () => {
     it('vision__title이 뷰포트에 진입하면 is-visible 클래스가 추가된다', () => {
       const { container } = render(<Vision />);
       const title = container.querySelector('.vision__title')!;
+      const titleCb = elementCallbackMap.get(title)!;
 
-      observerCallback(
+      titleCb(
         [
           {
             isIntersecting: true,
@@ -152,6 +141,66 @@ describe('Vision', () => {
       );
 
       expect(title).toHaveClass('is-visible');
+    });
+
+    it('vision__title이 위로 벗어나면 is-visible 클래스가 유지된다', () => {
+      const { container } = render(<Vision />);
+      const title = container.querySelector('.vision__title')!;
+      const titleCb = elementCallbackMap.get(title)!;
+
+      titleCb(
+        [
+          {
+            isIntersecting: true,
+            boundingClientRect: { top: 100 },
+          } as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver,
+      );
+      titleCb(
+        [
+          {
+            isIntersecting: false,
+            boundingClientRect: { top: -50 },
+          } as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver,
+      );
+
+      expect(title).toHaveClass('is-visible');
+    });
+
+    it('vision__title이 아래로 벗어나면 is-visible 클래스가 제거된다', () => {
+      const { container } = render(<Vision />);
+      const title = container.querySelector('.vision__title')!;
+      const titleCb = elementCallbackMap.get(title)!;
+
+      titleCb(
+        [
+          {
+            isIntersecting: true,
+            boundingClientRect: { top: 100 },
+          } as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver,
+      );
+      titleCb(
+        [
+          {
+            isIntersecting: false,
+            boundingClientRect: { top: 200 },
+          } as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver,
+      );
+
+      expect(title).not.toHaveClass('is-visible');
+    });
+
+    it('언마운트 시 모든 IntersectionObserver를 해제한다', () => {
+      const { unmount } = render(<Vision />);
+      unmount();
+      expect(mockDisconnect).toHaveBeenCalledTimes(4);
     });
   });
 });

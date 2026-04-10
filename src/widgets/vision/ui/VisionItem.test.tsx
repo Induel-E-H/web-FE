@@ -4,28 +4,33 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { VisionItem } from './VisionItem';
 
 const defaultProps = {
-  title: 'Parametric Design',
+  title: '정밀한 설계',
   description:
-    '수치 기반 설계와 알고리즘 모델링을 통해 최적화된 익스테리어 솔루션을 제공합니다.',
+    '모든 프로젝트는 치밀한 계획과 정밀한 엔지니어링에서 시작됩니다. 인들이앤에이치는 데이터 기반의 분석과 전문 기술력으로 최적의 솔루션을 제시합니다.',
   keyword: 'Param',
   image: 'vision_param.webp',
   index: 0,
 };
 
-let observerCallback: IntersectionObserverCallback;
+const elementCallbackMap = new Map<Element, IntersectionObserverCallback>();
 const mockObserve = vi.fn();
 const mockDisconnect = vi.fn();
 
 beforeEach(() => {
+  elementCallbackMap.clear();
   mockObserve.mockClear();
   mockDisconnect.mockClear();
   vi.stubGlobal(
     'IntersectionObserver',
     class {
+      private cb: IntersectionObserverCallback;
       constructor(cb: IntersectionObserverCallback) {
-        observerCallback = cb;
+        this.cb = cb;
       }
-      observe = mockObserve;
+      observe = (el: Element) => {
+        elementCallbackMap.set(el, this.cb);
+        mockObserve(el);
+      };
       disconnect = mockDisconnect;
     },
   );
@@ -43,7 +48,7 @@ describe('VisionItem', () => {
     it('title이 h4 요소로 렌더링된다', () => {
       render(<VisionItem {...defaultProps} />);
       expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent(
-        'Parametric Design',
+        '정밀한 설계',
       );
     });
 
@@ -61,15 +66,20 @@ describe('VisionItem', () => {
 
     it('이미지가 title을 alt로 렌더링된다', () => {
       render(<VisionItem {...defaultProps} />);
-      expect(screen.getByAltText('Parametric Design')).toBeInTheDocument();
+      expect(screen.getByAltText('정밀한 설계')).toBeInTheDocument();
     });
 
     it('이미지 src에 image prop이 반영된다', () => {
       render(<VisionItem {...defaultProps} />);
-      expect(screen.getByAltText('Parametric Design')).toHaveAttribute(
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
         'src',
         'vision_param.webp',
       );
+    });
+
+    it('hr 구분선이 렌더링된다', () => {
+      const { container } = render(<VisionItem {...defaultProps} />);
+      expect(container.querySelector('hr')).toBeInTheDocument();
     });
   });
 
@@ -111,8 +121,9 @@ describe('VisionItem', () => {
     it('뷰포트에 진입하면 is-visible 클래스가 추가된다', () => {
       const { container } = render(<VisionItem {...defaultProps} />);
       const el = container.querySelector('.vision__content')!;
+      const cb = elementCallbackMap.get(el)!;
 
-      observerCallback(
+      cb(
         [
           {
             isIntersecting: true,
@@ -128,8 +139,9 @@ describe('VisionItem', () => {
     it('뷰포트 아래로 벗어나면 is-visible 클래스가 제거된다', () => {
       const { container } = render(<VisionItem {...defaultProps} />);
       const el = container.querySelector('.vision__content')!;
+      const cb = elementCallbackMap.get(el)!;
 
-      observerCallback(
+      cb(
         [
           {
             isIntersecting: true,
@@ -140,7 +152,7 @@ describe('VisionItem', () => {
       );
       expect(el).toHaveClass('is-visible');
 
-      observerCallback(
+      cb(
         [
           {
             isIntersecting: false,
@@ -155,8 +167,9 @@ describe('VisionItem', () => {
     it('뷰포트 위로 벗어나면 is-visible 클래스가 유지된다', () => {
       const { container } = render(<VisionItem {...defaultProps} />);
       const el = container.querySelector('.vision__content')!;
+      const cb = elementCallbackMap.get(el)!;
 
-      observerCallback(
+      cb(
         [
           {
             isIntersecting: true,
@@ -167,7 +180,7 @@ describe('VisionItem', () => {
       );
       expect(el).toHaveClass('is-visible');
 
-      observerCallback(
+      cb(
         [
           {
             isIntersecting: false,
