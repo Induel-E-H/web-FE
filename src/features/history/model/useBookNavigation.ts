@@ -11,6 +11,13 @@ import type { PageConfig } from './pageRegistry';
 import { getPageRegistry } from './pageRegistry';
 import type { FlipDirection, IndexItem, NavigationStep } from './types';
 
+function pageCountToShadowCount(pages: number): number {
+  if (pages >= 10) return 3;
+  if (pages >= 5) return 2;
+  if (pages >= 2) return 1;
+  return 0;
+}
+
 function computeGlobalSpreadIndex(
   item: IndexItem,
   pageIndex: number,
@@ -264,8 +271,10 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     staticRightGlobalIdx = staticLeftGlobalIdx;
   }
 
-  const leftShadowCount = Math.min(staticLeftGlobalIdx, 3);
-  const rightShadowCount = Math.min(totalSpreads - 1 - staticRightGlobalIdx, 3);
+  const leftShadowCount = pageCountToShadowCount(staticLeftGlobalIdx);
+  const rightShadowCount = pageCountToShadowCount(
+    totalSpreads - 1 - staticRightGlobalIdx,
+  );
 
   return {
     activeItem,
