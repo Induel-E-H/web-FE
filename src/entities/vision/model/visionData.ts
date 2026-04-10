@@ -1,23 +1,23 @@
 export const VISION_DATA = [
   {
-    title: 'Parametric Design',
-    description:
-      '수치 기반 설계와 알고리즘 모델링을 통해 곡선 구조의 효율성과 심미성을 동시에 구현하며, 미래 도시 경관에 최적화된 익스테리어 솔루션을 제공합니다.',
     keyword: 'Param',
+    title: '정밀한 설계',
+    description:
+      '모든 프로젝트는 치밀한 계획과 정밀한 엔지니어링에서 시작됩니다. 인들이앤에이치는 데이터 기반의 분석과 전문 기술력으로 최적의 솔루션을 제시합니다.',
     image: 'vision_param.webp',
   },
   {
-    title: 'Urban Sculpting',
-    description:
-      '건축 외피를 단순한 외장재가 아닌 ‘도시를 조형하는 인터페이스’로 정의하고 곡선의 유연함을 통해 공간과 도시의 흐름을 재설계합니다.',
     keyword: 'Sculpt',
+    title: '공간을 조각하다',
+    description:
+      '원자재에서 정제된 건축물로, 인들이앤에이치는 공간을 단순히 짓는 것이 아니라, 사람과 환경을 위한 가치 있는 구조물을 창조합니다.',
     image: 'vision_sculpt.webp',
   },
   {
-    title: 'Engineering Investment',
-    description:
-      '구조 · 소재 · 환경 · 제조 기술을 보유한 공학 기업에 전략적으로 투자하여 설계 · 시공 · 기술 · 자본이 결합된 미래형 건축 생태계를 구축합니다.',
     keyword: 'Invest',
+    title: '미래에 투자하다',
+    description:
+      '지속 가능한 성장을 위한 전략적 투자. 인들이앤에이치는 부동산, 인프라, 신산업 분야에서 장기적 가치를 창출하는 투자 포트폴리오를 구축합니다.',
     image: 'vision_invest.webp',
   },
 ];
