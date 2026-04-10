@@ -62,7 +62,36 @@ describe('Footer', () => {
   });
 
   describe('저작권 표시', () => {
-    it('저작권 문구에 회사 영문 풀네임이 포함된다', () => {
+    const foundedYear = new Date(COMPANY.ESTABLISHED).getFullYear();
+    const currentYear = new Date().getFullYear();
+
+    it('저작권 문구에 창립 연도가 포함된다', () => {
+      render(<Footer />);
+
+      expect(
+        screen.getByText((_, element) => {
+          return (
+            element?.tagName === 'P' &&
+            (element.textContent ?? '').includes(String(foundedYear))
+          );
+        }),
+      ).toBeInTheDocument();
+    });
+
+    it('저작권 문구에 현재 연도가 포함된다', () => {
+      render(<Footer />);
+
+      expect(
+        screen.getByText((_, element) => {
+          return (
+            element?.tagName === 'P' &&
+            (element.textContent ?? '').includes(String(currentYear))
+          );
+        }),
+      ).toBeInTheDocument();
+    });
+
+    it('저작권 문구에 회사 영문 풀네임과 All rights reserved가 포함된다', () => {
       render(<Footer />);
 
       expect(

@@ -62,7 +62,8 @@ export function Footer() {
         </div>
       </div>
       <p className='footer__copyright'>
-        ⓒ 2000-2026 {COMPANY.NAME_EN_FULL}. All rights reserved.
+        ⓒ {new Date(COMPANY.ESTABLISHED).getFullYear()}-
+        {new Date().getFullYear()} {COMPANY.NAME_EN_FULL}. All rights reserved.
       </p>
     </footer>
   );
