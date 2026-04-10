@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Header } from './Header';
 
@@ -18,6 +18,20 @@ vi.mock('@shared/lib/scroll/smoothScrollTo', () => ({
 
 vi.mock('../model/useIsHero', () => ({
   useIsHero: mockUseIsHero,
+}));
+
+const mockOnNavScrollStart = vi.hoisted(() => vi.fn());
+const mockOnNavScrollEnd = vi.hoisted(() => vi.fn());
+const mockUseHeaderVisibility = vi.hoisted(() =>
+  vi.fn(() => ({
+    hidden: false,
+    onNavScrollStart: mockOnNavScrollStart,
+    onNavScrollEnd: mockOnNavScrollEnd,
+  })),
+);
+
+vi.mock('../model/useHeaderVisibility', () => ({
+  useHeaderVisibility: mockUseHeaderVisibility,
 }));
 
 describe('Header', () => {
@@ -64,6 +78,15 @@ describe('Header', () => {
   });
 
   describe('CSS 클래스', () => {
+    beforeEach(() => {
+      mockUseHeaderVisibility.mockReturnValue({
+        hidden: false,
+        onNavScrollStart: mockOnNavScrollStart,
+        onNavScrollEnd: mockOnNavScrollEnd,
+      });
+      mockUseIsHero.mockReturnValue(false);
+    });
+
     it('isHero가 true이면 header--hero 클래스가 적용된다', () => {
       mockUseIsHero.mockReturnValue(true);
       const { container } = render(<Header />);
@@ -71,9 +94,39 @@ describe('Header', () => {
     });
 
     it('isHero가 false이면 header--hero 클래스가 없다', () => {
-      mockUseIsHero.mockReturnValue(false);
       const { container } = render(<Header />);
       expect(container.querySelector('header')).not.toHaveClass('header--hero');
+    });
+
+    it('hidden이 true이면 header--hidden 클래스가 적용된다', () => {
+      mockUseHeaderVisibility.mockReturnValue({
+        hidden: true,
+        onNavScrollStart: mockOnNavScrollStart,
+        onNavScrollEnd: mockOnNavScrollEnd,
+      });
+      const { container } = render(<Header />);
+      expect(container.querySelector('header')).toHaveClass('header--hidden');
+    });
+
+    it('hidden이 false이면 header--hidden 클래스가 없다', () => {
+      const { container } = render(<Header />);
+      expect(container.querySelector('header')).not.toHaveClass(
+        'header--hidden',
+      );
+    });
+
+    it('모바일 메뉴가 열려있으면 hidden이 true여도 header--hidden 클래스가 적용되지 않는다', () => {
+      mockUseIsHero.mockReturnValue(true);
+      mockUseHeaderVisibility.mockReturnValue({
+        hidden: true,
+        onNavScrollStart: mockOnNavScrollStart,
+        onNavScrollEnd: mockOnNavScrollEnd,
+      });
+      const { container } = render(<Header />);
+      fireEvent.click(screen.getByRole('button', { name: '메뉴 열기' }));
+      expect(container.querySelector('header')).not.toHaveClass(
+        'header--hidden',
+      );
     });
   });
 
@@ -121,6 +174,48 @@ describe('Header', () => {
       expect(container.querySelector('header')).toHaveClass(
         'header--menu-open',
       );
+    });
+  });
+
+  describe('nav 클릭 후 헤더 숨김', () => {
+    beforeEach(() => {
+      mockOnNavScrollStart.mockClear();
+      mockOnNavScrollEnd.mockClear();
+      mockUseHeaderVisibility.mockReturnValue({
+        hidden: false,
+        onNavScrollStart: mockOnNavScrollStart,
+        onNavScrollEnd: mockOnNavScrollEnd,
+      });
+      mockUseIsHero.mockReturnValue(false);
+    });
+
+    it('nav 버튼 클릭 시 onNavScrollStart가 호출된다', () => {
+      render(<Header />);
+      fireEvent.click(screen.getAllByText('VISION')[0]);
+      expect(mockOnNavScrollStart).toHaveBeenCalledTimes(1);
+    });
+
+    it('로고 버튼 클릭 시 onNavScrollStart가 호출된다', () => {
+      render(<Header />);
+      fireEvent.click(
+        screen.getByRole('button', { name: /인들이앤에이치 로고/ }),
+      );
+      expect(mockOnNavScrollStart).toHaveBeenCalledTimes(1);
+    });
+
+    it('smoothScrollTo onDone 콜백에서 onNavScrollEnd가 호출된다', () => {
+      render(<Header />);
+      fireEvent.click(screen.getAllByText('VISION')[0]);
+
+      const [, onDone] = mockSmoothScrollTo.mock.calls.at(-1) as [
+        string,
+        () => void,
+      ];
+      act(() => {
+        onDone();
+      });
+
+      expect(mockOnNavScrollEnd).toHaveBeenCalledTimes(1);
     });
   });
 
