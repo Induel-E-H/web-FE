@@ -12,6 +12,7 @@
   justify-content: space-between;
   background-color: #ffffff;
   transition:
+    transform 0.3s ease,
     background-color 0.3s ease,
     color 0.3s ease;
 }
@@ -22,6 +23,10 @@
 
 .header--hero.header--menu-open {
   background-color: #000000;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
 }
 
 .header__logo {

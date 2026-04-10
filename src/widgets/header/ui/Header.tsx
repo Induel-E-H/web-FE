@@ -6,20 +6,33 @@ import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
 import induelIcon from '@assets/induel-icon.svg';
 
 import { NAV_ITEMS } from '../model/navItems';
+import { useHeaderVisibility } from '../model/useHeaderVisibility';
 import { useIsHero } from '../model/useIsHero';
 import '../styles/Header.css';
 
 export function Header() {
   const isHero = useIsHero();
+  const { hidden, onNavScrollStart, onNavScrollEnd } = useHeaderVisibility();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const scrollTo = (selector: string) => {
-    smoothScrollTo(selector, () => setMenuOpen(false));
+    onNavScrollStart();
+    smoothScrollTo(selector, () => {
+      setMenuOpen(false);
+      onNavScrollEnd();
+    });
   };
 
   return (
     <header
-      className={`header${isHero ? ' header--hero' : ''}${menuOpen && isHero ? ' header--menu-open' : ''}`}
+      className={[
+        'header',
+        isHero ? 'header--hero' : '',
+        hidden && !menuOpen ? 'header--hidden' : '',
+        menuOpen && isHero ? 'header--menu-open' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
       <button className='header__logo' onClick={() => scrollTo('.hero')}>
         <div className='header__logo_icon-frame'>
