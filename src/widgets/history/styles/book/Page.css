@@ -76,6 +76,11 @@
   transform: rotateY(180deg);
 }
 
+/* 커버 opening 전환 중: 정적 페이지 배경 투명화 (BookCover가 배경으로 보임) */
+.history__book-page--cover-opening .history__book-page-content {
+  background: transparent;
+}
+
 .history__book-page-outer-shadow {
   display: flex;
   flex-direction: row;

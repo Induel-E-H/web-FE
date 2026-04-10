@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { COMPANY } from '@shared/constant/company';
 import { getOrdinalSuffix } from '@shared/lib/ordinal/getOrdinalSuffix';
@@ -7,49 +7,11 @@ import '../../styles/book/FrontCover.css';
 
 const ESTABLISHED_YEAR = new Date(COMPANY.ESTABLISHED).getFullYear();
 
-export function BookFrontCover({
-  isFlipping,
-  isClosing,
-  onAnimationComplete,
-  onClick,
-}: {
-  isFlipping: boolean;
-  isClosing: boolean;
-  onAnimationComplete: () => void;
-  onClick: () => void;
-}) {
-  const coverRef = useRef<HTMLDivElement>(null);
+export function FrontCoverInner() {
   const years = new Date().getFullYear() - ESTABLISHED_YEAR;
 
-  useLayoutEffect(() => {
-    const el = coverRef.current;
-    if (!el) return;
-
-    if (isFlipping) {
-      el.classList.remove('history__front-cover--close');
-      el.classList.add('history__front-cover--flip');
-    } else if (isClosing) {
-      el.classList.remove('history__front-cover--flip');
-      el.classList.add('history__front-cover--close');
-    } else {
-      el.classList.remove('history__front-cover--flip');
-      el.classList.remove('history__front-cover--close');
-      return;
-    }
-
-    const handler = () => onAnimationComplete();
-    el.addEventListener('animationend', handler, { once: true });
-    return () => el.removeEventListener('animationend', handler);
-  }, [isFlipping, isClosing, onAnimationComplete]);
-
-  const isAnimating = isFlipping || isClosing;
-
   return (
-    <div
-      ref={coverRef}
-      className='history__front-cover'
-      onClick={isAnimating ? undefined : onClick}
-    >
+    <div className='history__front-cover-inner'>
       <hr className='history__front-cover-spine' />
       <div className='history__front-cover-text'>
         <div className='history__front-cover-title'>
@@ -63,6 +25,29 @@ export function BookFrontCover({
           </span>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function BookFrontCover({ onClick }: { onClick: () => void }) {
+  const [centered, setCentered] = useState(false);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(() => {
+      setCentered(true);
+    });
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return (
+    <div
+      className={`history__front-cover${centered ? ' history__front-cover--centered' : ''}`}
+      onClick={centered ? onClick : undefined}
+    >
+      <FrontCoverInner />
     </div>
   );
 }

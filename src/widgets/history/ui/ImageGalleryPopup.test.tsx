@@ -42,8 +42,8 @@ describe('ImageGalleryPopup', () => {
       const { container } = render(
         <ImageGalleryPopup {...defaultProps} onClose={onClose} />,
       );
-      const overlay = container.querySelector('.image-gallery-overlay')!;
-      fireEvent.mouseDown(overlay);
+      const overlay = container.querySelector('.popup__overlay')!;
+      fireEvent.click(overlay);
       expect(onClose).toHaveBeenCalledTimes(1);
     });
 
@@ -52,8 +52,8 @@ describe('ImageGalleryPopup', () => {
       const { container } = render(
         <ImageGalleryPopup {...defaultProps} onClose={onClose} />,
       );
-      const popup = container.querySelector('.image-gallery-popup')!;
-      fireEvent.mouseDown(popup);
+      const popup = container.querySelector('.popup--gallery')!;
+      fireEvent.click(popup);
       expect(onClose).not.toHaveBeenCalled();
     });
   });

@@ -1,18 +1,33 @@
-.history__front-cover {
+/* ─── 커버 inner: flip panel 내에서 흰색 배경을 덮기 위해 absolute ─── */
+.history__front-cover-inner {
   position: absolute;
   inset: 0;
+  background-color: var(--mauve-700);
+}
 
-  width: 33.23vmax;
+/* ─── 닫힌 커버 패널 (Desktop: 오른쪽 절반) ─── */
+.history__front-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
   height: 100%;
 
   background-color: var(--mauve-700);
 
   cursor: pointer;
-
   z-index: 20;
 
   border-top-right-radius: 0.78vmax;
   border-bottom-right-radius: 0.78vmax;
+
+  /* 중앙 이동 transition */
+  transition: transform 0.4s ease-in-out;
+}
+
+/* 중앙 배치: 오른쪽 절반에서 자신의 너비의 50%만큼 왼쪽으로 이동 → history__book 수평 중앙 */
+.history__front-cover--centered {
+  transform: translateX(-50%);
 }
 
 .history__front-cover-spine {
@@ -38,22 +53,9 @@
   gap: 1.88vmax;
 }
 
-.history__front-cover-title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  gap: 0;
-
-  background: linear-gradient(
-    90deg,
-    #b08d57 0%,
-    #f5e6a8 25%,
-    #fff6c7 50%,
-    #f5e6a8 75%,
-    #b08d57 100%
-  );
-
+.history__front-cover-title,
+.history__front-cover-year {
+  background: var(--gold-gradient);
   background-size: 200% auto;
 
   -webkit-background-clip: text;
@@ -63,21 +65,20 @@
   animation: goldShine 3s linear infinite;
 }
 
+.history__front-cover-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 0;
+}
+
 .history__front-cover-title span {
   font-size: 2.86vmax;
   font-weight: 600;
 
   line-height: 100%;
   letter-spacing: 0.1em;
-}
-
-@keyframes goldShine {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
 }
 
 .history__front-cover-year {
@@ -91,23 +92,6 @@
   font-weight: 700;
 
   transform: skewX(-10deg);
-
-  background: linear-gradient(
-    90deg,
-    #b08d57 0%,
-    #f5e6a8 25%,
-    #fff6c7 50%,
-    #f5e6a8 75%,
-    #b08d57 100%
-  );
-
-  background-size: 200% auto;
-
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: goldShine 3s linear infinite;
 }
 
 .history__front-cover-year-number {
@@ -124,48 +108,28 @@
   line-height: 100%;
 }
 
-.history__front-cover--flip {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-origin: left center;
-  animation: frontCoverFlip 0.8s ease-in-out forwards;
-}
-
-@keyframes frontCoverFlip {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(-180deg);
-  }
-}
-
-.history__front-cover--close {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-origin: left center;
-  animation: frontCoverClose 0.8s ease-in-out forwards;
-}
-
-@keyframes frontCoverClose {
-  from {
-    transform: rotateY(-180deg);
-  }
-  to {
-    transform: rotateY(0deg);
-  }
-}
-
+/* ─── Tablet (max-width: 1024px): 아래 절반에 위치 ─── */
 @media (max-width: 1024px) {
   .history__front-cover {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 50%;
+
     border-top-right-radius: 0;
+    border-top-left-radius: 0;
     border-bottom-left-radius: 1.95vmin;
     border-bottom-right-radius: 1.95vmin;
 
-    width: 100%;
-    height: 47.27vmin;
+    transform-origin: top center;
+  }
+
+  /* 중앙 배치: 아래 절반에서 자신의 높이의 50%만큼 위로 이동 → history__book 수직 중앙 */
+  .history__front-cover--centered {
+    transform: translateY(-50%);
   }
 
   .history__front-cover-spine {
@@ -182,9 +146,6 @@
     right: 4.43vmin;
     bottom: 4.95vmin;
 
-    display: flex;
-    flex-direction: column;
-
     gap: 2.6vmin;
   }
 
@@ -199,32 +160,15 @@
   .history__front-cover-year-ordinal {
     font-size: 3.91vmin;
   }
-
-  @keyframes frontCoverFlip {
-    from {
-      transform: rotateX(0deg);
-    }
-    to {
-      transform: rotateX(-180deg);
-    }
-  }
-
-  @keyframes frontCoverClose {
-    from {
-      transform: rotateX(-180deg);
-    }
-    to {
-      transform: rotateX(0deg);
-    }
-  }
 }
 
+/* ─── Mobile (max-width: 767px) ─── */
 @media (max-width: 767px) {
   .history__front-cover {
     border-bottom-left-radius: 4vmin;
     border-bottom-right-radius: 4vmin;
 
-    height: 71.73vmin;
+    height: 50%;
   }
 
   .history__front-cover-spine {
