@@ -18,7 +18,6 @@ export function Footer() {
           </div>
         </div>
         <div className='footer__information'>
-          <button>이용약관</button>
           <button>
             <b>개인정보처리방침</b>
           </button>
