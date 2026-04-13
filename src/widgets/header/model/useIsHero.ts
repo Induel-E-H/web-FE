@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const DEV_WIDGET: string | undefined = import.meta.env.VITE_DEV_WIDGET;
 
 export function useIsHero(): boolean {
+  const { pathname } = useLocation();
   const [isHero, setIsHero] = useState(
-    DEV_WIDGET === undefined || DEV_WIDGET === 'hero',
+    pathname === '/' && (DEV_WIDGET === undefined || DEV_WIDGET === 'hero'),
   );
 
   useEffect(() => {
