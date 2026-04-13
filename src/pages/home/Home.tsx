@@ -1,5 +1,7 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
+import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
 import Award from '@widgets/award';
 import { Footer } from '@widgets/footer';
 import { Header } from '@widgets/header/ui/Header';
@@ -24,6 +26,18 @@ const WIDGET_MAP: Record<string, ReactNode> = {
 };
 
 function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const state = location.state as { scrollTo?: string } | null;
+    if (state?.scrollTo) {
+      const timer = setTimeout(() => {
+        smoothScrollTo(state.scrollTo!);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
+
   if (DEV_WIDGET) {
     const widget = WIDGET_MAP[DEV_WIDGET];
     if (!widget) {
