@@ -3,7 +3,7 @@ import '../styles/Title.css';
 export function VisionTitle({
   ref,
 }: {
-  ref: React.RefObject<HTMLDivElement | null>;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
     <div ref={ref} className='vision__title'>
