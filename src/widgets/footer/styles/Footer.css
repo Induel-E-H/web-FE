@@ -69,7 +69,7 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 0.729vmax;
-  color: var(--gray-500);
+  color: var(--white);
 }
 
 .footer__information b {
