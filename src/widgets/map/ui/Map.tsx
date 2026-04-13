@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { COMPANY } from '@shared/constant';
+
 import { makeMap } from '../model/map';
 import '../styles/Map.css';
 import '../styles/mapInfoCard.css';
@@ -12,8 +14,13 @@ type NaverWindow = {
   navermap_authFailure?: () => void;
 };
 
-const FALLBACK_MAP_URL =
-  'https://www.openstreetmap.org/export/embed.html?bbox=129.0868%2C35.1249%2C129.1068%2C35.1449&layer=mapnik&marker=35.13488%2C129.0968';
+const BBOX_OFFSET = 0.01;
+const FALLBACK_MAP_URL = [
+  'https://www.openstreetmap.org/export/embed.html',
+  `?bbox=${COMPANY.LNG - BBOX_OFFSET}%2C${COMPANY.LAT - BBOX_OFFSET}`,
+  `%2C${COMPANY.LNG + BBOX_OFFSET}%2C${COMPANY.LAT + BBOX_OFFSET}`,
+  `&layer=mapnik&marker=${COMPANY.LAT}%2C${COMPANY.LNG}`,
+].join('');
 
 function isNaverAvailable() {
   const w = window as unknown as NaverWindow;
