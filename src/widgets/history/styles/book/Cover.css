@@ -10,11 +10,11 @@
 
 .history__book-cover-left,
 .history__book-cover-right {
-  flex: 1;
+  position: relative;
+  width: 100%;
   height: 100%;
 
   background-color: var(--mauve-500);
-
   z-index: 2;
 }
 
@@ -27,11 +27,18 @@
 }
 
 .history__book-cover-center {
-  position: relative;
-
-  flex-shrink: 0;
-  width: 1.35vmax;
+  position: absolute;
+  top: 0;
   height: 100%;
+  width: 0.675vmax;
+}
+
+.history__book-cover-left .history__book-cover-center {
+  right: 0;
+}
+
+.history__book-cover-right .history__book-cover-center {
+  left: 0;
 }
 
 .history__book-cover-center-line {
@@ -69,7 +76,7 @@
 
 .history__book-cover-center-spine-left,
 .history__book-cover-center-spine-right {
-  width: 19.23%;
+  width: 38.46%;
   height: 100%;
 
   background-color: var(--mauve-600);
@@ -82,14 +89,27 @@
   background-color: var(--mauve-700);
 }
 
+.history__book-cover-left .history__book-cover-center-spine-center {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+.history__book-cover-right .history__book-cover-center-spine-center {
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
 @media (max-width: 1024px) {
   .history__book-cover {
     flex-direction: column;
-  }
-
-  .history__book-cover-left,
-  .history__book-cover-right {
-    width: 100%;
   }
 
   .history__book-cover-left {
@@ -101,8 +121,19 @@
   }
 
   .history__book-cover-center {
+    position: absolute;
+    top: auto;
+    left: 0;
     width: 100%;
-    height: 3.125vmin;
+    height: 1.5626vmin;
+  }
+
+  .history__book-cover-left .history__book-cover-center {
+    bottom: 0;
+  }
+
+  .history__book-cover-right .history__book-cover-center {
+    top: 0;
   }
 
   .history__book-cover-center-line {
@@ -123,12 +154,14 @@
   .history__book-cover-center-spine-left,
   .history__book-cover-center-spine-right {
     width: 100%;
-    height: 25%;
+    height: 50%;
   }
 
   .history__book-cover-center-spine-center {
     width: 100%;
     height: 50%;
+
+    box-shadow: inset 0.5208vmin 0.5208vmin 0.5208vmin rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -142,7 +175,7 @@
   }
 
   .history__book-cover-center {
-    height: 5.87vmin;
+    height: 2.93vmin;
   }
 
   .history__book-cover-center-line {
@@ -151,5 +184,9 @@
 
   .history__book-cover-center-line div {
     width: 4vmin;
+  }
+
+  .history__book-cover-center-spine-center {
+    box-shadow: inset 1.0667vmin 1.0667vmin 1.0667vmin rgba(0, 0, 0, 0.25);
   }
 }

@@ -270,7 +270,11 @@ function History() {
             />
           )}
         </div>
-        {showBookCover && <BookCover />}
+        {showBookCover && (
+          <div className='history__book-cover'>
+            <BookCover side={'left'} /> <BookCover side={'right'} />
+          </div>
+        )}
         {showFrontCover && <BookFrontCover onClick={handleFrontCoverClick} />}
         {showBackCover && <BookBackCover onClick={handleBackCoverClick} />}
       </div>
