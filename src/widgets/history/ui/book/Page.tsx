@@ -100,25 +100,22 @@ export function BookPage({
 
   return (
     <>
-      {/* history__book-page-left (z:3) */}
       <div
-        className={`history__book-static-left history__book-page-left${canGoLeft ? ' history__book-page-left--clickable' : ''}`}
+        className='history__book-static-left history__book-page-left history__book-page-left--clickable'
         onMouseDown={canGoLeft ? onLeftMouseDown : undefined}
       >
         <BookPageOuterShadow side={PAGE_SIDE.LEFT} count={leftShadowCount} />
         <div className='history__book-page-content'>{staticLeftContent}</div>
       </div>
 
-      {/* history__book-page-right (z:3) */}
       <div
-        className={`history__book-static-right history__book-page-right${canGoRight ? ' history__book-page-right--clickable' : ''}`}
+        className='history__book-static-right history__book-page-right history__book-page-right--clickable'
         onMouseDown={canGoRight ? onRightMouseDown : undefined}
       >
         <div className='history__book-page-content'>{staticRightContent}</div>
         <BookPageOuterShadow side={PAGE_SIDE.RIGHT} count={rightShadowCount} />
       </div>
 
-      {/* Flip Panel (z:10) */}
       <div
         ref={flipPanelRef}
         className={`history__book-flip-panel history__book-flip-panel--${panelDirection}`}
