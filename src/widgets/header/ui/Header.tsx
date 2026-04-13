@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
 
@@ -14,13 +15,28 @@ export function Header() {
   const isHero = useIsHero();
   const { hidden, onNavScrollStart, onNavScrollEnd } = useHeaderVisibility();
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === '/';
 
   const scrollTo = (selector: string) => {
+    if (!isHome) {
+      void navigate('/', { state: { scrollTo: selector } });
+      return;
+    }
     onNavScrollStart();
     smoothScrollTo(selector, () => {
       setMenuOpen(false);
       onNavScrollEnd();
     });
+  };
+
+  const handleLogoClick = () => {
+    if (!isHome) {
+      void navigate('/');
+      return;
+    }
+    scrollTo('.hero');
   };
 
   return (
@@ -34,7 +50,7 @@ export function Header() {
         .filter(Boolean)
         .join(' ')}
     >
-      <button className='header__logo' onClick={() => scrollTo('.hero')}>
+      <button className='header__logo' onClick={handleLogoClick}>
         <div className='header__logo_icon-frame'>
           <img
             src={induelIcon}

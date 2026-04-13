@@ -12,4 +12,6 @@ export const COMPANY = {
   ADDRESS_FULL: '부산광역시 남구 수영로 274-16',
   ESTABLISHED: '2000-04-27',
   ESTABLISHED_DISPLAY: '2000.04.27',
+  LAT: 35.13488,
+  LNG: 129.0968,
 } as const;
