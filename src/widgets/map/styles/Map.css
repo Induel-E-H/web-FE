@@ -21,6 +21,15 @@
   box-shadow: 0 0 0.42vmax rgba(0, 0, 0, 0.25);
 }
 
+.map__content--fallback {
+  border: none;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.04vmax 0 0 1.04vmax;
+}
+
 @media (max-width: 1024px) {
   .map {
     height: 100vh;
@@ -35,6 +44,12 @@
     height: 100%;
     border-radius: 2.6vmin;
     box-shadow: 0 0 1.04vmin rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media (max-width: 1024px) {
+  .map__content--fallback {
+    border-radius: 2.6vmin 2.6vmin 0 0;
   }
 }
 

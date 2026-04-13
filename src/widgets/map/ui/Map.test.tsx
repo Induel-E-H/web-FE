@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import Map from './Map';
@@ -9,9 +9,24 @@ vi.mock('../model/map', () => ({
   makeMap: mockMakeMap,
 }));
 
+type NaverWindow = {
+  naver?: { maps?: { Map?: unknown } };
+  navermap_authFailure?: () => void;
+};
+
+function setNaverMaps(available: boolean) {
+  const w = window as unknown as NaverWindow;
+  if (available) {
+    w.naver = { maps: { Map: vi.fn() } };
+  } else {
+    delete w.naver;
+  }
+}
+
 describe('Map', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    setNaverMaps(true);
   });
 
   describe('시맨틱 구조', () => {
@@ -45,6 +60,67 @@ describe('Map', () => {
       unmount();
 
       expect(mockCleanup).toHaveBeenCalledOnce();
+    });
+
+    it('언마운트 시 navermap_authFailure 콜백이 정리된다', () => {
+      const w = window as unknown as NaverWindow;
+      const { unmount } = render(<Map />);
+
+      expect(w.navermap_authFailure).toBeTypeOf('function');
+      unmount();
+      expect(w.navermap_authFailure).toBeUndefined();
+    });
+  });
+
+  describe('fallback — Naver Maps SDK 미로드', () => {
+    it('naver.maps가 없으면 iframe fallback이 렌더링된다', () => {
+      setNaverMaps(false);
+      render(<Map />);
+
+      expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+      expect(mockMakeMap).not.toHaveBeenCalled();
+    });
+
+    it('naver.maps가 없으면 makeMap이 호출되지 않는다', () => {
+      setNaverMaps(false);
+      render(<Map />);
+
+      expect(mockMakeMap).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('fallback — makeMap 실행 중 오류', () => {
+    it('makeMap이 throw하면 iframe fallback이 렌더링된다', async () => {
+      mockMakeMap.mockImplementationOnce(() => {
+        throw new Error('map init failed');
+      });
+
+      render(<Map />);
+
+      // queueMicrotask로 지연된 setState 완료를 기다림
+      await waitFor(() => {
+        expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('fallback — 인증 실패 (401)', () => {
+    it('navermap_authFailure 호출 시 iframe fallback이 렌더링된다', () => {
+      const { rerender } = render(<Map />);
+
+      const w = window as unknown as NaverWindow;
+      w.navermap_authFailure?.();
+
+      rerender(<Map />);
+
+      expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+    });
+
+    it('마운트 시 navermap_authFailure 콜백이 등록된다', () => {
+      const w = window as unknown as NaverWindow;
+      render(<Map />);
+
+      expect(w.navermap_authFailure).toBeTypeOf('function');
     });
   });
 });
