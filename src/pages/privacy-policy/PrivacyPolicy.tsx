@@ -184,7 +184,7 @@ export function PrivacyPolicy() {
                 ■ 제 2조 처리하는 개인정보의 항목
               </h2>
               <p>
-                (주) 인들이엔에이치는 다음과 같은 개인정보 법적 근거로
+                (주) 인들이앤에이치는 다음과 같은 개인정보 법적 근거로
                 정보주체의 개인정보를 수집 및 이용합니다.
               </p>
               <ol className='privacy-policy__ordered-list'>
@@ -332,24 +332,24 @@ export function PrivacyPolicy() {
                 </table>
               </div>
               <p>
-                ② (주)인들이앤에이치는 위탁계약 체결 시 「개인정보 보호법」
+                (주)인들이앤에이치는 위탁계약 체결 시 「개인정보 보호법」
                 제26조에 따라 위탁업무 수행목적 외 개인정보 처리금지,
                 기술적·관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리·감독,
                 손해배상 등 책임에 관한 사항을 계약서 등 문서에 명시하고,
                 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.
               </p>
               <p>
-                ③ 「개인정보 보호법」 제26조제6항에 따라 수탁자가 당사의
-                개인정보 처리 업무를 재위탁하는 경우 (주)인들이앤에이치의 동의를
-                받고 있으며, 본 개인정보 처리방침을 통하여 재수탁자와 재수탁하는
+                「개인정보 보호법」 제26조제6항에 따라 수탁자가 당사의 개인정보
+                처리 업무를 재위탁하는 경우 (주)인들이앤에이치의 동의를 받고
+                있으며, 본 개인정보 처리방침을 통하여 재수탁자와 재수탁하는
                 업무의 내용을 공개하고 있습니다.
               </p>
               <p>
-                ④ 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본
+                위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본
                 개인정보 처리방침을 통하여 공개하도록 하겠습니다.
               </p>
               <p>
-                ⑤ 개인정보 처리 업무를 국외에 위탁하는 경우는 '제10조 개인정보의
+                개인정보 처리 업무를 국외에 위탁하는 경우는 '제10조 개인정보의
                 국외 수집 및 이전에 관한 사항'에서 안내하고 있습니다.
               </p>
             </article>
@@ -398,7 +398,7 @@ export function PrivacyPolicy() {
                 <li>
                   <strong>개인정보를 이전 받는 자</strong>
                   <ul className='privacy-policy__unordered-list'>
-                    <li>Google LLC</li>
+                    <li>Google</li>
                   </ul>
                 </li>
                 <li>
@@ -525,32 +525,40 @@ export function PrivacyPolicy() {
                 <p className='privacy-policy__cookie-guide-title'>
                   쿠키 허용 / 차단 방법
                 </p>
-                <p>▶ 웹 브라우저에서 쿠키 허용/차단</p>
-                <ul className='privacy-policy__unordered-list'>
-                  <li>
-                    크롬(Chrome): 웹브라우저 오른쪽 상단 '⋮' 표시 선택 &gt; 새
-                    시크릿 창 (단축키: Ctrl+Shift+N)
-                  </li>
-                  <li>
-                    엣지(Edge): 웹 브라우저 오른쪽 상단 '…' 표시 선택 &gt; 새
-                    InPrivate 창 (단축키: Ctrl+Shift+N)
-                  </li>
-                </ul>
-                <p>▶ 모바일 브라우저에서 쿠키 허용/차단</p>
-                <ul className='privacy-policy__unordered-list'>
-                  <li>
-                    크롬(Chrome): 모바일 브라우저 오른쪽 상단 '⋮' 표시 선택 &gt;
-                    새 시크릿 탭
-                  </li>
-                  <li>
-                    사파리(Safari): 모바일 기기 설정 &gt; 사파리(Safari) &gt;
-                    고급 &gt; 모든 쿠키 차단
-                  </li>
-                  <li>
-                    삼성 인터넷: 모바일 브라우저 아래쪽 '탭' 아이콘 선택 &gt;
-                    비밀 모드 켜기 &gt; 시작
-                  </li>
-                </ul>
+                <details className='privacy-policy__cookie-details'>
+                  <summary className='privacy-policy__cookie-summary'>
+                    ▶ 웹 브라우저에서 쿠키 허용/차단
+                  </summary>
+                  <ul className='privacy-policy__unordered-list'>
+                    <li>
+                      크롬(Chrome): 웹브라우저 오른쪽 상단 '⋮' 표시 선택 &gt; 새
+                      시크릿 창 (단축키: Ctrl+Shift+N)
+                    </li>
+                    <li>
+                      엣지(Edge): 웹 브라우저 오른쪽 상단 '…' 표시 선택 &gt; 새
+                      InPrivate 창 (단축키: Ctrl+Shift+N)
+                    </li>
+                  </ul>
+                </details>
+                <details className='privacy-policy__cookie-details'>
+                  <summary className='privacy-policy__cookie-summary'>
+                    ▶ 모바일 브라우저에서 쿠키 허용/차단
+                  </summary>
+                  <ul className='privacy-policy__unordered-list'>
+                    <li>
+                      크롬(Chrome): 모바일 브라우저 오른쪽 상단 '⋮' 표시 선택
+                      &gt; 새 시크릿 탭
+                    </li>
+                    <li>
+                      사파리(Safari): 모바일 기기 설정 &gt; 사파리(Safari) &gt;
+                      고급 &gt; 모든 쿠키 차단
+                    </li>
+                    <li>
+                      삼성 인터넷: 모바일 브라우저 아래쪽 '탭' 아이콘 선택 &gt;
+                      비밀 모드 켜기 &gt; 시작
+                    </li>
+                  </ul>
+                </details>
               </div>
             </article>
 

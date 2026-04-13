@@ -264,6 +264,50 @@
   font-size: 0.625vmax;
 }
 
+.privacy-policy__cookie-details {
+  border-top: 0.052vmax solid #e6ded6;
+  margin-top: 0.417vmax;
+}
+
+.privacy-policy__cookie-details:last-child {
+  border-bottom: 0.052vmax solid #e6ded6;
+}
+
+.privacy-policy__cookie-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.521vmax;
+  padding: 0.521vmax 0;
+  font-size: 0.625vmax;
+  font-weight: 600;
+  color: #5a4231;
+  cursor: pointer;
+  user-select: none;
+}
+
+.privacy-policy__cookie-summary::-webkit-details-marker {
+  display: none;
+}
+
+.privacy-policy__cookie-summary::after {
+  content: '﹢';
+  font-size: 0.729vmax;
+  font-weight: 400;
+  color: #947761;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.privacy-policy__cookie-details[open] .privacy-policy__cookie-summary::after {
+  content: '﹣';
+}
+
+.privacy-policy__cookie-details .privacy-policy__unordered-list {
+  padding-bottom: 0.521vmax;
+}
+
 .privacy-policy__contact-box {
   background-color: #f6f3f0;
   border-radius: 0.313vmax;
@@ -481,6 +525,15 @@
     font-size: 1.43vmin;
   }
 
+  .privacy-policy__cookie-summary {
+    font-size: 1.43vmin;
+    padding: 0.91vmin 0;
+  }
+
+  .privacy-policy__cookie-summary::after {
+    font-size: 1.69vmin;
+  }
+
   .privacy-policy__contact-box {
     border-radius: 0.65vmin;
     padding: 1.95vmin 2.34vmin;
@@ -656,6 +709,15 @@
 
   .privacy-policy__cookie-guide p {
     font-size: 2.93vmin;
+  }
+
+  .privacy-policy__cookie-summary {
+    font-size: 2.93vmin;
+    padding: 1.6vmin 0;
+  }
+
+  .privacy-policy__cookie-summary::after {
+    font-size: 3.47vmin;
   }
 
   .privacy-policy__contact-box {
