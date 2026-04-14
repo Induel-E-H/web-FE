@@ -5,16 +5,16 @@ import type { BookState } from './types';
 export function useBookCoverState() {
   const [bookState, setBookState] = useState<BookState>('cover-front');
 
-  function openFromFront() {
+  function openingFront() {
     if (bookState !== 'cover-front') return;
     setBookState('opening-front');
   }
 
-  function onFrontOpened() {
+  function onOpened() {
     setBookState('open');
   }
 
-  function closeFront() {
+  function closingFront() {
     if (bookState !== 'open') return;
     setBookState('closing-front');
   }
@@ -23,7 +23,7 @@ export function useBookCoverState() {
     setBookState('cover-front');
   }
 
-  function closeBack() {
+  function closingBack() {
     if (bookState !== 'open') return;
     setBookState('closing-back');
   }
@@ -32,24 +32,19 @@ export function useBookCoverState() {
     setBookState('cover-back');
   }
 
-  function openFromBack() {
+  function openingBack() {
     if (bookState !== 'cover-back') return;
     setBookState('opening-back');
   }
 
-  function onBackOpened() {
-    setBookState('open');
-  }
-
   return {
     bookState,
-    openFromFront,
-    onFrontOpened,
-    closeFront,
+    openingFront,
+    onOpened,
+    closingFront,
     onFrontClosed,
-    closeBack,
+    closingBack,
     onBackClosed,
-    openFromBack,
-    onBackOpened,
+    openingBack,
   };
 }

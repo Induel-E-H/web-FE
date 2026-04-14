@@ -4,10 +4,10 @@ import '../../styles/book/Cover.css';
 
 export function BookCover({
   side,
-  isHidden,
+  isHidden = false,
 }: {
   side: PageSide;
-  isHidden: boolean;
+  isHidden?: boolean;
 }) {
   const isLeft = side === 'left';
 

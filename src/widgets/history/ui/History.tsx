@@ -24,14 +24,13 @@ function History() {
   const breakpoint = useBreakpoint();
   const {
     bookState,
-    openFromFront,
-    onFrontOpened,
-    closeFront,
+    openingFront,
+    onOpened,
+    closingFront,
     onFrontClosed,
-    closeBack,
+    closingBack,
     onBackClosed,
-    openFromBack,
-    onBackOpened,
+    openingBack,
   } = useBookCoverState();
 
   const {
@@ -238,20 +237,20 @@ function History() {
 
   function handleFrontCoverClick() {
     if (isAnimatingRef.current) return;
-    openFromFront();
-    startFlipAnimation('forward', onFrontOpened);
+    openingFront();
+    startFlipAnimation('forward', onOpened);
   }
 
   function handleBackCoverClick() {
     if (isAnimatingRef.current) return;
-    openFromBack();
-    startFlipAnimation('backward', onBackOpened);
+    openingBack();
+    startFlipAnimation('backward', onOpened);
   }
 
   function handleLeftMouseDown() {
     if (!canGoLeft) {
       if (bookState === 'open' && !isAnimatingRef.current) {
-        closeFront();
+        closingFront();
         startFlipAnimation('backward', onFrontClosed);
       }
       return;
@@ -262,7 +261,7 @@ function History() {
   function handleRightMouseDown() {
     if (!canGoRight) {
       if (bookState === 'open' && !isAnimatingRef.current) {
-        closeBack();
+        closingBack();
         startFlipAnimation('forward', onBackClosed);
       }
       return;
@@ -274,13 +273,13 @@ function History() {
     if (bookState === 'cover-front') {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);
-      openFromFront();
-      startFlipAnimation('forward', onFrontOpened);
+      openingFront();
+      startFlipAnimation('forward', onOpened);
     } else if (bookState === 'cover-back') {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);
-      openFromBack();
-      startFlipAnimation('backward', onBackOpened);
+      openingBack();
+      startFlipAnimation('backward', onOpened);
     } else {
       navigateToCategory(item, 0, true);
     }
