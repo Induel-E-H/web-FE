@@ -80,18 +80,17 @@ function History() {
     pageIndex: number,
     item: IndexItem,
   ): ReactNode {
-    const pageSide = side === PAGE_SIDE.LEFT ? PAGE_SIDE.LEFT : PAGE_SIDE.RIGHT;
     switch (item) {
       case 'List':
-        return <ListPage side={pageSide} onItemClick={handleListItemClick} />;
+        return <ListPage side={side} onItemClick={handleListItemClick} />;
       case 'Content':
-        return <ContentPage side={pageSide} pageIndex={pageIndex} />;
+        return <ContentPage side={side} pageIndex={pageIndex} />;
       case 'Timeline':
-        return <TimelinePage side={pageSide} />;
+        return <TimelinePage side={side} />;
       case 'Milestones':
         return (
           <MilestonesPage
-            side={pageSide}
+            side={side}
             pageIndex={pageIndex}
             breakpoint={breakpoint}
           />
@@ -111,7 +110,7 @@ function History() {
     coverBackContent = (
       <>
         <BookCover side={PAGE_SIDE.LEFT} />
-        <div className='history__cover-flip-page-layer history__book-page-left'>
+        <div className='history__book-page-left'>
           <BookPageOuterShadow side={PAGE_SIDE.LEFT} count={leftShadowCount} />
           <div className='history__book-page-content'>
             {renderPage(PAGE_SIDE.LEFT, currentPageIndex, activeItem)}
@@ -123,7 +122,7 @@ function History() {
     coverFrontContent = (
       <>
         <BookCover side={PAGE_SIDE.LEFT} />
-        <div className='history__cover-flip-page-layer history__book-page-left'>
+        <div className='history__book-page-left'>
           <BookPageOuterShadow side={PAGE_SIDE.LEFT} count={leftShadowCount} />
           <div className='history__book-page-content'>
             {renderPage(PAGE_SIDE.LEFT, currentPageIndex, activeItem)}
@@ -136,7 +135,7 @@ function History() {
     coverFrontContent = (
       <>
         <BookCover side={PAGE_SIDE.RIGHT} />
-        <div className='history__cover-flip-page-layer history__book-page-right'>
+        <div className='history__book-page-right'>
           <div className='history__book-page-content'>
             {renderPage(PAGE_SIDE.RIGHT, currentPageIndex, activeItem)}
           </div>
@@ -153,7 +152,7 @@ function History() {
     coverBackContent = (
       <>
         <BookCover side={PAGE_SIDE.RIGHT} />
-        <div className='history__cover-flip-page-layer history__book-page-right'>
+        <div className='history__book-page-right'>
           <div className='history__book-page-content'>
             {renderPage(PAGE_SIDE.RIGHT, currentPageIndex, activeItem)}
           </div>

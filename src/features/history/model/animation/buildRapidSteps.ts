@@ -39,7 +39,6 @@ export function buildRapidSteps(params: {
   const sourceItem = INDEX_LIST[activeIndex];
 
   if (direction === 'forward') {
-    // 출발 카테고리 잔여 페이지 (최대 MAX_SOURCE_PAGE_FLIPS장)
     const sourceLast = getLastPageIndex(sourceItem);
     const fwdEnd = Math.min(
       currentPageIndex + MAX_SOURCE_PAGE_FLIPS,
@@ -52,7 +51,6 @@ export function buildRapidSteps(params: {
         duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
-    // 중간 카테고리 통과 스텝 (non-terminal)
     for (let i = activeIndex + 1; i < targetIndex; i++) {
       steps.push({
         item: INDEX_LIST[i],
@@ -60,7 +58,6 @@ export function buildRapidSteps(params: {
         duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
-    // 목적지 도착 approach 페이지 (targetPageIndex 직전 페이지들)
     const numApproach = Math.min(MAX_SOURCE_PAGE_FLIPS - 1, targetPageIndex);
     for (let p = targetPageIndex - numApproach; p < targetPageIndex; p++) {
       steps.push({
@@ -69,14 +66,12 @@ export function buildRapidSteps(params: {
         duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
-    // 목적지 terminal
     steps.push({
       item: targetItem,
       pageIndex: targetPageIndex,
       duration: RAPID_FLIP_DURATION,
     });
   } else {
-    // 출발 카테고리 잔여 페이지 (역방향, 최대 MAX_SOURCE_PAGE_FLIPS장)
     const bwdEnd = Math.max(currentPageIndex - MAX_SOURCE_PAGE_FLIPS, 0);
     for (let p = currentPageIndex - 1; p >= bwdEnd; p--) {
       steps.push({
@@ -85,7 +80,6 @@ export function buildRapidSteps(params: {
         duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
-    // 중간 카테고리 통과 스텝 (non-terminal)
     for (let i = activeIndex - 1; i > targetIndex; i--) {
       steps.push({
         item: INDEX_LIST[i],
@@ -93,7 +87,6 @@ export function buildRapidSteps(params: {
         duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
-    // 목적지 도착 approach 페이지 (targetPageIndex 직후 페이지들, 역방향으로 접근)
     const destLast = getLastPageIndex(targetItem);
     const numApproach = Math.min(
       MAX_SOURCE_PAGE_FLIPS - 1,
@@ -106,7 +99,6 @@ export function buildRapidSteps(params: {
         duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
-    // 목적지 terminal
     steps.push({
       item: targetItem,
       pageIndex: targetPageIndex,

@@ -72,7 +72,6 @@ export function useRapidFlip(
   return {
     isRapidFlipping,
     tabActiveItem,
-    stepsRef,
     startRapidSequence,
     chainNextStep,
     updateTabActiveItem,

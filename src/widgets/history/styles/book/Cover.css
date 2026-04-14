@@ -1,13 +1,3 @@
-.history__book-cover {
-  display: flex;
-  flex-direction: row;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 0;
-}
-
 .history__book-cover--hidden {
   visibility: hidden;
 }
@@ -119,10 +109,6 @@
 }
 
 @media (max-width: 1024px) {
-  .history__book-cover {
-    flex-direction: column;
-  }
-
   .history__book-cover-left {
     border-radius: 1.95vmin 1.95vmin 0 0;
   }

@@ -81,14 +81,16 @@ describe('useHoldNavigation', () => {
 
   it('mouseup 이벤트는 endContinuousFlip을 트리거한다', () => {
     const { result } = renderHook(() => useHoldNavigation());
-    const endFlip = vi.fn();
     act(() => {
-      result.current.syncCallbacks(vi.fn(), vi.fn(), endFlip);
+      result.current.syncCallbacks(vi.fn(), vi.fn());
+      result.current.beginContinuousFlip('left');
+      result.current.chainHoldFlip();
     });
+    expect(result.current.isHoldChaining).toBe(true);
     act(() => {
       window.dispatchEvent(new MouseEvent('mouseup'));
     });
-    expect(endFlip).toHaveBeenCalledTimes(1);
+    expect(result.current.isHoldChaining).toBe(false);
   });
 
   it('endContinuousFlip은 isHoldChaining을 false로 설정한다', () => {

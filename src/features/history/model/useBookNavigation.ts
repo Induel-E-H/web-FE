@@ -52,7 +52,6 @@ export function useBookNavigation(breakpoint: Breakpoint) {
   const canGoRight =
     activeIndex < INDEX_LIST.length - 1 || currentPageIndex < totalPages - 1;
 
-  // 다음 페이지 계산 (forward)
   let nextPageIndex = currentPageIndex;
   let nextActiveItem: IndexItem = activeItem;
   if (currentPageIndex < totalPages - 1) {
@@ -63,7 +62,6 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     nextPageIndex = 0;
   }
 
-  // 이전 페이지 계산 (backward)
   let prevPageIndex = currentPageIndex;
   let prevActiveItem: IndexItem = activeItem;
   if (currentPageIndex > 0) {
@@ -74,7 +72,6 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     prevPageIndex = pageRegistry[prevActiveItem].totalPages - 1;
   }
 
-  // 하위 훅 초기화
   const {
     isFlipping,
     flipDirection,
@@ -96,18 +93,15 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     isHoldChaining,
     clearHoldDirection,
     beginContinuousFlip,
-    endContinuousFlip,
     chainHoldFlip,
     syncCallbacks,
   } = useHoldNavigation();
 
-  // step 적용 헬퍼
   function applyNavigationStep(step: NavigationStep) {
     setPageIndices((prev) => ({ ...prev, [step.item]: step.pageIndex }));
     setActiveItem(step.item);
   }
 
-  // 애니메이션 완료 콜백 설정
   setOnAnimationComplete(() => {
     // rapid 체이닝 우선
     if (chainNextStep(applyNavigationStep)) return;
@@ -211,18 +205,15 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     startRapidSequence(steps, direction, item, applyNavigationStep);
   }
 
-  // 매 렌더 후 최신 함수 반영
   useEffect(() => {
     syncCallbacks(
       navigateLeft,
       navigateRight,
-      endContinuousFlip,
       () => navigateLeft(RAPID_FLIP_DURATION),
       () => navigateRight(RAPID_FLIP_DURATION),
     );
   });
 
-  // 클린업
   useEffect(() => {
     return () => {
       flipCleanup();
@@ -231,7 +222,6 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Outer shadow count 계산
   const totalSpreads = INDEX_LIST.reduce(
     (sum, item) => sum + pageRegistry[item].totalPages,
     0,

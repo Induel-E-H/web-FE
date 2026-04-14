@@ -1,4 +1,4 @@
-import type { IndexItem, PageSide } from './types';
+import type { IndexItem } from './types';
 
 export const INDEX_LIST: readonly IndexItem[] = [
   'List',
@@ -7,11 +7,7 @@ export const INDEX_LIST: readonly IndexItem[] = [
   'Milestones',
 ];
 
-export const PAGE_SIDE: { readonly LEFT: PageSide; readonly RIGHT: PageSide } =
-  {
-    LEFT: 'left',
-    RIGHT: 'right',
-  };
+export const PAGE_SIDE = { LEFT: 'left', RIGHT: 'right' } as const;
 
 export const FLIP_DURATION = 800;
 export const RAPID_FLIP_DURATION = 300;
