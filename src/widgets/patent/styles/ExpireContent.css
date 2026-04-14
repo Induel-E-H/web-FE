@@ -104,6 +104,13 @@
   border-top: 0.052vmax solid #4c3d34;
 }
 
+.patent__expiration__serial {
+  font-weight: 600;
+  font-size: 0.625vmax;
+
+  color: #827671;
+}
+
 @media (max-width: 1024px) {
   .patent__expiration {
     gap: 2.6vmin;
@@ -158,6 +165,10 @@
   .patent__expiration__item hr {
     border-top: 0.13vmin solid #4c3d34;
   }
+
+  .patent__expiration__serial {
+    font-size: 1.5625vmin;
+  }
 }
 
 @media (max-width: 767px) {
@@ -208,5 +219,9 @@
 
   .patent__expiration__item hr {
     border-top: 0.27vmin solid #4c3d34;
+  }
+
+  .patent__expiration__serial {
+    font-size: 3.2vmin;
   }
 }

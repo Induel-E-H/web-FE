@@ -22,6 +22,9 @@ export function PatentExpireContent() {
                 <span>{index + 1}.</span>
                 <span>{item.title}</span>
               </div>
+              <span className='patent__expiration__serial'>
+                {item.serialNumber}
+              </span>
             </div>
             <hr />
           </li>
