@@ -7,6 +7,15 @@
   background-color: #f0eadc;
 
   cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.patent__card:hover {
+  transform: translateY(-0.25vmax);
+  box-shadow: 0 0.8vmax 1.6vmax rgba(0, 0, 0, 0.2);
 }
 
 .patent__card_frame {

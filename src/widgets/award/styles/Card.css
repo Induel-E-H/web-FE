@@ -14,6 +14,15 @@
   box-shadow: 0 0 0.42vmax 0 rgba(0, 0, 0, 0.25);
 
   cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.award__card:hover {
+  transform: translateY(-0.3vmax);
+  box-shadow: 0 0.6vmax 1.2vmax rgba(0, 0, 0, 0.25);
 }
 
 .award__card__frame {
