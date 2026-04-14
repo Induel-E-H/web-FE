@@ -1,4 +1,6 @@
 .vision__content {
+  width: 100%;
+
   opacity: 0;
   transform: translateY(2.5vmax);
   transition:
@@ -38,7 +40,7 @@
 }
 
 .vision__content__image {
-  width: 54.57%;
+  flex: 1;
   height: 100%;
   overflow: hidden;
   flex-shrink: 0;
@@ -118,10 +120,6 @@
 @media (max-width: 1024px) {
   .vision__content {
     height: 55.34vmin;
-  }
-
-  .vision__content__image {
-    width: 53.39vmin;
   }
 
   .vision__content_text {
