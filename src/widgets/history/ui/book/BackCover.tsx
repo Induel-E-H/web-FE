@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
-
 import '../../styles/book/BackCover.css';
 
 const WORDS = ['EXHIBITION', 'ENVIRONMENTAL', 'INTERIOR'] as const;
@@ -20,23 +18,8 @@ export function BackCoverInner() {
 }
 
 export function BookBackCover({ onClick }: { onClick: () => void }) {
-  const [centered, setCentered] = useState(false);
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    rafRef.current = requestAnimationFrame(() => {
-      setCentered(true);
-    });
-    return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
   return (
-    <div
-      className={`history__back-cover${centered ? ' history__back-cover--centered' : ''}`}
-      onClick={centered ? onClick : undefined}
-    >
+    <div className='history__back-cover' onClick={onClick}>
       <BackCoverInner />
     </div>
   );

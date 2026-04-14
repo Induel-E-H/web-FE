@@ -7,7 +7,7 @@
 
   align-items: center;
 
-  gap: 1.3vmax;
+  gap: 1.19vmax;
 
   padding: 3.13vmax 4.17vmax 2.34vmax 4.17vmax;
 
@@ -28,26 +28,20 @@
 
   width: 65.1vmax;
   height: 100%;
-}
-
-.history__book--open {
-  box-shadow: 0 0.21vmax 0.21vmax rgba(0, 0, 0, 0.25);
-}
-
-.history__book-page {
-  position: absolute;
-  top: 0.57vmax;
-  bottom: 0.57vmax;
-  left: 0.78vmax;
-  right: 0.78vmax;
 
   display: flex;
   flex-direction: row;
 
   gap: 0;
+}
 
-  perspective: 130.21vmax;
-  z-index: 4;
+.history__book-left,
+.history__book-right {
+  flex: 1;
+
+  position: relative;
+
+  height: 100%;
 }
 
 @media (max-width: 1024px) {
@@ -62,22 +56,8 @@
   .history__book {
     width: 68.49vmin;
     height: 100%;
-  }
-
-  .history__book--open {
-    box-shadow: 0 0.52vmin 0.52vmin rgba(0, 0, 0, 0.25);
-  }
-
-  .history__book-page {
-    position: absolute;
-    top: 1.3vmin;
-    bottom: 1.3vmin;
-    left: 1.3vmin;
-    right: 1.3vmin;
 
     flex-direction: column;
-
-    perspective: 173vmin;
   }
 }
 
@@ -93,20 +73,6 @@
   .history__book {
     width: 83.2vmin;
     height: 100%;
-  }
-
-  .history__book--open {
-    box-shadow: 0 1.07vmin 1.07vmin rgba(0, 0, 0, 0.25);
-  }
-
-  .history__book-page {
-    position: absolute;
-    top: 2.67vmin;
-    bottom: 2.67vmin;
-    left: 2.67vmin;
-    right: 2.67vmin;
-
-    perspective: 262vmin;
   }
 }
 

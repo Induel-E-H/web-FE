@@ -1,0 +1,4 @@
+.history__book-page--rapid .history__book-page-flip-panel--animating,
+.history__book-page--hold .history__book-page-flip-panel--animating {
+  transition: transform 0.3s ease-in-out;
+}

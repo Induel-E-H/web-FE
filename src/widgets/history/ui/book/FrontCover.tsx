@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
-
 import { COMPANY } from '@shared/constant/company';
 import { getOrdinalSuffix } from '@shared/lib/ordinal/getOrdinalSuffix';
 
@@ -30,23 +28,8 @@ export function FrontCoverInner() {
 }
 
 export function BookFrontCover({ onClick }: { onClick: () => void }) {
-  const [centered, setCentered] = useState(false);
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    rafRef.current = requestAnimationFrame(() => {
-      setCentered(true);
-    });
-    return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
   return (
-    <div
-      className={`history__front-cover${centered ? ' history__front-cover--centered' : ''}`}
-      onClick={centered ? onClick : undefined}
-    >
+    <div className='history__front-cover' onClick={onClick}>
       <FrontCoverInner />
     </div>
   );
