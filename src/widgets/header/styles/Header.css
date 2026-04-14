@@ -16,10 +16,14 @@
     transform 0.3s ease,
     background-color 0.3s ease,
     color 0.3s ease;
+
+  box-shadow: 0 0.2vmax 0.6vmax rgba(0, 0, 0, 0.08);
 }
 
 .header--hero {
   background-color: transparent;
+
+  box-shadow: none;
 }
 
 .header--hero.header--menu-open {
