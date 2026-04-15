@@ -40,11 +40,11 @@
 }
 
 .history__book-page-flip-panel--forward.flipping {
-  transform: rotateY(180deg);
+  transform: rotateY(-180deg);
 }
 
 .history__book-page-flip-panel--backward.flipping {
-  transform: rotateY(-180deg);
+  transform: rotateY(180deg);
 }
 
 .history__book-page-flip-front,
