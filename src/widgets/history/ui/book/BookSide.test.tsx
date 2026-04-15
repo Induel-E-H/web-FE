@@ -210,4 +210,68 @@ describe('BookSide', () => {
       ).not.toBeInTheDocument();
     });
   });
+
+  describe('pointer-events 비활성화 (cover 중앙 이동 시 반대편 side 차단)', () => {
+    it('cover-front 상태에서 left side는 no-pointer 클래스를 가진다', () => {
+      const { container } = render(
+        <BookSide
+          {...defaultProps}
+          side='left'
+          bookState='cover-front'
+          isBookOpen={false}
+        />,
+      );
+      const el = container.querySelector('.history__book-left')!;
+      expect(el.className).toContain('history__book--no-pointer');
+    });
+
+    it('cover-front 상태에서 right side는 no-pointer 클래스가 없다', () => {
+      const { container } = render(
+        <BookSide
+          {...defaultProps}
+          side='right'
+          bookState='cover-front'
+          isBookOpen={false}
+          onFrontCoverClick={vi.fn()}
+        />,
+      );
+      const el = container.querySelector('.history__book-right')!;
+      expect(el.className).not.toContain('history__book--no-pointer');
+    });
+
+    it('cover-back 상태에서 right side는 no-pointer 클래스를 가진다', () => {
+      const { container } = render(
+        <BookSide
+          {...defaultProps}
+          side='right'
+          bookState='cover-back'
+          isBookOpen={false}
+        />,
+      );
+      const el = container.querySelector('.history__book-right')!;
+      expect(el.className).toContain('history__book--no-pointer');
+    });
+
+    it('cover-back 상태에서 left side는 no-pointer 클래스가 없다', () => {
+      const { container } = render(
+        <BookSide
+          {...defaultProps}
+          side='left'
+          bookState='cover-back'
+          isBookOpen={false}
+          onBackCoverClick={vi.fn()}
+        />,
+      );
+      const el = container.querySelector('.history__book-left')!;
+      expect(el.className).not.toContain('history__book--no-pointer');
+    });
+
+    it('open 상태에서는 no-pointer 클래스가 없다', () => {
+      const { container } = render(
+        <BookSide {...defaultProps} side='left' bookState='open' />,
+      );
+      const el = container.querySelector('.history__book-left')!;
+      expect(el.className).not.toContain('history__book--no-pointer');
+    });
+  });
 });
