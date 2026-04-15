@@ -10,7 +10,7 @@ export function BookCover({
   isHidden?: boolean;
 }) {
   const isLeft = side === PAGE_SIDE.LEFT;
-  const isRight = side === 'right';
+  const isRight = side === PAGE_SIDE.RIGHT;
 
   return (
     <div

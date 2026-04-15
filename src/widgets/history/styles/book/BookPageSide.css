@@ -81,28 +81,26 @@
 }
 
 @media (max-width: 1024px) {
+  .history__book-page-flip-wrapper {
+    perspective: 300vmin;
+  }
+
   .history__book-page-left {
-    position: absolute;
-    top: 0.78vmin;
-    bottom: 0.78vmin;
-    left: 0;
-    right: 0;
+    top: 1.302vmin;
+    bottom: 0;
+    left: 1.302vmin;
+    right: 1.302vmin;
 
     flex-direction: column;
-
-    width: 100%;
   }
 
   .history__book-page-right {
-    position: absolute;
-    top: 0.78vmin;
-    bottom: 0.78vmin;
-    left: 0;
-    right: 0;
+    top: 0;
+    bottom: 1.302vmin;
+    left: 1.302vmin;
+    right: 1.302vmin;
 
     flex-direction: column;
-
-    width: 100%;
   }
 
   .history__book-page-left--clickable {
@@ -121,69 +119,68 @@
 
   .history__book-page-content {
     flex-direction: column;
-
-    flex: 1;
-    min-height: 0;
-    width: 100%;
   }
 
   .history__book-page-right .history__book-page-content {
-    padding: 1.3vmin 1.3vmin 1.3vmin 1.3vmin;
+    padding: 1.953vmin 1.302vmin 1.302vmin 1.302vmin;
 
     background:
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent) top center /
-        100% 0.78vmin no-repeat,
-      linear-gradient(to bottom, #999999, #ffffff) top center / 100% 0.78vmin
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent) top / 100%
+        0.651vmin no-repeat,
+      linear-gradient(to bottom, #999999, #ffffff) top / 100% 0.651vmin
         no-repeat,
       var(--white);
   }
 
   .history__book-page-left .history__book-page-content {
-    padding: 1.3vmin 1.3vmin 1.3vmin 1.3vmin;
+    padding: 1.302vmin 1.302vmin 1.953vmin 1.302vmin;
 
     background:
-      linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent) bottom center /
-        100% 0.78vmin no-repeat,
-      linear-gradient(to top, #999999, #ffffff) bottom center / 100% 0.78vmin
+      linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent) bottom / 100%
+        0.651vmin no-repeat,
+      linear-gradient(to top, #999999, #ffffff) bottom / 100% 0.651vmin
         no-repeat,
       var(--white);
-  }
-
-  .history__book-page-flip-wrapper {
-    perspective: 150vmin;
   }
 }
 
 @media (max-width: 767px) {
-  .history__book-page-left,
-  .history__book-page-right {
-    position: absolute;
-    top: 1.07vmin;
-    bottom: 1.07vmin;
-    left: 0;
-    right: 0;
+  .history__book-page-flip-wrapper {
+    perspective: 614.4vmin;
+  }
 
-    width: 100%;
+  .history__book-page-left {
+    top: 2.667vmin;
+    bottom: 0;
+    left: 2.667vmin;
+    right: 2.667vmin;
+  }
+
+  .history__book-page-right {
+    top: 0;
+    bottom: 2.667vmin;
+    left: 2.667vmin;
+    right: 2.667vmin;
   }
 
   .history__book-page-right .history__book-page-content {
-    padding: 1.6vmin 1.6vmin 1.6vmin 1.6vmin;
+    padding: 2.667vmin 1.333vmin 1.333vmin 1.333vmin;
 
     background:
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent) top center /
-        100% 1.33vmin no-repeat,
-      linear-gradient(to bottom, #999999, #ffffff) top center / 100% 1.33vmin
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent) top / 100%
+        0.667vmin no-repeat,
+      linear-gradient(to bottom, #999999, #ffffff) top / 100% 0.667vmin
         no-repeat,
       var(--white);
   }
 
   .history__book-page-left .history__book-page-content {
-    padding: 1.6vmin 1.6vmin 1.6vmin 1.6vmin;
+    padding: 1.333vmin 1.333vmin 2.667vmin 1.333vmin;
 
     background:
-      linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent) bottom center /
-        100% 1.33vmin no-repeat,
-      linear-gradient(to top, #999999, #ffffff) bottom center / 100% 1.33vmin
+      linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent) bottom / 100%
+        0.667vmin no-repeat,
+      linear-gradient(to top, #999999, #ffffff) bottom / 100% 0.667vmin
         no-repeat,
       var(--white);
   }

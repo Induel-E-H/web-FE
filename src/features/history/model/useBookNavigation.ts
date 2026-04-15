@@ -285,7 +285,6 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     beginContinuousFlip,
     leftShadowCount,
     rightShadowCount,
-    // 커버 flip 연동을 위해 노출
     startFlipAnimation,
     isAnimatingRef,
   };

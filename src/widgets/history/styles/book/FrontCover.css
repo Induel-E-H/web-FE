@@ -1,9 +1,3 @@
-.history__front-cover-inner {
-  position: absolute;
-  inset: 0;
-  background-color: var(--mauve-700);
-}
-
 .history__front-cover {
   position: absolute;
   top: 0;
@@ -24,6 +18,12 @@
   transition: transform 0.4s ease-in-out;
 }
 
+.history__front-cover-inner {
+  position: absolute;
+  inset: 0;
+  background-color: var(--mauve-700);
+}
+
 .history__front-cover--centered {
   transform: translateX(-50%);
 }
@@ -37,7 +37,7 @@
   height: 100%;
 
   background-color: var(--mauve-800);
-  box-shadow: inset 0 0 0.21vmax rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 0.21vmax rgba(0, 0, 0, 0.4);
 }
 
 .history__front-cover-text {
@@ -108,88 +108,76 @@
 
 @media (max-width: 1024px) {
   .history__front-cover {
-    top: auto;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 50%;
-
     border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 1.95vmin;
     border-bottom-right-radius: 1.95vmin;
-
-    transform-origin: top center;
+    border-bottom-left-radius: 1.95vmin;
   }
 
   .history__front-cover--centered {
-    transform: translateY(-150%);
+    transform: translateY(-50%);
   }
 
   .history__front-cover-spine {
-    left: 0;
     top: 1.3vmin;
+    left: 0;
 
     width: 100%;
-    height: 1.82vmin;
+    height: 1.563vmin;
 
-    box-shadow: inset 0 0 0.52vmin rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 0.521vmin rgba(0, 0, 0, 0.4);
   }
 
   .history__front-cover-text {
-    right: 4.43vmin;
-    bottom: 4.95vmin;
+    right: 4.948vmin;
+    bottom: 4.297vmin;
 
-    gap: 2.6vmin;
+    gap: 2.604vmin;
   }
 
   .history__front-cover-title span {
-    font-size: 3.91vmin;
+    font-size: 3.906vmin;
   }
 
   .history__front-cover-year-number {
-    font-size: 13.02vmin;
+    font-size: 13.021vmin;
   }
 
   .history__front-cover-year-ordinal {
-    font-size: 3.91vmin;
+    font-size: 3.906vmin;
   }
 }
 
 @media (max-width: 767px) {
   .history__front-cover {
-    border-bottom-left-radius: 4vmin;
     border-bottom-right-radius: 4vmin;
-
-    height: 50%;
+    border-bottom-left-radius: 4vmin;
   }
 
   .history__front-cover-spine {
-    top: 2.67vmin;
+    top: 2.667vmin;
 
-    height: 2.67vmin;
+    width: 100%;
+    height: 2.667vmin;
 
-    box-shadow: inset 0 0 1.07vmin rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 1.067vmin rgba(0, 0, 0, 0.4);
   }
 
   .history__front-cover-text {
     right: 4vmin;
-    bottom: 6.67vmin;
+    bottom: 6.667vmin;
 
-    gap: 5.33vmin;
+    gap: 5.333vmin;
   }
 
   .history__front-cover-title span {
-    font-size: 5.33vmin;
+    font-size: 5.333vmin;
   }
 
   .history__front-cover-year-number {
-    font-size: 18.67vmin;
+    font-size: 18.667vmin;
   }
 
   .history__front-cover-year-ordinal {
-    font-size: 5.33vmin;
+    font-size: 5.333vmin;
   }
 }
