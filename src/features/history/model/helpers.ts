@@ -1,9 +1,11 @@
 import { artworks } from '@entities/history';
 
+import { PAGE_SIDE } from '../model/constants';
 import type { PageSide } from './types';
 
 export function getArtworkIndex(pageIndex: number, side: PageSide): number {
-  return pageIndex * 2 + (side === 'left' ? 0 : 1);
+  const isLeft = side === PAGE_SIDE.LEFT;
+  return pageIndex * 2 + (isLeft ? 0 : 1);
 }
 
 const thumbnailImages = import.meta.glob(

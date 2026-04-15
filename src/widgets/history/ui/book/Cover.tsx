@@ -1,4 +1,4 @@
-import type { PageSide } from '@features/history';
+import { PAGE_SIDE, type PageSide } from '@features/history';
 
 import '../../styles/book/Cover.css';
 
@@ -9,7 +9,8 @@ export function BookCover({
   side: PageSide;
   isHidden?: boolean;
 }) {
-  const isLeft = side === 'left';
+  const isLeft = side === PAGE_SIDE.LEFT;
+  const isRight = side === 'right';
 
   return (
     <div
@@ -26,7 +27,7 @@ export function BookCover({
 
           <div className='history__book-cover-center-spine-center' />
 
-          {!isLeft && (
+          {isRight && (
             <div className='history__book-cover-center-spine-right' />
           )}
         </div>

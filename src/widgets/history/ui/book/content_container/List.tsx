@@ -1,4 +1,5 @@
 import { artworks } from '@entities/history';
+import { PAGE_SIDE } from '@features/history';
 import type { PageSide } from '@features/history/model/types';
 
 import '../../../styles/book/content_container/List.css';
@@ -15,12 +16,14 @@ export function ListPage({
   side: PageSide;
   onItemClick?: (artworkIndex: number) => void;
 }) {
-  const items = side === 'left' ? leftItems : rightItems;
-  const offset = side === 'left' ? 0 : midpoint;
+  const isLeft = side === PAGE_SIDE.LEFT;
+  const isRight = side === PAGE_SIDE.RIGHT;
+  const items = isLeft ? leftItems : rightItems;
+  const offset = isLeft ? 0 : midpoint;
 
   return (
     <nav className='list__container' aria-label='작품 목록'>
-      <BookPageTitle title='List' hidden={side === 'right'} />
+      <BookPageTitle title='List' hidden={isRight} />
       <ul className='list__ul'>
         {items.map((item, i) => (
           <li key={item.title}>

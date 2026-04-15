@@ -1,5 +1,6 @@
 import { timelineData } from '@entities/history';
-import type { PageSide } from '@features/history/model/types';
+import type { PageSide } from '@features/history';
+import { PAGE_SIDE } from '@features/history';
 
 import '../../../styles/book/content_container/Timeline.css';
 import { BookPageTitle } from '../PageTitle';
@@ -9,11 +10,13 @@ const leftItems = timelineData.slice(0, maxPerPage);
 const rightItems = timelineData.slice(maxPerPage);
 
 export function TimelinePage({ side }: { side: PageSide }) {
-  const items = side === 'left' ? leftItems : rightItems;
+  const isLeft = side === PAGE_SIDE.LEFT;
+  const isRight = side === PAGE_SIDE.RIGHT;
+  const items = isLeft ? leftItems : rightItems;
 
   return (
     <div className='timeline__container'>
-      <BookPageTitle title='Timeline' hidden={side === 'right'} />
+      <BookPageTitle title='Timeline' hidden={isRight} />
       <ul className='timeline__ul'>
         {Array.from({ length: maxPerPage }, (_, i) => {
           const item = items[i];
