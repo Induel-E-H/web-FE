@@ -24,6 +24,10 @@
   transition: transform 0.4s ease-in-out;
 }
 
+.history__front-cover--centered {
+  transform: translateX(-50%);
+}
+
 .history__front-cover-spine {
   position: absolute;
   top: 0;
@@ -118,6 +122,10 @@
     border-bottom-right-radius: 1.95vmin;
 
     transform-origin: top center;
+  }
+
+  .history__front-cover--centered {
+    transform: translateY(-150%);
   }
 
   .history__front-cover-spine {

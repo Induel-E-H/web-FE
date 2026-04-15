@@ -1,3 +1,10 @@
+.history__book-page-flip-wrapper {
+  position: absolute;
+  inset: 0;
+  perspective: 120vmax;
+  z-index: 10;
+}
+
 .history__book-page-left {
   position: absolute;
   top: 0.57vmax;
@@ -140,6 +147,10 @@
       linear-gradient(to top, #999999, #ffffff) bottom center / 100% 0.78vmin
         no-repeat,
       var(--white);
+  }
+
+  .history__book-page-flip-wrapper {
+    perspective: 150vmin;
   }
 }
 

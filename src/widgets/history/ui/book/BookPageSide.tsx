@@ -63,13 +63,14 @@ export function BookPageSide({
   isHidden,
 }: BookPageSideProps) {
   const isLeft = side === PAGE_SIDE.LEFT;
+  const isRight = side === PAGE_SIDE.RIGHT;
 
   const panelDirection = flipDirection ?? 'forward';
 
   const shouldRenderFlip =
     isFlipping &&
     ((isLeft && panelDirection === 'backward') ||
-      (!isLeft && panelDirection === 'forward'));
+      (isRight && panelDirection === 'forward'));
 
   return (
     <>
@@ -81,21 +82,23 @@ export function BookPageSide({
           <BookPageOuterShadow side={side} count={shadowCount} />
         ) : null}
         <div className='history__book-page-content'>{staticContent}</div>
-        {!isLeft ? (
+        {isRight ? (
           <BookPageOuterShadow side={side} count={shadowCount} />
         ) : null}
       </div>
 
       {shouldRenderFlip && (
-        <PageFlip
-          isFlipping={isFlipping}
-          flipDirection={panelDirection}
-          flipDuration={flipDuration}
-          flipFrontContent={flipFrontContent}
-          flipBackContent={flipBackContent}
-          isRapidFlipping={isRapidFlipping}
-          isHoldChaining={isHoldChaining}
-        />
+        <div className='history__book-page-flip-wrapper'>
+          <PageFlip
+            isFlipping={isFlipping}
+            flipDirection={panelDirection}
+            flipDuration={flipDuration}
+            flipFrontContent={flipFrontContent}
+            flipBackContent={flipBackContent}
+            isRapidFlipping={isRapidFlipping}
+            isHoldChaining={isHoldChaining}
+          />
+        </div>
       )}
     </>
   );

@@ -52,8 +52,9 @@ export function BookSide({
   coverBackContent,
 }: BookSideProps) {
   const isLeft = side === PAGE_SIDE.LEFT;
+  const isRight = side === PAGE_SIDE.RIGHT;
 
-  const showFrontCover = !isLeft && bookState === 'cover-front';
+  const showFrontCover = isRight && bookState === 'cover-front';
   const showBackCover = isLeft && bookState === 'cover-back';
 
   const showBookCover =
@@ -63,15 +64,19 @@ export function BookSide({
     isCoverFlip &&
     ((isLeft &&
       (bookState === 'opening-back' || bookState === 'closing-front')) ||
-      (!isLeft &&
+      (isRight &&
         (bookState === 'opening-front' || bookState === 'closing-back')));
 
   const isHidden =
     (isLeft &&
       (bookState === 'opening-front' || bookState === 'closing-front')) ||
-    (!isLeft && (bookState === 'opening-back' || bookState === 'closing-back'));
+    (isRight && (bookState === 'opening-back' || bookState === 'closing-back'));
 
-  const sideClassName = `history__book-${side}${isRapidFlipping ? ' history__book-page--rapid' : ''}${isHoldChaining ? ' history__book-page--hold' : ''}`;
+  const isPointerDisabled =
+    (isLeft && bookState === 'cover-front') ||
+    (isRight && bookState === 'cover-back');
+
+  const sideClassName = `history__book-${side}${isRapidFlipping ? ' history__book-page--rapid' : ''}${isHoldChaining ? ' history__book-page--hold' : ''}${isPointerDisabled ? ' history__book--no-pointer' : ''}`;
 
   return (
     <div className={sideClassName}>

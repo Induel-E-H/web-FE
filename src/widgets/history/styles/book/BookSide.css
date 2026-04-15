@@ -2,3 +2,7 @@
 .history__book-page--hold .history__book-page-flip-panel--animating {
   transition: transform 0.3s ease-in-out;
 }
+
+.history__book--no-pointer {
+  pointer-events: none;
+}
