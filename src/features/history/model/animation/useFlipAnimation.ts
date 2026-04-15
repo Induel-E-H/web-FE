@@ -9,6 +9,7 @@ export function useFlipAnimation() {
   const [flipDirection, setFlipDirection] = useState<FlipDirection | null>(
     null,
   );
+  const [currentFlipDuration, setCurrentFlipDuration] = useState(FLIP_DURATION);
 
   const isAnimatingRef = useRef(false);
   const pendingCompleteRef = useRef<(() => void) | null>(null);
@@ -47,6 +48,7 @@ export function useFlipAnimation() {
     if (isAnimatingRef.current) return;
     isAnimatingRef.current = true;
     pendingCompleteRef.current = onComplete;
+    setCurrentFlipDuration(duration);
     setFlipDirection(direction);
     setIsFlipping(true);
 
@@ -60,6 +62,7 @@ export function useFlipAnimation() {
   return {
     isFlipping,
     flipDirection,
+    currentFlipDuration,
     isAnimatingRef,
     setOnAnimationComplete,
     startFlipAnimation,

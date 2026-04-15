@@ -1,0 +1,55 @@
+.history__category {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 1.56vmax;
+}
+
+.history__category button {
+  font-weight: 600;
+  font-size: 1.04vmax;
+  color: var(--white);
+
+  cursor: pointer;
+}
+
+.history__category button.active {
+  color: var(--brown-300);
+}
+
+.history__category span {
+  font-weight: 600;
+  font-size: 1.04vmax;
+  color: var(--white);
+}
+
+@media (max-width: 1024px) {
+  .history__category {
+    gap: 3.91vmin;
+  }
+
+  .history__category button {
+    font-size: 1.95vmin;
+  }
+
+  .history__category span {
+    font-size: 1.95vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .history__category {
+    gap: 4vmin;
+  }
+
+  .history__category button {
+    font-size: 3.2vmin;
+  }
+
+  .history__category span {
+    font-size: 3.2vmin;
+  }
+}

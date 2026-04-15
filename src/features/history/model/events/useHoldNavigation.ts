@@ -9,7 +9,6 @@ export function useHoldNavigation() {
   const navigateRightRef = useRef<() => void>(() => {});
   const navigateLeftRapidRef = useRef<() => void>(() => {});
   const navigateRightRapidRef = useRef<() => void>(() => {});
-  const endContinuousFlipRef = useRef<() => void>(() => {});
 
   function beginContinuousFlip(direction: 'left' | 'right') {
     holdDirectionRef.current = direction;
@@ -46,7 +45,6 @@ export function useHoldNavigation() {
   function syncCallbacks(
     navigateLeft: () => void,
     navigateRight: () => void,
-    endFlip: () => void,
     navigateLeftRapid?: () => void,
     navigateRightRapid?: () => void,
   ) {
@@ -54,19 +52,13 @@ export function useHoldNavigation() {
     navigateRightRef.current = navigateRight;
     navigateLeftRapidRef.current = navigateLeftRapid ?? navigateLeft;
     navigateRightRapidRef.current = navigateRightRapid ?? navigateRight;
-    endContinuousFlipRef.current = endFlip;
   }
 
-  // 마우스: window-level mouseup
   useEffect(() => {
-    function handleMouseUp() {
-      endContinuousFlipRef.current();
-    }
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => window.removeEventListener('mouseup', handleMouseUp);
+    window.addEventListener('mouseup', endContinuousFlip);
+    return () => window.removeEventListener('mouseup', endContinuousFlip);
   }, []);
 
-  // 키보드
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.repeat) return;
@@ -80,9 +72,9 @@ export function useHoldNavigation() {
     }
     function handleKeyUp(e: KeyboardEvent) {
       if (e.key === 'ArrowLeft' && holdDirectionRef.current === 'left')
-        endContinuousFlipRef.current();
+        endContinuousFlip();
       else if (e.key === 'ArrowRight' && holdDirectionRef.current === 'right')
-        endContinuousFlipRef.current();
+        endContinuousFlip();
     }
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
@@ -92,7 +84,6 @@ export function useHoldNavigation() {
     };
   }, []);
 
-  // 클린업
   useEffect(() => {
     return () => {
       if (chainTimerRef.current) clearTimeout(chainTimerRef.current);

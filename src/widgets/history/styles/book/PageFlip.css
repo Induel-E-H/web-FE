@@ -1,0 +1,114 @@
+.history__book-right .history__book-page-flip-panel {
+  position: absolute;
+  top: 0.57vmax;
+  bottom: 0.57vmax;
+  right: 0.78vmax;
+  left: 0;
+
+  transform-style: preserve-3d;
+  z-index: 10;
+}
+
+.history__book-left .history__book-page-flip-panel {
+  position: absolute;
+  top: 0.57vmax;
+  bottom: 0.57vmax;
+  left: 0.78vmax;
+  right: 0;
+
+  transform-style: preserve-3d;
+  z-index: 10;
+}
+
+.history__book-page-flip-panel--hidden {
+  display: none;
+}
+
+.history__book-page-flip-panel--forward {
+  left: 0;
+  right: 0;
+  transform-origin: left center;
+}
+
+.history__book-page-flip-panel--backward {
+  left: 0;
+  right: 0;
+  transform-origin: right center;
+}
+
+.history__book-page-flip-panel--animating {
+  transition: transform 0.8s ease-in-out;
+}
+
+.history__book-page-flip-panel--forward.flipping {
+  transform: rotateY(-180deg);
+}
+
+.history__book-page-flip-panel--backward.flipping {
+  transform: rotateY(180deg);
+}
+
+.history__book-page-flip-front,
+.history__book-page-flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: auto;
+}
+
+.history__book-page-flip-back {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 1024px) {
+  .history__book-left .history__book-page-flip-panel {
+    top: 1.302vmin;
+    bottom: 0;
+    left: 1.302vmin;
+    right: 1.302vmin;
+  }
+
+  .history__book-right .history__book-page-flip-panel {
+    top: 0;
+    bottom: 1.302vmin;
+    left: 1.302vmin;
+    right: 1.302vmin;
+  }
+
+  .history__book-page-flip-panel--forward {
+    transform-origin: top;
+  }
+
+  .history__book-page-flip-panel--backward {
+    transform-origin: bottom;
+  }
+
+  .history__book-page-flip-panel--forward.flipping {
+    transform: rotateX(180deg);
+  }
+
+  .history__book-page-flip-panel--backward.flipping {
+    transform: rotateX(-180deg);
+  }
+
+  .history__book-page-flip-back {
+    transform: rotateX(-180deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .history__book-left .history__book-page-flip-panel {
+    top: 2.667vmin;
+    bottom: 0;
+    left: 2.667vmin;
+    right: 2.667vmin;
+  }
+
+  .history__book-right .history__book-page-flip-panel {
+    top: 0;
+    bottom: 2.667vmin;
+    left: 2.667vmin;
+    right: 2.667vmin;
+  }
+}

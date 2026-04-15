@@ -1,0 +1,232 @@
+.history__book-cover--hidden {
+  visibility: hidden;
+}
+
+.history__book-cover-left,
+.history__book-cover-right {
+  position: absolute;
+  inset: 0;
+
+  background-color: var(--mauve-500);
+  z-index: 2;
+}
+
+.history__book-cover-left {
+  border-radius: 0.78vmax 0 0 0.78vmax;
+
+  box-shadow:
+    0.52vmax 0 1.04vmax rgba(0, 0, 0, 0.25),
+    inset -0.26vmax 0 0.52vmax rgba(0, 0, 0, 0.2);
+}
+
+.history__book-cover-right {
+  border-radius: 0 0.78vmax 0.78vmax 0;
+
+  box-shadow:
+    -0.52vmax 0 1.04vmax rgba(0, 0, 0, 0.25),
+    inset 0.26vmax 0 0.52vmax rgba(0, 0, 0, 0.2);
+}
+
+.history__book-cover-center {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 0.675vmax;
+}
+
+.history__book-cover-left .history__book-cover-center {
+  right: 0;
+}
+
+.history__book-cover-right .history__book-cover-center {
+  left: 0;
+}
+
+.history__book-cover-center-line {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  gap: 0;
+
+  padding: 0.26vmax 0;
+
+  z-index: 1;
+}
+
+.history__book-cover-center-line div {
+  width: 100%;
+  height: 1.04vmax;
+
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.history__book-cover-center-spine {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: row;
+
+  z-index: 0;
+}
+
+.history__book-cover-center-spine-left,
+.history__book-cover-center-spine-right {
+  width: 38.46%;
+  height: 100%;
+
+  background-color: var(--mauve-600);
+}
+
+.history__book-cover-center-spine-center {
+  width: 61.54%;
+  height: 100%;
+
+  background-color: var(--mauve-700);
+}
+
+.history__book-cover-left .history__book-cover-center-spine-center {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+.history__book-cover-right .history__book-cover-center-spine-center {
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+@media (max-width: 1024px) {
+  .history__book-cover-left {
+    border-radius: 1.953vmin 1.953vmin 0 0;
+
+    box-shadow:
+      0 1.3vmin 2.6vmin rgba(0, 0, 0, 0.25),
+      inset 0 -0.65vmin 1.3vmin rgba(0, 0, 0, 0.2);
+  }
+
+  .history__book-cover-right {
+    border-radius: 0 0 1.953vmin 1.953vmin;
+
+    box-shadow:
+      -1.3vmin 0 2.6vmin rgba(0, 0, 0, 0.25),
+      inset 0.65vmin 0 1.3vmin rgba(0, 0, 0, 0.2);
+  }
+
+  .history__book-cover-center {
+    height: 1.563vmin;
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .history__book-cover-left .history__book-cover-center {
+    top: auto;
+    bottom: 0;
+  }
+
+  .history__book-cover-right .history__book-cover-center {
+    top: 0;
+  }
+
+  .history__book-cover-center-line {
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    gap: 0;
+
+    padding: 0 0.651vmin;
+
+    z-index: 1;
+  }
+
+  .history__book-cover-center-line div {
+    width: 2.604vmin;
+    height: 100%;
+  }
+
+  .history__book-cover-center-spine {
+    flex-direction: column;
+  }
+
+  .history__book-cover-center-spine-left,
+  .history__book-cover-center-spine-right {
+    width: 100%;
+    height: 0.781vmin;
+  }
+
+  .history__book-cover-center-spine-center {
+    width: 100%;
+    height: 0.781vmin;
+  }
+
+  .history__book-cover-left .history__book-cover-center-spine-center {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.3) 70%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+  }
+
+  .history__book-cover-right .history__book-cover-center-spine-center {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.3) 70%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+  }
+}
+
+@media (max-width: 767px) {
+  .history__book-cover-left {
+    border-radius: 4vmin 4vmin 0 0;
+
+    box-shadow:
+      0 2.662vmin 5.325vmin rgba(0, 0, 0, 0.25),
+      inset 0 -1.331vmin 2.662vmin rgba(0, 0, 0, 0.2);
+  }
+
+  .history__book-cover-right {
+    border-radius: 0 0 4vmin 4vmin;
+
+    box-shadow:
+      -2.662vmin 0 5.325vmin rgba(0, 0, 0, 0.25),
+      inset 1.331vmin 0 2.662vmin rgba(0, 0, 0, 0.2);
+  }
+
+  .history__book-cover-center {
+    height: 2.933vmin;
+  }
+
+  .history__book-cover-center-line {
+    padding: 0 1.333vmin;
+  }
+
+  .history__book-cover-center-line div {
+    width: 4vmin;
+  }
+
+  .history__book-cover-center-spine-left,
+  .history__book-cover-center-spine-right {
+    height: 1.867vmin;
+  }
+
+  .history__book-cover-center-spine-center {
+    height: 1.067vmin;
+  }
+}

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { IoMdClose } from 'react-icons/io';
 
 import {
   lockScroll,
   unlockScroll,
 } from '@shared/lib/useScrollLock/useScrollLock';
 import { ImageSlider, useSliderNavigation } from '@shared/ui/ImageSlider';
+import { Popup } from '@shared/ui/Popup';
 
 import '../styles/ImageGalleryPopup.css';
 
@@ -61,35 +61,16 @@ export function ImageGalleryPopup({
   ]);
 
   return (
-    <div
-      className='image-gallery-overlay'
-      onMouseDown={(e) => {
-        e.stopPropagation();
-        if (e.target === e.currentTarget) onClose();
-      }}
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className='image-gallery-popup'>
-        <div className='image-gallery-popup__header'>
-          <h3 className='image-gallery-popup__title'>{title}</h3>
-          <button
-            className='image-gallery-popup__close'
-            onClick={onClose}
-            aria-label='닫기'
-          >
-            <IoMdClose size='1.6vmax' />
-          </button>
-        </div>
-        <hr />
-        <ImageSlider
-          images={images}
-          currentIndex={currentIndex}
-          alt={title}
-          onPrev={() => startContinuousSlide(goToPrevSlide)}
-          onNext={() => startContinuousSlide(goToNextSlide)}
-          onRelease={stopContinuousSlide}
-        />
-      </div>
-    </div>
+    <Popup ariaLabel={title} title={title} variant='gallery' onClose={onClose}>
+      <hr className='image-gallery-popup__divider' />
+      <ImageSlider
+        images={images}
+        currentIndex={currentIndex}
+        alt={title}
+        onPrev={() => startContinuousSlide(goToPrevSlide)}
+        onNext={() => startContinuousSlide(goToNextSlide)}
+        onRelease={stopContinuousSlide}
+      />
+    </Popup>
   );
 }

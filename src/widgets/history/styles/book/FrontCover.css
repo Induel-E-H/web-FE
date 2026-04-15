@@ -1,0 +1,183 @@
+.history__front-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--mauve-700);
+
+  cursor: pointer;
+  z-index: 20;
+
+  border-top-right-radius: 0.78vmax;
+  border-bottom-right-radius: 0.78vmax;
+
+  overflow: hidden;
+
+  transition: transform 0.4s ease-in-out;
+}
+
+.history__front-cover-inner {
+  position: absolute;
+  inset: 0;
+  background-color: var(--mauve-700);
+}
+
+.history__front-cover--centered {
+  transform: translateX(-50%);
+}
+
+.history__front-cover-spine {
+  position: absolute;
+  top: 0;
+  left: 1.3vmax;
+
+  width: 0.83vmax;
+  height: 100%;
+
+  background-color: var(--mauve-800);
+  box-shadow: inset 0 0 0.21vmax rgba(0, 0, 0, 0.4);
+}
+
+.history__front-cover-text {
+  position: absolute;
+  right: 3.65vmax;
+  bottom: 5.21vmax;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.88vmax;
+}
+
+.history__front-cover-title,
+.history__front-cover-year {
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: goldShine 3s linear infinite;
+}
+
+.history__front-cover-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 0;
+}
+
+.history__front-cover-title span {
+  font-size: 2.86vmax;
+  font-weight: 600;
+
+  line-height: 100%;
+  letter-spacing: 0.1em;
+}
+
+.history__front-cover-year {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 0;
+
+  font-weight: 700;
+
+  transform: skewX(-10deg);
+}
+
+.history__front-cover-year-number {
+  font-family: 'BookendBatang';
+  font-size: 7.29vmax;
+
+  line-height: 100%;
+}
+
+.history__front-cover-year-ordinal {
+  font-family: 'BookendBatang';
+  font-size: 2.6vmax;
+
+  line-height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .history__front-cover {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 1.95vmin;
+    border-bottom-left-radius: 1.95vmin;
+  }
+
+  .history__front-cover--centered {
+    transform: translateY(-50%);
+  }
+
+  .history__front-cover-spine {
+    top: 1.3vmin;
+    left: 0;
+
+    width: 100%;
+    height: 1.563vmin;
+
+    box-shadow: inset 0 0 0.521vmin rgba(0, 0, 0, 0.4);
+  }
+
+  .history__front-cover-text {
+    right: 4.948vmin;
+    bottom: 4.297vmin;
+
+    gap: 2.604vmin;
+  }
+
+  .history__front-cover-title span {
+    font-size: 3.906vmin;
+  }
+
+  .history__front-cover-year-number {
+    font-size: 13.021vmin;
+  }
+
+  .history__front-cover-year-ordinal {
+    font-size: 3.906vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .history__front-cover {
+    border-bottom-right-radius: 4vmin;
+    border-bottom-left-radius: 4vmin;
+  }
+
+  .history__front-cover-spine {
+    top: 2.667vmin;
+
+    width: 100%;
+    height: 2.667vmin;
+
+    box-shadow: inset 0 0 1.067vmin rgba(0, 0, 0, 0.4);
+  }
+
+  .history__front-cover-text {
+    right: 4vmin;
+    bottom: 6.667vmin;
+
+    gap: 5.333vmin;
+  }
+
+  .history__front-cover-title span {
+    font-size: 5.333vmin;
+  }
+
+  .history__front-cover-year-number {
+    font-size: 18.667vmin;
+  }
+
+  .history__front-cover-year-ordinal {
+    font-size: 5.333vmin;
+  }
+}

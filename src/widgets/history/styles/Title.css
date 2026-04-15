@@ -1,0 +1,77 @@
+.history__title {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  gap: 0;
+}
+
+.history__title__description {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  gap: 0.78vmax;
+
+  color: #e7c889;
+}
+
+.history__title__description hr {
+  border: none;
+  border-top: 0.1vmax solid #e7c889;
+  width: 4.17vmax;
+}
+
+.history__title__description p {
+  font-weight: 700;
+  font-size: 0.63vmax;
+  letter-spacing: 0.15em;
+}
+
+.history__title h2 {
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 3.13vmax;
+
+  color: #f0ead6;
+}
+
+@media (max-width: 1024px) {
+  .history__title__description {
+    gap: 1.95vmin;
+  }
+
+  .history__title__description hr {
+    border-top: 0.26vmin solid #e7c889;
+    width: 9.11vmin;
+  }
+
+  .history__title__description p {
+    font-size: 1.3vmin;
+  }
+
+  .history__title h2 {
+    font-size: 5.21vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .history__title__description {
+    gap: 4vmin;
+  }
+
+  .history__title__description hr {
+    border-top: 0.53vmin solid #e7c889;
+    width: 16vmin;
+  }
+
+  .history__title__description p {
+    font-size: 2.13vmin;
+  }
+
+  .history__title h2 {
+    font-size: 8vmin;
+  }
+}

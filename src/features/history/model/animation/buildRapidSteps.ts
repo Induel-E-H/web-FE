@@ -1,91 +1,110 @@
-import { INDEX_LIST, MIN_RAPID_FLIPS } from '../constants';
+import {
+  INDEX_LIST,
+  MAX_SOURCE_PAGE_FLIPS,
+  PASS_THROUGH_FLIP_DURATION,
+  RAPID_FLIP_DURATION,
+} from '../constants';
 import type { FlipDirection, IndexItem, NavigationStep } from '../types';
 
 export function buildRapidSteps(params: {
-  activeItem: IndexItem;
   activeIndex: number;
   currentPageIndex: number;
-  totalPages: number;
   targetItem: IndexItem;
   targetPageIndex: number;
-  targetTotalPages: number;
   direction: FlipDirection;
+  getLastPageIndex: (item: IndexItem) => number;
 }): NavigationStep[] {
   const {
-    activeItem,
     activeIndex,
     currentPageIndex,
-    totalPages,
     targetItem,
     targetPageIndex,
-    targetTotalPages,
     direction,
+    getLastPageIndex,
   } = params;
 
   const targetIndex = INDEX_LIST.indexOf(targetItem);
 
-  // 카테고리 횡단 스텝
-  const crossSteps: NavigationStep[] = [];
   if (targetIndex === activeIndex) {
-    crossSteps.push({ item: targetItem, pageIndex: targetPageIndex });
-  } else if (direction === 'forward') {
-    for (let i = activeIndex + 1; i <= targetIndex; i++) {
-      crossSteps.push({
-        item: INDEX_LIST[i],
-        pageIndex: i === targetIndex ? targetPageIndex : 0,
+    return [
+      {
+        item: targetItem,
+        pageIndex: targetPageIndex,
+        duration: RAPID_FLIP_DURATION,
+      },
+    ];
+  }
+
+  const steps: NavigationStep[] = [];
+  const sourceItem = INDEX_LIST[activeIndex];
+
+  if (direction === 'forward') {
+    const sourceLast = getLastPageIndex(sourceItem);
+    const fwdEnd = Math.min(
+      currentPageIndex + MAX_SOURCE_PAGE_FLIPS,
+      sourceLast,
+    );
+    for (let p = currentPageIndex + 1; p <= fwdEnd; p++) {
+      steps.push({
+        item: sourceItem,
+        pageIndex: p,
+        duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
+    for (let i = activeIndex + 1; i < targetIndex; i++) {
+      steps.push({
+        item: INDEX_LIST[i],
+        pageIndex: getLastPageIndex(INDEX_LIST[i]),
+        duration: PASS_THROUGH_FLIP_DURATION,
+      });
+    }
+    const numApproach = Math.min(MAX_SOURCE_PAGE_FLIPS - 1, targetPageIndex);
+    for (let p = targetPageIndex - numApproach; p < targetPageIndex; p++) {
+      steps.push({
+        item: targetItem,
+        pageIndex: p,
+        duration: PASS_THROUGH_FLIP_DURATION,
+      });
+    }
+    steps.push({
+      item: targetItem,
+      pageIndex: targetPageIndex,
+      duration: RAPID_FLIP_DURATION,
+    });
   } else {
-    for (let i = activeIndex - 1; i >= targetIndex; i--) {
-      crossSteps.push({
-        item: INDEX_LIST[i],
-        pageIndex: i === targetIndex ? targetPageIndex : 0,
+    const bwdEnd = Math.max(currentPageIndex - MAX_SOURCE_PAGE_FLIPS, 0);
+    for (let p = currentPageIndex - 1; p >= bwdEnd; p--) {
+      steps.push({
+        item: sourceItem,
+        pageIndex: p,
+        duration: PASS_THROUGH_FLIP_DURATION,
       });
     }
-  }
-
-  // 1단계: 현재 카테고리 내 페이지 패딩
-  const paddingNeeded = Math.max(MIN_RAPID_FLIPS - crossSteps.length, 0);
-  const prePadding: NavigationStep[] = [];
-  for (let p = 1; p <= paddingNeeded; p++) {
-    if (direction === 'forward') {
-      const padPage = currentPageIndex + p;
-      if (padPage >= totalPages) break;
-      prePadding.push({ item: activeItem, pageIndex: padPage });
-    } else {
-      const padPage = currentPageIndex - p;
-      if (padPage < 0) break;
-      prePadding.push({ item: activeItem, pageIndex: padPage });
+    for (let i = activeIndex - 1; i > targetIndex; i--) {
+      steps.push({
+        item: INDEX_LIST[i],
+        pageIndex: 0,
+        duration: PASS_THROUGH_FLIP_DURATION,
+      });
     }
-  }
-
-  // 2단계: 타겟 카테고리 내 페이지 패딩
-  const stillNeeded = paddingNeeded - prePadding.length;
-  const postPadding: NavigationStep[] = [];
-  for (let p = 1; p <= stillNeeded; p++) {
-    if (direction === 'forward') {
-      const padPage = targetPageIndex + (stillNeeded - p + 1);
-      if (padPage >= targetTotalPages || padPage <= targetPageIndex) continue;
-      postPadding.push({ item: targetItem, pageIndex: padPage });
-    } else {
-      const padPage = targetPageIndex + p;
-      if (padPage >= targetTotalPages) break;
-      postPadding.push({ item: targetItem, pageIndex: padPage });
+    const destLast = getLastPageIndex(targetItem);
+    const numApproach = Math.min(
+      MAX_SOURCE_PAGE_FLIPS - 1,
+      destLast - targetPageIndex,
+    );
+    for (let p = targetPageIndex + numApproach; p > targetPageIndex; p--) {
+      steps.push({
+        item: targetItem,
+        pageIndex: p,
+        duration: PASS_THROUGH_FLIP_DURATION,
+      });
     }
-  }
-  if (direction === 'backward') postPadding.reverse();
-
-  // 조합
-  const allSteps = [...prePadding, ...crossSteps];
-  if (postPadding.length > 0) {
-    const targetStep = allSteps.pop()!;
-    allSteps.push(...postPadding, targetStep);
+    steps.push({
+      item: targetItem,
+      pageIndex: targetPageIndex,
+      duration: RAPID_FLIP_DURATION,
+    });
   }
 
-  // 제자리 플립으로 최소 횟수 보충
-  while (allSteps.length < MIN_RAPID_FLIPS) {
-    allSteps.unshift({ item: activeItem, pageIndex: currentPageIndex });
-  }
-
-  return allSteps;
+  return steps;
 }

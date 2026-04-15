@@ -3,7 +3,7 @@ import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import type { IndexItem } from './types';
 
-export const AWARD_YEAR_RANGES_BY_BREAKPOINT: Record<
+export const MILESTONES_YEAR_RANGES_BY_BREAKPOINT: Record<
   Breakpoint,
   readonly (readonly [number, number])[]
 > = {
@@ -20,6 +20,15 @@ export const AWARD_YEAR_RANGES_BY_BREAKPOINT: Record<
     [2014, 2016],
     [2017, 2019],
   ],
+  mobile: [
+    [2003, 2005],
+    [2006, 2007],
+    [2008, 2009],
+    [2010, 2012],
+    [2013, 2015],
+    [2016, 2018],
+    [2019, 2019],
+  ],
 };
 
 export type PageConfig = {
@@ -34,12 +43,12 @@ export function getPageRegistry(
   const cachedRegistry = cache.get(breakpoint);
   if (cachedRegistry) return cachedRegistry;
 
-  const ranges = AWARD_YEAR_RANGES_BY_BREAKPOINT[breakpoint];
+  const ranges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT[breakpoint];
   const registry: Record<IndexItem, PageConfig> = {
     List: { totalPages: 1 },
     Content: { totalPages: Math.ceil(artworks.length / 2) },
     Timeline: { totalPages: 1 },
-    Award: { totalPages: Math.ceil(ranges.length / 2) },
+    Milestones: { totalPages: Math.ceil(ranges.length / 2) },
   };
   cache.set(breakpoint, registry);
   return registry;
