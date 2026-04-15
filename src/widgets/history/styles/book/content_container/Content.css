@@ -193,19 +193,19 @@
 
 @media (max-width: 767px) {
   .content__item {
-    gap: 1.33vmin;
+    gap: 1.333vmin;
   }
 
   .content__text {
-    gap: 1.6vmin;
+    gap: 1.333vmin;
   }
 
   .content__title-eng {
-    font-size: 4.8vmin;
+    font-size: 4.267vmin;
   }
 
   .content__title-kor {
-    font-size: 4.27vmin;
+    font-size: 3.733vmin;
   }
 
   .content__subtitle {
