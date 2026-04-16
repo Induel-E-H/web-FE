@@ -2,7 +2,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Footer } from './ui/Footer';
+import { Footer } from './Footer';
 
 const meta = {
   title: 'Widgets/Footer',
