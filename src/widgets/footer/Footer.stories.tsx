@@ -30,13 +30,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Desktop: Story = {
   name: 'Desktop (1920px)',
+  globals: {
+    viewport: { value: 'desktop' },
+  },
   parameters: {
-    viewport: {
-      defaultViewport: 'desktop',
-    },
     docs: {
       description: {
-        story: '1440px 이상 데스크탑 해상도에서의 Footer 레이아웃.',
+        story: '1920px 데스크탑 해상도에서의 Footer 레이아웃.',
       },
     },
   },
@@ -44,14 +44,13 @@ export const Desktop: Story = {
 
 export const Tablet: Story = {
   name: 'Tablet (768px)',
+  globals: {
+    viewport: { value: 'tablet' },
+  },
   parameters: {
-    viewport: {
-      defaultViewport: 'tablet',
-    },
     docs: {
       description: {
-        story:
-          '1024px 이하 태블릿 해상도에서의 Footer 레이아웃. vmin 단위로 전환됩니다.',
+        story: '768px 태블릿 해상도에서의 Footer 레이아웃.',
       },
     },
   },
@@ -59,14 +58,14 @@ export const Tablet: Story = {
 
 export const Mobile: Story = {
   name: 'Mobile (375px)',
+  globals: {
+    viewport: { value: 'mobile' },
+  },
   parameters: {
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
     docs: {
       description: {
         story:
-          '767px 이하 모바일 해상도에서의 Footer 레이아웃. footer__content가 column 방향으로 전환되고 footer__right가 좌측 정렬됩니다.',
+          '375px 모바일 해상도에서의 Footer 레이아웃. footer__content가 column 방향으로 전환되고 footer__right가 좌측 정렬됩니다.',
       },
     },
   },
