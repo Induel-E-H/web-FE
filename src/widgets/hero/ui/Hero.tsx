@@ -4,11 +4,10 @@ import { COMPANY } from '@shared/constant';
 
 import induelIcon from '@assets/induel-icon.svg';
 
-import { showScrollArrow } from '../model/heroConfig';
 import '../styles/Hero.css';
 import HeroBackground from './HeroBackground';
 
-function Hero() {
+function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
     <section className='hero'>
       <HeroBackground />

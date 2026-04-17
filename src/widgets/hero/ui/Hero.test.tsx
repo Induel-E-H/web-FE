@@ -12,13 +12,13 @@ vi.mock('./HeroBackground', () => ({
 describe('Hero', () => {
   describe('회사 정보 표시', () => {
     it('회사 로고가 올바른 alt 텍스트로 렌더링된다', () => {
-      render(<Hero />);
+      render(<Hero showScrollArrow={false} />);
 
       expect(screen.getByAltText('인들이앤에이치 로고')).toBeInTheDocument();
     });
 
     it('로고 이미지에 src 속성이 존재한다', () => {
-      render(<Hero />);
+      render(<Hero showScrollArrow={false} />);
 
       const logo = screen.getByAltText('인들이앤에이치 로고');
       expect(logo).toHaveAttribute('src');
@@ -26,7 +26,7 @@ describe('Hero', () => {
     });
 
     it('로고 이미지에 hero__logo 클래스가 적용된다', () => {
-      render(<Hero />);
+      render(<Hero showScrollArrow={false} />);
 
       expect(screen.getByAltText('인들이앤에이치 로고')).toHaveClass(
         'hero__logo',
@@ -34,20 +34,20 @@ describe('Hero', () => {
     });
 
     it('회사 한글 이름이 h1 요소로 표시된다', () => {
-      render(<Hero />);
+      render(<Hero showScrollArrow={false} />);
 
       const heading = screen.getByRole('heading', { level: 1 });
       expect(heading).toHaveTextContent(`(주) ${COMPANY.NAME_KO}`);
     });
 
     it('회사 영문 풀네임이 표시된다', () => {
-      render(<Hero />);
+      render(<Hero showScrollArrow={false} />);
 
       expect(screen.getByText(COMPANY.NAME_EN_FULL)).toBeInTheDocument();
     });
 
     it('설립일이 올바른 dateTime 속성과 함께 표시된다', () => {
-      render(<Hero />);
+      render(<Hero showScrollArrow={false} />);
 
       const timeEl = screen.getByText(`SINCE ${COMPANY.ESTABLISHED_DISPLAY}`, {
         exact: false,
@@ -60,7 +60,7 @@ describe('Hero', () => {
 
   describe('시맨틱 구조', () => {
     it('최상위 요소가 section으로 렌더링된다', () => {
-      const { container } = render(<Hero />);
+      const { container } = render(<Hero showScrollArrow={false} />);
 
       const section = container.querySelector('section');
       expect(section).toBeInTheDocument();
@@ -68,13 +68,13 @@ describe('Hero', () => {
     });
 
     it('HeroBackground canvas가 렌더링된다', () => {
-      const { container } = render(<Hero />);
+      const { container } = render(<Hero showScrollArrow={false} />);
 
       expect(container.querySelector('canvas')).toBeInTheDocument();
     });
 
     it('회사명과 영문명이 hgroup으로 묶인다', () => {
-      const { container } = render(<Hero />);
+      const { container } = render(<Hero showScrollArrow={false} />);
 
       const hgroup = container.querySelector('hgroup');
       expect(hgroup).toBeInTheDocument();
@@ -83,7 +83,7 @@ describe('Hero', () => {
     });
 
     it('설립일 time 요소는 hgroup 밖에 위치한다', () => {
-      const { container } = render(<Hero />);
+      const { container } = render(<Hero showScrollArrow={false} />);
 
       const hgroup = container.querySelector('hgroup');
       expect(hgroup?.querySelector('time')).not.toBeInTheDocument();
@@ -93,7 +93,7 @@ describe('Hero', () => {
 
   describe('환경별 분기', () => {
     it('비프로덕션 환경에서 개발 중 안내 문구가 표시된다', () => {
-      render(<Hero />);
+      render(<Hero showScrollArrow={false} />);
 
       expect(screen.getByText('현재 개발중입니다!')).toBeInTheDocument();
     });

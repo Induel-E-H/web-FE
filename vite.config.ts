@@ -3,7 +3,9 @@ import { defineConfig } from 'vite';
 import sitemap from 'vite-plugin-sitemap';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-// https://vite.dev/config/
+const isStorybook =
+  process.env.STORYBOOK === 'true' || process.env.CHROMATIC === 'true';
+
 export const baseConfig = {
   plugins: [
     react({
@@ -12,8 +14,8 @@ export const baseConfig = {
       },
     }),
     tsconfigPaths(),
-    sitemap({ hostname: 'https://induel.co.kr' }),
-  ],
+    !isStorybook && sitemap({ hostname: 'https://induel.co.kr' }),
+  ].filter(Boolean),
   server: {
     host: true,
     port: 5173,
