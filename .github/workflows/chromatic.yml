@@ -6,6 +6,8 @@ on:
   pull_request_target:
     branches: [develop]
 
+  workflow_dispatch:
+
 # List of jobs
 jobs:
   chromatic:
