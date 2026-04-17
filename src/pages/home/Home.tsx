@@ -6,6 +6,7 @@ import Award from '@widgets/award';
 import { Footer } from '@widgets/footer';
 import { Header } from '@widgets/header/ui/Header';
 import Hero from '@widgets/hero';
+import { showScrollArrow } from '@widgets/hero/model/heroConfig';
 import History from '@widgets/history';
 import Map from '@widgets/map';
 import Patent from '@widgets/patent';
@@ -16,7 +17,7 @@ const isStaging = import.meta.env.MODE === 'staging';
 
 const WIDGET_MAP: Record<string, ReactNode> = {
   header: <Header />,
-  hero: <Hero />,
+  hero: <Hero showScrollArrow={showScrollArrow} />,
   vision: <Vision />,
   history: <History />,
   award: <Award />,
@@ -66,13 +67,13 @@ function Home() {
   }
 
   if (isStaging) {
-    return <Hero />;
+    return <Hero showScrollArrow={showScrollArrow} />;
   }
 
   return (
     <>
       <Header />
-      <Hero />
+      <Hero showScrollArrow={showScrollArrow} />
       <Vision />
       <History />
       <Award />
