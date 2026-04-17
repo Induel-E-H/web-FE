@@ -3,6 +3,7 @@ import type { Preview } from '@storybook/react-vite';
 import '../src/app/styles/index.css';
 
 const preview: Preview = {
+  tags: ['autodocs'],
   parameters: {
     controls: {
       matchers: {
@@ -24,7 +25,7 @@ const preview: Preview = {
         },
         mobile: {
           name: 'Mobile (375px)',
-          styles: { width: '375px', height: '600px' },
+          styles: { width: '375px', height: '680px' },
           type: 'mobile',
         },
       },
