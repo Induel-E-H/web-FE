@@ -6,6 +6,11 @@ import { YearCategory } from './YearCategory';
 const meta = {
   title: 'Features/Award/YearCategory',
   component: YearCategory,
+  args: {
+    yearList: YEAR_LIST,
+    activeYear: '전체',
+    onYearChange: () => {},
+  },
   parameters: {
     layout: 'centered',
     docs: {
@@ -22,11 +27,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '기본',
-  args: {
-    yearList: YEAR_LIST,
-    activeYear: '전체',
-    onYearChange: () => {},
-  },
   parameters: {
     docs: {
       description: {
@@ -40,9 +40,7 @@ export const Default: Story = {
 export const SelectedYear: Story = {
   name: '선택된 연도',
   args: {
-    yearList: YEAR_LIST,
     activeYear: YEAR_LIST[1],
-    onYearChange: () => {},
   },
   parameters: {
     docs: {

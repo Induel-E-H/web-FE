@@ -33,6 +33,9 @@ export const Default: Story = {
     itemsPerPage: 10,
     totalPages: Math.ceil(AWARD_LIST.length / 10),
   },
+  globals: {
+    viewport: { value: 'desktop' },
+  },
   parameters: {
     docs: {
       description: {
@@ -40,4 +43,20 @@ export const Default: Story = {
       },
     },
   },
+};
+
+export const Tablet = {
+  name: '(3×2, 6개/페이지)',
+  globals: {
+    viewport: { value: 'tablet' },
+  },
+  args: { itemsPerPage: 6, totalPages: Math.ceil(AWARD_LIST.length / 6) },
+};
+
+export const Mobile = {
+  name: '(2×2, 4개/페이지)',
+  globals: {
+    viewport: { value: 'mobile' },
+  },
+  args: { itemsPerPage: 4, totalPages: Math.ceil(AWARD_LIST.length / 4) },
 };

@@ -6,6 +6,9 @@ import { AwardCount } from './Count';
 const meta = {
   title: 'Widgets/Award/Count',
   component: AwardCount,
+  args: {
+    awardList: AWARD_LIST,
+  },
   parameters: {
     layout: 'centered',
     docs: {
@@ -21,9 +24,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '기본 (10건)',
-  args: {
-    awardList: AWARD_LIST,
-  },
   parameters: {
     docs: {
       description: {

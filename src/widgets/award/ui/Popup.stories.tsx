@@ -8,6 +8,7 @@ const meta = {
   component: AwardPopup,
   args: {
     onClose: fn(),
+    awardId: 0,
   },
   parameters: {
     layout: 'fullscreen',
@@ -25,9 +26,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '팝업 열림',
-  args: {
-    awardId: 0,
-  },
   parameters: {
     docs: {
       description: {

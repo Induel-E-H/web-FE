@@ -9,6 +9,7 @@ const meta = {
   component: Card,
   args: {
     onClick: fn(),
+    award: AWARD_LIST[0],
   },
   parameters: {
     layout: 'centered',
@@ -26,9 +27,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: 'Award Card',
-  args: {
-    award: AWARD_LIST[0],
-  },
   parameters: {
     docs: {
       description: {
