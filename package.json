@@ -26,8 +26,8 @@
     "commit": "cz",
     "test": "vitest --project=unit",
     "test:storybook": "vitest --project=storybook",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui --project=unit",
+    "test:coverage": "vitest run --project=unit --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
