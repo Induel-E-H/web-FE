@@ -1,0 +1,44 @@
+.book-page-title {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  gap: 1.04vmax;
+}
+
+.book-page-title--hidden {
+  visibility: hidden;
+}
+
+.book-page-title hr {
+  border: none;
+  border-top: 0.05vmax solid #606060;
+  width: 16.35vmax;
+}
+
+.book-page-title h3 {
+  font-weight: 700;
+  font-size: 1.56vmax;
+
+  color: #000000;
+}
+
+@media (max-width: 1024px) {
+  .book-page-title hr {
+    display: none;
+  }
+
+  .book-page-title h3 {
+    font-size: 2.34vmin;
+  }
+
+  .history__book-page-right .book-page-title {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .book-page-title h3 {
+    font-size: 4vmin;
+  }
+}

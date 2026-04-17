@@ -1,0 +1,37 @@
+import { PAGE_SIDE, type PageSide } from '@features/history';
+
+import '../../styles/book/Cover.css';
+
+export function BookCover({
+  side,
+  isHidden = false,
+}: {
+  side: PageSide;
+  isHidden?: boolean;
+}) {
+  const isLeft = side === PAGE_SIDE.LEFT;
+  const isRight = side === PAGE_SIDE.RIGHT;
+
+  return (
+    <div
+      className={`history__book-cover-${side}${isHidden ? ' history__book-cover--hidden' : ''}`}
+    >
+      <div className='history__book-cover-center'>
+        <div className='history__book-cover-center-line'>
+          <div />
+          <div />
+        </div>
+
+        <div className='history__book-cover-center-spine'>
+          {isLeft && <div className='history__book-cover-center-spine-left' />}
+
+          <div className='history__book-cover-center-spine-center' />
+
+          {isRight && (
+            <div className='history__book-cover-center-spine-right' />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

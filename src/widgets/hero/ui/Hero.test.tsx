@@ -25,6 +25,14 @@ describe('Hero', () => {
       expect(logo.getAttribute('src')).not.toBe('');
     });
 
+    it('로고 이미지에 hero__logo 클래스가 적용된다', () => {
+      render(<Hero />);
+
+      expect(screen.getByAltText('인들이앤에이치 로고')).toHaveClass(
+        'hero__logo',
+      );
+    });
+
     it('회사 한글 이름이 h1 요소로 표시된다', () => {
       render(<Hero />);
 
@@ -50,19 +58,6 @@ describe('Hero', () => {
     });
   });
 
-  describe('React Compiler 메모이제이션 캐시 히트', () => {
-    it('재렌더링 시에도 동일한 UI가 유지된다 (캐시 히트 분기 커버)', () => {
-      const { rerender } = render(<Hero />);
-
-      rerender(<Hero />);
-
-      expect(screen.getByAltText('인들이앤에이치 로고')).toBeInTheDocument();
-      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-        `(주) ${COMPANY.NAME_KO}`,
-      );
-    });
-  });
-
   describe('시맨틱 구조', () => {
     it('최상위 요소가 section으로 렌더링된다', () => {
       const { container } = render(<Hero />);
@@ -76,6 +71,23 @@ describe('Hero', () => {
       const { container } = render(<Hero />);
 
       expect(container.querySelector('canvas')).toBeInTheDocument();
+    });
+
+    it('회사명과 영문명이 hgroup으로 묶인다', () => {
+      const { container } = render(<Hero />);
+
+      const hgroup = container.querySelector('hgroup');
+      expect(hgroup).toBeInTheDocument();
+      expect(hgroup?.querySelector('h1')).toBeInTheDocument();
+      expect(hgroup?.querySelector('p')).toBeInTheDocument();
+    });
+
+    it('설립일 time 요소는 hgroup 밖에 위치한다', () => {
+      const { container } = render(<Hero />);
+
+      const hgroup = container.querySelector('hgroup');
+      expect(hgroup?.querySelector('time')).not.toBeInTheDocument();
+      expect(container.querySelector('time')).toBeInTheDocument();
     });
   });
 

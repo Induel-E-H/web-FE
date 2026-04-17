@@ -1,7 +1,7 @@
-import type { BufferAttribute, BufferGeometry } from 'three';
+import type { BufferAttribute } from 'three';
 
 export type TubeData = {
   posAttr: BufferAttribute;
   baseY: Float32Array;
-  geo: BufferGeometry;
+  baseZ: Float32Array;
 };

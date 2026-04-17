@@ -1,0 +1,6 @@
+.image-gallery-popup__divider {
+  border: none;
+  border-top: 1px solid var(--gray-200);
+  margin: 0;
+  flex-shrink: 0;
+}

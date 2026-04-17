@@ -4,10 +4,9 @@ import { COMPANY } from '@shared/constant';
 
 import induelIcon from '@assets/induel-icon.svg';
 
+import { showScrollArrow } from '../model/heroConfig';
 import '../styles/Hero.css';
 import HeroBackground from './HeroBackground';
-
-const isProd = import.meta.env.MODE === 'production';
 
 function Hero() {
   return (
@@ -20,14 +19,16 @@ function Hero() {
           className='hero__logo'
         />
         <div className='hero__company-text'>
-          <h1 className='hero__company-name'>(주) {COMPANY.NAME_KO}</h1>
-          <p className='hero__company-name-en'>{COMPANY.NAME_EN_FULL}</p>
+          <hgroup>
+            <h1 className='hero__company-name'>(주) {COMPANY.NAME_KO}</h1>
+            <p className='hero__company-name-en'>{COMPANY.NAME_EN_FULL}</p>
+          </hgroup>
           <time className='hero__established' dateTime={COMPANY.ESTABLISHED}>
             SINCE {COMPANY.ESTABLISHED_DISPLAY}
           </time>
         </div>
       </div>
-      {isProd ? (
+      {showScrollArrow ? (
         <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
       ) : (
         <p

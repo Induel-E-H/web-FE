@@ -1,0 +1,136 @@
+.popup__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: popup-overlay-in 0.2s ease;
+}
+
+@keyframes popup-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.popup {
+  position: relative;
+  width: 24.38vmax;
+  height: 35.94vmax;
+  padding: 0.782vmax;
+  border-radius: 0.521vmax;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.78vmax;
+  background-color: var(--white);
+  animation: popup-in 0.25s ease;
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popup img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.popup__close {
+  font-size: 1.342vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--gray-600);
+}
+
+.popup__header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.popup__header:has(.popup__title) {
+  justify-content: space-between;
+}
+
+.popup__title {
+  font-family: 'BookendBatang', sans-serif;
+  font-size: 1.667vmax;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.popup--gallery {
+  width: 50vw;
+  height: 80vh;
+  padding: 1.6vmax;
+  gap: 0.8vmax;
+  border-radius: 0.52vmax;
+}
+
+@media (max-width: 1024px) {
+  .popup {
+    width: 64.584vmin;
+    height: 93.23vmin;
+    padding: 1.95vmin;
+    border-radius: 1.303vmin;
+    gap: 1.303vmin;
+  }
+
+  .popup__close {
+    font-size: 2.685vmin;
+  }
+
+  .popup--gallery {
+    width: 85vw;
+    height: 70vh;
+    padding: 3.13vmin;
+    gap: 1.56vmin;
+    border-radius: 1.04vmin;
+  }
+
+  .popup__title {
+    font-size: 3.13vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .popup {
+    width: 91.73vmin;
+    height: 135.47vmin;
+    padding: 4vmin;
+    border-radius: 2.666vmin;
+    gap: 4vmin;
+  }
+
+  .popup__close {
+    font-size: 2.529vmax;
+  }
+
+  .popup--gallery {
+    width: 95vw;
+    height: 75vh;
+    padding: 4vmin;
+    gap: 2vmin;
+    border-radius: 2vmin;
+  }
+
+  .popup__title {
+    font-size: 4vmin;
+  }
+}

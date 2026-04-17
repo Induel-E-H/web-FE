@@ -1,0 +1,30 @@
+.patent {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  align-items: center;
+
+  gap: 4.17vmax;
+
+  padding: 3.13vmax 14.58vmax;
+
+  background-color: #38271d;
+}
+
+@media (max-width: 1024px) {
+  .patent {
+    gap: 5.21vmin;
+
+    padding: 7.81vmin 3.91vmin 5.86vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .patent {
+    gap: 8vmin;
+
+    padding: 16vmin 4vmin 4vmin;
+  }
+}

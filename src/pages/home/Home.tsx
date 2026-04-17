@@ -1,25 +1,43 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
+import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
 import Award from '@widgets/award';
 import { Footer } from '@widgets/footer';
+import { Header } from '@widgets/header/ui/Header';
 import Hero from '@widgets/hero';
+import History from '@widgets/history';
 import Map from '@widgets/map';
+import Patent from '@widgets/patent';
 import { Vision } from '@widgets/vision';
 
 const DEV_WIDGET = import.meta.env.VITE_DEV_WIDGET;
 const isStaging = import.meta.env.MODE === 'staging';
 
 const WIDGET_MAP: Record<string, ReactNode> = {
+  header: <Header />,
   hero: <Hero />,
   vision: <Vision />,
-  // history: <History />,
+  history: <History />,
   award: <Award />,
-  // patent: <Patent />,
+  patent: <Patent />,
   map: <Map />,
   footer: <Footer />,
 };
 
 function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const state = location.state as { scrollTo?: string } | null;
+    if (state?.scrollTo) {
+      const timer = setTimeout(() => {
+        smoothScrollTo(state.scrollTo!);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
+
   if (DEV_WIDGET) {
     const widget = WIDGET_MAP[DEV_WIDGET];
     if (!widget) {
@@ -39,7 +57,12 @@ function Home() {
         </div>
       );
     }
-    return <>{widget}</>;
+    return (
+      <>
+        {DEV_WIDGET !== 'footer' ? <Header /> : null}
+        {widget}
+      </>
+    );
   }
 
   if (isStaging) {
@@ -48,11 +71,12 @@ function Home() {
 
   return (
     <>
+      <Header />
       <Hero />
       <Vision />
-      {/* <History /> */}
+      <History />
       <Award />
-      {/* <Patent /> */}
+      <Patent />
       <Map />
       <Footer />
     </>

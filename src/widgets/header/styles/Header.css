@@ -1,0 +1,226 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 5.208vmax;
+  padding-right: calc(5.208vmax + var(--scrollbar-width, 0px));
+  height: 3.33vmax;
+  justify-content: space-between;
+  background-color: #ffffff;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+
+  box-shadow: 0 0.2vmax 0.6vmax rgba(0, 0, 0, 0.08);
+}
+
+.header--hero {
+  background-color: transparent;
+
+  box-shadow: none;
+}
+
+.header--hero.header--menu-open {
+  background-color: #000000;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
+}
+
+.header__logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.521vmax;
+  cursor: pointer;
+  user-select: none;
+}
+
+.header__logo_icon-frame {
+  flex-shrink: 0;
+  width: 1.667vmax;
+  height: 1.667vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.26vmax;
+  border-radius: 0.26vmax;
+  background-color: #ffffff;
+  box-shadow: 0 0 0.208vmax rgba(0, 0, 0, 0.5);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.header--hero .header__logo_icon-frame {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.header__logo_icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.header__logo span {
+  font-weight: 700;
+  font-size: 0.938vmax;
+  color: #38271d;
+  transition: color 0.3s ease;
+}
+
+.header--hero .header__logo span {
+  color: #ffffff;
+}
+
+.header__nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2.604vmax;
+}
+
+.header__nav button {
+  font-weight: 600;
+  font-size: 0.833vmax;
+  color: #38271d;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.header--hero .header__nav button {
+  color: #ffffff;
+}
+
+.header__hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.667vmax;
+  align-items: center;
+  justify-content: center;
+  color: #38271d;
+  transition: color 0.3s ease;
+}
+
+.header--hero .header__hamburger {
+  color: #ffffff;
+}
+
+.header__mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-top: 0.052vmax solid rgba(56, 39, 29, 0.08);
+}
+
+.header__mobile-menu button {
+  padding: 0.729vmax 0.781vmax;
+  font-weight: 600;
+  font-size: 0.729vmax;
+  color: #38271d;
+  background: none;
+  border: none;
+  border-bottom: 0.052vw solid rgba(56, 39, 29, 0.1);
+  cursor: pointer;
+  text-align: left;
+}
+
+.header__mobile-menu button:last-child {
+  border-bottom: none;
+}
+
+.header--hero .header__mobile-menu {
+  background-color: #000000;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.header--hero .header__mobile-menu button {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 3.91vmin;
+    height: 7.29vmin;
+  }
+
+  .header__logo {
+    gap: 1.3vmin;
+  }
+
+  .header__logo_icon-frame {
+    width: 3.65vmin;
+    height: 3.65vmin;
+    padding: 3.8%;
+    border-radius: 0.66vmin;
+    box-shadow: 0 0 0.52vmin rgba(0, 0, 0, 0.5);
+  }
+
+  .header__logo span {
+    font-size: 2.08vmin;
+  }
+
+  .header__nav {
+    gap: 3.26vmin;
+  }
+
+  .header__nav button {
+    font-size: 1.82vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    padding: 0 4vmin;
+    height: 14.94vmin;
+  }
+
+  .header__logo {
+    gap: 2.67vmin;
+  }
+
+  .header__logo_icon-frame {
+    width: 7.47vmin;
+    height: 7.47vmin;
+    border-radius: 1.32vmin;
+  }
+
+  .header__logo span {
+    font-size: 4.27vmin;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__hamburger {
+    display: flex;
+    width: 8.53vmin;
+    height: 8.53vmin;
+    font-size: 6.35vmin;
+  }
+
+  .header__mobile-menu button {
+    padding: 3.73vmin 4vmin;
+    font-size: 3.73vmin;
+  }
+}

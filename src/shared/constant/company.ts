@@ -1,7 +1,7 @@
 export const COMPANY = {
   NAME_KO: '인들이앤에이치',
   NAME_EN: 'INDUEL E&H',
-  NAME_EN_FULL: 'Induel Engineering & Holdings',
+  NAME_EN_FULL: 'INDUEL ENGINEERING & HOLDINGS',
   CEO: '이선학',
   BUSINESS_NO: '617-81-27655',
   PHONE: '0516266277',
@@ -12,4 +12,6 @@ export const COMPANY = {
   ADDRESS_FULL: '부산광역시 남구 수영로 274-16',
   ESTABLISHED: '2000-04-27',
   ESTABLISHED_DISPLAY: '2000.04.27',
+  LAT: 35.13488,
+  LNG: 129.0968,
 } as const;

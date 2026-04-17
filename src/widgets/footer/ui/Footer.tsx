@@ -1,58 +1,73 @@
+import { useNavigate } from 'react-router-dom';
+
 import { COMPANY } from '@shared/constant';
+
+import induelIcon from '@assets/induel-icon.svg';
 
 import '../styles/Footer.css';
 
 export function Footer() {
+  const navigate = useNavigate();
+
   return (
     <footer className='footer'>
       <div className='footer__top'>
         <div className='footer__company'>
-          <div className='footer__company-name'>
-            <span className='footer__company-name-eng'>{COMPANY.NAME_EN}</span>
-            <span className='footer__company-name-kor'>{COMPANY.NAME_KO}</span>
-            <span className='footer__company-name-full'>
-              {COMPANY.NAME_EN_FULL}
-            </span>
+          <div className='footer__icon-frame'>
+            <img src={induelIcon} alt='인들이앤에이치 로고' />
           </div>
-
-          <address className='footer__company-owner'>
-            <div className='footer__company-row'>
-              <span>대표</span>
-              <p>{COMPANY.CEO}</p>
-            </div>
-            <div className='footer__company-row'>
-              <span>사업자 등록 번호</span>
-              <p>{COMPANY.BUSINESS_NO}</p>
-            </div>
-          </address>
+          <div className='footer__company_name'>
+            <p className='footer__company_name-kor'>(주) {COMPANY.NAME_KO}</p>
+            <p className='footer__company_name-eng'>{COMPANY.NAME_EN_FULL}</p>
+          </div>
         </div>
-
-        <address className='footer__contact'>
-          <span className='footer__title'>Contact</span>
-          <div className='footer__contact-row'>
-            <span>Tel</span>
-            <a href={`tel:${COMPANY.PHONE}`}>{COMPANY.PHONE_DISPLAY}</a>
-          </div>
-          <div className='footer__contact-row'>
-            <span>Fax</span>
-            <p>{COMPANY.FAX}</p>
-          </div>
-          <div className='footer__contact-row'>
-            <span>Email</span>
-            <a href={`mailto:${COMPANY.EMAIL}`}>{COMPANY.EMAIL}</a>
-          </div>
-        </address>
-
-        <address className='footer__address'>
-          <span className='footer__title'>Address</span>
-          <span>{COMPANY.ADDRESS_FULL}</span>
-        </address>
+        <div className='footer__information'>
+          <button onClick={() => void navigate('/privacy_policy')}>
+            <b>개인정보처리방침</b>
+          </button>
+        </div>
       </div>
-
-      <div className='footer__bottom'>
-        <hr />
-        <p>© 2000-2026 {COMPANY.NAME_EN_FULL}. All rights reserved. </p>
+      <hr />
+      <div className='footer__content'>
+        <div className='footer__left'>
+          <div className='footer__company_owner'>
+            <div className='footer__row'>
+              <span>대표이사</span>
+              <span>{COMPANY.CEO}</span>
+            </div>
+            <p className='footer__company_split'>|</p>
+            <div className='footer__row'>
+              <span>사업자 등록 번호</span>
+              <span>{COMPANY.BUSINESS_NO}</span>
+            </div>
+          </div>
+          <div className='footer__row'>
+            <span>주소</span>
+            <span>{COMPANY.ADDRESS_FULL}</span>
+          </div>
+        </div>
+        <div className='footer__right'>
+          <div className='footer__contact'>
+            <div className='footer__row'>
+              <span>TEL</span>
+              <span>{COMPANY.PHONE_DISPLAY}</span>
+            </div>
+            <p className='footer__company_split'>|</p>
+            <div className='footer__row'>
+              <span>FAX</span>
+              <span>{COMPANY.FAX}</span>
+            </div>
+          </div>
+          <div className='footer__row'>
+            <span>EMAIL</span>
+            <span>{COMPANY.EMAIL}</span>
+          </div>
+        </div>
       </div>
+      <p className='footer__copyright'>
+        ⓒ {new Date(COMPANY.ESTABLISHED).getFullYear()}-
+        {new Date().getFullYear()} {COMPANY.NAME_EN_FULL}. All rights reserved.
+      </p>
     </footer>
   );
 }
