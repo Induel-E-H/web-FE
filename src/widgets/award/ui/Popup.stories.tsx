@@ -23,51 +23,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = {
-  name: 'Desktop 팝업 열림',
+export const Default: Story = {
+  name: '팝업 열림',
   args: {
     awardId: 0,
   },
-  globals: {
-    viewport: { value: 'desktop' },
-  },
   parameters: {
     docs: {
       description: {
         story:
-          '1920px 데스크탑 해상도에서 팝업이 열렸을 때의 모습. 전체화면 오버레이로 수상 이미지가 표시되고, 닫기 버튼이 우측 상단에 위치합니다.',
-      },
-    },
-  },
-};
-
-export const Tablet: Story = {
-  name: 'Tablet 팝업 열림',
-  args: { awardId: 0 },
-  globals: {
-    viewport: { value: 'tablet' },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          '768px 태블릿 해상도에서 팝업이 열렸을 때의 모습. 전체화면 오버레이로 수상 이미지가 표시되고, 닫기 버튼이 우측 상단에 위치합니다.',
-      },
-    },
-  },
-};
-
-export const Mobile: Story = {
-  name: 'Mobile 팝업 열림',
-  args: { awardId: 0 },
-  globals: {
-    viewport: { value: 'mobile' },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          '375px 모바일 해상도에서 팝업이 열렸을 때의 모습. 전체화면 오버레이로 수상 이미지가 표시되고, 닫기 버튼이 우측 상단에 위치합니다.',
+          '팝업이 열렸을 때의 모습. 전체화면 오버레이로 수상 이미지가 표시되고, 닫기 버튼이 우측 상단에 위치합니다.',
       },
     },
   },

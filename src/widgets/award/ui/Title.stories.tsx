@@ -19,43 +19,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = {
+export const Default: Story = {
   name: '기본',
-  globals: {
-    viewport: { value: 'desktop' },
-  },
   parameters: {
     docs: {
       description: {
-        story: '1920px 데스크탑 해상도에서 타이틀이 렌더링되는 모습.',
-      },
-    },
-  },
-};
-
-export const Tablet: Story = {
-  name: '태블릿 뷰포트',
-  globals: {
-    viewport: { value: 'tablet' },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: '768px 태블릿 해상도에서 타이틀이 렌더링되는 모습.',
-      },
-    },
-  },
-};
-
-export const Mobile: Story = {
-  name: '모바일 뷰포트',
-  globals: {
-    viewport: { value: 'mobile' },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: '768px 모바일 해상도에서 타이틀이 렌더링되는 모습.',
+        story: '타이틀이 렌더링되는 모습.',
       },
     },
   },

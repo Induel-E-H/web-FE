@@ -28,44 +28,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = {
-  name: 'Desktop (1920px)',
-  globals: {
-    viewport: { value: 'desktop' },
-  },
+export const Default: Story = {
+  name: '기본',
   parameters: {
     docs: {
       description: {
-        story: '1920px 데스크탑 해상도에서의 Footer 레이아웃.',
-      },
-    },
-  },
-};
-
-export const Tablet: Story = {
-  name: 'Tablet (768px)',
-  globals: {
-    viewport: { value: 'tablet' },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: '768px 태블릿 해상도에서의 Footer 레이아웃.',
-      },
-    },
-  },
-};
-
-export const Mobile: Story = {
-  name: 'Mobile (375px)',
-  globals: {
-    viewport: { value: 'mobile' },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          '375px 모바일 해상도에서의 Footer 레이아웃. footer__content가 column 방향으로 전환되고 footer__right가 좌측 정렬됩니다.',
+        story: 'Footer 레이아웃.',
       },
     },
   },
