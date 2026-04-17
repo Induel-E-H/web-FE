@@ -11,7 +11,6 @@ const dirname =
     ? __dirname
     : path.dirname(fileURLToPath(import.meta.url));
 
-// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [
     react({
@@ -19,10 +18,11 @@ export default defineConfig({
         plugins: ['babel-plugin-react-compiler'],
       },
     }),
-    tsconfigPaths(),
   ],
+
   test: {
     passWithNoTests: true,
+
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json-summary'],
@@ -38,34 +38,39 @@ export default defineConfig({
         '**/*.svg',
       ],
     },
+
     projects: [
       {
-        extends: true,
+        plugins: [
+          tsconfigPaths({
+            projects: ['./tsconfig.json'],
+          }),
+        ],
         test: {
+          name: 'unit',
           environment: 'jsdom',
           setupFiles: ['./src/test/setup.ts'],
+          include: ['src/**/*.test.{ts,tsx}'],
         },
       },
+
       {
-        extends: true,
         plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          tsconfigPaths({
+            projects: ['./tsconfig.json'],
+          }),
           storybookTest({
             configDir: path.join(dirname, '.storybook'),
           }),
         ],
         test: {
           name: 'storybook',
+
           browser: {
             enabled: true,
             headless: true,
-            provider: playwright({}),
-            instances: [
-              {
-                browser: 'chromium',
-              },
-            ],
+            provider: playwright(),
+            instances: [{ browser: 'chromium' }],
           },
         },
       },
