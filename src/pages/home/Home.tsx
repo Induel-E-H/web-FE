@@ -6,7 +6,6 @@ import Award from '@widgets/award';
 import { Footer } from '@widgets/footer';
 import { Header } from '@widgets/header/ui/Header';
 import Hero from '@widgets/hero';
-import { showScrollArrow } from '@widgets/hero/model/heroConfig';
 import History from '@widgets/history';
 import Map from '@widgets/map';
 import Patent from '@widgets/patent';
@@ -14,10 +13,11 @@ import { Vision } from '@widgets/vision';
 
 const DEV_WIDGET = import.meta.env.VITE_DEV_WIDGET;
 const isStaging = import.meta.env.MODE === 'staging';
+const isProduction = import.meta.env.MODE === 'production';
 
-const WIDGET_MAP: Record<string, ReactNode> = {
+const DEV_WIDGET_MAP: Record<string, ReactNode> = {
   header: <Header />,
-  hero: <Hero showScrollArrow={showScrollArrow} />,
+  hero: <Hero showScrollArrow={false} />,
   vision: <Vision />,
   history: <History />,
   award: <Award />,
@@ -40,7 +40,7 @@ function Home() {
   }, [location.state]);
 
   if (DEV_WIDGET) {
-    const widget = WIDGET_MAP[DEV_WIDGET];
+    const widget = DEV_WIDGET_MAP[DEV_WIDGET];
     if (!widget) {
       return (
         <div
@@ -53,8 +53,8 @@ function Home() {
           }}
         >
           <p>⚠️ 위젯 &quot;{DEV_WIDGET}&quot;을 찾을 수 없습니다.</p>
-          <p>등록된 위젯: {Object.keys(WIDGET_MAP).join(', ')}</p>
-          <p>WIDGET_MAP에 등록 후 다시 실행하세요.</p>
+          <p>등록된 위젯: {Object.keys(DEV_WIDGET_MAP).join(', ')}</p>
+          <p>DEV_WIDGET_MAP에 등록 후 다시 실행하세요.</p>
         </div>
       );
     }
@@ -67,13 +67,13 @@ function Home() {
   }
 
   if (isStaging) {
-    return <Hero showScrollArrow={showScrollArrow} />;
+    return <Hero showScrollArrow={false} />;
   }
 
   return (
     <>
       <Header />
-      <Hero showScrollArrow={showScrollArrow} />
+      <Hero showScrollArrow={isProduction} />
       <Vision />
       <History />
       <Award />
