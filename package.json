@@ -63,6 +63,7 @@
     "@vitest/coverage-v8": "^4.1.2",
     "@vitest/ui": "^4.1.2",
     "babel-plugin-react-compiler": "^1.0.0",
+    "chromatic": "^16.3.0",
     "commitizen": "^4.3.1",
     "cross-env": "^10.1.0",
     "cz-customizable": "^7.5.4",
