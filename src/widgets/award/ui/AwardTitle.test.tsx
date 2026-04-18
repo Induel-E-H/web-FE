@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { AwardTitle } from './Title';
+import { AwardTitle } from './AwardTitle';
 
 describe('AwardTitle', () => {
   it('hgroup.award__title 요소가 렌더링된다', () => {

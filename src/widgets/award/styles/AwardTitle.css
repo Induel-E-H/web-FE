@@ -1,0 +1,75 @@
+.award__title {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0;
+}
+
+.award__title__description {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  gap: 0.78vmax;
+
+  color: #e7c889;
+}
+
+.award__title__description hr {
+  border: none;
+  border-top: 0.1vmax solid #e7c889;
+  width: 4.17vmax;
+}
+
+.award__title__description p {
+  font-weight: 700;
+  font-size: 0.63vmax;
+  letter-spacing: 0.15em;
+}
+
+.award__title h2 {
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 3.13vmax;
+
+  color: #38271d;
+}
+
+@media (max-width: 1024px) {
+  .award__title__description {
+    gap: 1.95vmin;
+  }
+
+  .award__title__description hr {
+    border-top: 0.26vmin solid #e7c889;
+    width: 9.11vmin;
+  }
+
+  .award__title__description p {
+    font-size: 1.3vmin;
+  }
+
+  .award__title h2 {
+    font-size: 5.21vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .award__title__description {
+    gap: 4vmin;
+  }
+
+  .award__title__description hr {
+    border-top: 0.53vmin solid #e7c889;
+    width: 16vmin;
+  }
+
+  .award__title__description p {
+    font-size: 2.13vmin;
+  }
+
+  .award__title h2 {
+    font-size: 8vmin;
+  }
+}
