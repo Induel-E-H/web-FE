@@ -24,12 +24,12 @@ describe('MapTitle', () => {
       expect(heading).toHaveTextContent('찾아오시는 길');
     });
 
-    it('hgroup이 존재한다', () => {
+    it('hgroup.map__title이 존재한다', () => {
       const { container } = render(<MapTitle />);
       const hgroup = container.querySelector('hgroup');
 
       expect(hgroup).toBeInTheDocument();
-      expect(hgroup).toHaveClass('map__title_text');
+      expect(hgroup).toHaveClass('map__title');
     });
 
     it('hr 요소가 렌더링된다', () => {
@@ -41,7 +41,7 @@ describe('MapTitle', () => {
   });
 
   describe('루트 요소', () => {
-    it('최상위 div에 map__title 클래스가 적용된다', () => {
+    it('최상위 hgroup에 map__title 클래스가 적용된다', () => {
       const { container } = render(<MapTitle />);
       const root = container.firstChild;
 

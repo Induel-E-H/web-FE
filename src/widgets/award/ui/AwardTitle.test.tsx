@@ -16,8 +16,13 @@ describe('AwardTitle', () => {
     );
   });
 
-  it('"Award" 문구가 렌더링된다', () => {
+  it('"AWARD" 문구가 렌더링된다', () => {
     render(<AwardTitle />);
-    expect(screen.getByText('Award')).toBeInTheDocument();
+    expect(screen.getByText('AWARD')).toBeInTheDocument();
+  });
+
+  it('hr 요소가 렌더링된다', () => {
+    const { container } = render(<AwardTitle />);
+    expect(container.querySelector('hr')).toBeInTheDocument();
   });
 });
