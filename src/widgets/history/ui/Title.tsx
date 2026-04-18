@@ -1,13 +1,13 @@
+import { SectionTitle } from '@shared/ui/SectionTitle';
+
 import '../styles/Title.css';
 
 export function HistoryTitle() {
   return (
-    <div className='history__title'>
-      <div className='history__title__description'>
-        <hr />
-        <p>COMPANY HISTORY</p>
-      </div>
-      <h2>걸어온 길</h2>
-    </div>
+    <SectionTitle
+      label='COMPANY HISTORY'
+      headings='걸어온 길'
+      className='history__title'
+    />
   );
 }

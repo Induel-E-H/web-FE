@@ -1,6 +1,6 @@
 import '../styles/Patent.css';
 import { PatentExpireContent } from './ExpireContent';
-import { PatentTitle } from './Title';
+import { PatentTitle } from './PatentTitle';
 import { PatentValidContent } from './ValidContent';
 
 function Patent() {

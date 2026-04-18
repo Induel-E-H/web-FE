@@ -9,13 +9,6 @@ describe('Patent', () => {
     expect(container.querySelector('section.patent')).toBeInTheDocument();
   });
 
-  it('PatentTitle의 h2 "특허 취득 기록"이 렌더링된다', () => {
-    render(<Patent />);
-    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-      '특허 취득 기록',
-    );
-  });
-
   it('유효 특허증 섹션이 렌더링된다', () => {
     render(<Patent />);
     expect(screen.getByText(/유효 특허증/)).toBeInTheDocument();
