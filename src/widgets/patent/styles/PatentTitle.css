@@ -1,35 +1,11 @@
-.patent__title {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.patent__title__description {
-  display: flex;
-  align-items: center;
-  gap: 0.78vmax;
-}
-
-.patent__title__description hr {
-  width: 4.167vmax;
-  border: none;
-  border-top: 0.104vmax solid #c9a96e;
-}
-
-.patent__title__description p {
-  font-weight: 700;
-  font-size: 0.63vmax;
-  letter-spacing: 0.15em;
-  color: #e7c889;
+.patent__title .section-title__description hr {
+  border-top-color: #c9a96e;
 }
 
 .patent__title h2 {
-  font-family: 'BookendBatang';
-  font-weight: 700;
-  font-size: 3.13vmax;
+  color: #f0ead6;
   line-height: 1.4;
   letter-spacing: -0.025em;
-  color: #f0ead6;
 }
 
 .patent__title h2:last-of-type {
@@ -37,42 +13,4 @@
   transform: skewX(-8deg);
   display: inline-block;
   line-height: 1;
-}
-
-@media (max-width: 1024px) {
-  .patent__title__description {
-    gap: 1.95vmin;
-  }
-
-  .patent__title__description hr {
-    width: 9.11vmin;
-    border-top-width: 0.26vmin;
-  }
-
-  .patent__title__description p {
-    font-size: 1.3vmin;
-  }
-
-  .patent__title h2 {
-    font-size: 5.21vmin;
-  }
-}
-
-@media (max-width: 767px) {
-  .patent__title__description {
-    gap: 4vmin;
-  }
-
-  .patent__title__description hr {
-    width: 16vmin;
-    border-top-width: 0.53vmin;
-  }
-
-  .patent__title__description p {
-    font-size: 2.13vmin;
-  }
-
-  .patent__title h2 {
-    font-size: 8vmin;
-  }
 }
