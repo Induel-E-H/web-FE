@@ -7,7 +7,7 @@ import '../styles/Map.css';
 import '../styles/mapInfoCard.css';
 import '../styles/mapMarker.css';
 import { MapCard } from './MapCard';
-import { MapTitle } from './Title';
+import { MapTitle } from './MapTitle';
 
 type NaverWindow = {
   naver?: { maps?: { Map?: unknown } };

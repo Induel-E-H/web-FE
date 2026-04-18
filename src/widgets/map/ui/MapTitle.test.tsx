@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { MapTitle } from './Title';
+import { MapTitle } from './MapTitle';
 
 describe('MapTitle', () => {
   describe('텍스트 렌더링', () => {
