@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { PatentTitle } from './Title';
+import { PatentTitle } from './PatentTitle';
 
 describe('PatentTitle', () => {
   it('"PATENTS" 문구가 렌더링된다', () => {
