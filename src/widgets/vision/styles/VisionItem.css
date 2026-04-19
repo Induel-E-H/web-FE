@@ -3,6 +3,7 @@
 
   opacity: 0;
   transform: translateY(2.5vmax);
+  -webkit-transform: translateY(2.5vmax);
   transition:
     opacity 0.7s ease,
     transform 0.7s ease;
@@ -11,6 +12,7 @@
 .vision__content.is-visible {
   opacity: 1;
   transform: translateY(0);
+  -webkit-transform: translateY(0);
 }
 
 .vision__content {
@@ -55,6 +57,7 @@
 
 .vision__content:hover .vision__content__image img {
   transform: scale(1.08);
+  -webkit-transform: scale(1.08);
 }
 
 .vision__content_text {
@@ -97,6 +100,7 @@
   font-size: 3.13vmax;
   color: var(--color-main-h3);
   transform: skewX(-10deg);
+  -webkit-transform: skewX(-10deg);
 }
 
 .vision__content__title__main h4 {

@@ -57,8 +57,16 @@ export function BookCoverFlip({
         ref={flipPanelRef}
         className={`history__book-cover-flip-panel history__book-cover-flip-panel--${flipDirection} history__book-cover-flip-panel--hidden`}
       >
-        <div className='history__book-cover-flip-front'>{frontContent}</div>
-        <div className='history__book-cover-flip-back'>{backContent}</div>
+        <div className='history__book-cover-flip-front'>
+          <div className='history__book-cover-flip-front-inner'>
+            {frontContent}
+          </div>
+        </div>
+        <div className='history__book-cover-flip-back'>
+          <div className='history__book-cover-flip-back-inner'>
+            {backContent}
+          </div>
+        </div>
       </div>
     </div>
   );

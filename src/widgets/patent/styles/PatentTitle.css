@@ -11,6 +11,7 @@
 .patent__title h2:last-of-type {
   color: #c9a96e;
   transform: skewX(-8deg);
+  -webkit-transform: skewX(-8deg);
   display: inline-block;
   line-height: 1;
 }

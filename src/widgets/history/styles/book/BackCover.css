@@ -26,6 +26,7 @@
 
 .history__back-cover--centered {
   transform: translateX(50%);
+  -webkit-transform: translateX(50%);
 }
 
 .history__back-cover-spine {
@@ -76,6 +77,7 @@
 
   .history__back-cover--centered {
     transform: translateY(50%);
+    -webkit-transform: translateY(50%);
   }
 
   .history__back-cover-spine {
@@ -103,6 +105,7 @@
 
   .history__back-cover--centered {
     transform: translateY(50%);
+    -webkit-transform: translateY(50%);
   }
 
   .history__back-cover-spine {

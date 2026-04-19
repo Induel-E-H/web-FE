@@ -124,6 +124,7 @@
 
 .content__image--has-image:hover img {
   transform: scale(1.07);
+  -webkit-transform: scale(1.07);
 }
 
 .content__image-zoom {

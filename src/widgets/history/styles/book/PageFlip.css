@@ -6,6 +6,7 @@
   left: 0;
 
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   z-index: 10;
 }
 
@@ -17,6 +18,7 @@
   right: 0;
 
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   z-index: 10;
 }
 
@@ -28,24 +30,29 @@
   left: 0;
   right: 0;
   transform-origin: left center;
+  -webkit-transform-origin: left center;
 }
 
 .history__book-page-flip-panel--backward {
   left: 0;
   right: 0;
   transform-origin: right center;
+  -webkit-transform-origin: right center;
 }
 
 .history__book-page-flip-panel--animating {
   transition: transform 0.8s ease-in-out;
+  will-change: transform;
 }
 
 .history__book-page-flip-panel--forward.flipping {
   transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
 }
 
 .history__book-page-flip-panel--backward.flipping {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 .history__book-page-flip-front,
@@ -59,6 +66,7 @@
 
 .history__book-page-flip-back {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 @media (max-width: 1024px) {
@@ -78,22 +86,27 @@
 
   .history__book-page-flip-panel--forward {
     transform-origin: top;
+    -webkit-transform-origin: top;
   }
 
   .history__book-page-flip-panel--backward {
     transform-origin: bottom;
+    -webkit-transform-origin: bottom;
   }
 
   .history__book-page-flip-panel--forward.flipping {
     transform: rotateX(180deg);
+    -webkit-transform: rotateX(180deg);
   }
 
   .history__book-page-flip-panel--backward.flipping {
     transform: rotateX(-180deg);
+    -webkit-transform: rotateX(-180deg);
   }
 
   .history__book-page-flip-back {
     transform: rotateX(-180deg);
+    -webkit-transform: rotateX(-180deg);
   }
 }
 
