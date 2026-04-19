@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { VisionTitle } from './Title';
+import { VisionTitle } from './VisionTitle';
 
 const nullRef = { current: null };
 
