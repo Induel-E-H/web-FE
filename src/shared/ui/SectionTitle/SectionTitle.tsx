@@ -1,19 +1,18 @@
 import './SectionTitle.css';
 
 type SectionTitleProps = {
-  label: string;
-  headings: string | [string, string];
+  subTitle: string;
+  title: string;
   className?: string;
-  ref?: React.RefObject<HTMLElement | null>;
+  ref?: React.Ref<HTMLElement | null>;
 };
 
 export function SectionTitle({
-  label,
-  headings,
+  subTitle: label,
+  title: heading,
   className,
   ref,
 }: SectionTitleProps) {
-  const headingArray = Array.isArray(headings) ? headings : [headings];
   const rootClass = ['section-title', className].filter(Boolean).join(' ');
 
   return (
@@ -22,9 +21,7 @@ export function SectionTitle({
         <hr />
         <p>{label}</p>
       </div>
-      {headingArray.map((h) => (
-        <h2 key={h}>{h}</h2>
-      ))}
+      <h2>{heading}</h2>
     </hgroup>
   );
 }

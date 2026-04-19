@@ -5,8 +5,8 @@ import '../styles/HistoryTitle.css';
 export function HistoryTitle() {
   return (
     <SectionTitle
-      label='COMPANY HISTORY'
-      headings='걸어온 길'
+      subTitle='HISTORY'
+      title='걸어온 길'
       className='history__title'
     />
   );

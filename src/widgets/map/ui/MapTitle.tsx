@@ -5,8 +5,8 @@ import '../styles/MapTitle.css';
 export function MapTitle() {
   return (
     <SectionTitle
-      label='LOCATION'
-      headings='찾아오시는 길'
+      subTitle='LOCATION'
+      title='찾아오시는 길'
       className='map__title'
     />
   );

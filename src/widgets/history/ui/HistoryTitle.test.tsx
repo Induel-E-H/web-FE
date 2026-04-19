@@ -11,8 +11,8 @@ describe('HistoryTitle', () => {
     );
   });
 
-  it('"COMPANY HISTORY" 텍스트가 렌더링된다', () => {
+  it('"HISTORY" 텍스트가 렌더링된다', () => {
     render(<HistoryTitle />);
-    expect(screen.getByText('COMPANY HISTORY')).toBeInTheDocument();
+    expect(screen.getByText('HISTORY')).toBeInTheDocument();
   });
 });
