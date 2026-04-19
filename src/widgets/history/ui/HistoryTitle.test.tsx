@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { HistoryTitle } from './Title';
+import { HistoryTitle } from './HistoryTitle';
 
 describe('HistoryTitle', () => {
   it('h2 "걸어온 길"이 렌더링된다', () => {

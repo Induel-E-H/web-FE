@@ -1,6 +1,6 @@
 import { SectionTitle } from '@shared/ui/SectionTitle';
 
-import '../styles/Title.css';
+import '../styles/HistoryTitle.css';
 
 export function HistoryTitle() {
   return (
