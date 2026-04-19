@@ -23,8 +23,8 @@ describe('MILESTONES_YEAR_RANGES_BY_BREAKPOINT', () => {
     });
   });
 
-  it('desktop보다 tablet의 범위 개수가 더 많다(더 촘촘하게 분할)', () => {
-    expect(MILESTONES_YEAR_RANGES_BY_BREAKPOINT.tablet.length).toBeGreaterThan(
+  it('desktop보다 tablet의 범위 개수가 더 적다(더 널널하게 분할)', () => {
+    expect(MILESTONES_YEAR_RANGES_BY_BREAKPOINT.tablet.length).toBeLessThan(
       MILESTONES_YEAR_RANGES_BY_BREAKPOINT.desktop.length,
     );
   });
@@ -72,10 +72,10 @@ describe('getPageRegistry', () => {
     );
   });
 
-  it('tablet Milestones의 totalPages는 desktop보다 크다', () => {
+  it('tablet Milestones의 totalPages는 desktop과 동일하다', () => {
     const desktopRegistry = getPageRegistry('desktop');
     const tabletRegistry = getPageRegistry('tablet');
-    expect(tabletRegistry.Milestones.totalPages).toBeGreaterThan(
+    expect(tabletRegistry.Milestones.totalPages).toBe(
       desktopRegistry.Milestones.totalPages,
     );
   });
