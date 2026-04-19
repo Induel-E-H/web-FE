@@ -43,6 +43,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,6 +80,7 @@
   bottom: 0.8vmax;
   left: 50%;
   transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
   padding: 0.26vmax 0.78vmax;

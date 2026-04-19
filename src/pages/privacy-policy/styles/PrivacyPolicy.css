@@ -371,6 +371,7 @@
 .privacy-policy__back-btn:hover {
   background-color: #5a4231;
   transform: translateY(-0.052vmax);
+  -webkit-transform: translateY(-0.052vmax);
 }
 
 .privacy-policy__back-btn svg {

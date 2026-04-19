@@ -26,6 +26,7 @@
 
 .history__front-cover--centered {
   transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
 }
 
 .history__front-cover-spine {
@@ -90,6 +91,7 @@
   font-weight: 700;
 
   transform: skewX(-10deg);
+  -webkit-transform: skewX(-10deg);
 }
 
 .history__front-cover-year-number {
@@ -115,6 +117,7 @@
 
   .history__front-cover--centered {
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
   }
 
   .history__front-cover-spine {
