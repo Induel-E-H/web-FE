@@ -66,6 +66,10 @@ function ContentItem({
     setShowPopup(true);
   }
 
+  function handlePopupClose() {
+    setShowPopup(false);
+  }
+
   return (
     <article className='content__item'>
       <div className='content__text'>
@@ -125,7 +129,7 @@ function ContentItem({
           <ImageGalleryPopup
             title={item.title}
             images={getAllContentImages(index)}
-            onClose={() => setShowPopup(false)}
+            onClose={handlePopupClose}
           />,
           document.body,
         )}
