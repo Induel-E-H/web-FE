@@ -25,14 +25,14 @@
 .content__title-eng {
   font-family: 'Pretendard', sans-serif;
   font-weight: 800;
-  font-size: 1.46vmax;
+  font-size: max(20px, 1.46vw);
 
   color: var(--black);
 }
 
 .content__title-kor {
   font-weight: 700;
-  font-size: 1.46vmax;
+  font-size: max(20px, 1.46vw);
 
   color: var(--black);
 }
@@ -44,14 +44,14 @@
 
 .content__subtitle {
   font-weight: 600;
-  font-size: 0.89vmax;
+  font-size: max(13px, 0.89vw);
 
   color: var(--black);
 }
 
 .content__body {
   font-weight: 600;
-  font-size: 0.78vmax;
+  font-size: max(12px, 0.78vw);
 
   color: var(--typo-contentW);
 }
@@ -83,14 +83,14 @@
 
 .content__caption dt {
   font-weight: 400;
-  font-size: 0.68vmax;
+  font-size: max(10px, 0.68vw);
 
   color: var(--typo-contentW);
 }
 
 .content__caption dd {
   font-weight: 400;
-  font-size: 0.68vmax;
+  font-size: max(10px, 0.68vw);
 
   color: var(--typo-contentW);
 }

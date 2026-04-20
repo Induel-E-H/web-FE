@@ -33,7 +33,7 @@
 
 .patent__expiration__title__text h3 {
   font-weight: 600;
-  font-size: 1.04vmax;
+  font-size: max(15px, 1.04vw);
   color: var(--white);
 }
 
@@ -85,14 +85,14 @@
 
 .patent__expiration__item__content span:first-child {
   font-weight: 600;
-  font-size: 0.78vmax;
+  font-size: max(12px, 0.78vw);
 
   color: #c9a96e;
 }
 
 .patent__expiration__item__content span:last-child {
   font-weight: 600;
-  font-size: 0.78vmax;
+  font-size: max(12px, 0.78vw);
 
   color: #b4a8a3;
 }
@@ -106,7 +106,7 @@
 
 .patent__expiration__serial {
   font-weight: 600;
-  font-size: 0.625vmax;
+  font-size: max(10px, 0.625vw);
 
   color: #827671;
 }

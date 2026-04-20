@@ -85,7 +85,7 @@
   color: #fff;
   padding: 0.26vmax 0.78vmax;
   border-radius: 1vmax;
-  font-size: 0.78vmax;
+  font-size: max(12px, 0.78vw);
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.2s;

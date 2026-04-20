@@ -12,7 +12,7 @@
 
   padding: 0 0.8vmax;
 
-  font-size: 0.834vmax;
+  font-size: max(12px, 0.834vw);
   font-weight: 400;
 
   color: var(--brown-200);

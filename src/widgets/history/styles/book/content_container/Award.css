@@ -31,7 +31,7 @@
 
 .award__year {
   font-weight: 700;
-  font-size: 0.83vmax;
+  font-size: max(12px, 0.83vw);
   color: var(--black);
 }
 
@@ -46,7 +46,7 @@
 
   gap: 1.93%;
 
-  font-size: 0.73vmax;
+  font-size: max(11px, 0.73vw);
   font-weight: 400;
 
   color: var(--black);
@@ -56,7 +56,7 @@
   content: '•';
   flex-shrink: 0;
 
-  font-size: 0.73vmax;
+  font-size: max(11px, 0.73vw);
 }
 
 @media (max-width: 1024px) {

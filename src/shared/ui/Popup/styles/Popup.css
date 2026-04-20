@@ -52,7 +52,7 @@
 }
 
 .popup__close {
-  font-size: 1.342vmax;
+  font-size: max(19px, 1.342vw);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,7 +72,7 @@
 
 .popup__title {
   font-family: 'BookendBatang', sans-serif;
-  font-size: 1.667vmax;
+  font-size: max(24px, 1.667vw);
   font-weight: 700;
   color: var(--black);
 }

@@ -79,7 +79,7 @@
 
 .vision__content__index {
   font-weight: 400;
-  font-size: 0.729vmax;
+  font-size: max(11px, 0.729vw);
   color: var(--color-index);
 }
 
@@ -97,14 +97,14 @@
 }
 
 .vision__content__title__main h3 {
-  font-size: 3.13vmax;
+  font-size: max(40px, 3.13vw);
   color: var(--color-main-h3);
   transform: skewX(-10deg);
   -webkit-transform: skewX(-10deg);
 }
 
 .vision__content__title__main h4 {
-  font-size: 1.04vmax;
+  font-size: max(15px, 1.04vw);
   color: var(--color-main-h4);
 }
 
@@ -116,7 +116,7 @@
 
 .vision__content__description {
   font-weight: 400;
-  font-size: 0.78vmax;
+  font-size: max(12px, 0.78vw);
   line-height: 2;
   color: var(--color-description);
 }

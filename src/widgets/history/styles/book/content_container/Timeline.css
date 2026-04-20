@@ -27,7 +27,7 @@
 
   gap: 0.5em;
 
-  font-size: 0.73vmax;
+  font-size: max(11px, 0.73vw);
   font-weight: 600;
 
   color: var(--typo-contentW);
@@ -36,7 +36,7 @@
 .timeline__ul li::before {
   content: '•';
   flex-shrink: 0;
-  font-size: 0.73vmax;
+  font-size: max(11px, 0.73vw);
 }
 
 .timeline__ul-placeholder {

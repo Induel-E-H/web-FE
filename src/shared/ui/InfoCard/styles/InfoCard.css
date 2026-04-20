@@ -74,7 +74,7 @@
 .info-card__text__year {
   font-family: 'BookendBatang';
   font-weight: 700;
-  font-size: 0.625vmax;
+  font-size: max(10px, 0.625vw);
 
   color: #c9a96e;
 }
@@ -82,7 +82,7 @@
 .info-card__text__title {
   font-family: 'BookendBatang';
   font-weight: 700;
-  font-size: 0.73vmax;
+  font-size: max(11px, 0.73vw);
 
   color: #38271d;
 }
@@ -90,7 +90,7 @@
 .info-card__text__secondary {
   font-family: 'Pretendard';
   font-weight: 700;
-  font-size: 0.625vmax;
+  font-size: max(10px, 0.625vw);
 
   color: #8c8672;
 }

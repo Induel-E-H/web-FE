@@ -72,7 +72,7 @@
 
 .header__logo span {
   font-weight: 700;
-  font-size: 0.938vmax;
+  font-size: max(14px, 0.938vw);
   color: #38271d;
 }
 
@@ -89,7 +89,7 @@
 
 .header__nav button {
   font-weight: 600;
-  font-size: 0.833vmax;
+  font-size: max(12px, 0.833vw);
   color: #38271d;
   background: none;
   border: none;
@@ -107,7 +107,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  font-size: 1.667vmax;
+  font-size: max(24px, 1.667vw);
   align-items: center;
   justify-content: center;
   color: #38271d;
@@ -131,7 +131,7 @@
 .header__mobile-menu button {
   padding: 0.729vmax 0.781vmax;
   font-weight: 600;
-  font-size: 0.729vmax;
+  font-size: max(11px, 0.729vw);
   color: #38271d;
   background: none;
   border: none;
