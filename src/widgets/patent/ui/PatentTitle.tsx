@@ -5,8 +5,8 @@ import '../styles/PatentTitle.css';
 export function PatentTitle() {
   return (
     <SectionTitle
-      label='PATENTS'
-      headings={['특허 취득 기록', '혁신의 증명']}
+      subTitle='PATENTS'
+      title='특허 취득 기록'
       className='patent__title'
     />
   );

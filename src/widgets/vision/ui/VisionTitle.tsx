@@ -1,6 +1,6 @@
 import { SectionTitle } from '@shared/ui/SectionTitle';
 
-import '../styles/Title.css';
+import '../styles/VisionTitle.css';
 
 export function VisionTitle({
   ref,
@@ -10,8 +10,8 @@ export function VisionTitle({
   return (
     <SectionTitle
       ref={ref}
-      label='FUTURE VISION'
-      headings={['미래를 향한', '세 가지 방향']}
+      subTitle='CONCEPT'
+      title='미래를 향한'
       className='vision__title'
     />
   );

@@ -18,7 +18,7 @@ import { TimelinePage } from './book/content_container/Timeline';
 import { BookCover } from './book/Cover';
 import { FrontCoverInner } from './book/FrontCover';
 import { HistoryCategory } from './Category';
-import { HistoryTitle } from './Title';
+import { HistoryTitle } from './HistoryTitle';
 
 function History() {
   const breakpoint = useBreakpoint();

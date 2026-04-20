@@ -15,14 +15,4 @@
 
 .vision__title h2 {
   color: #38271d;
-  line-height: 1.4;
-  letter-spacing: -0.025em;
-}
-
-.vision__title h2:last-of-type {
-  color: #c9a96e;
-  transform: skewX(-8deg);
-  -webkit-transform: skewX(-8deg);
-  display: inline-block;
-  line-height: 1;
 }

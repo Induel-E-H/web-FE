@@ -4,14 +4,4 @@
 
 .patent__title h2 {
   color: #f0ead6;
-  line-height: 1.4;
-  letter-spacing: -0.025em;
-}
-
-.patent__title h2:last-of-type {
-  color: #c9a96e;
-  transform: skewX(-8deg);
-  -webkit-transform: skewX(-8deg);
-  display: inline-block;
-  line-height: 1;
 }

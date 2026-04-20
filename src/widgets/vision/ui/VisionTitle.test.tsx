@@ -1,25 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { VisionTitle } from './Title';
+import { VisionTitle } from './VisionTitle';
 
 const nullRef = { current: null };
 
 describe('VisionTitle', () => {
   describe('vision__title 콘텐츠', () => {
-    it('"FUTURE VISION" 텍스트가 렌더링된다', () => {
+    it('"CONCEPT" 텍스트가 렌더링된다', () => {
       render(<VisionTitle ref={nullRef} />);
-      expect(screen.getByText('FUTURE VISION')).toBeInTheDocument();
+      expect(screen.getByText('CONCEPT')).toBeInTheDocument();
     });
 
     it('"미래를 향한" h2가 렌더링된다', () => {
       render(<VisionTitle ref={nullRef} />);
       expect(screen.getByText('미래를 향한')).toBeInTheDocument();
-    });
-
-    it('"세 가지 방향" h2가 렌더링된다', () => {
-      render(<VisionTitle ref={nullRef} />);
-      expect(screen.getByText('세 가지 방향')).toBeInTheDocument();
     });
   });
 

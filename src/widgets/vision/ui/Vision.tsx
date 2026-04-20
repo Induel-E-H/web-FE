@@ -7,8 +7,8 @@ import { VISION_DATA } from '@entities/vision/model/visionData';
 import '@widgets/vision/styles/Vision.css';
 
 import '../styles/Vision.css';
-import { VisionTitle } from './Title';
 import { VisionItem } from './VisionItem';
+import { VisionTitle } from './VisionTitle';
 
 const imageMap = {
   'vision_param.webp': visionParam,
