@@ -17,7 +17,7 @@ const imageMap = {
 };
 
 export function Vision() {
-  const titleRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = titleRef.current;

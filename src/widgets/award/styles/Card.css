@@ -22,6 +22,7 @@
 
 .award__card:hover {
   transform: translateY(-0.3vmax);
+  -webkit-transform: translateY(-0.3vmax);
   box-shadow: 0 0.6vmax 1.2vmax rgba(0, 0, 0, 0.25);
 }
 

@@ -2,6 +2,7 @@
   position: absolute;
   inset: 0;
   perspective: 120vmax;
+  -webkit-perspective: 120vmax;
   z-index: 10;
 }
 
@@ -83,6 +84,7 @@
 @media (max-width: 1024px) {
   .history__book-page-flip-wrapper {
     perspective: 300vmin;
+    -webkit-perspective: 300vmin;
   }
 
   .history__book-page-left {
@@ -147,6 +149,7 @@
 @media (max-width: 767px) {
   .history__book-page-flip-wrapper {
     perspective: 614.4vmin;
+    -webkit-perspective: 614.4vmin;
   }
 
   .history__book-page-left {

@@ -7,6 +7,7 @@ on:
 
 jobs:
   lighthouse:
+    if: github.actor != 'dependabot[bot]'
     name: Lighthouse
     runs-on: ubuntu-latest
 

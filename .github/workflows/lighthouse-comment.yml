@@ -9,7 +9,7 @@ jobs:
   comment:
     name: Post Lighthouse Comment
     runs-on: ubuntu-latest
-    if: github.event.workflow_run.event == 'pull_request'
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.actor.login != 'dependabot[bot]'
     permissions:
       pull-requests: write
       issues: write

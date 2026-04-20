@@ -9,9 +9,9 @@ import {
 
 import { getItemsPerPage } from '../model/responsive';
 import '../styles/Award.css';
+import { AwardTitle } from './AwardTitle';
 import { AwardCount } from './Count';
 import { AwardPopup } from './Popup';
-import { AwardTitle } from './Title';
 import { Viewport } from './Viewport';
 
 function Award() {

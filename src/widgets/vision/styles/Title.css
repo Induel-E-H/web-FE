@@ -1,8 +1,7 @@
 .vision__title {
-  display: flex;
-  flex-direction: column;
   opacity: 0;
   transform: translateY(2.5vmax);
+  -webkit-transform: translateY(2.5vmax);
   transition:
     opacity 0.7s ease,
     transform 0.7s ease;
@@ -11,77 +10,19 @@
 .vision__title.is-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-.vision__title__description {
-  display: flex;
-  align-items: center;
-  gap: 0.78vmax;
-}
-
-.vision__title__description hr {
-  width: 4.167vmax;
-  border: none;
-  border-top: 0.104vmax solid #e7c889;
-}
-
-.vision__title__description p {
-  font-weight: 700;
-  font-size: 0.63vmax;
-  letter-spacing: 0.15em;
-  color: #e7c889;
+  -webkit-transform: translateY(0);
 }
 
 .vision__title h2 {
-  font-family: 'BookendBatang';
-  font-weight: 700;
-  font-size: 3.13vmax;
+  color: #38271d;
   line-height: 1.4;
   letter-spacing: -0.025em;
-  color: #38271d;
 }
 
 .vision__title h2:last-of-type {
   color: #c9a96e;
   transform: skewX(-8deg);
+  -webkit-transform: skewX(-8deg);
   display: inline-block;
   line-height: 1;
-}
-
-@media (max-width: 1024px) {
-  .vision__title__description {
-    gap: 1.95vmin;
-  }
-
-  .vision__title__description hr {
-    width: 9.11vmin;
-    border-top-width: 0.26vmin;
-  }
-
-  .vision__title__description p {
-    font-size: 1.3vmin;
-  }
-
-  .vision__title h2 {
-    font-size: 5.21vmin;
-  }
-}
-
-@media (max-width: 767px) {
-  .vision__title__description {
-    gap: 4vmin;
-  }
-
-  .vision__title__description hr {
-    width: 16vmin;
-    border-top-width: 0.53vmin;
-  }
-
-  .vision__title__description p {
-    font-size: 2.13vmin;
-  }
-
-  .vision__title h2 {
-    font-size: 8vmin;
-  }
 }

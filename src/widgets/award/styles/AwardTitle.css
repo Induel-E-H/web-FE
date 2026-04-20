@@ -1,0 +1,7 @@
+.award__title {
+  flex: 1;
+}
+
+.award__title h2 {
+  color: #38271d;
+}

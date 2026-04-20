@@ -105,6 +105,7 @@
   background-color: var(--brown-900);
   box-shadow: none;
   transform: translateY(1px);
+  -webkit-transform: translateY(1px);
 }
 
 .map__description_call svg {
