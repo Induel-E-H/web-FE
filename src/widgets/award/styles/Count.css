@@ -24,7 +24,7 @@
 
 .award__count p {
   font-weight: 600;
-  font-size: 0.78vmax;
+  font-size: max(12px, 0.78vw);
 }
 
 @media (max-width: 1024px) {

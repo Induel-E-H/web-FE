@@ -49,15 +49,15 @@
 }
 
 .hero__company-name {
-  font-size: 6.25vmax;
+  font-size: max(60px, 6.25vw);
 }
 
 .hero__company-name-en {
-  font-size: 2.6vmax;
+  font-size: max(32px, 2.6vw);
 }
 
 .hero__established {
-  font-size: 2.08vmax;
+  font-size: max(28px, 2.08vw);
 }
 
 @keyframes fade-in {

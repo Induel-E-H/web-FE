@@ -35,6 +35,14 @@ describe('Card', () => {
       render(<Card award={mockAward} onClick={vi.fn()} />);
       expect(screen.getByText('테스트 기관')).toBeInTheDocument();
     });
+
+    it('time 요소의 dateTime이 "YYYY-MM-DD" 형식이다', () => {
+      const { container } = render(
+        <Card award={mockAward} onClick={vi.fn()} />,
+      );
+      const time = container.querySelector('time.info-card__text__year');
+      expect(time).toHaveAttribute('dateTime', '2008-03-05');
+    });
   });
 
   describe('클릭 이벤트', () => {

@@ -18,6 +18,10 @@
   transition: transform 0.4s ease-in-out;
 }
 
+.history__front-cover * {
+  cursor: pointer;
+}
+
 .history__front-cover-inner {
   position: absolute;
   inset: 0;
@@ -73,7 +77,7 @@
 }
 
 .history__front-cover-title span {
-  font-size: 2.86vmax;
+  font-size: max(36px, 2.86vw);
   font-weight: 600;
 
   line-height: 100%;
@@ -96,14 +100,14 @@
 
 .history__front-cover-year-number {
   font-family: 'BookendBatang';
-  font-size: 7.29vmax;
+  font-size: max(70px, 7.29vw);
 
   line-height: 100%;
 }
 
 .history__front-cover-year-ordinal {
   font-family: 'BookendBatang';
-  font-size: 2.6vmax;
+  font-size: max(32px, 2.6vw);
 
   line-height: 100%;
 }

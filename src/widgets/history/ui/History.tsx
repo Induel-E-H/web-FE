@@ -1,7 +1,10 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
-import { PAGE_SIDE } from '@features/history/model/constants';
+import {
+  PAGE_SIDE,
+  RAPID_FLIP_DURATION,
+} from '@features/history/model/constants';
 import type { IndexItem, PageSide } from '@features/history/model/types';
 import { useBookCoverState } from '@features/history/model/useBookCoverState';
 import { useBookNavigation } from '@features/history/model/useBookNavigation';
@@ -50,11 +53,46 @@ function History() {
     prevActiveItem,
     navigateToCategory,
     beginContinuousFlip,
+    syncBoundaryCallbacks,
+    syncCoverCallbacks,
     leftShadowCount,
     rightShadowCount,
     startFlipAnimation,
     isAnimatingRef,
   } = useBookNavigation(breakpoint);
+
+  useEffect(() => {
+    syncBoundaryCallbacks(
+      (duration) => {
+        if (bookState === 'open' && !isAnimatingRef.current) {
+          closingFront();
+          startFlipAnimation('backward', onFrontClosed, duration);
+        }
+      },
+      (duration) => {
+        if (bookState === 'open' && !isAnimatingRef.current) {
+          closingBack();
+          startFlipAnimation('forward', onBackClosed, duration);
+        }
+      },
+    );
+    syncCoverCallbacks(
+      bookState === 'cover-front',
+      bookState === 'cover-back',
+      (duration) => {
+        if (!isAnimatingRef.current) {
+          openingFront();
+          startFlipAnimation('forward', onOpened, duration);
+        }
+      },
+      (duration) => {
+        if (!isAnimatingRef.current) {
+          openingBack();
+          startFlipAnimation('backward', onOpened, duration);
+        }
+      },
+    );
+  });
 
   const [pendingCategory, setPendingCategory] = useState<IndexItem | null>(
     null,
@@ -273,12 +311,12 @@ function History() {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);
       openingFront();
-      startFlipAnimation('forward', onOpened);
+      startFlipAnimation('forward', onOpened, RAPID_FLIP_DURATION);
     } else if (bookState === 'cover-back') {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);
       openingBack();
-      startFlipAnimation('backward', onOpened);
+      startFlipAnimation('backward', onOpened, RAPID_FLIP_DURATION);
     } else {
       navigateToCategory(item, 0, true);
     }

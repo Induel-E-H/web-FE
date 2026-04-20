@@ -10,7 +10,7 @@
 
 .history__category button {
   font-weight: 600;
-  font-size: 1.04vmax;
+  font-size: max(15px, 1.04vw);
   color: var(--white);
 
   cursor: pointer;
@@ -22,7 +22,7 @@
 
 .history__category span {
   font-weight: 600;
-  font-size: 1.04vmax;
+  font-size: max(15px, 1.04vw);
   color: var(--white);
 }
 

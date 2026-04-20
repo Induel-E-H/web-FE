@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { FLIP_DURATION, RAPID_FLIP_DURATION } from '../constants';
+
 export function useHoldNavigation() {
   const holdDirectionRef = useRef<'left' | 'right' | null>(null);
   const chainTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -9,6 +11,20 @@ export function useHoldNavigation() {
   const navigateRightRef = useRef<() => void>(() => {});
   const navigateLeftRapidRef = useRef<() => void>(() => {});
   const navigateRightRapidRef = useRef<() => void>(() => {});
+  const leftBoundaryCallbackRef = useRef<((duration?: number) => void) | null>(
+    null,
+  );
+  const rightBoundaryCallbackRef = useRef<((duration?: number) => void) | null>(
+    null,
+  );
+  const isCoverFrontRef = useRef(false);
+  const isCoverBackRef = useRef(false);
+  const openFrontCoverCallbackRef = useRef<((duration: number) => void) | null>(
+    null,
+  );
+  const openBackCoverCallbackRef = useRef<((duration: number) => void) | null>(
+    null,
+  );
 
   function beginContinuousFlip(direction: 'left' | 'right') {
     holdDirectionRef.current = direction;
@@ -34,9 +50,19 @@ export function useHoldNavigation() {
 
     setIsHoldChaining(true);
     chainTimerRef.current = setTimeout(() => {
-      if (holdDirectionRef.current === 'left') navigateLeftRapidRef.current();
-      else if (holdDirectionRef.current === 'right')
+      if (holdDirectionRef.current === 'left') {
+        navigateLeftRapidRef.current();
+        if (holdDirectionRef.current === null) {
+          setIsHoldChaining(false);
+          leftBoundaryCallbackRef.current?.(RAPID_FLIP_DURATION);
+        }
+      } else if (holdDirectionRef.current === 'right') {
         navigateRightRapidRef.current();
+        if (holdDirectionRef.current === null) {
+          setIsHoldChaining(false);
+          rightBoundaryCallbackRef.current?.(RAPID_FLIP_DURATION);
+        }
+      }
     }, 0);
 
     return true;
@@ -54,6 +80,26 @@ export function useHoldNavigation() {
     navigateRightRapidRef.current = navigateRightRapid ?? navigateRight;
   }
 
+  function syncBoundaryCallbacks(
+    onLeftBoundary: (duration?: number) => void,
+    onRightBoundary: (duration?: number) => void,
+  ) {
+    leftBoundaryCallbackRef.current = onLeftBoundary;
+    rightBoundaryCallbackRef.current = onRightBoundary;
+  }
+
+  function syncCoverCallbacks(
+    isCoverFront: boolean,
+    isCoverBack: boolean,
+    openFront: (duration: number) => void,
+    openBack: (duration: number) => void,
+  ) {
+    isCoverFrontRef.current = isCoverFront;
+    isCoverBackRef.current = isCoverBack;
+    openFrontCoverCallbackRef.current = openFront;
+    openBackCoverCallbackRef.current = openBack;
+  }
+
   useEffect(() => {
     window.addEventListener('mouseup', endContinuousFlip);
     return () => window.removeEventListener('mouseup', endContinuousFlip);
@@ -63,11 +109,27 @@ export function useHoldNavigation() {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.repeat) return;
       if (e.key === 'ArrowLeft') {
+        if (isCoverBackRef.current) {
+          holdDirectionRef.current = 'left';
+          openBackCoverCallbackRef.current?.(FLIP_DURATION);
+          return;
+        }
         holdDirectionRef.current = 'left';
         navigateLeftRef.current();
+        if (holdDirectionRef.current === null) {
+          leftBoundaryCallbackRef.current?.(FLIP_DURATION);
+        }
       } else if (e.key === 'ArrowRight') {
+        if (isCoverFrontRef.current) {
+          holdDirectionRef.current = 'right';
+          openFrontCoverCallbackRef.current?.(FLIP_DURATION);
+          return;
+        }
         holdDirectionRef.current = 'right';
         navigateRightRef.current();
+        if (holdDirectionRef.current === null) {
+          rightBoundaryCallbackRef.current?.(FLIP_DURATION);
+        }
       }
     }
     function handleKeyUp(e: KeyboardEvent) {
@@ -97,5 +159,7 @@ export function useHoldNavigation() {
     endContinuousFlip,
     chainHoldFlip,
     syncCallbacks,
+    syncBoundaryCallbacks,
+    syncCoverCallbacks,
   };
 }

@@ -49,13 +49,13 @@
 
 .footer__company_name-kor {
   font-weight: 800;
-  font-size: 0.938vmax;
+  font-size: max(14px, 0.938vw);
   color: var(--white);
 }
 
 .footer__company_name-eng {
   font-weight: 600;
-  font-size: 0.625vmax;
+  font-size: max(10px, 0.625vw);
   color: var(--gray-500);
 }
 
@@ -68,8 +68,12 @@
 .footer__information button {
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.729vmax;
+  font-size: max(11px, 0.729vw);
   color: var(--white);
+}
+
+.footer__information button:hover {
+  opacity: 0.7;
 }
 
 .footer__information b {
@@ -109,7 +113,7 @@
   flex-direction: row;
   gap: 0.781vmax;
   font-weight: 600;
-  font-size: 0.729vmax;
+  font-size: max(11px, 0.729vw);
 }
 
 .footer__row span:first-child {
@@ -122,7 +126,7 @@
 
 .footer__company_split {
   font-weight: 600;
-  font-size: 0.729vmax;
+  font-size: max(11px, 0.729vw);
   color: var(--gray-500);
 }
 
@@ -132,7 +136,7 @@
 
 .footer__copyright {
   font-weight: 100;
-  font-size: 0.625vmax;
+  font-size: max(10px, 0.625vw);
   color: var(--footer-copyright);
 }
 

@@ -19,14 +19,14 @@
 
 .section-title__description p {
   font-weight: 700;
-  font-size: 0.63vmax;
+  font-size: max(10px, 0.63vw);
   letter-spacing: 0.15em;
 }
 
 .section-title h2 {
   font-family: 'BookendBatang';
   font-weight: 700;
-  font-size: 3.13vmax;
+  font-size: max(40px, 3.13vw);
 }
 
 @media (max-width: 1024px) {

@@ -53,7 +53,7 @@
 }
 
 .history__back-cover-word {
-  font-size: 1.56vmax;
+  font-size: max(22px, 1.56vw);
   font-weight: 600;
 
   letter-spacing: 0.1em;

@@ -33,12 +33,12 @@
 .map__info__name {
   color: white;
   font-weight: 700;
-  font-size: 0.9vmax;
+  font-size: max(13px, 0.9vw);
 }
 
 .map__info__subtitle {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 0.664vmax;
+  font-size: max(10px, 0.664vw);
 }
 
 .map__info__body {
@@ -79,17 +79,17 @@
 
 .map__info__phone {
   color: #38271d;
-  font-size: 0.81vmax;
+  font-size: max(12px, 0.81vw);
   font-weight: 600;
   text-decoration: none;
 }
 
 .map__info__address-main {
   color: #424242;
-  font-size: 0.81vmax;
+  font-size: max(12px, 0.81vw);
 }
 
 .map__info__address-sub {
   color: #9e9e9e;
-  font-size: 0.664vmax;
+  font-size: max(10px, 0.664vw);
 }

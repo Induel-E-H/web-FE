@@ -41,7 +41,7 @@ describe('PatentCard', () => {
     const { container } = render(
       <PatentCard item={mockItem} onClick={vi.fn()} />,
     );
-    const time = container.querySelector('time.patent__card__text__year');
+    const time = container.querySelector('time.info-card__text__year');
     expect(time).toHaveAttribute('dateTime', '2013-09-24');
   });
 

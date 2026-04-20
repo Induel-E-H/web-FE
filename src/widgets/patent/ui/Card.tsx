@@ -1,6 +1,7 @@
 import { IoDocumentTextOutline } from 'react-icons/io5';
 
 import type { PatentValidType } from '@entities/patent';
+import { InfoCard } from '@shared/ui/InfoCard';
 
 import '../styles/Card.css';
 
@@ -12,22 +13,16 @@ export function PatentCard({
   onClick: () => void;
 }) {
   return (
-    <button className='patent__card' onClick={onClick}>
-      <div className='patent__card_frame'>
-        <div className='patent__card__content'>
-          <IoDocumentTextOutline className='patent__card__content__icon' />
-          <div className='patent__card__text'>
-            <p className='patent__card__text__title'>{item.title}</p>
-            <p className='patent__card__text__serial'>{item.serialNumber}</p>
-            <time
-              className='patent__card__text__year'
-              dateTime={item.filingDate.replace(/\. /g, '-')}
-            >
-              {item.filingDate.slice(0, 4)}년 출원
-            </time>
-          </div>
-        </div>
-      </div>
-    </button>
+    <InfoCard
+      className='patent__card'
+      icon={<IoDocumentTextOutline />}
+      year={{
+        text: `${item.filingDate.slice(0, 4)}년 출원`,
+        dateTime: item.filingDate.replace(/\. /g, '-'),
+      }}
+      title={item.title}
+      secondary={item.serialNumber}
+      onClick={onClick}
+    />
   );
 }

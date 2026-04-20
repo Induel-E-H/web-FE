@@ -95,6 +95,8 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     beginContinuousFlip,
     chainHoldFlip,
     syncCallbacks,
+    syncBoundaryCallbacks,
+    syncCoverCallbacks,
   } = useHoldNavigation();
 
   function applyNavigationStep(step: NavigationStep) {
@@ -283,6 +285,8 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     prevActiveItem,
     navigateToCategory,
     beginContinuousFlip,
+    syncBoundaryCallbacks,
+    syncCoverCallbacks,
     leftShadowCount,
     rightShadowCount,
     startFlipAnimation,
