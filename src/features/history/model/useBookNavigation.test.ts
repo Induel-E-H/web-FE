@@ -119,6 +119,18 @@ describe('useBookNavigation', () => {
     });
   });
 
+  describe('노출 API', () => {
+    it('syncBoundaryCallbacks가 반환값에 포함된다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+      expect(typeof result.current.syncBoundaryCallbacks).toBe('function');
+    });
+
+    it('syncCoverCallbacks가 반환값에 포함된다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+      expect(typeof result.current.syncCoverCallbacks).toBe('function');
+    });
+  });
+
   describe('breakpoint 변경', () => {
     it('tablet breakpoint에서도 초기 상태가 올바르다', () => {
       const { result } = renderHook(() => useBookNavigation('tablet'));
