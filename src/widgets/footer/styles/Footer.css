@@ -72,6 +72,10 @@
   color: var(--white);
 }
 
+.footer__information button:hover {
+  opacity: 0.7;
+}
+
 .footer__information b {
   font-weight: 900;
 }
