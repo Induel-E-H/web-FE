@@ -123,3 +123,25 @@
     font-size: 1.56vmin;
   }
 }
+
+@media (max-width: 767px) {
+  .image-slider__nav {
+    width: 7.47vmin;
+    height: 7.47vmin;
+  }
+
+  .image-slider__nav--prev {
+    left: 0;
+  }
+
+  .image-slider__nav--next {
+    right: 0;
+  }
+
+  .image-slider__indicator {
+    bottom: 0;
+    padding: 0.53vmin 2.133vmin;
+    border-radius: 2.67vmin;
+    font-size: 2.67vmin;
+  }
+}
