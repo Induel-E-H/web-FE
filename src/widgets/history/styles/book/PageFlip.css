@@ -71,17 +71,17 @@
 
 @media (max-width: 1024px) {
   .history__book-left .history__book-page-flip-panel {
-    top: 1.302vmin;
+    top: 1.302vw;
     bottom: 0;
-    left: 1.302vmin;
-    right: 1.302vmin;
+    left: 1.302vw;
+    right: 1.302vw;
   }
 
   .history__book-right .history__book-page-flip-panel {
     top: 0;
-    bottom: 1.302vmin;
-    left: 1.302vmin;
-    right: 1.302vmin;
+    bottom: 1.302vw;
+    left: 1.302vw;
+    right: 1.302vw;
   }
 
   .history__book-page-flip-panel--forward {
@@ -112,16 +112,16 @@
 
 @media (max-width: 767px) {
   .history__book-left .history__book-page-flip-panel {
-    top: 1.87vmin;
+    top: clamp(8px, 1.87vw, 9px);
     bottom: 0;
-    left: 1.333vmin;
-    right: 1.333vmin;
+    left: clamp(4px, 1.333vw, 7px);
+    right: clamp(4px, 1.333vw, 7px);
   }
 
   .history__book-right .history__book-page-flip-panel {
     top: 0;
-    bottom: 1.87vmin;
-    left: 1.333vmin;
-    right: 1.333vmin;
+    bottom: clamp(8px, 1.87vw, 9px);
+    left: clamp(4px, 1.333vw, 7px);
+    right: clamp(4px, 1.333vw, 7px);
   }
 }

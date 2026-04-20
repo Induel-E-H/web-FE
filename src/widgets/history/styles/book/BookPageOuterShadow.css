@@ -64,7 +64,7 @@
     flex-direction: column;
 
     width: 100%;
-    height: 1.17vmin;
+    height: 1.17vw;
   }
 
   .history__book-page-left .history__book-page-outer-shadow {
@@ -114,7 +114,7 @@
 
 @media (max-width: 767px) {
   .history__book-page-outer-shadow {
-    height: 1.6vmin;
+    height: clamp(8px, 1.6vw, 8px);
   }
 
   .history__book-page-outer-shadow-3 {

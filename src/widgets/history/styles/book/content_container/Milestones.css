@@ -61,7 +61,7 @@
 
 @media (max-width: 1024px) {
   .milestones__container {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .milestones__content {
@@ -70,44 +70,44 @@
   }
 
   .milestones__year-group {
-    gap: 0.39vmin;
+    gap: 0.39vw;
   }
 
   .milestones__year {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 
   .milestones__ul li {
-    gap: 0.39vmin;
+    gap: 0.39vw;
 
-    font-size: 1.3vmin;
+    font-size: 1.3vw;
   }
 
   .milestones__ul li::before {
-    font-size: 1.3vmin;
+    font-size: 1.3vw;
   }
 }
 
 @media (max-width: 767px) {
   .milestones__container {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .milestones__year-group {
-    gap: 0.8vmin;
+    gap: clamp(2px, 0.8vw, 4px);
   }
 
   .milestones__year {
-    font-size: 2.4vmin;
+    font-size: clamp(8px, 2.4vw, 12px);
   }
 
   .milestones__ul li {
-    gap: 1vmin;
+    gap: clamp(3px, 1vw, 5px);
 
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .milestones__ul li::before {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 }

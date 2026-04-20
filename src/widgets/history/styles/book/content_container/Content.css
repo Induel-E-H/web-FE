@@ -155,87 +155,87 @@
 
 @media (max-width: 1024px) {
   .content__item {
-    gap: 1.04vmin;
+    gap: 1.04vw;
   }
 
   .content__text {
-    gap: 1.04vmin;
+    gap: 1.04vw;
   }
 
   .content__title-kor {
-    font-size: 2.6vmin;
+    font-size: 2.6vw;
   }
 
   .content__title-eng {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 
   .content__subtitle {
-    font-size: 1.82vmin;
+    font-size: 1.82vw;
   }
 
   .content__body {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 
   .content__caption-row {
-    gap: 0.26vmin;
+    gap: 0.26vw;
   }
 
   .content__caption dt {
-    font-size: 1.3vmin;
+    font-size: 1.3vw;
   }
 
   .content__caption dd {
-    font-size: 1.3vmin;
+    font-size: 1.3vw;
   }
 
   .content__image {
     flex: 1;
     height: auto;
     min-height: 0;
-    border-radius: 0.65vmin;
+    border-radius: 0.65vw;
   }
 }
 
 @media (max-width: 767px) {
   .content__item {
-    gap: 1.333vmin;
+    gap: clamp(4px, 1.333vw, 7px);
   }
 
   .content__text {
-    gap: 1.333vmin;
+    gap: clamp(4px, 1.333vw, 7px);
   }
 
   .content__title-kor {
-    font-size: 3.733vmin;
+    font-size: clamp(13px, 3.733vw, 19px);
   }
 
   .content__title-eng {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 
   .content__subtitle {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .content__body {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .content__caption-row {
-    gap: 0.53vmin;
+    gap: clamp(2px, 0.53vw, 3px);
   }
 
   .content__caption dt {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .content__caption dd {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .content__image {
-    border-radius: 1.33vmin;
+    border-radius: clamp(4px, 1.33vw, 7px);
   }
 }

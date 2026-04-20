@@ -123,14 +123,14 @@
     filter: none;
     animation: fade-in-mobile 1.2s ease-out forwards;
     gap: 0;
-    padding-top: 9.77vmin;
+    padding-top: 9.77vw;
   }
 
   .hero__company::after {
     content: '';
     display: block;
     order: 3;
-    height: calc(9.11vmin + 4.56vmin * 1.4);
+    height: calc(9.11vw + 4.56vw * 1.4);
   }
 
   .hero__logo {
@@ -138,9 +138,9 @@
     transform: none;
     -webkit-transform: none;
     order: 2;
-    height: 37.5vmin;
+    height: 37.5vw;
     width: auto;
-    filter: drop-shadow(0 0 5.21vmin rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
   }
 
   .hero__company-text {
@@ -149,81 +149,81 @@
     -webkit-transform: none;
     order: 1;
     align-items: center;
-    gap: 1.82vmin;
-    text-shadow: 0 0 5.21vmin rgba(0, 0, 0, 1);
+    gap: 1.82vw;
+    text-shadow: 0 0 40px rgba(0, 0, 0, 1);
   }
 
   .hero__company-text hgroup {
     align-items: center;
-    gap: 1.82vmin;
+    gap: 1.82vw;
   }
 
   .hero__company-name {
-    font-size: 9.11vmin;
+    font-size: 9.11vw;
   }
 
   .hero__company-name-en {
-    font-size: 5.21vmin;
+    font-size: 5.21vw;
   }
 
   .hero__established {
     position: absolute;
-    bottom: 9.11vmin;
+    bottom: 9.11vw;
     left: 50%;
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
-    font-size: 4.56vmin;
+    font-size: 4.56vw;
   }
 
   .hero__down-icon {
     bottom: 2.34%;
-    --size: 6.51vmin;
+    --size: 6.51vw;
     width: var(--size);
     height: var(--size);
-    filter: drop-shadow(0 0 5.21vmin rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
   }
 }
 
 @media (max-width: 767px) {
   .hero__company {
-    padding-top: 16vmin;
+    padding-top: clamp(56px, 16vw, 80px);
   }
   .hero__company::after {
-    height: calc(13.33vmin + 4.53vmin * 1.4);
+    height: calc(13.33vw + 4.53vw * 1.4);
   }
 
   .hero__logo {
-    height: 54.13vmin;
-    filter: drop-shadow(0 0 10.67vmin rgba(0, 0, 0, 1));
+    height: clamp(189px, 54.13vw, 271px);
+    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
   }
 
   .hero__company-text {
-    gap: 2.13vmin;
-    text-shadow: 0 0 10.67vmin rgba(0, 0, 0, 1);
+    gap: clamp(8px, 2.13vw, 11px);
+    text-shadow: 0 0 40px rgba(0, 0, 0, 1);
   }
 
   .hero__company-text hgroup {
-    gap: 2.13vmin;
+    gap: clamp(8px, 2.13vw, 11px);
   }
 
   .hero__company-name {
-    font-size: 10.67vmin;
+    font-size: clamp(37px, 10.67vw, 53px);
   }
 
   .hero__company-name-en {
-    font-size: 5.33vmin;
+    font-size: clamp(19px, 5.33vw, 27px);
   }
 
   .hero__established {
-    font-size: 4.53vmin;
-    bottom: 13.33vmin;
+    font-size: clamp(16px, 4.53vw, 23px);
+    bottom: clamp(47px, 13.33vw, 67px);
   }
 
   .hero__down-icon {
     bottom: 2%;
-    --size: 10.93vmin;
+    --size: clamp(38px, 10.93vw, 55px);
     width: var(--size);
     height: var(--size);
-    filter: drop-shadow(0 0 10.67vmin rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
   }
 }

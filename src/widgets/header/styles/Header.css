@@ -187,53 +187,53 @@
 
 @media (max-width: 1024px) {
   .header {
-    padding: 0 3.91vmin;
-    height: 7.29vmin;
+    padding: 0 3.91vw;
+    height: 7.29vw;
   }
 
   .header__logo {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .header__logo_icon-frame {
-    width: 3.65vmin;
-    height: 3.65vmin;
+    width: 3.65vw;
+    height: 3.65vw;
     padding: 3.8%;
-    border-radius: 0.66vmin;
-    box-shadow: 0 0 0.52vmin rgba(0, 0, 0, 0.5);
+    border-radius: 0.66vw;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   }
 
   .header__logo span {
-    font-size: 2.08vmin;
+    font-size: 2.08vw;
   }
 
   .header__nav {
-    gap: 3.26vmin;
+    gap: 3.26vw;
   }
 
   .header__nav button {
-    font-size: 1.82vmin;
+    font-size: 1.82vw;
   }
 }
 
 @media (max-width: 767px) {
   .header {
-    padding: 0 4vmin;
-    height: 14.94vmin;
+    padding: 0 clamp(14px, 4vw, 20px);
+    height: clamp(52px, 14.94vw, 75px);
   }
 
   .header__logo {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .header__logo_icon-frame {
-    width: 7.47vmin;
-    height: 7.47vmin;
-    border-radius: 1.32vmin;
+    width: clamp(26px, 7.47vw, 37px);
+    height: clamp(26px, 7.47vw, 37px);
+    border-radius: clamp(4px, 1.32vw, 7px);
   }
 
   .header__logo span {
-    font-size: 4.27vmin;
+    font-size: clamp(15px, 4.27vw, 21px);
   }
 
   .header__nav {
@@ -242,13 +242,13 @@
 
   .header__hamburger {
     display: flex;
-    width: 8.53vmin;
-    height: 8.53vmin;
-    font-size: 6.35vmin;
+    width: clamp(30px, 8.53vw, 43px);
+    height: clamp(30px, 8.53vw, 43px);
+    font-size: clamp(22px, 6.35vw, 32px);
   }
 
   .header__mobile-menu button {
-    padding: 3.73vmin 4vmin;
-    font-size: 3.73vmin;
+    padding: clamp(13px, 3.73vw, 19px) clamp(14px, 4vw, 20px);
+    font-size: clamp(13px, 3.73vw, 19px);
   }
 }

@@ -29,7 +29,7 @@
   }
 
   .book-page-title h3 {
-    font-size: 2.34vmin;
+    font-size: 2.34vw;
   }
 
   .history__book-page-right .book-page-title {
@@ -39,6 +39,6 @@
 
 @media (max-width: 767px) {
   .book-page-title h3 {
-    font-size: 4vmin;
+    font-size: clamp(14px, 4vw, 20px);
   }
 }

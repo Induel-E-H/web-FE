@@ -49,58 +49,58 @@
 
 @media (max-width: 1024px) {
   .award__pagination {
-    gap: 1.31vmin;
+    gap: 1.31vw;
   }
 
   .award__pagination_arrow {
-    width: 2.865vmin;
-    font-size: 1.954vmin;
-    border-radius: 0.652vmin;
+    width: 2.865vw;
+    font-size: 1.954vw;
+    border-radius: 0.652vw;
   }
 
   .award__pagination_dots {
-    gap: 1.31vmin;
+    gap: 1.31vw;
   }
 
   .award__pagination_dot {
-    width: 2.605vmin;
-    height: 2.605vmin;
+    width: 2.605vw;
+    height: 2.605vw;
   }
 
   .award__pagination_dot--active {
-    width: 4.69vmin;
+    width: 4.69vw;
   }
 
   .award__pagination_info {
-    font-size: 2.084vmin;
+    font-size: 2.084vw;
   }
 }
 
 @media (max-width: 767px) {
   .award__pagination {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .award__pagination_arrow {
-    width: 5.334vmin;
-    font-size: 2.67vmin;
-    border-radius: 1.34vmin;
+    width: clamp(19px, 5.334vw, 27px);
+    font-size: clamp(9px, 2.67vw, 13px);
+    border-radius: clamp(4px, 1.34vw, 7px);
   }
 
   .award__pagination_dots {
-    gap: 2.666vmin;
+    gap: clamp(9px, 2.666vw, 13px);
   }
 
   .award__pagination_dot {
-    width: 4.8vmin;
-    height: 4.8vmin;
+    width: clamp(17px, 4.8vw, 24px);
+    height: clamp(17px, 4.8vw, 24px);
   }
 
   .award__pagination_dot--active {
-    width: 9.6vmin;
+    width: clamp(34px, 9.6vw, 48px);
   }
 
   .award__pagination_info {
-    font-size: 3.734vmin;
+    font-size: clamp(13px, 3.734vw, 19px);
   }
 }

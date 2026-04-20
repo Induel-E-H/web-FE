@@ -142,111 +142,111 @@
 
 @media (max-width: 1024px) {
   .footer {
-    height: 31.25vmin;
-    padding: 2.6vmin 3.91vmin;
+    height: 31.25vw;
+    padding: 2.6vw 3.91vw;
   }
 
   .footer__company {
-    gap: 1.95vmin;
+    gap: 1.95vw;
   }
 
   .footer__icon-frame {
-    width: 4.69vmin;
-    height: 4.69vmin;
-    padding: 0.65vmin;
-    border-radius: 0.651vmin;
+    width: 4.69vw;
+    height: 4.69vw;
+    padding: 0.65vw;
+    border-radius: 0.651vw;
   }
 
   .footer__company_name-kor {
-    font-size: 2.08vmin;
+    font-size: 2.08vw;
   }
 
   .footer__company_name-eng {
-    font-size: 1.82vmin;
+    font-size: 1.82vw;
   }
 
   .footer__information {
-    gap: 3.26vmin;
+    gap: 3.26vw;
   }
 
   .footer__information button {
-    font-size: 1.82vmin;
+    font-size: 1.82vw;
   }
 
   .footer hr {
-    border-top: 0.13vmin solid var(--footer-divider);
+    border-top: 1px solid var(--footer-divider);
   }
 
   .footer__left,
   .footer__right {
-    gap: 0.65vmin;
+    gap: 0.65vw;
   }
 
   .footer__company_owner,
   .footer__contact {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .footer__row {
-    gap: 1.3vmin;
-    font-size: 1.82vmin;
+    gap: 1.3vw;
+    font-size: 1.82vw;
   }
 
   .footer__company_split {
-    font-size: 1.82vmin;
+    font-size: 1.82vw;
   }
 
   .footer__copyright {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 }
 
 @media (max-width: 767px) {
   .footer {
-    height: 53.33vmin;
-    padding: 4vmin 4vmin;
+    height: clamp(187px, 53.33vw, 267px);
+    padding: clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
   }
 
   .footer__company {
-    gap: 4vmin;
+    gap: clamp(14px, 4vw, 20px);
   }
 
   .footer__icon-frame {
-    width: 8vmin;
-    height: 8vmin;
-    padding: 1.33vmin;
-    border-radius: 1.33vmin;
+    width: clamp(28px, 8vw, 40px);
+    height: clamp(28px, 8vw, 40px);
+    padding: clamp(4px, 1.33vw, 7px);
+    border-radius: clamp(4px, 1.33vw, 7px);
   }
 
   .footer__company_name-kor {
-    font-size: 3.73vmin;
+    font-size: clamp(13px, 3.73vw, 19px);
   }
 
   .footer__company_name-eng {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 
   .footer__information {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .footer__information button {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 
   .footer hr {
-    border-top: 0.267vmin solid var(--footer-divider);
+    border-top: 1px solid var(--footer-divider);
   }
 
   .footer__content {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.33vmin;
+    gap: clamp(4px, 1.33vw, 7px);
   }
 
   .footer__left,
   .footer__right {
-    gap: 1.33vmin;
+    gap: clamp(4px, 1.33vw, 7px);
   }
 
   .footer__right {
@@ -255,19 +255,19 @@
 
   .footer__company_owner,
   .footer__contact {
-    gap: 1.3vmin;
+    gap: clamp(4px, 1.3vw, 7px);
   }
 
   .footer__row {
-    gap: 2.67vmin;
-    font-size: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 
   .footer__company_split {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 
   .footer__copyright {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 }

@@ -10,13 +10,13 @@
 @media (max-width: 1024px) {
   .patent__card {
     width: 100%;
-    height: 40.7vmin;
+    height: 40.7vw;
   }
 }
 
 @media (max-width: 767px) {
   .patent__card {
     width: 100%;
-    height: 63.65vmin;
+    height: 35.1dvh;
   }
 }
