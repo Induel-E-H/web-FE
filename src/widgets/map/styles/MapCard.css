@@ -57,7 +57,7 @@
 
 .map__description_text h4 {
   font-weight: 700;
-  font-size: 0.73vmax;
+  font-size: 0.833vmax;
   color: var(--brown-900);
 }
 
@@ -68,7 +68,7 @@
 
 .map__description__content p {
   font-weight: 500;
-  font-size: 0.63vmax;
+  font-size: 0.729vmax;
   color: var(--brown-800);
 }
 
