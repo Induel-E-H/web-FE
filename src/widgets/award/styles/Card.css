@@ -69,7 +69,7 @@
 .award__card_text_year {
   font-family: 'BookendBatang';
   font-weight: 700;
-  font-size: 0.52vmax;
+  font-size: 0.625vmax;
 
   color: #c9a96e;
 }
@@ -85,7 +85,7 @@
 .award__card_text_issuer {
   font-family: 'Pretendard';
   font-weight: 700;
-  font-size: 0.52vmax;
+  font-size: 0.625vmax;
 
   color: #8c8672;
 }

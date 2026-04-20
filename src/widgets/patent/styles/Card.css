@@ -73,16 +73,16 @@
 
 .patent__card__text__serial {
   font-family: 'Pretendard';
-  font-weight: 600;
-  font-size: 0.52vmax;
+  font-weight: 700;
+  font-size: 0.625vmax;
 
   color: #8c8672;
 }
 
 .patent__card__text__year {
-  font-family: 'Pretendard';
-  font-weight: 500;
-  font-size: 0.42vmax;
+  font-family: 'BookendBatang';
+  font-weight: 700;
+  font-size: 0.625vmax;
 
   color: #c9a96e;
 }
