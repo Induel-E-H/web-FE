@@ -74,17 +74,17 @@
   }
 
   .milestones__year {
-    font-size: 1.17vmin;
+    font-size: 1.56vmin;
   }
 
   .milestones__ul li {
     gap: 0.39vmin;
 
-    font-size: 1.04vmin;
+    font-size: 1.3vmin;
   }
 
   .milestones__ul li::before {
-    font-size: 1.04vmin;
+    font-size: 1.3vmin;
   }
 }
 

@@ -44,8 +44,8 @@
 
 .header__logo_icon-frame {
   flex-shrink: 0;
-  width: 1.667vmax;
-  height: 1.667vmax;
+  width: max(18px, 1.667vmax);
+  height: max(18px, 1.667vmax);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,7 +89,7 @@
 
 .header__nav button {
   font-weight: 600;
-  font-size: max(12px, 0.833vw);
+  font-size: max(14px, 0.833vw);
   color: #38271d;
   background: none;
   border: none;
