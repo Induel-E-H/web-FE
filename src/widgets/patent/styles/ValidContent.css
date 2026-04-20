@@ -46,8 +46,11 @@
 }
 
 .patent__content__item__list {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, auto);
+
+  column-gap: 4.17vmax;
 
   width: 100%;
 

@@ -1,6 +1,6 @@
 .patent__card {
-  width: 10.78vmax;
-  height: 15.36vmax;
+  width: 100%;
+  height: 15.44vmax;
 }
 
 .patent__card:hover {
@@ -9,14 +9,14 @@
 
 @media (max-width: 1024px) {
   .patent__card {
-    width: 28.54vmin;
+    width: 100%;
     height: 40.7vmin;
   }
 }
 
 @media (max-width: 767px) {
   .patent__card {
-    width: 44.67vmin;
+    width: 100%;
     height: 63.65vmin;
   }
 }
