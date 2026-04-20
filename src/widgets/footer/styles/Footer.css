@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 12.5vmax;
+  height: 13.54vmax;
   align-items: center;
   justify-content: space-between;
   padding: 2.08vmax 10.42vmax;
@@ -26,8 +26,8 @@
 
 .footer__icon-frame {
   display: flex;
-  width: 2.19vmax;
-  height: 2.19vmax;
+  width: max(28px, 1.875vmax);
+  height: max(28px, 1.875vmax);
   justify-content: center;
   align-items: center;
   padding: 0.26vmax;
@@ -49,13 +49,13 @@
 
 .footer__company_name-kor {
   font-weight: 800;
-  font-size: max(14px, 0.938vw);
+  font-size: max(16px, 0.94vw);
   color: var(--white);
 }
 
 .footer__company_name-eng {
   font-weight: 600;
-  font-size: max(10px, 0.625vw);
+  font-size: max(12px, 0.73vw);
   color: var(--gray-500);
 }
 
@@ -142,7 +142,7 @@
 
 @media (max-width: 1024px) {
   .footer {
-    height: 23.44vmin;
+    height: 31.25vmin;
     padding: 2.6vmin 3.91vmin;
   }
 
@@ -153,7 +153,7 @@
   .footer__icon-frame {
     width: 4.69vmin;
     height: 4.69vmin;
-    padding: 0.651vmin;
+    padding: 0.65vmin;
     border-radius: 0.651vmin;
   }
 
@@ -162,7 +162,7 @@
   }
 
   .footer__company_name-eng {
-    font-size: 1.3vmin;
+    font-size: 1.82vmin;
   }
 
   .footer__information {
@@ -203,7 +203,7 @@
 
 @media (max-width: 767px) {
   .footer {
-    height: 42.67vmin;
+    height: 53.33vmin;
     padding: 4vmin 4vmin;
   }
 
@@ -212,18 +212,18 @@
   }
 
   .footer__icon-frame {
-    width: 7.47vmin;
-    height: 7.47vmin;
+    width: 8vmin;
+    height: 8vmin;
     padding: 1.33vmin;
     border-radius: 1.33vmin;
   }
 
   .footer__company_name-kor {
-    font-size: 3.2vmin;
+    font-size: 3.73vmin;
   }
 
   .footer__company_name-eng {
-    font-size: 2.13vmin;
+    font-size: 2.67vmin;
   }
 
   .footer__information {
@@ -260,14 +260,14 @@
 
   .footer__row {
     gap: 2.67vmin;
-    font-size: 2.13vmin;
+    font-size: 2.67vmin;
   }
 
   .footer__company_split {
-    font-size: 2.13vmin;
+    font-size: 2.67vmin;
   }
 
   .footer__copyright {
-    font-size: 1.6vmin;
+    font-size: 2.13vmin;
   }
 }
