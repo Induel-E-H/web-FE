@@ -53,11 +53,46 @@ function History() {
     prevActiveItem,
     navigateToCategory,
     beginContinuousFlip,
+    syncBoundaryCallbacks,
+    syncCoverCallbacks,
     leftShadowCount,
     rightShadowCount,
     startFlipAnimation,
     isAnimatingRef,
   } = useBookNavigation(breakpoint);
+
+  useEffect(() => {
+    syncBoundaryCallbacks(
+      (duration) => {
+        if (bookState === 'open' && !isAnimatingRef.current) {
+          closingFront();
+          startFlipAnimation('backward', onFrontClosed, duration);
+        }
+      },
+      (duration) => {
+        if (bookState === 'open' && !isAnimatingRef.current) {
+          closingBack();
+          startFlipAnimation('forward', onBackClosed, duration);
+        }
+      },
+    );
+    syncCoverCallbacks(
+      bookState === 'cover-front',
+      bookState === 'cover-back',
+      (duration) => {
+        if (!isAnimatingRef.current) {
+          openingFront();
+          startFlipAnimation('forward', onOpened, duration);
+        }
+      },
+      (duration) => {
+        if (!isAnimatingRef.current) {
+          openingBack();
+          startFlipAnimation('backward', onOpened, duration);
+        }
+      },
+    );
+  });
 
   const [pendingCategory, setPendingCategory] = useState<IndexItem | null>(
     null,

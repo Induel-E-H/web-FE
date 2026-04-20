@@ -36,7 +36,8 @@ export function ImageSlider({
     if (touchStartXRef.current === null) return;
     const delta = touchStartXRef.current - e.changedTouches[0].clientX;
     if (Math.abs(delta) > SWIPE_THRESHOLD) {
-      delta > 0 ? onNext() : onPrev();
+      if (delta > 0) onNext();
+      else onPrev();
       onRelease();
     }
     touchStartXRef.current = null;
@@ -52,7 +53,8 @@ export function ImageSlider({
     if (mouseStartXRef.current === null) return;
     const delta = mouseStartXRef.current - e.clientX;
     if (Math.abs(delta) > SWIPE_THRESHOLD) {
-      delta > 0 ? onNext() : onPrev();
+      if (delta > 0) onNext();
+      else onPrev();
       onRelease();
     }
     mouseStartXRef.current = null;
