@@ -1,7 +1,10 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
-import { PAGE_SIDE } from '@features/history/model/constants';
+import {
+  PAGE_SIDE,
+  RAPID_FLIP_DURATION,
+} from '@features/history/model/constants';
 import type { IndexItem, PageSide } from '@features/history/model/types';
 import { useBookCoverState } from '@features/history/model/useBookCoverState';
 import { useBookNavigation } from '@features/history/model/useBookNavigation';
@@ -273,12 +276,12 @@ function History() {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);
       openingFront();
-      startFlipAnimation('forward', onOpened);
+      startFlipAnimation('forward', onOpened, RAPID_FLIP_DURATION);
     } else if (bookState === 'cover-back') {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);
       openingBack();
-      startFlipAnimation('backward', onOpened);
+      startFlipAnimation('backward', onOpened, RAPID_FLIP_DURATION);
     } else {
       navigateToCategory(item, 0, true);
     }
