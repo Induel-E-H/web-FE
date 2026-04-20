@@ -17,7 +17,8 @@
 
   width: 100%;
 
-  gap: 1.56vmax;
+  height: 39.36vh;
+  justify-content: space-between;
 
   list-style: none;
 }
@@ -49,7 +50,7 @@
   }
 
   .timeline__ul {
-    gap: 2.6vmin;
+    height: 30.67vh;
   }
 
   .timeline__ul li {
@@ -67,7 +68,7 @@
   }
 
   .timeline__ul {
-    gap: 3.2vmin;
+    height: 28.82vh;
   }
 
   .timeline__ul li {
