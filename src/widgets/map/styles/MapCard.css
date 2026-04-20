@@ -21,9 +21,11 @@
 
 .map__description {
   display: flex;
+  width: 100%;
+  height: 26.7vh;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.56vmax;
+  justify-content: space-between;
 }
 
 .map__description li {
@@ -144,7 +146,7 @@
   }
 
   .map__description {
-    gap: 1.95vmin;
+    height: 22.22vh;
   }
 
   .map__description li {
@@ -219,7 +221,7 @@
   }
 
   .map__description {
-    gap: 2.67vmin;
+    height: 24.26vh;
   }
 
   .map__description li {
