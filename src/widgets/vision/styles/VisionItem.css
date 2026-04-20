@@ -79,7 +79,7 @@
 
 .vision__content__index {
   font-weight: 400;
-  font-size: 0.52vmax;
+  font-size: 0.729vmax;
   color: var(--color-index);
 }
 
@@ -137,7 +137,7 @@
   }
 
   .vision__content__index {
-    font-size: 1.04vmin;
+    font-size: 1.563vmin;
   }
 
   .vision__content__title__main {
@@ -185,7 +185,7 @@
   }
 
   .vision__content__index {
-    font-size: 2.13vmin;
+    font-size: 2.667vmin;
   }
 
   .vision__content__title__main {
