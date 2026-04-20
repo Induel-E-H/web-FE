@@ -112,16 +112,16 @@
 
 @media (max-width: 767px) {
   .history__book-left .history__book-page-flip-panel {
-    top: 2.667vmin;
+    top: 1.87vmin;
     bottom: 0;
-    left: 2.667vmin;
-    right: 2.667vmin;
+    left: 1.333vmin;
+    right: 1.333vmin;
   }
 
   .history__book-right .history__book-page-flip-panel {
     top: 0;
-    bottom: 2.667vmin;
-    left: 2.667vmin;
-    right: 2.667vmin;
+    bottom: 1.87vmin;
+    left: 1.333vmin;
+    right: 1.333vmin;
   }
 }

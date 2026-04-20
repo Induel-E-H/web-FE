@@ -153,17 +153,17 @@
   }
 
   .history__book-page-left {
-    top: 2.667vmin;
+    top: 1.87vmin;
     bottom: 0;
-    left: 2.667vmin;
-    right: 2.667vmin;
+    left: 1.333vmin;
+    right: 1.333vmin;
   }
 
   .history__book-page-right {
     top: 0;
-    bottom: 2.667vmin;
-    left: 2.667vmin;
-    right: 2.667vmin;
+    bottom: 1.87vmin;
+    left: 1.333vmin;
+    right: 1.333vmin;
   }
 
   .history__book-page-right .history__book-page-content {
