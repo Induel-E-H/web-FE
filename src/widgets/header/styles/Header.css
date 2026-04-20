@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 5.208vmax;
-  padding-right: calc(5.208vmax + var(--scrollbar-width, 0px));
+  padding: 0 2.604vmax;
+  padding-right: calc(2.604vmax + var(--scrollbar-width, 0px));
   height: 3.33vmax;
   justify-content: space-between;
   background-color: #ffffff;
