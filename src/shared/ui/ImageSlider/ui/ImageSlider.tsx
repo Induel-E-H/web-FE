@@ -1,6 +1,9 @@
+import { useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 import '../styles/ImageSlider.css';
+
+const SWIPE_THRESHOLD = 50;
 
 interface ImageSliderProps {
   images: string[];
@@ -21,9 +24,56 @@ export function ImageSlider({
   onNext,
   onRelease,
 }: ImageSliderProps) {
+  const touchStartXRef = useRef<number | null>(null);
+  const mouseStartXRef = useRef<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartXRef.current = e.touches[0].clientX;
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartXRef.current === null) return;
+    const delta = touchStartXRef.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > SWIPE_THRESHOLD) {
+      delta > 0 ? onNext() : onPrev();
+      onRelease();
+    }
+    touchStartXRef.current = null;
+  }
+
+  function handleMouseDown(e: React.MouseEvent) {
+    if ((e.target as HTMLElement).closest('.image-slider__nav')) return;
+    mouseStartXRef.current = e.clientX;
+    setIsDragging(true);
+  }
+
+  function handleMouseUp(e: React.MouseEvent) {
+    if (mouseStartXRef.current === null) return;
+    const delta = mouseStartXRef.current - e.clientX;
+    if (Math.abs(delta) > SWIPE_THRESHOLD) {
+      delta > 0 ? onNext() : onPrev();
+      onRelease();
+    }
+    mouseStartXRef.current = null;
+    setIsDragging(false);
+  }
+
+  function handleMouseLeave() {
+    mouseStartXRef.current = null;
+    setIsDragging(false);
+  }
+
   return (
     <div className='image-slider'>
-      <div className='image-slider__frame'>
+      <div
+        className={`image-slider__frame${isDragging ? ' image-slider__frame--dragging' : ''}`}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+      >
         <div
           className='image-slider__track'
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -34,6 +84,7 @@ export function ImageSlider({
                 src={src}
                 alt={alt ? `${alt} - ${images.indexOf(src) + 1}` : ''}
                 style={{ borderRadius: imageRadius }}
+                draggable={false}
               />
             </div>
           ))}

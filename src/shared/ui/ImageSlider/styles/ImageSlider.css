@@ -14,6 +14,12 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+
+.image-slider__frame--dragging {
+  cursor: grabbing;
 }
 
 .image-slider__track {
