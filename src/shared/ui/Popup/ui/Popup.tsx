@@ -18,10 +18,18 @@ export function Popup({
 }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    history.pushState(null, '');
+
+    function handlePopState() {
+      onClose();
+    }
+
+    window.addEventListener('popstate', handlePopState);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('popstate', handlePopState);
     };
-  }, []);
+  }, [onClose]);
 
   return (
     <div
