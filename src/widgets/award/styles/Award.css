@@ -32,8 +32,6 @@
 
 @media (max-width: 1024px) {
   .award {
-    height: 100vh;
-
     gap: 1.95vmin;
     padding: 7.81vmax 6.51vmax 3.91vmax;
   }
@@ -47,8 +45,6 @@
 
 @media (max-width: 767px) {
   .award {
-    height: 100vh;
-
     gap: 4vmin;
     padding: 16vmin 4vmin 4vmin;
   }

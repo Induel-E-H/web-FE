@@ -33,6 +33,7 @@
 @media (max-width: 1024px) {
   .award__card_viewport {
     padding: 0.5vmin;
+    height: 69vh;
   }
 
   .award__card_slider {
@@ -51,6 +52,7 @@
 @media (max-width: 767px) {
   .award__card_viewport {
     padding: 1vmin;
+    height: 70.59vh;
   }
 
   .award__card_slider {
