@@ -19,7 +19,7 @@
 
 .privacy-policy__hero {
   padding: 2.604vmax 0 2.083vmax;
-  border-bottom: 0.052vmax solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 2.083vmax;
 }
 
@@ -61,7 +61,7 @@
   padding: 0.938vmax;
   background-color: #f6f3f0;
   border-radius: 0.417vmax;
-  border: 0.052vmax solid #e6ded6;
+  border: 1px solid #e6ded6;
   transition: box-shadow 0.2s ease;
 }
 
@@ -92,7 +92,7 @@
 
 .privacy-policy__toc {
   background-color: #f9fafb;
-  border-left: 0.208vmax solid #947761;
+  border-left: 2px solid #947761;
   border-radius: 0 0.313vmax 0.313vmax 0;
   padding: 1.302vmax 1.563vmax;
   margin-bottom: 2.604vmax;
@@ -137,7 +137,7 @@
 
 .privacy-policy__article {
   padding: 1.563vmax 0;
-  border-bottom: 0.052vmax solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
   scroll-margin-top: 4.167vmax;
 }
 
@@ -170,7 +170,7 @@
   font-size: max(10px, 0.625vw) !important;
   color: #757575 !important;
   background-color: #fafafa;
-  border-left: 0.156vmax solid #d2c2b3;
+  border-left: 2px solid #d2c2b3;
   padding: 0.521vmax 0.781vmax;
   border-radius: 0 0.208vmax 0.208vmax 0;
   margin: 0.521vmax 0 !important;
@@ -232,7 +232,7 @@
 .privacy-policy__table th,
 .privacy-policy__table td {
   padding: 0.521vmax 0.781vmax;
-  border: 0.052vmax solid #e0e0e0;
+  border: 1px solid #e0e0e0;
   text-align: left;
   vertical-align: middle;
 }
@@ -265,12 +265,12 @@
 }
 
 .privacy-policy__cookie-details {
-  border-top: 0.052vmax solid #e6ded6;
+  border-top: 1px solid #e6ded6;
   margin-top: 0.417vmax;
 }
 
 .privacy-policy__cookie-details:last-child {
-  border-bottom: 0.052vmax solid #e6ded6;
+  border-bottom: 1px solid #e6ded6;
 }
 
 .privacy-policy__cookie-summary {

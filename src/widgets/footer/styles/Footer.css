@@ -82,7 +82,7 @@
 
 .footer hr {
   width: 100%;
-  border-top: 0.052vmax solid var(--footer-divider);
+  border-top: 1px solid var(--footer-divider);
 }
 
 .footer__content {

@@ -111,7 +111,7 @@
 .vision__content__title hr {
   width: 2.083vmax;
   border: none;
-  border-top: 0.052vmax solid var(--color-hr);
+  border-top: 1px solid var(--color-hr);
 }
 
 .vision__content__description {

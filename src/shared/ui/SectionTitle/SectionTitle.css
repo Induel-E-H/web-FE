@@ -13,7 +13,7 @@
 
 .section-title__description hr {
   border: none;
-  border-top: 0.1vmax solid #e7c889;
+  border-top: 2px solid #e7c889;
   width: 4.17vmax;
 }
 

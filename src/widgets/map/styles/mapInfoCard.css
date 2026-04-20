@@ -10,9 +10,9 @@
 .map__info__tail {
   width: 0;
   height: 0;
-  border-left: 0.45vmax solid transparent;
-  border-right: 0.45vmax solid transparent;
-  border-top: 0.45vmax solid white;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
   margin: 0 auto;
 }
 

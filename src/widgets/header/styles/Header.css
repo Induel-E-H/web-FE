@@ -125,7 +125,7 @@
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  border-top: 0.052vmax solid rgba(56, 39, 29, 0.08);
+  border-top: 1px solid rgba(56, 39, 29, 0.08);
 }
 
 .header__mobile-menu button {

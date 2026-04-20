@@ -16,7 +16,7 @@
   font-weight: 400;
 
   color: var(--brown-200);
-  border-bottom: 0.12vmax solid var(--brown-200);
+  border-bottom: 2px solid var(--brown-200);
 
   transition:
     color 0.3s,

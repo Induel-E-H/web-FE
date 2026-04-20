@@ -12,7 +12,7 @@
 
 .book-page-title hr {
   border: none;
-  border-top: 0.05vmax solid #606060;
+  border-top: 1px solid #606060;
   width: 16.35vmax;
 }
 

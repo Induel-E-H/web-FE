@@ -42,7 +42,7 @@
   width: 100%;
 
   border: none;
-  border-top: 0.052vmax solid #60524a;
+  border-top: 1px solid #60524a;
 }
 
 .patent__content__item__list {
