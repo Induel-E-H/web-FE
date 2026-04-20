@@ -4,6 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from '@app/App.tsx';
 import '@app/styles/index.css';
+import { printAsciiBanner } from '@shared/lib/console/banner';
+
+printAsciiBanner();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
