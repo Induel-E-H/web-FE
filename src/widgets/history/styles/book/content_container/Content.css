@@ -66,7 +66,7 @@
   font-size: max(12px, 0.73vw);
 
   color: var(--black);
-  word-break: break-word;
+  word-break: normal;
   overflow-wrap: break-word;
 }
 
@@ -95,11 +95,11 @@
 
   width: 100%;
 
-  justify-content: space-between;
-  gap: 0;
+  gap: clamp(3px, 0.26vw, 5px);
 }
 
 .content__caption-col {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -119,6 +119,8 @@
   font-size: max(9px, 0.625vw);
 
   color: var(--typo-contentW);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .content__caption dd {
@@ -126,6 +128,9 @@
   font-size: max(9px, 0.625vw);
 
   color: var(--typo-contentW);
+  min-width: 0;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .content__caption-col:last-child dd {
