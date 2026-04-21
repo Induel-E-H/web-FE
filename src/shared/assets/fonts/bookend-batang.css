@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'BookendBatang';
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local('TTBookendBatangR'),
+    url('./BookendBatang-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'BookendBatang';
+  font-weight: 600 700;
+  font-display: swap;
+  src:
+    local('TTBookendBatangSB'),
+    url('./BookendBatang-SemiBold.woff2') format('woff2');
+}
