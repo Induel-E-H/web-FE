@@ -86,6 +86,7 @@ export function ImageSlider({
                 src={src}
                 alt={alt ? `${alt} - ${images.indexOf(src) + 1}` : ''}
                 style={{ borderRadius: imageRadius }}
+                loading='lazy'
                 draggable={false}
               />
             </div>

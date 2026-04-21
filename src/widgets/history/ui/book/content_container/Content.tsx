@@ -161,7 +161,7 @@ function ContentItem({
         >
           {imageSrc && (
             <>
-              <img src={imageSrc} alt={item.title} />
+              <img src={imageSrc} alt={item.title} loading='lazy' />
               <div className='content__image-zoom'>
                 <MdOutlineZoomOutMap size='1.25vmax' color='white' />
               </div>

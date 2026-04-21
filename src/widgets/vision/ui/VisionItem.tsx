@@ -45,7 +45,7 @@ export function VisionItem({
       className={`vision__content${isReverse ? ' vision__content--reverse' : ''}`}
     >
       <div className='vision__content__image'>
-        <img src={image} alt={title} />
+        <img src={image} alt={title} loading='lazy' />
       </div>
       <div className='vision__content_text'>
         <div className='vision__content__title'>
