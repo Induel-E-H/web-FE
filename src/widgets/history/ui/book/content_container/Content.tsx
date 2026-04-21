@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { MdOutlineZoomOutMap } from 'react-icons/md';
+import { MdOutlineImage, MdOutlineZoomOutMap } from 'react-icons/md';
 
 import { artworks } from '@entities/history';
 import {
@@ -58,7 +58,33 @@ function ContentItem({
   index: number;
 }) {
   const [showPopup, setShowPopup] = useState(false);
+  const [showImageInline, setShowImageInline] = useState(true);
+  const articleRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const imageSrc = getThumbnailImage(index);
+
+  useLayoutEffect(() => {
+    if (!imageSrc) return;
+
+    const article = articleRef.current;
+    const text = textRef.current;
+    if (!article || !text) return;
+
+    function measure() {
+      const articleHeight = article!.clientHeight;
+      const textHeight = text!.clientHeight;
+      const gap = parseFloat(getComputedStyle(article!).gap) || 0;
+      const available = articleHeight - textHeight - gap;
+      setShowImageInline(available >= articleHeight * 0.3);
+    }
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(article);
+    ro.observe(text);
+    measure();
+
+    return () => ro.disconnect();
+  }, [imageSrc]);
 
   function handleImageClick(e: React.MouseEvent) {
     e.stopPropagation();
@@ -70,9 +96,24 @@ function ContentItem({
     setShowPopup(false);
   }
 
+  const iconMode = Boolean(imageSrc && !showImageInline);
+
   return (
-    <article className='content__item'>
-      <div className='content__text'>
+    <article
+      className={`content__item${iconMode ? ' content__item--icon-mode' : ''}`}
+      ref={articleRef}
+    >
+      {iconMode && (
+        <button
+          className='content__image-icon'
+          onMouseDown={(e) => e.stopPropagation()}
+          onClick={handleImageClick}
+          aria-label='이미지 보기'
+        >
+          <MdOutlineImage size={18} color='white' />
+        </button>
+      )}
+      <div className='content__text' ref={textRef}>
         <div className='content__title'>
           <h3 className='content__title-kor'>{item.title}</h3>
           <h3 className='content__title-eng'>{item.titleEng}</h3>
@@ -112,20 +153,22 @@ function ContentItem({
           </div>
         </dl>
       </div>
-      <figure
-        className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
-        onMouseDown={(e) => imageSrc && e.stopPropagation()}
-        onClick={imageSrc ? handleImageClick : undefined}
-      >
-        {imageSrc && (
-          <>
-            <img src={imageSrc} alt={item.title} />
-            <div className='content__image-zoom'>
-              <MdOutlineZoomOutMap size='1.25vmax' color='white' />
-            </div>
-          </>
-        )}
-      </figure>
+      {showImageInline && (
+        <figure
+          className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
+          onMouseDown={(e) => imageSrc && e.stopPropagation()}
+          onClick={imageSrc ? handleImageClick : undefined}
+        >
+          {imageSrc && (
+            <>
+              <img src={imageSrc} alt={item.title} />
+              <div className='content__image-zoom'>
+                <MdOutlineZoomOutMap size='1.25vmax' color='white' />
+              </div>
+            </>
+          )}
+        </figure>
+      )}
       {showPopup &&
         createPortal(
           <ImageGalleryPopup
@@ -143,7 +186,7 @@ export function ContentPage({ side, pageIndex }: ContentPageProps) {
   const itemIndex = getArtworkIndex(pageIndex, side);
   const item = artworks[itemIndex] ?? null;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     preloadContentImages(pageIndex);
   }, [pageIndex]);
 
