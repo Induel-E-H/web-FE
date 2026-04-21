@@ -23,6 +23,19 @@ export const baseConfig = {
   build: {
     target: 'esnext',
     chunkSizeWarningLimit: 500,
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes('node_modules/three')) return 'vendor-three';
+          if (
+            id.includes('node_modules/react') ||
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/react-router')
+          )
+            return 'vendor-react';
+        },
+      },
+    },
   },
 };
 

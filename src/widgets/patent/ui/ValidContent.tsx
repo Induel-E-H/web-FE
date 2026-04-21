@@ -54,6 +54,7 @@ export function PatentValidContent() {
           <img
             src={PATENT_IMAGES[selectedIndex]}
             alt={PATENT_VALID_LIST[selectedIndex].title}
+            loading='lazy'
           />
         </Popup>
       )}
