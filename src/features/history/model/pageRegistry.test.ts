@@ -23,8 +23,8 @@ describe('MILESTONES_YEAR_RANGES_BY_BREAKPOINT', () => {
     });
   });
 
-  it('desktop보다 tablet의 범위 개수가 더 적다(더 널널하게 분할)', () => {
-    expect(MILESTONES_YEAR_RANGES_BY_BREAKPOINT.tablet.length).toBeLessThan(
+  it('desktop보다 tablet의 범위 개수가 동일하다.', () => {
+    expect(MILESTONES_YEAR_RANGES_BY_BREAKPOINT.tablet.length).toBe(
       MILESTONES_YEAR_RANGES_BY_BREAKPOINT.desktop.length,
     );
   });
