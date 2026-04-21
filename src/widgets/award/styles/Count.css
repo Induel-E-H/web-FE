@@ -29,38 +29,38 @@
 
 @media (max-width: 1024px) {
   .award__count {
-    gap: 0.65vmin;
+    gap: 0.65vw;
 
-    padding: 0.65vmin 1.3vmin;
+    padding: 0.65vw 1.3vw;
 
-    border-radius: 2.6vmin;
+    border-radius: 2.6vw;
   }
 
   .award__count__icon {
-    width: 2.21vmin;
-    height: 2.21vmin;
+    width: 2.21vw;
+    height: 2.21vw;
   }
 
   .award__count p {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 }
 
 @media (max-width: 767px) {
   .award__count {
-    gap: 1.87vmin;
+    gap: clamp(8px, 1.87vw, 9px);
 
-    padding: 1.33vmin 2.67vmin;
+    padding: clamp(4px, 1.33vw, 7px) clamp(9px, 2.67vw, 13px);
 
-    border-radius: 5.33vmin;
+    border-radius: clamp(19px, 5.33vw, 27px);
   }
 
   .award__count__icon {
-    width: 3.73vmin;
-    height: 3.73vmin;
+    width: clamp(13px, 3.73vw, 19px);
+    height: clamp(13px, 3.73vw, 19px);
   }
 
   .award__count p {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 }

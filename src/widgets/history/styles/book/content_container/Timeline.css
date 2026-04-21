@@ -17,7 +17,8 @@
 
   width: 100%;
 
-  gap: 1.56vmax;
+  height: 39.36vh;
+  justify-content: space-between;
 
   list-style: none;
 }
@@ -45,36 +46,36 @@
 
 @media (max-width: 1024px) {
   .timeline__container {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .timeline__ul {
-    gap: 2.6vmin;
+    height: 30.67vh;
   }
 
   .timeline__ul li {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 
   .timeline__ul li::before {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 }
 
 @media (max-width: 767px) {
   .timeline__container {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .timeline__ul {
-    gap: 3.2vmin;
+    height: 28.82vh;
   }
 
   .timeline__ul li {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .timeline__ul li::before {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 }

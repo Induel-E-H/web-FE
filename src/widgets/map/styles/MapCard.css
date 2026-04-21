@@ -21,9 +21,11 @@
 
 .map__description {
   display: flex;
+  width: 100%;
+  height: 26.7vh;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.56vmax;
+  justify-content: space-between;
 }
 
 .map__description li {
@@ -75,7 +77,7 @@
 .map__card_content hr {
   width: 100%;
   border: none;
-  border-top: 0.05vmax solid var(--brown-200);
+  border-top: 1px solid var(--brown-200);
 }
 
 .map__description_call {
@@ -136,69 +138,69 @@
   .map__card_content {
     width: 100%;
     height: 50%;
-    padding: 2.6vmin 9.11vmin;
+    padding: 2.6vw 9.11vw;
   }
 
   .map__card_content h3 {
-    font-size: 2.6vmin;
+    font-size: 2.6vw;
   }
 
   .map__description {
-    gap: 1.95vmin;
+    height: 22.22vh;
   }
 
   .map__description li {
-    gap: 1.95vmin;
+    gap: 1.95vw;
   }
 
   .map__icon_frame {
-    width: 4.3vmin;
-    height: 4.3vmin;
+    width: 4.3vw;
+    height: 4.3vw;
   }
 
   .map__icon {
-    width: 2.66vmin;
-    height: 2.66vmin;
+    width: 2.66vw;
+    height: 2.66vw;
   }
 
   .map__description_text {
-    gap: 0.65vmin;
+    gap: 0.65vw;
   }
 
   .map__description_text h4 {
-    font-size: 1.56vmin;
+    font-size: 1.82vw;
   }
 
   .map__description__content p {
-    font-size: 1.3vmin;
+    font-size: 1.56vw;
   }
 
   .map__card_content hr {
-    border-top: 0.13vmin solid var(--brown-200);
+    border-top: 1px solid var(--brown-200);
   }
 
   .map__description_call {
-    gap: 1.3vmin;
-    padding: 1.95vmin 0;
-    border-radius: 0.91vmin;
-    box-shadow: 0 0.52vmin 0.52vmin rgb(0, 0, 0, 0.25);
+    gap: 1.3vw;
+    padding: 1.95vw 0;
+    border-radius: 0.91vw;
+    box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   }
 
   .map__description_call:hover {
-    box-shadow: 0 0.78vmin 0.42vmin rgba(0, 0, 0, 0.35);
+    box-shadow: 0 6px 3px rgba(0, 0, 0, 0.35);
   }
 
   .map__description_call svg {
-    width: 2.34vmin;
-    height: 2.34vmin;
+    width: 2.34vw;
+    height: 2.34vw;
   }
 
   .map__description_call_text {
-    gap: 0.65vmin;
+    gap: 0.65vw;
   }
 
   .map__description_call_text span {
-    font-size: 2.08vmin;
+    font-size: 2.08vw;
   }
 }
 
@@ -211,29 +213,29 @@
   .map__card_content {
     width: 100%;
     height: 54.26%;
-    padding: 4vmin 8vmin;
+    padding: clamp(14px, 4vw, 20px) clamp(28px, 8vw, 40px);
   }
 
   .map__card_content h3 {
-    font-size: 4.27vmin;
+    font-size: clamp(15px, 4.27vw, 21px);
   }
 
   .map__description {
-    gap: 2.67vmin;
+    height: 24.26vh;
   }
 
   .map__description li {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .map__icon_frame {
-    width: 8vmin;
-    height: 8vmin;
+    width: clamp(28px, 8vw, 40px);
+    height: clamp(28px, 8vw, 40px);
   }
 
   .map__icon {
-    width: 4vmin;
-    height: 4vmin;
+    width: clamp(14px, 4vw, 20px);
+    height: clamp(14px, 4vw, 20px);
   }
 
   .map__description_text {
@@ -241,38 +243,38 @@
   }
 
   .map__description_text h4 {
-    font-size: 3.2vmin;
+    font-size: clamp(13px, 3.73vw, 19px);
   }
 
   .map__description__content p {
-    font-size: 2.67vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .map__card_content hr {
-    border-top: 0.27vmin solid var(--brown-200);
+    border-top: 1px solid var(--brown-200);
   }
 
   .map__description_call {
-    gap: 2.67vmin;
-    padding: 2.67vmin 0;
-    border-radius: 1.87vmin;
-    box-shadow: 0 1.07vmin 1.07vmin rgb(0, 0, 0, 0.25);
+    gap: clamp(9px, 2.67vw, 13px);
+    padding: clamp(9px, 2.67vw, 13px) 0;
+    border-radius: clamp(8px, 1.87vw, 9px);
+    box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   }
 
   .map__description_call:hover {
-    box-shadow: 0 0.78vmin 0.42vmin rgba(0, 0, 0, 0.35);
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.35);
   }
 
   .map__description_call svg {
-    width: 4vmin;
-    height: 4vmin;
+    width: clamp(14px, 4vw, 20px);
+    height: clamp(14px, 4vw, 20px);
   }
 
   .map__description_call_text {
-    gap: 1.33vmin;
+    gap: clamp(4px, 1.33vw, 7px);
   }
 
   .map__description_call_text span {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 }

@@ -93,8 +93,8 @@
 
 @media (max-width: 1024px) {
   .history__book-cover-flip {
-    perspective: 300vmin;
-    -webkit-perspective: 300vmin;
+    perspective: 2304px;
+    -webkit-perspective: 2304px;
   }
 
   .history__book-cover-flip-panel--forward {
@@ -128,48 +128,48 @@
 
   .history__book-cover-flip-panel--forward
     .history__book-cover-flip-front-inner {
-    border-radius: 0 0 1.953vmin 1.953vmin;
+    border-radius: 0 0 1.953vw 1.953vw;
   }
 
   .history__book-cover-flip-panel--forward
     .history__book-cover-flip-back-inner {
-    border-radius: 1.953vmin 1.953vmin 0 0;
+    border-radius: 1.953vw 1.953vw 0 0;
   }
 
   .history__book-cover-flip-panel--backward
     .history__book-cover-flip-front-inner {
-    border-radius: 1.953vmin 1.953vmin 0 0;
+    border-radius: 1.953vw 1.953vw 0 0;
   }
 
   .history__book-cover-flip-panel--backward
     .history__book-cover-flip-back-inner {
-    border-radius: 0 0 1.953vmin 1.953vmin;
+    border-radius: 0 0 1.953vw 1.953vw;
   }
 }
 
 @media (max-width: 767px) {
   .history__book-cover-flip {
-    perspective: 614.4vmin;
-    -webkit-perspective: 614.4vmin;
+    perspective: 2304px;
+    -webkit-perspective: 2304px;
   }
 
   .history__book-cover-flip-panel--forward
     .history__book-cover-flip-front-inner {
-    border-radius: 0 0 4vmin 4vmin;
+    border-radius: 0 0 clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
   }
 
   .history__book-cover-flip-panel--forward
     .history__book-cover-flip-back-inner {
-    border-radius: 4vmin 4vmin 0 0;
+    border-radius: clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px) 0 0;
   }
 
   .history__book-cover-flip-panel--backward
     .history__book-cover-flip-front-inner {
-    border-radius: 4vmin 4vmin 0 0;
+    border-radius: clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px) 0 0;
   }
 
   .history__book-cover-flip-panel--backward
     .history__book-cover-flip-back-inner {
-    border-radius: 0 0 4vmin 4vmin;
+    border-radius: 0 0 clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
   }
 }

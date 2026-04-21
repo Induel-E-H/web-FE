@@ -16,7 +16,7 @@
   font-weight: 400;
 
   color: var(--brown-200);
-  border-bottom: 0.12vmax solid var(--brown-200);
+  border-bottom: 2px solid var(--brown-200);
 
   transition:
     color 0.3s,
@@ -32,20 +32,20 @@
 
 @media (max-width: 1024px) {
   .award__year_category button {
-    padding: 0 1.5vmin;
+    padding: 0 1.5vw;
 
-    font-size: 2.08vmin;
+    font-size: 2.08vw;
 
-    border-bottom: 0.26vmin solid var(--brown-200);
+    border-bottom: 2px solid var(--brown-200);
   }
 }
 
 @media (max-width: 767px) {
   .award__year_category button {
-    padding: 0 2vmin;
+    padding: 0 clamp(8px, 2vw, 10px);
 
-    font-size: 3.73vmin;
+    font-size: clamp(13px, 3.73vw, 19px);
 
-    border-bottom: 0.53vmin solid var(--brown-200);
+    border-bottom: 2px solid var(--brown-200);
   }
 }

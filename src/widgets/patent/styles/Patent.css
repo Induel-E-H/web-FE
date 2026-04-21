@@ -15,16 +15,17 @@
 
 @media (max-width: 1024px) {
   .patent {
-    gap: 5.21vmin;
+    gap: 5.21vw;
 
-    padding: 7.81vmin 3.91vmin 5.86vmin;
+    padding: 7.81vw 3.91vw 5.86vw;
   }
 }
 
 @media (max-width: 767px) {
   .patent {
-    gap: 8vmin;
+    gap: clamp(28px, 8vw, 40px);
 
-    padding: 16vmin 4vmin 4vmin;
+    padding: clamp(56px, 16vw, 80px) clamp(14px, 4vw, 20px)
+      clamp(14px, 4vw, 20px);
   }
 }

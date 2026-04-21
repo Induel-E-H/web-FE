@@ -1,9 +1,18 @@
 import * as matchers from '@testing-library/jest-dom/matchers';
 import { cleanup } from '@testing-library/react';
-import { afterEach, expect } from 'vitest';
+import { afterEach, expect, vi } from 'vitest';
 
 expect.extend(matchers);
 
 afterEach(() => {
   cleanup();
 });
+
+vi.stubGlobal(
+  'ResizeObserver',
+  class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  },
+);

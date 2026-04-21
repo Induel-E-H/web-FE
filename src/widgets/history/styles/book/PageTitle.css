@@ -12,7 +12,7 @@
 
 .book-page-title hr {
   border: none;
-  border-top: 0.05vmax solid #606060;
+  border-top: 1px solid #606060;
   width: 16.35vmax;
 }
 
@@ -29,7 +29,7 @@
   }
 
   .book-page-title h3 {
-    font-size: 2.34vmin;
+    font-size: 2.34vw;
   }
 
   .history__book-page-right .book-page-title {
@@ -39,6 +39,6 @@
 
 @media (max-width: 767px) {
   .book-page-title h3 {
-    font-size: 4vmin;
+    font-size: clamp(14px, 4vw, 20px);
   }
 }

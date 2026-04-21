@@ -13,7 +13,7 @@
 
 .section-title__description hr {
   border: none;
-  border-top: 0.1vmax solid #e7c889;
+  border-top: 2px solid #e7c889;
   width: 4.17vmax;
 }
 
@@ -31,38 +31,38 @@
 
 @media (max-width: 1024px) {
   .section-title__description {
-    gap: 1.95vmin;
+    gap: 1.95vw;
   }
 
   .section-title__description hr {
-    border-top: 0.26vmin solid #e7c889;
-    width: 9.11vmin;
+    border-top: 2px solid #e7c889;
+    width: 9.11vw;
   }
 
   .section-title__description p {
-    font-size: 1.3vmin;
+    font-size: 1.3vw;
   }
 
   .section-title h2 {
-    font-size: 5.21vmin;
+    font-size: 5.21vw;
   }
 }
 
 @media (max-width: 767px) {
   .section-title__description {
-    gap: 4vmin;
+    gap: clamp(14px, 4vw, 20px);
   }
 
   .section-title__description hr {
-    border-top: 0.53vmin solid #e7c889;
-    width: 16vmin;
+    border-top: 2px solid #e7c889;
+    width: clamp(56px, 16vw, 80px);
   }
 
   .section-title__description p {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .section-title h2 {
-    font-size: 8vmin;
+    font-size: clamp(28px, 8vw, 40px);
   }
 }

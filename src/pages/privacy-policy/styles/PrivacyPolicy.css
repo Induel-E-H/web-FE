@@ -19,7 +19,7 @@
 
 .privacy-policy__hero {
   padding: 2.604vmax 0 2.083vmax;
-  border-bottom: 0.052vmax solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 2.083vmax;
 }
 
@@ -61,7 +61,7 @@
   padding: 0.938vmax;
   background-color: #f6f3f0;
   border-radius: 0.417vmax;
-  border: 0.052vmax solid #e6ded6;
+  border: 1px solid #e6ded6;
   transition: box-shadow 0.2s ease;
 }
 
@@ -92,7 +92,7 @@
 
 .privacy-policy__toc {
   background-color: #f9fafb;
-  border-left: 0.208vmax solid #947761;
+  border-left: 2px solid #947761;
   border-radius: 0 0.313vmax 0.313vmax 0;
   padding: 1.302vmax 1.563vmax;
   margin-bottom: 2.604vmax;
@@ -137,7 +137,7 @@
 
 .privacy-policy__article {
   padding: 1.563vmax 0;
-  border-bottom: 0.052vmax solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
   scroll-margin-top: 4.167vmax;
 }
 
@@ -170,7 +170,7 @@
   font-size: max(10px, 0.625vw) !important;
   color: #757575 !important;
   background-color: #fafafa;
-  border-left: 0.156vmax solid #d2c2b3;
+  border-left: 2px solid #d2c2b3;
   padding: 0.521vmax 0.781vmax;
   border-radius: 0 0.208vmax 0.208vmax 0;
   margin: 0.521vmax 0 !important;
@@ -232,7 +232,7 @@
 .privacy-policy__table th,
 .privacy-policy__table td {
   padding: 0.521vmax 0.781vmax;
-  border: 0.052vmax solid #e0e0e0;
+  border: 1px solid #e0e0e0;
   text-align: left;
   vertical-align: middle;
 }
@@ -265,12 +265,12 @@
 }
 
 .privacy-policy__cookie-details {
-  border-top: 0.052vmax solid #e6ded6;
+  border-top: 1px solid #e6ded6;
   margin-top: 0.417vmax;
 }
 
 .privacy-policy__cookie-details:last-child {
-  border-bottom: 0.052vmax solid #e6ded6;
+  border-bottom: 1px solid #e6ded6;
 }
 
 .privacy-policy__cookie-summary {
@@ -380,233 +380,234 @@
 
 @media (max-width: 1024px) {
   .privacy-policy__main {
-    padding-top: 7.29vmin;
+    padding-top: 7.29vw;
   }
 
   .privacy-policy__container {
     max-width: 100%;
-    padding: 3.91vmin 3.91vmin 6.51vmin;
+    padding: 3.91vw 3.91vw 6.51vw;
   }
 
   .privacy-policy__hero {
-    padding: 3.91vmin 0 3.26vmin;
-    margin-bottom: 3.26vmin;
-    border-bottom-width: 0.13vmin;
+    padding: 3.91vw 0 3.26vw;
+    margin-bottom: 3.26vw;
+    border-bottom-width: 1px;
   }
 
   .privacy-policy__title {
-    font-size: 3.65vmin;
-    margin-bottom: 1.95vmin;
+    font-size: 3.65vw;
+    margin-bottom: 1.95vw;
   }
 
   .privacy-policy__intro {
-    font-size: 1.69vmin;
+    font-size: 1.69vw;
   }
 
   .privacy-policy__effective {
-    margin-top: 1.3vmin;
-    font-size: 1.43vmin;
+    margin-top: 1.3vw;
+    font-size: 1.43vw;
   }
 
   .privacy-policy__highlights {
     grid-template-columns: repeat(5, 1fr);
-    gap: 1.3vmin;
-    margin-bottom: 3.91vmin;
+    gap: 1.3vw;
+    margin-bottom: 3.91vw;
   }
 
   .privacy-policy__highlight-card {
-    padding: 1.69vmin;
-    border-radius: 0.78vmin;
-    gap: 0.91vmin;
-    border-width: 0.13vmin;
+    padding: 1.69vw;
+    border-radius: 0.78vw;
+    gap: 0.91vw;
+    border-width: 1px;
   }
 
   .privacy-policy__highlight-icon {
-    font-size: 2.34vmin;
+    font-size: 2.34vw;
   }
 
   .privacy-policy__highlight-body strong {
-    font-size: 1.3vmin;
-    margin-bottom: 0.52vmin;
+    font-size: 1.3vw;
+    margin-bottom: 0.52vw;
   }
 
   .privacy-policy__highlight-body p {
-    font-size: 1.17vmin;
+    font-size: 1.17vw;
   }
 
   .privacy-policy__toc {
-    border-left-width: 0.39vmin;
-    border-radius: 0 0.65vmin 0.65vmin 0;
-    padding: 2.6vmin 2.86vmin;
-    margin-bottom: 3.91vmin;
+    border-left-width: 3px;
+    border-radius: 0 0.65vw 0.65vw 0;
+    padding: 2.6vw 2.86vw;
+    margin-bottom: 3.91vw;
   }
 
   .privacy-policy__toc-title {
-    font-size: 1.69vmin;
-    margin-bottom: 1.3vmin;
+    font-size: 1.69vw;
+    margin-bottom: 1.3vw;
   }
 
   .privacy-policy__toc-list {
-    gap: 0.65vmin;
+    gap: 0.65vw;
   }
 
   .privacy-policy__toc-list li a {
-    font-size: 1.43vmin;
-    padding: 0.26vmin 0;
+    font-size: 1.43vw;
+    padding: 0.26vw 0;
   }
 
   .privacy-policy__article {
-    padding: 2.86vmin 0;
-    scroll-margin-top: 8.45vmin;
-    border-bottom-width: 0.13vmin;
+    padding: 2.86vw 0;
+    scroll-margin-top: 8.45vw;
+    border-bottom-width: 1px;
   }
 
   .privacy-policy__article-title {
-    font-size: 1.82vmin;
-    margin-bottom: 1.3vmin;
+    font-size: 1.82vw;
+    margin-bottom: 1.3vw;
   }
 
   .privacy-policy__article p {
-    font-size: 1.56vmin;
-    margin-bottom: 0.91vmin;
+    font-size: 1.56vw;
+    margin-bottom: 0.91vw;
   }
 
   .privacy-policy__note {
-    font-size: 1.43vmin !important;
-    border-left-width: 0.26vmin;
-    padding: 0.91vmin 1.3vmin;
-    margin: 0.91vmin 0 !important;
+    font-size: 1.43vw !important;
+    border-left-width: 2px;
+    padding: 0.91vw 1.3vw;
+    margin: 0.91vw 0 !important;
   }
 
   .privacy-policy__ordered-list {
-    padding-left: 2.6vmin;
-    gap: 0.91vmin;
-    margin-top: 0.91vmin;
+    padding-left: 2.6vw;
+    gap: 0.91vw;
+    margin-top: 0.91vw;
   }
 
   .privacy-policy__ordered-list li {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 
   .privacy-policy__ordered-list li strong {
-    margin-bottom: 0.39vmin;
+    margin-bottom: 0.39vw;
   }
 
   .privacy-policy__unordered-list {
-    padding-left: 1.95vmin;
-    gap: 0.39vmin;
-    margin-top: 0.52vmin;
+    padding-left: 1.95vw;
+    gap: 0.39vw;
+    margin-top: 0.52vw;
   }
 
   .privacy-policy__unordered-list li {
-    font-size: 1.43vmin;
+    font-size: 1.43vw;
   }
 
   .privacy-policy__table-wrap {
-    margin: 1.3vmin 0;
+    margin: 1.3vw 0;
   }
 
   .privacy-policy__table {
-    font-size: 1.43vmin;
+    font-size: 1.43vw;
   }
 
   .privacy-policy__table th,
   .privacy-policy__table td {
-    padding: 0.91vmin 1.3vmin;
-    border-width: 0.13vmin;
+    padding: 0.91vw 1.3vw;
+    border-width: 1px;
   }
 
   .privacy-policy__cookie-guide {
-    border-radius: 0.65vmin;
-    padding: 1.69vmin 1.95vmin;
-    margin-top: 1.3vmin;
+    border-radius: 0.65vw;
+    padding: 1.69vw 1.95vw;
+    margin-top: 1.3vw;
   }
 
   .privacy-policy__cookie-guide p {
-    font-size: 1.43vmin;
+    font-size: 1.43vw;
   }
 
   .privacy-policy__cookie-summary {
-    font-size: 1.43vmin;
-    padding: 0.91vmin 0;
+    font-size: 1.43vw;
+    padding: 0.91vw 0;
   }
 
   .privacy-policy__cookie-summary::after {
-    font-size: 1.69vmin;
+    font-size: 1.69vw;
   }
 
   .privacy-policy__contact-box {
-    border-radius: 0.65vmin;
-    padding: 1.95vmin 2.34vmin;
-    margin: 1.3vmin 0;
+    border-radius: 0.65vw;
+    padding: 1.95vw 2.34vw;
+    margin: 1.3vw 0;
   }
 
   .privacy-policy__contact-box-title {
-    font-size: 1.56vmin !important;
-    margin-bottom: 0.91vmin !important;
+    font-size: 1.56vw !important;
+    margin-bottom: 0.91vw !important;
   }
 
   .privacy-policy__contact-list {
-    gap: 0.52vmin;
+    gap: 0.52vw;
   }
 
   .privacy-policy__contact-list li {
-    font-size: 1.43vmin;
-    gap: 1.3vmin;
+    font-size: 1.43vw;
+    gap: 1.3vw;
   }
 
   .privacy-policy__contact-list li span:first-child {
-    min-width: 5.21vmin;
+    min-width: 5.21vw;
   }
 
   .privacy-policy__back {
-    padding: 3.91vmin 0 1.95vmin;
+    padding: 3.91vw 0 1.95vw;
   }
 
   .privacy-policy__back-btn {
-    gap: 0.78vmin;
-    padding: 1.43vmin 2.86vmin;
-    font-size: 1.56vmin;
-    border-radius: 0.39vmin;
+    gap: 0.78vw;
+    padding: 1.43vw 2.86vw;
+    font-size: 1.56vw;
+    border-radius: 0.39vw;
   }
 
   .privacy-policy__back-btn svg {
-    font-size: 1.82vmin;
+    font-size: 1.82vw;
   }
 }
 
 @media (max-width: 767px) {
   .privacy-policy__main {
-    padding-top: 14.94vmin;
+    padding-top: clamp(52px, 14.94vw, 75px);
   }
 
   .privacy-policy__container {
-    padding: 4vmin 4vmin 8vmin;
+    padding: clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px)
+      clamp(28px, 8vw, 40px);
   }
 
   .privacy-policy__hero {
-    padding: 4vmin 0 3.73vmin;
-    margin-bottom: 4vmin;
+    padding: clamp(14px, 4vw, 20px) 0 clamp(13px, 3.73vw, 19px);
+    margin-bottom: clamp(14px, 4vw, 20px);
   }
 
   .privacy-policy__title {
-    font-size: 6.4vmin;
-    margin-bottom: 3.2vmin;
+    font-size: clamp(22px, 6.4vw, 32px);
+    margin-bottom: clamp(11px, 3.2vw, 16px);
   }
 
   .privacy-policy__intro {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .privacy-policy__effective {
-    margin-top: 2.13vmin;
-    font-size: 2.93vmin;
+    margin-top: clamp(8px, 2.13vw, 11px);
+    font-size: clamp(10px, 2.93vw, 15px);
   }
 
   .privacy-policy__highlights {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.67vmin;
-    margin-bottom: 5.33vmin;
+    gap: clamp(9px, 2.67vw, 13px);
+    margin-bottom: clamp(19px, 5.33vw, 27px);
   }
 
   .privacy-policy__highlight-card:nth-child(5) {
@@ -614,147 +615,147 @@
   }
 
   .privacy-policy__highlight-card {
-    padding: 3.2vmin;
-    border-radius: 1.33vmin;
-    gap: 1.6vmin;
+    padding: clamp(11px, 3.2vw, 16px);
+    border-radius: clamp(4px, 1.33vw, 7px);
+    gap: clamp(8px, 1.6vw, 8px);
   }
 
   .privacy-policy__highlight-icon {
-    font-size: 4.8vmin;
+    font-size: clamp(17px, 4.8vw, 24px);
   }
 
   .privacy-policy__highlight-body strong {
-    font-size: 2.93vmin;
-    margin-bottom: 0.8vmin;
+    font-size: clamp(10px, 2.93vw, 15px);
+    margin-bottom: clamp(2px, 0.8vw, 4px);
   }
 
   .privacy-policy__highlight-body p {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 
   .privacy-policy__toc {
-    border-left-width: 0.53vmin;
-    border-radius: 0 1.07vmin 1.07vmin 0;
-    padding: 3.73vmin 4vmin;
-    margin-bottom: 5.33vmin;
+    border-left-width: 2px;
+    border-radius: 0 clamp(3px, 1.07vw, 5px) clamp(3px, 1.07vw, 5px) 0;
+    padding: clamp(13px, 3.73vw, 19px) clamp(14px, 4vw, 20px);
+    margin-bottom: clamp(19px, 5.33vw, 27px);
   }
 
   .privacy-policy__toc-title {
-    font-size: 3.73vmin;
-    margin-bottom: 2.13vmin;
+    font-size: clamp(13px, 3.73vw, 19px);
+    margin-bottom: clamp(8px, 2.13vw, 11px);
   }
 
   .privacy-policy__toc-list {
-    gap: 1.33vmin;
+    gap: clamp(4px, 1.33vw, 7px);
   }
 
   .privacy-policy__toc-list li a {
-    font-size: 2.93vmin;
-    padding: 0.53vmin 0;
+    font-size: clamp(10px, 2.93vw, 15px);
+    padding: clamp(2px, 0.53vw, 3px) 0;
   }
 
   .privacy-policy__article {
-    padding: 4.8vmin 0;
-    scroll-margin-top: 17.07vmin;
+    padding: clamp(17px, 4.8vw, 24px) 0;
+    scroll-margin-top: clamp(60px, 17.07vw, 85px);
   }
 
   .privacy-policy__article-title {
-    font-size: 3.73vmin;
-    margin-bottom: 2.67vmin;
+    font-size: clamp(13px, 3.73vw, 19px);
+    margin-bottom: clamp(9px, 2.67vw, 13px);
   }
 
   .privacy-policy__article p {
-    font-size: 3.2vmin;
-    margin-bottom: 1.6vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
+    margin-bottom: clamp(8px, 1.6vw, 8px);
   }
 
   .privacy-policy__note {
-    font-size: 2.93vmin !important;
-    padding: 1.6vmin 2.13vmin;
-    margin: 1.6vmin 0 !important;
+    font-size: clamp(10px, 2.93vw, 15px) !important;
+    padding: clamp(8px, 1.6vw, 8px) clamp(8px, 2.13vw, 11px);
+    margin: clamp(8px, 1.6vw, 8px) 0 !important;
   }
 
   .privacy-policy__ordered-list {
-    padding-left: 4.27vmin;
-    gap: 1.6vmin;
-    margin-top: 1.6vmin;
+    padding-left: clamp(15px, 4.27vw, 21px);
+    gap: clamp(8px, 1.6vw, 8px);
+    margin-top: clamp(8px, 1.6vw, 8px);
   }
 
   .privacy-policy__ordered-list li {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .privacy-policy__unordered-list {
-    padding-left: 3.73vmin;
-    gap: 0.8vmin;
-    margin-top: 0.8vmin;
+    padding-left: clamp(13px, 3.73vw, 19px);
+    gap: clamp(2px, 0.8vw, 4px);
+    margin-top: clamp(2px, 0.8vw, 4px);
   }
 
   .privacy-policy__unordered-list li {
-    font-size: 2.93vmin;
+    font-size: clamp(10px, 2.93vw, 15px);
   }
 
   .privacy-policy__table {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 
   .privacy-policy__table th,
   .privacy-policy__table td {
-    padding: 1.6vmin 2.13vmin;
+    padding: clamp(8px, 1.6vw, 8px) clamp(8px, 2.13vw, 11px);
   }
 
   .privacy-policy__cookie-guide {
-    padding: 3.2vmin 3.73vmin;
-    margin-top: 2.13vmin;
+    padding: clamp(11px, 3.2vw, 16px) clamp(13px, 3.73vw, 19px);
+    margin-top: clamp(8px, 2.13vw, 11px);
   }
 
   .privacy-policy__cookie-guide p {
-    font-size: 2.93vmin;
+    font-size: clamp(10px, 2.93vw, 15px);
   }
 
   .privacy-policy__cookie-summary {
-    font-size: 2.93vmin;
-    padding: 1.6vmin 0;
+    font-size: clamp(10px, 2.93vw, 15px);
+    padding: clamp(8px, 1.6vw, 8px) 0;
   }
 
   .privacy-policy__cookie-summary::after {
-    font-size: 3.47vmin;
+    font-size: clamp(12px, 3.47vw, 17px);
   }
 
   .privacy-policy__contact-box {
-    padding: 3.2vmin 3.73vmin;
-    margin: 2.13vmin 0;
+    padding: clamp(11px, 3.2vw, 16px) clamp(13px, 3.73vw, 19px);
+    margin: clamp(8px, 2.13vw, 11px) 0;
   }
 
   .privacy-policy__contact-box-title {
-    font-size: 3.2vmin !important;
-    margin-bottom: 1.6vmin !important;
+    font-size: clamp(11px, 3.2vw, 16px) !important;
+    margin-bottom: clamp(8px, 1.6vw, 8px) !important;
   }
 
   .privacy-policy__contact-list li {
-    font-size: 2.93vmin;
-    gap: 2.67vmin;
+    font-size: clamp(10px, 2.93vw, 15px);
+    gap: clamp(9px, 2.67vw, 13px);
     flex-wrap: wrap;
   }
 
   .privacy-policy__contact-list li span:first-child {
-    min-width: 10.67vmin;
+    min-width: clamp(37px, 10.67vw, 53px);
   }
 
   .privacy-policy__back {
-    padding: 6.4vmin 0 2.67vmin;
+    padding: clamp(22px, 6.4vw, 32px) 0 clamp(9px, 2.67vw, 13px);
   }
 
   .privacy-policy__back-btn {
-    gap: 1.6vmin;
-    padding: 3.2vmin 6.4vmin;
-    font-size: 3.73vmin;
-    border-radius: 0.8vmin;
+    gap: clamp(8px, 1.6vw, 8px);
+    padding: clamp(11px, 3.2vw, 16px) clamp(22px, 6.4vw, 32px);
+    font-size: clamp(13px, 3.73vw, 19px);
+    border-radius: clamp(2px, 0.8vw, 4px);
     width: 100%;
     justify-content: center;
   }
 
   .privacy-policy__back-btn svg {
-    font-size: 4.27vmin;
+    font-size: clamp(15px, 4.27vw, 21px);
   }
 }

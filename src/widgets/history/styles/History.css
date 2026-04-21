@@ -48,13 +48,13 @@
   .history {
     height: 100vh;
 
-    gap: 1.11vmin;
+    gap: 1.11vw;
 
-    padding: 7.81vmin 6.51vmin 3.91vmin 6.51vmin;
+    padding: 7.81vw 6.51vw 3.91vw 6.51vw;
   }
 
   .history__book {
-    width: 68.49vmin;
+    width: 68.49vw;
     height: 100%;
 
     flex-direction: column;
@@ -65,13 +65,14 @@
   .history {
     height: 100vh;
 
-    gap: 2vmin;
+    gap: clamp(8px, 2vw, 10px);
 
-    padding: 16vmin 4vmin 4vmin 4vmin;
+    padding: clamp(56px, 16vw, 80px) clamp(14px, 4vw, 20px)
+      clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
   }
 
   .history__book {
-    width: 83.2vmin;
+    width: clamp(291px, 83.2vw, 416px);
   }
 }
 

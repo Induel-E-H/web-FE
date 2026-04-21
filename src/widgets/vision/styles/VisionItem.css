@@ -111,7 +111,7 @@
 .vision__content__title hr {
   width: 2.083vmax;
   border: none;
-  border-top: 0.052vmax solid var(--color-hr);
+  border-top: 1px solid var(--color-hr);
 }
 
 .vision__content__description {
@@ -123,89 +123,89 @@
 
 @media (max-width: 1024px) {
   .vision__content {
-    height: 55.34vmin;
+    height: 55.34vw;
   }
 
   .vision__content_text {
-    width: 33.59vmin;
-    gap: 2.6vmin;
-    padding: 0 3.91vmin;
+    width: 33.59vw;
+    gap: 2.6vw;
+    padding: 0 3.91vw;
   }
 
   .vision__content__title {
-    gap: 1.95vmin;
+    gap: 1.95vw;
   }
 
   .vision__content__index {
-    font-size: 1.563vmin;
+    font-size: 1.563vw;
   }
 
   .vision__content__title__main {
-    gap: 0.65vmin;
+    gap: 0.65vw;
   }
 
   .vision__content__title__main h3 {
-    font-size: 5.21vmin;
+    font-size: 5.21vw;
   }
 
   .vision__content__title__main h4 {
-    font-size: 1.95vmin;
+    font-size: 1.95vw;
   }
 
   .vision__content__title hr {
-    width: 4.56vmin;
-    border-top-width: 0.13vmin;
+    width: 4.56vw;
+    border-top-width: 1px;
   }
 
   .vision__content__description {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 }
 
 @media (max-width: 767px) {
   .vision__content {
     flex-direction: column;
-    height: 113.33vmin;
+    height: 62.5dvh;
   }
 
   .vision__content__image {
     width: 100%;
-    height: 54.4vmin;
+    height: clamp(190px, 54.4vw, 272px);
   }
 
   .vision__content_text {
     width: 100%;
-    height: 58.93vmin;
-    gap: 4vmin;
-    padding: 0 8vmin;
+    height: clamp(206px, 58.93vw, 295px);
+    gap: clamp(14px, 4vw, 20px);
+    padding: 0 clamp(28px, 8vw, 40px);
   }
 
   .vision__content__title {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .vision__content__index {
-    font-size: 2.667vmin;
+    font-size: clamp(9px, 2.667vw, 13px);
   }
 
   .vision__content__title__main {
-    gap: 1.33vmin;
+    gap: clamp(4px, 1.33vw, 7px);
   }
 
   .vision__content__title__main h3 {
-    font-size: 8vmin;
+    font-size: clamp(28px, 8vw, 40px);
   }
 
   .vision__content__title__main h4 {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .vision__content__title hr {
-    width: 9.33vmin;
-    border-top-width: 0.27vmin;
+    width: clamp(33px, 9.33vw, 47px);
+    border-top-width: 1px;
   }
 
   .vision__content__description {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 }

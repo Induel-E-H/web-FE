@@ -61,7 +61,7 @@
 
 @media (max-width: 1024px) {
   .award__container {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .award__content {
@@ -70,44 +70,44 @@
   }
 
   .award__year-group {
-    gap: 0.39vmin;
+    gap: 0.39vw;
   }
 
   .award__year {
-    font-size: 1.17vmin;
+    font-size: 1.17vw;
   }
 
   .award__ul li {
-    gap: 0.39vmin;
+    gap: 0.39vw;
 
-    font-size: 1.04vmin;
+    font-size: 1.04vw;
   }
 
   .award__ul li::before {
-    font-size: 1.04vmin;
+    font-size: 1.04vw;
   }
 }
 
 @media (max-width: 767px) {
   .award__container {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .award__year-group {
-    gap: 0.8vmin;
+    gap: clamp(2px, 0.8vw, 4px);
   }
 
   .award__year {
-    font-size: 2.4vmin;
+    font-size: clamp(8px, 2.4vw, 12px);
   }
 
   .award__ul li {
-    gap: 1vmin;
+    gap: clamp(3px, 1vw, 5px);
 
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .award__ul li::before {
-    font-size: 2.13vmin;
+    font-size: clamp(8px, 2.13vw, 11px);
   }
 }

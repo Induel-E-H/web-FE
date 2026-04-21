@@ -42,12 +42,15 @@
   width: 100%;
 
   border: none;
-  border-top: 0.052vmax solid #60524a;
+  border-top: 1px solid #60524a;
 }
 
 .patent__content__item__list {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, auto);
+
+  column-gap: 4.17vmax;
 
   width: 100%;
 
@@ -61,28 +64,28 @@
 
 @media (max-width: 1024px) {
   .patent__content {
-    gap: 2.6vmin;
+    gap: 2.6vw;
   }
 
   .patent__content__title {
-    gap: 1.56vmin;
+    gap: 1.56vw;
   }
 
   .patent__content__title__text {
-    gap: 0.65vmin;
+    gap: 0.65vw;
   }
 
   .patent__content__icon {
-    width: 2.86vmin;
-    height: 2.86vmin;
+    width: 2.86vw;
+    height: 2.86vw;
   }
 
   .patent__content__title__text h3 {
-    font-size: 2.86vmin;
+    font-size: 2.86vw;
   }
 
   .patent__content__title hr {
-    border-top: 0.13vmin solid #60524a;
+    border-top: 1px solid #60524a;
   }
 
   .patent__content__item__list {
@@ -90,42 +93,42 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, auto);
 
-    row-gap: 3.25vmin;
-    column-gap: 1.95vmin;
+    row-gap: 3.25vw;
+    column-gap: 1.95vw;
   }
 }
 
 @media (max-width: 767px) {
   .patent__content {
-    gap: 5.33vmin;
+    gap: clamp(19px, 5.33vw, 27px);
   }
 
   .patent__content__title {
-    gap: 3.2vmin;
+    gap: clamp(11px, 3.2vw, 16px);
   }
 
   .patent__content__title__text {
-    gap: 1.33vmin;
+    gap: clamp(4px, 1.33vw, 7px);
   }
 
   .patent__content__icon {
-    width: 4.8vmin;
-    height: 4.8vmin;
+    width: clamp(17px, 4.8vw, 24px);
+    height: clamp(17px, 4.8vw, 24px);
   }
 
   .patent__content__title__text h3 {
-    font-size: 4.27vmin;
+    font-size: clamp(15px, 4.27vw, 21px);
   }
 
   .patent__content__title hr {
-    border-top: 0.27vmin solid #60524a;
+    border-top: 1px solid #60524a;
   }
 
   .patent__content__item__list {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, auto);
 
-    row-gap: 2.67vmin;
-    column-gap: 2.67vmin;
+    row-gap: clamp(9px, 2.67vw, 13px);
+    column-gap: clamp(9px, 2.67vw, 13px);
   }
 }
