@@ -16,6 +16,7 @@ function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
           src={induelIcon}
           alt='인들이앤에이치 로고'
           className='hero__logo'
+          fetchPriority='high'
         />
         <div className='hero__company-text'>
           <hgroup>
