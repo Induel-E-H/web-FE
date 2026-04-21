@@ -50,6 +50,11 @@
     pointer;
 }
 
+.history__book-page-left--clickable *,
+.history__book-page-right--clickable * {
+  cursor: inherit;
+}
+
 .history__book-page-content {
   display: flex;
   flex-direction: row;
