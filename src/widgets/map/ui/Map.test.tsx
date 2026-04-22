@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import Map from './Map';
 
@@ -98,6 +98,55 @@ describe('Map', () => {
       render(<Map />);
 
       // queueMicrotask로 지연된 setState 완료를 기다림
+      await waitFor(() => {
+        expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('loading 상태 — API 키 있음, SDK 미로드', () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      document
+        .querySelectorAll('script[src*="oapi.map.naver.com"]')
+        .forEach((el) => el.remove());
+    });
+
+    it('API 키가 있고 Naver SDK 미로드 시 div.map__content가 렌더링된다', () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      const { container } = render(<Map />);
+
+      expect(container.querySelector('.map__content')).toBeInTheDocument();
+      expect(screen.queryByTitle('위치 지도')).not.toBeInTheDocument();
+    });
+
+    it('API 키가 있고 Naver SDK 미로드 시 스크립트가 동적으로 삽입된다', () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      render(<Map />);
+
+      const script = document.querySelector(
+        'script[src*="oapi.map.naver.com"]',
+      );
+      expect(script).toBeInTheDocument();
+      expect(script?.getAttribute('src')).toContain('test-api-key');
+    });
+
+    it('스크립트 로드 실패 시 iframe fallback이 렌더링된다', async () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      render(<Map />);
+
+      const script = document.querySelector(
+        'script[src*="oapi.map.naver.com"]',
+      );
+
+      script?.dispatchEvent(new Event('error'));
+
       await waitFor(() => {
         expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
       });
