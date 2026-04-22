@@ -57,6 +57,7 @@ function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
               0 0 20px rgba(0, 0, 0, 1),
               0 0 60px rgba(0, 0, 0, 1)
             `,
+            color: 'white',
           }}
         >
           현재 개발중입니다!

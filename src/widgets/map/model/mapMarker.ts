@@ -25,12 +25,36 @@ function createMarkerSvg() {
 `;
 }
 
-const MARKER_VMAX = 2.292;
+const MARKER_DESKTOP_VMAX = 2.292;
+const MARKER_TABLET_VMIN = 7;
+const MARKER_MOBILE_VMIN = 10;
 
 function getMarkerConfig() {
-  const vmax = Math.max(window.innerWidth, window.innerHeight) / 100;
-  const iconW = Math.round(MARKER_VMAX * vmax);
+  const width = window.innerWidth;
+
+  const maxPx = Math.max(window.innerWidth, window.innerHeight);
+  const minPx = Math.min(window.innerWidth, window.innerHeight);
+
+  const vmaxPx = maxPx / 100;
+  const vminPx = minPx / 100;
+
+  let size: number;
+  let unitPx: number;
+
+  if (width <= 767) {
+    size = MARKER_MOBILE_VMIN;
+    unitPx = vminPx;
+  } else if (width <= 1024) {
+    size = MARKER_TABLET_VMIN;
+    unitPx = vminPx;
+  } else {
+    size = MARKER_DESKTOP_VMAX;
+    unitPx = vmaxPx;
+  }
+
+  const iconW = Math.round(size * unitPx);
   const iconH = Math.round((iconW * 56) / 44);
+
   return {
     iconW,
     iconH,
@@ -38,7 +62,6 @@ function getMarkerConfig() {
     anchorY: Math.round((iconH * 54) / 56),
   };
 }
-
 function createMarkerIcon() {
   const { iconW, iconH, anchorX, anchorY } = getMarkerConfig();
   return {

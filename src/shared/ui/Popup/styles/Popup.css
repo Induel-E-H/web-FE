@@ -88,7 +88,7 @@
 @media (max-width: 1024px) {
   .popup {
     width: 64.584vw;
-    height: 79.6dvh;
+    height: 79.6svh;
     padding: 1.95vw;
     border-radius: 1.303vw;
     gap: 1.303vw;
@@ -114,7 +114,7 @@
 @media (max-width: 767px) {
   .popup {
     width: clamp(321px, 91.73vw, 459px);
-    height: 74.7dvh;
+    height: 74.7svh;
     padding: clamp(14px, 4vw, 20px);
     border-radius: clamp(9px, 2.666vw, 13px);
     gap: clamp(14px, 4vw, 20px);
