@@ -1,15 +1,20 @@
-import { type ReactNode, useEffect } from 'react';
+import { lazy, type ReactNode, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
-import Award from '@widgets/award';
-import { Footer } from '@widgets/footer';
 import { Header } from '@widgets/header/ui/Header';
 import Hero from '@widgets/hero';
-import History from '@widgets/history';
-import Map from '@widgets/map';
-import Patent from '@widgets/patent';
-import { Vision } from '@widgets/vision';
+
+const Vision = lazy(() =>
+  import('@widgets/vision').then((m) => ({ default: m.Vision })),
+);
+const History = lazy(() => import('@widgets/history'));
+const Award = lazy(() => import('@widgets/award'));
+const Patent = lazy(() => import('@widgets/patent'));
+const Map = lazy(() => import('@widgets/map'));
+const Footer = lazy(() =>
+  import('@widgets/footer').then((m) => ({ default: m.Footer })),
+);
 
 const DEV_WIDGET = import.meta.env.VITE_DEV_WIDGET;
 const isStaging = import.meta.env.MODE === 'staging';
@@ -61,7 +66,7 @@ function Home() {
     return (
       <>
         {DEV_WIDGET !== 'footer' ? <Header /> : null}
-        {widget}
+        <Suspense fallback={null}>{widget}</Suspense>
       </>
     );
   }
@@ -74,12 +79,14 @@ function Home() {
     <>
       <Header />
       <Hero showScrollArrow={isProduction} />
-      <Vision />
-      <History />
-      <Award />
-      <Patent />
-      <Map />
-      <Footer />
+      <Suspense fallback={null}>
+        <Vision />
+        <History />
+        <Award />
+        <Patent />
+        <Map />
+        <Footer />
+      </Suspense>
     </>
   );
 }
