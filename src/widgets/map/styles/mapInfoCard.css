@@ -4,7 +4,7 @@
   overflow: hidden;
   box-shadow: 0 0.417vmax 1.25vmax rgba(0, 0, 0, 0.16);
   width: 15vmax;
-  height: 9vmax;
+  min-width: 240px;
 }
 
 .map__info__tail {
@@ -20,25 +20,23 @@
   background: var(--footer-background);
   padding: 0.65vmax 0.75vmax;
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 0.55vmax;
 }
 
 .map__info__logo {
   width: 1.3vmax;
-  height: auto;
 }
 
 .map__info__name {
   color: white;
   font-weight: 700;
-  font-size: max(13px, 0.9vw);
+  font-size: clamp(13px, 0.9vw, 18px);
 }
 
 .map__info__subtitle {
   color: rgba(255, 255, 255, 0.5);
-  font-size: max(10px, 0.664vw);
+  font-size: clamp(10px, 0.664vw, 14px);
 }
 
 .map__info__body {
@@ -70,26 +68,123 @@
 
 .map__info__icon {
   width: 0.8vmax;
-  height: 0.8vmax;
 }
 
-.map__info__icon-path {
-  fill: #38271d;
-}
-
-.map__info__phone {
+.map__info__phone,
+.map__info__address-main {
+  font-size: clamp(12px, 0.81vw, 16px);
   color: #38271d;
-  font-size: max(12px, 0.81vw);
-  font-weight: 600;
   text-decoration: none;
 }
 
-.map__info__address-main {
-  color: #424242;
-  font-size: max(12px, 0.81vw);
+.map__info__address-sub {
+  font-size: clamp(10px, 0.664vw, 14px);
+  color: #666;
 }
 
-.map__info__address-sub {
-  color: #666666;
-  font-size: max(10px, 0.664vw);
+@media (max-width: 1024px) {
+  .map__info__card {
+    width: 28.65vmin;
+    border-radius: 0.8vmin;
+    box-shadow: 0 0.5vmin 1.2vmin rgba(0, 0, 0, 0.14);
+  }
+
+  .map__info__header {
+    padding: 1.2vmin 1.3vmin;
+    gap: 0.9vmin;
+  }
+
+  .map__info__logo {
+    width: 2.4vmin;
+  }
+
+  .map__info__body {
+    padding: 1.2vmin 1.3vmin;
+    gap: 0.9vmin;
+  }
+
+  .map__info__icon-box {
+    width: 2.4vmin;
+    height: 2.4vmin;
+  }
+
+  .map__info__icon {
+    width: 1.5vmin;
+  }
+
+  .map__info__name {
+    font-size: clamp(14px, 1.8vmin, 18px);
+  }
+
+  .map__info__subtitle {
+    font-size: clamp(11px, 1.3vmin, 14px);
+  }
+
+  .map__info__phone,
+  .map__info__address-main {
+    font-size: clamp(12px, 1.6vmin, 16px);
+  }
+
+  .map__info__address-sub {
+    font-size: clamp(10px, 1.3vmin, 14px);
+  }
+}
+
+@media (max-width: 767px) {
+  .map__info__card {
+    width: 69.5vmin;
+    border-radius: 2.6vmin;
+    box-shadow: 0 0.8vmin 3vmin rgba(0, 0, 0, 0.12);
+  }
+
+  .map__info__header {
+    padding: 3.2vmin 3.7vmin;
+    gap: 2.6vmin;
+  }
+
+  .map__info__logo {
+    width: 5.8vmin;
+  }
+
+  .map__info__body {
+    padding: 3.2vmin 3.7vmin;
+    gap: 2.6vmin;
+  }
+
+  .map__info__row {
+    gap: 2.6vmin;
+  }
+
+  .map__info__icon-box {
+    width: 5.8vmin;
+    height: 5.8vmin;
+    border-radius: 1.6vmin;
+  }
+
+  .map__info__icon {
+    width: 3vmin;
+  }
+
+  .map__info__name {
+    font-size: 4.2vmin;
+  }
+
+  .map__info__subtitle {
+    font-size: 3.2vmin;
+  }
+
+  .map__info__phone,
+  .map__info__address-main {
+    font-size: 3.5vmin;
+  }
+
+  .map__info__address-sub {
+    font-size: 3vmin;
+  }
+
+  .map__info__tail {
+    border-left: 1.6vmin solid transparent;
+    border-right: 1.6vmin solid transparent;
+    border-top: 1.6vmin solid white;
+  }
 }
