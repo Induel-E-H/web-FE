@@ -5,3 +5,11 @@
 .award__title h2 {
   color: #38271d;
 }
+
+.award__title .section-title__description {
+  color: #8a6d2f;
+}
+
+.award__title .section-title__description hr {
+  border-color: #8a6d2f;
+}
