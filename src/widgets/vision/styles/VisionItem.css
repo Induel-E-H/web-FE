@@ -165,7 +165,7 @@
 @media (max-width: 767px) {
   .vision__content {
     flex-direction: column;
-    height: 62.5dvh;
+    height: 62.5svh;
   }
 
   .vision__content__image {
