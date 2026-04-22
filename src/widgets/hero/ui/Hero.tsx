@@ -1,16 +1,30 @@
+import { lazy, Suspense } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
 import { COMPANY } from '@shared/constant';
 
 import induelIcon from '@assets/induel-icon.svg';
 
+import backgroundFallback from '../assets/background-fallback.webp';
 import '../styles/Hero.css';
-import HeroBackground from './HeroBackground';
+
+const HeroBackground = lazy(() => import('./HeroBackground'));
 
 function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
     <section className='hero'>
-      <HeroBackground />
+      <Suspense
+        fallback={
+          <img
+            src={backgroundFallback}
+            className='hero__background hero__background--fallback'
+            aria-hidden='true'
+            alt=''
+          />
+        }
+      >
+        <HeroBackground />
+      </Suspense>
       <div className='hero__company'>
         <img
           src={induelIcon}

@@ -14,6 +14,10 @@
   filter: blur(10px);
 }
 
+.hero__background--fallback {
+  object-fit: cover;
+}
+
 .hero__company {
   position: absolute;
   top: 50%;
