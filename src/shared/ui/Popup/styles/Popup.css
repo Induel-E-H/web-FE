@@ -57,7 +57,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--gray-600);
+  color: var(--gray-700);
 }
 
 .popup__header {

@@ -15,8 +15,8 @@
   font-size: max(12px, 0.834vw);
   font-weight: 400;
 
-  color: var(--brown-200);
-  border-bottom: 2px solid var(--brown-200);
+  color: var(--brown-500);
+  border-bottom: 2px solid var(--brown-300);
 
   transition:
     color 0.3s,
@@ -24,10 +24,10 @@
 }
 
 .award__year_category button.active {
-  font-weight: 500;
+  font-weight: 600;
 
-  color: var(--brown-500);
-  border-bottom-color: var(--brown-500);
+  color: var(--brown-700);
+  border-bottom-color: var(--brown-700);
 }
 
 @media (max-width: 1024px) {

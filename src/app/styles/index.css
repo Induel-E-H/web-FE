@@ -52,7 +52,7 @@
   /* Typography */
   --typo-titleB: var(--black);
   --typo-titleW: var(--white);
-  --typo-contentW: var(--gray-600);
+  --typo-contentW: #6f6f6f;
   --typo-caption: var(--gray-400);
 
   /* Footer */
