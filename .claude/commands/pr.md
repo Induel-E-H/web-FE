@@ -105,20 +105,4 @@ From the response, extract:
 - The field node whose `name` matches "End Date" (or similar) → `END_DATE_FIELD_ID`
 - The `projectItems` node where `project.number == 1` → `ITEM_ID`
 
-**5-2. Update the End Date field:**
-
-```bash
-gh api graphql -f query='
-mutation {
-  updateProjectV2ItemFieldValue(input: {
-    projectId: "PROJECT_ID"
-    itemId: "ITEM_ID"
-    fieldId: "END_DATE_FIELD_ID"
-    value: { date: "TODAY_YYYY-MM-DD" }
-  }) {
-    projectV2Item { id }
-  }
-}'
-```
-
-If there are multiple closed issues, repeat Steps 5-1 and 5-2 for each one.
+If there are multiple closed issues, repeat Steps 5-1 for each one.
