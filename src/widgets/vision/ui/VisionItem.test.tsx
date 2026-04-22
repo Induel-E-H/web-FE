@@ -77,6 +77,28 @@ describe('VisionItem', () => {
       );
     });
 
+    it('imageSrcSet prop이 img srcSet 속성으로 적용된다', () => {
+      const srcSet = 'vision_param@800.webp 800w, vision_param.webp 1536w';
+      render(<VisionItem {...defaultProps} imageSrcSet={srcSet} />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'srcSet',
+        srcSet,
+      );
+    });
+
+    it('imageSrcSet가 없으면 srcSet 속성이 없다', () => {
+      render(<VisionItem {...defaultProps} />);
+      expect(screen.getByAltText('정밀한 설계')).not.toHaveAttribute('srcSet');
+    });
+
+    it('sizes 속성이 반응형 뷰포트에 따라 설정된다', () => {
+      render(<VisionItem {...defaultProps} imageSrcSet='test.webp 800w' />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'sizes',
+        '(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 55vw',
+      );
+    });
+
     it('hr 구분선이 렌더링된다', () => {
       const { container } = render(<VisionItem {...defaultProps} />);
       expect(container.querySelector('hr')).toBeInTheDocument();

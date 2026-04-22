@@ -7,6 +7,7 @@ interface VisionItemProps {
   description: string;
   keyword: string;
   image: string;
+  imageSrcSet?: string;
   index: number;
 }
 
@@ -15,6 +16,7 @@ export function VisionItem({
   description,
   keyword,
   image,
+  imageSrcSet,
   index,
 }: VisionItemProps) {
   const isReverse = index % 2 !== 0;
@@ -45,7 +47,15 @@ export function VisionItem({
       className={`vision__content${isReverse ? ' vision__content--reverse' : ''}`}
     >
       <div className='vision__content__image'>
-        <img src={image} alt={title} loading='lazy' />
+        <img
+          src={image}
+          srcSet={imageSrcSet}
+          sizes='(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 710px'
+          width={710}
+          height={473}
+          alt={title}
+          loading='lazy'
+        />
       </div>
       <div className='vision__content_text'>
         <div className='vision__content__title'>
