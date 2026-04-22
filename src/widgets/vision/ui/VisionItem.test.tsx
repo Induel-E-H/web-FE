@@ -92,10 +92,10 @@ describe('VisionItem', () => {
     });
 
     it('sizes 속성이 반응형 뷰포트에 따라 설정된다', () => {
-      render(<VisionItem {...defaultProps} imageSrcSet='test.webp 800w' />);
+      render(<VisionItem {...defaultProps} imageSrcSet='test.webp 480w' />);
       expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
         'sizes',
-        '(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 55vw',
+        '(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 710px',
       );
     });
 
