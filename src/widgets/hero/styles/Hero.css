@@ -54,14 +54,17 @@
 
 .hero__company-name {
   font-size: max(60px, 6.25vw);
+  color: var(--white);
 }
 
 .hero__company-name-en {
   font-size: max(32px, 2.6vw);
+  color: var(--white);
 }
 
 .hero__established {
   font-size: max(28px, 2.08vw);
+  color: var(--white);
 }
 
 @keyframes fade-in {
