@@ -22,11 +22,14 @@ export function InfoCard({
       type='button'
       className={`info-card${className ? ` ${className}` : ''}`}
       onClick={onClick}
+      aria-label={`${title} - ${year.text}, ${secondary}`}
     >
       <div className='info-card__frame'>
         <div className='info-card__content'>
-          <div className='info-card__icon'>{icon}</div>
-          <div className='info-card__text'>
+          <div className='info-card__icon' aria-hidden='true'>
+            {icon}
+          </div>
+          <div className='info-card__text' aria-hidden='true'>
             <time className='info-card__text__year' dateTime={year.dateTime}>
               {year.text}
             </time>

@@ -67,7 +67,7 @@ export function ImageSlider({
   }
 
   return (
-    <div className='image-slider'>
+    <div className='image-slider' role='region' aria-label='이미지 슬라이더'>
       <div
         className={`image-slider__frame${isDragging ? ' image-slider__frame--dragging' : ''}`}
         onTouchStart={handleTouchStart}
@@ -99,7 +99,7 @@ export function ImageSlider({
           onMouseLeave={onRelease}
           aria-label='이전 이미지'
         >
-          <IoIosArrowBack size='1.25vmax' />
+          <IoIosArrowBack size='1.25vmax' aria-hidden='true' />
         </button>
         <button
           className='image-slider__nav image-slider__nav--next'
@@ -108,9 +108,14 @@ export function ImageSlider({
           onMouseLeave={onRelease}
           aria-label='다음 이미지'
         >
-          <IoIosArrowForward size='1.25vmax' />
+          <IoIosArrowForward size='1.25vmax' aria-hidden='true' />
         </button>
-        <div className='image-slider__indicator'>
+        <div
+          className='image-slider__indicator'
+          aria-live='polite'
+          aria-atomic='true'
+        >
+          <span className='sr-only'>이미지</span>
           {currentIndex + 1} / {images.length}
         </div>
       </div>
