@@ -89,4 +89,16 @@ describe('useBookCoverState', () => {
     act(() => result.current.onOpened());
     expect(result.current.bookState).toBe('open');
   });
+
+  it('closingBack: open이 아닐 때 무시된다', () => {
+    const { result } = renderHook(() => useBookCoverState());
+    act(() => result.current.closingBack());
+    expect(result.current.bookState).toBe('cover-front');
+  });
+
+  it('openingBack: cover-back가 아닐 때 무시된다', () => {
+    const { result } = renderHook(() => useBookCoverState());
+    act(() => result.current.openingBack());
+    expect(result.current.bookState).toBe('cover-front');
+  });
 });

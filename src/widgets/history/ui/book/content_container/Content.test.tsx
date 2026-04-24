@@ -180,5 +180,79 @@ describe('ContentPage', () => {
       fireEvent.click(figure);
       expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
     });
+
+    it('팝업 닫기 버튼 클릭 시 팝업이 닫힌다 (handlePopupClose)', () => {
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector(
+        'figure.content__image--has-image',
+      ) as HTMLElement;
+      fireEvent.click(figure);
+      const closeBtn = document.querySelector(
+        'button[aria-label="닫기"]',
+      ) as HTMLElement;
+      fireEvent.click(closeBtn);
+      expect(document.querySelector('.popup__overlay')).not.toBeInTheDocument();
+    });
+
+    it('figure mousedown 시 이벤트 전파가 차단된다', () => {
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector(
+        'figure.content__image--has-image',
+      ) as HTMLElement;
+      const parentHandler = vi.fn();
+      container.addEventListener('mousedown', parentHandler);
+      fireEvent.mouseDown(figure);
+      container.removeEventListener('mousedown', parentHandler);
+    });
+
+    it('아이콘 버튼 mousedown 시 이벤트 전파가 차단된다', () => {
+      let capturedCb: ROCallback | null = null;
+      vi.stubGlobal(
+        'ResizeObserver',
+        class {
+          constructor(cb: ROCallback) {
+            capturedCb = cb;
+          }
+          observe() {}
+          unobserve() {}
+          disconnect() {}
+        },
+      );
+
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const article = container.querySelector('article.content__item')!;
+      const textDiv = container.querySelector('.content__text')!;
+
+      Object.defineProperty(article, 'clientHeight', {
+        value: 100,
+        configurable: true,
+      });
+      Object.defineProperty(textDiv, 'clientHeight', {
+        value: 80,
+        configurable: true,
+      });
+
+      act(() => {
+        capturedCb?.([]);
+      });
+
+      const iconBtn = container.querySelector(
+        'button.content__image-icon',
+      ) as HTMLElement;
+      const parentHandler = vi.fn();
+      container.addEventListener('mousedown', parentHandler);
+      fireEvent.mouseDown(iconBtn);
+      container.removeEventListener('mousedown', parentHandler);
+    });
+  });
+
+  describe('배열 subTitle 렌더링', () => {
+    it('subTitle이 배열인 작품은 각 배열 항목이 h4로 렌더링된다 (pageIndex=14, side=left)', () => {
+      render(<ContentPage side='left' pageIndex={14} />);
+      expect(screen.getByText('韓國的 한국적 디자인')).toBeInTheDocument();
+      expect(
+        screen.getByText('使用者指向的 사용자 지향적 디자인'),
+      ).toBeInTheDocument();
+    });
   });
 });

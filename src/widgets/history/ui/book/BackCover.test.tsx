@@ -104,4 +104,58 @@ describe('BookBackCover', () => {
     });
     expect(onClick).toHaveBeenCalledTimes(1);
   });
+
+  it('centered 후 Enter 키로도 onClick이 호출된다', () => {
+    const onClick = vi.fn();
+    const { container } = render(<BookBackCover onClick={onClick} />);
+    act(() => {
+      vi.runAllTimers();
+    });
+    const el = container.querySelector('.history__back-cover')!;
+    act(() => {
+      el.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
+      );
+    });
+    act(() => {
+      vi.advanceTimersByTime(400);
+    });
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('centered 후 Space 키로도 onClick이 호출된다', () => {
+    const onClick = vi.fn();
+    const { container } = render(<BookBackCover onClick={onClick} />);
+    act(() => {
+      vi.runAllTimers();
+    });
+    const el = container.querySelector('.history__back-cover')!;
+    act(() => {
+      el.dispatchEvent(
+        new KeyboardEvent('keydown', { key: ' ', bubbles: true }),
+      );
+    });
+    act(() => {
+      vi.advanceTimersByTime(400);
+    });
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('Enter/Space 이외의 키는 무시된다', () => {
+    const onClick = vi.fn();
+    const { container } = render(<BookBackCover onClick={onClick} />);
+    act(() => {
+      vi.runAllTimers();
+    });
+    const el = container.querySelector('.history__back-cover')!;
+    act(() => {
+      el.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }),
+      );
+    });
+    act(() => {
+      vi.advanceTimersByTime(400);
+    });
+    expect(onClick).not.toHaveBeenCalled();
+  });
 });
