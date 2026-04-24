@@ -7,7 +7,7 @@
 
   padding: 0.42vmax;
 
-  background-color: #f0eadc;
+  background-color: var(--info-card-bg);
 
   cursor: pointer;
   overflow: hidden;
@@ -20,7 +20,7 @@
 .info-card:hover {
   transform: translateY(-0.3vmax);
   -webkit-transform: translateY(-0.3vmax);
-  box-shadow: 0 0.6vmax 1.2vmax rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.6vmax 1.2vmax var(--shadow-sm);
 }
 
 .info-card__frame {
@@ -29,7 +29,7 @@
 
   padding: 0.21vmax;
 
-  box-shadow: inset 0 0 0 0.05vmax #e1d1b2;
+  box-shadow: inset 0 0 0 0.05vmax var(--info-card-frame);
 }
 
 .info-card__content {
@@ -44,7 +44,7 @@
 
   gap: 0.83vmax;
 
-  box-shadow: inset 0 0 0 0.05vmax #e1d1b2;
+  box-shadow: inset 0 0 0 0.05vmax var(--info-card-frame);
 
   padding: 0 0.521vmax;
 }
@@ -57,7 +57,7 @@
   width: 1.93vmax;
   height: 1.93vmax;
 
-  color: #c9a96e;
+  color: var(--accent-gold-warm);
 }
 
 .info-card__icon > svg {
@@ -78,19 +78,19 @@
 }
 
 .info-card__text__year {
-  font-family: 'BookendBatang';
+  font-family: var(--font-serif);
   font-weight: 700;
-  font-size: max(10px, 0.625vw);
+  font-size: var(--text-xs);
 
-  color: #7e5a05;
+  color: var(--info-year);
 }
 
 .info-card__text__title {
-  font-family: 'BookendBatang';
+  font-family: var(--font-serif);
   font-weight: 700;
-  font-size: max(11px, 0.73vw);
+  font-size: var(--text-sm);
 
-  color: #38271d;
+  color: var(--brown-800);
 
   width: 100%;
   display: -webkit-box;
@@ -101,11 +101,11 @@
 }
 
 .info-card__text__secondary {
-  font-family: 'Pretendard';
+  font-family: var(--font-sans);
   font-weight: 700;
-  font-size: max(10px, 0.625vw);
+  font-size: var(--text-xs);
 
-  color: #635c4f;
+  color: var(--info-secondary);
 
   width: 100%;
   white-space: nowrap;
@@ -122,13 +122,13 @@
   .info-card__frame {
     padding: 0.52vw;
 
-    box-shadow: inset 0 0 0 1px #e1d1b2;
+    box-shadow: inset 0 0 0 1px var(--info-card-frame);
   }
 
   .info-card__content {
     gap: 2.08vw;
 
-    box-shadow: inset 0 0 0 1px #e1d1b2;
+    box-shadow: inset 0 0 0 1px var(--info-card-frame);
 
     padding: 0 0.657vw;
   }
@@ -163,13 +163,13 @@
   .info-card__frame {
     padding: clamp(3px, 1.07vw, 5px);
 
-    box-shadow: inset 0 0 0 1px #e1d1b2;
+    box-shadow: inset 0 0 0 1px var(--info-card-frame);
   }
 
   .info-card__content {
     gap: clamp(15px, 4.27vw, 21px);
 
-    box-shadow: inset 0 0 0 1px #e1d1b2;
+    box-shadow: inset 0 0 0 1px var(--info-card-frame);
 
     padding: 0 clamp(4px, 1.33vw, 7px);
   }

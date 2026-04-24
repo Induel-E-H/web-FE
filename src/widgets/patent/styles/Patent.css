@@ -10,7 +10,7 @@
 
   padding: 3.13vmax 14.58vmax;
 
-  background-color: #38271d;
+  background-color: var(--brown-800);
 }
 
 @media (max-width: 1024px) {

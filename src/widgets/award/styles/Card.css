@@ -2,21 +2,21 @@
   width: 100%;
   height: 100%;
 
-  box-shadow: 0 0 0.42vmax 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0.42vmax 0 var(--shadow-sm);
 }
 
 .award__card:hover {
-  box-shadow: 0 0.6vmax 1.2vmax rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.6vmax 1.2vmax var(--shadow-sm);
 }
 
 @media (max-width: 1024px) {
   .award__card {
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 8px 0 var(--shadow-sm);
   }
 }
 
 @media (max-width: 767px) {
   .award__card {
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 8px 0 var(--shadow-sm);
   }
 }

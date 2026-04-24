@@ -49,6 +49,42 @@
   --mauve-800: #3a222a;
   --mauve-900: #241518;
 
+  /* Accent */
+  --accent-gold: #e7c889;
+  --accent-warm: #8a6d2f;
+  --accent-gold-warm: #c9a96e;
+
+  /* Surface */
+  --surface-warm: #faf7f2;
+  --surface-light: #f9fafb;
+  --surface-cream: #f0ead6;
+  --count-bg: #efeae8;
+  --map-icon-bg: #e4ddd7;
+
+  /* InfoCard */
+  --info-card-bg: #f0eadc;
+  --info-card-frame: #e1d1b2;
+  --info-year: #7e5a05;
+  --info-secondary: #635c4f;
+
+  /* Patent */
+  --status-valid: #05df72;
+  --patent-divider: #60524a;
+  --patent-item-divider: #4c3d34;
+  --patent-expire-icon: #827671;
+  --patent-text-secondary: #b4a8a3;
+  --patent-serial: #b0a49f;
+
+  /* History */
+  --history-bg: #1a1410;
+  --book-page-hr: #606060;
+  --book-shadow-dark: #b9b9b9;
+  --book-shadow-dark-line: #828282;
+  --book-shadow-mid: #cdcdcd;
+  --book-shadow-mid-line: #969696;
+  --book-shadow-light: #e1e1e1;
+  --book-shadow-light-line: #b4b4b4;
+
   /* Typography */
   --typo-titleB: var(--black);
   --typo-titleW: var(--white);
@@ -57,9 +93,13 @@
 
   /* Footer */
   --footer-background: var(--brown-800);
+  --footer-label: #d7d7d7;
   --footer-copyright: var(--gray-400);
   --footer-context: var(--gray-300);
   --footer-divider: var(--white-50);
+
+  /* Navigation */
+  --nav-hover: #74584b;
 
   /* Book */
   --book-cover: var(--mauve-500);
@@ -67,14 +107,54 @@
   --book-center-deep: var(--mauve-700);
   --book-page: var(--white);
 
-  --surface-light: #f9fafb;
-
   /* Vision */
   --vision-background: #4a2814cc;
+
+  /* Shadows */
+  --shadow-header: rgba(0, 0, 0, 0.08);
+  --shadow-icon: rgba(0, 0, 0, 0.5);
+  --shadow-sm: rgba(0, 0, 0, 0.25);
+  --shadow-hover: rgba(0, 0, 0, 0.35);
+  --shadow-overlay: rgba(0, 0, 0, 0.45);
+  --shadow-overlay-sm: rgba(0, 0, 0, 0.1);
+  --shadow-book: rgba(0, 0, 0, 0.2);
+  --shadow-book-dark: rgba(0, 0, 0, 0.3);
+  --shadow-page: rgba(0, 0, 0, 0.15);
+  --shadow-nav: rgba(0, 0, 0, 0.4);
+  --shadow-nav-hover: rgba(0, 0, 0, 0.6);
+  --shadow-map-info: rgba(0, 0, 0, 0.16);
+  --shadow-map-info-tablet: rgba(0, 0, 0, 0.14);
+  --shadow-map-info-mobile: rgba(0, 0, 0, 0.12);
+  --shadow-map-marker: rgba(0, 0, 0, 0.22);
+
+  /* Overlay */
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --overlay-white-12: rgba(255, 255, 255, 0.12);
+  --overlay-white-30: rgba(255, 255, 255, 0.3);
+  --overlay-white-50: rgba(255, 255, 255, 0.5);
+
+  /* Alpha overlays */
+  --brown-800-alpha-05: rgba(56, 39, 29, 0.05);
+  --brown-800-alpha-08: rgba(56, 39, 29, 0.08);
+  --brown-800-alpha-10: rgba(56, 39, 29, 0.1);
+  --white-alpha-08: rgba(255, 255, 255, 0.08);
+  --white-alpha-10: rgba(255, 255, 255, 0.1);
+  --white-alpha-15: rgba(255, 255, 255, 0.15);
+
+  /* Font Families */
+  --font-sans: Pretendard, sans-serif;
+  --font-serif: 'BookendBatang', sans-serif;
+
+  /* Type Scale */
+  --text-xs: max(10px, 0.625vw);
+  --text-sm: max(11px, 0.729vw);
+  --text-base: max(12px, 0.78vw);
+  --text-md: max(12px, 0.833vw);
+  --text-section: max(40px, 3.13vw);
 }
 
 * {
-  font-family: Pretendard, sans-serif;
+  font-family: var(--font-sans);
   font-variant-numeric: tabular-nums;
   font-style: normal;
   line-height: 1.4;

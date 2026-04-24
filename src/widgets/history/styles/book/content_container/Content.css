@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--shadow-overlay);
   border: none;
   border-radius: clamp(4px, 1.07vw, 6px);
   cursor: pointer;
@@ -42,7 +42,7 @@
 }
 
 .content__text * {
-  font-family: 'BookendBatang', sans-serif;
+  font-family: var(--font-serif);
 }
 
 .content__title {
@@ -61,7 +61,7 @@
 }
 
 .content__title-eng {
-  font-family: 'Pretendard', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 800;
   font-size: max(12px, 0.73vw);
 
@@ -77,14 +77,14 @@
 
 .content__subtitle {
   font-weight: 600;
-  font-size: max(12px, 0.83vw);
+  font-size: var(--text-md);
 
   color: var(--black);
 }
 
 .content__body {
   font-weight: 600;
-  font-size: max(11px, 0.73vw);
+  font-size: var(--text-sm);
 
   color: var(--typo-contentW);
 }
@@ -174,7 +174,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--shadow-overlay-sm);
   border-radius: 0.52vmax;
   opacity: 0;
   transition: opacity 0.2s;

@@ -13,8 +13,8 @@
 
   border-radius: 1.04vmax;
 
-  background-color: #efeae8;
-  color: #38271d;
+  background-color: var(--count-bg);
+  color: var(--brown-800);
 }
 
 .award__count__icon {
@@ -24,7 +24,7 @@
 
 .award__count p {
   font-weight: 600;
-  font-size: max(12px, 0.78vw);
+  font-size: var(--text-base);
 }
 
 @media (max-width: 1024px) {

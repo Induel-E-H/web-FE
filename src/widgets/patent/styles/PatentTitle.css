@@ -1,7 +1,7 @@
 .patent__title .section-title__description hr {
-  border-top-color: #c9a96e;
+  border-top-color: var(--accent-gold-warm);
 }
 
 .patent__title h2 {
-  color: #f0ead6;
+  color: var(--surface-cream);
 }

@@ -68,7 +68,7 @@
 .footer__information button {
   cursor: pointer;
   font-weight: 600;
-  font-size: max(11px, 0.729vw);
+  font-size: var(--text-sm);
   color: var(--white);
 }
 
@@ -113,11 +113,11 @@
   flex-direction: row;
   gap: 0.781vmax;
   font-weight: 600;
-  font-size: max(11px, 0.729vw);
+  font-size: var(--text-sm);
 }
 
 .footer__row span:first-child {
-  color: #d7d7d7;
+  color: var(--footer-label);
 }
 
 .footer__row span:last-child {
@@ -126,7 +126,7 @@
 
 .footer__company_split {
   font-weight: 600;
-  font-size: max(11px, 0.729vw);
+  font-size: var(--text-sm);
   color: var(--gray-500);
 }
 
@@ -136,7 +136,7 @@
 
 .footer__copyright {
   font-weight: 100;
-  font-size: max(10px, 0.625vw);
+  font-size: var(--text-xs);
   color: var(--footer-copyright);
 }
 

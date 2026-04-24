@@ -8,7 +8,7 @@
   gap: 1.56vmax;
   padding: 3.13vmax 5.21vmax;
 
-  background-color: #faf7f2;
+  background-color: var(--surface-warm);
 }
 
 .award__top {

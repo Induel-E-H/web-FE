@@ -12,7 +12,7 @@
 
 .book-page-title hr {
   border: none;
-  border-top: 1px solid #606060;
+  border-top: 1px solid var(--book-page-hr);
   width: 16.35vmax;
 }
 
@@ -20,7 +20,7 @@
   font-weight: 700;
   font-size: max(22px, 1.56vw);
 
-  color: #000000;
+  color: var(--black);
 }
 
 @media (max-width: 1024px) {

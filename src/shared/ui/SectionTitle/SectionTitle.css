@@ -8,12 +8,12 @@
   display: flex;
   align-items: center;
   gap: 0.78vmax;
-  color: #e7c889;
+  color: var(--accent-gold);
 }
 
 .section-title__description hr {
   border: none;
-  border-top: 2px solid #e7c889;
+  border-top: 2px solid var(--accent-gold);
   width: 4.17vmax;
 }
 
@@ -24,9 +24,9 @@
 }
 
 .section-title h2 {
-  font-family: 'BookendBatang';
+  font-family: var(--font-serif);
   font-weight: 700;
-  font-size: max(40px, 3.13vw);
+  font-size: var(--text-section);
 }
 
 @media (max-width: 1024px) {
@@ -35,7 +35,7 @@
   }
 
   .section-title__description hr {
-    border-top: 2px solid #e7c889;
+    border-top: 2px solid var(--accent-gold);
     width: 9.11vw;
   }
 
@@ -54,7 +54,7 @@
   }
 
   .section-title__description hr {
-    border-top: 2px solid #e7c889;
+    border-top: 2px solid var(--accent-gold);
     width: clamp(56px, 16vw, 80px);
   }
 

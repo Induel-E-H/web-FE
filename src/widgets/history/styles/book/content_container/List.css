@@ -38,14 +38,14 @@
   color: var(--typo-contentW);
   flex-shrink: 0;
 
-  font-size: max(11px, 0.73vw);
+  font-size: var(--text-sm);
 }
 
 .list__ul button {
   cursor: pointer;
 
   font-weight: 600;
-  font-size: max(11px, 0.73vw);
+  font-size: var(--text-sm);
 
   color: var(--typo-contentW);
 

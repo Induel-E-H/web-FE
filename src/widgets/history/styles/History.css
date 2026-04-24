@@ -11,7 +11,7 @@
 
   padding: 3.13vmax 4.17vmax 2.34vmax 4.17vmax;
 
-  background-color: #1a1410;
+  background-color: var(--history-bg);
 
   --gold-gradient: linear-gradient(
     90deg,
