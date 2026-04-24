@@ -72,7 +72,7 @@ export function Header() {
       <button
         className='header__hamburger'
         onClick={() => setMenuOpen((prev) => !prev)}
-        aria-label='메뉴 열기'
+        aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
         aria-expanded={menuOpen}
         aria-controls='mobile-menu'
       >
