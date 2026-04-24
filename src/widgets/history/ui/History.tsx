@@ -12,7 +12,7 @@ import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import '../styles/History.css';
 import { BackCoverInner } from './book/BackCover';
-import { BookPageOuterShadow } from './book/BookPageSide';
+import { BookPageOuterShadow } from './book/BookPageOuterShadow';
 import { BookSide } from './book/BookSide';
 import { ContentPage } from './book/content_container/Content';
 import { ListPage } from './book/content_container/List';
