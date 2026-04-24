@@ -9,7 +9,10 @@ export function PatentExpireContent() {
     <article className='patent__expiration'>
       <header className='patent__expiration__title'>
         <div className='patent__expiration__title__text'>
-          <FaRegFileExcel className='patent__expiration__icon' />
+          <FaRegFileExcel
+            className='patent__expiration__icon'
+            aria-hidden='true'
+          />
           <h3>만료 특허 이력 ({PATENT_EXPIRE_LIST.length}건)</h3>
         </div>
         <hr />

@@ -77,16 +77,21 @@ function Home() {
 
   return (
     <>
+      <a href='#main-content' className='skip-link'>
+        본문으로 바로 가기
+      </a>
       <Header />
-      <Hero showScrollArrow={isProduction} />
-      <Suspense fallback={null}>
-        <Vision />
-        <History />
-        <Award />
-        <Patent />
-        <Map />
-        <Footer />
-      </Suspense>
+      <main id='main-content'>
+        <Hero showScrollArrow={isProduction} />
+        <Suspense fallback={null}>
+          <Vision />
+          <History />
+          <Award />
+          <Patent />
+          <Map />
+          <Footer />
+        </Suspense>
+      </main>
     </>
   );
 }

@@ -66,7 +66,7 @@ export function Vision() {
   }, []);
 
   return (
-    <section className='vision'>
+    <section id='vision' className='vision' aria-label='미래 비전'>
       <VisionTitle ref={titleRef} />
       <div className='vision__main'>
         {VISION_DATA.map((item, index) => (

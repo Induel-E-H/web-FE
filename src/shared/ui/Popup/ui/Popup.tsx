@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect } from 'react';
+import { type ReactNode, useEffect, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 import '../styles/Popup.css';
@@ -16,6 +16,20 @@ export function Popup({
   onClose: () => void;
   children: ReactNode;
 }) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<Element | null>(null);
+
+  useEffect(() => {
+    triggerRef.current = document.activeElement;
+    closeButtonRef.current?.focus();
+
+    return () => {
+      if (triggerRef.current instanceof HTMLElement) {
+        triggerRef.current.focus();
+      }
+    };
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     history.pushState(null, '');
@@ -24,10 +38,16 @@ export function Popup({
       onClose();
     }
 
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose();
+    }
+
     window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
 
@@ -47,8 +67,13 @@ export function Popup({
       >
         <div className='popup__header'>
           {title && <h3 className='popup__title'>{title}</h3>}
-          <button aria-label='닫기' className='popup__close' onClick={onClose}>
-            <IoMdClose />
+          <button
+            ref={closeButtonRef}
+            aria-label='닫기'
+            className='popup__close'
+            onClick={onClose}
+          >
+            <IoMdClose aria-hidden='true' />
           </button>
         </div>
         {children}

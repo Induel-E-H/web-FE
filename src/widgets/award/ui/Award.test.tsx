@@ -46,9 +46,11 @@ describe('Award', () => {
       );
     });
 
-    it('연도 필터(tablist)가 렌더링된다', () => {
+    it('연도 필터(navigation)가 렌더링된다', () => {
       render(<Award />);
-      expect(screen.getByRole('tablist')).toBeInTheDocument();
+      expect(
+        screen.getByRole('navigation', { name: '연도 필터' }),
+      ).toBeInTheDocument();
     });
   });
 
@@ -108,7 +110,7 @@ describe('Award', () => {
     it('2008년 클릭 시 해당 연도(2개) 항목만 표시된다', () => {
       render(<Award />);
 
-      fireEvent.click(screen.getByRole('tab', { name: '2008' }));
+      fireEvent.click(screen.getByRole('button', { name: '2008' }));
 
       expect(document.querySelectorAll('button.award__card')).toHaveLength(2);
     });
@@ -116,7 +118,7 @@ describe('Award', () => {
     it('연도 변경 시 currentPage가 0으로 초기화된다', () => {
       render(<Award />);
 
-      fireEvent.click(screen.getByRole('tab', { name: '2008' }));
+      fireEvent.click(screen.getByRole('button', { name: '2008' }));
 
       const slider = document.querySelector(
         '.award__card_slider',
@@ -131,7 +133,7 @@ describe('Award', () => {
       render(<Award />);
 
       expect(
-        screen.getByRole('button', { name: 'Previous page' }),
+        screen.getByRole('button', { name: '이전 페이지' }),
       ).toBeInTheDocument();
     });
 
@@ -139,7 +141,7 @@ describe('Award', () => {
       render(<Award />);
 
       expect(
-        screen.queryByRole('button', { name: 'Previous page' }),
+        screen.queryByRole('button', { name: '이전 페이지' }),
       ).not.toBeInTheDocument();
     });
   });
@@ -181,7 +183,7 @@ describe('Award', () => {
         document.querySelector('.award__card_slider') as HTMLElement
       ).style.transform;
 
-      fireEvent.click(screen.getByRole('button', { name: 'Next page' }));
+      fireEvent.click(screen.getByRole('button', { name: '다음 페이지' }));
 
       const sliderAfter = (
         document.querySelector('.award__card_slider') as HTMLElement

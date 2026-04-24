@@ -4,18 +4,16 @@ import { getAwardImage } from '../model/image';
 
 export function AwardPopup({
   awardId,
+  awardTitle,
   onClose,
 }: {
   awardId: number;
+  awardTitle: string;
   onClose: () => void;
 }) {
   return (
-    <Popup ariaLabel='당선작 상세보기' onClose={onClose}>
-      <img
-        src={getAwardImage(awardId)}
-        alt={`당선작 ${awardId}`}
-        loading='lazy'
-      />
+    <Popup ariaLabel={`${awardTitle} 수상 이미지`} onClose={onClose}>
+      <img src={getAwardImage(awardId)} alt={awardTitle} loading='lazy' />
     </Popup>
   );
 }

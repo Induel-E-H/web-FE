@@ -33,6 +33,8 @@ export function Viewport({
     <div
       ref={ref}
       className='award__card_viewport'
+      role='region'
+      aria-label='수상 목록'
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >

@@ -61,7 +61,7 @@ function Award() {
   const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
 
   return (
-    <section className='award'>
+    <section id='award' className='award' aria-label='수상 기록'>
       <div className='award__top'>
         <AwardTitle />
         <AwardCount awardList={AWARD_LIST} />
@@ -89,7 +89,14 @@ function Award() {
           />
         )}
         {selectedId !== null && (
-          <AwardPopup awardId={selectedId} onClose={handlePopupClose} />
+          <AwardPopup
+            awardId={selectedId}
+            awardTitle={
+              AWARD_LIST.find((a) => a.id === selectedId)?.title ??
+              '수상 이미지'
+            }
+            onClose={handlePopupClose}
+          />
         )}
       </div>
     </section>

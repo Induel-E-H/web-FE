@@ -11,14 +11,16 @@ const defaultProps = {
 
 describe('HistoryCategory', () => {
   describe('렌더링', () => {
-    it('tablist 역할로 렌더링된다', () => {
+    it('navigation 역할로 렌더링된다', () => {
       render(<HistoryCategory {...defaultProps} />);
-      expect(screen.getByRole('tablist')).toBeInTheDocument();
+      expect(
+        screen.getByRole('navigation', { name: '역사 카테고리' }),
+      ).toBeInTheDocument();
     });
 
-    it('INDEX_LIST 항목 수만큼 탭 버튼이 렌더링된다', () => {
+    it('INDEX_LIST 항목 수만큼 버튼이 렌더링된다', () => {
       render(<HistoryCategory {...defaultProps} />);
-      expect(screen.getAllByRole('tab')).toHaveLength(INDEX_LIST.length);
+      expect(screen.getAllByRole('button')).toHaveLength(INDEX_LIST.length);
     });
 
     it('각 카테고리 텍스트가 렌더링된다', () => {
@@ -35,20 +37,17 @@ describe('HistoryCategory', () => {
   });
 
   describe('활성 상태', () => {
-    it('tabActiveItem 버튼은 aria-selected=true이다', () => {
+    it('tabActiveItem 버튼은 aria-current=true이다', () => {
       render(<HistoryCategory {...defaultProps} tabActiveItem='Timeline' />);
       expect(screen.getByText('Timeline')).toHaveAttribute(
-        'aria-selected',
+        'aria-current',
         'true',
       );
     });
 
-    it('비활성 버튼은 aria-selected=false이다', () => {
+    it('비활성 버튼은 aria-current가 없다', () => {
       render(<HistoryCategory {...defaultProps} tabActiveItem='Timeline' />);
-      expect(screen.getByText('List')).toHaveAttribute(
-        'aria-selected',
-        'false',
-      );
+      expect(screen.getByText('List')).not.toHaveAttribute('aria-current');
     });
 
     it('활성 버튼에 active 클래스가 적용된다', () => {

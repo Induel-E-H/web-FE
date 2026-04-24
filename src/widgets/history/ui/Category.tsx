@@ -19,12 +19,11 @@ export function HistoryCategory({ tabActiveItem, navigateToCategory }: Props) {
   }
 
   return (
-    <div className='history__category' role='tablist'>
+    <nav className='history__category' aria-label='역사 카테고리'>
       {INDEX_LIST.map((item, index) => (
         <Fragment key={item}>
           <button
-            role='tab'
-            aria-selected={tabActiveItem === item}
+            aria-current={tabActiveItem === item ? 'true' : undefined}
             className={tabActiveItem === item ? 'active' : ''}
             onClick={() => handleCategoryClick(item)}
           >
@@ -33,6 +32,6 @@ export function HistoryCategory({ tabActiveItem, navigateToCategory }: Props) {
           {index < INDEX_LIST.length - 1 && <span aria-hidden='true'>|</span>}
         </Fragment>
       ))}
-    </div>
+    </nav>
   );
 }

@@ -98,18 +98,23 @@ function Map() {
   }, [mapState]);
 
   return (
-    <section className='map'>
+    <section id='map' className='map' aria-label='찾아오시는 길'>
       <MapTitle />
       <div className='map__card'>
         {mapState === 'fallback' ? (
           <iframe
             className='map__content map__content--fallback'
             src={FALLBACK_MAP_URL}
-            title='위치 지도'
+            title='인들이앤에이치 본사 위치 지도'
             loading='lazy'
           />
         ) : (
-          <div ref={mapRef} className='map__content' />
+          <div
+            ref={mapRef}
+            className='map__content'
+            role='img'
+            aria-label='인들이앤에이치 본사 위치 지도'
+          />
         )}
         <MapCard />
       </div>

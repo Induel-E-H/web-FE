@@ -5,7 +5,7 @@ import { PatentValidContent } from './ValidContent';
 
 function Patent() {
   return (
-    <section className='patent'>
+    <section id='patent' className='patent' aria-label='특허 기록'>
       <PatentTitle />
       <PatentValidContent />
       <PatentExpireContent />

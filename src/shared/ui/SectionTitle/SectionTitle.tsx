@@ -18,7 +18,7 @@ export function SectionTitle({
   return (
     <hgroup ref={ref} className={rootClass}>
       <div className='section-title__description'>
-        <hr />
+        <hr aria-hidden='true' />
         <p>{label}</p>
       </div>
       <h2>{heading}</h2>
