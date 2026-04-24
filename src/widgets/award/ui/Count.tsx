@@ -7,7 +7,7 @@ import '../styles/Count.css';
 export function AwardCount({ awardList }: { awardList: AwardItem[] }) {
   return (
     <div className='award__count'>
-      <FiAward className='award__count__icon' />
+      <FiAward className='award__count__icon' aria-hidden='true' />
       <p>총 {awardList.length}건의 표창 및 수상</p>
     </div>
   );
