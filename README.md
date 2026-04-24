@@ -137,10 +137,11 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 <img width="103" height="97" alt="Deploy" src="https://github.com/user-attachments/assets/df2906e5-240e-4ed5-9df1-4c84320addb3" />
 
 ### Develop
-<img width="722" height="99" alt="Develop" src="https://github.com/user-attachments/assets/6f85237b-ce95-4592-bc80-2d395f2961d1" />
+<img width="759" height="99" alt="Develop" src="https://github.com/user-attachments/assets/9675dca0-0ee5-4ea2-a44c-2e7d6ea79a70" />
 
 ### Develop Environment
-<img width="1011" height="97" alt="Environment" src="https://github.com/user-attachments/assets/30ee5487-43fe-4460-bcb4-60ea07642432" />
+<img width="1011" height="97" alt="Environment" src="https://github.com/user-attachments/assets/ecbdbaa5-5d5b-4163-b793-331e00265e8e" />
+
 
 ### CI/CD
 <img width="385" height="97" alt="CI   CD" src="https://github.com/user-attachments/assets/a88b7b4f-531f-47c1-a1ef-f25f04f8f9c2" />
