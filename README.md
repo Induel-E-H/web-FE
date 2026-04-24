@@ -80,16 +80,19 @@ word-break: keep-all;
 
 웹 사이트의 **네비게이션**입니다.  
 디바이스별 UI 전략을 분리하여 반응형 대응을 최적화했습니다.
+<img width="2539" height="75" alt="image" src="https://github.com/user-attachments/assets/8f7103f2-8f61-4264-a338-95a49981486a" />
 
 ### Hero
 
 Three.js 기반 3D 배경을 구현하여 브랜드 키워드인 **‘유연함’을 시각화**했습니다.  
 정적 콘텐츠가 아닌, **첫 인상 자체를 경험으로 설계**했습니다.
+<img width="2539" height="1270" alt="image" src="https://github.com/user-attachments/assets/ddbe2b20-baa9-47ed-86f8-d98ebac9e975" />
 
 ### Vision
 
 AI 기반 이미지 생성과 키워드 구조화를 통해  
 기업의 방향성을 **추상 → 구체**로 변환했습니다.
+<img width="1278" height="1040" alt="image" src="https://github.com/user-attachments/assets/9106cf26-d5b3-4658-8990-caac0905421a" />
 
 ### History
 
@@ -98,40 +101,53 @@ AI 기반 이미지 생성과 키워드 구조화를 통해
 
 페이지 구조, 상태 관리, 애니메이션 흐름까지  
 모두 **물리적 경험을 디지털로 치환**하는 데 집중했습니다.
+<img width="2241" height="1109" alt="image" src="https://github.com/user-attachments/assets/b3885726-5d0f-4ea5-9d7d-f56a7d25b9ad" />
 
 ### Award
 
 Grid 기반 레이아웃 + 반응형 페이지네이션을 적용하여  
 디바이스 제약 환경에서도 **정보 밀도를 유지**했습니다.
+<img width="2243" height="1113" alt="image" src="https://github.com/user-attachments/assets/20d7069d-7b4c-49e1-afce-d588671997d7" />
 
 ### Patent
 
 특허증 데이터 나열이 아닌  
 **UI 일관성을 유지하는 방향으로 재디자인**을 수행했습니다.
+<img width="2243" height="1111" alt="image" src="https://github.com/user-attachments/assets/ba844a7c-27b2-4dbd-af2a-efc1256729e3" />
 
 ### Location
 
 Naver Map API + Open Street Map Fallback 구조로  
 외부 API 장애 상황까지 고려한 **이중화 설계**를 적용했습니다.
+<img width="2540" height="1078" alt="image" src="https://github.com/user-attachments/assets/850863ad-8cd7-463d-9770-e2502be46df0" />
 
 ### Footer
 
 브랜드 컬러를 기반으로 한 **정보 신뢰 영역**을 구현했습니다.
+<img width="2244" height="304" alt="image" src="https://github.com/user-attachments/assets/fd4350d4-c62f-48ad-9f63-902e3d749521" />
 
 ### Privacy Policy
 
 Google Analytics 적용을 위한 법적 요구사항을 충족하며  
 **실서비스 기준 컴플라이언스 대응**을 반영했습니다.
+<img width="2243" height="1111" alt="image" src="https://github.com/user-attachments/assets/c35f20bf-d47c-4ad7-91f9-336178cb89ad" />
 
 ## 📚 SKILL STACK
+### Deploy
+<img width="103" height="97" alt="Deploy" src="https://github.com/user-attachments/assets/df2906e5-240e-4ed5-9df1-4c84320addb3" />
 
-### 개발
+### Develop
+<img width="722" height="99" alt="Develop" src="https://github.com/user-attachments/assets/6f85237b-ce95-4592-bc80-2d395f2961d1" />
 
-### 개발 환경
+### Develop Environment
+<img width="1011" height="97" alt="Environment" src="https://github.com/user-attachments/assets/30ee5487-43fe-4460-bcb4-60ea07642432" />
 
 ### CI/CD
+<img width="385" height="97" alt="CI   CD" src="https://github.com/user-attachments/assets/a88b7b4f-531f-47c1-a1ef-f25f04f8f9c2" />
 
 ### Monitor
+<img width="427" height="97" alt="Monitor" src="https://github.com/user-attachments/assets/6ceb7171-47de-4728-b478-32c8a72dbf31" />
+
 
 ## 🫂 TEAM
 
