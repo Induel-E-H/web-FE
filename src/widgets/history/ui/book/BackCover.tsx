@@ -8,7 +8,7 @@ const COVER_MOVE_DURATION = 400;
 
 export function BackCoverInner() {
   return (
-    <div className='history__back-cover-inner'>
+    <div className='history__back-cover-inner' aria-hidden='true'>
       <hr className='history__back-cover-spine' />
       <div className='history__back-cover-content'>
         {WORDS.map((word) => (
@@ -35,10 +35,21 @@ export function BookBackCover({ onClick }: { onClick: () => void }) {
     setTimeout(onClick, COVER_MOVE_DURATION);
   }
 
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  }
+
   return (
     <div
       className={`history__back-cover${centered ? ' history__back-cover--centered' : ''}`}
+      role='button'
+      tabIndex={0}
+      aria-label='책 닫기'
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
     >
       <BackCoverInner />
     </div>

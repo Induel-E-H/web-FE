@@ -325,7 +325,7 @@ function History() {
   const pageIsFlipping = !isCoverFlip && isFlipping;
 
   return (
-    <section className='history'>
+    <section id='history' className='history' aria-label='회사 역사'>
       <HistoryTitle />
       <HistoryCategory
         tabActiveItem={tabActiveItem}

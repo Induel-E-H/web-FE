@@ -110,7 +110,7 @@ function ContentItem({
           onClick={handleImageClick}
           aria-label='이미지 보기'
         >
-          <MdOutlineImage size={18} color='white' />
+          <MdOutlineImage size={18} color='white' aria-hidden='true' />
         </button>
       )}
       <div className='content__text' ref={textRef}>
@@ -162,7 +162,7 @@ function ContentItem({
           {imageSrc && (
             <>
               <img src={imageSrc} alt={item.title} loading='lazy' />
-              <div className='content__image-zoom'>
+              <div className='content__image-zoom' aria-hidden='true'>
                 <MdOutlineZoomOutMap size='1.25vmax' color='white' />
               </div>
             </>
