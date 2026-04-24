@@ -64,7 +64,7 @@ export function VisionItem({
             <h3>{keyword}</h3>
             <h4>{title}</h4>
           </div>
-          <hr />
+          <hr aria-hidden='true' />
         </div>
         <p className='vision__content__description'>{description}</p>
       </div>
