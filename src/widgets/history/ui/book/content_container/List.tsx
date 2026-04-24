@@ -1,6 +1,7 @@
 import { artworks } from '@entities/history';
 import { PAGE_SIDE } from '@features/history';
 import type { PageSide } from '@features/history/model/types';
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
 import '../../../styles/book/content_container/List.css';
 import { BookPageTitle } from '../PageTitle';
@@ -16,6 +17,7 @@ export function ListPage({
   side: PageSide;
   onItemClick?: (artworkIndex: number) => void;
 }) {
+  const breakpoint = useBreakpoint();
   const isLeft = side === PAGE_SIDE.LEFT;
   const isRight = side === PAGE_SIDE.RIGHT;
   const items = isLeft ? leftItems : rightItems;
@@ -29,8 +31,14 @@ export function ListPage({
           <li key={item.title}>
             <button
               type='button'
-              onMouseDown={(e) => e.stopPropagation()}
-              onClick={() => onItemClick?.(offset + i)}
+              onMouseDown={
+                breakpoint !== 'mobile' ? (e) => e.stopPropagation() : undefined
+              }
+              onClick={
+                breakpoint !== 'mobile'
+                  ? () => onItemClick?.(offset + i)
+                  : undefined
+              }
             >
               {item.title}
             </button>
