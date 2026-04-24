@@ -7,7 +7,7 @@ const yearList: (string | number)[] = ['전체', 2008, 2006, 2005];
 
 describe('YearCategory', () => {
   describe('렌더링', () => {
-    it('tablist 역할로 렌더링된다', () => {
+    it('navigation 역할로 렌더링된다', () => {
       render(
         <YearCategory
           yearList={yearList}
@@ -15,7 +15,9 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByRole('tablist')).toBeInTheDocument();
+      expect(
+        screen.getByRole('navigation', { name: '연도 필터' }),
+      ).toBeInTheDocument();
     });
 
     it('yearList 항목 수만큼 버튼이 렌더링된다', () => {
@@ -26,7 +28,7 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getAllByRole('tab')).toHaveLength(yearList.length);
+      expect(screen.getAllByRole('button')).toHaveLength(yearList.length);
     });
 
     it('각 연도 텍스트가 렌더링된다', () => {
@@ -43,7 +45,7 @@ describe('YearCategory', () => {
   });
 
   describe('활성 상태', () => {
-    it('activeYear 버튼은 aria-selected=true이다', () => {
+    it('activeYear 버튼은 aria-current=true이다', () => {
       render(
         <YearCategory
           yearList={yearList}
@@ -51,10 +53,10 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('2008')).toHaveAttribute('aria-selected', 'true');
+      expect(screen.getByText('2008')).toHaveAttribute('aria-current', 'true');
     });
 
-    it('비활성 버튼은 aria-selected=false이다', () => {
+    it('비활성 버튼은 aria-current가 없다', () => {
       render(
         <YearCategory
           yearList={yearList}
@@ -62,10 +64,7 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('전체')).toHaveAttribute(
-        'aria-selected',
-        'false',
-      );
+      expect(screen.getByText('전체')).not.toHaveAttribute('aria-current');
     });
 
     it('활성 버튼은 tabIndex=0이다', () => {

@@ -47,7 +47,7 @@ describe('History', () => {
 
   it('초기 상태에서 HistoryCategory의 List 탭이 active이다', () => {
     render(<History />);
-    const listTab = screen.getByRole('tab', { name: 'List' });
+    const listTab = screen.getByRole('button', { name: 'List' });
     expect(listTab).toHaveClass('active');
   });
 });

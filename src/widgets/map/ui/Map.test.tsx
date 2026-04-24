@@ -77,7 +77,9 @@ describe('Map', () => {
       setNaverMaps(false);
       render(<Map />);
 
-      expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+      expect(
+        screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+      ).toBeInTheDocument();
       expect(mockMakeMap).not.toHaveBeenCalled();
     });
 
@@ -99,7 +101,9 @@ describe('Map', () => {
 
       // queueMicrotask로 지연된 setState 완료를 기다림
       await waitFor(() => {
-        expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+        expect(
+          screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+        ).toBeInTheDocument();
       });
     });
   });
@@ -119,7 +123,9 @@ describe('Map', () => {
       const { container } = render(<Map />);
 
       expect(container.querySelector('.map__content')).toBeInTheDocument();
-      expect(screen.queryByTitle('위치 지도')).not.toBeInTheDocument();
+      expect(
+        screen.queryByTitle('인들이앤에이치 본사 위치 지도'),
+      ).not.toBeInTheDocument();
     });
 
     it('API 키가 있고 Naver SDK 미로드 시 스크립트가 동적으로 삽입된다', () => {
@@ -148,7 +154,9 @@ describe('Map', () => {
       script?.dispatchEvent(new Event('error'));
 
       await waitFor(() => {
-        expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+        expect(
+          screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+        ).toBeInTheDocument();
       });
     });
   });
@@ -162,7 +170,9 @@ describe('Map', () => {
 
       rerender(<Map />);
 
-      expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+      expect(
+        screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+      ).toBeInTheDocument();
     });
 
     it('마운트 시 navermap_authFailure 콜백이 등록된다', () => {
