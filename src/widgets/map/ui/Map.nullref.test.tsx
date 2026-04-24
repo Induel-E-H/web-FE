@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 /**
  * Map 컴포넌트 — mapRef가 null인 경우 테스트
  *
