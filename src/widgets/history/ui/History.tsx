@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   PAGE_SIDE,
@@ -97,12 +97,19 @@ function History() {
   const [pendingCategory, setPendingCategory] = useState<IndexItem | null>(
     null,
   );
+  const pendingFiredRef = useRef(false);
 
   useEffect(() => {
-    if (bookState === 'open' && pendingCategory !== null) {
+    if (
+      bookState === 'open' &&
+      pendingCategory !== null &&
+      !pendingFiredRef.current
+    ) {
+      pendingFiredRef.current = true;
       const cat = pendingCategory;
-      setPendingCategory(null);
       setTimeout(() => {
+        pendingFiredRef.current = false;
+        setPendingCategory(null);
         navigateToCategory(cat, 0, true);
       }, 0);
     }
