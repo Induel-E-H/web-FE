@@ -12,7 +12,7 @@ const HeroBackground = lazy(() => import('./HeroBackground'));
 
 function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
-    <section className='hero'>
+    <section id='hero' className='hero' aria-label='회사 소개'>
       <Suspense
         fallback={
           <img
