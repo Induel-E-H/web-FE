@@ -35,7 +35,9 @@ export function Footer() {
               <span>대표이사</span>
               <span>{COMPANY.CEO}</span>
             </div>
-            <p className='footer__company_split'>|</p>
+            <p className='footer__company_split' aria-hidden='true'>
+              |
+            </p>
             <div className='footer__row'>
               <span>사업자 등록 번호</span>
               <span>{COMPANY.BUSINESS_NO}</span>
@@ -52,7 +54,9 @@ export function Footer() {
               <span>TEL</span>
               <span>{COMPANY.PHONE_DISPLAY}</span>
             </div>
-            <p className='footer__company_split'>|</p>
+            <p className='footer__company_split' aria-hidden='true'>
+              |
+            </p>
             <div className='footer__row'>
               <span>FAX</span>
               <span>{COMPANY.FAX}</span>
