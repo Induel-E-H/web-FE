@@ -144,4 +144,233 @@ describe('useBookNavigation', () => {
       expect(result.current.canGoLeft).toBe(false);
     });
   });
+
+  describe('navigateRight (beginContinuousFlip right)', () => {
+    it('Content 내에서 오른쪽으로 이동 시 pageIndex가 1 증가한다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 0);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.activeItem).toBe('Content');
+
+      act(() => {
+        result.current.beginContinuousFlip('right');
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.currentPageIndex).toBe(1);
+    });
+
+    it('List 마지막 페이지에서 오른쪽으로 이동 시 Content로 넘어간다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.beginContinuousFlip('right');
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.activeItem).toBe('Content');
+    });
+
+    it('isFlipping이 true이면 flipDirection이 설정된다 (shadow backward branch)', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 0);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      act(() => {
+        result.current.beginContinuousFlip('right');
+      });
+      expect(result.current.isFlipping).toBe(true);
+      expect(result.current.flipDirection).toBe('forward');
+    });
+  });
+
+  describe('navigateLeft (beginContinuousFlip left)', () => {
+    it('Content 페이지 1에서 왼쪽으로 이동 시 pageIndex가 0이 된다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 1);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.currentPageIndex).toBe(1);
+
+      act(() => {
+        result.current.beginContinuousFlip('left');
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.currentPageIndex).toBe(0);
+    });
+
+    it('Content 페이지 0에서 왼쪽으로 이동 시 List로 넘어간다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 0);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      act(() => {
+        result.current.beginContinuousFlip('left');
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.activeItem).toBe('List');
+    });
+
+    it('왼쪽 이동 중 flipDirection이 backward이다 (shadow backward branch)', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 0);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      act(() => {
+        result.current.beginContinuousFlip('left');
+      });
+      expect(result.current.flipDirection).toBe('backward');
+    });
+  });
+
+  describe('navigateToCategory with useRapidFlip=true', () => {
+    it('여러 단계 rapid flip 시 startRapidSequence가 호출된다 (Timeline으로 이동)', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Timeline', 0, true);
+      });
+      expect(result.current.isFlipping).toBe(true);
+      expect(result.current.isRapidFlipping).toBe(true);
+    });
+
+    it('단일 단계 rapid flip은 일반 flip으로 처리된다 (Content→List)', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 0, true);
+      });
+      expect(result.current.isFlipping).toBe(true);
+      expect(result.current.isRapidFlipping).toBe(false);
+    });
+
+    it('단일 단계 rapid flip 완료 후 activeItem이 변경된다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 0, true);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.activeItem).toBe('Content');
+    });
+
+    it('역방향 navigateToCategory - backward direction', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Milestones', 0);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      act(() => {
+        result.current.navigateToCategory('List', 0, true);
+      });
+      expect(result.current.isFlipping).toBe(true);
+    });
+
+    it('같은 카테고리 내 다른 페이지로 rapid flip 이동 (Content 페이지 5로)', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Content', 0);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      act(() => {
+        result.current.navigateToCategory('Content', 5, true);
+      });
+      expect(result.current.isFlipping).toBe(true);
+    });
+  });
+
+  describe('shadow count 계산 (flipDirection 분기)', () => {
+    it('backward 방향 flip 중 leftShadowCount/rightShadowCount가 계산된다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Milestones', 0);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      act(() => {
+        result.current.beginContinuousFlip('left');
+      });
+
+      expect(result.current.flipDirection).toBe('backward');
+      expect(result.current.leftShadowCount).toBeGreaterThanOrEqual(0);
+      expect(result.current.rightShadowCount).toBeGreaterThanOrEqual(0);
+    });
+  });
+
+  describe('canGoRight=false 경계 처리', () => {
+    it('Milestones 마지막 페이지로 이동하면 canGoRight=false이다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Milestones', 2);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      expect(result.current.activeItem).toBe('Milestones');
+      expect(result.current.canGoRight).toBe(false);
+    });
+
+    it('canGoRight=false 상태에서 beginContinuousFlip(right)는 flip을 시작하지 않는다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.navigateToCategory('Milestones', 2);
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+
+      expect(result.current.canGoRight).toBe(false);
+
+      act(() => {
+        result.current.beginContinuousFlip('right');
+      });
+      expect(result.current.isFlipping).toBe(false);
+    });
+  });
 });

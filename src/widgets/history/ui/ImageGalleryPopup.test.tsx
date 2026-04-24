@@ -70,4 +70,55 @@ describe('ImageGalleryPopup', () => {
       expect(document.body.style.overflow).toBe('');
     });
   });
+
+  describe('키보드 슬라이드 네비게이션', () => {
+    it('ArrowLeft keydown 시 이전 슬라이드로 이동한다 (wrap-around)', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      fireEvent.keyDown(window, { key: 'ArrowLeft' });
+      const imgs = screen.getAllByRole('img');
+      expect(imgs.length).toBe(3);
+    });
+
+    it('ArrowRight keydown 시 다음 슬라이드로 이동한다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      fireEvent.keyDown(window, { key: 'ArrowRight' });
+      const imgs = screen.getAllByRole('img');
+      expect(imgs.length).toBe(3);
+    });
+
+    it('ArrowLeft keyup 시 stopContinuousSlide가 호출된다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      fireEvent.keyDown(window, { key: 'ArrowLeft' });
+      fireEvent.keyUp(window, { key: 'ArrowLeft' });
+    });
+
+    it('ArrowRight keyup 시 stopContinuousSlide가 호출된다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      fireEvent.keyDown(window, { key: 'ArrowRight' });
+      fireEvent.keyUp(window, { key: 'ArrowRight' });
+    });
+
+    it('다른 키 keyup 시 아무것도 호출되지 않는다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      expect(() => {
+        fireEvent.keyUp(window, { key: 'Enter' });
+      }).not.toThrow();
+    });
+  });
+
+  describe('슬라이더 버튼 네비게이션', () => {
+    it('이전 버튼 mousedown 시 슬라이드 이동이 시작된다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      const prevBtn = screen.getByRole('button', { name: '이전 이미지' });
+      fireEvent.mouseDown(prevBtn);
+      fireEvent.mouseUp(prevBtn);
+    });
+
+    it('다음 버튼 mousedown 시 슬라이드 이동이 시작된다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      const nextBtn = screen.getByRole('button', { name: '다음 이미지' });
+      fireEvent.mouseDown(nextBtn);
+      fireEvent.mouseUp(nextBtn);
+    });
+  });
 });

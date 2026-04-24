@@ -118,4 +118,55 @@ describe('mapMarker', () => {
       expect(icon.content).toContain('map__marker');
     });
   });
+
+  describe('브레이크포인트별 마커 사이즈', () => {
+    function stubWindowSize(width: number, height: number) {
+      vi.stubGlobal('innerWidth', width);
+      vi.stubGlobal('innerHeight', height);
+    }
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+      vi.stubGlobal('naver', {
+        maps: { Marker: MockMarker, Size: MockSize, Point: MockPoint },
+      });
+    });
+
+    it('모바일(width=375)에서 makeMapMarker가 정상 동작한다', () => {
+      stubWindowSize(375, 812);
+      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      expect(MockSize).toHaveBeenCalledOnce();
+      expect(MockPoint).toHaveBeenCalledOnce();
+    });
+
+    it('태블릿(width=768)에서 makeMapMarker가 정상 동작한다', () => {
+      stubWindowSize(768, 1024);
+      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      expect(MockSize).toHaveBeenCalledOnce();
+      expect(MockPoint).toHaveBeenCalledOnce();
+    });
+
+    it('데스크탑(width=1440)에서 makeMapMarker가 정상 동작한다', () => {
+      stubWindowSize(1440, 900);
+      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      expect(MockSize).toHaveBeenCalledOnce();
+      expect(MockPoint).toHaveBeenCalledOnce();
+    });
+
+    it('모바일에서 vmin 기반으로 아이콘 크기가 계산된다', () => {
+      stubWindowSize(375, 812);
+      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      const [w, h] = MockSize.mock.calls[0] as [number, number];
+      expect(w).toBeGreaterThan(0);
+      expect(h).toBeGreaterThan(w);
+    });
+
+    it('태블릿에서 vmin 기반으로 아이콘 크기가 계산된다', () => {
+      stubWindowSize(768, 1024);
+      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      const [w, h] = MockSize.mock.calls[0] as [number, number];
+      expect(w).toBeGreaterThan(0);
+      expect(h).toBeGreaterThan(w);
+    });
+  });
 });

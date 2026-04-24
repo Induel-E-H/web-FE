@@ -128,4 +128,67 @@ describe('useRapidFlip', () => {
     });
     expect(returnValue).toBe(true);
   });
+
+  it('chainNextStep setTimeout 내에서 startFlipAnimation이 호출된다', () => {
+    const { result } = renderHook(() => useRapidFlip(mockStartFlipAnimation));
+
+    act(() => {
+      result.current.startRapidSequence(
+        [
+          { item: 'Content' as const, pageIndex: 0 },
+          { item: 'Timeline' as const, pageIndex: 0 },
+        ],
+        'forward',
+        'Timeline',
+        vi.fn(),
+      );
+    });
+
+    (mockStartFlipAnimation as ReturnType<typeof vi.fn>).mockClear();
+
+    act(() => {
+      result.current.chainNextStep(vi.fn());
+    });
+    act(() => {
+      vi.runAllTimers();
+    });
+    expect(mockStartFlipAnimation).toHaveBeenCalledOnce();
+  });
+
+  it('마지막 스텝이 완료되면 isRapidFlipping이 false가 된다', () => {
+    let capturedOnComplete: (() => void) | undefined;
+
+    (mockStartFlipAnimation as ReturnType<typeof vi.fn>).mockImplementation(
+      (_dir: string, onComplete: () => void) => {
+        capturedOnComplete = onComplete;
+      },
+    );
+
+    const { result } = renderHook(() => useRapidFlip(mockStartFlipAnimation));
+
+    act(() => {
+      result.current.startRapidSequence(
+        [
+          { item: 'Content' as const, pageIndex: 0 },
+          { item: 'Timeline' as const, pageIndex: 0 },
+        ],
+        'forward',
+        'Timeline',
+        vi.fn(),
+      );
+    });
+
+    act(() => {
+      result.current.chainNextStep(vi.fn());
+    });
+    act(() => {
+      vi.runAllTimers();
+    });
+
+    act(() => {
+      capturedOnComplete?.();
+    });
+
+    expect(result.current.isRapidFlipping).toBe(false);
+  });
 });

@@ -65,5 +65,14 @@ describe('ListPage', () => {
         fireEvent.click(screen.getAllByRole('button')[0]),
       ).not.toThrow();
     });
+
+    it('버튼 mousedown 시 이벤트 전파가 차단된다', () => {
+      const { container } = render(<ListPage side='left' />);
+      const button = screen.getAllByRole('button')[0];
+      const parentHandler = vi.fn();
+      container.addEventListener('mousedown', parentHandler);
+      fireEvent.mouseDown(button);
+      container.removeEventListener('mousedown', parentHandler);
+    });
   });
 });
