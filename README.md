@@ -1,75 +1,177 @@
-# React + TypeScript + Vite
+# 🌐 (주) 인들이앤에이치 기업 소개 웹 사이트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align='center'>
 
-Currently, two official plugins are available:
+| [🗒️ 팀 노션](https://induel-dev.notion.site/Induel-E-H-2d085bfc828280f0bc3fedd91b91bc91?pvs=74) | [🎨 디자인 툴](https://www.figma.com/design/hLUzLlFZkt1a9Om6FgZNK7/Induel-E-H-FE?node-id=0-1&p=f) |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [**📊 프로젝트 보드**](https://github.com/orgs/Induel-E-H/projects/1)                           | [**📕 프로젝트 위키**](https://github.com/Induel-E-H/web-FE/wiki)                                 |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+</div>
 
-## React Compiler
+<div align="center">
+<a href="https://induel.co.kr" style="
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:6px;
+padding:12px 20px;
+font-size:clamp(13px, 1.2vw, 15px);
+font-weight:600;
+color:#ffffff;
+background:linear-gradient(135deg, #3b2a20, #1f140f);
+border-radius:10px;
+text-decoration:none;
+white-space:nowrap;
+max-width:90%;
+box-sizing:border-box;
+transition:all 0.2s ease;
+">
+<span>배포 사이트 가기</span>
+<span>🚀</span>
+</a>
+</div>
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 📖 PROJECT
 
-Note: This will impact Vite dev & build performances.
+<div align="left">
+<div style="
+display: inline-block;
+padding: 12px 18px;
+border: 1px solid #e5e5e5;
+border-radius: 10px;
+background: #fff;
+box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+max-width: 100%;
+box-sizing: border-box;
+">
+<div style="
+font-size: clamp(12px, 2.5vw, 14px);
+font-weight: 600;
+color: #333;
+line-height: 1.4;
+">
+📅 프로젝트 기간
+</div>
+<div style="
+margin-top: 4px;
+font-size: clamp(13px, 3vw, 15px);
+font-weight: 700;
+color: #333;
+line-height: 1.4;
+word-break: keep-all;
+">
+2025. 12. 20 ~ 2026. 04. 30
+</div>
+</div>
+</div>
 
-## Expanding the ESLint configuration
+### 개요
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+(주) 인들이앤에이치 기업 소개 웹사이트를 제작한 프로젝트입니다.
+기업 브랜드의 정체성과 스토리를 **인터랙션 중심 경험**으로 구현한 프로젝트입니다.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+클라이언트의 모호한 요구사항 속에서 팀 내 자체적으로 기업을 분석하여  
+요구를 구체화하고, 사용자 경험 기준으로 재정의한 뒤  
+**기획 → 디자인 → 인프라 → 개발 → QA**까지 전 과정을 통합 설계했습니다.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✨ 주요 위젯
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+### Header
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+웹 사이트의 **네비게이션**입니다.  
+디바이스별 UI 전략을 분리하여 반응형 대응을 최적화했습니다.
 
-```js
-// eslint.config.js
-import reactDom from 'eslint-plugin-react-dom';
-import reactX from 'eslint-plugin-react-x';
+### Hero
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+Three.js 기반 3D 배경을 구현하여 브랜드 키워드인 **‘유연함’을 시각화**했습니다.  
+정적 콘텐츠가 아닌, **첫 인상 자체를 경험으로 설계**했습니다.
+
+### Vision
+
+AI 기반 이미지 생성과 키워드 구조화를 통해  
+기업의 방향성을 **추상 → 구체**로 변환했습니다.
+
+### History
+
+클라이언트의 요구사항은 “책처럼 보여달라”였습니다.  
+결과는 단순 UI가 아닌 **실제 기업 브로슈어 디자인을 모사한 인터랙션 시스템**으로 구현했습니다.
+
+페이지 구조, 상태 관리, 애니메이션 흐름까지  
+모두 **물리적 경험을 디지털로 치환**하는 데 집중했습니다.
+
+### Award
+
+Grid 기반 레이아웃 + 반응형 페이지네이션을 적용하여  
+디바이스 제약 환경에서도 **정보 밀도를 유지**했습니다.
+
+### Patent
+
+특허증 데이터 나열이 아닌  
+**UI 일관성을 유지하는 방향으로 재디자인**을 수행했습니다.
+
+### Location
+
+Naver Map API + Open Street Map Fallback 구조로  
+외부 API 장애 상황까지 고려한 **이중화 설계**를 적용했습니다.
+
+### Footer
+
+브랜드 컬러를 기반으로 한 **정보 신뢰 영역**을 구현했습니다.
+
+### Privacy Policy
+
+Google Analytics 적용을 위한 법적 요구사항을 충족하며  
+**실서비스 기준 컴플라이언스 대응**을 반영했습니다.
+
+## 📚 SKILL STACK
+
+### 개발
+
+### 개발 환경
+
+### CI/CD
+
+### Monitor
+
+## 🫂 TEAM
+
+### 팀원 소개
+
+<div align='center'>
+
+| **Frontend**               | **Frontend**             |
+| -------------------------- | ------------------------ |
+| ![박경민][gyeongmin]       | ![조민석][minseok]       |
+| [박경민][gyeongmin-github] | [조민석][minseok-github] |
+
+</div>
+
+## 🤝 협업 방식
+
+### 코드 리뷰
+
+PN 룰 기반으로 리뷰 코멘트에 중요도를 부여하여
+**의사결정 비용을 최소화** 했습니다.
+
+### PR 운영
+
+대규모 변경은 텍스트 리뷰 대신  
+**실시간 설명 기반 리뷰(Discord)** 로 전환하여 속도와 이해도를 동시에 확보했습니다.
+
+### AI 활용 전략
+
+Claude Code 기반으로 반복 작업을 자동화하고  
+**개발 생산성**을 최적화했습니다.
+
+- PR 자동 생성 (`/pr`)
+- AI 지침 자동 갱신 (`/ai-update`)
+- RTK 기반 토큰 비용 절감
+- 사용 플러그인
+  - superpowers
+  - frontend-design
+  - code-simplifier
+
+[gyeongmin]: https://avatars.githubusercontent.com/u/115498500?v=4&size=128
+[minseok]: https://avatars.githubusercontent.com/u/99482796?v=4&size=128
+[gyeongmin-github]: https://github.com/imyourmxxn
+[minseok-github]: https://github.com/Jo-Minseok
