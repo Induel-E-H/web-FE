@@ -34,7 +34,10 @@ export function PatentValidContent() {
     <article className='patent__content'>
       <header className='patent__content__title'>
         <div className='patent__content__title__text'>
-          <FaRegCheckCircle className='patent__content__icon' />
+          <FaRegCheckCircle
+            className='patent__content__icon'
+            aria-hidden='true'
+          />
           <h3>유효 특허증 ({PATENT_VALID_LIST.length}건)</h3>
         </div>
         <hr />
