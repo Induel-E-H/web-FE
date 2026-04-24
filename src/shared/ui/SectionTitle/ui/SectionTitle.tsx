@@ -1,4 +1,4 @@
-import './SectionTitle.css';
+import '../styles/SectionTitle.css';
 
 type SectionTitleProps = {
   subTitle: string;
