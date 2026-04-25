@@ -1,45 +1,13 @@
-import visionInvest from '@entities/vision/assets/vision_invest.webp';
-import visionInvest480 from '@entities/vision/assets/vision_invest@480.webp';
-import visionInvest768 from '@entities/vision/assets/vision_invest@768.webp';
-import visionInvest1200 from '@entities/vision/assets/vision_invest@1200.webp';
-import visionParam from '@entities/vision/assets/vision_param.webp';
-import visionParam480 from '@entities/vision/assets/vision_param@480.webp';
-import visionParam768 from '@entities/vision/assets/vision_param@768.webp';
-import visionParam1200 from '@entities/vision/assets/vision_param@1200.webp';
-import visionSculpt from '@entities/vision/assets/vision_sculpt.webp';
-import visionSculpt480 from '@entities/vision/assets/vision_sculpt@480.webp';
-import visionSculpt768 from '@entities/vision/assets/vision_sculpt@768.webp';
-import visionSculpt1200 from '@entities/vision/assets/vision_sculpt@1200.webp';
-import { VISION_DATA } from '@entities/vision/model/visionData';
+import {
+  VISION_DATA,
+  VISION_IMAGE_MAP,
+  VISION_SRCSET_MAP,
+} from '@entities/vision';
 import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation/useIntersectionAnimation';
 
 import '../styles/Vision.css';
 import { VisionItem } from './VisionItem';
 import { VisionTitle } from './VisionTitle';
-
-const imageMap = {
-  'vision_param.webp': visionParam,
-  'vision_sculpt.webp': visionSculpt,
-  'vision_invest.webp': visionInvest,
-};
-
-const srcSetMap = {
-  'vision_param.webp': `
-    ${visionParam480} 480w,
-    ${visionParam768} 768w,
-    ${visionParam1200} 1200w
-  `,
-  'vision_sculpt.webp': `
-    ${visionSculpt480} 480w,
-    ${visionSculpt768} 768w,
-    ${visionSculpt1200} 1200w
-  `,
-  'vision_invest.webp': `
-    ${visionInvest480} 480w,
-    ${visionInvest768} 768w,
-    ${visionInvest1200} 1200w
-  `,
-};
 
 export function Vision() {
   const titleRef = useIntersectionAnimation<HTMLElement>();
@@ -54,8 +22,8 @@ export function Vision() {
             title={item.title}
             description={item.description}
             keyword={item.keyword}
-            image={imageMap[item.image as keyof typeof imageMap]}
-            imageSrcSet={srcSetMap[item.image as keyof typeof srcSetMap]}
+            image={VISION_IMAGE_MAP[item.image]}
+            imageSrcSet={VISION_SRCSET_MAP[item.image]}
             index={index}
           />
         ))}

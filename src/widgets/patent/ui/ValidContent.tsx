@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
-import { PATENT_VALID_LIST } from '@entities/patent';
-import img0 from '@entities/patent/assets/0.webp';
-import img1 from '@entities/patent/assets/1.webp';
-import img2 from '@entities/patent/assets/2.webp';
-import img3 from '@entities/patent/assets/3.webp';
-import img4 from '@entities/patent/assets/4.webp';
+import { PATENT_IMAGES, PATENT_VALID_LIST } from '@entities/patent';
 import {
   lockScroll,
   unlockScroll,
@@ -16,19 +11,18 @@ import { Popup } from '@shared/ui/Popup';
 import '../styles/ValidContent.css';
 import { PatentCard } from './Card';
 
-const PATENT_IMAGES = [img0, img1, img2, img3, img4];
-
 export function PatentValidContent() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const handleOpen = (index: number) => {
+
+  function handleOpen(index: number) {
     lockScroll();
     setSelectedIndex(index);
-  };
+  }
 
-  const handleClose = () => {
+  function handleClose() {
     unlockScroll();
     setSelectedIndex(null);
-  };
+  }
 
   return (
     <article className='patent__content'>
