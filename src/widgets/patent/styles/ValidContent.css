@@ -84,10 +84,6 @@
     font-size: 2.86vw;
   }
 
-  .patent__content__title hr {
-    border-top: 1px solid var(--patent-divider);
-  }
-
   .patent__content__item__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -118,10 +114,6 @@
 
   .patent__content__title__text h3 {
     font-size: clamp(15px, 4.27vw, 21px);
-  }
-
-  .patent__content__title hr {
-    border-top: 1px solid var(--patent-divider);
   }
 
   .patent__content__item__list {
