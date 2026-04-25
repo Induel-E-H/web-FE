@@ -175,10 +175,6 @@
     font-size: 1.82vw;
   }
 
-  .footer hr {
-    border-top: 1px solid rgb(var(--white-rgb) / var(--alpha-15));
-  }
-
   .footer__left,
   .footer__right {
     gap: 0.65vw;
@@ -234,10 +230,6 @@
 
   .footer__information button {
     font-size: clamp(9px, 2.67vw, 13px);
-  }
-
-  .footer hr {
-    border-top: 1px solid rgb(var(--white-rgb) / var(--alpha-15));
   }
 
   .footer__content {
