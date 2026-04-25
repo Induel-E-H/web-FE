@@ -7,10 +7,7 @@ import {
   YEAR_ALL,
   YearCategory,
 } from '@features/award';
-import {
-  lockScroll,
-  unlockScroll,
-} from '@shared/lib/useScrollLock/useScrollLock';
+import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 
 import { useItemsPerPage } from '../model/useItemsPerPage';
 import '../styles/Award.css';

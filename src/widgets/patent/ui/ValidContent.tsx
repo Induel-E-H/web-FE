@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
 import { PATENT_IMAGES, PATENT_VALID_LIST } from '@entities/patent';
-import {
-  lockScroll,
-  unlockScroll,
-} from '@shared/lib/useScrollLock/useScrollLock';
+import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 import { Popup } from '@shared/ui/Popup';
 
 import '../styles/ValidContent.css';
