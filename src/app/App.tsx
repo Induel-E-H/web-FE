@@ -15,7 +15,7 @@ function App() {
       <Route
         path='/privacy_policy'
         element={
-          <Suspense>
+          <Suspense fallback={null}>
             <PrivacyPolicy />
           </Suspense>
         }

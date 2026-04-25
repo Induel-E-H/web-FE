@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { AWARD_LIST } from '@entities/award';
 import {
@@ -12,7 +12,7 @@ import {
   unlockScroll,
 } from '@shared/lib/useScrollLock/useScrollLock';
 
-import { getItemsPerPage } from '../model/responsive';
+import { useItemsPerPage } from '../model/useItemsPerPage';
 import '../styles/Award.css';
 import { AwardTitle } from './AwardTitle';
 import { AwardCount } from './Count';
@@ -21,7 +21,7 @@ import { Viewport } from './Viewport';
 
 function Award() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage);
+  const itemsPerPage = useItemsPerPage();
   const isMobile = itemsPerPage < 8;
   const {
     activeYear,
@@ -29,6 +29,7 @@ function Award() {
     handleYearChange: changeYear,
   } = useYearFilter();
   const [selectedId, setSelectedId] = useState<number | null>(null);
+
   function handleCardClick(id: number) {
     lockScroll();
     setSelectedId(id);
@@ -38,14 +39,6 @@ function Award() {
     unlockScroll();
     setSelectedId(null);
   }
-
-  useEffect(() => {
-    function handleResize() {
-      setItemsPerPage(getItemsPerPage());
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   function handleYearChange(year: string | number): void {
     changeYear(year);
