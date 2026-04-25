@@ -97,7 +97,9 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('2008')).toHaveClass('active');
+      expect(screen.getByText('2008')).toHaveClass(
+        'award__year_category--active',
+      );
     });
 
     it('비활성 버튼에는 active 클래스가 없다', () => {
@@ -108,7 +110,9 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('전체')).not.toHaveClass('active');
+      expect(screen.getByText('전체')).not.toHaveClass(
+        'award__year_category--active',
+      );
     });
   });
 
