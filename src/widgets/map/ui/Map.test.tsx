@@ -47,10 +47,14 @@ describe('Map', () => {
       expect(mockMakeMap).toHaveBeenCalledOnce();
     });
 
-    it('makeMap에 HTMLDivElement가 전달된다', () => {
+    it('makeMap에 HTMLDivElement와 HTML/SVG 문자열이 전달된다', () => {
       render(<Map />);
 
-      expect(mockMakeMap).toHaveBeenCalledWith(expect.any(HTMLDivElement));
+      expect(mockMakeMap).toHaveBeenCalledWith(
+        expect.any(HTMLDivElement),
+        expect.any(String),
+        expect.any(String),
+      );
     });
 
     it('언마운트 시 makeMap의 cleanup 함수가 호출된다', () => {

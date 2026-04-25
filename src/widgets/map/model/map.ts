@@ -9,7 +9,11 @@ function getZoom(): number {
   return 17;
 }
 
-export function makeMap(el: HTMLDivElement): () => void {
+export function makeMap(
+  el: HTMLDivElement,
+  infoCardHTML: string,
+  markerSVG: string,
+): () => void {
   const map = new naver.maps.Map(el, {
     center: new naver.maps.LatLng(COMPANY.LAT, COMPANY.LNG),
     zoom: getZoom(),
@@ -18,12 +22,12 @@ export function makeMap(el: HTMLDivElement): () => void {
       position: naver.maps.Position.TOP_RIGHT,
     },
   });
-  const marker = makeMapMarker(map);
-  const infoWindow = makeInfoCard(map, marker);
+  const marker = makeMapMarker(map, markerSVG);
+  const infoWindow = makeInfoCard(map, marker, infoCardHTML);
 
   const onResize = () => {
     const wasOpen = !!infoWindow.getMap();
-    updateMarkerIcon(marker);
+    updateMarkerIcon(marker, markerSVG);
     if (wasOpen) {
       infoWindow.close();
       infoWindow.open(map, marker);
