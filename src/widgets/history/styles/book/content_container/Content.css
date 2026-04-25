@@ -23,6 +23,8 @@
   border: none;
   border-radius: clamp(4px, 1.07vw, 6px);
   cursor: pointer;
+  color: white;
+  font-size: 18px;
   z-index: 10;
   padding: 0;
 }
@@ -176,6 +178,8 @@
   justify-content: center;
   background: var(--shadow-overlay-sm);
   border-radius: 0.52vmax;
+  color: white;
+  font-size: 1.25vmax;
   opacity: 0;
   transition: opacity 0.2s;
   pointer-events: none;
