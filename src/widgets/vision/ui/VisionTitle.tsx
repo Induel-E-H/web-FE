@@ -1,12 +1,11 @@
+import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation';
 import { SectionTitle } from '@shared/ui/SectionTitle';
 
 import '../styles/VisionTitle.css';
 
-export function VisionTitle({
-  ref,
-}: {
-  ref?: React.RefObject<HTMLElement | null>;
-}) {
+export function VisionTitle() {
+  const ref = useIntersectionAnimation<HTMLElement>();
+
   return (
     <SectionTitle
       ref={ref}

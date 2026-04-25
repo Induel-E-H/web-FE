@@ -3,18 +3,15 @@ import {
   VISION_IMAGE_MAP,
   VISION_SRCSET_MAP,
 } from '@entities/vision';
-import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation';
 
 import '../styles/Vision.css';
 import { VisionItem } from './VisionItem';
 import { VisionTitle } from './VisionTitle';
 
 export function Vision() {
-  const titleRef = useIntersectionAnimation<HTMLElement>();
-
   return (
     <section id='vision' className='vision' aria-label='미래 비전'>
-      <VisionTitle ref={titleRef} />
+      <VisionTitle />
       <div className='vision__main'>
         {VISION_DATA.map((item, index) => (
           <VisionItem
