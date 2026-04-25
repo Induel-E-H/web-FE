@@ -1,10 +1,10 @@
-import { BREAKPOINT_MOBILE_MAX } from '@shared/lib/breakpoint/useBreakpoint';
+import { isMobileViewport } from '@shared/lib/breakpoint/viewport';
 import { WebGLRenderer } from 'three';
 
 const RENDER_SCALE = 0.5;
 
 export function createRenderer(canvas: HTMLCanvasElement) {
-  const isMobile = window.innerWidth <= BREAKPOINT_MOBILE_MAX;
+  const isMobile = isMobileViewport();
   const pixelRatio = Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2);
 
   const renderer = new WebGLRenderer({
