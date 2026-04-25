@@ -3,13 +3,13 @@
 }
 
 .award__title h2 {
-  color: #38271d;
+  color: var(--brown-800);
 }
 
 .award__title .section-title__description {
-  color: #8a6d2f;
+  color: var(--accent-brown-700);
 }
 
 .award__title .section-title__description hr {
-  border-color: #8a6d2f;
+  border-color: var(--accent-brown-700);
 }

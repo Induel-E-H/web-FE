@@ -38,7 +38,7 @@
   height: 100%;
 
   background-color: var(--mauve-800);
-  box-shadow: inset 0 0 0.21vmax rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 0.21vmax rgb(0, 0, 0, 0.4);
 }
 
 .history__back-cover-content {
@@ -89,7 +89,7 @@
     width: 100%;
     height: 1.563vw;
 
-    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 4px rgb(0, 0, 0, 0.4);
   }
 
   .history__back-cover-word {
@@ -113,7 +113,7 @@
 
     height: clamp(9px, 2.667vw, 13px);
 
-    box-shadow: inset 0 0 1.067 rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 1.067 rgb(0, 0, 0, 0.4);
   }
 
   .history__back-cover-word {

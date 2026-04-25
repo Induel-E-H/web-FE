@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 import { COMPANY } from '@shared/constant';
 
 import { makeMap } from '../model/map';
 import '../styles/Map.css';
-import '../styles/mapInfoCard.css';
-import '../styles/mapMarker.css';
 import { MapCard } from './MapCard';
+import { MapInfoCard } from './MapInfoCard';
+import { MapMarker } from './MapMarker';
 import { MapTitle } from './MapTitle';
+
+const INFO_CARD_HTML = renderToStaticMarkup(<MapInfoCard />);
+const MARKER_SVG = renderToStaticMarkup(<MapMarker />);
 
 type NaverWindow = {
   naver?: { maps?: { Map?: unknown } };
@@ -86,7 +90,7 @@ function Map() {
 
     let cleanup: (() => void) | undefined;
     try {
-      cleanup = makeMap(mapRef.current);
+      cleanup = makeMap(mapRef.current, INFO_CARD_HTML, MARKER_SVG);
     } catch {
       queueMicrotask(() => setMapState('fallback'));
     }

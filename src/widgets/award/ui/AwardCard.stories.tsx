@@ -2,11 +2,11 @@ import { AWARD_LIST } from '@entities/award';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
-import { Card } from './Card';
+import { AwardCard } from './AwardCard';
 
 const meta = {
   title: 'Widgets/Award/Card',
-  component: Card,
+  component: AwardCard,
   args: {
     onClick: fn(),
     award: AWARD_LIST[0],
@@ -20,7 +20,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof Card>;
+} satisfies Meta<typeof AwardCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

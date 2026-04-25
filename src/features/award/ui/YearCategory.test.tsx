@@ -1,9 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
+import { YEAR_ALL } from '../model/constant';
 import { YearCategory } from './YearCategory';
 
-const yearList: (string | number)[] = ['전체', 2008, 2006, 2005];
+const yearList: (string | number)[] = [YEAR_ALL, 2008, 2006, 2005];
 
 describe('YearCategory', () => {
   describe('렌더링', () => {
@@ -11,7 +12,7 @@ describe('YearCategory', () => {
       render(
         <YearCategory
           yearList={yearList}
-          activeYear='전체'
+          activeYear={YEAR_ALL}
           onYearChange={vi.fn()}
         />,
       );
@@ -24,7 +25,7 @@ describe('YearCategory', () => {
       render(
         <YearCategory
           yearList={yearList}
-          activeYear='전체'
+          activeYear={YEAR_ALL}
           onYearChange={vi.fn()}
         />,
       );
@@ -35,11 +36,11 @@ describe('YearCategory', () => {
       render(
         <YearCategory
           yearList={yearList}
-          activeYear='전체'
+          activeYear={YEAR_ALL}
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('전체')).toBeInTheDocument();
+      expect(screen.getByText(YEAR_ALL)).toBeInTheDocument();
       expect(screen.getByText('2008')).toBeInTheDocument();
     });
   });
@@ -64,7 +65,7 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('전체')).not.toHaveAttribute('aria-current');
+      expect(screen.getByText(YEAR_ALL)).not.toHaveAttribute('aria-current');
     });
 
     it('활성 버튼은 tabIndex=0이다', () => {
@@ -86,7 +87,7 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('전체')).toHaveAttribute('tabindex', '-1');
+      expect(screen.getByText(YEAR_ALL)).toHaveAttribute('tabindex', '-1');
     });
 
     it('활성 버튼에 active 클래스가 적용된다', () => {
@@ -97,7 +98,9 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('2008')).toHaveClass('active');
+      expect(screen.getByText('2008')).toHaveClass(
+        'award__year_category--active',
+      );
     });
 
     it('비활성 버튼에는 active 클래스가 없다', () => {
@@ -108,7 +111,9 @@ describe('YearCategory', () => {
           onYearChange={vi.fn()}
         />,
       );
-      expect(screen.getByText('전체')).not.toHaveClass('active');
+      expect(screen.getByText(YEAR_ALL)).not.toHaveClass(
+        'award__year_category--active',
+      );
     });
   });
 
@@ -118,7 +123,7 @@ describe('YearCategory', () => {
       render(
         <YearCategory
           yearList={yearList}
-          activeYear='전체'
+          activeYear={YEAR_ALL}
           onYearChange={onYearChange}
         />,
       );
@@ -138,9 +143,9 @@ describe('YearCategory', () => {
         />,
       );
 
-      fireEvent.click(screen.getByText('전체'));
+      fireEvent.click(screen.getByText(YEAR_ALL));
 
-      expect(onYearChange).toHaveBeenCalledWith('전체');
+      expect(onYearChange).toHaveBeenCalledWith(YEAR_ALL);
     });
   });
 });

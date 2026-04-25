@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
+import { COMPANY } from '@shared/constant';
+import { smoothScrollTo } from '@shared/lib/scroll';
 
 import induelIcon from '@assets/induel-icon.svg';
 
@@ -10,6 +11,8 @@ import { NAV_ITEMS } from '../model/navItems';
 import { useHeaderVisibility } from '../model/useHeaderVisibility';
 import { useIsHero } from '../model/useIsHero';
 import '../styles/Header.css';
+
+const HERO_SELECTOR = '.hero';
 
 export function Header() {
   const isHero = useIsHero();
@@ -19,7 +22,7 @@ export function Header() {
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
-  const scrollTo = (selector: string) => {
+  function scrollTo(selector: string) {
     if (!isHome) {
       void navigate('/', { state: { scrollTo: selector } });
       return;
@@ -29,15 +32,15 @@ export function Header() {
       setMenuOpen(false);
       onNavScrollEnd();
     });
-  };
+  }
 
-  const handleLogoClick = () => {
+  function handleLogoClick() {
     if (!isHome) {
       void navigate('/');
       return;
     }
-    scrollTo('.hero');
-  };
+    scrollTo(HERO_SELECTOR);
+  }
 
   return (
     <header
@@ -54,11 +57,11 @@ export function Header() {
         <div className='header__logo_icon-frame'>
           <img
             src={induelIcon}
-            alt='인들이앤에이치 로고'
+            alt={`${COMPANY.NAME_KO} 로고`}
             className='header__logo_icon'
           />
         </div>
-        <span>인들이앤에이치</span>
+        <span>{COMPANY.NAME_KO}</span>
       </button>
 
       <nav className='header__nav' aria-label='데스크탑 메뉴'>

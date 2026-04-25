@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getAwardImage } from './image';
+import { getAwardImage } from './awardImages';
 
 describe('getAwardImage', () => {
   beforeEach(() => {

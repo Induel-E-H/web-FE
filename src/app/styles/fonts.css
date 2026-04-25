@@ -3,3 +3,9 @@
 
 /* BookendBatang - 로컬 */
 @import '../../shared/assets/fonts/bookend-batang.css';
+
+:root {
+  /* Font Families */
+  --font-pretendard: Pretendard, sans-serif;
+  --font-bookendbatang: 'BookendBatang', sans-serif;
+}

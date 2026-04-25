@@ -2,9 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { makeMapMarker, updateMarkerIcon } from './mapMarker';
 
-vi.mock('@assets/induel-icon.svg?raw', () => ({
-  default: '<svg viewBox="0 0 649 748"><g /></svg>',
-}));
+const TEST_SVG = '<svg class="map__marker" viewBox="0 0 44 56"></svg>';
 
 describe('mapMarker', () => {
   const mockSetIcon = vi.fn();
@@ -41,81 +39,68 @@ describe('mapMarker', () => {
 
   describe('makeMapMarker', () => {
     it('마커를 생성하고 반환한다', () => {
-      const result = makeMapMarker(mockMap as unknown as naver.maps.Map);
+      const result = makeMapMarker(
+        mockMap as unknown as naver.maps.Map,
+        TEST_SVG,
+      );
 
       expect(MockMarker).toHaveBeenCalledOnce();
       expect(result).toBe(mockMarker);
     });
 
     it('마커 위치로 지도 중심을 사용한다', () => {
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
 
       expect(mockGetCenter).toHaveBeenCalledOnce();
     });
 
     it('마커 아이콘 생성 시 Size가 계산된다', () => {
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
 
       expect(MockSize).toHaveBeenCalledOnce();
     });
 
     it('마커 아이콘 생성 시 Point(anchor)가 계산된다', () => {
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
 
       expect(MockPoint).toHaveBeenCalledOnce();
     });
 
     it('Marker 생성자에 position, map, icon이 전달된다', () => {
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
 
       expect(MockMarker).toHaveBeenCalledWith(
         expect.objectContaining({
           position: expect.anything() as unknown,
           map: mockMap,
           icon: expect.objectContaining({
-            content: expect.any(String) as unknown,
+            content: TEST_SVG,
           }) as unknown,
         }),
       );
-    });
-
-    it('마커 SVG content에 map__marker 클래스가 포함된다', () => {
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
-
-      const call = MockMarker.mock.calls[0][0] as { icon: { content: string } };
-      expect(call.icon.content).toContain('map__marker');
     });
   });
 
   describe('updateMarkerIcon', () => {
     it('마커의 setIcon이 호출된다', () => {
-      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker);
+      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker, TEST_SVG);
 
       expect(mockSetIcon).toHaveBeenCalledOnce();
     });
 
-    it('새로운 아이콘 객체를 setIcon에 전달한다', () => {
-      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker);
+    it('전달받은 SVG content가 setIcon에 전달된다', () => {
+      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker, TEST_SVG);
 
       expect(mockSetIcon).toHaveBeenCalledWith(
-        expect.objectContaining({
-          content: expect.any(String) as unknown,
-        }) as unknown,
+        expect.objectContaining({ content: TEST_SVG }) as unknown,
       );
     });
 
     it('업데이트 시 Size와 Point가 재생성된다', () => {
-      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker);
+      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker, TEST_SVG);
 
       expect(MockSize).toHaveBeenCalledOnce();
       expect(MockPoint).toHaveBeenCalledOnce();
-    });
-
-    it('setIcon에 전달된 content가 map__marker SVG를 포함한다', () => {
-      updateMarkerIcon(mockMarker as unknown as naver.maps.Marker);
-
-      const icon = mockSetIcon.mock.calls[0][0] as { content: string };
-      expect(icon.content).toContain('map__marker');
     });
   });
 
@@ -134,28 +119,28 @@ describe('mapMarker', () => {
 
     it('모바일(width=375)에서 makeMapMarker가 정상 동작한다', () => {
       stubWindowSize(375, 812);
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
       expect(MockSize).toHaveBeenCalledOnce();
       expect(MockPoint).toHaveBeenCalledOnce();
     });
 
     it('태블릿(width=768)에서 makeMapMarker가 정상 동작한다', () => {
       stubWindowSize(768, 1024);
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
       expect(MockSize).toHaveBeenCalledOnce();
       expect(MockPoint).toHaveBeenCalledOnce();
     });
 
     it('데스크탑(width=1440)에서 makeMapMarker가 정상 동작한다', () => {
       stubWindowSize(1440, 900);
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
       expect(MockSize).toHaveBeenCalledOnce();
       expect(MockPoint).toHaveBeenCalledOnce();
     });
 
     it('모바일에서 vmin 기반으로 아이콘 크기가 계산된다', () => {
       stubWindowSize(375, 812);
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
       const [w, h] = MockSize.mock.calls[0] as [number, number];
       expect(w).toBeGreaterThan(0);
       expect(h).toBeGreaterThan(w);
@@ -163,7 +148,7 @@ describe('mapMarker', () => {
 
     it('태블릿에서 vmin 기반으로 아이콘 크기가 계산된다', () => {
       stubWindowSize(768, 1024);
-      makeMapMarker(mockMap as unknown as naver.maps.Map);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
       const [w, h] = MockSize.mock.calls[0] as [number, number];
       expect(w).toBeGreaterThan(0);
       expect(h).toBeGreaterThan(w);

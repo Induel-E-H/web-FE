@@ -15,16 +15,16 @@
   border-radius: 0.78vmax 0 0 0.78vmax;
 
   box-shadow:
-    0.52vmax 0 1.04vmax rgba(0, 0, 0, 0.25),
-    inset -0.26vmax 0 0.52vmax rgba(0, 0, 0, 0.2);
+    0.52vmax 0 1.04vmax var(--shadow-04),
+    inset -0.26vmax 0 0.52vmax var(--shadow-04);
 }
 
 .history__book-cover-right {
   border-radius: 0 0.78vmax 0.78vmax 0;
 
   box-shadow:
-    -0.52vmax 0 1.04vmax rgba(0, 0, 0, 0.25),
-    inset 0.26vmax 0 0.52vmax rgba(0, 0, 0, 0.2);
+    -0.52vmax 0 1.04vmax var(--shadow-04),
+    inset 0.26vmax 0 0.52vmax var(--shadow-04);
 }
 
 .history__book-cover-center {
@@ -62,7 +62,7 @@
   width: 100%;
   height: 1.04vmax;
 
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--overlay-white-30);
 }
 
 .history__book-cover-center-spine {
@@ -93,18 +93,18 @@
 .history__book-cover-left .history__book-cover-center-spine-center {
   background: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.3) 70%,
-    rgba(0, 0, 0, 0.3) 100%
+    var(--shadow-04),
+    var(--shadow-05) 70%,
+    var(--shadow-05) 100%
   );
 }
 
 .history__book-cover-right .history__book-cover-center-spine-center {
   background: linear-gradient(
     to left,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.3) 70%,
-    rgba(0, 0, 0, 0.3) 100%
+    var(--shadow-04),
+    var(--shadow-05) 70%,
+    var(--shadow-05) 100%
   );
 }
 
@@ -113,16 +113,16 @@
     border-radius: 1.953vw 1.953vw 0 0;
 
     box-shadow:
-      0 10px 20px rgba(0, 0, 0, 0.25),
-      inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+      0 10px 20px var(--shadow-04),
+      inset 0 -5px 10px var(--shadow-04);
   }
 
   .history__book-cover-right {
     border-radius: 0 0 1.953vw 1.953vw;
 
     box-shadow:
-      -10px 0 20px rgba(0, 0, 0, 0.25),
-      inset 5px 0 10px rgba(0, 0, 0, 0.2);
+      -10px 0 20px var(--shadow-04),
+      inset 5px 0 10px var(--shadow-04);
   }
 
   .history__book-cover-center {
@@ -176,18 +176,18 @@
   .history__book-cover-left .history__book-cover-center-spine-center {
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.3) 70%,
-      rgba(0, 0, 0, 0.3) 100%
+      var(--shadow-04),
+      var(--shadow-05) 70%,
+      var(--shadow-05) 100%
     );
   }
 
   .history__book-cover-right .history__book-cover-center-spine-center {
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.3) 70%,
-      rgba(0, 0, 0, 0.3) 100%
+      var(--shadow-04),
+      var(--shadow-05) 70%,
+      var(--shadow-05) 100%
     );
   }
 }
@@ -197,16 +197,16 @@
     border-radius: clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px) 0 0;
 
     box-shadow:
-      0 10px 20px rgba(0, 0, 0, 0.25),
-      inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+      0 10px 20px var(--shadow-04),
+      inset 0 -5px 10px var(--shadow-04);
   }
 
   .history__book-cover-right {
     border-radius: 0 0 clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
 
     box-shadow:
-      -10px 0 20px rgba(0, 0, 0, 0.25),
-      inset 5px 0 10px rgba(0, 0, 0, 0.2);
+      -10px 0 20px var(--shadow-04),
+      inset 5px 0 10px var(--shadow-04);
   }
 
   .history__book-cover-center {

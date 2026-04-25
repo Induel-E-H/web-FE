@@ -6,18 +6,6 @@
   overflow: hidden;
 }
 
-.hero__background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  filter: blur(10px);
-}
-
-.hero__background--fallback {
-  object-fit: cover;
-}
-
 .hero__company {
   position: absolute;
   top: 50%;
@@ -33,7 +21,7 @@
 
 .hero__logo {
   height: 16.67vmax;
-  filter: drop-shadow(0 0 2.08vmax rgba(0, 0, 0, 1));
+  filter: drop-shadow(0 0 2.08vmax var(--black));
 }
 
 .hero__company-text {
@@ -42,7 +30,7 @@
   align-items: flex-end;
   white-space: nowrap;
   gap: 0.52vmax;
-  text-shadow: 0 0 2.08vmax rgba(0, 0, 0, 1);
+  text-shadow: 0 0 2.08vmax var(--black);
 }
 
 .hero__company-text hgroup {
@@ -111,16 +99,10 @@
   --size: 3.13vmax;
   width: var(--size);
   height: var(--size);
-  filter: drop-shadow(0 0 2.08vmax rgba(0, 0, 0, 1));
+  filter: drop-shadow(0 0 2.08vmax var(--black));
 }
 
 @media (max-width: 1024px) {
-  .hero__background {
-    transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    transform-origin: center;
-  }
-
   .hero__company {
     position: absolute;
     top: 0;
@@ -153,7 +135,7 @@
     order: 2;
     height: 37.5vw;
     width: auto;
-    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 40px var(--black));
   }
 
   .hero__company-text {
@@ -163,7 +145,7 @@
     order: 1;
     align-items: center;
     gap: 1.82vw;
-    text-shadow: 0 0 40px rgba(0, 0, 0, 1);
+    text-shadow: 0 0 40px var(--black);
   }
 
   .hero__company-text hgroup {
@@ -193,7 +175,7 @@
     --size: 6.51vw;
     width: var(--size);
     height: var(--size);
-    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 40px var(--black));
   }
 }
 
@@ -207,12 +189,12 @@
 
   .hero__logo {
     height: clamp(189px, 54.13vw, 271px);
-    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 40px var(--black));
   }
 
   .hero__company-text {
     gap: clamp(8px, 2.13vw, 11px);
-    text-shadow: 0 0 40px rgba(0, 0, 0, 1);
+    text-shadow: 0 0 40px var(--black);
   }
 
   .hero__company-text hgroup {
@@ -237,6 +219,6 @@
     --size: clamp(38px, 10.93vw, 55px);
     width: var(--size);
     height: var(--size);
-    filter: drop-shadow(0 0 40px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 40px var(--black));
   }
 }

@@ -10,8 +10,19 @@
 
   /* White & Black */
   --white: #ffffff;
-  --white-50: #ffffff26;
+  --white-rgb: 255 255 255;
   --black: #000000;
+  --black-rgb: 0 0 0;
+
+  /* Alpha overlays */
+  --alpha-05: 0.05;
+  --alpha-10: 0.1;
+  --alpha-15: 0.15;
+  --alpha-20: 0.2;
+  --alpha-30: 0.3;
+  --alpha-40: 0.4;
+  --alpha-50: 0.5;
+  --alpha-60: 0.6;
 
   /* Brown */
   --brown-50: #f6f3f0;
@@ -23,6 +34,7 @@
   --brown-600: #5a4231;
   --brown-700: #4a3527;
   --brown-800: #38271d;
+  --brown-800-rgb: 56 39 29;
   --brown-900: #241812;
 
   /* Gray */
@@ -49,32 +61,45 @@
   --mauve-800: #3a222a;
   --mauve-900: #241518;
 
-  /* Typography */
-  --typo-titleB: var(--black);
-  --typo-titleW: var(--white);
-  --typo-contentW: #6f6f6f;
-  --typo-caption: var(--gray-400);
+  /* Accent */
+  --accent-gold-400: #e7c889;
+  --accent-gold-600: #c9a96e;
+  --accent-brown-700: #8a6d2f;
 
-  /* Footer */
-  --footer-background: var(--brown-800);
-  --footer-copyright: var(--gray-400);
-  --footer-context: var(--gray-300);
-  --footer-divider: var(--white-50);
+  /* Brand Color */
+  --brand-color: var(--brown-800);
 
-  /* Book */
-  --book-cover: var(--mauve-500);
-  --book-center: var(--mauve-600);
-  --book-center-deep: var(--mauve-700);
-  --book-page: var(--white);
+  /* Shadows */
+  --shadow-01: rgb(var(--black-rgb) / var(--alpha-05));
+  --shadow-02: rgb(var(--black-rgb) / var(--alpha-10));
+  --shadow-03: rgb(var(--black-rgb) / var(--alpha-15));
+  --shadow-04: rgb(var(--black-rgb) / var(--alpha-20));
+  --shadow-05: rgb(var(--black-rgb) / var(--alpha-30));
+  --shadow-06: rgb(var(--black-rgb) / var(--alpha-40));
+  --shadow-07: rgb(var(--black-rgb) / var(--alpha-50));
+  --shadow-08: rgb(var(--black-rgb) / var(--alpha-60));
 
+  /* Overlay */
+  --overlay-black-10: rgb(var(--black-rgb) / var(--alpha-10));
+  --overlay-black-30: rgb(var(--black-rgb) / var(--alpha-30));
+  --overlay-black-50: rgb(var(--black-rgb) / var(--alpha-50));
+
+  --overlay-white-10: rgb(var(--white-rgb) / var(--alpha-10));
+  --overlay-white-30: rgb(var(--white-rgb) / var(--alpha-30));
+  --overlay-white-50: rgb(var(--white-rgb) / var(--alpha-50));
+
+  /* Surface */
+  --surface-warm: #faf7f2;
   --surface-light: #f9fafb;
+  --surface-cream: #f0ead6;
+  --surface-beige: #f5f5dc;
 
-  /* Vision */
-  --vision-background: #4a2814cc;
+  /* Typography */
+  --typo-contentW: #6f6f6f;
 }
 
 * {
-  font-family: Pretendard, sans-serif;
+  font-family: var(--font-pretendard);
   font-variant-numeric: tabular-nums;
   font-style: normal;
   line-height: 1.4;

@@ -1,9 +1,6 @@
 import { useEffect, useLayoutEffect } from 'react';
 
-import {
-  lockScroll,
-  unlockScroll,
-} from '@shared/lib/useScrollLock/useScrollLock';
+import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 import { ImageSlider, useSliderNavigation } from '@shared/ui/ImageSlider';
 import { Popup } from '@shared/ui/Popup';
 

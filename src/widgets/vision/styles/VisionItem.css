@@ -16,12 +16,12 @@
 }
 
 .vision__content {
-  --text-bg: #f0ead6;
+  --text-bg: var(--surface-cream);
   --color-index: #8c8672;
-  --color-main-h3: #38271d;
+  --color-main-h3: var(--brown-800);
   --color-main-h4: var(--brown-900);
-  --color-hr: #38271d;
-  --color-description: #38271d;
+  --color-hr: var(--brown-800);
+  --color-description: var(--brown-900);
 
   display: flex;
   flex-direction: row;
@@ -31,12 +31,12 @@
 }
 
 .vision__content--reverse {
-  --text-bg: #38271d;
+  --text-bg: var(--brown-800);
   --color-index: #977449;
-  --color-main-h3: #c9a96e;
-  --color-main-h4: #f5f5dc;
-  --color-hr: #c9a96e;
-  --color-description: #f5f5dc;
+  --color-main-h3: var(--accent-gold-600);
+  --color-main-h4: var(--surface-cream);
+  --color-hr: var(--accent-gold-600);
+  --color-description: var(--surface-cream);
 
   flex-direction: row-reverse;
 }
@@ -91,7 +91,7 @@
 
 .vision__content__title__main h3,
 .vision__content__title__main h4 {
-  font-family: 'BookendBatang';
+  font-family: var(--font-bookendbatang);
   font-weight: 700;
   line-height: 1.1;
 }

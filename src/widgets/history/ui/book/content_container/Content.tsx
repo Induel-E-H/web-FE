@@ -2,11 +2,13 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { MdOutlineImage, MdOutlineZoomOutMap } from 'react-icons/md';
 
-import { artworks } from '@entities/history';
 import {
+  artworks,
   getAllContentImages,
-  getArtworkIndex,
   getThumbnailImage,
+} from '@entities/history';
+import {
+  getArtworkIndex,
   preloadContentImages,
 } from '@features/history/model/helpers';
 import type { PageSide } from '@features/history/model/types';
@@ -58,6 +60,7 @@ function ContentItem({
   index: number;
 }) {
   const [showPopup, setShowPopup] = useState(false);
+  const [contentImages, setContentImages] = useState<string[]>([]);
   const [showImageInline, setShowImageInline] = useState(true);
   const articleRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -86,14 +89,17 @@ function ContentItem({
     return () => ro.disconnect();
   }, [imageSrc]);
 
-  function handleImageClick(e: React.MouseEvent) {
+  async function handleImageClick(e: React.MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
+    const images = await getAllContentImages(index);
+    setContentImages(images);
     setShowPopup(true);
   }
 
   function handlePopupClose() {
     setShowPopup(false);
+    setContentImages([]);
   }
 
   const iconMode = Boolean(imageSrc && !showImageInline);
@@ -110,7 +116,7 @@ function ContentItem({
           onClick={handleImageClick}
           aria-label='이미지 보기'
         >
-          <MdOutlineImage size={18} color='white' aria-hidden='true' />
+          <MdOutlineImage aria-hidden='true' />
         </button>
       )}
       <div className='content__text' ref={textRef}>
@@ -163,7 +169,7 @@ function ContentItem({
             <>
               <img src={imageSrc} alt={item.title} loading='lazy' />
               <div className='content__image-zoom' aria-hidden='true'>
-                <MdOutlineZoomOutMap size='1.25vmax' color='white' />
+                <MdOutlineZoomOutMap />
               </div>
             </>
           )}
@@ -173,7 +179,7 @@ function ContentItem({
         createPortal(
           <ImageGalleryPopup
             title={item.title}
-            images={getAllContentImages(index)}
+            images={contentImages}
             onClose={handlePopupClose}
           />,
           document.body,

@@ -3,7 +3,7 @@ import { IoDocumentTextOutline } from 'react-icons/io5';
 import type { PatentValidType } from '@entities/patent';
 import { InfoCard } from '@shared/ui/InfoCard';
 
-import '../styles/Card.css';
+import '../styles/PatentCard.css';
 
 export function PatentCard({
   item,

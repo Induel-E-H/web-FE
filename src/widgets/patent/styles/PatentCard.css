@@ -4,7 +4,7 @@
 }
 
 .patent__card:hover {
-  box-shadow: 0 0.8vmax 1.6vmax rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.8vmax 1.6vmax var(--shadow-04);
 }
 
 @media (max-width: 1024px) {

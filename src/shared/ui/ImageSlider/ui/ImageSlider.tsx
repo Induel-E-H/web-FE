@@ -9,7 +9,6 @@ interface ImageSliderProps {
   images: string[];
   currentIndex: number;
   alt?: string;
-  imageRadius?: string;
   onPrev: () => void;
   onNext: () => void;
   onRelease: () => void;
@@ -19,7 +18,6 @@ export function ImageSlider({
   images,
   currentIndex,
   alt = '',
-  imageRadius = '10px',
   onPrev,
   onNext,
   onRelease,
@@ -85,7 +83,6 @@ export function ImageSlider({
               <img
                 src={src}
                 alt={alt ? `${alt} - ${images.indexOf(src) + 1}` : ''}
-                style={{ borderRadius: imageRadius }}
                 loading='lazy'
                 draggable={false}
               />
@@ -99,7 +96,7 @@ export function ImageSlider({
           onMouseLeave={onRelease}
           aria-label='이전 이미지'
         >
-          <IoIosArrowBack size='1.25vmax' aria-hidden='true' />
+          <IoIosArrowBack aria-hidden='true' />
         </button>
         <button
           className='image-slider__nav image-slider__nav--next'
@@ -108,7 +105,7 @@ export function ImageSlider({
           onMouseLeave={onRelease}
           aria-label='다음 이미지'
         >
-          <IoIosArrowForward size='1.25vmax' aria-hidden='true' />
+          <IoIosArrowForward aria-hidden='true' />
         </button>
         <div
           className='image-slider__indicator'

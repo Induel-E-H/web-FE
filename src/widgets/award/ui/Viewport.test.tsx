@@ -12,9 +12,10 @@ vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
   }),
 }));
 
-vi.mock('../model/image', () => ({
-  getAwardImage: vi.fn().mockReturnValue('mock.webp'),
-}));
+vi.mock('@entities/award', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@entities/award')>();
+  return { ...actual, getAwardImage: vi.fn().mockReturnValue('mock.webp') };
+});
 
 const mockList: AwardItem[] = Array.from({ length: 4 }, (_, i) => ({
   id: i,

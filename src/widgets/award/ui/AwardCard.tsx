@@ -3,9 +3,9 @@ import { FiAward } from 'react-icons/fi';
 import type { AwardItem } from '@entities/award';
 import { InfoCard } from '@shared/ui/InfoCard';
 
-import '../styles/Card.css';
+import '../styles/AwardCard.css';
 
-export function Card({
+export function AwardCard({
   award,
   onClick,
 }: {

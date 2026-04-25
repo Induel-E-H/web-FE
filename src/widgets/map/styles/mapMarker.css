@@ -4,7 +4,7 @@
 }
 
 .map__marker__shadow {
-  fill: rgba(0, 0, 0, 0.22);
+  fill: var(--shadow-04);
 }
 
 .map__marker__body {
@@ -12,11 +12,11 @@
 }
 
 .map__marker__highlight {
-  fill: rgba(255, 255, 255, 0.12);
+  fill: var(--overlay-white-10);
 }
 
 .map__marker__circle {
-  fill: white;
+  fill: var(--white);
 }
 
 @media (max-width: 1024px) {

@@ -2,7 +2,7 @@ import type { PatentValidType } from '@entities/patent';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { PatentCard } from './Card';
+import { PatentCard } from './PatentCard';
 
 const mockItem: PatentValidType = {
   serialNumber: '제 10-1506087호',

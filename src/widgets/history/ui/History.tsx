@@ -1,25 +1,17 @@
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import {
-  PAGE_SIDE,
-  RAPID_FLIP_DURATION,
-} from '@features/history/model/constants';
-import type { IndexItem, PageSide } from '@features/history/model/types';
-import { useBookCoverState } from '@features/history/model/useBookCoverState';
-import { useBookNavigation } from '@features/history/model/useBookNavigation';
-import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import { PAGE_SIDE, RAPID_FLIP_DURATION } from '@features/history';
+import type { IndexItem } from '@features/history';
+import { useBookCoverState } from '@features/history';
+import { useBookNavigation } from '@features/history';
+import { useBreakpoint } from '@shared/lib/breakpoint';
 
 import '../styles/History.css';
-import { BackCoverInner } from './book/BackCover';
-import { BookPageOuterShadow } from './book/BookPageSide';
+import { BookPageContent } from './book/BookPageContent';
+import { BookPageSlot } from './book/BookPageSlot';
 import { BookSide } from './book/BookSide';
-import { ContentPage } from './book/content_container/Content';
-import { ListPage } from './book/content_container/List';
-import { MilestonesPage } from './book/content_container/Milestones';
-import { TimelinePage } from './book/content_container/Timeline';
-import { BookCover } from './book/Cover';
-import { FrontCoverInner } from './book/FrontCover';
+import { buildCoverContent } from './book/CoverContent';
 import { HistoryCategory } from './Category';
 import { HistoryTitle } from './HistoryTitle';
 
@@ -120,95 +112,42 @@ function History() {
     navigateToCategory('Content', Math.floor(index / 2), true);
   }
 
-  function renderPage(
-    side: PageSide,
-    pageIndex: number,
+  function page(
     item: IndexItem,
+    pageIndex: number,
+    side: typeof PAGE_SIDE.LEFT | typeof PAGE_SIDE.RIGHT,
   ): ReactNode {
-    switch (item) {
-      case 'List':
-        return <ListPage side={side} onItemClick={handleListItemClick} />;
-      case 'Content':
-        return <ContentPage side={side} pageIndex={pageIndex} />;
-      case 'Timeline':
-        return <TimelinePage side={side} />;
-      case 'Milestones':
-        return (
-          <MilestonesPage
-            side={side}
-            pageIndex={pageIndex}
-            breakpoint={breakpoint}
-          />
-        );
-    }
+    return (
+      <BookPageContent
+        side={side}
+        pageIndex={pageIndex}
+        item={item}
+        breakpoint={breakpoint}
+        onListItemClick={handleListItemClick}
+      />
+    );
   }
 
   const isCoverFlip =
     bookState.startsWith('opening') || bookState.startsWith('closing');
   const isBookOpen = bookState !== 'cover-front' && bookState !== 'cover-back';
 
-  let coverFrontContent: ReactNode = null;
-  let coverBackContent: ReactNode = null;
+  const leftSlot = (
+    <BookPageSlot side={PAGE_SIDE.LEFT} shadowCount={leftShadowCount}>
+      {page(activeItem, currentPageIndex, PAGE_SIDE.LEFT)}
+    </BookPageSlot>
+  );
+  const rightSlot = (
+    <BookPageSlot side={PAGE_SIDE.RIGHT} shadowCount={rightShadowCount}>
+      {page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT)}
+    </BookPageSlot>
+  );
 
-  if (bookState === 'opening-front') {
-    coverFrontContent = <FrontCoverInner />;
-    coverBackContent = (
-      <>
-        <BookCover side={PAGE_SIDE.LEFT} />
-        <div className='history__book-page-left'>
-          <BookPageOuterShadow side={PAGE_SIDE.LEFT} count={leftShadowCount} />
-          <div className='history__book-page-content'>
-            {renderPage(PAGE_SIDE.LEFT, currentPageIndex, activeItem)}
-          </div>
-        </div>
-      </>
-    );
-  } else if (bookState === 'closing-front') {
-    coverFrontContent = (
-      <>
-        <BookCover side={PAGE_SIDE.LEFT} />
-        <div className='history__book-page-left'>
-          <BookPageOuterShadow side={PAGE_SIDE.LEFT} count={leftShadowCount} />
-          <div className='history__book-page-content'>
-            {renderPage(PAGE_SIDE.LEFT, currentPageIndex, activeItem)}
-          </div>
-        </div>
-      </>
-    );
-    coverBackContent = <FrontCoverInner />;
-  } else if (bookState === 'closing-back') {
-    coverFrontContent = (
-      <>
-        <BookCover side={PAGE_SIDE.RIGHT} />
-        <div className='history__book-page-right'>
-          <div className='history__book-page-content'>
-            {renderPage(PAGE_SIDE.RIGHT, currentPageIndex, activeItem)}
-          </div>
-          <BookPageOuterShadow
-            side={PAGE_SIDE.RIGHT}
-            count={rightShadowCount}
-          />
-        </div>
-      </>
-    );
-    coverBackContent = <BackCoverInner />;
-  } else if (bookState === 'opening-back') {
-    coverFrontContent = <BackCoverInner />;
-    coverBackContent = (
-      <>
-        <BookCover side={PAGE_SIDE.RIGHT} />
-        <div className='history__book-page-right'>
-          <div className='history__book-page-content'>
-            {renderPage(PAGE_SIDE.RIGHT, currentPageIndex, activeItem)}
-          </div>
-          <BookPageOuterShadow
-            side={PAGE_SIDE.RIGHT}
-            count={rightShadowCount}
-          />
-        </div>
-      </>
-    );
-  }
+  const { coverFrontContent, coverBackContent } = buildCoverContent(
+    bookState,
+    leftSlot,
+    rightSlot,
+  );
 
   let staticLeftContent: ReactNode;
   let staticRightContent: ReactNode;
@@ -216,66 +155,22 @@ function History() {
   let flipBackContent: ReactNode;
 
   if (isCoverFlip) {
-    staticLeftContent = renderPage(
-      PAGE_SIDE.LEFT,
-      currentPageIndex,
-      activeItem,
-    );
-    staticRightContent = renderPage(
-      PAGE_SIDE.RIGHT,
-      currentPageIndex,
-      activeItem,
-    );
+    staticLeftContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
+    staticRightContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
   } else if (flipDirection === 'forward') {
-    staticLeftContent = renderPage(
-      PAGE_SIDE.LEFT,
-      currentPageIndex,
-      activeItem,
-    );
-    staticRightContent = renderPage(
-      PAGE_SIDE.RIGHT,
-      nextPageIndex,
-      nextActiveItem,
-    );
-    flipFrontContent = renderPage(
-      PAGE_SIDE.RIGHT,
-      currentPageIndex,
-      activeItem,
-    );
-    flipBackContent = renderPage(PAGE_SIDE.LEFT, nextPageIndex, nextActiveItem);
+    staticLeftContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
+    staticRightContent = page(nextActiveItem, nextPageIndex, PAGE_SIDE.RIGHT);
+    flipFrontContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
+    flipBackContent = page(nextActiveItem, nextPageIndex, PAGE_SIDE.LEFT);
   } else if (flipDirection === 'backward') {
-    staticLeftContent = renderPage(
-      PAGE_SIDE.LEFT,
-      prevPageIndex,
-      prevActiveItem,
-    );
-    staticRightContent = renderPage(
-      PAGE_SIDE.RIGHT,
-      currentPageIndex,
-      activeItem,
-    );
-    flipFrontContent = renderPage(PAGE_SIDE.LEFT, currentPageIndex, activeItem);
-    flipBackContent = renderPage(
-      PAGE_SIDE.RIGHT,
-      prevPageIndex,
-      prevActiveItem,
-    );
+    staticLeftContent = page(prevActiveItem, prevPageIndex, PAGE_SIDE.LEFT);
+    staticRightContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
+    flipFrontContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
+    flipBackContent = page(prevActiveItem, prevPageIndex, PAGE_SIDE.RIGHT);
   } else {
-    staticLeftContent = renderPage(
-      PAGE_SIDE.LEFT,
-      currentPageIndex,
-      activeItem,
-    );
-    staticRightContent = renderPage(
-      PAGE_SIDE.RIGHT,
-      currentPageIndex,
-      activeItem,
-    );
-    flipFrontContent = renderPage(
-      PAGE_SIDE.RIGHT,
-      currentPageIndex,
-      activeItem,
-    );
+    staticLeftContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
+    staticRightContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
+    flipFrontContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
     flipBackContent = null;
   }
 

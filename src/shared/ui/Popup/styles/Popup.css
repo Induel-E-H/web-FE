@@ -1,7 +1,7 @@
 .popup__overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--overlay-black-50);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,7 +71,7 @@
 }
 
 .popup__title {
-  font-family: 'BookendBatang', sans-serif;
+  font-family: var(--font-bookendbatang);
   font-size: max(24px, 1.667vw);
   font-weight: 700;
   color: var(--black);

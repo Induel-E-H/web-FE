@@ -1,8 +1,8 @@
 .map__info__card {
-  background: white;
+  background: var(--white);
   border-radius: 0.65vmax;
   overflow: hidden;
-  box-shadow: 0 0.417vmax 1.25vmax rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0.417vmax 1.25vmax var(--shadow-03);
   width: 15vmax;
   min-width: 240px;
 }
@@ -12,12 +12,12 @@
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid white;
+  border-top: 8px solid var(--white);
   margin: 0 auto;
 }
 
 .map__info__header {
-  background: var(--footer-background);
+  background: var(--brand-color);
   padding: 0.65vmax 0.75vmax;
   display: flex;
   align-items: center;
@@ -29,13 +29,13 @@
 }
 
 .map__info__name {
-  color: white;
+  color: var(--white);
   font-weight: 700;
   font-size: max(13px, 0.833vw);
 }
 
 .map__info__subtitle {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--overlay-white-50);
   font-size: max(10px, 0.625vw);
 }
 
@@ -59,7 +59,7 @@
 .map__info__icon-box {
   width: 1.4vmax;
   height: 1.4vmax;
-  background: #f6f3f0;
+  background: var(--brown-50);
   border-radius: 0.38vmax;
   display: flex;
   align-items: center;
@@ -73,20 +73,20 @@
 .map__info__phone,
 .map__info__address-main {
   font-size: max(12px, 0.729vw);
-  color: #38271d;
+  color: var(--brown-800);
   text-decoration: none;
 }
 
 .map__info__address-sub {
   font-size: max(10px, 0.625vw);
-  color: #666;
+  color: var(--gray-700);
 }
 
 @media (max-width: 1024px) {
   .map__info__card {
     width: 28.65vmin;
     border-radius: 0.8vmin;
-    box-shadow: 0 0.5vmin 1.2vmin rgba(0, 0, 0, 0.14);
+    box-shadow: 0 0.5vmin 1.2vmin var(--shadow-03);
   }
 
   .map__info__header {
@@ -134,7 +134,7 @@
   .map__info__card {
     width: 69.5vmin;
     border-radius: 2.6vmin;
-    box-shadow: 0 0.8vmin 3vmin rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.8vmin 3vmin var(--shadow-02);
   }
 
   .map__info__header {
@@ -185,6 +185,6 @@
   .map__info__tail {
     border-left: 1.6vmin solid transparent;
     border-right: 1.6vmin solid transparent;
-    border-top: 1.6vmin solid white;
+    border-top: 1.6vmin solid var(--white);
   }
 }

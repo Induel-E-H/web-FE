@@ -2,8 +2,11 @@ import { useSyncExternalStore } from 'react';
 
 export type Breakpoint = 'desktop' | 'tablet' | 'mobile';
 
-const MOBILE_QUERY = '(max-width: 767px)';
-const TABLET_QUERY = '(max-width: 1024px)';
+export const BREAKPOINT_MOBILE_MAX = 767;
+export const BREAKPOINT_TABLET_MAX = 1024;
+
+const MOBILE_QUERY = `(max-width: ${BREAKPOINT_MOBILE_MAX}px)`;
+const TABLET_QUERY = `(max-width: ${BREAKPOINT_TABLET_MAX}px)`;
 
 const mobileMql = window.matchMedia(MOBILE_QUERY);
 const tabletMql = window.matchMedia(TABLET_QUERY);

@@ -1,10 +1,10 @@
-export const BREAKPOINTS = {
-  mobile: 767,
-  tablet: 1024,
-} as const;
+import {
+  BREAKPOINT_MOBILE_MAX,
+  BREAKPOINT_TABLET_MAX,
+} from '@shared/lib/breakpoint/useBreakpoint';
 
 export function getItemsPerPage(): number {
-  if (window.innerWidth <= BREAKPOINTS.mobile) return 4; // 2×2
-  if (window.innerWidth <= BREAKPOINTS.tablet) return 6; // 3×2
-  return 10; // 5×2
+  if (window.innerWidth <= BREAKPOINT_MOBILE_MAX) return 4;
+  if (window.innerWidth <= BREAKPOINT_TABLET_MAX) return 6;
+  return 10;
 }

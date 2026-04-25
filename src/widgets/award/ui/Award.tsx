@@ -1,13 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { AWARD_LIST } from '@entities/award';
-import { Pagination, useYearFilter, YearCategory } from '@features/award';
 import {
-  lockScroll,
-  unlockScroll,
-} from '@shared/lib/useScrollLock/useScrollLock';
+  Pagination,
+  useYearFilter,
+  YEAR_ALL,
+  YearCategory,
+} from '@features/award';
+import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 
-import { getItemsPerPage } from '../model/responsive';
+import { useItemsPerPage } from '../model/useItemsPerPage';
 import '../styles/Award.css';
 import { AwardTitle } from './AwardTitle';
 import { AwardCount } from './Count';
@@ -16,7 +18,7 @@ import { Viewport } from './Viewport';
 
 function Award() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage);
+  const itemsPerPage = useItemsPerPage();
   const isMobile = itemsPerPage < 8;
   const {
     activeYear,
@@ -24,6 +26,7 @@ function Award() {
     handleYearChange: changeYear,
   } = useYearFilter();
   const [selectedId, setSelectedId] = useState<number | null>(null);
+
   function handleCardClick(id: number) {
     lockScroll();
     setSelectedId(id);
@@ -34,22 +37,14 @@ function Award() {
     setSelectedId(null);
   }
 
-  useEffect(() => {
-    function handleResize() {
-      setItemsPerPage(getItemsPerPage());
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   function handleYearChange(year: string | number): void {
     changeYear(year);
     setCurrentPage(0);
   }
 
-  const filteredAWARD_LIST = useMemo(() => {
+  const filteredList = useMemo(() => {
     const list =
-      activeYear === '전체'
+      activeYear === YEAR_ALL
         ? AWARD_LIST
         : AWARD_LIST.filter((award) =>
             award.date.startsWith(String(activeYear)),
@@ -57,7 +52,7 @@ function Award() {
     return [...list].sort((a, b) => b.date.localeCompare(a.date));
   }, [activeYear]);
 
-  const totalPages = Math.ceil(filteredAWARD_LIST.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
   const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
 
   return (
@@ -76,7 +71,7 @@ function Award() {
         <Viewport
           safePage={safePage}
           totalPages={totalPages}
-          filteredList={filteredAWARD_LIST}
+          filteredList={filteredList}
           itemsPerPage={itemsPerPage}
           onCardClick={handleCardClick}
           setCurrentPage={setCurrentPage}

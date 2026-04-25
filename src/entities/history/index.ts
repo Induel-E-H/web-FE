@@ -6,3 +6,5 @@ export { MILESTONES_HISTORY_LIST as milestonesData } from './model/milestonesDat
 
 export type { TimelineItem } from './model/timelineData';
 export { TIMELINE_LIST as timelineData } from './model/timelineData';
+
+export { getThumbnailImage, getAllContentImages } from './model/contentImages';
