@@ -166,14 +166,14 @@
   margin-bottom: 0;
 }
 
-.privacy-policy__note {
-  font-size: max(10px, 0.625vw) !important;
-  color: var(--typo-contentW) !important;
+.privacy-policy__article .privacy-policy__note {
+  font-size: max(10px, 0.625vw);
+  color: var(--typo-contentW);
   background-color: var(--gray-50);
   border-left: 2px solid var(--brown-200);
   padding: 0.521vmax 0.781vmax;
   border-radius: 0 0.208vmax 0.208vmax 0;
-  margin: 0.521vmax 0 !important;
+  margin: 0.521vmax 0;
 }
 
 .privacy-policy__ordered-list {
@@ -199,7 +199,7 @@
 }
 
 .privacy-policy__ordered-list li p {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
 .privacy-policy__unordered-list {
@@ -254,10 +254,10 @@
   margin-top: 0.781vmax;
 }
 
-.privacy-policy__cookie-guide-title {
-  font-weight: 700 !important;
-  color: var(--brown-800) !important;
-  margin-bottom: 0.521vmax !important;
+.privacy-policy__article .privacy-policy__cookie-guide-title {
+  font-weight: 700;
+  color: var(--brown-800);
+  margin-bottom: 0.521vmax;
 }
 
 .privacy-policy__cookie-guide p {
@@ -315,11 +315,11 @@
   margin: 0.781vmax 0;
 }
 
-.privacy-policy__contact-box-title {
-  font-size: max(10px, 0.677vw) !important;
-  font-weight: 700 !important;
-  color: var(--brown-800) !important;
-  margin-bottom: 0.521vmax !important;
+.privacy-policy__article .privacy-policy__contact-box-title {
+  font-size: max(10px, 0.677vw);
+  font-weight: 700;
+  color: var(--brown-800);
+  margin-bottom: 0.521vmax;
 }
 
 .privacy-policy__contact-list {
@@ -471,11 +471,11 @@
     margin-bottom: 0.91vw;
   }
 
-  .privacy-policy__note {
-    font-size: 1.43vw !important;
+  .privacy-policy__article .privacy-policy__note {
+    font-size: 1.43vw;
     border-left-width: 2px;
     padding: 0.91vw 1.3vw;
-    margin: 0.91vw 0 !important;
+    margin: 0.91vw 0;
   }
 
   .privacy-policy__ordered-list {
@@ -541,9 +541,9 @@
     margin: 1.3vw 0;
   }
 
-  .privacy-policy__contact-box-title {
-    font-size: 1.56vw !important;
-    margin-bottom: 0.91vw !important;
+  .privacy-policy__article .privacy-policy__contact-box-title {
+    font-size: 1.56vw;
+    margin-bottom: 0.91vw;
   }
 
   .privacy-policy__contact-list {
@@ -669,10 +669,10 @@
     margin-bottom: clamp(8px, 1.6vw, 8px);
   }
 
-  .privacy-policy__note {
-    font-size: clamp(10px, 2.93vw, 15px) !important;
+  .privacy-policy__article .privacy-policy__note {
+    font-size: clamp(10px, 2.93vw, 15px);
     padding: clamp(8px, 1.6vw, 8px) clamp(8px, 2.13vw, 11px);
-    margin: clamp(8px, 1.6vw, 8px) 0 !important;
+    margin: clamp(8px, 1.6vw, 8px) 0;
   }
 
   .privacy-policy__ordered-list {
@@ -727,9 +727,9 @@
     margin: clamp(8px, 2.13vw, 11px) 0;
   }
 
-  .privacy-policy__contact-box-title {
-    font-size: clamp(11px, 3.2vw, 16px) !important;
-    margin-bottom: clamp(8px, 1.6vw, 8px) !important;
+  .privacy-policy__article .privacy-policy__contact-box-title {
+    font-size: clamp(11px, 3.2vw, 16px);
+    margin-bottom: clamp(8px, 1.6vw, 8px);
   }
 
   .privacy-policy__contact-list li {
