@@ -3,9 +3,13 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { AwardPopup } from './Popup';
 
-vi.mock('../model/image', () => ({
-  getAwardImage: vi.fn().mockReturnValue('popup-image.webp'),
-}));
+vi.mock('@features/award', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@features/award')>();
+  return {
+    ...actual,
+    getAwardImage: vi.fn().mockReturnValue('popup-image.webp'),
+  };
+});
 
 describe('AwardPopup', () => {
   describe('렌더링', () => {
