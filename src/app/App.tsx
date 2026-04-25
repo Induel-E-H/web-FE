@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Home from '@pages/home';
-import { useGoogleAnalytics } from '@shared/lib/analytics/useGoogleAnalytics';
+import { useGoogleAnalytics } from '@shared/lib/analytics';
 
 const PrivacyPolicy = lazy(() => import('@pages/privacy-policy'));
 

@@ -3,7 +3,7 @@ import {
   VISION_IMAGE_MAP,
   VISION_SRCSET_MAP,
 } from '@entities/vision';
-import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation/useIntersectionAnimation';
+import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation';
 
 import '../styles/Vision.css';
 import { VisionItem } from './VisionItem';

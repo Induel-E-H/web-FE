@@ -1,14 +1,11 @@
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import {
-  PAGE_SIDE,
-  RAPID_FLIP_DURATION,
-} from '@features/history/model/constants';
-import type { IndexItem } from '@features/history/model/types';
-import { useBookCoverState } from '@features/history/model/useBookCoverState';
-import { useBookNavigation } from '@features/history/model/useBookNavigation';
-import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import { PAGE_SIDE, RAPID_FLIP_DURATION } from '@features/history';
+import type { IndexItem } from '@features/history';
+import { useBookCoverState } from '@features/history';
+import { useBookNavigation } from '@features/history';
+import { useBreakpoint } from '@shared/lib/breakpoint';
 
 import '../styles/History.css';
 import { BookPageContent } from './book/BookPageContent';

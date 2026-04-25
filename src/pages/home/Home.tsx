@@ -1,7 +1,7 @@
 import { lazy, type ReactNode, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
+import { smoothScrollTo } from '@shared/lib/scroll';
 import { Header } from '@widgets/header/ui/Header';
 import Hero from '@widgets/hero';
 

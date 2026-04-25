@@ -1,4 +1,4 @@
-import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation/useIntersectionAnimation';
+import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation';
 
 import '../styles/VisionItem.css';
 

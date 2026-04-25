@@ -3,7 +3,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { COMPANY } from '@shared/constant';
-import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
+import { smoothScrollTo } from '@shared/lib/scroll';
 
 import induelIcon from '@assets/induel-icon.svg';
 

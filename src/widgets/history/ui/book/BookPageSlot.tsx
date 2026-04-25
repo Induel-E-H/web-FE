@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { PAGE_SIDE } from '@features/history/model/constants';
-import type { PageSide } from '@features/history/model/types';
+import { PAGE_SIDE } from '@features/history';
+import type { PageSide } from '@features/history';
 
 import { BookPageOuterShadow } from './BookPageOuterShadow';
 import { BookCover } from './Cover';

@@ -1,5 +1,5 @@
-import type { IndexItem, PageSide } from '@features/history/model/types';
-import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import type { IndexItem, PageSide } from '@features/history';
+import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import { ContentPage } from './content_container/Content';
 import { ListPage } from './content_container/List';

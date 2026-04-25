@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { BookState } from '@features/history/model/types';
+import type { BookState } from '@features/history';
 
 import { BackCoverInner } from './BackCover';
 import { FrontCoverInner } from './FrontCover';

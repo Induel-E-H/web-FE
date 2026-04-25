@@ -1,0 +1,1 @@
+export { useIntersectionAnimation } from './useIntersectionAnimation';

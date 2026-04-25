@@ -1,5 +1,5 @@
 import type { AwardItem } from '@entities/award';
-import { useSlideGesture } from '@shared/lib/useSlideGesture/useSlideGesture';
+import { useSlideGesture } from '@shared/lib/useSlideGesture';
 
 import '../styles/Viewport.css';
 import { AwardCard } from './AwardCard';
