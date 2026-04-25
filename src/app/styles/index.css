@@ -49,6 +49,9 @@
   --mauve-800: #3a222a;
   --mauve-900: #241518;
 
+  /* Brand Color */
+  --brand-color: var(--brown-800);
+
   /* Accent */
   --accent-gold: #e7c889;
   --accent-warm: #8a6d2f;
@@ -92,7 +95,7 @@
   --typo-caption: var(--gray-400);
 
   /* Footer */
-  --footer-background: var(--brown-800);
+  --footer-background: var(--brand-color);
   --footer-label: #d7d7d7;
   --footer-copyright: var(--gray-400);
   --footer-context: var(--gray-300);
