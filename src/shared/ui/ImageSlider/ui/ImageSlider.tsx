@@ -9,7 +9,6 @@ interface ImageSliderProps {
   images: string[];
   currentIndex: number;
   alt?: string;
-  imageRadius?: string;
   onPrev: () => void;
   onNext: () => void;
   onRelease: () => void;
@@ -19,7 +18,6 @@ export function ImageSlider({
   images,
   currentIndex,
   alt = '',
-  imageRadius = '10px',
   onPrev,
   onNext,
   onRelease,
@@ -85,7 +83,6 @@ export function ImageSlider({
               <img
                 src={src}
                 alt={alt ? `${alt} - ${images.indexOf(src) + 1}` : ''}
-                style={{ borderRadius: imageRadius }}
                 loading='lazy'
                 draggable={false}
               />
