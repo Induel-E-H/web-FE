@@ -31,7 +31,7 @@
 
 .milestones__year {
   font-weight: 700;
-  font-size: var(--text-md);
+  font-size: max(12px, 0.833vw);
   color: var(--black);
 }
 
@@ -46,7 +46,7 @@
 
   gap: 1.93%;
 
-  font-size: var(--text-sm);
+  font-size: max(11px, 0.729vw);
   font-weight: 400;
 
   color: var(--black);
@@ -56,7 +56,7 @@
   content: '•';
   flex-shrink: 0;
 
-  font-size: var(--text-sm);
+  font-size: max(11px, 0.729vw);
 }
 
 @media (max-width: 1024px) {

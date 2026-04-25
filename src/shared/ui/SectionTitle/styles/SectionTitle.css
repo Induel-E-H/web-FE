@@ -26,7 +26,7 @@
 .section-title h2 {
   font-family: var(--font-bookendbatang);
   font-weight: 700;
-  font-size: var(--text-section);
+  font-size: max(40px, 3.13vw);
 }
 
 @media (max-width: 1024px) {

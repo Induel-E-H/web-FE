@@ -36,7 +36,7 @@
 
 .map__info__subtitle {
   color: var(--overlay-white-50);
-  font-size: var(--text-xs);
+  font-size: max(10px, 0.625vw);
 }
 
 .map__info__body {
@@ -78,7 +78,7 @@
 }
 
 .map__info__address-sub {
-  font-size: var(--text-xs);
+  font-size: max(10px, 0.625vw);
   color: var(--gray-700);
 }
 

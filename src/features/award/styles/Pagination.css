@@ -14,7 +14,7 @@
   border-radius: 0.27vmax;
   cursor: pointer;
   color: var(--black);
-  font-size: var(--text-base);
+  font-size: max(12px, 0.78vw);
   display: flex;
   align-items: center;
   justify-content: center;
