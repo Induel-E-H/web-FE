@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { AWARD_LIST } from '@entities/award';
-import { Pagination, useYearFilter, YearCategory } from '@features/award';
+import {
+  Pagination,
+  useYearFilter,
+  YEAR_ALL,
+  YearCategory,
+} from '@features/award';
 import {
   lockScroll,
   unlockScroll,
@@ -49,7 +54,7 @@ function Award() {
 
   const filteredAWARD_LIST = useMemo(() => {
     const list =
-      activeYear === '전체'
+      activeYear === YEAR_ALL
         ? AWARD_LIST
         : AWARD_LIST.filter((award) =>
             award.date.startsWith(String(activeYear)),

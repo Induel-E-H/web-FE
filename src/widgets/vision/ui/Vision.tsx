@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react';
-
 import visionInvest from '@entities/vision/assets/vision_invest.webp';
 import visionInvest480 from '@entities/vision/assets/vision_invest@480.webp';
 import visionInvest768 from '@entities/vision/assets/vision_invest@768.webp';
@@ -13,7 +11,7 @@ import visionSculpt480 from '@entities/vision/assets/vision_sculpt@480.webp';
 import visionSculpt768 from '@entities/vision/assets/vision_sculpt@768.webp';
 import visionSculpt1200 from '@entities/vision/assets/vision_sculpt@1200.webp';
 import { VISION_DATA } from '@entities/vision/model/visionData';
-import '@widgets/vision/styles/Vision.css';
+import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation/useIntersectionAnimation';
 
 import '../styles/Vision.css';
 import { VisionItem } from './VisionItem';
@@ -44,26 +42,7 @@ const srcSetMap = {
 };
 
 export function Vision() {
-  const titleRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = titleRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('is-visible');
-        } else if (entry.boundingClientRect.top > 0) {
-          el.classList.remove('is-visible');
-        }
-      },
-      { threshold: 0.15 },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const titleRef = useIntersectionAnimation<HTMLElement>();
 
   return (
     <section id='vision' className='vision' aria-label='미래 비전'>
