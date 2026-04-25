@@ -23,7 +23,7 @@
     border-color 0.3s;
 }
 
-.award__year_category button.active {
+.award__year_category button.award__year_category--active {
   font-weight: 600;
 
   color: var(--brown-700);

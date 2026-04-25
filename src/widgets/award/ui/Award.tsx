@@ -52,7 +52,7 @@ function Award() {
     setCurrentPage(0);
   }
 
-  const filteredAWARD_LIST = useMemo(() => {
+  const filteredList = useMemo(() => {
     const list =
       activeYear === YEAR_ALL
         ? AWARD_LIST
@@ -62,7 +62,7 @@ function Award() {
     return [...list].sort((a, b) => b.date.localeCompare(a.date));
   }, [activeYear]);
 
-  const totalPages = Math.ceil(filteredAWARD_LIST.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
   const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
 
   return (
@@ -81,7 +81,7 @@ function Award() {
         <Viewport
           safePage={safePage}
           totalPages={totalPages}
-          filteredList={filteredAWARD_LIST}
+          filteredList={filteredList}
           itemsPerPage={itemsPerPage}
           onCardClick={handleCardClick}
           setCurrentPage={setCurrentPage}
