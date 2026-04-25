@@ -60,7 +60,7 @@
   -webkit-transform: scale(1.08);
 }
 
-.vision__content_text {
+.vision__content__text {
   display: flex;
   flex-direction: column;
   width: 45.43%;
@@ -126,7 +126,7 @@
     height: 55.34vw;
   }
 
-  .vision__content_text {
+  .vision__content__text {
     width: 33.59vw;
     gap: 2.6vw;
     padding: 0 3.91vw;
@@ -173,7 +173,7 @@
     height: clamp(190px, 54.4vw, 272px);
   }
 
-  .vision__content_text {
+  .vision__content__text {
     width: 100%;
     height: clamp(206px, 58.93vw, 295px);
     gap: clamp(14px, 4vw, 20px);

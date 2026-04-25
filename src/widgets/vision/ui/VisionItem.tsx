@@ -38,7 +38,7 @@ export function VisionItem({
           loading='lazy'
         />
       </div>
-      <div className='vision__content_text'>
+      <div className='vision__content__text'>
         <div className='vision__content__title'>
           <p className='vision__content__index'>VISION {index + 1}</p>
           <div className='vision__content__title__main'>
