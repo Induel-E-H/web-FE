@@ -21,7 +21,7 @@
   --color-main-h3: var(--brown-800);
   --color-main-h4: var(--brown-900);
   --color-hr: var(--brown-800);
-  --color-description: var(--brown-800);
+  --color-description: var(--brown-900);
 
   display: flex;
   flex-direction: row;
