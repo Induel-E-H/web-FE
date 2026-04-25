@@ -3,3 +3,16 @@
 
 /* BookendBatang - 로컬 */
 @import '../../shared/assets/fonts/bookend-batang.css';
+
+:root {
+  /* Font Families */
+  --font-pretendard: Pretendard, sans-serif;
+  --font-bookendbatang: 'BookendBatang', sans-serif;
+
+  /* Type Scale */
+  --text-xs: max(10px, 0.625vw);
+  --text-sm: max(11px, 0.729vw);
+  --text-base: max(12px, 0.78vw);
+  --text-md: max(12px, 0.833vw);
+  --text-section: max(40px, 3.13vw);
+}

@@ -99,14 +99,14 @@
 }
 
 .history__front-cover-year-number {
-  font-family: var(--font-serif);
+  font-family: var(--font-bookendbatang);
   font-size: max(70px, 7.29vw);
 
   line-height: 100%;
 }
 
 .history__front-cover-year-ordinal {
-  font-family: var(--font-serif);
+  font-family: var(--font-bookendbatang);
   font-size: max(32px, 2.6vw);
 
   line-height: 100%;

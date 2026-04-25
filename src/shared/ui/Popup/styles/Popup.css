@@ -71,7 +71,7 @@
 }
 
 .popup__title {
-  font-family: var(--font-serif);
+  font-family: var(--font-bookendbatang);
   font-size: max(24px, 1.667vw);
   font-weight: 700;
   color: var(--black);

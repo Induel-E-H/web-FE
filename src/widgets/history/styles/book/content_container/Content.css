@@ -42,7 +42,7 @@
 }
 
 .content__text * {
-  font-family: var(--font-serif);
+  font-family: var(--font-bookendbatang);
 }
 
 .content__title {
@@ -61,7 +61,7 @@
 }
 
 .content__title-eng {
-  font-family: var(--font-sans);
+  font-family: var(--font-pretendard);
   font-weight: 800;
   font-size: max(12px, 0.73vw);
 
