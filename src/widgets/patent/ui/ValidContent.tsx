@@ -6,7 +6,7 @@ import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 import { Popup } from '@shared/ui/Popup';
 
 import '../styles/ValidContent.css';
-import { PatentCard } from './Card';
+import { PatentCard } from './PatentCard';
 
 export function PatentValidContent() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
