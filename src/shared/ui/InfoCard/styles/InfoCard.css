@@ -1,4 +1,9 @@
 .info-card {
+  --info-card-bg: #f0eadc;
+  --info-card-frame: #e1d1b2;
+  --info-year: #7e5a05;
+  --info-secondary: #635c4f;
+
   display: flex;
   flex-direction: row;
 
@@ -20,7 +25,7 @@
 .info-card:hover {
   transform: translateY(-0.3vmax);
   -webkit-transform: translateY(-0.3vmax);
-  box-shadow: 0 0.6vmax 1.2vmax var(--shadow-sm);
+  box-shadow: 0 0.6vmax 1.2vmax var(--shadow-04);
 }
 
 .info-card__frame {
@@ -57,7 +62,7 @@
   width: 1.93vmax;
   height: 1.93vmax;
 
-  color: var(--accent-gold-warm);
+  color: var(--accent-gold-600);
 }
 
 .info-card__icon > svg {

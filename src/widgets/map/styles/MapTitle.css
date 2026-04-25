@@ -3,9 +3,9 @@
 }
 
 .map__title .section-title__description {
-  color: var(--accent-warm);
+  color: var(--accent-brown-700);
 }
 
 .map__title .section-title__description hr {
-  border-color: var(--accent-warm);
+  border-color: var(--accent-brown-700);
 }

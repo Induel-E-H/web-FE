@@ -33,10 +33,10 @@
 .vision__content--reverse {
   --text-bg: var(--brown-800);
   --color-index: #977449;
-  --color-main-h3: var(--accent-gold-warm);
-  --color-main-h4: #f5f5dc;
-  --color-hr: var(--accent-gold-warm);
-  --color-description: #f5f5dc;
+  --color-main-h3: var(--accent-gold-600);
+  --color-main-h4: var(--surface-cream);
+  --color-hr: var(--accent-gold-600);
+  --color-description: var(--surface-cream);
 
   flex-direction: row-reverse;
 }

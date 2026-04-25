@@ -10,8 +10,19 @@
 
   /* White & Black */
   --white: #ffffff;
-  --white-50: #ffffff26;
+  --white-rgb: 255 255 255;
   --black: #000000;
+  --black-rgb: 0 0 0;
+
+  /* Alpha overlays */
+  --alpha-05: 0.05;
+  --alpha-10: 0.1;
+  --alpha-15: 0.15;
+  --alpha-20: 0.2;
+  --alpha-30: 0.3;
+  --alpha-40: 0.4;
+  --alpha-50: 0.5;
+  --alpha-60: 0.6;
 
   /* Brown */
   --brown-50: #f6f3f0;
@@ -23,6 +34,7 @@
   --brown-600: #5a4231;
   --brown-700: #4a3527;
   --brown-800: #38271d;
+  --brown-800-rgb: 56 39 29;
   --brown-900: #241812;
 
   /* Gray */
@@ -49,100 +61,41 @@
   --mauve-800: #3a222a;
   --mauve-900: #241518;
 
+  /* Accent */
+  --accent-gold-400: #e7c889;
+  --accent-gold-600: #c9a96e;
+  --accent-brown-700: #8a6d2f;
+
   /* Brand Color */
   --brand-color: var(--brown-800);
 
-  /* Accent */
-  --accent-gold: #e7c889;
-  --accent-warm: #8a6d2f;
-  --accent-gold-warm: #c9a96e;
+  /* Shadows */
+  --shadow-01: rgb(var(--black-rgb) / var(--alpha-05));
+  --shadow-02: rgb(var(--black-rgb) / var(--alpha-10));
+  --shadow-03: rgb(var(--black-rgb) / var(--alpha-15));
+  --shadow-04: rgb(var(--black-rgb) / var(--alpha-20));
+  --shadow-05: rgb(var(--black-rgb) / var(--alpha-30));
+  --shadow-06: rgb(var(--black-rgb) / var(--alpha-40));
+  --shadow-07: rgb(var(--black-rgb) / var(--alpha-50));
+  --shadow-08: rgb(var(--black-rgb) / var(--alpha-60));
+
+  /* Overlay */
+  --overlay-black-10: rgb(var(--black-rgb) / var(--alpha-10));
+  --overlay-black-30: rgb(var(--black-rgb) / var(--alpha-30));
+  --overlay-black-50: rgb(var(--black-rgb) / var(--alpha-50));
+
+  --overlay-white-10: rgb(var(--white-rgb) / var(--alpha-10));
+  --overlay-white-30: rgb(var(--white-rgb) / var(--alpha-30));
+  --overlay-white-50: rgb(var(--white-rgb) / var(--alpha-50));
 
   /* Surface */
   --surface-warm: #faf7f2;
   --surface-light: #f9fafb;
   --surface-cream: #f0ead6;
-  --count-bg: #efeae8;
-  --map-icon-bg: #e4ddd7;
-
-  /* InfoCard */
-  --info-card-bg: #f0eadc;
-  --info-card-frame: #e1d1b2;
-  --info-year: #7e5a05;
-  --info-secondary: #635c4f;
-
-  /* Patent */
-  --status-valid: #05df72;
-  --patent-divider: #60524a;
-  --patent-item-divider: #4c3d34;
-  --patent-expire-icon: #827671;
-  --patent-text-secondary: #b4a8a3;
-  --patent-serial: #b0a49f;
-
-  /* History */
-  --history-bg: #1a1410;
-  --book-page-hr: #606060;
-  --book-shadow-dark: #b9b9b9;
-  --book-shadow-dark-line: #828282;
-  --book-shadow-mid: #cdcdcd;
-  --book-shadow-mid-line: #969696;
-  --book-shadow-light: #e1e1e1;
-  --book-shadow-light-line: #b4b4b4;
+  --surface-beige: #f5f5dc;
 
   /* Typography */
-  --typo-titleB: var(--black);
-  --typo-titleW: var(--white);
   --typo-contentW: #6f6f6f;
-  --typo-caption: var(--gray-400);
-
-  /* Footer */
-  --footer-background: var(--brand-color);
-  --footer-label: #d7d7d7;
-  --footer-copyright: var(--gray-400);
-  --footer-context: var(--gray-300);
-  --footer-divider: var(--white-50);
-
-  /* Navigation */
-  --nav-hover: #74584b;
-
-  /* Book */
-  --book-cover: var(--mauve-500);
-  --book-center: var(--mauve-600);
-  --book-center-deep: var(--mauve-700);
-  --book-page: var(--white);
-
-  /* Vision */
-  --vision-background: #4a2814cc;
-
-  /* Shadows */
-  --shadow-header: rgba(0, 0, 0, 0.08);
-  --shadow-icon: rgba(0, 0, 0, 0.5);
-  --shadow-sm: rgba(0, 0, 0, 0.25);
-  --shadow-hover: rgba(0, 0, 0, 0.35);
-  --shadow-overlay: rgba(0, 0, 0, 0.45);
-  --shadow-overlay-sm: rgba(0, 0, 0, 0.1);
-  --shadow-book: rgba(0, 0, 0, 0.2);
-  --shadow-book-dark: rgba(0, 0, 0, 0.3);
-  --shadow-page: rgba(0, 0, 0, 0.15);
-  --shadow-nav: rgba(0, 0, 0, 0.4);
-  --shadow-nav-hover: rgba(0, 0, 0, 0.6);
-  --shadow-map-info: rgba(0, 0, 0, 0.16);
-  --shadow-map-info-tablet: rgba(0, 0, 0, 0.14);
-  --shadow-map-info-mobile: rgba(0, 0, 0, 0.12);
-  --shadow-map-marker: rgba(0, 0, 0, 0.22);
-
-  /* Overlay */
-  --overlay-bg: rgba(0, 0, 0, 0.5);
-  --overlay-white-12: rgba(255, 255, 255, 0.12);
-  --overlay-white-30: rgba(255, 255, 255, 0.3);
-  --overlay-white-50: rgba(255, 255, 255, 0.5);
-
-  /* Alpha overlays */
-  --brown-800-alpha-05: rgba(56, 39, 29, 0.05);
-  --brown-800-alpha-08: rgba(56, 39, 29, 0.08);
-  --brown-800-alpha-10: rgba(56, 39, 29, 0.1);
-  --white-alpha-08: rgba(255, 255, 255, 0.08);
-  --white-alpha-10: rgba(255, 255, 255, 0.1);
-  --white-alpha-15: rgba(255, 255, 255, 0.15);
 }
 
 * {

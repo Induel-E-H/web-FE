@@ -87,7 +87,7 @@
   font-weight: 600;
   font-size: var(--text-base);
 
-  color: var(--accent-gold-warm);
+  color: var(--accent-gold-600);
 }
 
 .patent__expiration__item__content span:last-child {

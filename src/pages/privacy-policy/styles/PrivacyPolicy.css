@@ -66,7 +66,7 @@
 }
 
 .privacy-policy__highlight-card:hover {
-  box-shadow: 0 0.208vmax 0.625vmax var(--brown-800-alpha-10);
+  box-shadow: 0 0.208vmax 0.625vmax rgb(var(--brown-800-rgb) / var(--alpha-10));
 }
 
 .privacy-policy__highlight-icon {

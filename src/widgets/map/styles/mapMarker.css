@@ -4,7 +4,7 @@
 }
 
 .map__marker__shadow {
-  fill: var(--shadow-map-marker);
+  fill: var(--shadow-04);
 }
 
 .map__marker__body {
@@ -12,7 +12,7 @@
 }
 
 .map__marker__highlight {
-  fill: var(--overlay-white-12);
+  fill: var(--overlay-white-10);
 }
 
 .map__marker__circle {

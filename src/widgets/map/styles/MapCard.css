@@ -36,6 +36,8 @@
 }
 
 .map__icon_frame {
+  --map-icon-bg: #e4ddd7;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,7 +92,7 @@
   padding: 0.78vmax 0;
   border-radius: 0.36vmax;
   background-color: var(--brown-800);
-  box-shadow: 0 0.21vmax 0.21vmax var(--shadow-sm);
+  box-shadow: 0 0.21vmax 0.21vmax var(--shadow-04);
   cursor: pointer;
   text-decoration: none;
   transition:
@@ -100,7 +102,7 @@
 
 .map__description_call:hover {
   background-color: var(--brown-900);
-  box-shadow: 0 0.31vmax 0.42vmax var(--shadow-hover);
+  box-shadow: 0 0.31vmax 0.42vmax var(--shadow-05);
 }
 
 .map__description_call:active {
@@ -183,11 +185,11 @@
     gap: 1.3vw;
     padding: 1.95vw 0;
     border-radius: 0.91vw;
-    box-shadow: 0 4px 4px var(--shadow-sm);
+    box-shadow: 0 4px 4px var(--shadow-04);
   }
 
   .map__description_call:hover {
-    box-shadow: 0 6px 3px var(--shadow-hover);
+    box-shadow: 0 6px 3px var(--shadow-05);
   }
 
   .map__description_call svg {
@@ -258,11 +260,11 @@
     gap: clamp(9px, 2.67vw, 13px);
     padding: clamp(9px, 2.67vw, 13px) 0;
     border-radius: clamp(8px, 1.87vw, 9px);
-    box-shadow: 0 4px 4px var(--shadow-sm);
+    box-shadow: 0 4px 4px var(--shadow-04);
   }
 
   .map__description_call:hover {
-    box-shadow: 0 3px 2px var(--shadow-hover);
+    box-shadow: 0 3px 2px var(--shadow-05);
   }
 
   .map__description_call svg {

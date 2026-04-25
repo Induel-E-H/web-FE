@@ -2,7 +2,7 @@
   background: var(--white);
   border-radius: 0.65vmax;
   overflow: hidden;
-  box-shadow: 0 0.417vmax 1.25vmax var(--shadow-map-info);
+  box-shadow: 0 0.417vmax 1.25vmax var(--shadow-03);
   width: 15vmax;
   min-width: 240px;
 }
@@ -17,7 +17,7 @@
 }
 
 .map__info__header {
-  background: var(--footer-background);
+  background: var(--brand-color);
   padding: 0.65vmax 0.75vmax;
   display: flex;
   align-items: center;
@@ -86,7 +86,7 @@
   .map__info__card {
     width: 28.65vmin;
     border-radius: 0.8vmin;
-    box-shadow: 0 0.5vmin 1.2vmin var(--shadow-map-info-tablet);
+    box-shadow: 0 0.5vmin 1.2vmin var(--shadow-03);
   }
 
   .map__info__header {
@@ -134,7 +134,7 @@
   .map__info__card {
     width: 69.5vmin;
     border-radius: 2.6vmin;
-    box-shadow: 0 0.8vmin 3vmin var(--shadow-map-info-mobile);
+    box-shadow: 0 0.8vmin 3vmin var(--shadow-02);
   }
 
   .map__info__header {

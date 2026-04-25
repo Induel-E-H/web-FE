@@ -15,16 +15,16 @@
   border-radius: 0.78vmax 0 0 0.78vmax;
 
   box-shadow:
-    0.52vmax 0 1.04vmax var(--shadow-sm),
-    inset -0.26vmax 0 0.52vmax var(--shadow-book);
+    0.52vmax 0 1.04vmax var(--shadow-04),
+    inset -0.26vmax 0 0.52vmax var(--shadow-04);
 }
 
 .history__book-cover-right {
   border-radius: 0 0.78vmax 0.78vmax 0;
 
   box-shadow:
-    -0.52vmax 0 1.04vmax var(--shadow-sm),
-    inset 0.26vmax 0 0.52vmax var(--shadow-book);
+    -0.52vmax 0 1.04vmax var(--shadow-04),
+    inset 0.26vmax 0 0.52vmax var(--shadow-04);
 }
 
 .history__book-cover-center {
@@ -93,18 +93,18 @@
 .history__book-cover-left .history__book-cover-center-spine-center {
   background: linear-gradient(
     to right,
-    var(--shadow-book),
-    var(--shadow-book-dark) 70%,
-    var(--shadow-book-dark) 100%
+    var(--shadow-04),
+    var(--shadow-05) 70%,
+    var(--shadow-05) 100%
   );
 }
 
 .history__book-cover-right .history__book-cover-center-spine-center {
   background: linear-gradient(
     to left,
-    var(--shadow-book),
-    var(--shadow-book-dark) 70%,
-    var(--shadow-book-dark) 100%
+    var(--shadow-04),
+    var(--shadow-05) 70%,
+    var(--shadow-05) 100%
   );
 }
 
@@ -113,16 +113,16 @@
     border-radius: 1.953vw 1.953vw 0 0;
 
     box-shadow:
-      0 10px 20px var(--shadow-sm),
-      inset 0 -5px 10px var(--shadow-book);
+      0 10px 20px var(--shadow-04),
+      inset 0 -5px 10px var(--shadow-04);
   }
 
   .history__book-cover-right {
     border-radius: 0 0 1.953vw 1.953vw;
 
     box-shadow:
-      -10px 0 20px var(--shadow-sm),
-      inset 5px 0 10px var(--shadow-book);
+      -10px 0 20px var(--shadow-04),
+      inset 5px 0 10px var(--shadow-04);
   }
 
   .history__book-cover-center {
@@ -176,18 +176,18 @@
   .history__book-cover-left .history__book-cover-center-spine-center {
     background: linear-gradient(
       to top,
-      var(--shadow-book),
-      var(--shadow-book-dark) 70%,
-      var(--shadow-book-dark) 100%
+      var(--shadow-04),
+      var(--shadow-05) 70%,
+      var(--shadow-05) 100%
     );
   }
 
   .history__book-cover-right .history__book-cover-center-spine-center {
     background: linear-gradient(
       to bottom,
-      var(--shadow-book),
-      var(--shadow-book-dark) 70%,
-      var(--shadow-book-dark) 100%
+      var(--shadow-04),
+      var(--shadow-05) 70%,
+      var(--shadow-05) 100%
     );
   }
 }
@@ -197,16 +197,16 @@
     border-radius: clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px) 0 0;
 
     box-shadow:
-      0 10px 20px var(--shadow-sm),
-      inset 0 -5px 10px var(--shadow-book);
+      0 10px 20px var(--shadow-04),
+      inset 0 -5px 10px var(--shadow-04);
   }
 
   .history__book-cover-right {
     border-radius: 0 0 clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
 
     box-shadow:
-      -10px 0 20px var(--shadow-sm),
-      inset 5px 0 10px var(--shadow-book);
+      -10px 0 20px var(--shadow-04),
+      inset 5px 0 10px var(--shadow-04);
   }
 
   .history__book-cover-center {

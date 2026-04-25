@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--shadow-overlay);
+  background: var(--shadow-06);
   border: none;
   border-radius: clamp(4px, 1.07vw, 6px);
   cursor: pointer;
@@ -176,7 +176,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--shadow-overlay-sm);
+  background: var(--shadow-02);
   border-radius: 0.52vmax;
   color: white;
   font-size: 1.25vmax;

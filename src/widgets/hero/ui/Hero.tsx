@@ -53,9 +53,9 @@ function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
             textAlign: 'center',
             whiteSpace: 'nowrap',
             textShadow: `
-              0 0 40px rgba(0, 0, 0, 1),
-              0 0 20px rgba(0, 0, 0, 1),
-              0 0 60px rgba(0, 0, 0, 1)
+              0 0 40px rgb(0, 0, 0, 1),
+              0 0 20px rgb(0, 0, 0, 1),
+              0 0 60px rgb(0, 0, 0, 1)
             `,
             color: 'white',
           }}

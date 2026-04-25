@@ -1,4 +1,6 @@
 .award__count {
+  --count-bg: #efeae8;
+
   display: flex;
   flex-direction: row;
 

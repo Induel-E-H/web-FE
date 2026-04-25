@@ -1,4 +1,6 @@
 .header {
+  --nav-hover: #74584b;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +18,7 @@
     transform 0.3s ease,
     background-color 0.3s ease,
     color 0.3s ease;
-  box-shadow: 0 0.2vmax 0.6vmax var(--shadow-header);
+  box-shadow: 0 0.2vmax 0.6vmax var(--shadow-01);
 }
 
 .header--hero {
@@ -52,7 +54,7 @@
   padding: 0.26vmax;
   border-radius: 0.26vmax;
   background-color: var(--white);
-  box-shadow: 0 0 0.208vmax var(--shadow-icon);
+  box-shadow: 0 0 0.208vmax var(--shadow-07);
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease,
@@ -125,7 +127,7 @@
   background-color: var(--white);
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--brown-800-alpha-08);
+  border-top: 1px solid rgb(var(--brown-800-rgb) / var(--alpha-10));
 }
 
 .header__mobile-menu button {
@@ -135,7 +137,7 @@
   color: var(--brown-800);
   background: none;
   border: none;
-  border-bottom: 0.052vw solid var(--brown-800-alpha-10);
+  border-bottom: 0.052vw solid rgb(var(--brown-800-rgb) / var(--alpha-10));
   cursor: pointer;
   text-align: left;
 }
@@ -146,12 +148,12 @@
 
 .header--hero .header__mobile-menu {
   background-color: var(--black);
-  border-top-color: var(--white-alpha-08);
+  border-top-color: rgb(var(--white-rgb) / var(--alpha-10));
 }
 
 .header--hero .header__mobile-menu button {
   color: var(--white);
-  border-bottom-color: var(--white-alpha-10);
+  border-bottom-color: rgb(var(--white-rgb) / var(--alpha-10));
 }
 
 .header__nav button,
@@ -170,19 +172,19 @@
 }
 
 .header__mobile-menu button:hover {
-  background-color: var(--brown-800-alpha-05);
+  background-color: rgb(var(--brown-800-rgb) / var(--alpha-05));
 }
 
 .header__mobile-menu button:active {
-  background-color: var(--brown-800-alpha-10);
+  background-color: rgb(var(--brown-800-rgb) / var(--alpha-10));
 }
 
 .header--hero .header__mobile-menu button:hover {
-  background-color: var(--white-alpha-08);
+  background-color: rgb(var(--white-rgb) / var(--alpha-10));
 }
 
 .header--hero .header__mobile-menu button:active {
-  background-color: var(--white-alpha-15);
+  background-color: rgb(var(--white-rgb) / var(--alpha-15));
 }
 
 @media (max-width: 1024px) {
@@ -200,7 +202,7 @@
     height: 3.65vw;
     padding: 3.8%;
     border-radius: 0.66vw;
-    box-shadow: 0 0 4px var(--shadow-icon);
+    box-shadow: 0 0 4px var(--shadow-07);
   }
 
   .header__logo span {

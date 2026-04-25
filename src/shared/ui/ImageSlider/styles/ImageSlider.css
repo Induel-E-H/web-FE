@@ -55,7 +55,7 @@
   justify-content: center;
   width: 2.5vmax;
   height: 2.5vmax;
-  background: var(--shadow-nav);
+  background: var(--shadow-06);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -79,7 +79,7 @@
 }
 
 .image-slider__nav:hover {
-  background: var(--shadow-nav-hover);
+  background: var(--shadow-08);
 }
 
 .image-slider__indicator {
@@ -88,7 +88,7 @@
   left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
-  background: var(--overlay-bg);
+  background: var(--overlay-black-50);
   color: var(--white);
   padding: 0.26vmax 0.78vmax;
   border-radius: 1vmax;

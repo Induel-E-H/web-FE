@@ -8,12 +8,12 @@
   display: flex;
   align-items: center;
   gap: 0.78vmax;
-  color: var(--accent-gold);
+  color: var(--accent-gold-400);
 }
 
 .section-title__description hr {
   border: none;
-  border-top: 2px solid var(--accent-gold);
+  border-top: 2px solid var(--accent-gold-400);
   width: 4.17vmax;
 }
 
@@ -35,7 +35,7 @@
   }
 
   .section-title__description hr {
-    border-top: 2px solid var(--accent-gold);
+    border-top: 2px solid var(--accent-gold-400);
     width: 9.11vw;
   }
 
@@ -54,7 +54,7 @@
   }
 
   .section-title__description hr {
-    border-top: 2px solid var(--accent-gold);
+    border-top: 2px solid var(--accent-gold-400);
     width: clamp(56px, 16vw, 80px);
   }
 

@@ -1,4 +1,11 @@
 .patent {
+  --status-valid: #05df72;
+  --patent-divider: #60524a;
+  --patent-item-divider: #4c3d34;
+  --patent-expire-icon: #827671;
+  --patent-text-secondary: #b4a8a3;
+  --patent-serial: #b0a49f;
+
   display: flex;
   flex-direction: column;
 
