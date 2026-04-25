@@ -148,7 +148,7 @@
   overflow: hidden;
 }
 
-.content__image--has-image {
+.content__image.content__image--has-image {
   cursor: pointer;
 }
 
