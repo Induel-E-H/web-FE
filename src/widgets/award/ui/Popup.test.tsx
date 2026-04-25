@@ -3,8 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { AwardPopup } from './Popup';
 
-vi.mock('@features/award', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@features/award')>();
+vi.mock('@entities/award', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@entities/award')>();
   return {
     ...actual,
     getAwardImage: vi.fn().mockReturnValue('popup-image.webp'),

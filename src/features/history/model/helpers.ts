@@ -1,4 +1,4 @@
-import { artworks } from '@entities/history';
+import { artworks, getThumbnailImage } from '@entities/history';
 
 import { PAGE_SIDE } from '../model/constants';
 import type { PageSide } from './types';
@@ -6,37 +6,6 @@ import type { PageSide } from './types';
 export function getArtworkIndex(pageIndex: number, side: PageSide): number {
   const isLeft = side === PAGE_SIDE.LEFT;
   return pageIndex * 2 + (isLeft ? 0 : 1);
-}
-
-const thumbnailImages = import.meta.glob(
-  '/src/entities/history/assets/content/*/0.webp',
-  { eager: true, import: 'default' },
-);
-
-const allContentImages = import.meta.glob(
-  '/src/entities/history/assets/content/*/*.webp',
-  { eager: true, import: 'default' },
-);
-
-export function getThumbnailImage(index: number): string | undefined {
-  const src =
-    thumbnailImages[`/src/entities/history/assets/content/${index}/0.webp`];
-  return typeof src === 'string' ? src : undefined;
-}
-
-export function getAllContentImages(index: number): string[] {
-  const images: string[] = [];
-  let i = 0;
-  while (true) {
-    const src =
-      allContentImages[
-        `/src/entities/history/assets/content/${index}/${i}.webp`
-      ];
-    if (typeof src !== 'string') break;
-    images.push(src);
-    i++;
-  }
-  return images;
 }
 
 export function preloadContentImages(pageIndex: number): void {

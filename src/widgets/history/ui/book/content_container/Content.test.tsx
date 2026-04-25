@@ -1,3 +1,4 @@
+import * as entityHistory from '@entities/history';
 import * as helpers from '@features/history/model/helpers';
 import { artworks } from '@entities/history';
 import { act, fireEvent, render, screen } from '@testing-library/react';
@@ -39,8 +40,10 @@ describe('ContentPage', () => {
     const MOCK_IMAGE = 'mock-thumbnail.webp';
 
     beforeEach(() => {
-      vi.spyOn(helpers, 'getThumbnailImage').mockReturnValue(MOCK_IMAGE);
-      vi.spyOn(helpers, 'getAllContentImages').mockReturnValue([MOCK_IMAGE]);
+      vi.spyOn(entityHistory, 'getThumbnailImage').mockReturnValue(MOCK_IMAGE);
+      vi.spyOn(entityHistory, 'getAllContentImages').mockResolvedValue([
+        MOCK_IMAGE,
+      ]);
       vi.spyOn(helpers, 'preloadContentImages').mockReturnValue(undefined);
     });
 
@@ -133,7 +136,7 @@ describe('ContentPage', () => {
       expect(article.classList).toContain('content__item--icon-mode');
     });
 
-    it('이미지 아이콘 버튼 클릭 시 팝업이 열린다', () => {
+    it('이미지 아이콘 버튼 클릭 시 팝업이 열린다', async () => {
       let capturedCb: ROCallback | null = null;
       vi.stubGlobal(
         'ResizeObserver',
@@ -167,26 +170,32 @@ describe('ContentPage', () => {
       const iconBtn = container.querySelector(
         'button.content__image-icon',
       ) as HTMLElement;
-      fireEvent.click(iconBtn);
+      await act(async () => {
+        fireEvent.click(iconBtn);
+      });
 
       expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
     });
 
-    it('figure 이미지 클릭 시 팝업이 열린다', () => {
+    it('figure 이미지 클릭 시 팝업이 열린다', async () => {
       const { container } = render(<ContentPage side='left' pageIndex={0} />);
       const figure = container.querySelector(
         'figure.content__image--has-image',
       ) as HTMLElement;
-      fireEvent.click(figure);
+      await act(async () => {
+        fireEvent.click(figure);
+      });
       expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
     });
 
-    it('팝업 닫기 버튼 클릭 시 팝업이 닫힌다 (handlePopupClose)', () => {
+    it('팝업 닫기 버튼 클릭 시 팝업이 닫힌다 (handlePopupClose)', async () => {
       const { container } = render(<ContentPage side='left' pageIndex={0} />);
       const figure = container.querySelector(
         'figure.content__image--has-image',
       ) as HTMLElement;
-      fireEvent.click(figure);
+      await act(async () => {
+        fireEvent.click(figure);
+      });
       const closeBtn = document.querySelector(
         'button[aria-label="닫기"]',
       ) as HTMLElement;

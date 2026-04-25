@@ -1,4 +1,4 @@
-import { getAwardImage } from '@features/award';
+import { getAwardImage } from '@entities/award';
 import { Popup } from '@shared/ui/Popup';
 
 export function AwardPopup({
