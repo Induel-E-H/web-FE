@@ -1,5 +1,7 @@
 # 🌐 (주) 인들이앤에이치 기업 소개 웹 사이트
 
+> 인터랙션 기반 브랜드 경험을 설계한 기업 웹사이트
+
 <div align='center'>
 
 | [🗒️ 팀 노션](https://induel-dev.notion.site/Induel-E-H-2d085bfc828280f0bc3fedd91b91bc91?pvs=74) | [🎨 디자인 툴](https://www.figma.com/design/hLUzLlFZkt1a9Om6FgZNK7/Induel-E-H-FE?node-id=0-1&p=f) |
@@ -119,6 +121,8 @@ Grid 기반 레이아웃 + 반응형 페이지네이션을 적용하여
 
 Naver Map API + Open Street Map Fallback 구조로  
 외부 API 장애 상황까지 고려한 **이중화 설계**를 적용했습니다.
+
+Naver Map API를 활용하여 Map Marker와 Info Window를 구현하여 회사 위치를 정확하게 표기했습니다.
 <img width="2540" height="1078" alt="image" src="https://github.com/user-attachments/assets/850863ad-8cd7-463d-9770-e2502be46df0" />
 
 ### Footer
@@ -133,22 +137,26 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 <img width="2243" height="1111" alt="image" src="https://github.com/user-attachments/assets/c35f20bf-d47c-4ad7-91f9-336178cb89ad" />
 
 ## 📚 SKILL STACK
+
 ### Deploy
+
 <img width="103" height="97" alt="Deploy" src="https://github.com/user-attachments/assets/df2906e5-240e-4ed5-9df1-4c84320addb3" />
 
 ### Develop
+
 <img width="759" height="99" alt="Develop" src="https://github.com/user-attachments/assets/9675dca0-0ee5-4ea2-a44c-2e7d6ea79a70" />
 
 ### Develop Environment
+
 <img width="1011" height="97" alt="Environment" src="https://github.com/user-attachments/assets/ecbdbaa5-5d5b-4163-b793-331e00265e8e" />
 
-
 ### CI/CD
+
 <img width="385" height="97" alt="CI   CD" src="https://github.com/user-attachments/assets/a88b7b4f-531f-47c1-a1ef-f25f04f8f9c2" />
 
 ### Monitor
-<img width="427" height="97" alt="Monitor" src="https://github.com/user-attachments/assets/6ceb7171-47de-4728-b478-32c8a72dbf31" />
 
+<img width="427" height="97" alt="Monitor" src="https://github.com/user-attachments/assets/6ceb7171-47de-4728-b478-32c8a72dbf31" />
 
 ## 🫂 TEAM
 
@@ -162,6 +170,29 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 | [박경민][gyeongmin-github] | [조민석][minseok-github] |
 
 </div>
+
+## 🚀 RESULT
+
+- Lighthouse
+  | Performance | Accessibility | Best Practice | SEO |
+  | ---------------------- | ------------- | ------------- | ------ |
+  | 🟢 95 | 🟢 100 | 🟢 100 | 🟢 100 |
+
+- 이미지 용량 45.6GB -> 311MB **99.32%** 절감 (JPG, PNG, TIF -> WebP 최적화)
+- Vitest & Github Actions 기반 테스트 자동화 파이프라인 구축
+- Storybook 기반 컴포넌트 명세화
+- Vitest & Storybook 연동으로 UI 단위 테스트 환경 구축
+- Naver Map 장애 대비 Open Street Map Fallback 구조 설계
+- ThreeJS 렌더링 성능 최적화 (디바이스별 분기 처리)
+- Lighthouse & Github Actions 기반 성능 회귀 감지 자동화
+- Chromatic & Storybook 기반 시각 회귀 테스트 적용
+- Docker 기반 개발 환경 통일 OS 간 실행 환경 차이 제거
+- mise 기반 Node.js 버전 통일 팀원 간 실행 환경 불일치 제거 및 개발 환경 재현성 확보
+- FSD(Feature-Sliced Design) 아키텍처 적용
+- Google Analytics 도입에 따른 개인정보 처리방침 페이지 구현으로 법적 요구사항 대응
+- Google Analytics / Search Console 기반 사용자 유입 및 검색 성과 모니터링
+- Netlify DNS 기반 도메인 및 배포 환경 관리
+- 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ## 🤝 협업 방식
 
