@@ -1,10 +1,7 @@
 import { type ReactNode, useEffect, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
-import {
-  lockScroll,
-  unlockScroll,
-} from '@shared/lib/useScrollLock/useScrollLock';
+import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 
 import '../styles/Popup.css';
 
@@ -87,16 +84,12 @@ export function Popup({
         }
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
-        if (e.shiftKey) {
-          if (document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-          }
-        } else {
-          if (document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-          }
+        const atBoundary = e.shiftKey
+          ? document.activeElement === first
+          : document.activeElement === last;
+        if (atBoundary) {
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
         }
         return;
       }

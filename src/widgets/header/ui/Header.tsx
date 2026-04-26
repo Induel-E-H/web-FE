@@ -41,6 +41,12 @@ function Header() {
     scrollTo(HERO_SELECTOR);
   }
 
+  const navItems = NAV_ITEMS.map(({ label, selector }) => (
+    <button key={label} onClick={() => scrollTo(selector)}>
+      {label}
+    </button>
+  ));
+
   return (
     <header
       className={[
@@ -64,11 +70,7 @@ function Header() {
       </button>
 
       <nav className='header__nav' aria-label='데스크탑 메뉴'>
-        {NAV_ITEMS.map(({ label, selector }) => (
-          <button key={label} onClick={() => scrollTo(selector)}>
-            {label}
-          </button>
-        ))}
+        {navItems}
       </nav>
 
       <button
@@ -87,11 +89,7 @@ function Header() {
           className='header__mobile-menu'
           aria-label='모바일 메뉴'
         >
-          {NAV_ITEMS.map(({ label, selector }) => (
-            <button key={label} onClick={() => scrollTo(selector)}>
-              {label}
-            </button>
-          ))}
+          {navItems}
         </nav>
       )}
     </header>
