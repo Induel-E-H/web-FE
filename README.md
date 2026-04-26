@@ -164,35 +164,71 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 
 <div align='center'>
 
-| **Frontend**               | **Frontend**             |
+| **FE**                     | **FE ⭐ Lead**           |
 | -------------------------- | ------------------------ |
 | ![박경민][gyeongmin]       | ![조민석][minseok]       |
 | [박경민][gyeongmin-github] | [조민석][minseok-github] |
 
 </div>
 
+#### 박경민
+
+- **QA**
+- Vision
+- Patent
+- Footer
+
+#### 조민석
+
+- **Infra**
+- Header
+- Hero
+- History
+- Award
+- Map
+- Privacy Policy
+
 ## 🚀 RESULT
+
+### Performance
 
 - Lighthouse
   | Performance | Accessibility | Best Practice | SEO |
   | ---------------------- | ------------- | ------------- | ------ |
   | 🟢 95 | 🟢 100 | 🟢 100 | 🟢 100 |
+- 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
+
+### Optimization
 
 - 이미지 용량 45.6GB -> 311MB **99.32%** 절감 (JPG, PNG, TIF -> WebP 최적화)
-- Vitest & Github Actions 기반 테스트 자동화 파이프라인 구축
-- Storybook 기반 컴포넌트 명세화
-- Vitest & Storybook 연동으로 UI 단위 테스트 환경 구축
-- Naver Map 장애 대비 Open Street Map Fallback 구조 설계
 - ThreeJS 렌더링 성능 최적화 (디바이스별 분기 처리)
+
+### Architecture
+
+- FSD(Feature-Sliced Design) 아키텍처 적용
+- Naver Map 장애 대비 Open Street Map Fallback 구조 설계
+
+### CI/CD
+
+- Vitest & Github Actions 기반 테스트 자동화 파이프라인 구축
 - Lighthouse & Github Actions 기반 성능 회귀 감지 자동화
 - Chromatic & Storybook 기반 시각 회귀 테스트 적용
-- Docker 기반 개발 환경 통일 OS 간 실행 환경 차이 제거
-- mise 기반 Node.js 버전 통일 팀원 간 실행 환경 불일치 제거 및 개발 환경 재현성 확보
-- FSD(Feature-Sliced Design) 아키텍처 적용
+- Netlify DNS 기반 도메인 및 배포 환경 관리
+
+### Test & Docs
+
+- Storybook 기반 컴포넌트 명세화
+- Vitest & Storybook 연동으로 UI 단위 테스트 환경 구축
+
+### Observability
+
 - Google Analytics 도입에 따른 개인정보 처리방침 페이지 구현으로 법적 요구사항 대응
 - Google Analytics / Search Console 기반 사용자 유입 및 검색 성과 모니터링
-- Netlify DNS 기반 도메인 및 배포 환경 관리
-- 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
+
+### TeamWork
+
+- Docker 기반 개발 환경 통일 OS 간 실행 환경 차이 제거
+- mise 기반 Node.js 버전 통일 팀원 간 실행 환경 불일치 제거 및 개발 환경 재현성 확보
 
 ## 🤝 협업 방식
 
@@ -218,6 +254,11 @@ Claude Code 기반으로 반복 작업을 자동화하고
   - superpowers
   - frontend-design
   - code-simplifier
+- MCP
+  - Talk To Figma
+- Agent
+  - figma-designer: Talk To Figma를 통해 디자인을 제작하는 Agent
+  - vitest-writer: 테스트 작성 전문 Agent
 
 [gyeongmin]: https://avatars.githubusercontent.com/u/115498500?v=4&size=128
 [minseok]: https://avatars.githubusercontent.com/u/99482796?v=4&size=128
