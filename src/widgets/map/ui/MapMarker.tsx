@@ -1,3 +1,5 @@
+import induelIcon from '@assets/induel-icon.svg';
+
 import '../styles/mapMarker.css';
 
 export function MapMarker() {
@@ -29,27 +31,14 @@ export function MapMarker() {
         d='M22 3C14.5 3 8 7.5 5.5 14C9 9 15 6 22 6C29 6 35 9 38.5 14C36 7.5 29.5 3 22 3Z'
       />
       <circle className='map__marker__circle' cx='22' cy='21' r='14' />
-      <svg
+      <image
         x='15'
         y='12'
         width='16'
         height='18'
-        viewBox='0 0 649 748'
+        href={induelIcon}
         preserveAspectRatio='xMidYMid meet'
-      >
-        <path
-          d='M275.115 -6.10352e-05H197.814V157.373H275.115C394.499 157.373 491.627 254.501 491.627 373.885C491.627 493.269 394.499 590.397 275.115 590.397H157.37V747.764H275.115C481.595 747.764 649 580.372 649 373.885C649 167.392 481.595 -6.10352e-05 275.115 -6.10352e-05Z'
-          fill='#808285'
-        />
-        <path
-          d='M0 197.811V609.671V747.764H157.373V609.671V197.811H0Z'
-          fill='#333132'
-        />
-        <path
-          d='M0 -0.000259399H157.373V157.373H0V-0.000259399Z'
-          fill='#BF1E2D'
-        />
-      </svg>
+      />
     </svg>
   );
 }
