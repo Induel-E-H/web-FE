@@ -16,12 +16,12 @@
 }
 
 .vision__content {
-  --text-bg: #f0ead6;
+  --text-bg: var(--surface-cream);
   --color-index: #8c8672;
-  --color-main-h3: #38271d;
+  --color-main-h3: var(--brown-800);
   --color-main-h4: var(--brown-900);
-  --color-hr: #38271d;
-  --color-description: #38271d;
+  --color-hr: var(--brown-800);
+  --color-description: var(--brown-900);
 
   display: flex;
   flex-direction: row;
@@ -31,12 +31,12 @@
 }
 
 .vision__content--reverse {
-  --text-bg: #38271d;
+  --text-bg: var(--brown-800);
   --color-index: #977449;
-  --color-main-h3: #c9a96e;
-  --color-main-h4: #f5f5dc;
-  --color-hr: #c9a96e;
-  --color-description: #f5f5dc;
+  --color-main-h3: var(--accent-gold-600);
+  --color-main-h4: var(--surface-cream);
+  --color-hr: var(--accent-gold-600);
+  --color-description: var(--surface-cream);
 
   flex-direction: row-reverse;
 }
@@ -60,7 +60,7 @@
   -webkit-transform: scale(1.08);
 }
 
-.vision__content_text {
+.vision__content__text {
   display: flex;
   flex-direction: column;
   width: 45.43%;
@@ -78,8 +78,8 @@
 }
 
 .vision__content__index {
-  font-weight: 400;
-  font-size: 0.52vmax;
+  font-weight: var(--pretendard-regular);
+  font-size: max(11px, 0.729vw);
   color: var(--color-index);
 }
 
@@ -91,121 +91,121 @@
 
 .vision__content__title__main h3,
 .vision__content__title__main h4 {
-  font-family: 'BookendBatang';
-  font-weight: 700;
+  font-family: var(--font-bookendbatang);
+  font-weight: var(--bookendbatang-bold);
   line-height: 1.1;
 }
 
 .vision__content__title__main h3 {
-  font-size: 3.13vmax;
+  font-size: max(40px, 3.13vw);
   color: var(--color-main-h3);
   transform: skewX(-10deg);
   -webkit-transform: skewX(-10deg);
 }
 
 .vision__content__title__main h4 {
-  font-size: 1.04vmax;
+  font-size: max(15px, 1.04vw);
   color: var(--color-main-h4);
 }
 
 .vision__content__title hr {
   width: 2.083vmax;
   border: none;
-  border-top: 0.052vmax solid var(--color-hr);
+  border-top: 1px solid var(--color-hr);
 }
 
 .vision__content__description {
-  font-weight: 400;
-  font-size: 0.78vmax;
+  font-weight: var(--pretendard-regular);
+  font-size: max(12px, 0.78vw);
   line-height: 2;
   color: var(--color-description);
 }
 
 @media (max-width: 1024px) {
   .vision__content {
-    height: 55.34vmin;
+    height: 55.34vw;
   }
 
-  .vision__content_text {
-    width: 33.59vmin;
-    gap: 2.6vmin;
-    padding: 0 3.91vmin;
+  .vision__content__text {
+    width: 33.59vw;
+    gap: 2.6vw;
+    padding: 0 3.91vw;
   }
 
   .vision__content__title {
-    gap: 1.95vmin;
+    gap: 1.95vw;
   }
 
   .vision__content__index {
-    font-size: 1.04vmin;
+    font-size: 1.563vw;
   }
 
   .vision__content__title__main {
-    gap: 0.65vmin;
+    gap: 0.65vw;
   }
 
   .vision__content__title__main h3 {
-    font-size: 5.21vmin;
+    font-size: 5.21vw;
   }
 
   .vision__content__title__main h4 {
-    font-size: 1.95vmin;
+    font-size: 1.95vw;
   }
 
   .vision__content__title hr {
-    width: 4.56vmin;
-    border-top-width: 0.13vmin;
+    width: 4.56vw;
+    border-top-width: 1px;
   }
 
   .vision__content__description {
-    font-size: 1.56vmin;
+    font-size: 1.56vw;
   }
 }
 
 @media (max-width: 767px) {
   .vision__content {
     flex-direction: column;
-    height: 113.33vmin;
+    height: 62.5svh;
   }
 
   .vision__content__image {
     width: 100%;
-    height: 54.4vmin;
+    height: clamp(190px, 54.4vw, 272px);
   }
 
-  .vision__content_text {
+  .vision__content__text {
     width: 100%;
-    height: 58.93vmin;
-    gap: 4vmin;
-    padding: 0 8vmin;
+    height: clamp(206px, 58.93vw, 295px);
+    gap: clamp(14px, 4vw, 20px);
+    padding: 0 clamp(28px, 8vw, 40px);
   }
 
   .vision__content__title {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .vision__content__index {
-    font-size: 2.13vmin;
+    font-size: clamp(9px, 2.667vw, 13px);
   }
 
   .vision__content__title__main {
-    gap: 1.33vmin;
+    gap: clamp(4px, 1.33vw, 7px);
   }
 
   .vision__content__title__main h3 {
-    font-size: 8vmin;
+    font-size: clamp(28px, 8vw, 40px);
   }
 
   .vision__content__title__main h4 {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .vision__content__title hr {
-    width: 9.33vmin;
-    border-top-width: 0.27vmin;
+    width: clamp(33px, 9.33vw, 47px);
+    border-top-width: 1px;
   }
 
   .vision__content__description {
-    font-size: 2.67vmin;
+    font-size: clamp(9px, 2.67vw, 13px);
   }
 }

@@ -1,11 +1,11 @@
 .popup__overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--overlay-black-50);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 1001;
   animation: popup-overlay-in 0.2s ease;
 }
 
@@ -52,12 +52,12 @@
 }
 
 .popup__close {
-  font-size: 1.342vmax;
+  font-size: max(19px, 1.342vw);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--gray-600);
+  color: var(--gray-700);
 }
 
 .popup__header {
@@ -71,9 +71,9 @@
 }
 
 .popup__title {
-  font-family: 'BookendBatang', sans-serif;
-  font-size: 1.667vmax;
-  font-weight: 700;
+  font-family: var(--font-bookendbatang);
+  font-size: max(24px, 1.667vw);
+  font-weight: var(--bookendbatang-bold);
   color: var(--black);
 }
 
@@ -87,52 +87,52 @@
 
 @media (max-width: 1024px) {
   .popup {
-    width: 64.584vmin;
-    height: 93.23vmin;
-    padding: 1.95vmin;
-    border-radius: 1.303vmin;
-    gap: 1.303vmin;
+    width: 64.584vw;
+    height: 79.6svh;
+    padding: 1.95vw;
+    border-radius: 1.303vw;
+    gap: 1.303vw;
   }
 
   .popup__close {
-    font-size: 2.685vmin;
+    font-size: 2.685vw;
   }
 
   .popup--gallery {
     width: 85vw;
     height: 70vh;
-    padding: 3.13vmin;
-    gap: 1.56vmin;
-    border-radius: 1.04vmin;
+    padding: 3.13vw;
+    gap: 1.56vw;
+    border-radius: 1.04vw;
   }
 
   .popup__title {
-    font-size: 3.13vmin;
+    font-size: 3.13vw;
   }
 }
 
 @media (max-width: 767px) {
   .popup {
-    width: 91.73vmin;
-    height: 135.47vmin;
-    padding: 4vmin;
-    border-radius: 2.666vmin;
-    gap: 4vmin;
+    width: clamp(321px, 91.73vw, 459px);
+    height: 74.7svh;
+    padding: clamp(14px, 4vw, 20px);
+    border-radius: clamp(9px, 2.666vw, 13px);
+    gap: clamp(14px, 4vw, 20px);
   }
 
   .popup__close {
-    font-size: 2.529vmax;
+    font-size: clamp(16px, 4.585vw, 23px);
   }
 
   .popup--gallery {
     width: 95vw;
     height: 75vh;
-    padding: 4vmin;
-    gap: 2vmin;
-    border-radius: 2vmin;
+    padding: clamp(14px, 4vw, 20px);
+    gap: clamp(8px, 2vw, 10px);
+    border-radius: clamp(8px, 2vw, 10px);
   }
 
   .popup__title {
-    font-size: 4vmin;
+    font-size: clamp(15px, 4.27vw, 21px);
   }
 }

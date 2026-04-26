@@ -9,6 +9,7 @@ const meta = {
   args: {
     onClose: fn(),
     awardId: 0,
+    awardTitle: '수상 이미지',
   },
   parameters: {
     layout: 'fullscreen',

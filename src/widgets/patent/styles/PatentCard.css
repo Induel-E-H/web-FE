@@ -1,0 +1,22 @@
+.patent__card {
+  width: 100%;
+  height: 15.44vmax;
+}
+
+.patent__card:hover {
+  box-shadow: 0 0.8vmax 1.6vmax var(--shadow-04);
+}
+
+@media (max-width: 1024px) {
+  .patent__card {
+    width: 100%;
+    height: 40.7vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .patent__card {
+    width: 100%;
+    height: 35.1svh;
+  }
+}

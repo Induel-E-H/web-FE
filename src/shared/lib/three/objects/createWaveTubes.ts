@@ -1,3 +1,4 @@
+import { isMobileViewport } from '@shared/lib/breakpoint';
 import {
   type BufferAttribute,
   Color,
@@ -10,7 +11,7 @@ import {
 import type { TubeData } from './type';
 
 export function createWaveTubes(): { group: Group; tubes: TubeData[] } {
-  const isMobile = window.innerWidth < 768;
+  const isMobile = isMobileViewport();
 
   const TUBE_COUNT = isMobile ? 20 : 30;
   const TUBE_RADIUS = 2;

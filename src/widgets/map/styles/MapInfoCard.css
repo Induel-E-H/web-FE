@@ -1,0 +1,190 @@
+.map__info__card {
+  background: var(--white);
+  border-radius: 0.65vmax;
+  overflow: hidden;
+  box-shadow: 0 0.417vmax 1.25vmax var(--shadow-03);
+  width: 15vmax;
+  min-width: 240px;
+}
+
+.map__info__tail {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--white);
+  margin: 0 auto;
+}
+
+.map__info__header {
+  background: var(--brand-color);
+  padding: 0.65vmax 0.75vmax;
+  display: flex;
+  align-items: center;
+  gap: 0.55vmax;
+}
+
+.map__info__logo {
+  width: 1.3vmax;
+}
+
+.map__info__name {
+  color: var(--white);
+  font-weight: var(--pretendard-bold);
+  font-size: max(13px, 0.833vw);
+}
+
+.map__info__subtitle {
+  color: var(--overlay-white-50);
+  font-size: max(10px, 0.625vw);
+}
+
+.map__info__body {
+  padding: 0.65vmax 0.75vmax;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vmax;
+}
+
+.map__info__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5vmax;
+}
+
+.map__info__row--top {
+  align-items: flex-start;
+}
+
+.map__info__icon-box {
+  width: 1.4vmax;
+  height: 1.4vmax;
+  background: var(--brown-50);
+  border-radius: 0.38vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map__info__icon {
+  width: 0.8vmax;
+}
+
+.map__info__phone,
+.map__info__address-main {
+  font-size: max(12px, 0.729vw);
+  color: var(--brown-800);
+  text-decoration: none;
+}
+
+.map__info__address-sub {
+  font-size: max(10px, 0.625vw);
+  color: var(--gray-700);
+}
+
+@media (max-width: 1024px) {
+  .map__info__card {
+    width: 28.65vmin;
+    border-radius: 0.8vmin;
+    box-shadow: 0 0.5vmin 1.2vmin var(--shadow-03);
+  }
+
+  .map__info__header {
+    padding: 1.2vmin 1.3vmin;
+    gap: 0.9vmin;
+  }
+
+  .map__info__logo {
+    width: 2.4vmin;
+  }
+
+  .map__info__body {
+    padding: 1.2vmin 1.3vmin;
+    gap: 0.9vmin;
+  }
+
+  .map__info__icon-box {
+    width: 2.4vmin;
+    height: 2.4vmin;
+  }
+
+  .map__info__icon {
+    width: 1.5vmin;
+  }
+
+  .map__info__name {
+    font-size: clamp(14px, 1.8vmin, 18px);
+  }
+
+  .map__info__subtitle {
+    font-size: clamp(11px, 1.3vmin, 14px);
+  }
+
+  .map__info__phone,
+  .map__info__address-main {
+    font-size: clamp(12px, 1.6vmin, 16px);
+  }
+
+  .map__info__address-sub {
+    font-size: clamp(10px, 1.3vmin, 14px);
+  }
+}
+
+@media (max-width: 767px) {
+  .map__info__card {
+    width: 69.5vmin;
+    border-radius: 2.6vmin;
+    box-shadow: 0 0.8vmin 3vmin var(--shadow-02);
+  }
+
+  .map__info__header {
+    padding: 3.2vmin 3.7vmin;
+    gap: 2.6vmin;
+  }
+
+  .map__info__logo {
+    width: 5.8vmin;
+  }
+
+  .map__info__body {
+    padding: 3.2vmin 3.7vmin;
+    gap: 2.6vmin;
+  }
+
+  .map__info__row {
+    gap: 2.6vmin;
+  }
+
+  .map__info__icon-box {
+    width: 5.8vmin;
+    height: 5.8vmin;
+    border-radius: 1.6vmin;
+  }
+
+  .map__info__icon {
+    width: 3vmin;
+  }
+
+  .map__info__name {
+    font-size: 4.2vmin;
+  }
+
+  .map__info__subtitle {
+    font-size: 3.2vmin;
+  }
+
+  .map__info__phone,
+  .map__info__address-main {
+    font-size: 3.5vmin;
+  }
+
+  .map__info__address-sub {
+    font-size: 3vmin;
+  }
+
+  .map__info__tail {
+    border-left: 1.6vmin solid transparent;
+    border-right: 1.6vmin solid transparent;
+    border-top: 1.6vmin solid var(--white);
+  }
+}

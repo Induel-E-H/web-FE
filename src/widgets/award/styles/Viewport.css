@@ -3,9 +3,9 @@
   flex-direction: column;
 
   width: 100%;
-  height: 100%;
+  height: 93.3vh;
   padding: 0.5vmax;
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 .award__card_slider {
@@ -32,36 +32,38 @@
 
 @media (max-width: 1024px) {
   .award__card_viewport {
-    padding: 0.5vmin;
+    padding: 0.5vw;
+    height: 69vh;
   }
 
   .award__card_slider {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .award__card_page {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
 
-    column-gap: 2.6vmin;
-    row-gap: 2.6vmin;
+    column-gap: 2.6vw;
+    row-gap: 2.6vw;
   }
 }
 
 @media (max-width: 767px) {
   .award__card_viewport {
-    padding: 1vmin;
+    padding: clamp(3px, 1vw, 5px);
+    height: 70.59vh;
   }
 
   .award__card_slider {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .award__card_page {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
 
-    column-gap: 4vmin;
-    row-gap: 4vmin;
+    column-gap: clamp(14px, 4vw, 20px);
+    row-gap: clamp(14px, 4vw, 20px);
   }
 }

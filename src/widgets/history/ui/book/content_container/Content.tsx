@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { MdOutlineZoomOutMap } from 'react-icons/md';
+import { MdOutlineImage, MdOutlineZoomOutMap } from 'react-icons/md';
 
-import { artworks } from '@entities/history';
 import {
+  artworks,
   getAllContentImages,
-  getArtworkIndex,
   getThumbnailImage,
-  preloadContentImages,
-} from '@features/history/model/helpers';
-import type { PageSide } from '@features/history/model/types';
+} from '@entities/history';
+import { getArtworkIndex, preloadContentImages } from '@features/history';
+import type { PageSide } from '@features/history';
 
 import '../../../styles/book/content_container/Content.css';
 import { ImageGalleryPopup } from '../../ImageGalleryPopup';
@@ -58,19 +57,72 @@ function ContentItem({
   index: number;
 }) {
   const [showPopup, setShowPopup] = useState(false);
+  const [contentImages, setContentImages] = useState<string[]>([]);
+  const [showImageInline, setShowImageInline] = useState(true);
+  const articleRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const imageSrc = getThumbnailImage(index);
 
-  function handleImageClick(e: React.MouseEvent) {
+  useLayoutEffect(() => {
+    if (!imageSrc) return;
+
+    const article = articleRef.current;
+    const text = textRef.current;
+    if (!article || !text) return;
+
+    function measure() {
+      const articleHeight = article!.clientHeight;
+      const textHeight = text!.clientHeight;
+      const gap = parseFloat(getComputedStyle(article!).gap) || 0;
+      const available = articleHeight - textHeight - gap;
+      setShowImageInline(available >= articleHeight * 0.3);
+    }
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(article);
+    ro.observe(text);
+    measure();
+
+    return () => ro.disconnect();
+  }, [imageSrc]);
+
+  async function handleImageClick(e: React.MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
+    const images = await getAllContentImages(index);
+    setContentImages(images);
     setShowPopup(true);
   }
 
+  function handlePopupClose() {
+    setShowPopup(false);
+    setContentImages([]);
+  }
+
+  const iconMode = Boolean(imageSrc && !showImageInline);
+
   return (
-    <article className='content__item'>
-      <div className='content__text'>
-        <h3 className='content__title-eng'>{item.titleEng}</h3>
-        <h3 className='content__title-kor'>{item.title}</h3>
+    <article
+      className={`content__item${iconMode ? ' content__item--icon-mode' : ''}`}
+      ref={articleRef}
+    >
+      {iconMode && (
+        <button
+          className='content__image-icon'
+          onMouseDown={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            void handleImageClick(e);
+          }}
+          aria-label='이미지 보기'
+        >
+          <MdOutlineImage aria-hidden='true' />
+        </button>
+      )}
+      <div className='content__text' ref={textRef}>
+        <div className='content__title'>
+          <h3 className='content__title-kor'>{item.title}</h3>
+          <h3 className='content__title-eng'>{item.titleEng}</h3>
+        </div>
         <SubTitleContent
           subTitle={item.subTitle as SubTitleProp}
           content={item.content as ContentProp}
@@ -106,26 +158,34 @@ function ContentItem({
           </div>
         </dl>
       </div>
-      <figure
-        className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
-        onMouseDown={(e) => imageSrc && e.stopPropagation()}
-        onClick={imageSrc ? handleImageClick : undefined}
-      >
-        {imageSrc && (
-          <>
-            <img src={imageSrc} alt={item.title} />
-            <div className='content__image-zoom'>
-              <MdOutlineZoomOutMap size='1.25vmax' color='white' />
-            </div>
-          </>
-        )}
-      </figure>
+      {showImageInline && (
+        <figure
+          className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
+          onMouseDown={(e) => imageSrc && e.stopPropagation()}
+          onClick={
+            imageSrc
+              ? (e) => {
+                  void handleImageClick(e);
+                }
+              : undefined
+          }
+        >
+          {imageSrc && (
+            <>
+              <img src={imageSrc} alt={item.title} loading='lazy' />
+              <div className='content__image-zoom' aria-hidden='true'>
+                <MdOutlineZoomOutMap />
+              </div>
+            </>
+          )}
+        </figure>
+      )}
       {showPopup &&
         createPortal(
           <ImageGalleryPopup
             title={item.title}
-            images={getAllContentImages(index)}
-            onClose={() => setShowPopup(false)}
+            images={contentImages}
+            onClose={handlePopupClose}
           />,
           document.body,
         )}
@@ -137,7 +197,7 @@ export function ContentPage({ side, pageIndex }: ContentPageProps) {
   const itemIndex = getArtworkIndex(pageIndex, side);
   const item = artworks[itemIndex] ?? null;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     preloadContentImages(pageIndex);
   }, [pageIndex]);
 

@@ -1,3 +1,11 @@
 .map__title h2 {
-  color: #38271d;
+  color: var(--brown-800);
+}
+
+.map__title .section-title__description {
+  color: var(--accent-brown-700);
+}
+
+.map__title .section-title__description hr {
+  border-color: var(--accent-brown-700);
 }

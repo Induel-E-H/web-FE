@@ -1,3 +1,4 @@
+import { isMobileViewport } from '@shared/lib/breakpoint';
 import type { Camera, Scene, WebGLRenderer } from 'three';
 
 import type { TubeData } from '../objects/type';
@@ -12,7 +13,7 @@ export function startWaveAnimation(
   const WAVE_FREQ = 0.4;
   const WAVE_SPEED = 0.3;
 
-  const isMobile = window.innerWidth < 768;
+  const isMobile = isMobileViewport();
   const targetFPS = isMobile ? 30 : 60;
   const frameInterval = 1000 / targetFPS;
 

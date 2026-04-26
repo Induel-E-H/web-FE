@@ -1,8 +1,10 @@
 import { milestonesData } from '@entities/history';
-import { getArtworkIndex } from '@features/history/model/helpers';
-import { MILESTONES_YEAR_RANGES_BY_BREAKPOINT } from '@features/history/model/pageRegistry';
-import type { PageSide } from '@features/history/model/types';
-import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import {
+  getArtworkIndex,
+  MILESTONES_YEAR_RANGES_BY_BREAKPOINT,
+} from '@features/history';
+import type { PageSide } from '@features/history';
+import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import '../../../styles/book/content_container/Milestones.css';
 import { BookPageTitle } from '../PageTitle';

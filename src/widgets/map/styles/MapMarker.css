@@ -1,0 +1,32 @@
+.map__marker {
+  width: 2.292vmax;
+  aspect-ratio: 11/14;
+}
+
+.map__marker__shadow {
+  fill: var(--shadow-04);
+}
+
+.map__marker__body {
+  fill: url(#pinGrad);
+}
+
+.map__marker__highlight {
+  fill: var(--overlay-white-10);
+}
+
+.map__marker__circle {
+  fill: var(--white);
+}
+
+@media (max-width: 1024px) {
+  .map__marker {
+    width: 7vmin;
+  }
+}
+
+@media (max-width: 767px) {
+  .map__marker {
+    width: 10vmin;
+  }
+}

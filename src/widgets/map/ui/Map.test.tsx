@@ -1,7 +1,8 @@
+// @vitest-environment jsdom
 import { render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import Map from './Map';
+import { Map } from './Map';
 
 const mockMakeMap = vi.hoisted(() => vi.fn(() => vi.fn()));
 
@@ -46,10 +47,14 @@ describe('Map', () => {
       expect(mockMakeMap).toHaveBeenCalledOnce();
     });
 
-    it('makeMap에 HTMLDivElement가 전달된다', () => {
+    it('makeMap에 HTMLDivElement와 HTML/SVG 문자열이 전달된다', () => {
       render(<Map />);
 
-      expect(mockMakeMap).toHaveBeenCalledWith(expect.any(HTMLDivElement));
+      expect(mockMakeMap).toHaveBeenCalledWith(
+        expect.any(HTMLDivElement),
+        expect.any(String),
+        expect.any(String),
+      );
     });
 
     it('언마운트 시 makeMap의 cleanup 함수가 호출된다', () => {
@@ -77,7 +82,9 @@ describe('Map', () => {
       setNaverMaps(false);
       render(<Map />);
 
-      expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+      expect(
+        screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+      ).toBeInTheDocument();
       expect(mockMakeMap).not.toHaveBeenCalled();
     });
 
@@ -99,8 +106,103 @@ describe('Map', () => {
 
       // queueMicrotask로 지연된 setState 완료를 기다림
       await waitFor(() => {
-        expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+        expect(
+          screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+        ).toBeInTheDocument();
       });
+    });
+  });
+
+  describe('loading 상태 — API 키 있음, SDK 미로드', () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      document
+        .querySelectorAll('script[src*="oapi.map.naver.com"]')
+        .forEach((el) => el.remove());
+    });
+
+    it('API 키가 있고 Naver SDK 미로드 시 div.map__content가 렌더링된다', () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      const { container } = render(<Map />);
+
+      expect(container.querySelector('.map__content')).toBeInTheDocument();
+      expect(
+        screen.queryByTitle('인들이앤에이치 본사 위치 지도'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('API 키가 있고 Naver SDK 미로드 시 스크립트가 동적으로 삽입된다', () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      render(<Map />);
+
+      const script = document.querySelector(
+        'script[src*="oapi.map.naver.com"]',
+      );
+      expect(script).toBeInTheDocument();
+      expect(script?.getAttribute('src')).toContain('test-api-key');
+    });
+
+    it('스크립트 로드 실패 시 iframe fallback이 렌더링된다', async () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      render(<Map />);
+
+      const script = document.querySelector(
+        'script[src*="oapi.map.naver.com"]',
+      );
+
+      script?.dispatchEvent(new Event('error'));
+
+      await waitFor(() => {
+        expect(
+          screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+        ).toBeInTheDocument();
+      });
+    });
+
+    it('스크립트 load 이벤트 후 Naver SDK가 없으면 fallback이 렌더링된다', async () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      render(<Map />);
+
+      const script = document.querySelector(
+        'script[src*="oapi.map.naver.com"]',
+      );
+      script?.dispatchEvent(new Event('load'));
+
+      await waitFor(() => {
+        expect(
+          screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+        ).toBeInTheDocument();
+      });
+    });
+
+    it('이미 스크립트가 있고 Naver SDK 미로드 시 load 이벤트를 기다린다', async () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+
+      const existingScript = document.createElement('script');
+      existingScript.src =
+        'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=test-api-key';
+      document.head.appendChild(existingScript);
+
+      render(<Map />);
+
+      existingScript.dispatchEvent(new Event('load'));
+
+      await waitFor(() => {
+        expect(
+          screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+        ).toBeInTheDocument();
+      });
+
+      existingScript.remove();
     });
   });
 
@@ -113,7 +215,9 @@ describe('Map', () => {
 
       rerender(<Map />);
 
-      expect(screen.getByTitle('위치 지도')).toBeInTheDocument();
+      expect(
+        screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+      ).toBeInTheDocument();
     });
 
     it('마운트 시 navermap_authFailure 콜백이 등록된다', () => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import { buildRapidSteps } from './animation/buildRapidSteps';
 import { useFlipAnimation } from './animation/useFlipAnimation';
@@ -95,6 +95,8 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     beginContinuousFlip,
     chainHoldFlip,
     syncCallbacks,
+    syncBoundaryCallbacks,
+    syncCoverCallbacks,
   } = useHoldNavigation();
 
   function applyNavigationStep(step: NavigationStep) {
@@ -283,6 +285,8 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     prevActiveItem,
     navigateToCategory,
     beginContinuousFlip,
+    syncBoundaryCallbacks,
+    syncCoverCallbacks,
     leftShadowCount,
     rightShadowCount,
     startFlipAnimation,

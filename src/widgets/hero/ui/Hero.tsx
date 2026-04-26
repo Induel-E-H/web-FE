@@ -1,21 +1,35 @@
+import { lazy, Suspense } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
+import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 
-import induelIcon from '@assets/induel-icon.svg';
-
+import backgroundFallback from '../assets/background-fallback.webp';
 import '../styles/Hero.css';
-import HeroBackground from './HeroBackground';
 
-function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
+const HeroBackground = lazy(() => import('./HeroBackground'));
+
+export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
-    <section className='hero'>
-      <HeroBackground />
+    <section id='hero' className='hero' aria-label='회사 소개'>
+      <Suspense
+        fallback={
+          <img
+            src={backgroundFallback}
+            className='hero__background hero__background--fallback'
+            aria-hidden='true'
+            alt=''
+          />
+        }
+      >
+        <HeroBackground />
+      </Suspense>
       <div className='hero__company'>
         <img
           src={induelIcon}
           alt='인들이앤에이치 로고'
           className='hero__logo'
+          fetchPriority='high'
         />
         <div className='hero__company-text'>
           <hgroup>
@@ -38,10 +52,11 @@ function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
             textAlign: 'center',
             whiteSpace: 'nowrap',
             textShadow: `
-              0 0 40px rgba(0, 0, 0, 1),
-              0 0 20px rgba(0, 0, 0, 1),
-              0 0 60px rgba(0, 0, 0, 1)
+              0 0 40px rgb(0, 0, 0, 1),
+              0 0 20px rgb(0, 0, 0, 1),
+              0 0 60px rgb(0, 0, 0, 1)
             `,
+            color: 'white',
           }}
         >
           현재 개발중입니다!
@@ -50,5 +65,3 @@ function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
     </section>
   );
 }
-
-export default Hero;

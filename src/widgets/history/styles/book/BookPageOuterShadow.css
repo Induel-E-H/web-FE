@@ -14,11 +14,13 @@
   width: 56%;
   height: 100%;
 
-  background-color: #b9b9b9;
+  background-color: var(--book-shadow-dark);
   background-image:
-    linear-gradient(#828282, #828282), linear-gradient(#828282, #828282),
-    linear-gradient(#828282, #828282), linear-gradient(#828282, #828282),
-    linear-gradient(#828282, #828282);
+    linear-gradient(var(--book-shadow-dark-line), var(--book-shadow-dark-line)),
+    linear-gradient(var(--book-shadow-dark-line), var(--book-shadow-dark-line)),
+    linear-gradient(var(--book-shadow-dark-line), var(--book-shadow-dark-line)),
+    linear-gradient(var(--book-shadow-dark-line), var(--book-shadow-dark-line)),
+    linear-gradient(var(--book-shadow-dark-line), var(--book-shadow-dark-line));
   background-size: 0.05vmax 100%;
   background-position:
     16.67% 0,
@@ -33,10 +35,11 @@
   width: 32%;
   height: 100%;
 
-  background-color: #cdcdcd;
+  background-color: var(--book-shadow-mid);
   background-image:
-    linear-gradient(#969696, #969696), linear-gradient(#969696, #969696),
-    linear-gradient(#969696, #969696);
+    linear-gradient(var(--book-shadow-mid-line), var(--book-shadow-mid-line)),
+    linear-gradient(var(--book-shadow-mid-line), var(--book-shadow-mid-line)),
+    linear-gradient(var(--book-shadow-mid-line), var(--book-shadow-mid-line));
   background-size: 0.05vmax 100%;
   background-position:
     25% 0,
@@ -49,9 +52,16 @@
   width: 12%;
   height: 100%;
 
-  background-color: #e1e1e1;
+  background-color: var(--book-shadow-light);
   background-image:
-    linear-gradient(#b4b4b4, #b4b4b4), linear-gradient(#b4b4b4, #b4b4b4);
+    linear-gradient(
+      var(--book-shadow-light-line),
+      var(--book-shadow-light-line)
+    ),
+    linear-gradient(
+      var(--book-shadow-light-line),
+      var(--book-shadow-light-line)
+    );
   background-size: 0.05vmax 100%;
   background-position:
     33.33% 0,
@@ -64,7 +74,7 @@
     flex-direction: column;
 
     width: 100%;
-    height: 1.17vmin;
+    height: 1.17vw;
   }
 
   .history__book-page-left .history__book-page-outer-shadow {
@@ -114,7 +124,7 @@
 
 @media (max-width: 767px) {
   .history__book-page-outer-shadow {
-    height: 1.6vmin;
+    height: clamp(8px, 1.6vw, 8px);
   }
 
   .history__book-page-outer-shadow-3 {

@@ -28,12 +28,12 @@
   width: 0.83vmax;
   height: 1.04vmax;
 
-  color: #827671;
+  color: var(--patent-expire-icon);
 }
 
 .patent__expiration__title__text h3 {
-  font-weight: 600;
-  font-size: 1.04vmax;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(15px, 1.04vw);
   color: var(--white);
 }
 
@@ -41,7 +41,7 @@
   width: 100%;
 
   border: none;
-  border-top: 0.052vmax solid #60524a;
+  border-top: 1px solid var(--patent-divider);
 }
 
 .patent__expiration__content {
@@ -84,144 +84,128 @@
 }
 
 .patent__expiration__item__content span:first-child {
-  font-weight: 600;
-  font-size: 0.78vmax;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(12px, 0.78vw);
 
-  color: #c9a96e;
+  color: var(--accent-gold-600);
 }
 
 .patent__expiration__item__content span:last-child {
-  font-weight: 600;
-  font-size: 0.78vmax;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(12px, 0.78vw);
 
-  color: #b4a8a3;
+  color: var(--patent-text-secondary);
 }
 
 .patent__expiration__item hr {
   width: 100%;
 
   border: none;
-  border-top: 0.052vmax solid #4c3d34;
+  border-top: 1px solid var(--patent-item-divider);
 }
 
 .patent__expiration__serial {
-  font-weight: 600;
-  font-size: 0.625vmax;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(10px, 0.625vw);
 
-  color: #827671;
+  color: var(--patent-serial);
 }
 
 @media (max-width: 1024px) {
   .patent__expiration {
-    gap: 2.6vmin;
+    gap: 2.6vw;
   }
 
   .patent__expiration__title {
-    gap: 1.56vmin;
+    gap: 1.56vw;
   }
 
   .patent__expiration__title__text {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .patent__expiration__icon {
-    width: 2.08vmin;
-    height: 2.6vmin;
+    width: 2.08vw;
+    height: 2.6vw;
   }
 
   .patent__expiration__title__text h3 {
-    font-size: 2.6vmin;
-  }
-
-  .patent__expiration__title hr {
-    border-top: 0.13vmin solid #60524a;
+    font-size: 2.6vw;
   }
 
   .patent__expiration__content {
     display: flex;
     flex-direction: column;
 
-    gap: 3.26vmin;
+    gap: 3.26vw;
   }
 
   .patent__expiration__item {
     width: 100%;
 
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .patent__expiration__item__content {
-    gap: 3.13vmin;
+    gap: 3.13vw;
   }
 
   .patent__expiration__item__content span:first-child {
-    font-size: 1.95vmin;
+    font-size: 1.95vw;
   }
 
   .patent__expiration__item__content span:last-child {
-    font-size: 1.95vmin;
-  }
-
-  .patent__expiration__item hr {
-    border-top: 0.13vmin solid #4c3d34;
+    font-size: 1.95vw;
   }
 
   .patent__expiration__serial {
-    font-size: 1.5625vmin;
+    font-size: 1.5625vw;
   }
 }
 
 @media (max-width: 767px) {
   .patent__expiration {
-    gap: 5.3vmin;
+    gap: clamp(19px, 5.3vw, 27px);
   }
 
   .patent__expiration__title {
-    gap: 3.2vmin;
+    gap: clamp(11px, 3.2vw, 16px);
   }
 
   .patent__expiration__title__text {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .patent__expiration__icon {
-    width: 4.26vmin;
-    height: 5.33vmin;
+    width: clamp(15px, 4.26vw, 21px);
+    height: clamp(19px, 5.33vw, 27px);
   }
 
   .patent__expiration__title__text h3 {
-    font-size: 3.73vmin;
-  }
-
-  .patent__expiration__title hr {
-    border-top: 0.27vmin solid #60524a;
+    font-size: clamp(13px, 3.73vw, 19px);
   }
 
   .patent__expiration__content {
-    gap: 6.67vmin;
+    gap: clamp(23px, 6.67vw, 33px);
   }
 
   .patent__expiration__item {
-    gap: 2.13vmin;
+    gap: clamp(8px, 2.13vw, 11px);
   }
 
   .patent__expiration__item__content {
-    gap: 6.5vmin;
+    gap: clamp(23px, 6.5vw, 33px);
   }
 
   .patent__expiration__item__content span:first-child {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .patent__expiration__item__content span:last-child {
-    font-size: 3.2vmin;
-  }
-
-  .patent__expiration__item hr {
-    border-top: 0.27vmin solid #4c3d34;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .patent__expiration__serial {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 }

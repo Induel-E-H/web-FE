@@ -1,8 +1,8 @@
 import type { AwardItem } from '@entities/award';
-import { useSlideGesture } from '@shared/lib/useSlideGesture/useSlideGesture';
+import { useSlideGesture } from '@shared/lib/useSlideGesture';
 
 import '../styles/Viewport.css';
-import { Card } from './Card';
+import { AwardCard } from './AwardCard';
 
 export function Viewport({
   safePage,
@@ -33,6 +33,8 @@ export function Viewport({
     <div
       ref={ref}
       className='award__card_viewport'
+      role='region'
+      aria-label='수상 목록'
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
@@ -45,7 +47,7 @@ export function Viewport({
         {Array.from({ length: totalPages }, (_, pageIndex) => (
           <div key={pageIndex} className='award__card_page'>
             {getPageItems(pageIndex).map((award) => (
-              <Card key={award.id} award={award} onClick={onCardClick} />
+              <AwardCard key={award.id} award={award} onClick={onCardClick} />
             ))}
           </div>
         ))}

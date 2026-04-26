@@ -1,1 +1,1 @@
-export { default } from './ui/Award';
+export { Award } from './ui/Award';

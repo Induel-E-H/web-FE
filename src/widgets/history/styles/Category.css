@@ -9,8 +9,8 @@
 }
 
 .history__category button {
-  font-weight: 600;
-  font-size: 1.04vmax;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(16px, 1.04vw);
   color: var(--white);
 
   cursor: pointer;
@@ -21,35 +21,35 @@
 }
 
 .history__category span {
-  font-weight: 600;
-  font-size: 1.04vmax;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(16px, 1.04vw);
   color: var(--white);
 }
 
 @media (max-width: 1024px) {
   .history__category {
-    gap: 3.91vmin;
+    gap: 3.91vw;
   }
 
   .history__category button {
-    font-size: 1.95vmin;
+    font-size: 1.95vw;
   }
 
   .history__category span {
-    font-size: 1.95vmin;
+    font-size: 1.95vw;
   }
 }
 
 @media (max-width: 767px) {
   .history__category {
-    gap: 4vmin;
+    gap: clamp(14px, 4vw, 20px);
   }
 
   .history__category button {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .history__category span {
-    font-size: 3.2vmin;
+    font-size: clamp(11px, 3.2vw, 16px);
   }
 }

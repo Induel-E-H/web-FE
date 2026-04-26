@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { useLayoutEffect, useRef } from 'react';
 
 import '../../styles/book/PageFlip.css';
-import { BookPageOuterShadow } from './BookPageSide';
+import { BookPageOuterShadow } from './BookPageOuterShadow';
 
 export function PageFlip({
   isFlipping,

@@ -1,5 +1,5 @@
 import { artworks } from '@entities/history';
-import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import type { IndexItem } from './types';
 
@@ -8,17 +8,20 @@ export const MILESTONES_YEAR_RANGES_BY_BREAKPOINT: Record<
   readonly (readonly [number, number])[]
 > = {
   desktop: [
-    [2003, 2007],
-    [2008, 2011],
-    [2012, 2015],
-    [2016, 2019],
+    [2003, 2006],
+    [2007, 2009],
+    [2010, 2012],
+    [2013, 2015],
+    [2016, 2018],
+    [2019, 2019],
   ],
   tablet: [
     [2003, 2006],
     [2007, 2009],
-    [2010, 2013],
-    [2014, 2016],
-    [2017, 2019],
+    [2010, 2012],
+    [2013, 2015],
+    [2016, 2018],
+    [2019, 2019],
   ],
   mobile: [
     [2003, 2005],

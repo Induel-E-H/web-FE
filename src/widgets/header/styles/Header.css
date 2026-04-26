@@ -1,4 +1,6 @@
 .header {
+  --nav-hover: #74584b;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -7,30 +9,33 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 5.208vmax;
-  padding-right: calc(5.208vmax + var(--scrollbar-width, 0px));
+  padding: 0 2.604vmax;
+  padding-right: calc(2.604vmax + var(--scrollbar-width, 0px));
   height: 3.33vmax;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: var(--white);
   transition:
     transform 0.3s ease,
     background-color 0.3s ease,
     color 0.3s ease;
-
-  box-shadow: 0 0.2vmax 0.6vmax rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0.2vmax 0.6vmax var(--shadow-01);
 }
 
 .header--hero {
   background-color: transparent;
-
   box-shadow: none;
 }
 
 .header--hero.header--menu-open {
-  background-color: #000000;
+  background-color: var(--black);
 }
 
 .header--hidden {
+  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+}
+
+body[data-popup-open] .header {
   transform: translateY(-100%);
   -webkit-transform: translateY(-100%);
 }
@@ -46,18 +51,19 @@
 
 .header__logo_icon-frame {
   flex-shrink: 0;
-  width: 1.667vmax;
-  height: 1.667vmax;
+  width: max(18px, 1.667vmax);
+  height: max(18px, 1.667vmax);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.26vmax;
   border-radius: 0.26vmax;
-  background-color: #ffffff;
-  box-shadow: 0 0 0.208vmax rgba(0, 0, 0, 0.5);
+  background-color: var(--white);
+  box-shadow: 0 0 0.208vmax var(--shadow-07);
   transition:
     background-color 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease,
+    opacity 0.2s ease;
 }
 
 .header--hero .header__logo_icon-frame {
@@ -72,14 +78,13 @@
 }
 
 .header__logo span {
-  font-weight: 700;
-  font-size: 0.938vmax;
-  color: #38271d;
-  transition: color 0.3s ease;
+  font-weight: var(--pretendard-bold);
+  font-size: max(14px, 0.938vw);
+  color: var(--brown-800);
 }
 
 .header--hero .header__logo span {
-  color: #ffffff;
+  color: var(--white);
 }
 
 .header__nav {
@@ -90,18 +95,17 @@
 }
 
 .header__nav button {
-  font-weight: 600;
-  font-size: 0.833vmax;
-  color: #38271d;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(14px, 0.833vw);
+  color: var(--brown-800);
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: color 0.3s ease;
 }
 
 .header--hero .header__nav button {
-  color: #ffffff;
+  color: var(--white);
 }
 
 .header__hamburger {
@@ -110,15 +114,14 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  font-size: 1.667vmax;
+  font-size: max(24px, 1.667vw);
   align-items: center;
   justify-content: center;
-  color: #38271d;
-  transition: color 0.3s ease;
+  color: var(--brown-800);
 }
 
 .header--hero .header__hamburger {
-  color: #ffffff;
+  color: var(--white);
 }
 
 .header__mobile-menu {
@@ -126,20 +129,20 @@
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #ffffff;
+  background-color: var(--white);
   display: flex;
   flex-direction: column;
-  border-top: 0.052vmax solid rgba(56, 39, 29, 0.08);
+  border-top: 1px solid rgb(var(--brown-800-rgb) / var(--alpha-10));
 }
 
 .header__mobile-menu button {
   padding: 0.729vmax 0.781vmax;
-  font-weight: 600;
-  font-size: 0.729vmax;
-  color: #38271d;
+  font-weight: var(--pretendard-semibold);
+  font-size: max(11px, 0.729vw);
+  color: var(--brown-800);
   background: none;
   border: none;
-  border-bottom: 0.052vw solid rgba(56, 39, 29, 0.1);
+  border-bottom: 0.052vw solid rgb(var(--brown-800-rgb) / var(--alpha-10));
   cursor: pointer;
   text-align: left;
 }
@@ -149,64 +152,95 @@
 }
 
 .header--hero .header__mobile-menu {
-  background-color: #000000;
-  border-top-color: rgba(255, 255, 255, 0.08);
+  background-color: var(--black);
+  border-top-color: rgb(var(--white-rgb) / var(--alpha-10));
 }
 
 .header--hero .header__mobile-menu button {
-  color: #ffffff;
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border-bottom-color: rgb(var(--white-rgb) / var(--alpha-10));
+}
+
+.header__nav button,
+.header__hamburger,
+.header__mobile-menu button,
+.header__logo span {
+  transition:
+    color 0.3s ease,
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.header__nav button:hover {
+  color: var(--nav-hover);
+}
+
+.header__mobile-menu button:hover {
+  background-color: rgb(var(--brown-800-rgb) / var(--alpha-05));
+}
+
+.header__mobile-menu button:active {
+  background-color: rgb(var(--brown-800-rgb) / var(--alpha-10));
+}
+
+.header--hero .header__mobile-menu button:hover {
+  background-color: rgb(var(--white-rgb) / var(--alpha-10));
+}
+
+.header--hero .header__mobile-menu button:active {
+  background-color: rgb(var(--white-rgb) / var(--alpha-15));
 }
 
 @media (max-width: 1024px) {
   .header {
-    padding: 0 3.91vmin;
-    height: 7.29vmin;
+    padding: 0 3.91vw;
+    height: 7.29vw;
   }
 
   .header__logo {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 
   .header__logo_icon-frame {
-    width: 3.65vmin;
-    height: 3.65vmin;
+    width: 3.65vw;
+    height: 3.65vw;
     padding: 3.8%;
-    border-radius: 0.66vmin;
-    box-shadow: 0 0 0.52vmin rgba(0, 0, 0, 0.5);
+    border-radius: 0.66vw;
+    box-shadow: 0 0 4px var(--shadow-07);
   }
 
   .header__logo span {
-    font-size: 2.08vmin;
+    font-size: 2.08vw;
   }
 
   .header__nav {
-    gap: 3.26vmin;
+    gap: 3.26vw;
   }
 
   .header__nav button {
-    font-size: 1.82vmin;
+    font-size: 1.82vw;
   }
 }
 
 @media (max-width: 767px) {
   .header {
-    padding: 0 4vmin;
-    height: 14.94vmin;
+    padding: 0 clamp(14px, 4vw, 20px);
+    height: clamp(52px, 14.94vw, 75px);
   }
 
   .header__logo {
-    gap: 2.67vmin;
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .header__logo_icon-frame {
-    width: 7.47vmin;
-    height: 7.47vmin;
-    border-radius: 1.32vmin;
+    width: clamp(26px, 7.47vw, 37px);
+    height: clamp(26px, 7.47vw, 37px);
+    border-radius: clamp(4px, 1.32vw, 7px);
   }
 
   .header__logo span {
-    font-size: 4.27vmin;
+    font-size: clamp(15px, 4.27vw, 21px);
   }
 
   .header__nav {
@@ -215,13 +249,13 @@
 
   .header__hamburger {
     display: flex;
-    width: 8.53vmin;
-    height: 8.53vmin;
-    font-size: 6.35vmin;
+    width: clamp(30px, 8.53vw, 43px);
+    height: clamp(30px, 8.53vw, 43px);
+    font-size: clamp(22px, 6.35vw, 32px);
   }
 
   .header__mobile-menu button {
-    padding: 3.73vmin 4vmin;
-    font-size: 3.73vmin;
+    padding: clamp(13px, 3.73vw, 19px) clamp(14px, 4vw, 20px);
+    font-size: clamp(13px, 3.73vw, 19px);
   }
 }

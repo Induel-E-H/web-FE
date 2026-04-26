@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
-
-import induelIcon from '@assets/induel-icon.svg';
 
 import '../styles/Footer.css';
 
@@ -14,7 +13,7 @@ export function Footer() {
       <div className='footer__top'>
         <div className='footer__company'>
           <div className='footer__icon-frame'>
-            <img src={induelIcon} alt='인들이앤에이치 로고' />
+            <img src={induelIcon} alt='인들이앤에이치 로고' loading='lazy' />
           </div>
           <div className='footer__company_name'>
             <p className='footer__company_name-kor'>(주) {COMPANY.NAME_KO}</p>
@@ -35,7 +34,9 @@ export function Footer() {
               <span>대표이사</span>
               <span>{COMPANY.CEO}</span>
             </div>
-            <p className='footer__company_split'>|</p>
+            <p className='footer__company_split' aria-hidden='true'>
+              |
+            </p>
             <div className='footer__row'>
               <span>사업자 등록 번호</span>
               <span>{COMPANY.BUSINESS_NO}</span>
@@ -52,7 +53,9 @@ export function Footer() {
               <span>TEL</span>
               <span>{COMPANY.PHONE_DISPLAY}</span>
             </div>
-            <p className='footer__company_split'>|</p>
+            <p className='footer__company_split' aria-hidden='true'>
+              |
+            </p>
             <div className='footer__row'>
               <span>FAX</span>
               <span>{COMPANY.FAX}</span>

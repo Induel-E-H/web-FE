@@ -10,10 +10,10 @@ describe('Pagination', () => {
         <Pagination currentPage={0} totalPages={3} onPageChange={vi.fn()} />,
       );
       expect(
-        screen.getByRole('button', { name: 'Previous page' }),
+        screen.getByRole('button', { name: '이전 페이지' }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'Next page' }),
+        screen.getByRole('button', { name: '다음 페이지' }),
       ).toBeInTheDocument();
     });
 
@@ -22,13 +22,13 @@ describe('Pagination', () => {
         <Pagination currentPage={0} totalPages={3} onPageChange={vi.fn()} />,
       );
       expect(
-        screen.getByRole('button', { name: 'Go to page 1' }),
+        screen.getByRole('button', { name: '1페이지' }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'Go to page 2' }),
+        screen.getByRole('button', { name: '2페이지' }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'Go to page 3' }),
+        screen.getByRole('button', { name: '3페이지' }),
       ).toBeInTheDocument();
     });
 
@@ -45,9 +45,10 @@ describe('Pagination', () => {
       render(
         <Pagination currentPage={1} totalPages={3} onPageChange={vi.fn()} />,
       );
-      expect(
-        screen.getByRole('button', { name: 'Go to page 2' }),
-      ).toHaveAttribute('aria-current', 'page');
+      expect(screen.getByRole('button', { name: '2페이지' })).toHaveAttribute(
+        'aria-current',
+        'page',
+      );
     });
 
     it('비활성 dot에는 aria-current가 없다', () => {
@@ -55,7 +56,7 @@ describe('Pagination', () => {
         <Pagination currentPage={1} totalPages={3} onPageChange={vi.fn()} />,
       );
       expect(
-        screen.getByRole('button', { name: 'Go to page 1' }),
+        screen.getByRole('button', { name: '1페이지' }),
       ).not.toHaveAttribute('aria-current');
     });
 
@@ -63,7 +64,7 @@ describe('Pagination', () => {
       render(
         <Pagination currentPage={0} totalPages={3} onPageChange={vi.fn()} />,
       );
-      expect(screen.getByRole('button', { name: 'Go to page 1' })).toHaveClass(
+      expect(screen.getByRole('button', { name: '1페이지' })).toHaveClass(
         'award__pagination_dot--active',
       );
     });
@@ -72,9 +73,9 @@ describe('Pagination', () => {
       render(
         <Pagination currentPage={0} totalPages={3} onPageChange={vi.fn()} />,
       );
-      expect(
-        screen.getByRole('button', { name: 'Go to page 2' }),
-      ).not.toHaveClass('award__pagination_dot--active');
+      expect(screen.getByRole('button', { name: '2페이지' })).not.toHaveClass(
+        'award__pagination_dot--active',
+      );
     });
   });
 
@@ -89,7 +90,7 @@ describe('Pagination', () => {
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: 'Go to page 2' }));
+      fireEvent.click(screen.getByRole('button', { name: '2페이지' }));
 
       expect(onPageChange).toHaveBeenCalledWith(1);
     });
@@ -104,7 +105,7 @@ describe('Pagination', () => {
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: 'Previous page' }));
+      fireEvent.click(screen.getByRole('button', { name: '이전 페이지' }));
 
       // wrapPage(-1, 3) = 2
       expect(onPageChange).toHaveBeenCalledWith(2);
@@ -120,7 +121,7 @@ describe('Pagination', () => {
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: 'Next page' }));
+      fireEvent.click(screen.getByRole('button', { name: '다음 페이지' }));
 
       // wrapPage(3, 3) = 0
       expect(onPageChange).toHaveBeenCalledWith(0);

@@ -36,6 +36,7 @@ gh issue list -R Induel-E-H/web-FE --state open --json number,title,labels --lim
 - `🔧 Chore` — settings / config
 - `🔨 Refactor` — code restructuring
 - `🧹 Cleanup` — code cleanup
+- `⚡️ Performance` — Performance Improvement
 
 **Related Issues** — match the changes to open issues in `Induel-E-H/web-FE`.
 
@@ -62,63 +63,3 @@ gh pr create \
 EOF
 )"
 ```
-
-## Step 5: Update Project End Date (only when `close #N` is used)
-
-For each closed issue, update its End Date in the GitHub Project (project number: **1**) to today's date.
-
-**5-1. Fetch project node ID, End Date field ID, and issue item ID in one query** (replace `ISSUE_NUMBER`):
-
-```bash
-gh api graphql -f query='
-{
-  organization(login: "Induel-E-H") {
-    projectV2(number: 1) {
-      id
-      fields(first: 30) {
-        nodes {
-          __typename
-          ... on ProjectV2Field {
-            id
-            name
-          }
-        }
-      }
-    }
-  }
-  repository(owner: "Induel-E-H", name: "web-FE") {
-    issue(number: ISSUE_NUMBER) {
-      projectItems(first: 10) {
-        nodes {
-          id
-          project { number }
-        }
-      }
-    }
-  }
-}'
-```
-
-From the response, extract:
-
-- `organization.projectV2.id` → `PROJECT_ID`
-- The field node whose `name` matches "End Date" (or similar) → `END_DATE_FIELD_ID`
-- The `projectItems` node where `project.number == 1` → `ITEM_ID`
-
-**5-2. Update the End Date field:**
-
-```bash
-gh api graphql -f query='
-mutation {
-  updateProjectV2ItemFieldValue(input: {
-    projectId: "PROJECT_ID"
-    itemId: "ITEM_ID"
-    fieldId: "END_DATE_FIELD_ID"
-    value: { date: "TODAY_YYYY-MM-DD" }
-  }) {
-    projectV2Item { id }
-  }
-}'
-```
-
-If there are multiple closed issues, repeat Steps 5-1 and 5-2 for each one.

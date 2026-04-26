@@ -1,15 +1,28 @@
-import { type ReactNode, useEffect } from 'react';
+import { lazy, type ReactNode, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { smoothScrollTo } from '@shared/lib/scroll/smoothScrollTo';
-import Award from '@widgets/award';
-import { Footer } from '@widgets/footer';
-import { Header } from '@widgets/header/ui/Header';
-import Hero from '@widgets/hero';
-import History from '@widgets/history';
-import Map from '@widgets/map';
-import Patent from '@widgets/patent';
-import { Vision } from '@widgets/vision';
+import { smoothScrollTo } from '@shared/lib/scroll';
+import { Header } from '@widgets/header';
+import { Hero } from '@widgets/hero';
+
+const Vision = lazy(() =>
+  import('@widgets/vision').then((m) => ({ default: m.Vision })),
+);
+const History = lazy(() =>
+  import('@widgets/history').then((m) => ({ default: m.History })),
+);
+const Award = lazy(() =>
+  import('@widgets/award').then((m) => ({ default: m.Award })),
+);
+const Patent = lazy(() =>
+  import('@widgets/patent').then((m) => ({ default: m.Patent })),
+);
+const Map = lazy(() =>
+  import('@widgets/map').then((m) => ({ default: m.Map })),
+);
+const Footer = lazy(() =>
+  import('@widgets/footer').then((m) => ({ default: m.Footer })),
+);
 
 const DEV_WIDGET = import.meta.env.VITE_DEV_WIDGET;
 const isStaging = import.meta.env.MODE === 'staging';
@@ -26,7 +39,7 @@ const DEV_WIDGET_MAP: Record<string, ReactNode> = {
   footer: <Footer />,
 };
 
-function Home() {
+export function Home() {
   const location = useLocation();
 
   useEffect(() => {
@@ -61,7 +74,7 @@ function Home() {
     return (
       <>
         {DEV_WIDGET !== 'footer' ? <Header /> : null}
-        {widget}
+        <Suspense fallback={null}>{widget}</Suspense>
       </>
     );
   }
@@ -72,16 +85,21 @@ function Home() {
 
   return (
     <>
+      <a href='#main-content' className='skip-link'>
+        본문으로 바로 가기
+      </a>
       <Header />
-      <Hero showScrollArrow={isProduction} />
-      <Vision />
-      <History />
-      <Award />
-      <Patent />
-      <Map />
-      <Footer />
+      <main id='main-content'>
+        <Hero showScrollArrow={isProduction} />
+        <Suspense fallback={null}>
+          <Vision />
+          <History />
+          <Award />
+          <Patent />
+          <Map />
+          <Footer />
+        </Suspense>
+      </main>
     </>
   );
 }
-
-export default Home;

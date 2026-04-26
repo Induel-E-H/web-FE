@@ -1,11 +1,11 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import Award from './Award';
+import { Award } from './Award';
 
-const mockGetItemsPerPage = vi.hoisted(() => vi.fn().mockReturnValue(8));
-vi.mock('../model/responsive', () => ({
-  getItemsPerPage: mockGetItemsPerPage,
+const mockUseBreakpoint = vi.hoisted(() => vi.fn().mockReturnValue('desktop'));
+vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
+  useBreakpoint: mockUseBreakpoint,
 }));
 
 vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
@@ -16,14 +16,15 @@ vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
   }),
 }));
 
-vi.mock('../model/image', () => ({
-  getAwardImage: vi.fn().mockReturnValue('mock.webp'),
-}));
+vi.mock('@entities/award', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@entities/award')>();
+  return { ...actual, getAwardImage: vi.fn().mockReturnValue('mock.webp') };
+});
 
 describe('Award', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockGetItemsPerPage.mockReturnValue(8);
+    mockUseBreakpoint.mockReturnValue('desktop');
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   });
@@ -46,16 +47,11 @@ describe('Award', () => {
       );
     });
 
-    it('연도 필터(tablist)가 렌더링된다', () => {
+    it('연도 필터(navigation)가 렌더링된다', () => {
       render(<Award />);
-      expect(screen.getByRole('tablist')).toBeInTheDocument();
-    });
-  });
-
-  describe('카드 렌더링', () => {
-    it('데스크탑(10 items/page)에서 10개의 카드가 렌더링된다', () => {
-      render(<Award />);
-      expect(document.querySelectorAll('button.award__card')).toHaveLength(10);
+      expect(
+        screen.getByRole('navigation', { name: '연도 필터' }),
+      ).toBeInTheDocument();
     });
   });
 
@@ -108,7 +104,7 @@ describe('Award', () => {
     it('2008년 클릭 시 해당 연도(2개) 항목만 표시된다', () => {
       render(<Award />);
 
-      fireEvent.click(screen.getByRole('tab', { name: '2008' }));
+      fireEvent.click(screen.getByRole('button', { name: '2008' }));
 
       expect(document.querySelectorAll('button.award__card')).toHaveLength(2);
     });
@@ -116,7 +112,7 @@ describe('Award', () => {
     it('연도 변경 시 currentPage가 0으로 초기화된다', () => {
       render(<Award />);
 
-      fireEvent.click(screen.getByRole('tab', { name: '2008' }));
+      fireEvent.click(screen.getByRole('button', { name: '2008' }));
 
       const slider = document.querySelector(
         '.award__card_slider',
@@ -125,63 +121,65 @@ describe('Award', () => {
     });
   });
 
-  describe('모바일 Pagination', () => {
-    it('itemsPerPage < 10(모바일)이면 Pagination이 표시된다', () => {
-      mockGetItemsPerPage.mockReturnValue(4);
+  describe('모바일/태블릿 Pagination', () => {
+    it('모바일 breakpoint이면 Pagination이 표시된다', () => {
+      mockUseBreakpoint.mockReturnValue('mobile');
       render(<Award />);
 
       expect(
-        screen.getByRole('button', { name: 'Previous page' }),
+        screen.getByRole('button', { name: '이전 페이지' }),
       ).toBeInTheDocument();
     });
 
-    it('itemsPerPage >= 10(데스크탑)이면 Pagination이 표시되지 않는다', () => {
+    it('태블릿 breakpoint이면 Pagination이 표시된다', () => {
+      mockUseBreakpoint.mockReturnValue('tablet');
       render(<Award />);
 
       expect(
-        screen.queryByRole('button', { name: 'Previous page' }),
+        screen.getByRole('button', { name: '이전 페이지' }),
+      ).toBeInTheDocument();
+    });
+
+    it('데스크탑 breakpoint이면 Pagination이 표시되지 않는다', () => {
+      render(<Award />);
+
+      expect(
+        screen.queryByRole('button', { name: '이전 페이지' }),
       ).not.toBeInTheDocument();
     });
   });
 
-  describe('resize 이벤트', () => {
-    it('resize 시 getItemsPerPage가 다시 호출된다', () => {
+  describe('breakpoint별 카드 수', () => {
+    it('데스크탑에서 10개 카드가 렌더링된다', () => {
       render(<Award />);
-      const callsBefore = mockGetItemsPerPage.mock.calls.length;
-
-      act(() => {
-        window.dispatchEvent(new Event('resize'));
-      });
-
-      expect(mockGetItemsPerPage.mock.calls.length).toBeGreaterThan(
-        callsBefore,
-      );
+      expect(document.querySelectorAll('button.award__card')).toHaveLength(10);
     });
 
-    it('언마운트 시 resize 리스너가 제거된다', () => {
-      const { unmount } = render(<Award />);
-      const callsBefore = mockGetItemsPerPage.mock.calls.length;
+    it('태블릿에서 6개씩 페이지가 구성된다', () => {
+      mockUseBreakpoint.mockReturnValue('tablet');
+      render(<Award />);
+      const firstPage = document.querySelector('.award__card_page');
+      expect(firstPage?.querySelectorAll('button.award__card')).toHaveLength(6);
+    });
 
-      unmount();
-
-      act(() => {
-        window.dispatchEvent(new Event('resize'));
-      });
-
-      expect(mockGetItemsPerPage.mock.calls.length).toBe(callsBefore);
+    it('모바일에서 4개씩 페이지가 구성된다', () => {
+      mockUseBreakpoint.mockReturnValue('mobile');
+      render(<Award />);
+      const firstPage = document.querySelector('.award__card_page');
+      expect(firstPage?.querySelectorAll('button.award__card')).toHaveLength(4);
     });
   });
 
   describe('safePage 슬라이더 transform', () => {
     it('모바일에서 Next page 클릭 시 슬라이더 transform이 업데이트된다 (safePage > 0 분기 커버)', () => {
-      mockGetItemsPerPage.mockReturnValue(4); // 4 items/page → 2 pages
+      mockUseBreakpoint.mockReturnValue('mobile'); // 4 items/page → 3 pages
       render(<Award />);
 
       const sliderBefore = (
         document.querySelector('.award__card_slider') as HTMLElement
       ).style.transform;
 
-      fireEvent.click(screen.getByRole('button', { name: 'Next page' }));
+      fireEvent.click(screen.getByRole('button', { name: '다음 페이지' }));
 
       const sliderAfter = (
         document.querySelector('.award__card_slider') as HTMLElement

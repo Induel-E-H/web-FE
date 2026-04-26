@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import History from './History';
+import { History } from './History';
 
 // useBreakpoint가 모듈 로드 시 window.matchMedia를 호출하므로 모듈 자체를 mock
 vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
@@ -47,7 +47,7 @@ describe('History', () => {
 
   it('초기 상태에서 HistoryCategory의 List 탭이 active이다', () => {
     render(<History />);
-    const listTab = screen.getByRole('tab', { name: 'List' });
+    const listTab = screen.getByRole('button', { name: 'List' });
     expect(listTab).toHaveClass('active');
   });
 });

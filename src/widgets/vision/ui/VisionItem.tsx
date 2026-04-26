@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation';
 
 import '../styles/VisionItem.css';
 
@@ -7,6 +7,7 @@ interface VisionItemProps {
   description: string;
   keyword: string;
   image: string;
+  imageSrcSet?: string;
   index: number;
 }
 
@@ -18,26 +19,7 @@ export function VisionItem({
   index,
 }: VisionItemProps) {
   const isReverse = index % 2 !== 0;
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('is-visible');
-        } else if (entry.boundingClientRect.top > 0) {
-          el.classList.remove('is-visible');
-        }
-      },
-      { threshold: 0.15 },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const ref = useIntersectionAnimation<HTMLDivElement>();
 
   return (
     <div
@@ -45,16 +27,23 @@ export function VisionItem({
       className={`vision__content${isReverse ? ' vision__content--reverse' : ''}`}
     >
       <div className='vision__content__image'>
-        <img src={image} alt={title} />
+        <img
+          src={image}
+          sizes='(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 710px'
+          width={710}
+          height={473}
+          alt={title}
+          loading='lazy'
+        />
       </div>
-      <div className='vision__content_text'>
+      <div className='vision__content__text'>
         <div className='vision__content__title'>
           <p className='vision__content__index'>VISION {index + 1}</p>
           <div className='vision__content__title__main'>
             <h3>{keyword}</h3>
             <h4>{title}</h4>
           </div>
-          <hr />
+          <hr aria-hidden='true' />
         </div>
         <p className='vision__content__description'>{description}</p>
       </div>

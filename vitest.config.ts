@@ -36,6 +36,7 @@ export default defineConfig({
         '**/*.webp',
         '**/*.css',
         '**/*.svg',
+        '**/*.stories.{ts,tsx}',
       ],
     },
 
@@ -48,7 +49,16 @@ export default defineConfig({
         ],
         test: {
           name: 'unit',
-          environment: 'jsdom',
+          environment: 'happy-dom',
+          environmentOptions: {
+            happyDOM: {
+              settings: {
+                disableJavaScriptFileLoading: true,
+              },
+            },
+          },
+          pool: 'forks',
+          clearMocks: true,
           setupFiles: ['./src/test/setup.ts'],
           include: ['src/**/*.test.{ts,tsx}'],
         },
@@ -65,6 +75,7 @@ export default defineConfig({
         ],
         test: {
           name: 'storybook',
+          setupFiles: ['./.storybook/vitest.setup.ts'],
 
           browser: {
             enabled: true,

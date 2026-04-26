@@ -2,12 +2,13 @@ import { COMPANY } from '@shared/constant';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import Hero from './Hero';
+import { Hero } from './Hero';
 
 // Three.js 의존성을 가진 HeroBackground를 격리
-vi.mock('./HeroBackground', () => ({
-  default: () => <canvas aria-hidden='true' />,
-}));
+const HeroBackgroundMock = vi.hoisted(() =>
+  vi.fn(() => <canvas aria-hidden='true' />),
+);
+vi.mock('./HeroBackground', () => ({ default: HeroBackgroundMock }));
 
 describe('Hero', () => {
   describe('회사 정보 표시', () => {

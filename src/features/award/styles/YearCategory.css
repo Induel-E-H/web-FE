@@ -12,40 +12,40 @@
 
   padding: 0 0.8vmax;
 
-  font-size: 0.834vmax;
-  font-weight: 400;
+  font-size: max(12px, 0.834vw);
+  font-weight: var(--pretendard-regular);
 
-  color: var(--brown-200);
-  border-bottom: 0.12vmax solid var(--brown-200);
+  color: var(--brown-500);
+  border-bottom: 2px solid var(--brown-300);
 
   transition:
     color 0.3s,
     border-color 0.3s;
 }
 
-.award__year_category button.active {
-  font-weight: 500;
+.award__year_category button.award__year_category--active {
+  font-weight: var(--pretendard-semibold);
 
-  color: var(--brown-500);
-  border-bottom-color: var(--brown-500);
+  color: var(--brown-700);
+  border-bottom-color: var(--brown-700);
 }
 
 @media (max-width: 1024px) {
   .award__year_category button {
-    padding: 0 1.5vmin;
+    padding: 0 1.5vw;
 
-    font-size: 2.08vmin;
+    font-size: 2.08vw;
 
-    border-bottom: 0.26vmin solid var(--brown-200);
+    border-bottom: 2px solid var(--brown-200);
   }
 }
 
 @media (max-width: 767px) {
   .award__year_category button {
-    padding: 0 2vmin;
+    padding: 0 clamp(8px, 2vw, 10px);
 
-    font-size: 3.73vmin;
+    font-size: clamp(13px, 3.73vw, 19px);
 
-    border-bottom: 0.53vmin solid var(--brown-200);
+    border-bottom: 2px solid var(--brown-200);
   }
 }

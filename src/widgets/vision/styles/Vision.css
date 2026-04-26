@@ -5,7 +5,7 @@
   gap: 0.78vmax;
   padding: 3.65vmax 13.54vmax;
   overflow: hidden;
-  background-color: #faf7f2;
+  background-color: var(--surface-warm);
 }
 
 .vision__main {
@@ -17,22 +17,23 @@
 
 @media (max-width: 1024px) {
   .vision {
-    gap: 2.6vmin;
-    padding: 7.81vmin 6.51vmin 6.51vmin 6.51vmin;
+    gap: 2.6vw;
+    padding: 7.81vw 6.51vw 6.51vw 6.51vw;
   }
 
   .vision__main {
-    gap: 1.3vmin;
+    gap: 1.3vw;
   }
 }
 
 @media (max-width: 767px) {
   .vision {
-    gap: 4vmin;
-    padding: 16vmin 4vmin 4vmin 4vmin;
+    gap: clamp(14px, 4vw, 20px);
+    padding: clamp(56px, 16vw, 80px) clamp(14px, 4vw, 20px)
+      clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
   }
 
   .vision__main {
-    gap: 4vmin;
+    gap: clamp(14px, 4vw, 20px);
   }
 }

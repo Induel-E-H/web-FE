@@ -1,13 +1,10 @@
-import { COMPANY } from '@shared/constant';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { makeInfoCard } from './mapInfoCard';
 
-vi.mock('@assets/induel-icon.svg?raw', () => ({
-  default: '<svg viewBox="0 0 649 748"><g /></svg>',
-}));
+const TEST_CONTENT = '<div class="map__info__card">test</div>';
 
-describe('mapInfoCard', () => {
+describe('makeInfoCard', () => {
   const mockGetMap = vi.fn();
   const mockClose = vi.fn();
   const mockOpen = vi.fn();
@@ -48,87 +45,59 @@ describe('mapInfoCard', () => {
     vi.unstubAllGlobals();
   });
 
-  describe('makeInfoCard', () => {
-    it('InfoWindow를 생성하고 반환한다', () => {
-      const result = makeInfoCard(mockMap, mockMarker);
+  it('InfoWindow를 생성하고 반환한다', () => {
+    const result = makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
-      expect(MockInfoWindow).toHaveBeenCalledOnce();
-      expect(result).toBe(mockInfoWindow);
-    });
+    expect(MockInfoWindow).toHaveBeenCalledOnce();
+    expect(result).toBe(mockInfoWindow);
+  });
 
-    it('InfoWindow content에 회사 한글 이름이 포함된다', () => {
-      makeInfoCard(mockMap, mockMarker);
+  it('전달받은 content를 InfoWindow에 그대로 사용한다', () => {
+    makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
-      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
-        .content;
-      expect(content).toContain(COMPANY.NAME_KO);
-    });
+    expect(MockInfoWindow).toHaveBeenCalledWith(
+      expect.objectContaining({ content: TEST_CONTENT }),
+    );
+  });
 
-    it('InfoWindow content에 회사 영문 전체 명칭이 포함된다', () => {
-      makeInfoCard(mockMap, mockMarker);
+  it('InfoWindow에 borderWidth: 0이 설정된다', () => {
+    makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
-      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
-        .content;
-      expect(content).toContain('INDUEL ENGINEERING & HOLDINGS');
-    });
+    expect(MockInfoWindow).toHaveBeenCalledWith(
+      expect.objectContaining({ borderWidth: 0 }),
+    );
+  });
 
-    it('InfoWindow content에 전화번호 tel: 링크가 포함된다', () => {
-      makeInfoCard(mockMap, mockMarker);
+  it('InfoWindow에 disableAnchor: true가 설정된다', () => {
+    makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
-      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
-        .content;
-      expect(content).toContain(`tel:${COMPANY.PHONE}`);
-      expect(content).toContain(COMPANY.PHONE_DISPLAY);
-    });
+    expect(MockInfoWindow).toHaveBeenCalledWith(
+      expect.objectContaining({ disableAnchor: true }),
+    );
+  });
 
-    it('InfoWindow content에 회사 주소가 포함된다', () => {
-      makeInfoCard(mockMap, mockMarker);
+  it('InfoWindow에 backgroundColor가 transparent로 설정된다', () => {
+    makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
-      const content = (MockInfoWindow.mock.calls[0][0] as { content: string })
-        .content;
-      expect(content).toContain(COMPANY.ADDRESS_FULL);
-      expect(content).toContain(COMPANY.ADDRESS_SUB);
-    });
+    expect(MockInfoWindow).toHaveBeenCalledWith(
+      expect.objectContaining({ backgroundColor: 'transparent' }),
+    );
+  });
 
-    it('마커에 click 이벤트 리스너가 등록된다', () => {
-      makeInfoCard(mockMap, mockMarker);
+  it('마커에 click 이벤트 리스너가 등록된다', () => {
+    makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
-      expect(MockAddListener).toHaveBeenCalledWith(
-        mockMarker,
-        'click',
-        expect.any(Function),
-      );
-    });
-
-    it('InfoWindow에 borderWidth: 0이 설정된다', () => {
-      makeInfoCard(mockMap, mockMarker);
-
-      expect(MockInfoWindow).toHaveBeenCalledWith(
-        expect.objectContaining({ borderWidth: 0 }),
-      );
-    });
-
-    it('InfoWindow에 disableAnchor: true가 설정된다', () => {
-      makeInfoCard(mockMap, mockMarker);
-
-      expect(MockInfoWindow).toHaveBeenCalledWith(
-        expect.objectContaining({ disableAnchor: true }),
-      );
-    });
-
-    it('InfoWindow에 backgroundColor가 transparent로 설정된다', () => {
-      makeInfoCard(mockMap, mockMarker);
-
-      expect(MockInfoWindow).toHaveBeenCalledWith(
-        expect.objectContaining({ backgroundColor: 'transparent' }),
-      );
-    });
+    expect(MockAddListener).toHaveBeenCalledWith(
+      mockMarker,
+      'click',
+      expect.any(Function),
+    );
   });
 
   describe('click 핸들러 토글', () => {
     it('InfoWindow가 열려있을 때 클릭하면 닫힌다', () => {
-      mockGetMap.mockReturnValue({} /* truthy — 열려있음 */);
-      makeInfoCard(mockMap, mockMarker);
+      mockGetMap.mockReturnValue({});
+      makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
       capturedClickHandler!();
 
@@ -137,8 +106,8 @@ describe('mapInfoCard', () => {
     });
 
     it('InfoWindow가 닫혀있을 때 클릭하면 열린다', () => {
-      mockGetMap.mockReturnValue(null /* falsy — 닫혀있음 */);
-      makeInfoCard(mockMap, mockMarker);
+      mockGetMap.mockReturnValue(null);
+      makeInfoCard(mockMap, mockMarker, TEST_CONTENT);
 
       capturedClickHandler!();
 

@@ -1,5 +1,7 @@
 import type { PerspectiveCamera, WebGLRenderer } from 'three';
 
+import { RENDER_SCALE } from '../core/createRenderer';
+
 const DEBOUNCE_MS = 100;
 
 export function attachResizeHandler(
@@ -13,7 +15,11 @@ export function attachResizeHandler(
     timeoutId = setTimeout(() => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(
+        Math.round(window.innerWidth * RENDER_SCALE),
+        Math.round(window.innerHeight * RENDER_SCALE),
+        false,
+      );
     }, DEBOUNCE_MS);
   }
 

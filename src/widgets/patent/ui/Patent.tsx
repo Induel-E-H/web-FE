@@ -3,14 +3,12 @@ import { PatentExpireContent } from './ExpireContent';
 import { PatentTitle } from './PatentTitle';
 import { PatentValidContent } from './ValidContent';
 
-function Patent() {
+export function Patent() {
   return (
-    <section className='patent'>
+    <section id='patent' className='patent' aria-label='특허 기록'>
       <PatentTitle />
       <PatentValidContent />
       <PatentExpireContent />
     </section>
   );
 }
-
-export default Patent;

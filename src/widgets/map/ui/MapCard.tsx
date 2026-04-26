@@ -1,6 +1,6 @@
 import { FiPhoneCall } from 'react-icons/fi';
 
-import { TRANSPORT_ITEMS } from '@entities/map/model/transportInfo';
+import { TRANSPORT_ITEMS } from '@entities/map';
 import { COMPANY } from '@shared/constant';
 
 import '../styles/MapCard.css';

@@ -1,12 +1,13 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import { YEAR_ALL } from './constant';
 import { useYearFilter } from './useYearFilter';
 
 describe('useYearFilter', () => {
   it('초기 activeYear는 "전체"이다', () => {
     const { result } = renderHook(() => useYearFilter());
-    expect(result.current.activeYear).toBe('전체');
+    expect(result.current.activeYear).toBe(YEAR_ALL);
   });
 
   it('handleYearChange 호출 시 activeYear가 변경된다', () => {
@@ -23,9 +24,9 @@ describe('useYearFilter', () => {
     const { result } = renderHook(() => useYearFilter());
 
     act(() => {
-      result.current.handleYearChange('전체');
+      result.current.handleYearChange(YEAR_ALL);
     });
 
-    expect(result.current.activeYear).toBe('전체');
+    expect(result.current.activeYear).toBe(YEAR_ALL);
   });
 });

@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 
-import { PAGE_SIDE } from '@features/history/model/constants';
-import type { PageSide } from '@features/history/model/types';
+import { PAGE_SIDE } from '@features/history';
+import type { PageSide } from '@features/history';
 
-import '../../styles/book/BookPageOuterShadow.css';
 import '../../styles/book/BookPageSide.css';
+import { BookPageOuterShadow } from './BookPageOuterShadow';
 import { PageFlip } from './PageFlip';
 
 interface BookPageSideProps {
@@ -20,32 +20,6 @@ interface BookPageSideProps {
   isRapidFlipping?: boolean;
   isHoldChaining?: boolean;
   isHidden: boolean;
-}
-
-export function BookPageOuterShadow({
-  side,
-  count,
-}: {
-  side: PageSide;
-  count: number;
-}) {
-  const levels =
-    side === PAGE_SIDE.LEFT
-      ? Array.from({ length: count }, (_, i) => count - i)
-      : Array.from({ length: count }, (_, i) => i + 1);
-
-  return (
-    <div className='history__book-page-outer-shadow'>
-      {count
-        ? levels.map((level) => (
-            <div
-              key={level}
-              className={`history__book-page-outer-shadow-${level}`}
-            />
-          ))
-        : null}
-    </div>
-  );
 }
 
 export function BookPageSide({

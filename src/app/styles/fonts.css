@@ -1,87 +1,26 @@
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2')
-    format('woff2');
-  font-weight: 100;
-  font-display: swap;
-}
+/* Pretendard - 로컬 서브셋 (CDN 요청 없음) */
+@import '../../shared/assets/fonts/pretendard-subset.css';
 
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2')
-    format('woff2');
-  font-weight: 200;
-  font-display: swap;
-}
+/* BookendBatang - 로컬 */
+@import '../../shared/assets/fonts/bookend-batang.css';
 
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2')
-    format('woff2');
-  font-weight: 300;
-  font-display: swap;
-}
+:root {
+  /* Font Families */
+  --font-pretendard: Pretendard, sans-serif;
+  --font-bookendbatang: 'BookendBatang', sans-serif;
 
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2')
-    format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
+  /* Pretendard Weights */
+  --pretendard-thin: 100;
+  --pretendard-extralight: 200;
+  --pretendard-light: 300;
+  --pretendard-regular: 400;
+  --pretendard-medium: 500;
+  --pretendard-semibold: 600;
+  --pretendard-bold: 700;
+  --pretendard-extrabold: 800;
+  --pretendard-black: 900;
 
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2')
-    format('woff2');
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2')
-    format('woff2');
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2')
-    format('woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2')
-    format('woff2');
-  font-weight: 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2')
-    format('woff2');
-  font-weight: 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'BookendBatang';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-2@1.0/TTBookendBatangR.woff2')
-    format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'BookendBatang';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-2@1.0/TTBookendBatangSB.woff2')
-    format('woff2');
-  font-weight: 700;
-  font-display: swap;
+  /* BookendBatang Weights */
+  --bookendbatang-regular: 400;
+  --bookendbatang-bold: 700;
 }
