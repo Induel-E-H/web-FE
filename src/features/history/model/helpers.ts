@@ -1,7 +1,9 @@
 import { artworks, getThumbnailImage } from '@entities/history';
 
-import { PAGE_SIDE } from '../model/constants';
+import { PAGE_SIDE } from './constants';
 import type { PageSide } from './types';
+
+const preloadedSrcs = new Set<string>();
 
 export function getArtworkIndex(pageIndex: number, side: PageSide): number {
   const isLeft = side === PAGE_SIDE.LEFT;
@@ -12,18 +14,15 @@ export function preloadContentImages(pageIndex: number): void {
   const adjacentIndices = [
     getArtworkIndex(pageIndex + 1, 'left'),
     getArtworkIndex(pageIndex + 1, 'right'),
-    getArtworkIndex(pageIndex + 2, 'left'),
-    getArtworkIndex(pageIndex + 2, 'right'),
     getArtworkIndex(pageIndex - 1, 'left'),
     getArtworkIndex(pageIndex - 1, 'right'),
-    getArtworkIndex(pageIndex - 2, 'left'),
-    getArtworkIndex(pageIndex - 2, 'right'),
   ];
 
   for (const idx of adjacentIndices) {
     if (idx < 0 || idx >= artworks.length) continue;
     const src = getThumbnailImage(idx);
-    if (src) {
+    if (src && !preloadedSrcs.has(src)) {
+      preloadedSrcs.add(src);
       const img = new Image();
       img.src = src;
     }

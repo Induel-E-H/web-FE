@@ -1,7 +1,7 @@
 import { artworks } from '@entities/history';
 import { PAGE_SIDE } from '@features/history';
-import type { PageSide } from '@features/history/model/types';
-import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import type { PageSide } from '@features/history';
+import { useBreakpoint } from '@shared/lib/breakpoint';
 
 import '../../../styles/book/content_container/List.css';
 import { BookPageTitle } from '../PageTitle';

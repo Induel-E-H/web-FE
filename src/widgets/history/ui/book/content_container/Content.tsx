@@ -7,11 +7,8 @@ import {
   getAllContentImages,
   getThumbnailImage,
 } from '@entities/history';
-import {
-  getArtworkIndex,
-  preloadContentImages,
-} from '@features/history/model/helpers';
-import type { PageSide } from '@features/history/model/types';
+import { getArtworkIndex, preloadContentImages } from '@features/history';
+import type { PageSide } from '@features/history';
 
 import '../../../styles/book/content_container/Content.css';
 import { ImageGalleryPopup } from '../../ImageGalleryPopup';
@@ -113,7 +110,9 @@ function ContentItem({
         <button
           className='content__image-icon'
           onMouseDown={(e) => e.stopPropagation()}
-          onClick={handleImageClick}
+          onClick={(e) => {
+            void handleImageClick(e);
+          }}
           aria-label='이미지 보기'
         >
           <MdOutlineImage aria-hidden='true' />
@@ -163,7 +162,13 @@ function ContentItem({
         <figure
           className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
           onMouseDown={(e) => imageSrc && e.stopPropagation()}
-          onClick={imageSrc ? handleImageClick : undefined}
+          onClick={
+            imageSrc
+              ? (e) => {
+                  void handleImageClick(e);
+                }
+              : undefined
+          }
         >
           {imageSrc && (
             <>
