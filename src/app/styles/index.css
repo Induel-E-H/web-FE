@@ -98,6 +98,10 @@
   --typo-contentW: #6f6f6f;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 * {
   font-family: var(--font-pretendard);
   font-variant-numeric: tabular-nums;

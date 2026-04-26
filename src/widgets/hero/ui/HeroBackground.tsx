@@ -1,5 +1,4 @@
 import { useWaveBackground } from '../model/useWaveBackground';
-import '../styles/HeroBackground.css';
 
 function HeroBackground() {
   const canvasRef = useWaveBackground();

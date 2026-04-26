@@ -15,7 +15,7 @@ import { buildCoverContent } from './book/CoverContent';
 import { HistoryCategory } from './Category';
 import { HistoryTitle } from './HistoryTitle';
 
-function History() {
+export function History() {
   const breakpoint = useBreakpoint();
   const {
     bookState,
@@ -276,5 +276,3 @@ function History() {
     </section>
   );
 }
-
-export default History;

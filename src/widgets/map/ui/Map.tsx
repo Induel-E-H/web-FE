@@ -33,7 +33,7 @@ function isNaverAvailable() {
   return !!w.naver?.maps?.Map;
 }
 
-function Map() {
+export function Map() {
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapState, setMapState] = useState<MapState>(() => {
     if (isNaverAvailable()) return 'ready';
@@ -125,5 +125,3 @@ function Map() {
     </section>
   );
 }
-
-export default Map;

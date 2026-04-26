@@ -54,7 +54,7 @@
 }
 
 .content__title-kor {
-  font-weight: 700;
+  font-weight: var(--bookendbatang-bold);
   font-size: max(20px, 1.46vw);
 
   color: var(--black);
@@ -64,7 +64,7 @@
 
 .content__title-eng {
   font-family: var(--font-pretendard);
-  font-weight: 800;
+  font-weight: var(--pretendard-extrabold);
   font-size: max(12px, 0.73vw);
 
   color: var(--black);
@@ -78,14 +78,14 @@
 }
 
 .content__subtitle {
-  font-weight: 600;
+  font-weight: var(--bookendbatang-bold);
   font-size: max(12px, 0.833vw);
 
   color: var(--black);
 }
 
 .content__body {
-  font-weight: 600;
+  font-weight: var(--bookendbatang-bold);
   font-size: max(11px, 0.729vw);
 
   color: var(--typo-contentW);
@@ -117,7 +117,7 @@
 }
 
 .content__caption dt {
-  font-weight: 400;
+  font-weight: var(--bookendbatang-regular);
   font-size: max(9px, 0.625vw);
 
   color: var(--typo-contentW);
@@ -126,7 +126,7 @@
 }
 
 .content__caption dd {
-  font-weight: 400;
+  font-weight: var(--bookendbatang-regular);
   font-size: max(9px, 0.625vw);
 
   color: var(--typo-contentW);

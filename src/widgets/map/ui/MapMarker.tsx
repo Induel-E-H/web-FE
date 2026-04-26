@@ -1,6 +1,6 @@
-import induelIcon from '@assets/induel-icon.svg';
+import { induelIcon } from '@shared/assets';
 
-import '../styles/mapMarker.css';
+import '../styles/MapMarker.css';
 
 export function MapMarker() {
   return (

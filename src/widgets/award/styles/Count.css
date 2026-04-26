@@ -25,7 +25,7 @@
 }
 
 .award__count p {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(12px, 0.78vw);
 }
 

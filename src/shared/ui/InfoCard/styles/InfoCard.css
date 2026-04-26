@@ -84,7 +84,7 @@
 
 .info-card__text__year {
   font-family: var(--font-bookendbatang);
-  font-weight: 700;
+  font-weight: var(--bookendbatang-bold);
   font-size: max(10px, 0.625vw);
 
   color: var(--info-year);
@@ -92,7 +92,7 @@
 
 .info-card__text__title {
   font-family: var(--font-bookendbatang);
-  font-weight: 700;
+  font-weight: var(--bookendbatang-bold);
   font-size: max(11px, 0.729vw);
 
   color: var(--brown-800);
@@ -107,7 +107,7 @@
 
 .info-card__text__secondary {
   font-family: var(--font-pretendard);
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   font-size: max(10px, 0.625vw);
 
   color: var(--info-secondary);

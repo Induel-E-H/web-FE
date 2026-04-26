@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 1001;
   animation: popup-overlay-in 0.2s ease;
 }
 
@@ -73,7 +73,7 @@
 .popup__title {
   font-family: var(--font-bookendbatang);
   font-size: max(24px, 1.667vw);
-  font-weight: 700;
+  font-weight: var(--bookendbatang-bold);
   color: var(--black);
 }
 

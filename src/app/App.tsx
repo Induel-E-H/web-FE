@@ -1,10 +1,8 @@
-import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import Home from '@pages/home';
+import { Home } from '@pages/home';
+import { PrivacyPolicy } from '@pages/privacy-policy';
 import { useGoogleAnalytics } from '@shared/lib/analytics';
-
-const PrivacyPolicy = lazy(() => import('@pages/privacy-policy'));
 
 function App() {
   useGoogleAnalytics();
@@ -12,14 +10,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route
-        path='/privacy_policy'
-        element={
-          <Suspense fallback={null}>
-            <PrivacyPolicy />
-          </Suspense>
-        }
-      />
+      <Route path='/privacy_policy' element={<PrivacyPolicy />} />
     </Routes>
   );
 }

@@ -1,0 +1,1 @@
+export { getOrdinalSuffix } from './getOrdinalSuffix';

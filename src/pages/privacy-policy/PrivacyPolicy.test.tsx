@@ -13,7 +13,7 @@ vi.mock('react-router-dom', async (importOriginal) => {
   return { ...actual, useNavigate: () => mockNavigate };
 });
 
-vi.mock('@widgets/header/ui/Header', () => ({
+vi.mock('@widgets/header', () => ({
   Header: () => <header data-testid='header' />,
 }));
 

@@ -14,13 +14,7 @@ const config = {
   endOfLine: 'lf', // 파일 EOF
   plugins: ['@trivago/prettier-plugin-sort-imports'],
   // Import 정렬 설정
-  importOrder: [
-    '^react',
-    '<THIRD_PARTY_MODULES>',
-    '^@/(.*)$',
-    '^@assets/(.*)$',
-    '^[./]',
-  ],
+  importOrder: ['^react', '<THIRD_PARTY_MODULES>', '^@/(.*)$', '^[./]'],
   importOrderSeparation: true, // 그룹 간 빈 줄 추가
   importOrderSortSpecifiers: true, // import 내부 specifier 정렬
   importOrderGroupNamespaceSpecifiers: true, // namespace import 그룹화

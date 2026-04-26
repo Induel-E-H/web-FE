@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { COMPANY } from '@shared/constant/company';
-import { getOrdinalSuffix } from '@shared/lib/ordinal/getOrdinalSuffix';
+import { COMPANY } from '@shared/constant';
+import { getOrdinalSuffix } from '@shared/lib/ordinal';
 
 import '../../styles/book/FrontCover.css';
 

@@ -16,7 +16,6 @@ export function VisionItem({
   description,
   keyword,
   image,
-  imageSrcSet,
   index,
 }: VisionItemProps) {
   const isReverse = index % 2 !== 0;
@@ -30,7 +29,6 @@ export function VisionItem({
       <div className='vision__content__image'>
         <img
           src={image}
-          srcSet={imageSrcSet}
           sizes='(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 710px'
           width={710}
           height={473}

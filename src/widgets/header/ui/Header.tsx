@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 import { smoothScrollTo } from '@shared/lib/scroll';
-
-import induelIcon from '@assets/induel-icon.svg';
 
 import { NAV_ITEMS } from '../model/navItems';
 import { useHeaderVisibility } from '../model/useHeaderVisibility';
@@ -42,6 +41,12 @@ export function Header() {
     scrollTo(HERO_SELECTOR);
   }
 
+  const navItems = NAV_ITEMS.map(({ label, selector }) => (
+    <button key={label} onClick={() => scrollTo(selector)}>
+      {label}
+    </button>
+  ));
+
   return (
     <header
       className={[
@@ -65,11 +70,7 @@ export function Header() {
       </button>
 
       <nav className='header__nav' aria-label='데스크탑 메뉴'>
-        {NAV_ITEMS.map(({ label, selector }) => (
-          <button key={label} onClick={() => scrollTo(selector)}>
-            {label}
-          </button>
-        ))}
+        {navItems}
       </nav>
 
       <button
@@ -88,11 +89,7 @@ export function Header() {
           className='header__mobile-menu'
           aria-label='모바일 메뉴'
         >
-          {NAV_ITEMS.map(({ label, selector }) => (
-            <button key={label} onClick={() => scrollTo(selector)}>
-              {label}
-            </button>
-          ))}
+          {navItems}
         </nav>
       )}
     </header>

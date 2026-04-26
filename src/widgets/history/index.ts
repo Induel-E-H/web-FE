@@ -1,1 +1,1 @@
-export { default } from './ui/History';
+export { History } from './ui/History';

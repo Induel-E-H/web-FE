@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Award from './Award';
+import { Award } from './Award';
 
 const meta = {
   title: 'Widgets/Award',

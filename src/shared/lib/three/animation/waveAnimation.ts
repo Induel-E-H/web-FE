@@ -1,4 +1,4 @@
-import { isMobileViewport } from '@shared/lib/breakpoint/viewport';
+import { isMobileViewport } from '@shared/lib/breakpoint';
 import type { Camera, Scene, WebGLRenderer } from 'three';
 
 import type { TubeData } from '../objects/type';

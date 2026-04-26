@@ -1,4 +1,4 @@
-import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import type { Breakpoint } from '@shared/lib/breakpoint';
 
 export function getItemsPerPage(breakpoint: Breakpoint): number {
   if (breakpoint === 'mobile') return 4;

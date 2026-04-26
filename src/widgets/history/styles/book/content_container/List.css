@@ -44,7 +44,7 @@
 .list__ul button {
   cursor: pointer;
 
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(11px, 0.729vw);
 
   color: var(--typo-contentW);

@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { MapInfoCard } from './MapInfoCard';
 
-vi.mock('@assets/induel-icon.svg', () => ({ default: 'induel-icon.svg' }));
+vi.mock('@shared/assets', () => ({ induelIcon: 'induel-icon.svg' }));
 
 describe('MapInfoCard', () => {
   it('회사 한글 이름이 렌더링된다', () => {

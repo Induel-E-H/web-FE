@@ -13,7 +13,7 @@
   padding: 0 0.8vmax;
 
   font-size: max(12px, 0.834vw);
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
 
   color: var(--brown-500);
   border-bottom: 2px solid var(--brown-300);
@@ -24,7 +24,7 @@
 }
 
 .award__year_category button.award__year_category--active {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
 
   color: var(--brown-700);
   border-bottom-color: var(--brown-700);

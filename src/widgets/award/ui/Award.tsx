@@ -7,7 +7,7 @@ import {
   YEAR_ALL,
   YearCategory,
 } from '@features/award';
-import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import { useBreakpoint } from '@shared/lib/breakpoint';
 import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 
 import { getItemsPerPage } from '../model/responsive';
@@ -17,7 +17,7 @@ import { AwardCount } from './Count';
 import { AwardPopup } from './Popup';
 import { Viewport } from './Viewport';
 
-function Award() {
+export function Award() {
   const [currentPage, setCurrentPage] = useState(0);
   const breakpoint = useBreakpoint();
   const itemsPerPage = getItemsPerPage(breakpoint);
@@ -99,5 +99,3 @@ function Award() {
     </section>
   );
 }
-
-export default Award;

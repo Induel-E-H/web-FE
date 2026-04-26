@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { MapMarker } from './MapMarker';
 
-vi.mock('@assets/induel-icon.svg', () => ({ default: 'induel-icon.svg' }));
+vi.mock('@shared/assets', () => ({ induelIcon: 'induel-icon.svg' }));
 
 describe('MapMarker', () => {
   it('SVG 루트 요소가 map__marker 클래스로 렌더링된다', () => {

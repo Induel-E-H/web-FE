@@ -3,7 +3,7 @@ import { PatentExpireContent } from './ExpireContent';
 import { PatentTitle } from './PatentTitle';
 import { PatentValidContent } from './ValidContent';
 
-function Patent() {
+export function Patent() {
   return (
     <section id='patent' className='patent' aria-label='특허 기록'>
       <PatentTitle />
@@ -12,5 +12,3 @@ function Patent() {
     </section>
   );
 }
-
-export default Patent;

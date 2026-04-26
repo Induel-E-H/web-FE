@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { COMPANY } from '@shared/constant';
 import { Footer } from '@widgets/footer';
-import { Header } from '@widgets/header/ui/Header';
+import { Header } from '@widgets/header';
 
 import './styles/PrivacyPolicy.css';
 

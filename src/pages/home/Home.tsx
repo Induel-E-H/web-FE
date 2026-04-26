@@ -2,16 +2,24 @@ import { lazy, type ReactNode, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { smoothScrollTo } from '@shared/lib/scroll';
-import { Header } from '@widgets/header/ui/Header';
-import Hero from '@widgets/hero';
+import { Header } from '@widgets/header';
+import { Hero } from '@widgets/hero';
 
 const Vision = lazy(() =>
   import('@widgets/vision').then((m) => ({ default: m.Vision })),
 );
-const History = lazy(() => import('@widgets/history'));
-const Award = lazy(() => import('@widgets/award'));
-const Patent = lazy(() => import('@widgets/patent'));
-const Map = lazy(() => import('@widgets/map'));
+const History = lazy(() =>
+  import('@widgets/history').then((m) => ({ default: m.History })),
+);
+const Award = lazy(() =>
+  import('@widgets/award').then((m) => ({ default: m.Award })),
+);
+const Patent = lazy(() =>
+  import('@widgets/patent').then((m) => ({ default: m.Patent })),
+);
+const Map = lazy(() =>
+  import('@widgets/map').then((m) => ({ default: m.Map })),
+);
 const Footer = lazy(() =>
   import('@widgets/footer').then((m) => ({ default: m.Footer })),
 );
@@ -31,7 +39,7 @@ const DEV_WIDGET_MAP: Record<string, ReactNode> = {
   footer: <Footer />,
 };
 
-function Home() {
+export function Home() {
   const location = useLocation();
 
   useEffect(() => {
@@ -95,5 +103,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

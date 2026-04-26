@@ -78,7 +78,7 @@
 
 .history__front-cover-title span {
   font-size: max(36px, 2.86vw);
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
 
   line-height: 100%;
   letter-spacing: 0.1em;
@@ -92,7 +92,7 @@
   align-items: flex-start;
   gap: 0;
 
-  font-weight: 700;
+  font-weight: var(--bookendbatang-bold);
 
   transform: skewX(-10deg);
   -webkit-transform: skewX(-10deg);

@@ -78,7 +78,7 @@
 }
 
 .vision__content__index {
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   font-size: max(11px, 0.729vw);
   color: var(--color-index);
 }
@@ -92,7 +92,7 @@
 .vision__content__title__main h3,
 .vision__content__title__main h4 {
   font-family: var(--font-bookendbatang);
-  font-weight: 700;
+  font-weight: var(--bookendbatang-bold);
   line-height: 1.1;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .vision__content__description {
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   font-size: max(12px, 0.78vw);
   line-height: 2;
   color: var(--color-description);

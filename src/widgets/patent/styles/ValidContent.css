@@ -33,7 +33,7 @@
 }
 
 .patent__content__title__text h3 {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(18px, 1.3vw);
   color: var(--white);
 }

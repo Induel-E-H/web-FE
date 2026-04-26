@@ -1,16 +1,15 @@
 import { lazy, Suspense } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
+import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
-
-import induelIcon from '@assets/induel-icon.svg';
 
 import backgroundFallback from '../assets/background-fallback.webp';
 import '../styles/Hero.css';
 
 const HeroBackground = lazy(() => import('./HeroBackground'));
 
-function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
+export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
     <section id='hero' className='hero' aria-label='회사 소개'>
       <Suspense
@@ -66,5 +65,3 @@ function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
     </section>
   );
 }
-
-export default Hero;

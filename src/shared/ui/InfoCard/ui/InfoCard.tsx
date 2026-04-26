@@ -21,6 +21,7 @@ export function InfoCard({
     <button
       type='button'
       className={`info-card${className ? ` ${className}` : ''}`}
+      onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
       aria-label={`${title} - ${year.text}, ${secondary}`}
     >

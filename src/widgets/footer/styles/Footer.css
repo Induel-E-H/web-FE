@@ -50,13 +50,13 @@
 }
 
 .footer__company_name-kor {
-  font-weight: 800;
+  font-weight: var(--pretendard-semibold);
   font-size: max(16px, 0.94vw);
   color: var(--white);
 }
 
 .footer__company_name-eng {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(12px, 0.73vw);
   color: var(--gray-500);
 }
@@ -69,7 +69,7 @@
 
 .footer__information button {
   cursor: pointer;
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(11px, 0.729vw);
   color: var(--white);
 }
@@ -79,7 +79,7 @@
 }
 
 .footer__information b {
-  font-weight: 900;
+  font-weight: var(--pretendard-black);
 }
 
 .footer hr {
@@ -114,7 +114,7 @@
   display: flex;
   flex-direction: row;
   gap: 0.781vmax;
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(11px, 0.729vw);
 }
 
@@ -127,7 +127,7 @@
 }
 
 .footer__company_split {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(11px, 0.729vw);
   color: var(--gray-500);
 }
@@ -137,7 +137,7 @@
 }
 
 .footer__copyright {
-  font-weight: 100;
+  font-weight: var(--pretendard-thin);
   font-size: max(10px, 0.625vw);
   color: var(--gray-400);
 }

@@ -32,14 +32,6 @@ function subscribe(callback: () => void) {
   };
 }
 
-function getSnapshot(): Breakpoint {
-  return cached;
-}
-
-function getServerSnapshot(): Breakpoint {
-  return 'desktop';
-}
-
 export function useBreakpoint(): Breakpoint {
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return useSyncExternalStore(subscribe, () => cached);
 }

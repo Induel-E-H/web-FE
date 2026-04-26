@@ -35,6 +35,11 @@
   -webkit-transform: translateY(-100%);
 }
 
+body[data-popup-open] .header {
+  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+}
+
 .header__logo {
   display: flex;
   flex-direction: row;
@@ -73,7 +78,7 @@
 }
 
 .header__logo span {
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   font-size: max(14px, 0.938vw);
   color: var(--brown-800);
 }
@@ -90,7 +95,7 @@
 }
 
 .header__nav button {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(14px, 0.833vw);
   color: var(--brown-800);
   background: none;
@@ -132,7 +137,7 @@
 
 .header__mobile-menu button {
   padding: 0.729vmax 0.781vmax;
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(11px, 0.729vw);
   color: var(--brown-800);
   background: none;

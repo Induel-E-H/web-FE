@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import { buildRapidSteps } from './animation/buildRapidSteps';
 import { useFlipAnimation } from './animation/useFlipAnimation';
