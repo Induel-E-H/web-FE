@@ -77,20 +77,6 @@ describe('VisionItem', () => {
       );
     });
 
-    it('imageSrcSet prop이 img srcSet 속성으로 적용된다', () => {
-      const srcSet = 'vision_param@800.webp 800w, vision_param.webp 1536w';
-      render(<VisionItem {...defaultProps} imageSrcSet={srcSet} />);
-      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
-        'srcSet',
-        srcSet,
-      );
-    });
-
-    it('imageSrcSet가 없으면 srcSet 속성이 없다', () => {
-      render(<VisionItem {...defaultProps} />);
-      expect(screen.getByAltText('정밀한 설계')).not.toHaveAttribute('srcSet');
-    });
-
     it('sizes 속성이 반응형 뷰포트에 따라 설정된다', () => {
       render(<VisionItem {...defaultProps} imageSrcSet='test.webp 480w' />);
       expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(

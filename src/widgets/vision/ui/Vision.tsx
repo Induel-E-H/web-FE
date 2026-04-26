@@ -1,8 +1,4 @@
-import {
-  VISION_DATA,
-  VISION_IMAGE_MAP,
-  VISION_SRCSET_MAP,
-} from '@entities/vision';
+import { VISION_DATA, VISION_IMAGE_MAP } from '@entities/vision';
 
 import '../styles/Vision.css';
 import { VisionItem } from './VisionItem';
@@ -20,7 +16,6 @@ export function Vision() {
             description={item.description}
             keyword={item.keyword}
             image={VISION_IMAGE_MAP[item.image]}
-            imageSrcSet={VISION_SRCSET_MAP[item.image]}
             index={index}
           />
         ))}
