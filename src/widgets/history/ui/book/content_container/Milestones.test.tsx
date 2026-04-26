@@ -1,5 +1,5 @@
 import { milestonesData } from '@entities/history';
-import { MILESTONES_YEAR_RANGES_BY_BREAKPOINT } from '@features/history/model/pageRegistry';
+import { MILESTONES_YEAR_RANGES_BY_BREAKPOINT } from '@features/history';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 

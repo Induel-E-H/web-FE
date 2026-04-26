@@ -1,6 +1,6 @@
 import { artworks, getThumbnailImage } from '@entities/history';
 
-import { PAGE_SIDE } from '../model/constants';
+import { PAGE_SIDE } from './constants';
 import type { PageSide } from './types';
 
 export function getArtworkIndex(pageIndex: number, side: PageSide): number {

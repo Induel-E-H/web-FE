@@ -1,4 +1,4 @@
-import type { BookState, PageSide } from '@features/history/model/types';
+import type { BookState, PageSide } from '@features/history';
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 

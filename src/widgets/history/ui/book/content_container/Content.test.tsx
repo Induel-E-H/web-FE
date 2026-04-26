@@ -1,10 +1,21 @@
 import * as entityHistory from '@entities/history';
-import * as helpers from '@features/history/model/helpers';
 import { artworks } from '@entities/history';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ContentPage } from './Content';
+
+vi.mock('@features/history/model/helpers', async (importOriginal) => {
+  const actual =
+    await importOriginal<typeof import('@features/history/model/helpers')>();
+  return { ...actual, preloadContentImages: vi.fn() };
+});
 
 type ROCallback = (entries: ResizeObserverEntry[]) => void;
 
@@ -44,7 +55,6 @@ describe('ContentPage', () => {
       vi.spyOn(entityHistory, 'getAllContentImages').mockResolvedValue([
         MOCK_IMAGE,
       ]);
-      vi.spyOn(helpers, 'preloadContentImages').mockReturnValue(undefined);
     });
 
     it('공간이 충분하면 figure.content__image가 렌더링된다', () => {
@@ -170,11 +180,10 @@ describe('ContentPage', () => {
       const iconBtn = container.querySelector(
         'button.content__image-icon',
       ) as HTMLElement;
-      await act(async () => {
-        fireEvent.click(iconBtn);
+      fireEvent.click(iconBtn);
+      await waitFor(() => {
+        expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
       });
-
-      expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
     });
 
     it('figure 이미지 클릭 시 팝업이 열린다', async () => {
@@ -182,10 +191,10 @@ describe('ContentPage', () => {
       const figure = container.querySelector(
         'figure.content__image--has-image',
       ) as HTMLElement;
-      await act(async () => {
-        fireEvent.click(figure);
+      fireEvent.click(figure);
+      await waitFor(() => {
+        expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
       });
-      expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
     });
 
     it('팝업 닫기 버튼 클릭 시 팝업이 닫힌다 (handlePopupClose)', async () => {
@@ -193,8 +202,9 @@ describe('ContentPage', () => {
       const figure = container.querySelector(
         'figure.content__image--has-image',
       ) as HTMLElement;
-      await act(async () => {
-        fireEvent.click(figure);
+      fireEvent.click(figure);
+      await waitFor(() => {
+        expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
       });
       const closeBtn = document.querySelector(
         'button[aria-label="닫기"]',
