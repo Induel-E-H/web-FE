@@ -1,4 +1,4 @@
-import induelIcon from '@assets/induel-icon.svg';
+import { induelIcon } from '@shared/assets';
 
 import '../styles/mapMarker.css';
 

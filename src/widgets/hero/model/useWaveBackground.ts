@@ -1,12 +1,14 @@
 import { useEffect, useRef } from 'react';
 
-import { startWaveAnimation } from '@shared/lib/three/animation/waveAnimation';
-import { createCamera } from '@shared/lib/three/core/createCamera';
-import { createLights } from '@shared/lib/three/core/createLights';
-import { createRenderer } from '@shared/lib/three/core/createRenderer';
-import { createScene } from '@shared/lib/three/core/createScene';
-import { createWaveTubes } from '@shared/lib/three/objects/createWaveTubes';
-import { attachResizeHandler } from '@shared/lib/three/utils/attachResizeHandler';
+import {
+  attachResizeHandler,
+  createCamera,
+  createLights,
+  createRenderer,
+  createScene,
+  createWaveTubes,
+  startWaveAnimation,
+} from '@shared/lib/three';
 
 export function useWaveBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);

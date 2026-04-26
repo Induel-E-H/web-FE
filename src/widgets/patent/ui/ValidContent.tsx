@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
-import { PATENT_IMAGES, PATENT_VALID_LIST } from '@entities/patent';
+import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
 import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 import { Popup } from '@shared/ui/Popup';
 
@@ -46,7 +46,7 @@ export function PatentValidContent() {
           onClose={handleClose}
         >
           <img
-            src={PATENT_IMAGES[selectedIndex]}
+            src={getPatentImage(selectedIndex)}
             alt={PATENT_VALID_LIST[selectedIndex].title}
             loading='lazy'
           />

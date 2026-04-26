@@ -1,10 +1,12 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import Home from '@pages/home';
+import { Home } from '@pages/home';
 import { useGoogleAnalytics } from '@shared/lib/analytics';
 
-const PrivacyPolicy = lazy(() => import('@pages/privacy-policy'));
+const PrivacyPolicy = lazy(() =>
+  import('@pages/privacy-policy').then((m) => ({ default: m.PrivacyPolicy })),
+);
 
 function App() {
   useGoogleAnalytics();

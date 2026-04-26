@@ -7,7 +7,7 @@ import {
   YEAR_ALL,
   YearCategory,
 } from '@features/award';
-import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import { useBreakpoint } from '@shared/lib/breakpoint';
 import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 
 import { getItemsPerPage } from '../model/responsive';

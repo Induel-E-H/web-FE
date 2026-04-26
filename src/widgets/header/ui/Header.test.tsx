@@ -2,9 +2,8 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Header } from '@widgets/header';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-
-import { Header } from './Header';
 
 const mockSmoothScrollTo = vi.hoisted(() => vi.fn());
 const mockUseIsHero = vi.hoisted(() => vi.fn(() => true));
@@ -14,7 +13,7 @@ vi.mock('react-icons/rx', () => ({
   RxHamburgerMenu: () => <svg data-testid='hamburger-icon' />,
 }));
 
-vi.mock('@assets/induel-icon.svg', () => ({ default: 'induel-icon.svg' }));
+vi.mock('@shared/assets', () => ({ induelIcon: 'induel-icon.svg' }));
 
 vi.mock('@shared/lib/scroll/smoothScrollTo', () => ({
   smoothScrollTo: mockSmoothScrollTo,

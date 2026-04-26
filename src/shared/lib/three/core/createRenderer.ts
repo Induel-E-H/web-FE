@@ -1,4 +1,4 @@
-import { isMobileViewport } from '@shared/lib/breakpoint/viewport';
+import { isMobileViewport } from '@shared/lib/breakpoint';
 import { WebGLRenderer } from 'three';
 
 const RENDER_SCALE = 0.5;

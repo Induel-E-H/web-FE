@@ -1,5 +1,5 @@
 import { artworks } from '@entities/history';
-import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import type { IndexItem } from './types';
 

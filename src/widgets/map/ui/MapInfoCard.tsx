@@ -1,6 +1,5 @@
+import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
-
-import induelIcon from '@assets/induel-icon.svg';
 
 import '../styles/mapInfoCard.css';
 

@@ -9,7 +9,7 @@ import img7 from '../assets/7.webp';
 import img8 from '../assets/8.webp';
 import img9 from '../assets/9.webp';
 
-export const AWARD_IMAGES = [
+const AWARD_IMAGES = [
   img0,
   img1,
   img2,
