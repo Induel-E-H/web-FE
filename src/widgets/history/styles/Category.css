@@ -9,7 +9,7 @@
 }
 
 .history__category button {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(16px, 1.04vw);
   color: var(--white);
 
@@ -21,7 +21,7 @@
 }
 
 .history__category span {
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   font-size: max(16px, 1.04vw);
   color: var(--white);
 }

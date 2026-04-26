@@ -14,7 +14,7 @@
 }
 
 .map__card_content h3 {
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   font-size: max(18px, 1.3vw);
   color: var(--brown-800);
 }
@@ -60,7 +60,7 @@
 }
 
 .map__description_text h4 {
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   font-size: max(12px, 0.833vw);
   color: var(--brown-900);
 }
@@ -71,7 +71,7 @@
 }
 
 .map__description__content p {
-  font-weight: 500;
+  font-weight: var(--pretendard-medium);
   font-size: max(11px, 0.729vw);
   color: var(--brown-800);
 }
@@ -126,7 +126,7 @@
 }
 
 .map__description_call_text span {
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   font-size: max(12px, 0.833vw);
   color: var(--white);
 }

@@ -25,7 +25,7 @@
 
 .privacy-policy__title {
   font-size: max(28px, 2.083vw);
-  font-weight: 900;
+  font-weight: var(--pretendard-black);
   color: var(--brown-800);
   margin-bottom: 1.042vmax;
   letter-spacing: -0.04em;
@@ -33,7 +33,7 @@
 
 .privacy-policy__intro {
   font-size: max(11px, 0.729vw);
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   color: var(--gray-700);
   line-height: 1.8;
   word-break: keep-all;
@@ -42,7 +42,7 @@
 .privacy-policy__effective {
   margin-top: 0.781vmax;
   font-size: max(10px, 0.625vw);
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   color: var(--gray-700);
 }
 
@@ -78,14 +78,14 @@
 .privacy-policy__highlight-body strong {
   display: block;
   font-size: max(10px, 0.625vw);
-  font-weight: 800;
+  font-weight: var(--pretendard-bold);
   color: var(--brown-800);
   margin-bottom: 0.26vmax;
 }
 
 .privacy-policy__highlight-body p {
   font-size: max(9px, 0.573vw);
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   color: var(--typo-contentW);
   line-height: 1.6;
 }
@@ -100,7 +100,7 @@
 
 .privacy-policy__toc-title {
   font-size: max(11px, 0.729vw);
-  font-weight: 800;
+  font-weight: var(--pretendard-extrabold);
   color: var(--brown-800);
   margin-bottom: 0.781vmax;
   letter-spacing: -0.02em;
@@ -116,7 +116,7 @@
 
 .privacy-policy__toc-list li a {
   font-size: max(10px, 0.625vw);
-  font-weight: 500;
+  font-weight: var(--pretendard-medium);
   color: var(--brown-600);
   text-decoration: none;
   display: block;
@@ -147,7 +147,7 @@
 
 .privacy-policy__article-title {
   font-size: max(12px, 0.833vw);
-  font-weight: 800;
+  font-weight: var(--pretendard-extrabold);
   color: var(--brown-800);
   margin-bottom: 0.781vmax;
   letter-spacing: -0.025em;
@@ -155,7 +155,7 @@
 
 .privacy-policy__article p {
   font-size: max(10px, 0.677vw);
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   color: var(--gray-800);
   line-height: 1.8;
   margin-bottom: 0.521vmax;
@@ -187,14 +187,14 @@
 
 .privacy-policy__ordered-list li {
   font-size: max(10px, 0.677vw);
-  font-weight: 500;
+  font-weight: var(--pretendard-medium);
   color: var(--brown-800);
   line-height: 1.7;
 }
 
 .privacy-policy__ordered-list li strong {
   display: block;
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   margin-bottom: 0.208vmax;
 }
 
@@ -213,7 +213,7 @@
 
 .privacy-policy__unordered-list li {
   font-size: max(10px, 0.625vw);
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   color: var(--gray-700);
   line-height: 1.7;
 }
@@ -239,7 +239,7 @@
 
 .privacy-policy__table th {
   background-color: var(--brown-50);
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   color: var(--brown-800);
 }
 
@@ -255,7 +255,7 @@
 }
 
 .privacy-policy__article .privacy-policy__cookie-guide-title {
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   color: var(--brown-800);
   margin-bottom: 0.521vmax;
 }
@@ -281,7 +281,7 @@
   gap: 0.521vmax;
   padding: 0.521vmax 0;
   font-size: max(10px, 0.625vw);
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   color: var(--brown-600);
   cursor: pointer;
   user-select: none;
@@ -294,7 +294,7 @@
 .privacy-policy__cookie-summary::after {
   content: '﹢';
   font-size: max(11px, 0.729vw);
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   color: var(--brown-400);
   flex-shrink: 0;
   transition: transform 0.2s ease;
@@ -317,7 +317,7 @@
 
 .privacy-policy__article .privacy-policy__contact-box-title {
   font-size: max(10px, 0.677vw);
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   color: var(--brown-800);
   margin-bottom: 0.521vmax;
 }
@@ -336,7 +336,7 @@
 }
 
 .privacy-policy__contact-list li span:first-child {
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   color: var(--brown-600);
   min-width: 3.125vmax;
   flex-shrink: 0;
@@ -360,7 +360,7 @@
   background-color: var(--brown-800);
   color: var(--white);
   font-size: max(11px, 0.729vw);
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   border-radius: 0.208vmax;
   cursor: pointer;
   transition:

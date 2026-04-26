@@ -30,7 +30,7 @@
 
 .map__info__name {
   color: var(--white);
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   font-size: max(13px, 0.833vw);
 }
 
