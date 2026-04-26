@@ -1,11 +1,11 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import Award from './Award';
 
-const mockGetItemsPerPage = vi.hoisted(() => vi.fn().mockReturnValue(8));
-vi.mock('../model/responsive', () => ({
-  getItemsPerPage: mockGetItemsPerPage,
+const mockUseBreakpoint = vi.hoisted(() => vi.fn().mockReturnValue('desktop'));
+vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
+  useBreakpoint: mockUseBreakpoint,
 }));
 
 vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
@@ -24,7 +24,7 @@ vi.mock('@entities/award', async (importOriginal) => {
 describe('Award', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockGetItemsPerPage.mockReturnValue(8);
+    mockUseBreakpoint.mockReturnValue('desktop');
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   });
@@ -52,13 +52,6 @@ describe('Award', () => {
       expect(
         screen.getByRole('navigation', { name: '연도 필터' }),
       ).toBeInTheDocument();
-    });
-  });
-
-  describe('카드 렌더링', () => {
-    it('데스크탑(10 items/page)에서 10개의 카드가 렌더링된다', () => {
-      render(<Award />);
-      expect(document.querySelectorAll('button.award__card')).toHaveLength(10);
     });
   });
 
@@ -128,9 +121,9 @@ describe('Award', () => {
     });
   });
 
-  describe('모바일 Pagination', () => {
-    it('itemsPerPage < 10(모바일)이면 Pagination이 표시된다', () => {
-      mockGetItemsPerPage.mockReturnValue(4);
+  describe('모바일/태블릿 Pagination', () => {
+    it('모바일 breakpoint이면 Pagination이 표시된다', () => {
+      mockUseBreakpoint.mockReturnValue('mobile');
       render(<Award />);
 
       expect(
@@ -138,7 +131,16 @@ describe('Award', () => {
       ).toBeInTheDocument();
     });
 
-    it('itemsPerPage >= 10(데스크탑)이면 Pagination이 표시되지 않는다', () => {
+    it('태블릿 breakpoint이면 Pagination이 표시된다', () => {
+      mockUseBreakpoint.mockReturnValue('tablet');
+      render(<Award />);
+
+      expect(
+        screen.getByRole('button', { name: '이전 페이지' }),
+      ).toBeInTheDocument();
+    });
+
+    it('데스크탑 breakpoint이면 Pagination이 표시되지 않는다', () => {
       render(<Award />);
 
       expect(
@@ -147,37 +149,30 @@ describe('Award', () => {
     });
   });
 
-  describe('resize 이벤트', () => {
-    it('resize 시 getItemsPerPage가 다시 호출된다', () => {
+  describe('breakpoint별 카드 수', () => {
+    it('데스크탑에서 10개 카드가 렌더링된다', () => {
       render(<Award />);
-      const callsBefore = mockGetItemsPerPage.mock.calls.length;
-
-      act(() => {
-        window.dispatchEvent(new Event('resize'));
-      });
-
-      expect(mockGetItemsPerPage.mock.calls.length).toBeGreaterThan(
-        callsBefore,
-      );
+      expect(document.querySelectorAll('button.award__card')).toHaveLength(10);
     });
 
-    it('언마운트 시 resize 리스너가 제거된다', () => {
-      const { unmount } = render(<Award />);
-      const callsBefore = mockGetItemsPerPage.mock.calls.length;
+    it('태블릿에서 6개씩 페이지가 구성된다', () => {
+      mockUseBreakpoint.mockReturnValue('tablet');
+      render(<Award />);
+      const firstPage = document.querySelector('.award__card_page');
+      expect(firstPage?.querySelectorAll('button.award__card')).toHaveLength(6);
+    });
 
-      unmount();
-
-      act(() => {
-        window.dispatchEvent(new Event('resize'));
-      });
-
-      expect(mockGetItemsPerPage.mock.calls.length).toBe(callsBefore);
+    it('모바일에서 4개씩 페이지가 구성된다', () => {
+      mockUseBreakpoint.mockReturnValue('mobile');
+      render(<Award />);
+      const firstPage = document.querySelector('.award__card_page');
+      expect(firstPage?.querySelectorAll('button.award__card')).toHaveLength(4);
     });
   });
 
   describe('safePage 슬라이더 transform', () => {
     it('모바일에서 Next page 클릭 시 슬라이더 transform이 업데이트된다 (safePage > 0 분기 커버)', () => {
-      mockGetItemsPerPage.mockReturnValue(4); // 4 items/page → 2 pages
+      mockUseBreakpoint.mockReturnValue('mobile'); // 4 items/page → 3 pages
       render(<Award />);
 
       const sliderBefore = (

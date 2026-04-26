@@ -7,9 +7,10 @@ import {
   YEAR_ALL,
   YearCategory,
 } from '@features/award';
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 
-import { useItemsPerPage } from '../model/useItemsPerPage';
+import { getItemsPerPage } from '../model/responsive';
 import '../styles/Award.css';
 import { AwardTitle } from './AwardTitle';
 import { AwardCount } from './Count';
@@ -18,8 +19,9 @@ import { Viewport } from './Viewport';
 
 function Award() {
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = useItemsPerPage();
-  const isMobile = itemsPerPage < 8;
+  const breakpoint = useBreakpoint();
+  const itemsPerPage = getItemsPerPage(breakpoint);
+  const showPagination = breakpoint !== 'desktop';
   const {
     activeYear,
     yearList,
@@ -76,7 +78,7 @@ function Award() {
           onCardClick={handleCardClick}
           setCurrentPage={setCurrentPage}
         />
-        {isMobile && (
+        {showPagination && (
           <Pagination
             currentPage={safePage}
             totalPages={totalPages}
