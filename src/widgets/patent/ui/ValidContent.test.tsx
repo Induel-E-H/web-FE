@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { PatentValidContent } from './ValidContent';
 
-vi.mock('@shared/lib/useScrollLock/useScrollLock', () => ({
+vi.mock('@shared/lib/useScrollLock', () => ({
   lockScroll: vi.fn(),
   unlockScroll: vi.fn(),
 }));
