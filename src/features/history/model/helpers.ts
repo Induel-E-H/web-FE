@@ -14,12 +14,8 @@ export function preloadContentImages(pageIndex: number): void {
   const adjacentIndices = [
     getArtworkIndex(pageIndex + 1, 'left'),
     getArtworkIndex(pageIndex + 1, 'right'),
-    getArtworkIndex(pageIndex + 2, 'left'),
-    getArtworkIndex(pageIndex + 2, 'right'),
     getArtworkIndex(pageIndex - 1, 'left'),
     getArtworkIndex(pageIndex - 1, 'right'),
-    getArtworkIndex(pageIndex - 2, 'left'),
-    getArtworkIndex(pageIndex - 2, 'right'),
   ];
 
   for (const idx of adjacentIndices) {
