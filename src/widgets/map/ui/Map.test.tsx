@@ -123,7 +123,7 @@ describe('Map', () => {
 
     it('API 키가 있고 Naver SDK 미로드 시 div.map__content가 렌더링된다', () => {
       setNaverMaps(false);
-      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-api-key');
 
       const { container } = render(<Map />);
 
@@ -135,7 +135,7 @@ describe('Map', () => {
 
     it('API 키가 있고 Naver SDK 미로드 시 스크립트가 동적으로 삽입된다', () => {
       setNaverMaps(false);
-      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-api-key');
 
       render(<Map />);
 
@@ -148,7 +148,7 @@ describe('Map', () => {
 
     it('스크립트 로드 실패 시 iframe fallback이 렌더링된다', async () => {
       setNaverMaps(false);
-      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-api-key');
 
       render(<Map />);
 
@@ -167,7 +167,7 @@ describe('Map', () => {
 
     it('스크립트 load 이벤트 후 Naver SDK가 없으면 fallback이 렌더링된다', async () => {
       setNaverMaps(false);
-      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-api-key');
 
       render(<Map />);
 
@@ -185,7 +185,7 @@ describe('Map', () => {
 
     it('이미 스크립트가 있고 Naver SDK 미로드 시 load 이벤트를 기다린다', async () => {
       setNaverMaps(false);
-      vi.stubEnv('VITE_NAVER_MAP_API', 'test-api-key');
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-api-key');
 
       const existingScript = document.createElement('script');
       existingScript.src =
