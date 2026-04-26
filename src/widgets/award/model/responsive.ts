@@ -1,10 +1,7 @@
-import {
-  isMobileViewport,
-  isTabletViewport,
-} from '@shared/lib/breakpoint/viewport';
+import type { Breakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 
-export function getItemsPerPage(): number {
-  if (isMobileViewport()) return 4;
-  if (isTabletViewport()) return 6;
+export function getItemsPerPage(breakpoint: Breakpoint): number {
+  if (breakpoint === 'mobile') return 4;
+  if (breakpoint === 'tablet') return 6;
   return 10;
 }
