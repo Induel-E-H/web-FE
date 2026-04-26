@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { COMPANY } from '@shared/constant/company';
+import { COMPANY } from '@shared/constant';
 import { getOrdinalSuffix } from '@shared/lib/ordinal';
 
 import '../../styles/book/FrontCover.css';

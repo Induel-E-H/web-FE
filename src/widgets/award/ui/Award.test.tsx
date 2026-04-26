@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import Award from './Award';
+import { Award } from './Award';
 
 const mockUseBreakpoint = vi.hoisted(() => vi.fn().mockReturnValue('desktop'));
 vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({

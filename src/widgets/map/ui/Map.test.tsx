@@ -2,7 +2,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import Map from './Map';
+import { Map } from './Map';
 
 const mockMakeMap = vi.hoisted(() => vi.fn(() => vi.fn()));
 

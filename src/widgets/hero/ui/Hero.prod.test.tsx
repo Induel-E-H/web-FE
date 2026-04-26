@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import Hero from './Hero';
+import { Hero } from './Hero';
 
 // HeroBackground mock (Three.js 의존성 격리)
 vi.mock('./HeroBackground', () => ({

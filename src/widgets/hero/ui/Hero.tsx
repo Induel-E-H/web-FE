@@ -9,7 +9,7 @@ import '../styles/Hero.css';
 
 const HeroBackground = lazy(() => import('./HeroBackground'));
 
-function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
+export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
     <section id='hero' className='hero' aria-label='회사 소개'>
       <Suspense
@@ -65,5 +65,3 @@ function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
     </section>
   );
 }
-
-export default Hero;

@@ -39,7 +39,7 @@ const DEV_WIDGET_MAP: Record<string, ReactNode> = {
   footer: <Footer />,
 };
 
-function Home() {
+export function Home() {
   const location = useLocation();
 
   useEffect(() => {
@@ -103,5 +103,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

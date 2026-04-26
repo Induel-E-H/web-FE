@@ -2,7 +2,7 @@ import { COMPANY } from '@shared/constant';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import Hero from './Hero';
+import { Hero } from './Hero';
 
 // Three.js 의존성을 가진 HeroBackground를 격리
 const HeroBackgroundMock = vi.hoisted(() =>

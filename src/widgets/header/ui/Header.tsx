@@ -13,7 +13,7 @@ import '../styles/Header.css';
 
 const HERO_SELECTOR = '.hero';
 
-function Header() {
+export function Header() {
   const isHero = useIsHero();
   const { hidden, onNavScrollStart, onNavScrollEnd } = useHeaderVisibility();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -95,5 +95,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;

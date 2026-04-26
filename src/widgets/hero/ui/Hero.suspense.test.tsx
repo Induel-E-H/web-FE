@@ -26,7 +26,7 @@ describe('Hero — Suspense fallback', () => {
 
     vi.doMock('./HeroBackground', () => deferredModule);
 
-    const { default: Hero } = await import('./Hero');
+    const { Hero } = await import('./Hero');
 
     let container!: HTMLElement;
     act(() => {
