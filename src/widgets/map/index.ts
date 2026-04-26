@@ -1,1 +1,1 @@
-export { default as Map } from './ui/Map';
+export { Map } from './ui/Map';

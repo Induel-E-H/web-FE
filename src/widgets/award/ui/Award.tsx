@@ -17,7 +17,7 @@ import { AwardCount } from './Count';
 import { AwardPopup } from './Popup';
 import { Viewport } from './Viewport';
 
-function Award() {
+export function Award() {
   const [currentPage, setCurrentPage] = useState(0);
   const breakpoint = useBreakpoint();
   const itemsPerPage = getItemsPerPage(breakpoint);
@@ -99,5 +99,3 @@ function Award() {
     </section>
   );
 }
-
-export default Award;

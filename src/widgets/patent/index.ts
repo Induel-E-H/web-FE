@@ -1,1 +1,1 @@
-export { default as Patent } from './ui/Patent';
+export { Patent } from './ui/Patent';
