@@ -1,5 +1,7 @@
 import { COMPANY } from '@shared/constant';
 
+import induelIcon from '@assets/induel-icon.svg';
+
 import '../styles/mapInfoCard.css';
 
 export function MapInfoCard() {
@@ -7,25 +9,12 @@ export function MapInfoCard() {
     <div className='map__info'>
       <div className='map__info__card'>
         <div className='map__info__header'>
-          <svg
+          <img
+            src={induelIcon}
             className='map__info__logo'
-            viewBox='0 0 649 748'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M275.115 -6.10352e-05H197.814V157.373H275.115C394.499 157.373 491.627 254.501 491.627 373.885C491.627 493.269 394.499 590.397 275.115 590.397H157.37V747.764H275.115C481.595 747.764 649 580.372 649 373.885C649 167.392 481.595 -6.10352e-05 275.115 -6.10352e-05Z'
-              fill='#808285'
-            />
-            <path
-              d='M0 197.811V609.671V747.764H157.373V609.671V197.811H0Z'
-              fill='#333132'
-            />
-            <path
-              d='M0 -0.000259399H157.373V157.373H0V-0.000259399Z'
-              fill='#BF1E2D'
-            />
-          </svg>
+            alt=''
+            aria-hidden='true'
+          />
           <div>
             <p className='map__info__name'>{COMPANY.NAME_KO}</p>
             <p className='map__info__subtitle'>{COMPANY.NAME_EN_FULL}</p>
