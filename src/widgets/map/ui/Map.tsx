@@ -37,7 +37,7 @@ export function Map() {
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapState, setMapState] = useState<MapState>(() => {
     if (isNaverAvailable()) return 'ready';
-    const key = import.meta.env.VITE_NAVER_MAP_API as string | undefined;
+    const key = import.meta.env.VITE_NAVER_MAP_API_KEY as string | undefined;
     if (!key) return 'fallback';
     return 'loading';
   });
@@ -46,7 +46,7 @@ export function Map() {
   useEffect(() => {
     if (isNaverAvailable()) return;
 
-    const key = import.meta.env.VITE_NAVER_MAP_API as string | undefined;
+    const key = import.meta.env.VITE_NAVER_MAP_API_KEY as string | undefined;
     if (!key) return;
 
     const handleLoad = () =>
