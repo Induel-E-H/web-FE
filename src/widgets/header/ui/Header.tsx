@@ -13,7 +13,11 @@ import '../styles/Header.css';
 
 const HERO_SELECTOR = '.hero';
 
-export function Header() {
+interface HeaderProps {
+  onNavClick?: (selector: string) => void;
+}
+
+export function Header({ onNavClick }: HeaderProps = {}) {
   const isHero = useIsHero();
   const { hidden, onNavScrollStart, onNavScrollEnd } = useHeaderVisibility();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,6 +26,10 @@ export function Header() {
   const isHome = location.pathname === '/';
 
   function scrollTo(selector: string) {
+    if (onNavClick) {
+      onNavClick(selector);
+      return;
+    }
     if (!isHome) {
       void navigate('/', { state: { scrollTo: selector } });
       return;
