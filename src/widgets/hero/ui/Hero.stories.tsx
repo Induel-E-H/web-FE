@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Hero } from './Hero';
 
-const meta: Meta<typeof Hero> = {
+const meta = {
   title: 'Widgets/Hero',
   component: Hero,
   parameters: {
@@ -14,11 +14,11 @@ const meta: Meta<typeof Hero> = {
       },
     },
   },
-};
+} satisfies Meta<typeof Hero>;
 
 export default meta;
 
-type Story = StoryObj<typeof Hero>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: 'Prod Hero 뷰포트',
