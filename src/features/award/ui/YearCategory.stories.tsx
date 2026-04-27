@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 
 import { YEAR_LIST } from '../model/constant';
 import { YearCategory } from './YearCategory';
@@ -9,7 +10,7 @@ const meta = {
   args: {
     yearList: YEAR_LIST,
     activeYear: '전체',
-    onYearChange: () => {},
+    onYearChange: fn(),
   },
   parameters: {
     layout: 'centered',

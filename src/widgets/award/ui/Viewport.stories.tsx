@@ -45,7 +45,7 @@ export const Default: Story = {
   },
 };
 
-export const Tablet = {
+export const Tablet: Story = {
   name: '(3×2, 6개/페이지)',
   globals: {
     viewport: { value: 'tablet' },
@@ -53,7 +53,7 @@ export const Tablet = {
   args: { itemsPerPage: 6, totalPages: Math.ceil(AWARD_LIST.length / 6) },
 };
 
-export const Mobile = {
+export const Mobile: Story = {
   name: '(2×2, 4개/페이지)',
   globals: {
     viewport: { value: 'mobile' },
