@@ -192,10 +192,15 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 
 ### Performance
 
-- Lighthouse
-  | Performance | Accessibility | Best Practice | SEO |
-  | ---------------------- | ------------- | ------------- | ------ |
-  | 🟢 95 | 🟢 100 | 🟢 100 | 🟢 100 |
+- Desktop
+  |Performance|Accessibility|Best Practice|SEO|
+  |---|---|---|---|
+  |🟢 100|🟢 100|🟠 77|🟢 100|
+
+- Mobile
+  |Performance|Accessibility|Best Practice|SEO|
+  |---|---|---|---|
+  |🟢 96|🟢 100|🟠 73|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
@@ -254,11 +259,15 @@ Claude Code 기반으로 반복 작업을 자동화하고
   - superpowers
   - frontend-design
   - code-simplifier
+  - chrome-devtools
 - MCP
   - Talk To Figma
 - Agent
   - figma-designer: Talk To Figma를 통해 디자인을 제작하는 Agent
   - vitest-writer: 테스트 작성 전문 Agent
+
+> [!TIP]
+> README에 대한 자세한 내용은 [Wiki](https://github.com/Induel-E-H/web-FE/wiki)에서 확인할 수 있습니다!
 
 [gyeongmin]: https://avatars.githubusercontent.com/u/115498500?v=4&size=128
 [minseok]: https://avatars.githubusercontent.com/u/99482796?v=4&size=128
