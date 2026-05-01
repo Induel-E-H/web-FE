@@ -1,4 +1,4 @@
-import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
+import { getPatentImage } from '@entities/patent';
 import { Popup } from '@shared/ui/Popup';
 
 export function PatentPopup({
@@ -14,7 +14,7 @@ export function PatentPopup({
     <Popup ariaLabel={`${patentTitle} 특허증 이미지`} onClose={onClose}>
       <img
         src={getPatentImage(patentId)}
-        alt={PATENT_VALID_LIST[patentId].title}
+        alt={`${patentTitle} 특허증 이미지`}
         loading='lazy'
       />
     </Popup>

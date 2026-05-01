@@ -39,12 +39,12 @@ describe('AwardPopup', () => {
       render(
         <AwardPopup awardId={3} awardTitle='최우수상' onClose={vi.fn()} />,
       );
-      expect(screen.getByAltText('최우수상')).toBeInTheDocument();
+      expect(screen.getByAltText('최우수상 수상 이미지')).toBeInTheDocument();
     });
 
     it('이미지 src가 getAwardImage 반환값이다', () => {
       render(<AwardPopup awardId={1} awardTitle='우수상' onClose={vi.fn()} />);
-      expect(screen.getByAltText('우수상')).toHaveAttribute(
+      expect(screen.getByAltText('우수상 수상 이미지')).toHaveAttribute(
         'src',
         'popup-image.webp',
       );

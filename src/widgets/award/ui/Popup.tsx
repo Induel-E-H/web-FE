@@ -12,7 +12,11 @@ export function AwardPopup({
 }) {
   return (
     <Popup ariaLabel={`${awardTitle} 수상 이미지`} onClose={onClose}>
-      <img src={getAwardImage(awardId)} alt={awardTitle} loading='lazy' />
+      <img
+        src={getAwardImage(awardId)}
+        alt={`${awardTitle} 수상 이미지`}
+        loading='lazy'
+      />
     </Popup>
   );
 }
