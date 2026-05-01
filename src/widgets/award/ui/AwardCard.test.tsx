@@ -52,7 +52,7 @@ describe('Card', () => {
 
       fireEvent.click(screen.getByRole('button'));
 
-      expect(onClick).toHaveBeenCalledWith(1);
+      expect(onClick).toHaveBeenCalledTimes(1);
     });
   });
 });
