@@ -22,7 +22,10 @@ export function InfoCard({
       type='button'
       className={`info-card${className ? ` ${className}` : ''}`}
       onMouseDown={(e) => e.preventDefault()}
-      onClick={onClick}
+      onClick={(e) => {
+        (e.currentTarget as HTMLButtonElement).focus();
+        onClick();
+      }}
       aria-label={`${title} - ${year.text}, ${secondary}`}
     >
       <div className='info-card__frame'>

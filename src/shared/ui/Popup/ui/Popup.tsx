@@ -39,9 +39,28 @@ export function Popup({
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    previousActiveElementRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+
     document.body.dataset.popupOpen = 'true';
+
+    const allInteractive = document.querySelectorAll(FOCUSABLE_SELECTORS);
+    allInteractive.forEach((el) => {
+      if (!dialogRef.current?.contains(el)) {
+        el.setAttribute('data-popup-inert', 'true');
+        (el as HTMLElement).inert = true;
+      }
+    });
+
+    setTimeout(() => {
+      closeButtonRef.current?.focus();
+    }, 0);
+
     history.pushState(null, '');
 
     function getFocusable() {
@@ -95,6 +114,19 @@ export function Popup({
 
     return () => {
       delete document.body.dataset.popupOpen;
+
+      const allInteractive = document.querySelectorAll(
+        '[data-popup-inert="true"]',
+      );
+      allInteractive.forEach((el) => {
+        el.removeAttribute('data-popup-inert');
+        (el as HTMLElement).inert = false;
+      });
+
+      if (previousActiveElementRef.current) {
+        previousActiveElementRef.current.focus({ preventScroll: true });
+      }
+
       window.removeEventListener('popstate', onClose);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('wheel', handleWheel);
