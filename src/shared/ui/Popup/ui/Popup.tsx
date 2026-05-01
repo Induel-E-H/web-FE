@@ -63,10 +63,6 @@ export function Popup({
       ).filter((el) => el.offsetParent !== null);
     }
 
-    function handlePopState() {
-      onClose();
-    }
-
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         onClose();
@@ -105,13 +101,13 @@ export function Popup({
       }
     }
 
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', onClose);
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
       delete document.body.dataset.popupOpen;
-      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('popstate', onClose);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('wheel', handleWheel);
     };
