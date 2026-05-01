@@ -1,8 +1,6 @@
 import { type ReactNode, useEffect, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
-import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
-
 import '../styles/Popup.css';
 
 const FOCUSABLE_SELECTORS = [
@@ -55,7 +53,6 @@ export function Popup({
   }, []);
 
   useEffect(() => {
-    lockScroll();
     document.body.dataset.popupOpen = 'true';
     history.pushState(null, '');
 
@@ -64,10 +61,6 @@ export function Popup({
         dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS) ??
           [],
       ).filter((el) => el.offsetParent !== null);
-    }
-
-    function handlePopState() {
-      onClose();
     }
 
     function handleKeyDown(e: KeyboardEvent) {
@@ -108,14 +101,13 @@ export function Popup({
       }
     }
 
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', onClose);
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
-      unlockScroll();
       delete document.body.dataset.popupOpen;
-      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('popstate', onClose);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('wheel', handleWheel);
     };

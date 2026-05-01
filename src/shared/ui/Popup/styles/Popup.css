@@ -27,6 +27,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  overscroll-behavior: contain;
   gap: 0.78vmax;
   background-color: var(--white);
   animation: popup-in 0.25s ease;
