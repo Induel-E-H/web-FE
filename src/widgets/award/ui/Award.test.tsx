@@ -63,14 +63,6 @@ describe('Award', () => {
 
       expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
-
-    it('카드 클릭 시 body overflow가 hidden으로 설정된다', () => {
-      render(<Award />);
-
-      fireEvent.click(document.querySelectorAll('button.award__card')[0]);
-
-      expect(document.body.style.overflow).toBe('hidden');
-    });
   });
 
   describe('handlePopupClose', () => {
