@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
-import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
-import { Popup } from '@shared/ui/Popup';
+import { PATENT_VALID_LIST } from '@entities/patent';
 
 import '../styles/ValidContent.css';
 import { PatentCard } from './PatentCard';
+import { PatentPopup } from './Popup';
 
 export function PatentValidContent() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   return (
     <article className='patent__content'>
@@ -25,21 +25,16 @@ export function PatentValidContent() {
       <ul className='patent__content__item__list'>
         {PATENT_VALID_LIST.map((item, index) => (
           <li key={item.serialNumber}>
-            <PatentCard item={item} onClick={() => setSelectedIndex(index)} />
+            <PatentCard item={item} onClick={() => setSelectedId(index)} />
           </li>
         ))}
       </ul>
-      {selectedIndex !== null && (
-        <Popup
-          ariaLabel={PATENT_VALID_LIST[selectedIndex].title}
-          onClose={() => setSelectedIndex(null)}
-        >
-          <img
-            src={getPatentImage(selectedIndex)}
-            alt={PATENT_VALID_LIST[selectedIndex].title}
-            loading='lazy'
-          />
-        </Popup>
+      {selectedId !== null && (
+        <PatentPopup
+          patentId={selectedId}
+          patentTitle={PATENT_VALID_LIST[selectedId].title}
+          onClose={() => setSelectedId(null)}
+        />
       )}
     </article>
   );

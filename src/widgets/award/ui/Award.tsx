@@ -77,10 +77,7 @@ export function Award() {
         {selectedId !== null && (
           <AwardPopup
             awardId={selectedId}
-            awardTitle={
-              AWARD_LIST.find((a) => a.id === selectedId)?.title ??
-              '수상 이미지'
-            }
+            awardTitle={AWARD_LIST[selectedId].title ?? '수상 이미지'}
             onClose={() => setSelectedId(null)}
           />
         )}
