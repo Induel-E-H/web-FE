@@ -1,6 +1,5 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
-import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 import { ImageSlider, useSliderNavigation } from '@shared/ui/ImageSlider';
 import { Popup } from '@shared/ui/Popup';
 
@@ -24,11 +23,6 @@ export function ImageGalleryPopup({
     startContinuousSlide,
     stopContinuousSlide,
   } = useSliderNavigation(images.length);
-
-  useLayoutEffect(() => {
-    lockScroll();
-    return unlockScroll;
-  }, []);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {

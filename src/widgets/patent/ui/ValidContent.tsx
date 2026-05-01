@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
 import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
-import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 import { Popup } from '@shared/ui/Popup';
 
 import '../styles/ValidContent.css';
@@ -10,16 +9,6 @@ import { PatentCard } from './PatentCard';
 
 export function PatentValidContent() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-
-  function handleOpen(index: number) {
-    lockScroll();
-    setSelectedIndex(index);
-  }
-
-  function handleClose() {
-    unlockScroll();
-    setSelectedIndex(null);
-  }
 
   return (
     <article className='patent__content'>
@@ -36,14 +25,14 @@ export function PatentValidContent() {
       <ul className='patent__content__item__list'>
         {PATENT_VALID_LIST.map((item, index) => (
           <li key={item.serialNumber}>
-            <PatentCard item={item} onClick={() => handleOpen(index)} />
+            <PatentCard item={item} onClick={() => setSelectedIndex(index)} />
           </li>
         ))}
       </ul>
       {selectedIndex !== null && (
         <Popup
           ariaLabel={PATENT_VALID_LIST[selectedIndex].title}
-          onClose={handleClose}
+          onClose={() => setSelectedIndex(null)}
         >
           <img
             src={getPatentImage(selectedIndex)}
