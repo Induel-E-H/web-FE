@@ -23,9 +23,9 @@ export function PatentValidContent() {
         <hr />
       </header>
       <ul className='patent__content__item__list'>
-        {PATENT_VALID_LIST.map((item, index) => (
-          <li key={item.serialNumber}>
-            <PatentCard item={item} onClick={() => setSelectedId(index)} />
+        {PATENT_VALID_LIST.map((patent, index) => (
+          <li key={patent.serialNumber}>
+            <PatentCard patent={patent} onClick={() => setSelectedId(index)} />
           </li>
         ))}
       </ul>
