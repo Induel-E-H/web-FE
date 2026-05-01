@@ -5,6 +5,7 @@ import { PAGE_SIDE, RAPID_FLIP_DURATION } from '@features/history';
 import type { IndexItem } from '@features/history';
 import { useBookCoverState } from '@features/history';
 import { useBookNavigation } from '@features/history';
+import { BOOK_STATE } from '@features/history';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 
 import '../styles/History.css';
@@ -56,13 +57,13 @@ export function History() {
   useEffect(() => {
     syncBoundaryCallbacks(
       (duration) => {
-        if (bookState === 'open' && !isAnimatingRef.current) {
+        if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
           closingFront();
           startFlipAnimation('backward', onFrontClosed, duration);
         }
       },
       (duration) => {
-        if (bookState === 'open' && !isAnimatingRef.current) {
+        if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
           closingBack();
           startFlipAnimation('forward', onBackClosed, duration);
         }
@@ -93,7 +94,7 @@ export function History() {
 
   useEffect(() => {
     if (
-      bookState === 'open' &&
+      bookState === BOOK_STATE.OPEN &&
       pendingCategory !== null &&
       !pendingFiredRef.current
     ) {
@@ -188,7 +189,7 @@ export function History() {
 
   function handleLeftMouseDown() {
     if (!canGoLeft) {
-      if (bookState === 'open' && !isAnimatingRef.current) {
+      if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
         closingFront();
         startFlipAnimation('backward', onFrontClosed);
       }
@@ -199,7 +200,7 @@ export function History() {
 
   function handleRightMouseDown() {
     if (!canGoRight) {
-      if (bookState === 'open' && !isAnimatingRef.current) {
+      if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
         closingBack();
         startFlipAnimation('forward', onBackClosed);
       }
