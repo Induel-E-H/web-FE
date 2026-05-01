@@ -38,19 +38,7 @@ export function Popup({
   children: ReactNode;
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const triggerRef = useRef<Element | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    triggerRef.current = document.activeElement;
-    closeButtonRef.current?.focus();
-
-    return () => {
-      if (triggerRef.current instanceof HTMLElement) {
-        triggerRef.current.focus();
-      }
-    };
-  }, []);
 
   useEffect(() => {
     document.body.dataset.popupOpen = 'true';
