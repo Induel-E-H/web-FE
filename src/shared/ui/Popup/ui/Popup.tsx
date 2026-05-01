@@ -1,28 +1,17 @@
-import { type ReactNode, useEffect, useRef } from 'react';
-import { IoMdClose } from 'react-icons/io';
+import { type ReactNode, useRef } from 'react';
 
+import { usePopupFocusTrap, usePopupInert } from '../model';
+import { POPUP_CLASS_NAMES } from '../model';
 import '../styles/Popup.css';
+import { PopupHeader } from './PopupHeader';
 
-const FOCUSABLE_SELECTORS = [
-  'a[href]',
-  'area[href]',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
-  'button:not([disabled])',
-  '[tabindex]:not([tabindex="-1"])',
-].join(', ');
-
-const SCROLL_KEYS = new Set([
-  'ArrowUp',
-  'ArrowDown',
-  'ArrowLeft',
-  'ArrowRight',
-  'PageUp',
-  'PageDown',
-  'Home',
-  'End',
-]);
+type PopupProps = {
+  ariaLabel: string;
+  title?: string;
+  variant?: 'default' | 'gallery';
+  onClose: () => void;
+  children: ReactNode;
+};
 
 export function Popup({
   ariaLabel,
@@ -30,112 +19,21 @@ export function Popup({
   variant = 'default',
   onClose,
   children,
-}: {
-  ariaLabel: string;
-  title?: string;
-  variant?: 'default' | 'gallery';
-  onClose: () => void;
-  children: ReactNode;
-}) {
+}: PopupProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    previousActiveElementRef.current =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+  usePopupFocusTrap(dialogRef, closeButtonRef, onClose);
+  usePopupInert(dialogRef, onClose);
 
-    document.body.dataset.popupOpen = 'true';
-
-    const allInteractive = document.querySelectorAll(FOCUSABLE_SELECTORS);
-    allInteractive.forEach((el) => {
-      if (!dialogRef.current?.contains(el)) {
-        el.setAttribute('data-popup-inert', 'true');
-        (el as HTMLElement).inert = true;
-      }
-    });
-
-    setTimeout(() => {
-      closeButtonRef.current?.focus();
-    }, 0);
-
-    history.pushState(null, '');
-
-    function getFocusable() {
-      return Array.from(
-        dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS) ??
-          [],
-      ).filter((el) => el.offsetParent !== null);
-    }
-
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
-        onClose();
-        return;
-      }
-
-      if (e.key === 'Tab') {
-        const focusable = getFocusable();
-        if (focusable.length === 0) {
-          e.preventDefault();
-          return;
-        }
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        const atBoundary = e.shiftKey
-          ? document.activeElement === first
-          : document.activeElement === last;
-        if (atBoundary) {
-          e.preventDefault();
-          (e.shiftKey ? last : first).focus();
-        }
-        return;
-      }
-
-      if (
-        SCROLL_KEYS.has(e.key) &&
-        !dialogRef.current?.contains(e.target as Node)
-      ) {
-        e.preventDefault();
-      }
-    }
-
-    function handleWheel(e: WheelEvent) {
-      if (!dialogRef.current?.contains(e.target as Node)) {
-        e.preventDefault();
-      }
-    }
-
-    window.addEventListener('popstate', onClose);
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      delete document.body.dataset.popupOpen;
-
-      const allInteractive = document.querySelectorAll(
-        '[data-popup-inert="true"]',
-      );
-      allInteractive.forEach((el) => {
-        el.removeAttribute('data-popup-inert');
-        (el as HTMLElement).inert = false;
-      });
-
-      if (previousActiveElementRef.current) {
-        previousActiveElementRef.current.focus({ preventScroll: true });
-      }
-
-      window.removeEventListener('popstate', onClose);
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('wheel', handleWheel);
-    };
-  }, [onClose]);
+  const isGallery = variant === 'gallery';
+  const dialogClassName = isGallery
+    ? `${POPUP_CLASS_NAMES.dialog} ${POPUP_CLASS_NAMES.dialogGallery}`
+    : POPUP_CLASS_NAMES.dialog;
 
   return (
     <div
-      className='popup__overlay'
+      className={POPUP_CLASS_NAMES.overlay}
       onClick={onClose}
       onMouseDown={(e) => e.stopPropagation()}
       onPointerDown={(e) => e.stopPropagation()}
@@ -145,20 +43,14 @@ export function Popup({
         role='dialog'
         aria-modal='true'
         aria-label={ariaLabel}
-        className={variant === 'gallery' ? 'popup popup--gallery' : 'popup'}
+        className={dialogClassName}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className='popup__header'>
-          {title && <h3 className='popup__title'>{title}</h3>}
-          <button
-            ref={closeButtonRef}
-            aria-label='닫기'
-            className='popup__close'
-            onClick={onClose}
-          >
-            <IoMdClose aria-hidden='true' />
-          </button>
-        </div>
+        <PopupHeader
+          title={title}
+          closeButtonRef={closeButtonRef}
+          onClose={onClose}
+        />
         {children}
       </div>
     </div>
