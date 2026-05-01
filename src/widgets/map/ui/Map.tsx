@@ -115,7 +115,6 @@ export function Map() {
           <div
             ref={mapRef}
             className='map__content'
-            role='img'
             aria-label='인들이앤에이치 본사 위치 지도'
           />
         )}
