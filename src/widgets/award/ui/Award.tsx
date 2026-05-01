@@ -8,7 +8,6 @@ import {
   YearCategory,
 } from '@features/award';
 import { useBreakpoint } from '@shared/lib/breakpoint';
-import { lockScroll, unlockScroll } from '@shared/lib/useScrollLock';
 
 import { getItemsPerPage } from '../model/responsive';
 import '../styles/Award.css';
@@ -28,16 +27,6 @@ export function Award() {
     handleYearChange: changeYear,
   } = useYearFilter();
   const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  function handleCardClick(id: number) {
-    lockScroll();
-    setSelectedId(id);
-  }
-
-  function handlePopupClose() {
-    unlockScroll();
-    setSelectedId(null);
-  }
 
   function handleYearChange(year: string | number): void {
     changeYear(year);
@@ -75,7 +64,7 @@ export function Award() {
           totalPages={totalPages}
           filteredList={filteredList}
           itemsPerPage={itemsPerPage}
-          onCardClick={handleCardClick}
+          onCardClick={setSelectedId}
           setCurrentPage={setCurrentPage}
         />
         {showPagination && (
@@ -88,11 +77,8 @@ export function Award() {
         {selectedId !== null && (
           <AwardPopup
             awardId={selectedId}
-            awardTitle={
-              AWARD_LIST.find((a) => a.id === selectedId)?.title ??
-              '수상 이미지'
-            }
-            onClose={handlePopupClose}
+            awardTitle={AWARD_LIST[selectedId].title ?? '수상 이미지'}
+            onClose={() => setSelectedId(null)}
           />
         )}
       </div>
