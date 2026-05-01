@@ -20,7 +20,6 @@ export function YearCategory({
             type='button'
             key={year}
             aria-current={isActive ? 'true' : undefined}
-            tabIndex={isActive ? 0 : -1}
             className={isActive ? 'award__year_category--active' : ''}
             onClick={() => onYearChange(year)}
           >
