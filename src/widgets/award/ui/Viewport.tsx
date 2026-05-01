@@ -47,7 +47,11 @@ export function Viewport({
         {Array.from({ length: totalPages }, (_, pageIndex) => (
           <div key={pageIndex} className='award__card_page'>
             {getPageItems(pageIndex).map((award) => (
-              <AwardCard key={award.id} award={award} onClick={onCardClick} />
+              <AwardCard
+                key={award.id}
+                award={award}
+                onClick={() => onCardClick(award.id)}
+              />
             ))}
           </div>
         ))}
