@@ -73,4 +73,41 @@ describe('SectionTitle', () => {
       expect(container.querySelector('hgroup')).toBeInTheDocument();
     });
   });
+
+  describe('variant', () => {
+    it('variant를 전달하지 않으면 section-title--reverse 클래스가 없다', () => {
+      const { container } = render(
+        <SectionTitle subTitle='AWARD' title='수상 기록' />,
+      );
+      expect(container.firstChild).not.toHaveClass('section-title--reverse');
+    });
+
+    it('variant="default"이면 section-title--reverse 클래스가 없다', () => {
+      const { container } = render(
+        <SectionTitle subTitle='AWARD' title='수상 기록' variant='default' />,
+      );
+      expect(container.firstChild).not.toHaveClass('section-title--reverse');
+    });
+
+    it('variant="reverse"이면 section-title--reverse 클래스가 적용된다', () => {
+      const { container } = render(
+        <SectionTitle subTitle='AWARD' title='수상 기록' variant='reverse' />,
+      );
+      expect(container.firstChild).toHaveClass('section-title--reverse');
+    });
+
+    it('variant="reverse"와 className을 함께 전달하면 두 클래스가 모두 적용된다', () => {
+      const { container } = render(
+        <SectionTitle
+          subTitle='AWARD'
+          title='수상 기록'
+          variant='reverse'
+          className='award__title'
+        />,
+      );
+      const root = container.firstChild;
+      expect(root).toHaveClass('section-title--reverse');
+      expect(root).toHaveClass('award__title');
+    });
+  });
 });

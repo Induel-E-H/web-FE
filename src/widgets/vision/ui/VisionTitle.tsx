@@ -11,6 +11,7 @@ export function VisionTitle() {
       ref={ref}
       subTitle='CONCEPT'
       title='미래를 향한'
+      variant='reverse'
       className='vision__title'
     />
   );
