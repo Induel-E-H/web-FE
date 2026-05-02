@@ -28,7 +28,7 @@ export function MapCard() {
         ))}
       </ul>
 
-      <hr />
+      <hr aria-hidden='true' />
 
       <a href={`tel:${COMPANY.PHONE}`} className='map__description_call'>
         <FiPhoneCall aria-hidden='true' />
