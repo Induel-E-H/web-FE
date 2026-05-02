@@ -39,7 +39,13 @@ export const LeftPage: Story = {
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '605.234px',
+          height: '640.812px',
+        }}
+      >
         <BookPageSide
           side='left'
           staticContent={<ListPage side='left' />}
@@ -71,7 +77,13 @@ export const RightPage: Story = {
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '605.234px',
+          height: '640.812px',
+        }}
+      >
         <BookPageSide
           side='right'
           staticContent={<TimelinePage side='right' />}
@@ -103,7 +115,13 @@ export const NoShadow: Story = {
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '605.234px',
+          height: '640.812px',
+        }}
+      >
         <BookPageSide
           side='left'
           staticContent={<TimelinePage side='left' />}

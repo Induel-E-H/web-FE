@@ -33,10 +33,7 @@ type Story = StoryObj<typeof meta>;
 export const ForwardFlip: Story = {
   name: '앞으로 넘기기 (forward)',
   render: () => (
-    <section
-      className='history'
-      style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
-    >
+    <section className='history'>
       <div
         className='history__book-right'
         style={{ position: 'relative', width: '620px', height: '662.5px' }}
@@ -68,10 +65,7 @@ export const ForwardFlip: Story = {
 export const BackwardFlip: Story = {
   name: '뒤로 넘기기 (backward)',
   render: () => (
-    <section
-      className='history'
-      style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
-    >
+    <section className='history'>
       <div
         className='history__book-left'
         style={{ position: 'relative', width: '620px', height: '662.5px' }}
@@ -103,10 +97,7 @@ export const BackwardFlip: Story = {
 export const RapidFlip: Story = {
   name: '고속 플립 (rapid)',
   render: () => (
-    <section
-      className='history'
-      style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
-    >
+    <section className='history'>
       <div
         className='history__book-right'
         style={{ position: 'relative', width: '620px', height: '662.5px' }}

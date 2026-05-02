@@ -24,7 +24,13 @@ const meta = {
         className='history'
         style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
       >
-        <div style={{ position: 'relative', width: '260px', height: '380px' }}>
+        <div
+          style={{
+            position: 'relative',
+            width: '620.078px',
+            height: '662.5px',
+          }}
+        >
           <Story />
         </div>
       </section>
