@@ -52,6 +52,13 @@ export const LeftPage: Story = {
       <TimelinePage side='left' />
     </BookPageWrapper>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: '좌측 페이지. "Timeline" 타이틀과 전반부 이벤트가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const RightPage: Story = {

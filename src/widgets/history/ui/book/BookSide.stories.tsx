@@ -132,6 +132,14 @@ export const OpenStateRight: Story = {
       </div>
     </section>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'bookState="open"일 때 우측에 BookCover 배경과 BookPageSide(페이지 콘텐츠)가 함께 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const BackCoverState: Story = {

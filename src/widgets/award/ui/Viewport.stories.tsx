@@ -51,6 +51,13 @@ export const Tablet: Story = {
     viewport: { value: 'tablet' },
   },
   args: { itemsPerPage: 6, totalPages: Math.ceil(AWARD_LIST.length / 6) },
+  parameters: {
+    docs: {
+      description: {
+        story: '6개 카드가 한 페이지에 3×2로 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const Mobile: Story = {
@@ -59,4 +66,11 @@ export const Mobile: Story = {
     viewport: { value: 'mobile' },
   },
   args: { itemsPerPage: 4, totalPages: Math.ceil(AWARD_LIST.length / 4) },
+  parameters: {
+    docs: {
+      description: {
+        story: '4개 카드가 한 페이지에 2×2로 표시됩니다.',
+      },
+    },
+  },
 };

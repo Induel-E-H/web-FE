@@ -54,6 +54,13 @@ export const LeftFirstItem: Story = {
     </BookPageWrapper>
   ),
   args: { side: 'left', pageIndex: 0 },
+  parameters: {
+    docs: {
+      description: {
+        story: 'pageIndex=0, side="left"의 첫 번째 작품 상세 페이지.',
+      },
+    },
+  },
 };
 
 export const RightFirstItem: Story = {

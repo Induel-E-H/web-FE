@@ -56,9 +56,24 @@ type Story = StoryObj<typeof meta>;
 export const LeftCount3: Story = {
   name: '좌측 3단계',
   args: { side: 'left', count: 3 },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '좌측 페이지. 3→2→1 내림차순으로 레이어를 쌓아 두께감을 표현합니다.',
+      },
+    },
+  },
 };
 
 export const RightCount3: Story = {
   name: '우측 3단계',
   args: { side: 'right', count: 3 },
+  parameters: {
+    docs: {
+      description: {
+        story: '우측 페이지. 1→2→3 오름차순으로 레이어를 쌓습니다.',
+      },
+    },
+  },
 };

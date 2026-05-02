@@ -25,10 +25,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '기본',
-  args: {
-    subTitle: 'HISTORY',
-    title: '걸어온 길',
-  },
   parameters: {
     docs: {
       description: {

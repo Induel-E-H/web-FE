@@ -23,17 +23,39 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  name: 'List 타이틀',
   args: { title: 'List' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'h3 타이틀 양쪽에 hr 선이 배치된 기본 형태.',
+      },
+    },
+  },
 };
 
 export const Timeline: Story = {
   name: 'Timeline 타이틀',
   args: { title: 'Timeline' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Timeline 페이지용 타이틀.',
+      },
+    },
+  },
 };
 
 export const Milestones: Story = {
   name: 'Milestones 타이틀',
   args: { title: 'Milestones' },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Milestones 페이지용 타이틀.',
+      },
+    },
+  },
 };
 
 export const Hidden: Story = {

@@ -54,6 +54,14 @@ export const LeftPage: Story = {
       <ListPage side='left' onItemClick={args.onItemClick} />
     </BookPageWrapper>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '좌측 페이지. "List" 타이틀과 전체 작품 목록의 전반부 항목을 표시합니다.',
+      },
+    },
+  },
 };
 
 export const RightPage: Story = {

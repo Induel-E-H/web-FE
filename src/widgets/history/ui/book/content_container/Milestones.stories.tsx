@@ -59,6 +59,14 @@ export const FirstSpread: Story = {
     </BookPageWrapper>
   ),
   args: { side: 'left', pageIndex: 0, breakpoint: 'desktop' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '첫 번째 펼침면 좌측. "Milestones" 타이틀과 2003~2006년 이정표가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const FirstSpreadRight: Story = {
@@ -95,6 +103,13 @@ export const SecondSpread: Story = {
     </BookPageWrapper>
   ),
   args: { side: 'left', pageIndex: 1, breakpoint: 'desktop' },
+  parameters: {
+    docs: {
+      description: {
+        story: '두 번째 펼침면 좌측. 2010~2012년 이정표가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const MobileBreakpoint: Story = {

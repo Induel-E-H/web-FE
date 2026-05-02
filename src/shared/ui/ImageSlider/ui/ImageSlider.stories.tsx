@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { getAllContentImages } from '@entities/history';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 
 import { ImageSlider } from './ImageSlider';
 
@@ -12,9 +13,9 @@ const meta = {
     images: [],
     currentIndex: 0,
     alt: '히스토리 이미지',
-    onPrev: () => {},
-    onNext: () => {},
-    onRelease: () => {},
+    onPrev: fn(),
+    onNext: fn(),
+    onRelease: fn(),
   },
   parameters: {
     layout: 'centered',
