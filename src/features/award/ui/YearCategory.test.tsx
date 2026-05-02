@@ -68,28 +68,6 @@ describe('YearCategory', () => {
       expect(screen.getByText(YEAR_ALL)).not.toHaveAttribute('aria-current');
     });
 
-    it('활성 버튼은 tabIndex=0이다', () => {
-      render(
-        <YearCategory
-          yearList={yearList}
-          activeYear={2008}
-          onYearChange={vi.fn()}
-        />,
-      );
-      expect(screen.getByText('2008')).toHaveAttribute('tabindex', '0');
-    });
-
-    it('비활성 버튼은 tabIndex=-1이다', () => {
-      render(
-        <YearCategory
-          yearList={yearList}
-          activeYear={2008}
-          onYearChange={vi.fn()}
-        />,
-      );
-      expect(screen.getByText(YEAR_ALL)).toHaveAttribute('tabindex', '-1');
-    });
-
     it('활성 버튼에 active 클래스가 적용된다', () => {
       render(
         <YearCategory

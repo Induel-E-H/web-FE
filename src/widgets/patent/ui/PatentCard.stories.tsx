@@ -9,7 +9,7 @@ const meta = {
   component: PatentCard,
   args: {
     onClick: fn(),
-    item: PATENT_VALID_LIST[0],
+    patent: PATENT_VALID_LIST[0],
   },
   parameters: {
     layout: 'centered',

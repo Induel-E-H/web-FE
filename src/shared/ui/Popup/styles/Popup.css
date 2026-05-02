@@ -18,6 +18,10 @@
   }
 }
 
+.popup:focus-visible {
+  outline: none;
+}
+
 .popup {
   position: relative;
   width: 24.38vmax;
