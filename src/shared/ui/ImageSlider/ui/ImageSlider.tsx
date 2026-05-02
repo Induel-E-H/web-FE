@@ -89,24 +89,29 @@ export function ImageSlider({
             </div>
           ))}
         </div>
-        <button
-          className='image-slider__nav image-slider__nav--prev'
-          onMouseDown={onPrev}
-          onMouseUp={onRelease}
-          onMouseLeave={onRelease}
-          aria-label='이전 이미지'
-        >
-          <IoIosArrowBack aria-hidden='true' />
-        </button>
-        <button
-          className='image-slider__nav image-slider__nav--next'
-          onMouseDown={onNext}
-          onMouseUp={onRelease}
-          onMouseLeave={onRelease}
-          aria-label='다음 이미지'
-        >
-          <IoIosArrowForward aria-hidden='true' />
-        </button>
+        {images.length > 1 && (
+          <>
+            <button
+              className='image-slider__nav image-slider__nav--prev'
+              onMouseDown={onPrev}
+              onMouseUp={onRelease}
+              onMouseLeave={onRelease}
+              aria-label='이전 이미지'
+            >
+              <IoIosArrowBack aria-hidden='true' />
+            </button>
+
+            <button
+              className='image-slider__nav image-slider__nav--next'
+              onMouseDown={onNext}
+              onMouseUp={onRelease}
+              onMouseLeave={onRelease}
+              aria-label='다음 이미지'
+            >
+              <IoIosArrowForward aria-hidden='true' />
+            </button>
+          </>
+        )}
         <div
           className='image-slider__indicator'
           aria-live='polite'
