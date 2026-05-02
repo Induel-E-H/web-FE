@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { preloadImages } from '@shared/lib/preload/preloadImages';
 import { ImageSlider, useSliderNavigation } from '@shared/ui/ImageSlider';
 import { Popup } from '@shared/ui/Popup';
 
@@ -27,12 +28,10 @@ export function ImageGalleryPopup({
   useEffect(() => {
     const len = images.length;
     if (len <= 1) return;
-    const next = images[(currentIndex + 1) % len];
-    const prev = images[(currentIndex - 1 + len) % len];
-    [next, prev].forEach((url) => {
-      const img = new Image();
-      img.src = url;
-    });
+    preloadImages([
+      images[(currentIndex + 1) % len],
+      images[(currentIndex - 1 + len) % len],
+    ]);
   }, [currentIndex, images]);
 
   useEffect(() => {

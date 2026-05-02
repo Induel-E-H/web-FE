@@ -1,5 +1,7 @@
 import { type RefObject, useEffect } from 'react';
 
+import { preloadImages } from './preloadImages';
+
 export function usePreloadOnVisible(
   ref: RefObject<HTMLElement | null>,
   urls: string[],
@@ -11,11 +13,7 @@ export function usePreloadOnVisible(
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        urls.forEach((url) => {
-          if (!url) return;
-          const img = new Image();
-          img.src = url;
-        });
+        preloadImages(urls);
         observer.disconnect();
       },
       { rootMargin: '400px' },

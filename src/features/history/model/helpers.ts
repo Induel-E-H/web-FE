@@ -1,9 +1,8 @@
 import { artworks, getThumbnailImage } from '@entities/history';
+import { preloadImages } from '@shared/lib/preload/preloadImages';
 
 import { PAGE_SIDE } from './constants';
 import type { PageSide } from './types';
-
-const preloadedSrcs = new Set<string>();
 
 export function getArtworkIndex(pageIndex: number, side: PageSide): number {
   const isLeft = side === PAGE_SIDE.LEFT;
@@ -18,13 +17,9 @@ export function preloadContentImages(pageIndex: number): void {
     getArtworkIndex(pageIndex - 1, 'right'),
   ];
 
-  for (const idx of adjacentIndices) {
-    if (idx < 0 || idx >= artworks.length) continue;
-    const src = getThumbnailImage(idx);
-    if (src && !preloadedSrcs.has(src)) {
-      preloadedSrcs.add(src);
-      const img = new Image();
-      img.src = src;
-    }
-  }
+  preloadImages(
+    adjacentIndices
+      .filter((idx) => idx >= 0 && idx < artworks.length)
+      .map((idx) => getThumbnailImage(idx)),
+  );
 }
