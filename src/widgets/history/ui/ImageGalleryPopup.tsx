@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { preloadImages } from '@shared/lib/preload/preloadImages';
 import { ImageSlider, useSliderNavigation } from '@shared/ui/ImageSlider';
 import { Popup } from '@shared/ui/Popup';
 
@@ -23,6 +24,15 @@ export function ImageGalleryPopup({
     startContinuousSlide,
     stopContinuousSlide,
   } = useSliderNavigation(images.length);
+
+  useEffect(() => {
+    const len = images.length;
+    if (len <= 1) return;
+    preloadImages([
+      images[(currentIndex + 1) % len],
+      images[(currentIndex - 1 + len) % len],
+    ]);
+  }, [currentIndex, images]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {

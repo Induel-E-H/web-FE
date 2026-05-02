@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
-import { AWARD_LIST } from '@entities/award';
+import { AWARD_LIST, getAwardImage } from '@entities/award';
 import {
   Pagination,
   useYearFilter,
@@ -8,6 +8,7 @@ import {
   YearCategory,
 } from '@features/award';
 import { useBreakpoint } from '@shared/lib/breakpoint';
+import { usePreloadOnVisible } from '@shared/lib/preload/usePreloadOnVisible';
 
 import { getItemsPerPage } from '../model/responsive';
 import '../styles/Award.css';
@@ -17,6 +18,13 @@ import { AwardPopup } from './Popup';
 import { Viewport } from './Viewport';
 
 export function Award() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const awardImageUrls = useMemo(
+    () => AWARD_LIST.map((award) => getAwardImage(award.id)),
+    [],
+  );
+  usePreloadOnVisible(sectionRef, awardImageUrls);
+
   const [currentPage, setCurrentPage] = useState(0);
   const breakpoint = useBreakpoint();
   const itemsPerPage = getItemsPerPage(breakpoint);
@@ -47,7 +55,12 @@ export function Award() {
   const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
 
   return (
-    <section id='award' className='award' aria-label='수상 기록'>
+    <section
+      ref={sectionRef}
+      id='award'
+      className='award'
+      aria-label='수상 기록'
+    >
       <div className='award__top'>
         <AwardTitle />
         <AwardCount awardList={AWARD_LIST} />

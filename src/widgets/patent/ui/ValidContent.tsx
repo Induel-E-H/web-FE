@@ -1,17 +1,24 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
-import { PATENT_VALID_LIST } from '@entities/patent';
+import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
+import { usePreloadOnVisible } from '@shared/lib/preload/usePreloadOnVisible';
 
 import '../styles/ValidContent.css';
 import { PatentCard } from './PatentCard';
 import { PatentPopup } from './Popup';
 
 export function PatentValidContent() {
+  const articleRef = useRef<HTMLElement>(null);
+  usePreloadOnVisible(
+    articleRef,
+    PATENT_VALID_LIST.map((_, i) => getPatentImage(i)),
+  );
+
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   return (
-    <article className='patent__content'>
+    <article ref={articleRef} className='patent__content'>
       <header className='patent__content__title'>
         <div className='patent__content__title__text'>
           <FaRegCheckCircle
