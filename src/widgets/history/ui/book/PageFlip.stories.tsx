@@ -35,25 +35,23 @@ export const ForwardFlip: Story = {
   render: () => (
     <section
       className='history'
-      style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
+      style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
     >
       <div
-        style={{
-          position: 'relative',
-          width: '260px',
-          height: '380px',
-          perspective: '1200px',
-        }}
+        className='history__book-right'
+        style={{ position: 'relative', width: '620px', height: '662.5px' }}
       >
-        <PageFlip
-          isFlipping={false}
-          flipDirection='forward'
-          flipDuration={800}
-          flipFrontContent={<ListPage side='right' />}
-          flipBackContent={<TimelinePage side='left' />}
-          isRapidFlipping={false}
-          isHoldChaining={false}
-        />
+        <div className='history__book-page-flip-wrapper'>
+          <PageFlip
+            isFlipping={true}
+            flipDirection='forward'
+            flipDuration={800}
+            flipFrontContent={<ListPage side='right' />}
+            flipBackContent={<TimelinePage side='left' />}
+            isRapidFlipping={false}
+            isHoldChaining={false}
+          />
+        </div>
       </div>
     </section>
   ),
@@ -61,7 +59,7 @@ export const ForwardFlip: Story = {
     docs: {
       description: {
         story:
-          'forward 방향 플립 기본 상태. Controls에서 isFlipping을 true로 토글하면 애니메이션이 실행됩니다.',
+          'forward 방향 플립. 오른쪽 페이지가 왼쪽으로 넘어가는 애니메이션입니다.',
       },
     },
   },
@@ -72,32 +70,31 @@ export const BackwardFlip: Story = {
   render: () => (
     <section
       className='history'
-      style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
+      style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
     >
       <div
-        style={{
-          position: 'relative',
-          width: '260px',
-          height: '380px',
-          perspective: '1200px',
-        }}
+        className='history__book-left'
+        style={{ position: 'relative', width: '620px', height: '662.5px' }}
       >
-        <PageFlip
-          isFlipping={false}
-          flipDirection='backward'
-          flipDuration={800}
-          flipFrontContent={<TimelinePage side='left' />}
-          flipBackContent={<ListPage side='right' />}
-          isRapidFlipping={false}
-          isHoldChaining={false}
-        />
+        <div className='history__book-page-flip-wrapper'>
+          <PageFlip
+            isFlipping={true}
+            flipDirection='backward'
+            flipDuration={800}
+            flipFrontContent={<TimelinePage side='left' />}
+            flipBackContent={<ListPage side='right' />}
+            isRapidFlipping={false}
+            isHoldChaining={false}
+          />
+        </div>
       </div>
     </section>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'backward 방향 플립.',
+        story:
+          'backward 방향 플립. 왼쪽 페이지가 오른쪽으로 넘어가는 애니메이션입니다.',
       },
     },
   },
@@ -108,25 +105,23 @@ export const RapidFlip: Story = {
   render: () => (
     <section
       className='history'
-      style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
+      style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
     >
       <div
-        style={{
-          position: 'relative',
-          width: '260px',
-          height: '380px',
-          perspective: '1200px',
-        }}
+        className='history__book-right'
+        style={{ position: 'relative', width: '620px', height: '662.5px' }}
       >
-        <PageFlip
-          isFlipping={false}
-          flipDirection='forward'
-          flipDuration={300}
-          flipFrontContent={<ListPage side='right' />}
-          flipBackContent={<TimelinePage side='left' />}
-          isRapidFlipping={true}
-          isHoldChaining={false}
-        />
+        <div className='history__book-page-flip-wrapper'>
+          <PageFlip
+            isFlipping={true}
+            flipDirection='forward'
+            flipDuration={300}
+            flipFrontContent={<ListPage side='right' />}
+            flipBackContent={<TimelinePage side='left' />}
+            isRapidFlipping={true}
+            isHoldChaining={false}
+          />
+        </div>
       </div>
     </section>
   ),

@@ -62,16 +62,3 @@ export const RightCount3: Story = {
   name: '우측 3단계',
   args: { side: 'right', count: 3 },
 };
-
-export const NoShadow: Story = {
-  name: '그림자 없음 (count=0)',
-  args: { side: 'left', count: 0 },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'count=0이면 아무 요소도 렌더링하지 않습니다. 책의 첫/마지막 페이지에서 사용됩니다.',
-      },
-    },
-  },
-};

@@ -42,28 +42,6 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '첫 번째 작품의 이미지를 비동기 로드하여 표시합니다.',
-      },
-    },
-  },
-};
-
-export const MultipleImages: Story = {
-  name: '다중 이미지 (인덱스 6)',
-  render: (args) => {
-    const [images, setImages] = useState<string[]>([]);
-
-    useEffect(() => {
-      void getAllContentImages(6).then(setImages);
-    }, []);
-
-    return (
-      <ImageGalleryPopup {...args} title='다중 이미지 갤러리' images={images} />
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
         story: '이미지가 여러 장인 경우. 좌우 버튼으로 슬라이드를 넘깁니다.',
       },
     },

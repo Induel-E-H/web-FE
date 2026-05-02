@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
+import '../../styles/History.css';
 import { BookFrontCover, FrontCoverInner } from './FrontCover';
 
 const meta = {
@@ -24,7 +25,9 @@ const meta = {
         className='history'
         style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
       >
-        <div style={{ position: 'relative', width: '260px', height: '380px' }}>
+        <div
+          style={{ position: 'relative', width: '620px', height: '662.5px' }}
+        >
           <Story />
         </div>
       </section>
@@ -49,8 +52,8 @@ export const Inner: Story = {
       <div
         style={{
           position: 'relative',
-          width: '260px',
-          height: '380px',
+          width: '620px',
+          height: '662.5px',
           backgroundColor: 'var(--mauve-700)',
         }}
       >
