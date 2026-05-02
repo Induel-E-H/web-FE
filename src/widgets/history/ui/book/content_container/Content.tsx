@@ -72,6 +72,7 @@ function ContentItem({
 
     function measure() {
       const articleHeight = article!.clientHeight;
+      if (!articleHeight) return;
       const textHeight = text!.clientHeight;
       const gap = parseFloat(getComputedStyle(article!).gap) || 0;
       const available = articleHeight - textHeight - gap;
