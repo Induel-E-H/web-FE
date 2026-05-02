@@ -25,6 +25,17 @@ export function ImageGalleryPopup({
   } = useSliderNavigation(images.length);
 
   useEffect(() => {
+    const len = images.length;
+    if (len <= 1) return;
+    const next = images[(currentIndex + 1) % len];
+    const prev = images[(currentIndex - 1 + len) % len];
+    [next, prev].forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, [currentIndex, images]);
+
+  useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       e.stopImmediatePropagation();
       if (e.key === 'Escape') onClose();
