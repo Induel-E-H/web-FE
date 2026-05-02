@@ -1,7 +1,6 @@
 import { type ReactNode, useRef } from 'react';
 
-import { usePopupFocusTrap, usePopupInert } from '../model';
-import { POPUP_CLASS_NAMES } from '../model';
+import { POPUP_CLASS_NAMES, usePopup } from '../model';
 import '../styles/Popup.css';
 import { PopupHeader } from './PopupHeader';
 
@@ -23,8 +22,7 @@ export function Popup({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  usePopupFocusTrap(dialogRef, closeButtonRef, onClose);
-  usePopupInert(dialogRef, onClose);
+  usePopup(dialogRef, onClose);
 
   const isGallery = variant === 'gallery';
   const dialogClassName = isGallery
@@ -44,6 +42,7 @@ export function Popup({
         aria-modal='true'
         aria-label={ariaLabel}
         className={dialogClassName}
+        tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
       >
         <PopupHeader

@@ -1,3 +1,2 @@
-export { usePopupFocusTrap } from './usePopupFocusTrap';
-export { usePopupInert } from './usePopupInert';
+export { usePopup } from './usePopup';
 export { POPUP_CLASS_NAMES, POPUP_DEFAULTS } from './constants';
