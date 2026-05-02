@@ -34,11 +34,8 @@ export function ListPage({
               onMouseDown={
                 breakpoint !== 'mobile' ? (e) => e.stopPropagation() : undefined
               }
-              onClick={
-                breakpoint !== 'mobile'
-                  ? () => onItemClick?.(offset + i)
-                  : undefined
-              }
+              onKeyDown={(e) => e.stopPropagation()}
+              onClick={() => onItemClick?.(offset + i)}
             >
               {item.title}
             </button>

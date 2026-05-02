@@ -57,7 +57,7 @@
 }
 
 .popup__close {
-  font-size: max(19px, 1.342vw);
+  font-size: max(22px, 1.5625vw);
   display: flex;
   align-items: center;
   justify-content: center;

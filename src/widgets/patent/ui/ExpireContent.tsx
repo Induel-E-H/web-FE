@@ -15,7 +15,7 @@ export function PatentExpireContent() {
           />
           <h3>만료 특허 이력 ({PATENT_EXPIRE_LIST.length}건)</h3>
         </div>
-        <hr />
+        <hr aria-hidden='true' />
       </header>
       <ol className='patent__expiration__content'>
         {PATENT_EXPIRE_LIST.map((item, index) => (
@@ -29,7 +29,7 @@ export function PatentExpireContent() {
                 {item.serialNumber}
               </span>
             </div>
-            <hr />
+            <hr aria-hidden='true' />
           </li>
         ))}
       </ol>

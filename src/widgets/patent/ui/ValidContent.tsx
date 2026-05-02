@@ -27,7 +27,7 @@ export function PatentValidContent() {
           />
           <h3>유효 특허증 ({PATENT_VALID_LIST.length}건)</h3>
         </div>
-        <hr />
+        <hr aria-hidden='true' />
       </header>
       <ul className='patent__content__item__list'>
         {PATENT_VALID_LIST.map((patent, index) => (
