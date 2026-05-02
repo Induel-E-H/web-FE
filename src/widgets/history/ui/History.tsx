@@ -87,6 +87,9 @@ export function History() {
     );
   });
 
+  const [pageAnnouncement, setPageAnnouncement] = useState('');
+  const prevIsFlippingRef = useRef(false);
+
   const [pendingCategory, setPendingCategory] = useState<IndexItem | null>(
     null,
   );
@@ -227,8 +230,24 @@ export function History() {
 
   const pageIsFlipping = !isCoverFlip && isFlipping;
 
+  useEffect(() => {
+    const wasFlipping = prevIsFlippingRef.current;
+    prevIsFlippingRef.current = pageIsFlipping;
+    if (wasFlipping && !pageIsFlipping && bookState === BOOK_STATE.OPEN) {
+      setPageAnnouncement(`${activeItem} ${currentPageIndex + 1}페이지`);
+    }
+  }, [activeItem, currentPageIndex, pageIsFlipping, bookState]);
+
+  const leftAriaLabel = canGoLeft ? '이전 페이지로 이동' : '앞표지로 돌아가기';
+  const rightAriaLabel = canGoRight
+    ? '다음 페이지로 이동'
+    : '뒤표지로 돌아가기';
+
   return (
     <section id='history' className='history' aria-label='회사 역사'>
+      <div className='sr-only' aria-live='polite' aria-atomic='true'>
+        {pageAnnouncement}
+      </div>
       <HistoryTitle />
       <HistoryCategory
         tabActiveItem={tabActiveItem}
@@ -253,6 +272,7 @@ export function History() {
           onBackCoverClick={handleBackCoverClick}
           coverFrontContent={coverFrontContent}
           coverBackContent={coverBackContent}
+          ariaLabel={leftAriaLabel}
         />
         <BookSide
           side={PAGE_SIDE.RIGHT}
@@ -272,6 +292,7 @@ export function History() {
           onFrontCoverClick={handleFrontCoverClick}
           coverFrontContent={coverFrontContent}
           coverBackContent={coverBackContent}
+          ariaLabel={rightAriaLabel}
         />
       </div>
     </section>

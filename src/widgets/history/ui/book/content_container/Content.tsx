@@ -86,12 +86,24 @@ function ContentItem({
     return () => ro.disconnect();
   }, [imageSrc]);
 
-  async function handleImageClick(e: React.MouseEvent) {
-    e.stopPropagation();
-    e.preventDefault();
+  async function openImageGallery() {
     const images = await getAllContentImages(index);
     setContentImages(images);
     setShowPopup(true);
+  }
+
+  function handleImageClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    e.preventDefault();
+    void openImageGallery();
+  }
+
+  function handleImageKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      void openImageGallery();
+    }
   }
 
   function handlePopupClose() {
@@ -162,13 +174,11 @@ function ContentItem({
         <figure
           className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
           onMouseDown={(e) => imageSrc && e.stopPropagation()}
-          onClick={
-            imageSrc
-              ? (e) => {
-                  void handleImageClick(e);
-                }
-              : undefined
-          }
+          onClick={imageSrc ? handleImageClick : undefined}
+          onKeyDown={imageSrc ? handleImageKeyDown : undefined}
+          role={imageSrc ? 'button' : undefined}
+          tabIndex={imageSrc ? 0 : undefined}
+          aria-label={imageSrc ? '이미지 확대 보기' : undefined}
         >
           {imageSrc && (
             <>

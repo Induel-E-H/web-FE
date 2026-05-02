@@ -29,6 +29,7 @@ interface BookSideProps {
   onBackCoverClick?: () => void;
   coverFrontContent?: ReactNode;
   coverBackContent?: ReactNode;
+  ariaLabel?: string;
 }
 
 export function BookSide({
@@ -50,6 +51,7 @@ export function BookSide({
   onBackCoverClick,
   coverFrontContent,
   coverBackContent,
+  ariaLabel,
 }: BookSideProps) {
   const isLeft = side === PAGE_SIDE.LEFT;
   const isRight = side === PAGE_SIDE.RIGHT;
@@ -94,6 +96,7 @@ export function BookSide({
           isRapidFlipping={isRapidFlipping}
           isHoldChaining={isHoldChaining}
           isHidden={isHidden}
+          ariaLabel={ariaLabel}
         />
       )}
 

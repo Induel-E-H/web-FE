@@ -20,6 +20,7 @@ interface BookPageSideProps {
   isRapidFlipping?: boolean;
   isHoldChaining?: boolean;
   isHidden: boolean;
+  ariaLabel?: string;
 }
 
 export function BookPageSide({
@@ -35,6 +36,7 @@ export function BookPageSide({
   isRapidFlipping = false,
   isHoldChaining = false,
   isHidden,
+  ariaLabel,
 }: BookPageSideProps) {
   const isLeft = side === PAGE_SIDE.LEFT;
   const isRight = side === PAGE_SIDE.RIGHT;
@@ -53,6 +55,7 @@ export function BookPageSide({
         onMouseDown={onMouseDown}
         tabIndex={0}
         role='button'
+        aria-label={ariaLabel}
         onKeyDown={
           onMouseDown
             ? (e) => {
