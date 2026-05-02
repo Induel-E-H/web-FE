@@ -51,6 +51,19 @@ export function BookPageSide({
       <div
         className={`history__book-page-${side} history__book-page-${side}--clickable${isHidden ? ' history__book-page-hidden' : ''}`}
         onMouseDown={onMouseDown}
+        tabIndex={0}
+        role='button'
+        onKeyDown={
+          onMouseDown
+            ? (e) => {
+                if (e.target !== e.currentTarget) return;
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  if (!e.repeat) onMouseDown();
+                }
+              }
+            : undefined
+        }
       >
         {isLeft ? (
           <BookPageOuterShadow side={side} count={shadowCount} />

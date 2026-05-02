@@ -137,6 +137,7 @@ export function useHoldNavigation() {
         endContinuousFlip();
       else if (e.key === 'ArrowRight' && holdDirectionRef.current === 'right')
         endContinuousFlip();
+      else if (e.key === ' ' || e.key === 'Enter') endContinuousFlip();
     }
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
