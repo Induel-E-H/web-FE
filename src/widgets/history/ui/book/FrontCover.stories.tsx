@@ -40,6 +40,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '앞 표지',
+  parameters: {
+    docs: {
+      description: {
+        story: '앞 표지 전체. 마운트 후 중앙 정렬 애니메이션이 재생됩니다.',
+      },
+    },
+  },
 };
 
 export const Inner: Story = {

@@ -16,7 +16,9 @@ function BookPageWrapper({
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{ position: 'relative', width: '581.5px', height: '640.812px' }}
+      >
         <div className={`history__book-page-${side}`}>
           <div className='history__book-page-content'>{children}</div>
         </div>
@@ -59,6 +61,14 @@ export const FirstSpread: Story = {
     </BookPageWrapper>
   ),
   args: { side: 'left', pageIndex: 0, breakpoint: 'desktop' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '첫 번째 펼침면 좌측. "Milestones" 타이틀과 2003~2006년 이정표가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const FirstSpreadRight: Story = {
@@ -95,6 +105,13 @@ export const SecondSpread: Story = {
     </BookPageWrapper>
   ),
   args: { side: 'left', pageIndex: 1, breakpoint: 'desktop' },
+  parameters: {
+    docs: {
+      description: {
+        story: '두 번째 펼침면 좌측. 2010~2012년 이정표가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const MobileBreakpoint: Story = {

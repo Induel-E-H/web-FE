@@ -31,4 +31,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: 'History 타이틀',
+  parameters: {
+    docs: {
+      description: {
+        story: 'HISTORY / 걸어온 길 섹션 타이틀이 렌더링되는 모습.',
+      },
+    },
+  },
 };

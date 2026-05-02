@@ -16,7 +16,9 @@ function BookPageWrapper({
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{ position: 'relative', width: '581.5px', height: '640.812px' }}
+      >
         <div className={`history__book-page-${side}`}>
           <div className='history__book-page-content'>{children}</div>
         </div>
@@ -54,6 +56,13 @@ export const LeftFirstItem: Story = {
     </BookPageWrapper>
   ),
   args: { side: 'left', pageIndex: 0 },
+  parameters: {
+    docs: {
+      description: {
+        story: 'pageIndex=0, side="left"의 첫 번째 작품 상세 페이지.',
+      },
+    },
+  },
 };
 
 export const RightFirstItem: Story = {

@@ -24,7 +24,13 @@ const meta = {
         className='history'
         style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
       >
-        <div style={{ position: 'relative', width: '260px', height: '380px' }}>
+        <div
+          style={{
+            position: 'relative',
+            width: '620.078px',
+            height: '662.5px',
+          }}
+        >
           <Story />
         </div>
       </section>
@@ -38,11 +44,26 @@ type Story = StoryObj<typeof meta>;
 export const Left: Story = {
   name: '좌측 표지',
   args: { side: 'left' },
+  parameters: {
+    docs: {
+      description: {
+        story: '좌측 표지. 우측 모서리가 직각으로 책 중앙 척추와 맞닿습니다.',
+      },
+    },
+  },
 };
 
 export const Right: Story = {
   name: '우측 표지',
   args: { side: 'right' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '우측 표지. 좌측 모서리가 직각이며 우측에 둥근 모서리와 척추 디테일이 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const Hidden: Story = {

@@ -40,6 +40,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '뒤 표지',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '뒤 표지 전체. EXHIBITION · ENVIRONMENTAL · INTERIOR 키워드가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const Inner: Story = {

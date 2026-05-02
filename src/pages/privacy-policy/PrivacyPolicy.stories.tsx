@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { PrivacyPolicy } from './PrivacyPolicy';
 
-const meta: Meta<typeof PrivacyPolicy> = {
+const meta = {
   title: 'Pages/PrivacyPolicy',
   component: PrivacyPolicy,
   decorators: [
@@ -23,10 +23,18 @@ const meta: Meta<typeof PrivacyPolicy> = {
       },
     },
   },
-};
+} satisfies Meta<typeof PrivacyPolicy>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-type Story = StoryObj<typeof PrivacyPolicy>;
-
-export const Default: Story = {};
+export const Default: Story = {
+  name: '기본',
+  parameters: {
+    docs: {
+      description: {
+        story: '실제 서비스와 동일한 개인정보처리방침 전체 페이지 레이아웃.',
+      },
+    },
+  },
+};

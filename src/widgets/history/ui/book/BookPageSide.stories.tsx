@@ -39,7 +39,13 @@ export const LeftPage: Story = {
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '605.234px',
+          height: '640.812px',
+        }}
+      >
         <BookPageSide
           side='left'
           staticContent={<ListPage side='left' />}
@@ -54,6 +60,14 @@ export const LeftPage: Story = {
       </div>
     </section>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '플립 없는 정적 좌측 페이지. ListPage 콘텐츠와 3단계 외부 그림자가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const RightPage: Story = {
@@ -63,7 +77,13 @@ export const RightPage: Story = {
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '605.234px',
+          height: '640.812px',
+        }}
+      >
         <BookPageSide
           side='right'
           staticContent={<TimelinePage side='right' />}
@@ -78,6 +98,14 @@ export const RightPage: Story = {
       </div>
     </section>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '플립 없는 정적 우측 페이지. TimelinePage 콘텐츠와 2단계 외부 그림자가 표시됩니다.',
+      },
+    },
+  },
 };
 
 export const NoShadow: Story = {
@@ -87,7 +115,13 @@ export const NoShadow: Story = {
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '605.234px',
+          height: '640.812px',
+        }}
+      >
         <BookPageSide
           side='left'
           staticContent={<TimelinePage side='left' />}

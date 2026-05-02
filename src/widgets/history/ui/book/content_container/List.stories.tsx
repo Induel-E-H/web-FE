@@ -17,7 +17,9 @@ function BookPageWrapper({
       className='history'
       style={{ height: 'auto', minHeight: 'auto', padding: 0 }}
     >
-      <div style={{ position: 'relative', width: '300px', height: '450px' }}>
+      <div
+        style={{ position: 'relative', width: '581.5px', height: '640.812px' }}
+      >
         <div className={`history__book-page-${side}`}>
           <div className='history__book-page-content'>{children}</div>
         </div>
@@ -54,6 +56,14 @@ export const LeftPage: Story = {
       <ListPage side='left' onItemClick={args.onItemClick} />
     </BookPageWrapper>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '좌측 페이지. "List" 타이틀과 전체 작품 목록의 전반부 항목을 표시합니다.',
+      },
+    },
+  },
 };
 
 export const RightPage: Story = {
