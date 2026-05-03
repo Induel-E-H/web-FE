@@ -97,5 +97,22 @@ describe('MapCard', () => {
 
       expect(container.querySelector('hr')).toBeInTheDocument();
     });
+
+    it('hr 요소에 aria-hidden="true" 속성이 있다', () => {
+      const { container } = render(<MapCard />);
+
+      expect(container.querySelector('hr')).toHaveAttribute(
+        'aria-hidden',
+        'true',
+      );
+    });
+
+    it('전화 링크에 map__description_call 클래스가 있다', () => {
+      const { container } = render(<MapCard />);
+
+      expect(
+        container.querySelector('a.map__description_call'),
+      ).toBeInTheDocument();
+    });
   });
 });
