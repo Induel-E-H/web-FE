@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
+import { motion } from 'framer-motion';
+
 import '../styles/ImageSlider.css';
 
 const SWIPE_THRESHOLD = 50;
@@ -74,9 +76,14 @@ export function ImageSlider({
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
       >
-        <div
+        <motion.div
           className='image-slider__track'
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          animate={{ x: `-${currentIndex * 100}%` }}
+          transition={{
+            type: 'tween',
+            duration: 0.4,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
         >
           {images.map((src) => (
             <div key={src} className='image-slider__slide'>
@@ -88,7 +95,7 @@ export function ImageSlider({
               />
             </div>
           ))}
-        </div>
+        </motion.div>
         {images.length > 1 && (
           <>
             <button
