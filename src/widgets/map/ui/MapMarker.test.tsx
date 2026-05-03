@@ -40,4 +40,18 @@ describe('MapMarker', () => {
     const { container } = render(<MapMarker />);
     expect(container.querySelector('.map__marker__circle')).toBeInTheDocument();
   });
+
+  it('map__marker__highlight path가 렌더링된다', () => {
+    const { container } = render(<MapMarker />);
+    expect(
+      container.querySelector('.map__marker__highlight'),
+    ).toBeInTheDocument();
+  });
+
+  it('SVG image 요소에 href 속성이 설정된다', () => {
+    const { container } = render(<MapMarker />);
+    const image = container.querySelector('image');
+    expect(image).toBeInTheDocument();
+    expect(image?.getAttribute('href')).toBe('induel-icon.svg');
+  });
 });

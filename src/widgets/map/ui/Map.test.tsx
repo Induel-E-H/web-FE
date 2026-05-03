@@ -38,6 +38,30 @@ describe('Map', () => {
       expect(section).toBeInTheDocument();
       expect(section).toHaveClass('map');
     });
+
+    it('section에 id="map" 속성이 있다', () => {
+      const { container } = render(<Map />);
+
+      expect(container.querySelector('section')).toHaveAttribute('id', 'map');
+    });
+
+    it('section에 aria-label="찾아오시는 길" 속성이 있다', () => {
+      render(<Map />);
+
+      expect(
+        screen.getByRole('region', { name: '찾아오시는 길' }),
+      ).toBeInTheDocument();
+    });
+
+    it('Naver 가용 상태에서 .map__content div에 aria-label 속성이 있다', () => {
+      const { container } = render(<Map />);
+
+      const mapContent = container.querySelector('div.map__content');
+      expect(mapContent).toHaveAttribute(
+        'aria-label',
+        '인들이앤에이치 본사 위치 지도',
+      );
+    });
   });
 
   describe('useEffect — makeMap 호출', () => {
@@ -93,6 +117,24 @@ describe('Map', () => {
       render(<Map />);
 
       expect(mockMakeMap).not.toHaveBeenCalled();
+    });
+
+    it('fallback iframe에 loading="lazy" 속성이 있다', () => {
+      setNaverMaps(false);
+      render(<Map />);
+
+      expect(
+        screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+      ).toHaveAttribute('loading', 'lazy');
+    });
+
+    it('fallback iframe에 map__content--fallback 클래스가 있다', () => {
+      setNaverMaps(false);
+      render(<Map />);
+
+      expect(screen.getByTitle('인들이앤에이치 본사 위치 지도')).toHaveClass(
+        'map__content--fallback',
+      );
     });
   });
 

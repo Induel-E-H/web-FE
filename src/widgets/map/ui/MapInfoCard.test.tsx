@@ -43,4 +43,34 @@ describe('MapInfoCard', () => {
     const { container } = render(<MapInfoCard />);
     expect(container.querySelector('.map__info__tail')).toBeInTheDocument();
   });
+
+  it('로고 img에 aria-hidden="true" 속성이 있다', () => {
+    const { container } = render(<MapInfoCard />);
+
+    expect(container.querySelector('img.map__info__logo')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
+  });
+
+  it('map__info__card 내부에 map__info__header가 존재한다', () => {
+    const { container } = render(<MapInfoCard />);
+
+    const card = container.querySelector('.map__info__card');
+    expect(card?.querySelector('.map__info__header')).toBeInTheDocument();
+  });
+
+  it('map__info__card 내부에 map__info__body가 존재한다', () => {
+    const { container } = render(<MapInfoCard />);
+
+    const card = container.querySelector('.map__info__card');
+    expect(card?.querySelector('.map__info__body')).toBeInTheDocument();
+  });
+
+  it('map__info__row 요소가 2개 존재한다', () => {
+    const { container } = render(<MapInfoCard />);
+
+    const rows = container.querySelectorAll('.map__info__row');
+    expect(rows).toHaveLength(2);
+  });
 });
