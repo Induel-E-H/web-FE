@@ -18,5 +18,23 @@ describe('VISION_DATA', () => {
         expect(item.description.trim()).not.toBe('');
       });
     });
+
+    it('데이터 항목이 3개다', () => {
+      expect(VISION_DATA).toHaveLength(3);
+    });
+
+    it('keyword 값이 Param, Sculpt, Invest 순서로 존재한다', () => {
+      expect(VISION_DATA.map((item) => item.keyword)).toEqual([
+        'Param',
+        'Sculpt',
+        'Invest',
+      ]);
+    });
+
+    it('모든 항목의 image 파일명이 .webp 확장자를 가진다', () => {
+      VISION_DATA.forEach((item) => {
+        expect(item.image).toMatch(/\.webp$/);
+      });
+    });
   });
 });
