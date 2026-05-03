@@ -12,6 +12,7 @@ const defaultProps = {
   title: '테스트 제목',
   secondary: '보조 텍스트',
   onClick: vi.fn(),
+  className: undefined as string | undefined,
 };
 
 function renderCard(overrides?: Partial<typeof defaultProps>) {
