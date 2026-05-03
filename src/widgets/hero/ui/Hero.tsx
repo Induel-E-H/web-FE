@@ -3,6 +3,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
+import { motion } from 'framer-motion';
 
 import backgroundFallback from '../assets/background-fallback.webp';
 import '../styles/Hero.css';
@@ -24,7 +25,12 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
       >
         <HeroBackground />
       </Suspense>
-      <div className='hero__company'>
+      <motion.div
+        className='hero__company'
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+      >
         <img
           src={induelIcon}
           alt='인들이앤에이치 로고'
@@ -40,7 +46,7 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
             SINCE {COMPANY.ESTABLISHED_DISPLAY}
           </time>
         </div>
-      </div>
+      </motion.div>
       {showScrollArrow ? (
         <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
       ) : (
