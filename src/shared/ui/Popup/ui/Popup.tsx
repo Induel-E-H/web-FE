@@ -1,5 +1,7 @@
 import { type ReactNode, useRef } from 'react';
 
+import { motion } from 'framer-motion';
+
 import { POPUP_CLASS_NAMES, usePopup } from '../model';
 import '../styles/Popup.css';
 import { PopupHeader } from './PopupHeader';
@@ -30,13 +32,17 @@ export function Popup({
     : POPUP_CLASS_NAMES.dialog;
 
   return (
-    <div
+    <motion.div
       className={POPUP_CLASS_NAMES.overlay}
       onClick={onClose}
       onMouseDown={(e) => e.stopPropagation()}
       onPointerDown={(e) => e.stopPropagation()}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
     >
-      <div
+      <motion.div
         ref={dialogRef}
         role='dialog'
         aria-modal='true'
@@ -44,6 +50,10 @@ export function Popup({
         className={dialogClassName}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.25 }}
       >
         <PopupHeader
           title={title}
@@ -51,7 +61,7 @@ export function Popup({
           onClose={onClose}
         />
         {children}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -3,6 +3,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Award } from './Award';
 
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: { children: unknown }) => children,
+  motion: new Proxy({} as Record<string, unknown>, {
+    get: (_, key: string) => key,
+  }),
+}));
+
 const mockUseBreakpoint = vi.hoisted(() => vi.fn().mockReturnValue('desktop'));
 vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
   useBreakpoint: mockUseBreakpoint,

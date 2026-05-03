@@ -3,6 +3,7 @@ import { FaRegCheckCircle } from 'react-icons/fa';
 
 import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
 import { usePreloadOnVisible } from '@shared/lib/preload/usePreloadOnVisible';
+import { AnimatePresence } from 'framer-motion';
 
 import '../styles/ValidContent.css';
 import { PatentCard } from './PatentCard';
@@ -36,13 +37,15 @@ export function PatentValidContent() {
           </li>
         ))}
       </ul>
-      {selectedId !== null && (
-        <PatentPopup
-          patentId={selectedId}
-          patentTitle={PATENT_VALID_LIST[selectedId].title}
-          onClose={() => setSelectedId(null)}
-        />
-      )}
+      <AnimatePresence>
+        {selectedId !== null && (
+          <PatentPopup
+            patentId={selectedId}
+            patentTitle={PATENT_VALID_LIST[selectedId].title}
+            onClose={() => setSelectedId(null)}
+          />
+        )}
+      </AnimatePresence>
     </article>
   );
 }

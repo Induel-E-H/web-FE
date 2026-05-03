@@ -9,6 +9,7 @@ import {
 } from '@features/award';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 import { usePreloadOnVisible } from '@shared/lib/preload/usePreloadOnVisible';
+import { AnimatePresence } from 'framer-motion';
 
 import { getItemsPerPage } from '../model/responsive';
 import '../styles/Award.css';
@@ -87,13 +88,15 @@ export function Award() {
             onPageChange={setCurrentPage}
           />
         )}
-        {selectedId !== null && (
-          <AwardPopup
-            awardId={selectedId}
-            awardTitle={AWARD_LIST[selectedId].title ?? '수상 이미지'}
-            onClose={() => setSelectedId(null)}
-          />
-        )}
+        <AnimatePresence>
+          {selectedId !== null && (
+            <AwardPopup
+              awardId={selectedId}
+              awardTitle={AWARD_LIST[selectedId].title ?? '수상 이미지'}
+              onClose={() => setSelectedId(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
