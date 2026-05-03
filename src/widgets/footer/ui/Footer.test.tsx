@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { COMPANY } from '@shared/constant';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Footer } from './Footer';
 
@@ -22,6 +22,10 @@ function renderFooter() {
 }
 
 describe('Footer', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   describe('회사 정보 표시', () => {
     it('회사 한글 이름이 표시된다', () => {
       renderFooter();
@@ -43,6 +47,43 @@ describe('Footer', () => {
     it('사업자 등록 번호가 표시된다', () => {
       renderFooter();
       expect(screen.getByText(COMPANY.BUSINESS_NO)).toBeInTheDocument();
+    });
+
+    it('로고 이미지가 올바른 alt 텍스트로 렌더링된다', () => {
+      renderFooter();
+      expect(screen.getByAltText('인들이앤에이치 로고')).toBeInTheDocument();
+    });
+  });
+
+  describe('필드 라벨 표시', () => {
+    it('"대표이사" 라벨이 표시된다', () => {
+      renderFooter();
+      expect(screen.getByText('대표이사')).toBeInTheDocument();
+    });
+
+    it('"사업자 등록 번호" 라벨이 표시된다', () => {
+      renderFooter();
+      expect(screen.getByText('사업자 등록 번호')).toBeInTheDocument();
+    });
+
+    it('"주소" 라벨이 표시된다', () => {
+      renderFooter();
+      expect(screen.getByText('주소')).toBeInTheDocument();
+    });
+
+    it('"TEL" 라벨이 표시된다', () => {
+      renderFooter();
+      expect(screen.getByText('TEL')).toBeInTheDocument();
+    });
+
+    it('"FAX" 라벨이 표시된다', () => {
+      renderFooter();
+      expect(screen.getByText('FAX')).toBeInTheDocument();
+    });
+
+    it('"EMAIL" 라벨이 표시된다', () => {
+      renderFooter();
+      expect(screen.getByText('EMAIL')).toBeInTheDocument();
     });
   });
 
@@ -121,6 +162,17 @@ describe('Footer', () => {
     it('footer 요소에 footer 클래스가 있다', () => {
       const { container } = renderFooter();
       expect(container.querySelector('footer')).toHaveClass('footer');
+    });
+
+    it('hr 구분선이 렌더링된다', () => {
+      const { container } = renderFooter();
+      expect(container.querySelector('hr')).toBeInTheDocument();
+    });
+
+    it('구분자 | 요소에 aria-hidden="true"가 설정된다', () => {
+      const { container } = renderFooter();
+      const separators = container.querySelectorAll('p[aria-hidden="true"]');
+      expect(separators).toHaveLength(2);
     });
   });
 
