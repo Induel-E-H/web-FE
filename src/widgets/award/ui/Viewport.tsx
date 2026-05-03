@@ -1,5 +1,6 @@
 import type { AwardItem } from '@entities/award';
 import { useSlideGesture } from '@shared/lib/useSlideGesture';
+import { motion } from 'framer-motion';
 
 import '../styles/Viewport.css';
 import { AwardCard } from './AwardCard';
@@ -38,11 +39,10 @@ export function Viewport({
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      <div
+      <motion.div
         className='award__card_slider'
-        style={{
-          transform: `translateX(calc(-${safePage * 100}% - ${safePage}vmax))`,
-        }}
+        animate={{ x: `calc(-${safePage * 100}% - ${safePage}vmax)` }}
+        transition={{ type: 'tween', duration: 0.4, ease: 'easeOut' }}
       >
         {Array.from({ length: totalPages }, (_, pageIndex) => (
           <div key={pageIndex} className='award__card_page'>
@@ -55,7 +55,7 @@ export function Viewport({
             ))}
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
