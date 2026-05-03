@@ -33,5 +33,15 @@ describe('PatentValidContent', () => {
       fireEvent.click(cards[0]);
       expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
+
+    it('팝업이 열린 상태에서 닫기 버튼 클릭 시 팝업이 닫힌다', () => {
+      render(<PatentValidContent />);
+      const cards = screen.getAllByRole('button');
+      fireEvent.click(cards[0]);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole('button', { name: '닫기' }));
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
   });
 });
