@@ -1,14 +1,23 @@
 import { COMPANY } from '@shared/constant';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { Hero } from './Hero';
 
-// Three.js 의존성을 가진 HeroBackground를 격리
 const HeroBackgroundMock = vi.hoisted(() =>
   vi.fn(() => <canvas aria-hidden='true' />),
 );
 vi.mock('./HeroBackground', () => ({ default: HeroBackgroundMock }));
+
+vi.mock('react-icons/io', () => ({
+  IoIosArrowDown: (props: Record<string, unknown>) => (
+    <svg data-testid='arrow-down-icon' {...props} />
+  ),
+}));
+
+afterEach(() => {
+  import.meta.env.MODE = 'test';
+});
 
 describe('Hero', () => {
   describe('회사 정보 표시', () => {
@@ -92,14 +101,40 @@ describe('Hero', () => {
     });
   });
 
-  describe('환경별 분기', () => {
-    it('비프로덕션 환경에서 개발 중 안내 문구가 표시된다', () => {
+  describe('showScrollArrow 분기', () => {
+    it('false일 때 개발 중 안내 문구가 표시된다', () => {
       render(<Hero showScrollArrow={false} />);
 
       expect(screen.getByText('현재 개발중입니다!')).toBeInTheDocument();
     });
 
-    // production 분기 테스트는 Hero.prod.test.tsx에서 수행
-    // (V8 커버리지가 모듈 레벨 상수의 분기를 추적하려면 모듈 최초 로드 시 환경이 설정되어야 함)
+    it('true일 때 하단 화살표 아이콘이 렌더링된다', () => {
+      render(<Hero showScrollArrow={true} />);
+
+      expect(screen.getByTestId('arrow-down-icon')).toBeInTheDocument();
+    });
+
+    it('true일 때 개발 문구는 표시되지 않는다', () => {
+      render(<Hero showScrollArrow={true} />);
+
+      expect(screen.queryByText('현재 개발중입니다!')).not.toBeInTheDocument();
+    });
+
+    it('화살표 아이콘에 hero__down-icon 클래스가 적용된다', () => {
+      render(<Hero showScrollArrow={true} />);
+
+      expect(screen.getByTestId('arrow-down-icon')).toHaveClass(
+        'hero__down-icon',
+      );
+    });
+
+    it('화살표 아이콘은 스크린 리더에서 숨겨진다', () => {
+      render(<Hero showScrollArrow={true} />);
+
+      expect(screen.getByTestId('arrow-down-icon')).toHaveAttribute(
+        'aria-hidden',
+        'true',
+      );
+    });
   });
 });
