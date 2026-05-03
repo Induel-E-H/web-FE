@@ -48,6 +48,27 @@ describe('Vision', () => {
       const { container } = render(<Vision />);
       expect(container.querySelectorAll('.vision__content')).toHaveLength(3);
     });
+
+    it('section에 id="vision" 속성이 설정된다', () => {
+      const { container } = render(<Vision />);
+      expect(container.querySelector('section.vision')).toHaveAttribute(
+        'id',
+        'vision',
+      );
+    });
+
+    it('section에 aria-label="미래 비전" 속성이 설정된다', () => {
+      const { container } = render(<Vision />);
+      expect(container.querySelector('section.vision')).toHaveAttribute(
+        'aria-label',
+        '미래 비전',
+      );
+    });
+
+    it('vision__main 컨테이너가 렌더링된다', () => {
+      const { container } = render(<Vision />);
+      expect(container.querySelector('.vision__main')).toBeInTheDocument();
+    });
   });
 
   describe('콘텐츠 렌더링', () => {

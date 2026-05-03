@@ -78,16 +78,48 @@ describe('VisionItem', () => {
     });
 
     it('sizes 속성이 반응형 뷰포트에 따라 설정된다', () => {
-      render(<VisionItem {...defaultProps} imageSrcSet='test.webp 480w' />);
+      render(<VisionItem {...defaultProps} />);
       expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
         'sizes',
         '(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 710px',
       );
     });
 
+    it('이미지에 loading="lazy" 속성이 설정된다', () => {
+      render(<VisionItem {...defaultProps} />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'loading',
+        'lazy',
+      );
+    });
+
+    it('이미지에 width="710" 속성이 설정된다', () => {
+      render(<VisionItem {...defaultProps} />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'width',
+        '710',
+      );
+    });
+
+    it('이미지에 height="473" 속성이 설정된다', () => {
+      render(<VisionItem {...defaultProps} />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'height',
+        '473',
+      );
+    });
+
     it('hr 구분선이 렌더링된다', () => {
       const { container } = render(<VisionItem {...defaultProps} />);
       expect(container.querySelector('hr')).toBeInTheDocument();
+    });
+
+    it('hr 구분선에 aria-hidden="true" 속성이 설정된다', () => {
+      const { container } = render(<VisionItem {...defaultProps} />);
+      expect(container.querySelector('hr')).toHaveAttribute(
+        'aria-hidden',
+        'true',
+      );
     });
   });
 
