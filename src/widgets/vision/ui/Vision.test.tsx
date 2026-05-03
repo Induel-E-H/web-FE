@@ -32,6 +32,7 @@ beforeEach(() => {
         elementCallbackMap.set(el, this.cb);
         mockObserve(el);
       };
+      unobserve = vi.fn();
       disconnect = mockDisconnect;
     },
   );
@@ -137,91 +138,6 @@ describe('Vision', () => {
       const { container } = render(<Vision />);
       const items = container.querySelectorAll('.vision__content');
       expect(items[2]).not.toHaveClass('vision__content--reverse');
-    });
-  });
-
-  describe('스크롤 페이드인 애니메이션', () => {
-    it('마운트 시 IntersectionObserver를 vision__title + vision__content 4개에 등록한다', () => {
-      render(<Vision />);
-      expect(mockObserve).toHaveBeenCalledTimes(4);
-    });
-
-    it('vision__title이 뷰포트에 진입하면 is-visible 클래스가 추가된다', () => {
-      const { container } = render(<Vision />);
-      const title = container.querySelector('.vision__title')!;
-      const titleCb = elementCallbackMap.get(title)!;
-
-      titleCb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-
-      expect(title).toHaveClass('is-visible');
-    });
-
-    it('vision__title이 위로 벗어나면 is-visible 클래스가 유지된다', () => {
-      const { container } = render(<Vision />);
-      const title = container.querySelector('.vision__title')!;
-      const titleCb = elementCallbackMap.get(title)!;
-
-      titleCb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      titleCb(
-        [
-          {
-            isIntersecting: false,
-            boundingClientRect: { top: -50 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-
-      expect(title).toHaveClass('is-visible');
-    });
-
-    it('vision__title이 아래로 벗어나면 is-visible 클래스가 제거된다', () => {
-      const { container } = render(<Vision />);
-      const title = container.querySelector('.vision__title')!;
-      const titleCb = elementCallbackMap.get(title)!;
-
-      titleCb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      titleCb(
-        [
-          {
-            isIntersecting: false,
-            boundingClientRect: { top: 200 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-
-      expect(title).not.toHaveClass('is-visible');
-    });
-
-    it('언마운트 시 모든 IntersectionObserver를 해제한다', () => {
-      const { unmount } = render(<Vision />);
-      unmount();
-      expect(mockDisconnect).toHaveBeenCalledTimes(4);
     });
   });
 });

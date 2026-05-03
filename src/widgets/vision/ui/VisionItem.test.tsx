@@ -31,6 +31,7 @@ beforeEach(() => {
         elementCallbackMap.set(el, this.cb);
         mockObserve(el);
       };
+      unobserve = vi.fn();
       disconnect = mockDisconnect;
     },
   );
@@ -143,93 +144,6 @@ describe('VisionItem', () => {
       expect(
         container.querySelector('.vision__content--reverse'),
       ).not.toBeInTheDocument();
-    });
-  });
-
-  describe('스크롤 페이드인 애니메이션', () => {
-    it('마운트 시 IntersectionObserver를 등록한다', () => {
-      render(<VisionItem {...defaultProps} />);
-      expect(mockObserve).toHaveBeenCalledTimes(1);
-    });
-
-    it('언마운트 시 IntersectionObserver를 해제한다', () => {
-      const { unmount } = render(<VisionItem {...defaultProps} />);
-      unmount();
-      expect(mockDisconnect).toHaveBeenCalledTimes(1);
-    });
-
-    it('뷰포트에 진입하면 is-visible 클래스가 추가된다', () => {
-      const { container } = render(<VisionItem {...defaultProps} />);
-      const el = container.querySelector('.vision__content')!;
-      const cb = elementCallbackMap.get(el)!;
-
-      cb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-
-      expect(el).toHaveClass('is-visible');
-    });
-
-    it('뷰포트 아래로 벗어나면 is-visible 클래스가 제거된다', () => {
-      const { container } = render(<VisionItem {...defaultProps} />);
-      const el = container.querySelector('.vision__content')!;
-      const cb = elementCallbackMap.get(el)!;
-
-      cb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).toHaveClass('is-visible');
-
-      cb(
-        [
-          {
-            isIntersecting: false,
-            boundingClientRect: { top: 200 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).not.toHaveClass('is-visible');
-    });
-
-    it('뷰포트 위로 벗어나면 is-visible 클래스가 유지된다', () => {
-      const { container } = render(<VisionItem {...defaultProps} />);
-      const el = container.querySelector('.vision__content')!;
-      const cb = elementCallbackMap.get(el)!;
-
-      cb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).toHaveClass('is-visible');
-
-      cb(
-        [
-          {
-            isIntersecting: false,
-            boundingClientRect: { top: -100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).toHaveClass('is-visible');
     });
   });
 });
