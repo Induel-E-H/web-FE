@@ -40,21 +40,6 @@
   -webkit-transform-origin: right center;
 }
 
-.history__book-page-flip-panel--animating {
-  transition: transform 0.8s ease-in-out;
-  will-change: transform;
-}
-
-.history__book-page-flip-panel--forward.flipping {
-  transform: rotateY(-180deg);
-  -webkit-transform: rotateY(-180deg);
-}
-
-.history__book-page-flip-panel--backward.flipping {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
-
 .history__book-page-flip-front,
 .history__book-page-flip-back {
   position: absolute;
@@ -92,16 +77,6 @@
   .history__book-page-flip-panel--backward {
     transform-origin: bottom;
     -webkit-transform-origin: bottom;
-  }
-
-  .history__book-page-flip-panel--forward.flipping {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-  }
-
-  .history__book-page-flip-panel--backward.flipping {
-    transform: rotateX(-180deg);
-    -webkit-transform: rotateX(-180deg);
   }
 
   .history__book-page-flip-back {

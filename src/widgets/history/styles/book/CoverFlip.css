@@ -30,21 +30,6 @@
   -webkit-transform-origin: right center;
 }
 
-.history__book-cover-flip-panel--animating {
-  transition: transform 0.8s ease-in-out;
-  will-change: transform;
-}
-
-.history__book-cover-flip-panel--forward.flipping {
-  transform: rotateY(-180deg);
-  -webkit-transform: rotateY(-180deg);
-}
-
-.history__book-cover-flip-panel--backward.flipping {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
-
 .history__book-cover-flip-front,
 .history__book-cover-flip-back {
   position: absolute;
@@ -109,16 +94,6 @@
     bottom: 0%;
     transform-origin: bottom;
     -webkit-transform-origin: bottom;
-  }
-
-  .history__book-cover-flip-panel--forward.flipping {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-  }
-
-  .history__book-cover-flip-panel--backward.flipping {
-    transform: rotateX(-180deg);
-    -webkit-transform: rotateX(-180deg);
   }
 
   .history__book-cover-flip-back {
