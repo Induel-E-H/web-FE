@@ -66,6 +66,7 @@
     "@vitest/coverage-v8": "^4.1.2",
     "@vitest/ui": "^4.1.2",
     "babel-plugin-react-compiler": "^1.0.0",
+    "browserslist": "^4.28.2",
     "chromatic": "^16.3.0",
     "commitizen": "^4.3.1",
     "cross-env": "^10.1.0",
@@ -81,6 +82,7 @@
     "happy-dom": "^20.9.0",
     "husky": "^9.1.7",
     "jsdom": "^29.0.2",
+    "lightningcss": "^1.32.0",
     "lint-staged": "^15.5.2",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
@@ -98,6 +100,7 @@
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
+  "browserslist": ">= 0.25%",
   "config": {
     "commitizen": {
       "path": "cz-customizable"
