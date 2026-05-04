@@ -1,17 +1,11 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { AWARD_LIST, getAwardImage } from '@entities/award';
-import {
-  Pagination,
-  useYearFilter,
-  YEAR_ALL,
-  YearCategory,
-} from '@features/award';
+import { Pagination, useAwardStore, YearCategory } from '@features/award';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 import { usePreloadOnVisible } from '@shared/lib/preload/usePreloadOnVisible';
 import { AnimatePresence } from 'framer-motion';
 
-import { getItemsPerPage } from '../model/responsive';
 import '../styles/Award.css';
 import { AwardTitle } from './AwardTitle';
 import { AwardCount } from './Count';
@@ -26,34 +20,9 @@ export function Award() {
   );
   usePreloadOnVisible(sectionRef, awardImageUrls);
 
-  const [currentPage, setCurrentPage] = useState(0);
   const breakpoint = useBreakpoint();
-  const itemsPerPage = getItemsPerPage(breakpoint);
   const showPagination = breakpoint !== 'desktop';
-  const {
-    activeYear,
-    yearList,
-    handleYearChange: changeYear,
-  } = useYearFilter();
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  function handleYearChange(year: string | number): void {
-    changeYear(year);
-    setCurrentPage(0);
-  }
-
-  const filteredList = useMemo(() => {
-    const list =
-      activeYear === YEAR_ALL
-        ? AWARD_LIST
-        : AWARD_LIST.filter((award) =>
-            award.date.startsWith(String(activeYear)),
-          );
-    return [...list].sort((a, b) => b.date.localeCompare(a.date));
-  }, [activeYear]);
-
-  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
-  const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
+  const selectedId = useAwardStore((s) => s.selectedId);
 
   return (
     <section
@@ -68,34 +37,11 @@ export function Award() {
       </div>
 
       <div className='award__content'>
-        <YearCategory
-          yearList={yearList}
-          activeYear={activeYear}
-          onYearChange={handleYearChange}
-        />
-        <Viewport
-          safePage={safePage}
-          totalPages={totalPages}
-          filteredList={filteredList}
-          itemsPerPage={itemsPerPage}
-          onCardClick={setSelectedId}
-          setCurrentPage={setCurrentPage}
-        />
-        {showPagination && (
-          <Pagination
-            currentPage={safePage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
-        )}
+        <YearCategory />
+        <Viewport />
+        {showPagination && <Pagination />}
         <AnimatePresence>
-          {selectedId !== null && (
-            <AwardPopup
-              awardId={selectedId}
-              awardTitle={AWARD_LIST[selectedId].title ?? '수상 이미지'}
-              onClose={() => setSelectedId(null)}
-            />
-          )}
+          {selectedId !== null && <AwardPopup key='award-popup' />}
         </AnimatePresence>
       </div>
     </section>

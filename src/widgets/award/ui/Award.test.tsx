@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import { useAwardStore } from '@features/award';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -53,11 +54,13 @@ describe('Award', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockUseBreakpoint.mockReturnValue('desktop');
+    useAwardStore.getState().reset();
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   });
 
   afterEach(() => {
+    useAwardStore.getState().reset();
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   });

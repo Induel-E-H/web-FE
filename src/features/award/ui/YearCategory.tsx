@@ -1,19 +1,14 @@
+import { YEAR_LIST } from '../model/constant';
+import { useAwardStore } from '../model/useAwardStore';
 import '../styles/YearCategory.css';
 
-type YearCategoryProps = {
-  yearList: (string | number)[];
-  activeYear: string | number;
-  onYearChange: (year: string | number) => void;
-};
+export function YearCategory() {
+  const activeYear = useAwardStore((s) => s.activeYear);
+  const handleYearChange = useAwardStore((s) => s.handleYearChange);
 
-export function YearCategory({
-  yearList,
-  activeYear,
-  onYearChange,
-}: YearCategoryProps) {
   return (
     <nav className='award__year_category' aria-label='연도 필터'>
-      {yearList.map((year) => {
+      {YEAR_LIST.map((year) => {
         const isActive = activeYear === year;
         return (
           <button
@@ -21,7 +16,7 @@ export function YearCategory({
             key={year}
             aria-current={isActive ? 'true' : undefined}
             className={isActive ? 'award__year_category--active' : ''}
-            onClick={() => onYearChange(year)}
+            onClick={() => handleYearChange(year)}
           >
             {year}
           </button>
