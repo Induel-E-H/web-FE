@@ -1,3 +1,4 @@
+import { useHistoryStore } from '@features/history';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { BookPageSide } from './BookPageSide';
@@ -12,21 +13,23 @@ const meta = {
     staticContent: null,
     flipFrontContent: null,
     flipBackContent: null,
-    isFlipping: false,
-    flipDirection: null,
-    flipDuration: 800,
     shadowCount: 3,
-    isHidden: false,
   },
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          '단일 페이지 면의 정적 콘텐츠와 PageFlip 애니메이션을 조합하는 컴포넌트. side와 flipDirection의 조합에 따라 플립 패널을 조건부 렌더링합니다.',
+          '단일 페이지 면의 정적 콘텐츠와 PageFlip 애니메이션을 조합하는 컴포넌트. Zustand 스토어의 isFlipping/flipDirection에 따라 플립 패널을 조건부 렌더링합니다.',
       },
     },
   },
+  decorators: [
+    (Story) => {
+      useHistoryStore.setState({ bookState: 'open' });
+      return <Story />;
+    },
+  ],
 } satisfies Meta<typeof BookPageSide>;
 
 export default meta;
@@ -51,11 +54,7 @@ export const LeftPage: Story = {
           staticContent={<ListPage side='left' />}
           flipFrontContent={<ListPage side='left' />}
           flipBackContent={<TimelinePage side='right' />}
-          isFlipping={false}
-          flipDirection={null}
-          flipDuration={800}
           shadowCount={3}
-          isHidden={false}
         />
       </div>
     </section>
@@ -89,11 +88,7 @@ export const RightPage: Story = {
           staticContent={<TimelinePage side='right' />}
           flipFrontContent={<TimelinePage side='right' />}
           flipBackContent={<ListPage side='left' />}
-          isFlipping={false}
-          flipDirection={null}
-          flipDuration={800}
           shadowCount={2}
-          isHidden={false}
         />
       </div>
     </section>
@@ -127,11 +122,7 @@ export const NoShadow: Story = {
           staticContent={<TimelinePage side='left' />}
           flipFrontContent={null}
           flipBackContent={null}
-          isFlipping={false}
-          flipDirection={null}
-          flipDuration={800}
           shadowCount={0}
-          isHidden={false}
         />
       </div>
     </section>

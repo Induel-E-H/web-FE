@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 
+import { useHistoryStore } from '@features/history';
 import { PAGE_SIDE } from '@features/history';
-import type { BookState, PageSide } from '@features/history';
+import type { PageSide } from '@features/history';
 
 import '../../styles/book/BookSide.css';
 import { BookBackCover } from './BackCover';
@@ -12,14 +13,6 @@ import { BookFrontCover } from './FrontCover';
 
 interface BookSideProps {
   side: PageSide;
-  bookState: BookState;
-  isBookOpen: boolean;
-  isCoverFlip: boolean;
-  isFlipping: boolean;
-  isRapidFlipping: boolean;
-  isHoldChaining: boolean;
-  flipDirection: 'forward' | 'backward' | null;
-  currentFlipDuration: number;
   staticPageContent: ReactNode;
   flipFrontPageContent: ReactNode;
   flipBackPageContent: ReactNode;
@@ -34,14 +27,6 @@ interface BookSideProps {
 
 export function BookSide({
   side,
-  bookState,
-  isBookOpen,
-  isCoverFlip,
-  isFlipping,
-  isRapidFlipping,
-  isHoldChaining,
-  flipDirection,
-  currentFlipDuration,
   staticPageContent,
   flipFrontPageContent,
   flipBackPageContent,
@@ -53,8 +38,17 @@ export function BookSide({
   coverBackContent,
   ariaLabel,
 }: BookSideProps) {
+  const bookState = useHistoryStore((s) => s.bookState);
+  const isRapidFlipping = useHistoryStore((s) => s.isRapidFlipping);
+  const isHoldChaining = useHistoryStore((s) => s.isHoldChaining);
+  const currentFlipDuration = useHistoryStore((s) => s.currentFlipDuration);
+
   const isLeft = side === PAGE_SIDE.LEFT;
   const isRight = side === PAGE_SIDE.RIGHT;
+
+  const isCoverFlip =
+    bookState.startsWith('opening') || bookState.startsWith('closing');
+  const isBookOpen = bookState !== 'cover-front' && bookState !== 'cover-back';
 
   const showFrontCover = isRight && bookState === 'cover-front';
   const showBackCover = isLeft && bookState === 'cover-back';
@@ -88,14 +82,8 @@ export function BookSide({
           staticContent={staticPageContent}
           flipFrontContent={flipFrontPageContent}
           flipBackContent={flipBackPageContent}
-          isFlipping={isFlipping}
-          flipDirection={flipDirection}
-          flipDuration={currentFlipDuration}
           onMouseDown={onMouseDown}
           shadowCount={shadowCount}
-          isRapidFlipping={isRapidFlipping}
-          isHoldChaining={isHoldChaining}
-          isHidden={isHidden}
           ariaLabel={ariaLabel}
         />
       )}

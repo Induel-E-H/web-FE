@@ -1,11 +1,10 @@
 import { Fragment } from 'react/jsx-runtime';
 
-import { INDEX_LIST, type IndexItem } from '@features/history';
+import { INDEX_LIST, type IndexItem, useHistoryStore } from '@features/history';
 
 import '../styles/Category.css';
 
 interface Props {
-  tabActiveItem: IndexItem;
   navigateToCategory: (
     item: IndexItem,
     pageIndex?: number,
@@ -13,7 +12,9 @@ interface Props {
   ) => void;
 }
 
-export function HistoryCategory({ tabActiveItem, navigateToCategory }: Props) {
+export function HistoryCategory({ navigateToCategory }: Props) {
+  const tabActiveItem = useHistoryStore((s) => s.tabActiveItem);
+
   function handleCategoryClick(item: IndexItem) {
     navigateToCategory(item, 0, true);
   }
