@@ -44,7 +44,6 @@
 
 .vision__content:hover .vision__content__image img {
   transform: scale(1.08);
-  -webkit-transform: scale(1.08);
 }
 
 .vision__content__text {
@@ -87,7 +86,6 @@
   font-size: max(40px, 3.13vw);
   color: var(--color-main-h3);
   transform: skewX(-10deg);
-  -webkit-transform: skewX(-10deg);
 }
 
 .vision__content__title__main h4 {

@@ -13,7 +13,6 @@
   z-index: -1;
   filter: blur(10px);
   transform: scale(1.2);
-  -webkit-transform: scale(1.2);
   transform-origin: center;
 }
 
@@ -72,18 +71,15 @@
   0%,
   100% {
     transform: translateX(-50%) translateY(0);
-    -webkit-transform: translateX(-50%) translateY(0);
   }
   50% {
     transform: translateX(-50%) translateY(10px);
-    -webkit-transform: translateX(-50%) translateY(10px);
   }
 }
 
 .hero__down-icon {
   position: absolute;
   transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
   bottom: 2.5%;
   left: 50%;
   animation: bounce-down 2s ease-in-out infinite;
@@ -151,7 +147,6 @@
     bottom: 9.11vw;
     left: 50%;
     transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
     font-size: 4.56vw;
   }
 

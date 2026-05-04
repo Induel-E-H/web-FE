@@ -31,12 +31,10 @@
 
 .header--hidden {
   transform: translateY(-100%);
-  -webkit-transform: translateY(-100%);
 }
 
 body[data-popup-open] .header {
   transform: translateY(-100%);
-  -webkit-transform: translateY(-100%);
 }
 
 .header__logo {

@@ -3,7 +3,6 @@
   inset: 0;
   z-index: 15;
   perspective: 120vmax;
-  -webkit-perspective: 120vmax;
 }
 
 .history__book-cover-flip-panel {
@@ -19,13 +18,11 @@
 .history__book-cover-flip-panel--forward {
   left: 0%;
   transform-origin: left center;
-  -webkit-transform-origin: left center;
 }
 
 .history__book-cover-flip-panel--backward {
   right: 0%;
   transform-origin: right center;
-  -webkit-transform-origin: right center;
 }
 
 .history__book-cover-flip-front,
@@ -33,12 +30,10 @@
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .history__book-cover-flip-front {
   transform: translateZ(0.01px);
-  -webkit-transform: translateZ(0.01px);
 }
 
 .history__book-cover-flip-front-inner,
@@ -72,21 +67,18 @@
 @media (max-width: 1024px) {
   .history__book-cover-flip {
     perspective: 2304px;
-    -webkit-perspective: 2304px;
   }
 
   .history__book-cover-flip-panel--forward {
     left: 0;
     top: 0%;
     transform-origin: top;
-    -webkit-transform-origin: top;
   }
 
   .history__book-cover-flip-panel--backward {
     right: 0;
     bottom: 0%;
     transform-origin: bottom;
-    -webkit-transform-origin: bottom;
   }
 
   .history__book-cover-flip-panel--forward
@@ -113,7 +105,6 @@
 @media (max-width: 767px) {
   .history__book-cover-flip {
     perspective: 2304px;
-    -webkit-perspective: 2304px;
   }
 
   .history__book-cover-flip-panel--forward
