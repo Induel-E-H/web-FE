@@ -200,12 +200,12 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Mobile
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 96|🟢 100|🟠 73|🟢 100|
+  |🟢 98|🟢 100|🟠 73|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
 
-- 이미지 용량 45.6GB -> 311MB **99.32%** 절감 (JPG, PNG, TIF -> WebP 최적화)
+- 이미지 용량 45.6GB -> 79MB **99.83%** 절감 (JPG, PNG, TIF -> WebP 최적화, 해상도 기반 용량 제한 적용: 썸네일 100KB, 일반 이미지 200KB)
 - ThreeJS 렌더링 성능 최적화 (디바이스별 분기 처리)
 
 ### Architecture
