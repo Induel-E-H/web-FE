@@ -45,11 +45,6 @@
   z-index: auto;
 }
 
-.history__book-page-flip-back {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
-
 @media (max-width: 1024px) {
   .history__book-left .history__book-page-flip-panel {
     top: 1.302vw;
@@ -73,11 +68,6 @@
   .history__book-page-flip-panel--backward {
     transform-origin: bottom;
     -webkit-transform-origin: bottom;
-  }
-
-  .history__book-page-flip-back {
-    transform: rotateX(-180deg);
-    -webkit-transform: rotateX(-180deg);
   }
 }
 

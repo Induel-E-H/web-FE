@@ -48,11 +48,6 @@
   overflow: hidden;
 }
 
-.history__book-cover-flip-back {
-  transform: rotateY(180deg) translateZ(0.01px);
-  -webkit-transform: rotateY(180deg) translateZ(0.01px);
-}
-
 .history__book-cover-flip-panel--forward .history__book-cover-flip-front-inner {
   border-top-right-radius: 0.78vmax;
   border-bottom-right-radius: 0.78vmax;
@@ -92,11 +87,6 @@
     bottom: 0%;
     transform-origin: bottom;
     -webkit-transform-origin: bottom;
-  }
-
-  .history__book-cover-flip-back {
-    transform: rotateX(-180deg) translateZ(0.01px);
-    -webkit-transform: rotateX(-180deg) translateZ(0.01px);
   }
 
   .history__book-cover-flip-panel--forward

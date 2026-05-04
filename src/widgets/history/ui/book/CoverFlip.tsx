@@ -57,11 +57,16 @@ export function BookCoverFlip({
             {frontContent}
           </div>
         </div>
-        <div className='history__book-cover-flip-back'>
+        <motion.div
+          className='history__book-cover-flip-back'
+          style={
+            isVertical ? { rotateX: -180, z: 0.01 } : { rotateY: 180, z: 0.01 }
+          }
+        >
           <div className='history__book-cover-flip-back-inner'>
             {backContent}
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   );

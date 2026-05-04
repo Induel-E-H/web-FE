@@ -64,8 +64,9 @@ export function PageFlip({
           <BookPageOuterShadow side={'left'} count={0} />
         )}
       </div>
-      <div
+      <motion.div
         className={`history__book-page-flip-back ${flipDirection === 'forward' ? 'history__book-page-left' : 'history__book-page-right'}`}
+        style={isVertical ? { rotateX: -180 } : { rotateY: 180 }}
       >
         {flipDirection === 'forward' && (
           <BookPageOuterShadow side={'left'} count={0} />
@@ -74,7 +75,7 @@ export function PageFlip({
         {flipDirection !== 'forward' && (
           <BookPageOuterShadow side={'left'} count={0} />
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
