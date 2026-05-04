@@ -528,7 +528,7 @@ export function PrivacyPolicy() {
                 </p>
                 <details className='privacy-policy__cookie-details'>
                   <summary className='privacy-policy__cookie-summary'>
-                    ▶ 웹 브라우저에서 쿠키 허용/차단
+                    ● 웹 브라우저에서 쿠키 허용/차단
                   </summary>
                   <ul className='privacy-policy__unordered-list'>
                     <li>
@@ -543,7 +543,7 @@ export function PrivacyPolicy() {
                 </details>
                 <details className='privacy-policy__cookie-details'>
                   <summary className='privacy-policy__cookie-summary'>
-                    ▶ 모바일 브라우저에서 쿠키 허용/차단
+                    ● 모바일 브라우저에서 쿠키 허용/차단
                   </summary>
                   <ul className='privacy-policy__unordered-list'>
                     <li>
