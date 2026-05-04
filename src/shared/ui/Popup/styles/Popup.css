@@ -6,16 +6,6 @@
   align-items: center;
   justify-content: center;
   z-index: 1001;
-  animation: popup-overlay-in 0.2s ease;
-}
-
-@keyframes popup-overlay-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 .popup:focus-visible {
@@ -34,20 +24,6 @@
   overscroll-behavior: contain;
   gap: 0.78vmax;
   background-color: var(--white);
-  animation: popup-in 0.25s ease;
-}
-
-@keyframes popup-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-    -webkit-transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-    -webkit-transform: scale(1);
-  }
 }
 
 .popup img {

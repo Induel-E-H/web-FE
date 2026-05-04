@@ -1,8 +1,35 @@
+import type { ReactNode } from 'react';
+
 import type { AwardItem } from '@entities/award';
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { Viewport } from './Viewport';
+
+vi.mock('framer-motion', async () => {
+  const { createElement } = await import('react');
+  return {
+    motion: new Proxy({} as Record<string, unknown>, {
+      get:
+        (_, tag: string) =>
+        ({ animate, style, children, ...rest }: Record<string, unknown>) =>
+          createElement(
+            tag,
+            {
+              ...rest,
+              style:
+                (animate as { x?: string } | undefined)?.x !== undefined
+                  ? {
+                      ...(style as object),
+                      transform: `translateX(${(animate as { x: string }).x})`,
+                    }
+                  : style,
+            },
+            children as ReactNode,
+          ),
+    }),
+  };
+});
 
 vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
   useSlideGesture: vi.fn().mockReturnValue({
@@ -57,12 +84,12 @@ describe('Viewport', () => {
   });
 
   describe('슬라이더 transform', () => {
-    it('safePage=0이면 transform이 0 기반이다', () => {
+    it('safePage=0이면 transform에 translateX가 적용된다', () => {
       const { container } = render(<Viewport {...defaultProps} safePage={0} />);
       const slider = container.querySelector(
         '.award__card_slider',
       ) as HTMLElement;
-      expect(slider.style.transform).toContain('0');
+      expect(slider.style.transform).toMatch(/translateX/);
     });
 
     it('safePage가 변경되면 transform이 달라진다', () => {

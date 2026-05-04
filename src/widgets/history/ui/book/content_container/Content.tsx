@@ -9,6 +9,7 @@ import {
 } from '@entities/history';
 import { getArtworkIndex, preloadContentImages } from '@features/history';
 import type { PageSide } from '@features/history';
+import { AnimatePresence } from 'framer-motion';
 
 import '../../../styles/book/content_container/Content.css';
 import { ImageGalleryPopup } from '../../ImageGalleryPopup';
@@ -191,15 +192,18 @@ function ContentItem({
           )}
         </figure>
       )}
-      {showPopup &&
-        createPortal(
-          <ImageGalleryPopup
-            title={item.title}
-            images={contentImages}
-            onClose={handlePopupClose}
-          />,
-          document.body,
-        )}
+      {createPortal(
+        <AnimatePresence>
+          {showPopup && (
+            <ImageGalleryPopup
+              title={item.title}
+              images={contentImages}
+              onClose={handlePopupClose}
+            />
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </article>
   );
 }

@@ -1,18 +1,19 @@
-import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation';
+import { useScrollAnimation } from '@shared/lib/animation/useScrollAnimation';
 import { SectionTitle } from '@shared/ui/SectionTitle';
-
-import '../styles/VisionTitle.css';
+import { motion } from 'framer-motion';
 
 export function VisionTitle() {
-  const ref = useIntersectionAnimation<HTMLElement>();
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>();
 
   return (
-    <SectionTitle
+    <motion.div
       ref={ref}
-      subTitle='CONCEPT'
-      title='미래를 향한'
-      variant='reverse'
       className='vision__title'
-    />
+      initial={false}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+    >
+      <SectionTitle subTitle='CONCEPT' title='미래를 향한' variant='reverse' />
+    </motion.div>
   );
 }

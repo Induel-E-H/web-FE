@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
-import { useLayoutEffect, useRef } from 'react';
+
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import { motion } from 'framer-motion';
 
 import '../../styles/book/CoverFlip.css';
 
@@ -16,58 +18,56 @@ export function BookCoverFlip({
   frontContent: ReactNode;
   backContent: ReactNode;
 }) {
-  const flipPanelRef = useRef<HTMLDivElement>(null);
+  const breakpoint = useBreakpoint();
+  const isVertical = breakpoint !== 'desktop';
 
-  useLayoutEffect(() => {
-    const panel = flipPanelRef.current;
-    if (!panel) return;
+  const rotateX =
+    isFlipping && isVertical ? (flipDirection === 'forward' ? 180 : -180) : 0;
+  const rotateY =
+    isFlipping && !isVertical ? (flipDirection === 'forward' ? -180 : 180) : 0;
 
-    if (!isFlipping) {
-      panel.style.transition = 'none';
-      panel.classList.remove('flipping');
-      panel.classList.remove('history__book-cover-flip-panel--animating');
-      panel.classList.add('history__book-cover-flip-panel--hidden');
-
-      requestAnimationFrame(() => {
-        if (flipPanelRef.current) {
-          flipPanelRef.current.style.transition = '';
-        }
-      });
-    } else {
-      panel.style.transition = 'none';
-      panel.classList.remove('history__book-cover-flip-panel--hidden');
-      panel.classList.remove('flipping');
-      panel.classList.add('history__book-cover-flip-panel--animating');
-
-      panel.getBoundingClientRect();
-
-      panel.style.transition = `transform ${flipDuration / 1000}s ease-in-out`;
-
-      requestAnimationFrame(() => {
-        if (flipPanelRef.current) {
-          flipPanelRef.current.classList.add('flipping');
-        }
-      });
-    }
-  }, [isFlipping, flipDuration]);
+  const transformOrigin = isVertical
+    ? flipDirection === 'forward'
+      ? 'top'
+      : 'bottom'
+    : flipDirection === 'forward'
+      ? 'left center'
+      : 'right center';
 
   return (
     <div className='history__book-cover-flip'>
-      <div
-        ref={flipPanelRef}
-        className={`history__book-cover-flip-panel history__book-cover-flip-panel--${flipDirection} history__book-cover-flip-panel--hidden`}
+      <motion.div
+        key={String(isFlipping)}
+        className={`history__book-cover-flip-panel history__book-cover-flip-panel--${flipDirection}${!isFlipping ? ' history__book-cover-flip-panel--hidden' : ''}`}
+        style={{ transformOrigin, transformStyle: 'preserve-3d' }}
+        initial={{ rotateX: 0, rotateY: 0 }}
+        animate={{ rotateX, rotateY }}
+        transition={
+          isFlipping
+            ? {
+                type: 'tween',
+                duration: flipDuration / 1000,
+                ease: 'easeInOut',
+              }
+            : { duration: 0 }
+        }
       >
         <div className='history__book-cover-flip-front'>
           <div className='history__book-cover-flip-front-inner'>
             {frontContent}
           </div>
         </div>
-        <div className='history__book-cover-flip-back'>
+        <motion.div
+          className='history__book-cover-flip-back'
+          style={
+            isVertical ? { rotateX: -180, z: 0.01 } : { rotateY: 180, z: 0.01 }
+          }
+        >
           <div className='history__book-cover-flip-back-inner'>
             {backContent}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

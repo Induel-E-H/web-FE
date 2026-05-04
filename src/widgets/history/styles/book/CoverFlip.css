@@ -10,8 +10,6 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
 }
 
 .history__book-cover-flip-panel--hidden {
@@ -28,21 +26,6 @@
   right: 0%;
   transform-origin: right center;
   -webkit-transform-origin: right center;
-}
-
-.history__book-cover-flip-panel--animating {
-  transition: transform 0.8s ease-in-out;
-  will-change: transform;
-}
-
-.history__book-cover-flip-panel--forward.flipping {
-  transform: rotateY(-180deg);
-  -webkit-transform: rotateY(-180deg);
-}
-
-.history__book-cover-flip-panel--backward.flipping {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
 }
 
 .history__book-cover-flip-front,
@@ -63,11 +46,6 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-}
-
-.history__book-cover-flip-back {
-  transform: rotateY(180deg) translateZ(0.01px);
-  -webkit-transform: rotateY(180deg) translateZ(0.01px);
 }
 
 .history__book-cover-flip-panel--forward .history__book-cover-flip-front-inner {
@@ -109,21 +87,6 @@
     bottom: 0%;
     transform-origin: bottom;
     -webkit-transform-origin: bottom;
-  }
-
-  .history__book-cover-flip-panel--forward.flipping {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-  }
-
-  .history__book-cover-flip-panel--backward.flipping {
-    transform: rotateX(-180deg);
-    -webkit-transform: rotateX(-180deg);
-  }
-
-  .history__book-cover-flip-back {
-    transform: rotateX(-180deg) translateZ(0.01px);
-    -webkit-transform: rotateX(-180deg) translateZ(0.01px);
   }
 
   .history__book-cover-flip-panel--forward

@@ -1,12 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const VISIBLE_CLASS = 'is-visible';
-const DEFAULT_THRESHOLD = 0.15;
-
-export function useIntersectionAnimation<T extends HTMLElement>(
-  threshold = DEFAULT_THRESHOLD,
-) {
+export function useScrollAnimation<T extends HTMLElement>(threshold = 0.15) {
   const ref = useRef<T>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -15,9 +11,9 @@ export function useIntersectionAnimation<T extends HTMLElement>(
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add(VISIBLE_CLASS);
+          setIsVisible(true);
         } else if (entry.boundingClientRect.top > 0) {
-          el.classList.remove(VISIBLE_CLASS);
+          setIsVisible(false);
         }
       },
       { threshold },
@@ -27,5 +23,5 @@ export function useIntersectionAnimation<T extends HTMLElement>(
     return () => observer.disconnect();
   }, [threshold]);
 
-  return ref;
+  return { ref, isVisible };
 }

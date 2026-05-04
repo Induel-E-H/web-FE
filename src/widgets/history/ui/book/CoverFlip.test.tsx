@@ -1,5 +1,5 @@
-import { act, render } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import { BookCoverFlip } from './CoverFlip';
 
@@ -11,15 +11,6 @@ describe('BookCoverFlip', () => {
     frontContent: <span>front</span>,
     backContent: <span>back</span>,
   };
-
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.runOnlyPendingTimers();
-    vi.useRealTimers();
-  });
 
   it('렌더링된다', () => {
     const { container } = render(<BookCoverFlip {...defaultProps} />);
@@ -63,25 +54,21 @@ describe('BookCoverFlip', () => {
     expect(getByText('back')).toBeInTheDocument();
   });
 
-  it('isFlipping=true이면 rAF 이후 flipping 클래스가 추가된다', () => {
+  it('isFlipping=true이면 --hidden 클래스가 없다', () => {
     const { container } = render(
       <BookCoverFlip {...defaultProps} isFlipping={true} />,
     );
-    act(() => {
-      vi.runAllTimers();
-    });
-    const panel = container.querySelector('.history__book-cover-flip-panel')!;
-    expect(panel.classList.contains('flipping')).toBe(true);
+    expect(
+      container.querySelector('.history__book-cover-flip-panel--hidden'),
+    ).not.toBeInTheDocument();
   });
 
-  it('isFlipping=false이면 flipping 클래스가 없다', () => {
+  it('isFlipping=false이면 --hidden 클래스가 있다', () => {
     const { container } = render(
       <BookCoverFlip {...defaultProps} isFlipping={false} />,
     );
-    act(() => {
-      vi.runAllTimers();
-    });
-    const panel = container.querySelector('.history__book-cover-flip-panel')!;
-    expect(panel.classList.contains('flipping')).toBe(false);
+    expect(
+      container.querySelector('.history__book-cover-flip-panel--hidden'),
+    ).toBeInTheDocument();
   });
 });

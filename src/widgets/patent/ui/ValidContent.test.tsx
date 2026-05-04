@@ -1,8 +1,15 @@
 import { PATENT_VALID_LIST } from '@entities/patent';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { PatentValidContent } from './ValidContent';
+
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: { children: unknown }) => children,
+  motion: new Proxy({} as Record<string, unknown>, {
+    get: (_, key: string) => key,
+  }),
+}));
 
 describe('PatentValidContent', () => {
   it('유효 특허 건수가 표시된다', () => {

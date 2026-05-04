@@ -1,7 +1,35 @@
+import type { ReactNode } from 'react';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Award } from './Award';
+
+vi.mock('framer-motion', async () => {
+  const { createElement } = await import('react');
+  return {
+    AnimatePresence: ({ children }: { children: ReactNode }) => children,
+    motion: new Proxy({} as Record<string, unknown>, {
+      get:
+        (_, tag: string) =>
+        ({ animate, style, children, ...rest }: Record<string, unknown>) =>
+          createElement(
+            tag,
+            {
+              ...rest,
+              style:
+                (animate as { x?: string } | undefined)?.x !== undefined
+                  ? {
+                      ...(style as object),
+                      transform: `translateX(${(animate as { x: string }).x})`,
+                    }
+                  : style,
+            },
+            children as ReactNode,
+          ),
+    }),
+  };
+});
 
 const mockUseBreakpoint = vi.hoisted(() => vi.fn().mockReturnValue('desktop'));
 vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({

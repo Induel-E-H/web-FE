@@ -11,6 +11,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ContentPage } from './Content';
 
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: { children: unknown }) => children,
+  motion: new Proxy({} as Record<string, unknown>, {
+    get: (_, key: string) => key,
+  }),
+}));
+
 vi.mock('@features/history/model/helpers', async (importOriginal) => {
   const actual =
     await importOriginal<typeof import('@features/history/model/helpers')>();

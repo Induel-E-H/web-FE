@@ -5,8 +5,6 @@
   right: 0.78vmax;
   left: 0;
 
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   z-index: 10;
 }
 
@@ -17,8 +15,6 @@
   left: 0.78vmax;
   right: 0;
 
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   z-index: 10;
 }
 
@@ -40,21 +36,6 @@
   -webkit-transform-origin: right center;
 }
 
-.history__book-page-flip-panel--animating {
-  transition: transform 0.8s ease-in-out;
-  will-change: transform;
-}
-
-.history__book-page-flip-panel--forward.flipping {
-  transform: rotateY(-180deg);
-  -webkit-transform: rotateY(-180deg);
-}
-
-.history__book-page-flip-panel--backward.flipping {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
-
 .history__book-page-flip-front,
 .history__book-page-flip-back {
   position: absolute;
@@ -62,11 +43,6 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   z-index: auto;
-}
-
-.history__book-page-flip-back {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
 }
 
 @media (max-width: 1024px) {
@@ -92,21 +68,6 @@
   .history__book-page-flip-panel--backward {
     transform-origin: bottom;
     -webkit-transform-origin: bottom;
-  }
-
-  .history__book-page-flip-panel--forward.flipping {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-  }
-
-  .history__book-page-flip-panel--backward.flipping {
-    transform: rotateX(-180deg);
-    -webkit-transform: rotateX(-180deg);
-  }
-
-  .history__book-page-flip-back {
-    transform: rotateX(-180deg);
-    -webkit-transform: rotateX(-180deg);
   }
 }
 

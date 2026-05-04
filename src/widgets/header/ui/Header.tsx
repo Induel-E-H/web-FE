@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 import { smoothScrollTo } from '@shared/lib/scroll';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { NAV_ITEMS } from '../model/navItems';
 import { useHeaderVisibility } from '../model/useHeaderVisibility';
@@ -91,15 +92,21 @@ export function Header({ onNavClick }: HeaderProps = {}) {
         <RxHamburgerMenu aria-hidden='true' />
       </button>
 
-      {menuOpen && (
-        <nav
-          id='mobile-menu'
-          className='header__mobile-menu'
-          aria-label='모바일 메뉴'
-        >
-          {navItems}
-        </nav>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id='mobile-menu'
+            className='header__mobile-menu'
+            aria-label='모바일 메뉴'
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            {navItems}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -1,5 +1,5 @@
-import { act, render } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import { PageFlip } from './PageFlip';
 
@@ -13,15 +13,6 @@ describe('PageFlip', () => {
     isRapidFlipping: false,
     isHoldChaining: false,
   };
-
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.runOnlyPendingTimers();
-    vi.useRealTimers();
-  });
 
   it('초기에 --hidden 클래스가 있다', () => {
     const { container } = render(<PageFlip {...defaultProps} />);
@@ -73,30 +64,26 @@ describe('PageFlip', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('isFlipping=true이면 rAF 이후 flipping 클래스가 추가된다', () => {
+  it('isFlipping=true이면 --hidden 클래스가 없다', () => {
     const { container } = render(
       <PageFlip {...defaultProps} isFlipping={true} />,
     );
-    act(() => {
-      vi.runAllTimers();
-    });
-    const panel = container.querySelector('.history__book-page-flip-panel')!;
-    expect(panel.classList.contains('flipping')).toBe(true);
+    expect(
+      container.querySelector('.history__book-page-flip-panel--hidden'),
+    ).not.toBeInTheDocument();
   });
 
-  it('isFlipping=true → false로 변경 시 flipping 클래스가 제거된다', () => {
+  it('isFlipping=true → false로 변경 시 --hidden 클래스가 추가된다', () => {
     const { container, rerender } = render(
       <PageFlip {...defaultProps} isFlipping={true} />,
     );
-    act(() => {
-      vi.runAllTimers();
-    });
+    expect(
+      container.querySelector('.history__book-page-flip-panel--hidden'),
+    ).not.toBeInTheDocument();
     rerender(<PageFlip {...defaultProps} isFlipping={false} />);
-    act(() => {
-      vi.runAllTimers();
-    });
-    const panel = container.querySelector('.history__book-page-flip-panel')!;
-    expect(panel.classList.contains('flipping')).toBe(false);
+    expect(
+      container.querySelector('.history__book-page-flip-panel--hidden'),
+    ).toBeInTheDocument();
   });
 
   it('flipFrontContent가 렌더링된다', () => {
