@@ -1,10 +1,19 @@
 import { act, renderHook } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { YEAR_ALL } from './constant';
+import { useAwardStore } from './useAwardStore';
 import { useYearFilter } from './useYearFilter';
 
 describe('useYearFilter', () => {
+  beforeEach(() => {
+    useAwardStore.getState().reset();
+  });
+
+  afterEach(() => {
+    useAwardStore.getState().reset();
+  });
+
   it('초기 activeYear는 "전체"이다', () => {
     const { result } = renderHook(() => useYearFilter());
     expect(result.current.activeYear).toBe(YEAR_ALL);
