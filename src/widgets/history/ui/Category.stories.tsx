@@ -17,6 +17,7 @@ const meta = {
         component:
           'History 섹션의 카테고리 탭 네비게이션. Zustand 스토어의 tabActiveItem에 따라 활성 탭이 결정됩니다.',
       },
+      story: { inline: false },
     },
   },
   decorators: [

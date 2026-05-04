@@ -1,23 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 
+import { useAwardStore } from '../model/useAwardStore';
 import { Pagination } from './Pagination';
 
 const meta = {
   title: 'Features/Award/Pagination',
   component: Pagination,
-  args: {
-    currentPage: 0,
-    totalPages: 5,
-    onPageChange: fn(),
-  },
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          'Award 위젯의 페이지네이션 컴포넌트. 현재 페이지와 총 페이지 수를 표시하며, 페이지 변경 시 onPageChange 콜백을 호출합니다.',
+          'Award 위젯의 페이지네이션 컴포넌트. Zustand 스토어에서 현재 페이지와 총 페이지 수를 계산하여 표시하며, 페이지 변경 시 스토어를 업데이트합니다.',
       },
+      story: { inline: false },
     },
   },
 } satisfies Meta<typeof Pagination>;
@@ -27,10 +23,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '기본',
+  decorators: [
+    (Story) => {
+      useAwardStore.setState({ currentPage: 0, activeYear: '전체' });
+      return <Story />;
+    },
+  ],
   parameters: {
     docs: {
       description: {
-        story: '현재 페이지 0, 총 페이지 5인 기본 상태.',
+        story: '첫 번째 페이지 상태. 모바일 기준 총 3페이지 중 1페이지.',
       },
     },
   },
@@ -38,13 +40,16 @@ export const Default: Story = {
 
 export const MiddlePage: Story = {
   name: '중간 페이지',
-  args: {
-    currentPage: 2,
-  },
+  decorators: [
+    (Story) => {
+      useAwardStore.setState({ currentPage: 1, activeYear: '전체' });
+      return <Story />;
+    },
+  ],
   parameters: {
     docs: {
       description: {
-        story: '현재 페이지 2로 설정하여 중간 페이지 상태를 시뮬레이션.',
+        story: '중간 페이지 상태. 모바일 기준 총 3페이지 중 2페이지.',
       },
     },
   },
@@ -52,13 +57,16 @@ export const MiddlePage: Story = {
 
 export const LastPage: Story = {
   name: '마지막 페이지',
-  args: {
-    currentPage: 4,
-  },
+  decorators: [
+    (Story) => {
+      useAwardStore.setState({ currentPage: 2, activeYear: '전체' });
+      return <Story />;
+    },
+  ],
   parameters: {
     docs: {
       description: {
-        story: '현재 페이지 4로 설정하여 마지막 페이지 상태를 시뮬레이션.',
+        story: '마지막 페이지 상태. 모바일 기준 총 3페이지 중 3페이지.',
       },
     },
   },
