@@ -1,9 +1,18 @@
 import { act, renderHook } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { useBookCoverState } from './useBookCoverState';
+import { useHistoryStore } from './useHistoryStore';
 
 describe('useBookCoverState', () => {
+  beforeEach(() => {
+    useHistoryStore.getState().reset();
+  });
+
+  afterEach(() => {
+    useHistoryStore.getState().reset();
+  });
+
   it('초기 상태는 cover-front이다', () => {
     const { result } = renderHook(() => useBookCoverState());
     expect(result.current.bookState).toBe('cover-front');

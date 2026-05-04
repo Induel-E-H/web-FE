@@ -2,6 +2,7 @@ import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { RAPID_FLIP_DURATION } from '../constants';
+import { useHistoryStore } from '../useHistoryStore';
 import { useRapidFlip } from './useRapidFlip';
 
 describe('useRapidFlip', () => {
@@ -13,6 +14,7 @@ describe('useRapidFlip', () => {
 
   beforeEach(() => {
     vi.useFakeTimers();
+    useHistoryStore.getState().reset();
     mockStartFlipAnimation = vi.fn() as unknown as (
       direction: import('../types').FlipDirection,
       onComplete: () => void,
@@ -22,6 +24,7 @@ describe('useRapidFlip', () => {
 
   afterEach(() => {
     vi.useRealTimers();
+    useHistoryStore.getState().reset();
   });
 
   it('초기 상태: isRapidFlipping=false, tabActiveItem="List"', () => {

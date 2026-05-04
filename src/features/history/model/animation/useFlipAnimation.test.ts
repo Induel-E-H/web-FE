@@ -2,15 +2,18 @@ import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { FLIP_DURATION } from '../constants';
+import { useHistoryStore } from '../useHistoryStore';
 import { useFlipAnimation } from './useFlipAnimation';
 
 describe('useFlipAnimation', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    useHistoryStore.getState().reset();
   });
 
   afterEach(() => {
     vi.useRealTimers();
+    useHistoryStore.getState().reset();
   });
 
   it('초기 상태: isFlipping=false, flipDirection=null', () => {
