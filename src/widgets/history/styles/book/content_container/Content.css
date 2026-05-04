@@ -68,7 +68,7 @@
   font-size: max(12px, 0.73vw);
 
   color: var(--black);
-  word-break: normal;
+  word-break: keep-all;
   overflow-wrap: break-word;
 }
 
@@ -89,6 +89,9 @@
   font-size: max(11px, 0.729vw);
 
   color: var(--typo-contentW);
+
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .content__caption {
@@ -132,7 +135,7 @@
   color: var(--typo-contentW);
   min-width: 0;
   word-break: keep-all;
-  overflow-wrap: normal;
+  overflow-wrap: break-word;
 }
 
 .content__caption-col:last-child dd {
