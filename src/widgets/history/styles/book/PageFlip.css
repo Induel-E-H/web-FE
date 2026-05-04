@@ -5,8 +5,6 @@
   right: 0.78vmax;
   left: 0;
 
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   z-index: 10;
 }
 
@@ -17,8 +15,6 @@
   left: 0.78vmax;
   right: 0;
 
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   z-index: 10;
 }
 
