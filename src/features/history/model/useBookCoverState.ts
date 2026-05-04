@@ -1,13 +1,12 @@
-import { useState } from 'react';
-
 import { BOOK_STATE } from './constants';
-import { type BookState } from './types';
+import { useHistoryStore } from './useHistoryStore';
 
 export function useBookCoverState() {
-  const [bookState, setBookState] = useState<BookState>(BOOK_STATE.COVER_FRONT);
+  const bookState = useHistoryStore((s) => s.bookState);
+  const { setBookState } = useHistoryStore.getState();
 
   function openingFront() {
-    if (bookState !== BOOK_STATE.COVER_FRONT) return;
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.COVER_FRONT) return;
     setBookState(BOOK_STATE.OPENING_FRONT);
   }
 
@@ -16,7 +15,7 @@ export function useBookCoverState() {
   }
 
   function closingFront() {
-    if (bookState !== BOOK_STATE.OPEN) return;
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.OPEN) return;
     setBookState(BOOK_STATE.CLOSING_FRONT);
   }
 
@@ -25,7 +24,7 @@ export function useBookCoverState() {
   }
 
   function closingBack() {
-    if (bookState !== BOOK_STATE.OPEN) return;
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.OPEN) return;
     setBookState(BOOK_STATE.CLOSING_BACK);
   }
 
@@ -34,7 +33,7 @@ export function useBookCoverState() {
   }
 
   function openingBack() {
-    if (bookState !== BOOK_STATE.COVER_BACK) return;
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.COVER_BACK) return;
     setBookState(BOOK_STATE.OPENING_BACK);
   }
 

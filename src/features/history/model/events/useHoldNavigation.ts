@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { FLIP_DURATION, RAPID_FLIP_DURATION } from '../constants';
+import { useHistoryStore } from '../useHistoryStore';
 
 export function useHoldNavigation() {
   const holdDirectionRef = useRef<'left' | 'right' | null>(null);
   const chainTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [isHoldChaining, setIsHoldChaining] = useState(false);
+
+  const isHoldChaining = useHistoryStore((s) => s.isHoldChaining);
 
   const navigateLeftRef = useRef<() => void>(() => {});
   const navigateRightRef = useRef<() => void>(() => {});
@@ -38,7 +40,7 @@ export function useHoldNavigation() {
 
   function endContinuousFlip() {
     holdDirectionRef.current = null;
-    setIsHoldChaining(false);
+    useHistoryStore.setState({ isHoldChaining: false });
     if (chainTimerRef.current) {
       clearTimeout(chainTimerRef.current);
       chainTimerRef.current = null;
@@ -48,18 +50,18 @@ export function useHoldNavigation() {
   function chainHoldFlip(): boolean {
     if (!holdDirectionRef.current) return false;
 
-    setIsHoldChaining(true);
+    useHistoryStore.setState({ isHoldChaining: true });
     chainTimerRef.current = setTimeout(() => {
       if (holdDirectionRef.current === 'left') {
         navigateLeftRapidRef.current();
         if (holdDirectionRef.current === null) {
-          setIsHoldChaining(false);
+          useHistoryStore.setState({ isHoldChaining: false });
           leftBoundaryCallbackRef.current?.(RAPID_FLIP_DURATION);
         }
       } else if (holdDirectionRef.current === 'right') {
         navigateRightRapidRef.current();
         if (holdDirectionRef.current === null) {
-          setIsHoldChaining(false);
+          useHistoryStore.setState({ isHoldChaining: false });
           rightBoundaryCallbackRef.current?.(RAPID_FLIP_DURATION);
         }
       }

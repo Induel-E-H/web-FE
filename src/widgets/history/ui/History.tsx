@@ -31,15 +31,11 @@ export function History() {
 
   const {
     activeItem,
-    tabActiveItem,
     currentPageIndex,
     canGoLeft,
     canGoRight,
     isFlipping,
     flipDirection,
-    currentFlipDuration,
-    isRapidFlipping,
-    isHoldChaining,
     nextPageIndex,
     nextActiveItem,
     prevPageIndex,
@@ -134,7 +130,6 @@ export function History() {
 
   const isCoverFlip =
     bookState.startsWith('opening') || bookState.startsWith('closing');
-  const isBookOpen = bookState !== 'cover-front' && bookState !== 'cover-back';
 
   const leftSlot = (
     <BookPageSlot side={PAGE_SIDE.LEFT} shadowCount={leftShadowCount}>
@@ -249,21 +244,10 @@ export function History() {
         {pageAnnouncement}
       </div>
       <HistoryTitle />
-      <HistoryCategory
-        tabActiveItem={tabActiveItem}
-        navigateToCategory={handleNavigateToCategory}
-      />
+      <HistoryCategory navigateToCategory={handleNavigateToCategory} />
       <div className='history__book'>
         <BookSide
           side={PAGE_SIDE.LEFT}
-          bookState={bookState}
-          isBookOpen={isBookOpen}
-          isCoverFlip={isCoverFlip}
-          isFlipping={pageIsFlipping}
-          isRapidFlipping={isRapidFlipping}
-          isHoldChaining={isHoldChaining}
-          flipDirection={flipDirection}
-          currentFlipDuration={currentFlipDuration}
           staticPageContent={staticLeftContent}
           flipFrontPageContent={flipFrontContent}
           flipBackPageContent={flipBackContent}
@@ -276,14 +260,6 @@ export function History() {
         />
         <BookSide
           side={PAGE_SIDE.RIGHT}
-          bookState={bookState}
-          isBookOpen={isBookOpen}
-          isCoverFlip={isCoverFlip}
-          isFlipping={pageIsFlipping}
-          isRapidFlipping={isRapidFlipping}
-          isHoldChaining={isHoldChaining}
-          flipDirection={flipDirection}
-          currentFlipDuration={currentFlipDuration}
           staticPageContent={staticRightContent}
           flipFrontPageContent={flipFrontContent}
           flipBackPageContent={flipBackContent}

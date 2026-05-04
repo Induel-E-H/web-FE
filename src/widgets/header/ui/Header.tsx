@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useHeaderVisibility } from '@features/header';
+import { useIsHero } from '@features/header';
 import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 import { smoothScrollTo } from '@shared/lib/scroll';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { NAV_ITEMS } from '../model/navItems';
-import { useHeaderVisibility } from '../model/useHeaderVisibility';
-import { useIsHero } from '../model/useIsHero';
 import '../styles/Header.css';
 
 const HERO_SELECTOR = '.hero';

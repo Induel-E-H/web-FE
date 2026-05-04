@@ -2,15 +2,18 @@ import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { FLIP_DURATION, RAPID_FLIP_DURATION } from '../constants';
+import { useHistoryStore } from '../useHistoryStore';
 import { useHoldNavigation } from './useHoldNavigation';
 
 describe('useHoldNavigation', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    useHistoryStore.getState().reset();
   });
 
   afterEach(() => {
     vi.useRealTimers();
+    useHistoryStore.getState().reset();
   });
 
   it('초기 상태: isHoldChaining=false', () => {

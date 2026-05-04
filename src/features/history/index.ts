@@ -1,5 +1,6 @@
 export { useBookNavigation } from './model/useBookNavigation';
 export { useBookCoverState } from './model/useBookCoverState';
+export { useHistoryStore } from './model/useHistoryStore';
 export {
   INDEX_LIST,
   PAGE_SIDE,

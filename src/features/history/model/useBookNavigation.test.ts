@@ -3,14 +3,17 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { FLIP_DURATION } from './constants';
 import { useBookNavigation } from './useBookNavigation';
+import { useHistoryStore } from './useHistoryStore';
 
 describe('useBookNavigation', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    useHistoryStore.getState().reset();
   });
 
   afterEach(() => {
     vi.useRealTimers();
+    useHistoryStore.getState().reset();
   });
 
   it('초기 activeItem은 List이다', () => {

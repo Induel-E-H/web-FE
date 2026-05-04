@@ -26,7 +26,7 @@ vi.mock('@shared/lib/scroll/smoothScrollTo', () => ({
   smoothScrollTo: mockSmoothScrollTo,
 }));
 
-vi.mock('../model/useIsHero', () => ({
+vi.mock('@features/header/model/useIsHero', () => ({
   useIsHero: mockUseIsHero,
 }));
 
@@ -40,7 +40,7 @@ const mockUseHeaderVisibility = vi.hoisted(() =>
   })),
 );
 
-vi.mock('../model/useHeaderVisibility', () => ({
+vi.mock('@features/header/model/useHeaderVisibility', () => ({
   useHeaderVisibility: mockUseHeaderVisibility,
 }));
 
