@@ -148,7 +148,7 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 
 ### Develop Environment
 
-<img width="1011" height="97" alt="Environment" src="https://github.com/user-attachments/assets/ecbdbaa5-5d5b-4163-b793-331e00265e8e" />
+<img width="1114" height="97" alt="Environment" src="https://github.com/user-attachments/assets/854c9198-0627-4b90-ae05-48019a2c3ecf" />
 
 ### CI/CD
 
