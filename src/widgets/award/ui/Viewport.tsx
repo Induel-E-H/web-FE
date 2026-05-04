@@ -60,7 +60,7 @@ export function Viewport() {
     >
       <motion.div
         className='award__card_slider'
-        animate={{ x: `calc(-${safePage * 100}% - ${safePage}vmax)` }}
+        animate={{ x: `-${safePage * 100}%` }}
         transition={{ type: 'tween', duration: 0.4, ease: 'easeOut' }}
       >
         {Array.from({ length: totalPages }, (_, pageIndex) => (
