@@ -1,12 +1,14 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import browserslist from 'browserslist';
+import { browserslistToTargets } from 'lightningcss';
+import { defineConfig, type UserConfig } from 'vite';
 import sitemap from 'vite-plugin-sitemap';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 const isStorybook =
   process.env.STORYBOOK === 'true' || process.env.CHROMATIC === 'true';
 
-export const baseConfig = {
+export const baseConfig: UserConfig = {
   plugins: [
     react({
       babel: {
@@ -20,8 +22,15 @@ export const baseConfig = {
     host: true,
     port: 5173,
   },
+  css: {
+    transformer: 'lightningcss',
+    lightningcss: {
+      targets: browserslistToTargets(browserslist('>= 0.25%')),
+    },
+  },
   build: {
     target: 'esnext',
+    cssMinify: 'lightningcss',
     chunkSizeWarningLimit: 500,
     rollupOptions: {
       output: {
