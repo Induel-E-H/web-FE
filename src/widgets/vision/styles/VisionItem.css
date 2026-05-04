@@ -104,6 +104,8 @@
   font-size: max(12px, 0.78vw);
   line-height: 2;
   color: var(--color-description);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 1024px) {
