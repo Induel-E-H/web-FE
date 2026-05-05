@@ -148,7 +148,7 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 
 ### Develop Environment
 
-<img width="1011" height="97" alt="Environment" src="https://github.com/user-attachments/assets/ecbdbaa5-5d5b-4163-b793-331e00265e8e" />
+<img width="1114" height="97" alt="Environment" src="https://github.com/user-attachments/assets/854c9198-0627-4b90-ae05-48019a2c3ecf" />
 
 ### CI/CD
 
@@ -200,12 +200,12 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Mobile
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 96|🟢 100|🟠 73|🟢 100|
+  |🟢 98|🟢 100|🟠 73|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
 
-- 이미지 용량 45.6GB -> 311MB **99.32%** 절감 (JPG, PNG, TIF -> WebP 최적화)
+- 이미지 용량 45.6GB -> 79MB **99.83%** 절감 (JPG, PNG, TIF -> WebP 최적화, 해상도 기반 용량 제한 적용: 썸네일 100KB, 일반 이미지 200KB)
 - ThreeJS 렌더링 성능 최적화 (디바이스별 분기 처리)
 
 ### Architecture
@@ -246,6 +246,11 @@ PN 룰 기반으로 리뷰 코멘트에 중요도를 부여하여
 
 대규모 변경은 텍스트 리뷰 대신  
 **실시간 설명 기반 리뷰(Discord)** 로 전환하여 속도와 이해도를 동시에 확보했습니다.
+
+### 크로스 도메인
+
+프로젝트 전체 이해도 향상과 오너십 강화를 위해 도메인 분리 기반의 교차 책임 구조를 적용합니다.
+각 개발자는 **오너 도메인**에서는 **기능 구현**을, **비오너 도메인**에서는 **테스트 코드 작성**을 담당하여 구현과 검증을 분리합니다.
 
 ### AI 활용 전략
 
