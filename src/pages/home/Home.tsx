@@ -4,10 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { smoothScrollTo } from '@shared/lib/scroll';
 import { Header } from '@widgets/header';
 import { Hero } from '@widgets/hero';
+import { Vision } from '@widgets/vision';
 
-const Vision = lazy(() =>
-  import('@widgets/vision').then((m) => ({ default: m.Vision })),
-);
 const History = lazy(() =>
   import('@widgets/history').then((m) => ({ default: m.History })),
 );
@@ -91,8 +89,8 @@ export function Home() {
       <Header />
       <main id='main-content'>
         <Hero showScrollArrow={isProduction} />
+        <Vision />
         <Suspense fallback={null}>
-          <Vision />
           <History />
           <Award />
           <Patent />
