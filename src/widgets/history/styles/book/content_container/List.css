@@ -77,5 +77,6 @@
 
   .list__ul button {
     font-size: clamp(8px, 2.133vw, 11px);
+    -webkit-tap-highlight-color: transparent;
   }
 }
