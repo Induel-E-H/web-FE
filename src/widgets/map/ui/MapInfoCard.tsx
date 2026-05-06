@@ -15,7 +15,7 @@ export function MapInfoCard() {
             aria-hidden='true'
           />
           <div>
-            <p className='map__info__name'>{COMPANY.NAME_KO}</p>
+            <p className='map__info__name'>{COMPANY.NAME_KR}</p>
             <p className='map__info__subtitle'>{COMPANY.NAME_EN_FULL}</p>
           </div>
         </div>

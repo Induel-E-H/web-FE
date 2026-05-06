@@ -162,6 +162,11 @@
   word-break: keep-all;
 }
 
+.privacy-policy__article a {
+  font-weight: var(--pretendard-medium);
+  color: var(--brown-600);
+}
+
 .privacy-policy__article p:last-child {
   margin-bottom: 0;
 }

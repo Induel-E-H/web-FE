@@ -8,7 +8,7 @@ import '../styles/MapCard.css';
 export function MapCard() {
   return (
     <address className='map__card_content'>
-      <h3>(주) 인들이앤에이치 본사</h3>
+      <h3>{COMPANY.NAME_KR} 본사</h3>
 
       <ul className='map__description'>
         {TRANSPORT_ITEMS.map(({ id, Icon, label, lines }) => (

@@ -49,8 +49,8 @@ export function PrivacyPolicy() {
           <section className='privacy-policy__hero'>
             <h1 className='privacy-policy__title'>개인정보처리방침</h1>
             <p className='privacy-policy__intro'>
-              (주) {COMPANY.NAME_KO}(이하 '회사')는 정보주체의 자유와 권리
-              보호를 위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여,
+              {COMPANY.NAME_KR}(이하 '회사')는 정보주체의 자유와 권리 보호를
+              위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여,
               적법하게 개인정보를 처리하고 안전하게 관리하고 있습니다. 이에
               「개인정보 보호법」제30조에 따라 정보주체에게 개인정보의 처리와
               보호에 관한 절차 및 기준을 안내하고, 이와 관련한 고충을 신속하고
@@ -155,11 +155,11 @@ export function PrivacyPolicy() {
                 ■ 제 1조 개인정보의 처리 목적
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 다음의 목적을 위하여 개인정보를
-                처리합니다. 처리하고 있는 개인정보는 다음의 목적 외의 용도로는
-                이용되지 않으며, 이용 목적이 변경되는 경우에는 「개인정보
-                보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를
-                이행할 예정입니다.
+                {COMPANY.NAME_KR}는 다음의 목적을 위하여 개인정보를 처리합니다.
+                처리하고 있는 개인정보는 다음의 목적 외의 용도로는 이용되지
+                않으며, 이용 목적이 변경되는 경우에는 「개인정보 보호법」
+                제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할
+                예정입니다.
               </p>
               <ol className='privacy-policy__ordered-list'>
                 <li>
@@ -184,8 +184,8 @@ export function PrivacyPolicy() {
                 ■ 제 2조 처리하는 개인정보의 항목
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 다음과 같은 개인정보 법적 근거로
-                정보주체의 개인정보를 수집 및 이용합니다.
+                {COMPANY.NAME_KR}는 다음과 같은 개인정보 법적 근거로 정보주체의
+                개인정보를 수집 및 이용합니다.
               </p>
               <ol className='privacy-policy__ordered-list'>
                 <li>
@@ -205,12 +205,11 @@ export function PrivacyPolicy() {
                 ■ 제 3조 14세 미만 아동의 개인정보 처리에 관한 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 만 14세 미만 사용자의 개인정보는
-                수집하지 않습니다. 단, 만 14세 미만 아동의 개인정보를 처리하기
-                위하여 개인정보보호법에 따른 동의를 받아야 할 때는 그
-                법정대리인에게 동의를 받고, 개인정보 사용이 끝나면 해당 정보를
-                바로 삭제하며, 개인정보가 사용되는 동안 개인정보를 안전하게
-                관리합니다.
+                {COMPANY.NAME_KR}는 만 14세 미만 사용자의 개인정보는 수집하지
+                않습니다. 단, 만 14세 미만 아동의 개인정보를 처리하기 위하여
+                개인정보보호법에 따른 동의를 받아야 할 때는 그 법정대리인에게
+                동의를 받고, 개인정보 사용이 끝나면 해당 정보를 바로 삭제하며,
+                개인정보가 사용되는 동안 개인정보를 안전하게 관리합니다.
               </p>
               <p className='privacy-policy__note'>
                 ※ 법정대리인 동의를 받기 위하여 아동에게 법정대리인의 성명,
@@ -234,9 +233,9 @@ export function PrivacyPolicy() {
                 ■ 제 4조 개인정보의 처리 및 보유 기간
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 법령에 따른 개인정보 보유·이용 기간
-                또는 정보주체로부터 개인정보 수집 시 안내한 보유·이용 기간
-                내에서 개인정보를 처리·보유합니다.
+                {COMPANY.NAME_KR}는 법령에 따른 개인정보 보유·이용 기간 또는
+                정보주체로부터 개인정보 수집 시 안내한 보유·이용 기간 내에서
+                개인정보를 처리·보유합니다.
               </p>
               <p>각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.</p>
               <ol className='privacy-policy__ordered-list'>
@@ -257,8 +256,8 @@ export function PrivacyPolicy() {
                 ■ 제 5조 개인정보의 파기 절차 및 방법
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 개인정보 보유기간의 경과, 처리목적 달성
-                등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를
+                {COMPANY.NAME_KR}는 개인정보 보유기간의 경과, 처리목적 달성 등
+                개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를
                 파기합니다. 정보주체로부터 동의받은 개인정보 보유기간이
                 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에
                 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의
@@ -269,15 +268,15 @@ export function PrivacyPolicy() {
                 <li>
                   <strong>파기절차</strong>
                   <p>
-                    (주) {COMPANY.NAME_KO}는 파기 사유가 발생한 개인정보를
-                    선정하고, (주) {COMPANY.NAME_KO}의 개인정보 보호 책임자의
-                    승인을 받아 개인정보를 파기합니다.
+                    {COMPANY.NAME_KR}는 파기 사유가 발생한 개인정보를 선정하고,{' '}
+                    {COMPANY.NAME_KR}의 개인정보 보호 책임자의 승인을 받아
+                    개인정보를 파기합니다.
                   </p>
                 </li>
                 <li>
                   <strong>파기방법</strong>
                   <p>
-                    (주) {COMPANY.NAME_KO}는 전자적 파일 형태로 기록·저장된
+                    {COMPANY.NAME_KR}는 전자적 파일 형태로 기록·저장된
                     개인정보는 기록을 재생할 수 없도록 파기하며 종이 문서에
                     기록·저장된 개인정보는 분쇄기로 분쇄하거나 소각하여
                     파기합니다.
@@ -288,7 +287,11 @@ export function PrivacyPolicy() {
                   <p>
                     Google Analytics를 통해 처리되는 개인정보는 각 서비스
                     제공자의 정책에 따라 일정 기간 보관 후 자동으로 삭제되며,
-                    보관 기간은 제4조에서 확인할 수 있습니다.
+                    보관 기간은{' '}
+                    <a href='#section-4'>
+                      '제4조 개인정보의 처리 및 보유 기간'
+                    </a>
+                    에서 확인할 수 있습니다.
                   </p>
                 </li>
               </ol>
@@ -299,8 +302,8 @@ export function PrivacyPolicy() {
                 ■ 제 6조 개인정보의 제3자 제공에 관한 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 정보주체의 개인정보를 제3자에게
-                제공하지 않습니다.
+                {COMPANY.NAME_KR}는 정보주체의 개인정보를 제3자에게 제공하지
+                않습니다.
               </p>
               <p>
                 다만, 법령에 따라 제공 의무가 발생하는 경우에는 관련 법령에 따라
@@ -313,8 +316,8 @@ export function PrivacyPolicy() {
                 ■ 제 7조 개인정보 처리업무의 위탁에 관한 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 원활한 개인정보 업무 처리를 위하여
-                다음과 같이 개인정보 처리 업무를 위탁하고 있습니다.
+                {COMPANY.NAME_KR}는 원활한 개인정보 업무 처리를 위하여 다음과
+                같이 개인정보 처리 업무를 위탁하고 있습니다.
               </p>
               <div className='privacy-policy__table-wrap'>
                 <table className='privacy-policy__table'>
@@ -333,7 +336,7 @@ export function PrivacyPolicy() {
                 </table>
               </div>
               <p>
-                (주) {COMPANY.NAME_KO}는 위탁계약 체결 시 「개인정보 보호법」
+                {COMPANY.NAME_KR}는 위탁계약 체결 시 「개인정보 보호법」
                 제26조에 따라 위탁업무 수행목적 외 개인정보 처리금지,
                 기술적·관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리·감독,
                 손해배상 등 책임에 관한 사항을 계약서 등 문서에 명시하고,
@@ -341,7 +344,7 @@ export function PrivacyPolicy() {
               </p>
               <p>
                 「개인정보 보호법」 제26조제6항에 따라 수탁자가 당사의 개인정보
-                처리 업무를 재위탁하는 경우 (주) {COMPANY.NAME_KO}의 동의를 받고
+                처리 업무를 재위탁하는 경우 {COMPANY.NAME_KR}의 동의를 받고
                 있으며, 본 개인정보 처리방침을 통하여 재수탁자와 재수탁하는
                 업무의 내용을 공개하고 있습니다.
               </p>
@@ -350,8 +353,11 @@ export function PrivacyPolicy() {
                 개인정보 처리방침을 통하여 공개하도록 하겠습니다.
               </p>
               <p>
-                개인정보 처리 업무를 국외에 위탁하는 경우는 '제10조 개인정보의
-                국외 수집 및 이전에 관한 사항'에서 안내하고 있습니다.
+                개인정보 처리 업무를 국외에 위탁하는 경우는{' '}
+                <a href='#section-10'>
+                  '제10조 개인정보의 국외 수집 및 이전에 관한 사항'
+                </a>
+                에서 안내하고 있습니다.
               </p>
             </article>
 
@@ -360,8 +366,8 @@ export function PrivacyPolicy() {
                 ■ 제 8조 개인정보의 국외 수집 및 이전에 관한 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 서비스 이용 통계 분석 및 웹사이트
-                운영을 위하여 개인정보를 국외에 이전하고 있습니다.
+                {COMPANY.NAME_KR}는 서비스 이용 통계 분석 및 웹사이트 운영을
+                위하여 개인정보를 국외에 이전하고 있습니다.
               </p>
               <ol className='privacy-policy__ordered-list'>
                 <li>
@@ -432,8 +438,8 @@ export function PrivacyPolicy() {
                 ■ 제 9조 개인정보의 안전성 확보조치에 관한 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 개인정보의 안전성 확보를 위해 다음과
-                같은 조치를 취하고 있습니다.
+                {COMPANY.NAME_KR}는 개인정보의 안전성 확보를 위해 다음과 같은
+                조치를 취하고 있습니다.
               </p>
               <ol className='privacy-policy__ordered-list'>
                 <li>
@@ -489,11 +495,11 @@ export function PrivacyPolicy() {
                 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 서비스 이용 과정에서 이용 정보를
-                저장하고 수시로 불러오는 '쿠키(Cookie)'를 사용합니다. 쿠키는
-                웹사이트 운영에 이용되는 서버(http)가 정보주체의 브라우저에
-                보내는 소량의 정보로서 정보주체의 컴퓨터 또는 모바일에 저장되며,
-                웹사이트 접속 시 정보주체의 브라우저에서 서버로 자동 전송됩니다.
+                {COMPANY.NAME_KR}는 서비스 이용 과정에서 이용 정보를 저장하고
+                수시로 불러오는 '쿠키(Cookie)'를 사용합니다. 쿠키는 웹사이트
+                운영에 이용되는 서버(http)가 정보주체의 브라우저에 보내는 소량의
+                정보로서 정보주체의 컴퓨터 또는 모바일에 저장되며, 웹사이트 접속
+                시 정보주체의 브라우저에서 서버로 자동 전송됩니다.
               </p>
               <ol className='privacy-policy__ordered-list'>
                 <li>
@@ -528,7 +534,7 @@ export function PrivacyPolicy() {
                 </p>
                 <details className='privacy-policy__cookie-details'>
                   <summary className='privacy-policy__cookie-summary'>
-                    ● 웹 브라우저에서 쿠키 허용/차단
+                    • 웹 브라우저에서 쿠키 허용/차단
                   </summary>
                   <ul className='privacy-policy__unordered-list'>
                     <li>
@@ -543,7 +549,7 @@ export function PrivacyPolicy() {
                 </details>
                 <details className='privacy-policy__cookie-details'>
                   <summary className='privacy-policy__cookie-summary'>
-                    ● 모바일 브라우저에서 쿠키 허용/차단
+                    • 모바일 브라우저에서 쿠키 허용/차단
                   </summary>
                   <ul className='privacy-policy__unordered-list'>
                     <li>
@@ -569,7 +575,7 @@ export function PrivacyPolicy() {
                 수집하도록 허용하는 경우 그 수집·이용 및 거부에 관한 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 서비스 이용 통계 분석을 위해 제3자가
+                {COMPANY.NAME_KR}는 서비스 이용 통계 분석을 위해 제3자가
                 개인정보 자동 수집 장치를 통해 행태정보를 수집하도록 허용하고
                 있습니다.
               </p>
@@ -596,7 +602,7 @@ export function PrivacyPolicy() {
                 사항
               </h2>
               <p>
-                정보주체는 (주) {COMPANY.NAME_KO}에 대해 언제든지 개인정보
+                정보주체는 {COMPANY.NAME_KR}에 대해 언제든지 개인정보
                 열람·전송·정정·삭제·처리정지 및 동의 철회 등을 요구(이하 "권리
                 행사"라 함)할 수 있습니다.
               </p>
@@ -607,10 +613,10 @@ export function PrivacyPolicy() {
                 행사할 수 있습니다.
               </p>
               <p>
-                권리 행사는 (주) {COMPANY.NAME_KO}에 대해 「개인정보 보호법
+                권리 행사는 {COMPANY.NAME_KR}에 대해 「개인정보 보호법
                 시행령」제41조제1항에 따라 서면, 전화, 전자 우편, 팩스(FAX),
-                인터넷 등을 통하여 하실 수 있으며, (주) {COMPANY.NAME_KO}는 이에
-                대해 지체없이 조치하겠습니다.
+                인터넷 등을 통하여 하실 수 있으며, {COMPANY.NAME_KR}는 이에 대해
+                지체없이 조치하겠습니다.
               </p>
               <p>
                 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을
@@ -626,12 +632,12 @@ export function PrivacyPolicy() {
                 해당 개인정보의 삭제를 요구할 수 없습니다.
               </p>
               <p>
-                (주) {COMPANY.NAME_KO}는 권리 행사를 한 자가 본인이거나 정당한
+                {COMPANY.NAME_KR}는 권리 행사를 한 자가 본인이거나 정당한
                 대리인인지를 확인합니다.
               </p>
               <p>
-                정보주체는 권리 행사를 아래의 부서에 할 수 있습니다. (주)
-                {COMPANY.NAME_KO}는 정보주체로부터 권리 행사를 청구받은 날로부터
+                정보주체는 권리 행사를 아래의 부서에 할 수 있습니다.
+                {COMPANY.NAME_KR}는 정보주체로부터 권리 행사를 청구받은 날로부터
                 10일 이내에 회신하겠습니다.
               </p>
               <div className='privacy-policy__contact-box'>
@@ -669,7 +675,7 @@ export function PrivacyPolicy() {
                 및 고충사항을 처리하는 부서에 관한 사항
               </h2>
               <p>
-                (주) {COMPANY.NAME_KO}는 개인정보 처리에 관한 업무를 총괄해서
+                {COMPANY.NAME_KR}는 개인정보 처리에 관한 업무를 총괄해서
                 책임지고, 개인정보 처리와 관련한 정보 주체의 불만처리 및
                 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고
                 있습니다.
@@ -702,11 +708,11 @@ export function PrivacyPolicy() {
                 </ul>
               </div>
               <p>
-                정보주체는 (주) {COMPANY.NAME_KO}의 서비스를 이용하시면서 발생한
-                모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을
+                정보주체는 {COMPANY.NAME_KR}의 서비스를 이용하시면서 발생한 모든
+                개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을
                 개인정보 보호책임자 및 개인정보보호 담당부서로 문의할 수
-                있습니다. (주) {COMPANY.NAME_KO}는 정보주체의 문의에 대해
-                지체없이 답변 및 처리해 드릴 것입니다.
+                있습니다. {COMPANY.NAME_KR}는 정보주체의 문의에 대해 지체없이
+                답변 및 처리해 드릴 것입니다.
               </p>
             </article>
 
