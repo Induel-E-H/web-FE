@@ -41,7 +41,7 @@ export const ARTWORK_LIST: ArtworkItem[] = [
       '평화를 향한 동행, 모두를 위한 번영\n"Partnership for Peace, Prosperity for People"',
     description:
       '2019 한·아세안 특별정상회의장 정상 회의장 및 부대시설 조성 사업',
-    address: '부산광역시 해운대구 APEC로 컨벤션홀, 동백섬 두리마루 APEC 하우스',
+    address: '부산광역시 해운대구 APEC로 컨벤션홀, 동백섬 누리마루 APEC 하우스',
     content:
       'EXHIBITION / 미래적인 공간\n창의 프레임을 통해 마주 대하는 소통과 깊은 유대감을 담아내고,\n전통적인 창을 현대적으로 해석하여 미니멀하고 단아한 디자인으로 계획',
     time: '2019. 07 ~ 2019. 12',
@@ -179,7 +179,7 @@ export const ARTWORK_LIST: ArtworkItem[] = [
     id: 14,
     titleEng: 'Koon Busan Store',
     title: '쿤 부산 스토어',
-    subTitle: 'KOON KOREA (SECLET SHOP, 편집샵)',
+    subTitle: 'KOON KOREA (SELECT SHOP, 편집샵)',
     description: '쿤 인테리어 제작·설치',
     address: '부산광역시 해운대구 우1동 763 스타제이드 2F',
     content:
@@ -486,7 +486,7 @@ export const ARTWORK_LIST: ArtworkItem[] = [
     subTitle:
       '천년의 숨결이 있는 신라의 기억 "時遊 시유" -신라, 시간 속을 산책하다.',
     description: '경주시민의 날 제정 기념 조형물 제작 설치사업 현상공모 당선',
-    address: '경상북도 경주시 황성동 429번지 일원(황성공원 실내체육관 북면)',
+    address: '경상북도 경주시 황성동 429번지 일원(황성공원 실내체육관 북편)',
     content:
       '찬란한 역사와 문화의 숨결을 느낀다.\n신라 천년의 古都 고도의 기운을 따라 거닌다.\n신라와 미래를 잇는 고리가 된다.\n알에서 태어난 박혁거세의 탄생신화를 바탕으로 비천상 등 신라를 대표하는 요소들로\n천년의 아름다움을 표현하여 조형물 사이를 거닐면서 신라의 역사와 미래가 공존하는 시간 속을 산책하는 느낌이 들도록 한다.',
     time: '2009. 03 ~ 2009. 06',
@@ -686,7 +686,7 @@ export const ARTWORK_LIST: ArtworkItem[] = [
       '아시아-태평양 시대의 중심도시 부산\n아시아 태평양 21개국을 엮어나가는 네트워크 도시로서의 부산, 그 이상의 아름답고 정겨운 도시 부산\n세계로 열린 희망의 도시 부산, 21C 동북아 해양수도 부산의 참 모습이다.',
     time: '2005. 10 ~ 2006. 03',
     area: [
-      'BEXCO: 컨벤션홀, 미디어센터, 만찬 및 문화 형사장, 전시홀 로비, 기존부산홍보관 등 39603.3m²',
+      'BEXCO: 컨벤션홀, 미디어센터, 만찬 및 문화 행사장, 전시홀 로비, 기존부산홍보관 등 39603.3m²',
     ],
   },
   {
@@ -726,7 +726,7 @@ export const ARTWORK_LIST: ArtworkItem[] = [
     id: 53,
     titleEng: 'U.N. Memorial Cemetery Memorabilia Hall',
     title: 'UN 기념관',
-    subTitle: "'천년의 빛'\n그들의 영원히 빛으로 우리 곁에 숨 쉬고 있다.",
+    subTitle: "'천년의 빛'\n그들은 영원히 빛으로 우리 곁에 숨 쉬고 있다.",
     description: 'UN 기념공원관리처 기념관 내부 전시실 공사',
     address: '부산광역시 남구 대연 4동 720번지',
     content:
