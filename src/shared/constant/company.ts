@@ -1,5 +1,5 @@
 export const COMPANY = {
-  NAME_KO: '인들이앤에이치',
+  NAME_KR: '(주) 인들이앤에이치',
   NAME_EN: 'INDUEL E&H',
   NAME_EN_FULL: 'INDUEL ENGINEERING & HOLDINGS',
   CEO: '이선학',

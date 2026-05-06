@@ -1,5 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 
+import { COMPANY } from '@shared/constant';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Header } from '@widgets/header';
@@ -76,12 +77,14 @@ describe('Header', () => {
 
     it('로고 이미지가 렌더링된다', () => {
       renderHeader();
-      expect(screen.getByAltText('인들이앤에이치 로고')).toBeInTheDocument();
+      expect(
+        screen.getByAltText(`${COMPANY.NAME_KR} 로고`),
+      ).toBeInTheDocument();
     });
 
     it('회사명 텍스트가 표시된다', () => {
       renderHeader();
-      expect(screen.getByText('인들이앤에이치')).toBeInTheDocument();
+      expect(screen.getByText(COMPANY.NAME_KR)).toBeInTheDocument();
     });
 
     it('NAV_ITEMS의 모든 버튼이 nav 안에 렌더링된다', () => {

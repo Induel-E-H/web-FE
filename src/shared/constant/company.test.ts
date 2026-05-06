@@ -4,8 +4,8 @@ import { COMPANY } from './company';
 
 describe('COMPANY 상수', () => {
   describe('회사명', () => {
-    it('한국어 회사명이 "인들이앤에이치"이다', () => {
-      expect(COMPANY.NAME_KO).toBe('인들이앤에이치');
+    it('한국어 회사명이 "(주) 인들이앤에이치"이다', () => {
+      expect(COMPANY.NAME_KR).toBe('(주) 인들이앤에이치');
     });
 
     it('영문 약칭이 "INDUEL E&H"이다', () => {

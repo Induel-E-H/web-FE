@@ -71,11 +71,11 @@ export function Header({ onNavClick }: HeaderProps = {}) {
         <div className='header__logo_icon-frame'>
           <img
             src={induelIcon}
-            alt={`${COMPANY.NAME_KO} 로고`}
+            alt={`${COMPANY.NAME_KR} 로고`}
             className='header__logo_icon'
           />
         </div>
-        <span>{COMPANY.NAME_KO}</span>
+        <span>{COMPANY.NAME_KR}</span>
       </button>
 
       <nav className='header__nav' aria-label='데스크탑 메뉴'>

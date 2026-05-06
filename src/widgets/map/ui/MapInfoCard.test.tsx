@@ -9,7 +9,7 @@ vi.mock('@shared/assets', () => ({ induelIcon: 'induel-icon.svg' }));
 describe('MapInfoCard', () => {
   it('회사 한글 이름이 렌더링된다', () => {
     render(<MapInfoCard />);
-    expect(screen.getByText(COMPANY.NAME_KO)).toBeInTheDocument();
+    expect(screen.getByText(COMPANY.NAME_KR)).toBeInTheDocument();
   });
 
   it('회사 영문 전체 명칭이 렌더링된다', () => {

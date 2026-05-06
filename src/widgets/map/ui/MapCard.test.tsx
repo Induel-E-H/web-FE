@@ -13,7 +13,7 @@ describe('MapCard', () => {
       expect(
         screen.getByRole('heading', {
           level: 3,
-          name: '(주) 인들이앤에이치 본사',
+          name: `${COMPANY.NAME_KR} 본사`,
         }),
       ).toBeInTheDocument();
     });

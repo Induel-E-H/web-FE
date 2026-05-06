@@ -29,7 +29,7 @@ describe('Footer', () => {
   describe('회사 정보 표시', () => {
     it('회사 한글 이름이 표시된다', () => {
       renderFooter();
-      expect(screen.getByText(`(주) ${COMPANY.NAME_KO}`)).toBeInTheDocument();
+      expect(screen.getByText(COMPANY.NAME_KR)).toBeInTheDocument();
     });
 
     it('회사 영문 풀네임이 표시된다', () => {

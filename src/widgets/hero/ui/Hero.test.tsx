@@ -47,7 +47,7 @@ describe('Hero', () => {
       render(<Hero showScrollArrow={false} />);
 
       const heading = screen.getByRole('heading', { level: 1 });
-      expect(heading).toHaveTextContent(`(주) ${COMPANY.NAME_KO}`);
+      expect(heading).toHaveTextContent(COMPANY.NAME_KR);
     });
 
     it('회사 영문 풀네임이 표시된다', () => {

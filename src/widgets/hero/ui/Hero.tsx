@@ -39,7 +39,7 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
         />
         <div className='hero__company-text'>
           <hgroup>
-            <h1 className='hero__company-name'>(주) {COMPANY.NAME_KO}</h1>
+            <h1 className='hero__company-name'>{COMPANY.NAME_KR}</h1>
             <p className='hero__company-name-en'>{COMPANY.NAME_EN_FULL}</p>
           </hgroup>
           <time className='hero__established' dateTime={COMPANY.ESTABLISHED}>
