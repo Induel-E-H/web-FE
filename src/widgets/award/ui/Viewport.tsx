@@ -10,13 +10,17 @@ import { motion } from 'framer-motion';
 import '../styles/Viewport.css';
 import { AwardCard } from './AwardCard';
 
-export function Viewport() {
+export function Viewport({
+  itemsPerPage: itemsPerPageProp,
+}: {
+  itemsPerPage?: number;
+}) {
   const activeYear = useAwardStore((s) => s.activeYear);
   const currentPage = useAwardStore((s) => s.currentPage);
   const setCurrentPage = useAwardStore((s) => s.setCurrentPage);
   const setSelectedId = useAwardStore((s) => s.setSelectedId);
   const breakpoint = useBreakpoint();
-  const itemsPerPage = getItemsPerPage(breakpoint);
+  const itemsPerPage = itemsPerPageProp ?? getItemsPerPage(breakpoint);
 
   const filteredList = useMemo(() => {
     const list =

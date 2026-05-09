@@ -31,7 +31,7 @@ const meta = {
   },
   decorators: [
     (Story, ctx) => {
-      const side = (ctx.args.side as 'left' | 'right') ?? 'left';
+      const side = ctx.args.side ?? 'left';
       return (
         <div
           className={`history__book-page-${side}`}
