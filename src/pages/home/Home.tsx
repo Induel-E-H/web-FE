@@ -1,10 +1,12 @@
-import { lazy, type ReactNode, Suspense, useEffect } from 'react';
+import { lazy, type ReactNode, Suspense, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { smoothScrollTo } from '@shared/lib/scroll';
 import { Header } from '@widgets/header';
 import { Hero } from '@widgets/hero';
 import { Vision } from '@widgets/vision';
+
+import './styles/Home.css';
 
 const History = lazy(() =>
   import('@widgets/history').then((m) => ({ default: m.History })),
@@ -21,6 +23,14 @@ const Map = lazy(() =>
 const Footer = lazy(() =>
   import('@widgets/footer').then((m) => ({ default: m.Footer })),
 );
+
+function prefetchLazyWidgets() {
+  void import('@widgets/history');
+  void import('@widgets/award');
+  void import('@widgets/patent');
+  void import('@widgets/map');
+  void import('@widgets/footer');
+}
 
 const DEV_WIDGET = import.meta.env.VITE_DEV_WIDGET;
 const isStaging = import.meta.env.MODE === 'staging';
@@ -39,6 +49,7 @@ const DEV_WIDGET_MAP: Record<string, ReactNode> = {
 
 export function Home() {
   const location = useLocation();
+  const prefetchTriggerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const state = location.state as { scrollTo?: string } | null;
@@ -49,6 +60,21 @@ export function Home() {
       return () => clearTimeout(timer);
     }
   }, [location.state]);
+
+  useEffect(() => {
+    const el = prefetchTriggerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        prefetchLazyWidgets();
+        observer.disconnect();
+      },
+      { rootMargin: '400px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   if (DEV_WIDGET) {
     const widget = DEV_WIDGET_MAP[DEV_WIDGET];
@@ -90,11 +116,20 @@ export function Home() {
       <main id='main-content'>
         <Hero showScrollArrow={isProduction} />
         <Vision />
-        <Suspense fallback={null}>
+        <div ref={prefetchTriggerRef} aria-hidden='true' />
+        <Suspense fallback={<div className='home__fallback--history' />}>
           <History />
+        </Suspense>
+        <Suspense fallback={<div className='home__fallback--award' />}>
           <Award />
+        </Suspense>
+        <Suspense fallback={<div className='home__fallback--patent' />}>
           <Patent />
+        </Suspense>
+        <Suspense fallback={<div className='home__fallback--map' />}>
           <Map />
+        </Suspense>
+        <Suspense fallback={<div className='home__fallback--footer' />}>
           <Footer />
         </Suspense>
       </main>

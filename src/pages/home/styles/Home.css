@@ -1,0 +1,40 @@
+.home__fallback--history {
+  min-height: 100vh;
+  background-color: #1a1410;
+}
+
+.home__fallback--award {
+  min-height: 100vh;
+  background-color: #faf7f2;
+}
+
+.home__fallback--patent {
+  min-height: 100vh;
+  background-color: #38271d;
+}
+
+.home__fallback--map {
+  min-height: 85.11vh;
+  background-color: #faf7f2;
+}
+
+.home__fallback--footer {
+  min-height: 13.54vmax;
+  background-color: #38271d;
+}
+
+@media (max-width: 1024px) {
+  .home__fallback--map {
+    min-height: 100vh;
+  }
+
+  .home__fallback--footer {
+    min-height: 31.25vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .home__fallback--footer {
+    min-height: clamp(187px, 53.33vw, 267px);
+  }
+}
