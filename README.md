@@ -265,11 +265,14 @@ Claude Code 기반으로 반복 작업을 자동화하고
   - frontend-design
   - code-simplifier
   - chrome-devtools
+  - session-report
+  - hookify
 - MCP
   - Talk To Figma
+  - Serena
 - Agent
-  - figma-designer: Talk To Figma를 통해 디자인을 제작하는 Agent
-  - vitest-writer: 테스트 작성 전문 Agent
+  - figma-designer: Talk To Figma를 통해 디자인을 제작하는 Agent (Model: Opus)
+  - vitest-writer: 테스트 작성 전문 Agent (Model: Opus)
 
 > [!TIP]
 > README에 대한 자세한 내용은 [Wiki](https://github.com/Induel-E-H/web-FE/wiki)에서 확인할 수 있습니다!
