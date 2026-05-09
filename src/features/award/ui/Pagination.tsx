@@ -10,7 +10,11 @@ import { getItemsPerPage } from '../model/responsive';
 import { useAwardStore } from '../model/useAwardStore';
 import '../styles/Pagination.css';
 
-export function Pagination() {
+export function Pagination({
+  totalPages: totalPagesProp,
+}: {
+  totalPages?: number;
+}) {
   const activeYear = useAwardStore((s) => s.activeYear);
   const currentPage = useAwardStore((s) => s.currentPage);
   const setCurrentPage = useAwardStore((s) => s.setCurrentPage);
@@ -27,7 +31,8 @@ export function Pagination() {
     return list;
   }, [activeYear]);
 
-  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
+  const totalPages =
+    totalPagesProp ?? Math.ceil(filteredList.length / itemsPerPage);
   const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
 
   return (

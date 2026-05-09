@@ -23,6 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '기본',
+  args: { totalPages: 3 },
   decorators: [
     (Story) => {
       useAwardStore.setState({ currentPage: 0, activeYear: '전체' });
@@ -32,7 +33,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '첫 번째 페이지 상태. 모바일 기준 총 3페이지 중 1페이지.',
+        story: '첫 번째 페이지 상태. 총 3페이지 중 1페이지.',
       },
     },
   },
@@ -40,6 +41,7 @@ export const Default: Story = {
 
 export const MiddlePage: Story = {
   name: '중간 페이지',
+  args: { totalPages: 3 },
   decorators: [
     (Story) => {
       useAwardStore.setState({ currentPage: 1, activeYear: '전체' });
@@ -49,7 +51,7 @@ export const MiddlePage: Story = {
   parameters: {
     docs: {
       description: {
-        story: '중간 페이지 상태. 모바일 기준 총 3페이지 중 2페이지.',
+        story: '중간 페이지 상태. 총 3페이지 중 2페이지.',
       },
     },
   },
@@ -57,6 +59,7 @@ export const MiddlePage: Story = {
 
 export const LastPage: Story = {
   name: '마지막 페이지',
+  args: { totalPages: 3 },
   decorators: [
     (Story) => {
       useAwardStore.setState({ currentPage: 2, activeYear: '전체' });
@@ -66,7 +69,7 @@ export const LastPage: Story = {
   parameters: {
     docs: {
       description: {
-        story: '마지막 페이지 상태. 모바일 기준 총 3페이지 중 3페이지.',
+        story: '마지막 페이지 상태. 총 3페이지 중 3페이지.',
       },
     },
   },

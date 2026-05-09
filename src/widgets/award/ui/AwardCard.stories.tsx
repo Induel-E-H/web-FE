@@ -8,8 +8,8 @@ const meta = {
   title: 'Widgets/Award/Card',
   component: AwardCard,
   args: {
-    onClick: fn(),
     award: AWARD_LIST[0],
+    onClick: fn(),
   },
   parameters: {
     layout: 'centered',
