@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, SetStateAction } from 'react';
 
 import { useAwardStore } from '@features/award';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Viewport } from './Viewport';
@@ -9,34 +9,44 @@ import { Viewport } from './Viewport';
 vi.mock('framer-motion', async () => {
   const { createElement } = await import('react');
   return {
-    motion: new Proxy({} as Record<string, unknown>, {
-      get:
-        (_, tag: string) =>
-        ({ animate, style, children, ...rest }: Record<string, unknown>) =>
-          createElement(
-            tag,
-            {
-              ...rest,
-              style:
-                (animate as { x?: string } | undefined)?.x !== undefined
-                  ? {
-                      ...(style as object),
-                      transform: `translateX(${(animate as { x: string }).x})`,
-                    }
-                  : style,
-            },
-            children as ReactNode,
-          ),
-    }),
+    motion: new Proxy(
+      {},
+      {
+        get:
+          (_, tag: string) =>
+          ({ animate, style, children, ...rest }: Record<string, unknown>) =>
+            createElement(
+              tag,
+              {
+                ...rest,
+                style:
+                  (animate as { x?: string } | undefined)?.x !== undefined
+                    ? {
+                        ...(style as object),
+                        transform: `translateX(${(animate as { x: string }).x})`,
+                      }
+                    : style,
+              },
+              children as ReactNode,
+            ),
+      },
+    ),
   };
 });
 
+let capturedDispatch: ((v: SetStateAction<number>) => void) | undefined;
+
 vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
-  useSlideGesture: vi.fn().mockReturnValue({
-    ref: { current: null },
-    onTouchStart: vi.fn(),
-    onTouchEnd: vi.fn(),
-  }),
+  useSlideGesture: vi
+    .fn()
+    .mockImplementation((dispatch: (v: SetStateAction<number>) => void) => {
+      capturedDispatch = dispatch;
+      return {
+        ref: { current: null },
+        onTouchStart: vi.fn(),
+        onTouchEnd: vi.fn(),
+      };
+    }),
 }));
 
 vi.mock('@shared/lib/breakpoint', () => ({
@@ -91,10 +101,6 @@ describe('Viewport', () => {
   });
 
   describe('슬라이더 transform', () => {
-    it('currentPage=0이면 transform에 translateX가 적용된다', () => {
-      render(<Viewport />);
-    });
-
     it('currentPage 변경 시 transform이 달라진다', () => {
       const { container: c0, unmount: u0 } = render(<Viewport />);
       const t0 = (c0.querySelector('.award__card_slider') as HTMLElement).style
@@ -107,6 +113,25 @@ describe('Viewport', () => {
         .transform;
 
       expect(t0).not.toBe(t1);
+    });
+  });
+
+  describe('dispatchPage 함수형 dispatch', () => {
+    it('function 형식으로 전달하면 현재 currentPage를 인자로 계산한다', () => {
+      useAwardStore.setState({ currentPage: 1 });
+      render(<Viewport />);
+      act(() => {
+        capturedDispatch?.((prev) => prev + 1);
+      });
+      expect(useAwardStore.getState().currentPage).toBe(2);
+    });
+
+    it('number 형식으로 전달하면 바로 currentPage로 설정한다', () => {
+      render(<Viewport />);
+      act(() => {
+        capturedDispatch?.(3);
+      });
+      expect(useAwardStore.getState().currentPage).toBe(3);
     });
   });
 });

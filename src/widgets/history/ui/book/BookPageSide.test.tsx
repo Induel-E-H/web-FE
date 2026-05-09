@@ -1,5 +1,5 @@
 import { useHistoryStore } from '@features/history';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { BookPageSide } from './BookPageSide';
@@ -74,8 +74,67 @@ describe('BookPageSide', () => {
       <BookPageSide {...defaultProps} onMouseDown={onMouseDown} />,
     );
     const el = container.querySelector('.history__book-page-left')!;
-    el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    fireEvent.mouseDown(el);
     expect(onMouseDown).toHaveBeenCalledTimes(1);
+  });
+
+  describe('키보드 이벤트 (onKeyDown)', () => {
+    it('Enter 키 입력 시 onMouseDown이 호출된다', () => {
+      const onMouseDown = vi.fn();
+      const { container } = render(
+        <BookPageSide {...defaultProps} onMouseDown={onMouseDown} />,
+      );
+      const el = container.querySelector('.history__book-page-left')!;
+      fireEvent.keyDown(el, { key: 'Enter' });
+      expect(onMouseDown).toHaveBeenCalledTimes(1);
+    });
+
+    it('Space 키 입력 시 onMouseDown이 호출된다', () => {
+      const onMouseDown = vi.fn();
+      const { container } = render(
+        <BookPageSide {...defaultProps} onMouseDown={onMouseDown} />,
+      );
+      const el = container.querySelector('.history__book-page-left')!;
+      fireEvent.keyDown(el, { key: ' ' });
+      expect(onMouseDown).toHaveBeenCalledTimes(1);
+    });
+
+    it('Enter repeat=true이면 onMouseDown이 호출되지 않는다', () => {
+      const onMouseDown = vi.fn();
+      const { container } = render(
+        <BookPageSide {...defaultProps} onMouseDown={onMouseDown} />,
+      );
+      const el = container.querySelector('.history__book-page-left')!;
+      fireEvent.keyDown(el, { key: 'Enter', repeat: true });
+      expect(onMouseDown).not.toHaveBeenCalled();
+    });
+
+    it('다른 키(예: a) 입력 시 onMouseDown이 호출되지 않는다', () => {
+      const onMouseDown = vi.fn();
+      const { container } = render(
+        <BookPageSide {...defaultProps} onMouseDown={onMouseDown} />,
+      );
+      const el = container.querySelector('.history__book-page-left')!;
+      fireEvent.keyDown(el, { key: 'a' });
+      expect(onMouseDown).not.toHaveBeenCalled();
+    });
+
+    it('onMouseDown 없이 keyDown 발생해도 오류가 발생하지 않는다', () => {
+      const { container } = render(<BookPageSide {...defaultProps} />);
+      const el = container.querySelector('.history__book-page-left')!;
+      expect(() => fireEvent.keyDown(el, { key: 'Enter' })).not.toThrow();
+    });
+
+    it('자식 요소에서 keyDown 발생 시(target !== currentTarget) onMouseDown이 호출되지 않는다', () => {
+      const onMouseDown = vi.fn();
+      const { getByText } = render(
+        <BookPageSide {...defaultProps} onMouseDown={onMouseDown} />,
+      );
+      // staticContent(<span>static</span>)는 page div의 자식 — target !== currentTarget
+      const childEl = getByText('static');
+      fireEvent.keyDown(childEl, { key: 'Enter' });
+      expect(onMouseDown).not.toHaveBeenCalled();
+    });
   });
 
   describe('PageFlip 렌더링 조건', () => {

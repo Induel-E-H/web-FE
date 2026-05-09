@@ -91,6 +91,16 @@ describe('ImageGalleryPopup', () => {
         fireEvent.keyUp(window, { key: 'Enter' });
       }).not.toThrow();
     });
+
+    it('ArrowLeft repeat=true이면 슬라이드 이동이 시작되지 않는다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      expect(() => {
+        fireEvent.keyDown(window, { key: 'ArrowLeft', repeat: true });
+      }).not.toThrow();
+      // repeat=true → early return이므로 이미지 상태 변화 없음
+      const imgs = screen.getAllByRole('img');
+      expect(imgs).toHaveLength(3);
+    });
   });
 
   describe('슬라이더 버튼 네비게이션', () => {

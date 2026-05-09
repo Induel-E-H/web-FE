@@ -303,6 +303,20 @@ describe('Header', () => {
     });
   });
 
+  describe('onNavClick prop', () => {
+    it('onNavClick이 제공되면 nav 클릭 시 onNavClick이 selector와 함께 호출된다', async () => {
+      const onNavClick = vi.fn();
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <Header onNavClick={onNavClick} />
+        </MemoryRouter>,
+      );
+      await userEvent.click(screen.getAllByText('VISION')[0]);
+      expect(onNavClick).toHaveBeenCalledWith('.vision');
+      expect(mockSmoothScrollTo).not.toHaveBeenCalled();
+    });
+  });
+
   describe('스크롤 이동 — 다른 페이지에서', () => {
     beforeEach(() => {
       mockUseIsHero.mockReturnValue(false);

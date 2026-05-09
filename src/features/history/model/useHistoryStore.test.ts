@@ -57,6 +57,31 @@ describe('useHistoryStore', () => {
     expect(useHistoryStore.getState().bookState).toBe('open');
   });
 
+  it('setFlipDirection은 flipDirection을 변경한다', () => {
+    useHistoryStore.getState().setFlipDirection('forward');
+    expect(useHistoryStore.getState().flipDirection).toBe('forward');
+  });
+
+  it('setCurrentFlipDuration은 currentFlipDuration을 변경한다', () => {
+    useHistoryStore.getState().setCurrentFlipDuration(300);
+    expect(useHistoryStore.getState().currentFlipDuration).toBe(300);
+  });
+
+  it('setIsRapidFlipping은 isRapidFlipping을 변경한다', () => {
+    useHistoryStore.getState().setIsRapidFlipping(true);
+    expect(useHistoryStore.getState().isRapidFlipping).toBe(true);
+  });
+
+  it('setTabActiveItem은 tabActiveItem을 변경한다', () => {
+    useHistoryStore.getState().setTabActiveItem('Timeline');
+    expect(useHistoryStore.getState().tabActiveItem).toBe('Timeline');
+  });
+
+  it('setIsHoldChaining은 isHoldChaining을 변경한다', () => {
+    useHistoryStore.getState().setIsHoldChaining(true);
+    expect(useHistoryStore.getState().isHoldChaining).toBe(true);
+  });
+
   it('setActiveItem은 activeItem을 변경한다', () => {
     useHistoryStore.getState().setActiveItem('Content');
     expect(useHistoryStore.getState().activeItem).toBe('Content');

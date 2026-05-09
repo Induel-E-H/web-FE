@@ -207,6 +207,17 @@ describe('ContentPage', () => {
       });
     });
 
+    it('figure에서 Enter 키 입력 시 팝업이 열린다 (handleImageKeyDown)', async () => {
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector(
+        'figure.content__image--has-image',
+      ) as HTMLElement;
+      fireEvent.keyDown(figure, { key: 'Enter' });
+      await waitFor(() => {
+        expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
+      });
+    });
+
     it('팝업 닫기 버튼 클릭 시 팝업이 닫힌다 (handlePopupClose)', async () => {
       const { container } = render(<ContentPage side='left' pageIndex={0} />);
       const figure = container.querySelector(

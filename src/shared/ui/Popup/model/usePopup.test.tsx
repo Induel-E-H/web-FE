@@ -1,4 +1,6 @@
 // @vitest-environment jsdom
+// jsdom을 사용하는 이유: happy-dom은 Node.contains()에 window를 전달하면 TypeError를 던지므로
+// 키보드/wheel 이벤트 핸들러의 dialogRef.current.contains(e.target) 검증이 불가능하다.
 import { useRef } from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
@@ -68,6 +70,83 @@ describe('usePopup', () => {
       unmount();
       fireEvent.popState(window);
       expect(onClose).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('스크롤 키 차단', () => {
+    it('ArrowDown이 다이얼로그 밖에서 발생하면 preventDefault가 호출된다', () => {
+      render(<TestComponent onClose={vi.fn()} />);
+      const event = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+        cancelable: true,
+      });
+      const preventSpy = vi.spyOn(event, 'preventDefault');
+      // window가 아닌 document.body에서 발생시켜야 e.target이 Node가 된다
+      document.body.dispatchEvent(event);
+      expect(preventSpy).toHaveBeenCalled();
+    });
+
+    it('PageUp이 다이얼로그 밖에서 발생하면 preventDefault가 호출된다', () => {
+      render(<TestComponent onClose={vi.fn()} />);
+      const event = new KeyboardEvent('keydown', {
+        key: 'PageUp',
+        bubbles: true,
+        cancelable: true,
+      });
+      const preventSpy = vi.spyOn(event, 'preventDefault');
+      document.body.dispatchEvent(event);
+      expect(preventSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('Tab 포커스 트랩', () => {
+    it('다이얼로그 내 포커스 가능 요소가 없으면 Tab → preventDefault', () => {
+      render(<TestComponent onClose={vi.fn()} />);
+      const event = new KeyboardEvent('keydown', {
+        key: 'Tab',
+        bubbles: true,
+        cancelable: true,
+      });
+      const preventSpy = vi.spyOn(event, 'preventDefault');
+      window.dispatchEvent(event);
+      expect(preventSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('Wheel 차단', () => {
+    it('다이얼로그 밖 wheel → preventDefault 호출', () => {
+      render(<TestComponent onClose={vi.fn()} />);
+      const event = new WheelEvent('wheel', {
+        bubbles: true,
+        cancelable: true,
+      });
+      const preventSpy = vi.spyOn(event, 'preventDefault');
+      document.body.dispatchEvent(event);
+      expect(preventSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('focusable 요소 inert 처리', () => {
+    it('마운트 시 다이얼로그 밖 버튼이 inert가 된다', () => {
+      const outsideBtn = document.createElement('button');
+      document.body.appendChild(outsideBtn);
+
+      render(<TestComponent onClose={vi.fn()} />);
+
+      expect(outsideBtn.inert).toBe(true);
+      document.body.removeChild(outsideBtn);
+    });
+
+    it('언마운트 시 inert 처리된 요소의 inert가 false로 복원된다', () => {
+      const outsideBtn = document.createElement('button');
+      document.body.appendChild(outsideBtn);
+
+      const { unmount } = render(<TestComponent onClose={vi.fn()} />);
+      unmount();
+
+      expect(outsideBtn.inert).toBe(false);
+      document.body.removeChild(outsideBtn);
     });
   });
 });
