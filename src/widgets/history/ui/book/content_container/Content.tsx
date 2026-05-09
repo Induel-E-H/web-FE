@@ -137,10 +137,7 @@ function ContentItem({
           <h3 className='content__title-kor'>{item.title}</h3>
           <h3 className='content__title-eng'>{item.titleEng}</h3>
         </div>
-        <SubTitleContent
-          subTitle={item.subTitle as SubTitleProp}
-          content={item.content as ContentProp}
-        />
+        <SubTitleContent subTitle={item.subTitle} content={item.content} />
         <dl className='content__caption'>
           <div className='content__caption-col'>
             {item.time && (
