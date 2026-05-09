@@ -13,9 +13,12 @@ import { ContentPage } from './Content';
 
 vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: { children: unknown }) => children,
-  motion: new Proxy({} as Record<string, unknown>, {
-    get: (_, key: string) => key,
-  }),
+  motion: new Proxy(
+    {},
+    {
+      get: (_, key: string) => key,
+    },
+  ),
 }));
 
 vi.mock('@features/history/model/helpers', async (importOriginal) => {
@@ -199,6 +202,17 @@ describe('ContentPage', () => {
         'figure.content__image--has-image',
       ) as HTMLElement;
       fireEvent.click(figure);
+      await waitFor(() => {
+        expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
+      });
+    });
+
+    it('figure에서 Enter 키 입력 시 팝업이 열린다 (handleImageKeyDown)', async () => {
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector(
+        'figure.content__image--has-image',
+      ) as HTMLElement;
+      fireEvent.keyDown(figure, { key: 'Enter' });
       await waitFor(() => {
         expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
       });

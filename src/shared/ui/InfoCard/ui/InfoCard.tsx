@@ -23,7 +23,7 @@ export function InfoCard({
       className={`info-card${className ? ` ${className}` : ''}`}
       onMouseDown={(e) => {
         e.preventDefault();
-        (e.currentTarget as HTMLButtonElement).focus({ preventScroll: true });
+        e.currentTarget.focus({ preventScroll: true });
       }}
       onClick={onClick}
       aria-label={`${title} - ${year.text}, ${secondary}`}

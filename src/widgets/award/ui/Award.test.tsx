@@ -10,25 +10,28 @@ vi.mock('framer-motion', async () => {
   const { createElement } = await import('react');
   return {
     AnimatePresence: ({ children }: { children: ReactNode }) => children,
-    motion: new Proxy({} as Record<string, unknown>, {
-      get:
-        (_, tag: string) =>
-        ({ animate, style, children, ...rest }: Record<string, unknown>) =>
-          createElement(
-            tag,
-            {
-              ...rest,
-              style:
-                (animate as { x?: string } | undefined)?.x !== undefined
-                  ? {
-                      ...(style as object),
-                      transform: `translateX(${(animate as { x: string }).x})`,
-                    }
-                  : style,
-            },
-            children as ReactNode,
-          ),
-    }),
+    motion: new Proxy(
+      {},
+      {
+        get:
+          (_, tag: string) =>
+          ({ animate, style, children, ...rest }: Record<string, unknown>) =>
+            createElement(
+              tag,
+              {
+                ...rest,
+                style:
+                  (animate as { x?: string } | undefined)?.x !== undefined
+                    ? {
+                        ...(style as object),
+                        transform: `translateX(${(animate as { x: string }).x})`,
+                      }
+                    : style,
+              },
+              children as ReactNode,
+            ),
+      },
+    ),
   };
 });
 

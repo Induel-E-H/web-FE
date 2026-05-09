@@ -15,7 +15,7 @@ describe('useRapidFlip', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     useHistoryStore.getState().reset();
-    mockStartFlipAnimation = vi.fn() as unknown as (
+    mockStartFlipAnimation = vi.fn() as (
       direction: import('../types').FlipDirection,
       onComplete: () => void,
       duration?: number,

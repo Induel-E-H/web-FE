@@ -12,9 +12,12 @@ const mockNavigate = vi.hoisted(() => vi.fn());
 
 vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: { children: unknown }) => children,
-  motion: new Proxy({} as Record<string, unknown>, {
-    get: (_, key: string) => key,
-  }),
+  motion: new Proxy(
+    {},
+    {
+      get: (_, key: string) => key,
+    },
+  ),
 }));
 
 vi.mock('react-icons/rx', () => ({
@@ -297,6 +300,20 @@ describe('Header', () => {
       expect(
         container.querySelector('.header__mobile-menu'),
       ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('onNavClick prop', () => {
+    it('onNavClick이 제공되면 nav 클릭 시 onNavClick이 selector와 함께 호출된다', async () => {
+      const onNavClick = vi.fn();
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <Header onNavClick={onNavClick} />
+        </MemoryRouter>,
+      );
+      await userEvent.click(screen.getAllByText('VISION')[0]);
+      expect(onNavClick).toHaveBeenCalledWith('.vision');
+      expect(mockSmoothScrollTo).not.toHaveBeenCalled();
     });
   });
 

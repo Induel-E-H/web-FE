@@ -29,7 +29,7 @@ function triggerObserver(el: Element, isIntersecting: boolean, top: number) {
           rootBounds: null,
           target: el,
           time: 0,
-        } as IntersectionObserverEntry,
+        },
       ],
       {} as IntersectionObserver,
     );
