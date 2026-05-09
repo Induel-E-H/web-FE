@@ -126,4 +126,61 @@ describe('Home', () => {
       expect(smoothScrollTo).not.toHaveBeenCalled();
     });
   });
+
+  describe('DevWidgetView (VITE_DEV_WIDGET 설정 시)', () => {
+    beforeEach(() => {
+      vi.useRealTimers();
+    });
+
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    });
+
+    it('유효한 위젯(hero)이면 Header와 해당 위젯이 렌더링된다', async () => {
+      vi.stubEnv('VITE_DEV_WIDGET', 'hero');
+      const { Home: DynamicHome } = await import('./Home');
+      await act(async () => {
+        render(
+          <MemoryRouter>
+            <DynamicHome />
+          </MemoryRouter>,
+        );
+        await Promise.resolve();
+      });
+      expect(screen.getByTestId('header')).toBeInTheDocument();
+      expect(screen.getByTestId('hero')).toBeInTheDocument();
+    });
+
+    it('footer 위젯이면 Header 없이 footer만 렌더링된다', async () => {
+      vi.stubEnv('VITE_DEV_WIDGET', 'footer');
+      const { Home: DynamicHome } = await import('./Home');
+      await act(async () => {
+        render(
+          <MemoryRouter>
+            <DynamicHome />
+          </MemoryRouter>,
+        );
+        await Promise.resolve();
+      });
+      expect(screen.queryByTestId('header')).not.toBeInTheDocument();
+      expect(screen.getByTestId('footer')).toBeInTheDocument();
+    });
+
+    it('유효하지 않은 위젯이면 에러 메시지가 렌더링된다', async () => {
+      vi.stubEnv('VITE_DEV_WIDGET', 'nonexistent');
+      const { Home: DynamicHome } = await import('./Home');
+      await act(async () => {
+        render(
+          <MemoryRouter>
+            <DynamicHome />
+          </MemoryRouter>,
+        );
+        await Promise.resolve();
+      });
+      expect(
+        screen.getByText(/위젯 "nonexistent"을 찾을 수 없습니다\./),
+      ).toBeInTheDocument();
+    });
+  });
 });
