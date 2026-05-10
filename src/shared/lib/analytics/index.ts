@@ -1,1 +1,2 @@
-export { useGoogleAnalytics } from './useGoogleAnalytics';
+export { useGoogleAnalytics, initGA } from './useGoogleAnalytics';
+export * from './events';

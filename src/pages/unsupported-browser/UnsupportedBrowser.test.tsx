@@ -1,7 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { UnsupportedBrowser } from './UnsupportedBrowser';
+
+vi.mock('@shared/lib/analytics', () => ({
+  initGA: vi.fn(),
+  trackBrowserUnsupported: vi.fn(),
+}));
 
 describe('UnsupportedBrowser', () => {
   describe('헤딩 및 안내 메시지', () => {

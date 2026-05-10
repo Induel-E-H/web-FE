@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import { COMPANY } from '@shared/constant';
+import {
+  trackMapLoadFailure,
+  trackMapLoadSuccess,
+} from '@shared/lib/analytics';
 
 import { MAP_STATE, type MapState } from '../model/constant';
 import { makeMap } from '../model/map';
@@ -48,8 +52,12 @@ export function Map() {
     const key = import.meta.env.VITE_NAVER_MAP_API_KEY as string | undefined;
     if (!key) return;
 
-    const handleLoad = () =>
-      setMapState(isNaverAvailable() ? MAP_STATE.READY : MAP_STATE.FALLBACK);
+    const handleLoad = () => {
+      const ready = isNaverAvailable();
+      setMapState(ready ? MAP_STATE.READY : MAP_STATE.FALLBACK);
+      if (ready) trackMapLoadSuccess();
+      else trackMapLoadFailure();
+    };
 
     const existing = document.querySelector(
       'script[src*="oapi.map.naver.com"]',
@@ -69,7 +77,10 @@ export function Map() {
     script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${key}`;
     script.async = true;
     script.onload = handleLoad;
-    script.onerror = () => setMapState(MAP_STATE.FALLBACK);
+    script.onerror = () => {
+      setMapState(MAP_STATE.FALLBACK);
+      trackMapLoadFailure();
+    };
     document.head.appendChild(script);
 
     return () => {

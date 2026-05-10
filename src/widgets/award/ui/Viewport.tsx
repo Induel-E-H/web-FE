@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { AWARD_LIST } from '@entities/award';
 import { useAwardStore, YEAR_ALL } from '@features/award';
 import { getItemsPerPage } from '@features/award';
+import { trackAwardCardOpen } from '@shared/lib/analytics';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 import { useSlideGesture } from '@shared/lib/useSlideGesture';
 import { motion } from 'framer-motion';
@@ -73,7 +74,10 @@ export function Viewport({
               <AwardCard
                 key={award.id}
                 award={award}
-                onClick={() => setSelectedId(award.id)}
+                onClick={() => {
+                  trackAwardCardOpen(award.title);
+                  setSelectedId(award.id);
+                }}
               />
             ))}
           </div>

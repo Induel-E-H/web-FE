@@ -6,6 +6,11 @@ import type { IndexItem } from '@features/history';
 import { useBookCoverState } from '@features/history';
 import { useBookNavigation } from '@features/history';
 import { BOOK_STATE } from '@features/history';
+import {
+  trackHistoryCategoryChange,
+  trackHistoryCoverOpen,
+  trackHistoryPageTurn,
+} from '@shared/lib/analytics';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 
 import '../styles/History.css';
@@ -175,12 +180,14 @@ export function History() {
 
   function handleFrontCoverClick() {
     if (isAnimatingRef.current) return;
+    trackHistoryCoverOpen('front');
     openingFront();
     startFlipAnimation('forward', onOpened);
   }
 
   function handleBackCoverClick() {
     if (isAnimatingRef.current) return;
+    trackHistoryCoverOpen('back');
     openingBack();
     startFlipAnimation('backward', onOpened);
   }
@@ -193,6 +200,7 @@ export function History() {
       }
       return;
     }
+    trackHistoryPageTurn('backward');
     beginContinuousFlip(PAGE_SIDE.LEFT);
   }
 
@@ -204,10 +212,12 @@ export function History() {
       }
       return;
     }
+    trackHistoryPageTurn('forward');
     beginContinuousFlip(PAGE_SIDE.RIGHT);
   }
 
   function handleNavigateToCategory(item: IndexItem) {
+    trackHistoryCategoryChange(String(item));
     if (bookState === 'cover-front') {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);

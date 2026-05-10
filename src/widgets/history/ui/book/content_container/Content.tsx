@@ -9,6 +9,7 @@ import {
 } from '@entities/history';
 import { getArtworkIndex, preloadContentImages } from '@features/history';
 import type { PageSide } from '@features/history';
+import { trackHistoryArtworkGalleryOpen } from '@shared/lib/analytics';
 import { AnimatePresence } from 'framer-motion';
 
 import '../../../styles/book/content_container/Content.css';
@@ -89,6 +90,7 @@ function ContentItem({
   }, [imageSrc]);
 
   async function openImageGallery() {
+    trackHistoryArtworkGalleryOpen(item.title);
     const images = await getAllContentImages(index);
     setContentImages(images);
     setShowPopup(true);
