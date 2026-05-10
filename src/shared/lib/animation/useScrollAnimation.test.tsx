@@ -126,5 +126,14 @@ describe('useScrollAnimation', () => {
       unmount();
       expect(mockDisconnect).toHaveBeenCalled();
     });
+
+    it('ref가 연결되지 않으면 observe가 호출되지 않는다', () => {
+      function TestNoRef() {
+        const { isVisible } = useScrollAnimation<HTMLDivElement>();
+        return <div data-visible={String(isVisible)} />;
+      }
+      render(<TestNoRef />);
+      expect(mockObserve).not.toHaveBeenCalled();
+    });
   });
 });

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { VisionItem } from './VisionItem';
@@ -121,6 +121,33 @@ describe('VisionItem', () => {
         'aria-hidden',
         'true',
       );
+    });
+  });
+
+  describe('스크롤 애니메이션 (isVisible)', () => {
+    it('요소가 뷰포트에 진입하면 isVisible이 true가 된다', () => {
+      const { container } = render(<VisionItem {...defaultProps} />);
+      const el = container.querySelector('.vision__content')!;
+      const cb = elementCallbackMap.get(el);
+
+      act(() => {
+        cb?.(
+          [
+            {
+              isIntersecting: true,
+              boundingClientRect: { top: -100 } as DOMRectReadOnly,
+              intersectionRatio: 1,
+              intersectionRect: {} as DOMRectReadOnly,
+              rootBounds: null,
+              target: el,
+              time: 0,
+            },
+          ],
+          {} as IntersectionObserver,
+        );
+      });
+
+      expect(container.querySelector('.vision__content')).toBeInTheDocument();
     });
   });
 

@@ -127,6 +127,127 @@ describe('Home', () => {
     });
   });
 
+  describe('스테이징 모드 (MODE=staging)', () => {
+    beforeEach(() => {
+      vi.useRealTimers();
+      vi.resetModules();
+    });
+
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    });
+
+    it('staging 모드에서는 Hero만 렌더링된다 (Header·main 없음)', async () => {
+      vi.stubEnv('MODE', 'staging');
+      const { Home: StagingHome } = await import('./Home');
+      await act(async () => {
+        render(
+          <MemoryRouter>
+            <StagingHome />
+          </MemoryRouter>,
+        );
+        await Promise.resolve();
+      });
+      expect(screen.getByTestId('hero')).toBeInTheDocument();
+      expect(screen.queryByTestId('header')).not.toBeInTheDocument();
+      expect(screen.queryByRole('main')).not.toBeInTheDocument();
+    });
+
+    it('staging 모드 Hero는 showScrollArrow=false로 렌더링된다', async () => {
+      vi.stubEnv('MODE', 'staging');
+      const { Home: StagingHome } = await import('./Home');
+      await act(async () => {
+        render(
+          <MemoryRouter>
+            <StagingHome />
+          </MemoryRouter>,
+        );
+        await Promise.resolve();
+      });
+      expect(screen.getByTestId('hero')).toHaveAttribute(
+        'data-show-scroll-arrow',
+        'false',
+      );
+    });
+  });
+
+  describe('prefetch IntersectionObserver', () => {
+    it('prefetchTriggerRef가 뷰포트에 진입하면 observer가 disconnect된다', () => {
+      const callbackMap = new Map<Element, IntersectionObserverCallback>();
+      const mockDisconnect = vi.fn();
+
+      vi.stubGlobal(
+        'IntersectionObserver',
+        class {
+          private cb: IntersectionObserverCallback;
+          constructor(cb: IntersectionObserverCallback) {
+            this.cb = cb;
+          }
+          observe = (el: Element) => callbackMap.set(el, this.cb);
+          disconnect = mockDisconnect;
+        },
+      );
+
+      renderHome();
+
+      const entries = [...callbackMap.entries()];
+      expect(entries.length).toBeGreaterThan(0);
+
+      const [el, cb] = entries[0];
+      act(() => {
+        cb(
+          [
+            {
+              isIntersecting: true,
+              target: el,
+            } as IntersectionObserverEntry,
+          ],
+          {} as IntersectionObserver,
+        );
+      });
+
+      expect(mockDisconnect).toHaveBeenCalled();
+      vi.unstubAllGlobals();
+    });
+
+    it('isIntersecting=false이면 prefetch가 트리거되지 않는다 (disconnect 미호출)', () => {
+      const callbackMap = new Map<Element, IntersectionObserverCallback>();
+      const mockDisconnect = vi.fn();
+
+      vi.stubGlobal(
+        'IntersectionObserver',
+        class {
+          private cb: IntersectionObserverCallback;
+          constructor(cb: IntersectionObserverCallback) {
+            this.cb = cb;
+          }
+          observe = (el: Element) => callbackMap.set(el, this.cb);
+          disconnect = mockDisconnect;
+        },
+      );
+
+      renderHome();
+
+      const entries = [...callbackMap.entries()];
+      const [el, cb] = entries[0];
+      act(() => {
+        cb(
+          [
+            {
+              isIntersecting: false,
+              target: el,
+            } as IntersectionObserverEntry,
+          ],
+          {} as IntersectionObserver,
+        );
+      });
+
+      expect(mockDisconnect).not.toHaveBeenCalled();
+      vi.unstubAllGlobals();
+    });
+  });
+
   describe('DevWidgetView (VITE_DEV_WIDGET 설정 시)', () => {
     beforeEach(() => {
       vi.useRealTimers();

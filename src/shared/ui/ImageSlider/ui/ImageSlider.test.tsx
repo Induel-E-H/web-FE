@@ -23,6 +23,14 @@ describe('ImageSlider', () => {
       expect(screen.getAllByRole('img')).toHaveLength(3);
     });
 
+    it('alt prop이 없으면 img의 alt가 빈 문자열이다', () => {
+      const { container } = render(
+        <ImageSlider {...defaultProps} alt={undefined} />,
+      );
+      const imgs = container.querySelectorAll('img');
+      imgs.forEach((img) => expect(img.getAttribute('alt')).toBe(''));
+    });
+
     it('인디케이터에 현재 인덱스+1과 전체 개수가 표시된다', () => {
       const { container } = render(
         <ImageSlider {...defaultProps} currentIndex={1} />,

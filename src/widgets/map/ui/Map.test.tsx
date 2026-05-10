@@ -155,6 +155,50 @@ describe('Map', () => {
     });
   });
 
+  describe('기존 스크립트 존재 시 (Strict Mode 재실행)', () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      document
+        .querySelectorAll('script[src*="oapi.map.naver.com"]')
+        .forEach((el) => el.remove());
+    });
+
+    it('기존 스크립트가 있고 Naver 가용 시 queueMicrotask로 makeMap이 호출된다', async () => {
+      setNaverMaps(true);
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-key');
+
+      const script = document.createElement('script');
+      script.src =
+        'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=test-key';
+      document.head.appendChild(script);
+
+      render(<Map />);
+
+      await waitFor(() => {
+        expect(mockMakeMap).toHaveBeenCalled();
+      });
+    });
+
+    it('기존 스크립트가 있고 Naver 미가용 시 load 이벤트 대기한다', async () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-key');
+
+      const script = document.createElement('script');
+      script.src =
+        'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=test-key';
+      document.head.appendChild(script);
+
+      render(<Map />);
+
+      setNaverMaps(true);
+      script.dispatchEvent(new Event('load'));
+
+      await waitFor(() => {
+        expect(mockMakeMap).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('loading 상태 — API 키 있음, SDK 미로드', () => {
     afterEach(() => {
       vi.unstubAllEnvs();
