@@ -6,6 +6,7 @@ import { useHeaderVisibility } from '@features/header';
 import { useIsHero } from '@features/header';
 import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
+import { trackNavLogoClick, trackNavMenuClick } from '@shared/lib/analytics';
 import { smoothScrollTo } from '@shared/lib/scroll';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -43,6 +44,7 @@ export function Header({ onNavClick }: HeaderProps = {}) {
   }
 
   function handleLogoClick() {
+    trackNavLogoClick();
     if (!isHome) {
       void navigate('/');
       return;
@@ -51,7 +53,13 @@ export function Header({ onNavClick }: HeaderProps = {}) {
   }
 
   const navItems = NAV_ITEMS.map(({ label, selector }) => (
-    <button key={label} onClick={() => scrollTo(selector)}>
+    <button
+      key={label}
+      onClick={() => {
+        trackNavMenuClick(label);
+        scrollTo(selector);
+      }}
+    >
       {label}
     </button>
   ));

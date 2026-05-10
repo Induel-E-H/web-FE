@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
 import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
+import { trackPatentCardOpen } from '@shared/lib/analytics';
 import { usePreloadOnVisible } from '@shared/lib/preload/usePreloadOnVisible';
 import { AnimatePresence } from 'framer-motion';
 
@@ -33,7 +34,13 @@ export function PatentValidContent() {
       <ul className='patent__content__item__list'>
         {PATENT_VALID_LIST.map((patent, index) => (
           <li key={patent.serialNumber}>
-            <PatentCard patent={patent} onClick={() => setSelectedId(index)} />
+            <PatentCard
+              patent={patent}
+              onClick={() => {
+                trackPatentCardOpen(patent.title);
+                setSelectedId(index);
+              }}
+            />
           </li>
         ))}
       </ul>

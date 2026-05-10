@@ -1,6 +1,14 @@
+import { useEffect } from 'react';
+
+import { initGA, trackBrowserUnsupported } from '@shared/lib/analytics';
+
 import './styles/UnsupportedBrowser.css';
 
 export function UnsupportedBrowser() {
+  useEffect(() => {
+    initGA();
+    trackBrowserUnsupported();
+  }, []);
   return (
     <div className='unsupported-browser'>
       <div className='unsupported-browser__content'>

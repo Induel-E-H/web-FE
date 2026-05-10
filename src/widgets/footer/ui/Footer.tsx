@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
+import { trackPrivacyPolicyClick } from '@shared/lib/analytics';
 
 import '../styles/Footer.css';
 
@@ -21,7 +22,12 @@ export function Footer() {
           </div>
         </div>
         <div className='footer__information'>
-          <button onClick={() => void navigate('/privacy_policy')}>
+          <button
+            onClick={() => {
+              trackPrivacyPolicyClick();
+              void navigate('/privacy_policy');
+            }}
+          >
             <b>개인정보처리방침</b>
           </button>
         </div>
