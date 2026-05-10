@@ -97,10 +97,26 @@ export function usePopup(
       }
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      let el = e.target instanceof Element ? e.target : null;
+      while (el && dialogRef.current?.contains(el)) {
+        const { overflowY } = getComputedStyle(el);
+        if (
+          (overflowY === 'scroll' || overflowY === 'auto') &&
+          el.scrollHeight > el.clientHeight
+        ) {
+          return;
+        }
+        el = el.parentElement;
+      }
+      e.preventDefault();
+    };
+
     const handlePopState = () => onCloseRef.current();
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('popstate', handlePopState);
 
     return () => {
@@ -113,6 +129,7 @@ export function usePopup(
 
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('popstate', handlePopState);
 
       queueMicrotask(() =>
