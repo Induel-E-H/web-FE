@@ -205,8 +205,11 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 
 ### Optimization
 
-- 이미지 용량 45.6GB -> 79MB **99.83%** 절감 (JPG, PNG, TIF -> WebP 최적화, 해상도 기반 용량 제한 적용: 썸네일 100KB, 일반 이미지 200KB)
+- 이미지 용량 45.6GB -> 78MB **99.83%** 절감 (JPG, PNG, TIF -> WebP 최적화, 해상도 기반 용량 제한 적용: 썸네일 100KB, 일반 이미지 200KB)
 - ThreeJS 렌더링 성능 최적화 (디바이스별 분기 처리)
+
+<img width="285" height="74" alt="image" src="https://github.com/user-attachments/assets/ca3ecfc5-ca4b-476b-821f-c35954c36e9b" />
+
 
 ### Compatibility
 
@@ -214,6 +217,8 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Chrome 81~90 환경은 성능 저하 가능성을 고려해 Framer Motion 애니메이션을 축소 적용
 - Lightning CSS 기반 트랜스파일 및 자동 Vendor Prefixing으로 레거시 브라우저 대응
 - WebGL 미지원 환경에서는 Three.js 렌더링 대신 정적 이미지를 제공하는 Fallback 구조 적용
+
+<img width="1101" height="719" alt="image" src="https://github.com/user-attachments/assets/bd2baedb-afa3-4acf-b9db-a425c595fdf0" />
 
 ### Architecture
 
@@ -226,6 +231,8 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Lighthouse & Github Actions 기반 성능 회귀 감지 자동화
 - Chromatic & Storybook 기반 시각 회귀 테스트 적용
 - Netlify DNS 기반 도메인 및 배포 환경 관리
+
+<img width="314" height="339" alt="image" src="https://github.com/user-attachments/assets/f4f3a730-d8eb-43a5-b6d2-a01de7e7a90b" />
 
 ### Test & Docs
 
