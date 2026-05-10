@@ -49,23 +49,27 @@ describe('preloadContentImages', () => {
     vi.mocked(preloadImages).mockClear();
   });
 
-  it('pageIndex=2이면 인접 페이지(1, 3)의 4개 이미지 URL을 preload한다', () => {
+  it('pageIndex=2이면 현재(2)와 인접 페이지(1, 3)의 6개 이미지 URL을 preload한다', () => {
     preloadContentImages(2);
     expect(vi.mocked(preloadImages)).toHaveBeenCalledOnce();
     const arg = vi.mocked(preloadImages).mock.calls[0][0];
-    // adjacent: pageIndex 3 → idx 6, 7 / pageIndex 1 → idx 2, 3
-    expect(arg).toHaveLength(4);
+    // current: pageIndex 2 → idx 4, 5 / next: pageIndex 3 → idx 6, 7 / prev: pageIndex 1 → idx 2, 3
+    expect(arg).toHaveLength(6);
+    expect(arg).toContain('thumb-4.webp');
+    expect(arg).toContain('thumb-5.webp');
     expect(arg).toContain('thumb-6.webp');
     expect(arg).toContain('thumb-7.webp');
     expect(arg).toContain('thumb-2.webp');
     expect(arg).toContain('thumb-3.webp');
   });
 
-  it('pageIndex=0이면 음수 인덱스가 필터링되어 2개만 preload한다', () => {
+  it('pageIndex=0이면 음수 인덱스가 필터링되어 4개만 preload한다', () => {
     preloadContentImages(0);
     const arg = vi.mocked(preloadImages).mock.calls[0][0];
-    // pageIndex 1 → idx 2, 3 (kept) / pageIndex -1 → idx -2, -1 (filtered)
-    expect(arg).toHaveLength(2);
+    // current: idx 0, 1 (kept) / next: pageIndex 1 → idx 2, 3 (kept) / prev: pageIndex -1 → idx -2, -1 (filtered)
+    expect(arg).toHaveLength(4);
+    expect(arg).toContain('thumb-0.webp');
+    expect(arg).toContain('thumb-1.webp');
     expect(arg).toContain('thumb-2.webp');
     expect(arg).toContain('thumb-3.webp');
   });
@@ -73,8 +77,10 @@ describe('preloadContentImages', () => {
   it('artworks 범위를 초과하는 인덱스는 필터링된다 (artworks.length=10)', () => {
     preloadContentImages(4);
     const arg = vi.mocked(preloadImages).mock.calls[0][0];
-    // pageIndex 5 → idx 10, 11 (filtered, >= 10) / pageIndex 3 → idx 6, 7 (kept)
-    expect(arg).toHaveLength(2);
+    // current: pageIndex 4 → idx 8, 9 (kept) / next: pageIndex 5 → idx 10, 11 (filtered) / prev: pageIndex 3 → idx 6, 7 (kept)
+    expect(arg).toHaveLength(4);
+    expect(arg).toContain('thumb-8.webp');
+    expect(arg).toContain('thumb-9.webp');
     expect(arg).toContain('thumb-6.webp');
     expect(arg).toContain('thumb-7.webp');
   });

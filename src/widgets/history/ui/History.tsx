@@ -1,7 +1,11 @@
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import { PAGE_SIDE, RAPID_FLIP_DURATION } from '@features/history';
+import {
+  PAGE_SIDE,
+  preloadContentImages,
+  RAPID_FLIP_DURATION,
+} from '@features/history';
 import type { IndexItem } from '@features/history';
 import { useBookCoverState } from '@features/history';
 import { useBookNavigation } from '@features/history';
@@ -114,7 +118,9 @@ export function History() {
   }, [bookState, pendingCategory]);
 
   function handleListItemClick(index: number) {
-    navigateToCategory('Content', Math.floor(index / 2), true);
+    const pageIndex = Math.floor(index / 2);
+    preloadContentImages(pageIndex);
+    navigateToCategory('Content', pageIndex, true);
   }
 
   function page(
@@ -218,6 +224,7 @@ export function History() {
 
   function handleNavigateToCategory(item: IndexItem) {
     trackHistoryCategoryChange(String(item));
+    if (item === 'Content') preloadContentImages(0);
     if (bookState === 'cover-front') {
       if (isAnimatingRef.current) return;
       setPendingCategory(item);
