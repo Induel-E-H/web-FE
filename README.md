@@ -62,7 +62,7 @@ color: #333;
 line-height: 1.4;
 word-break: keep-all;
 ">
-2025. 12. 20 ~ 2026. 04. 30
+2025. 12. 20 ~ 2026. 05. 20
 </div>
 </div>
 </div>
@@ -247,7 +247,7 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Google Analytics 도입에 따른 개인정보 처리방침 페이지 구현으로 법적 요구사항 대응
 - Google Analytics / Search Console 기반 사용자 유입 및 검색 성과 모니터링
 - Google Analytics 이벤트 트래킹을 통한 사용자 행동 데이터 수집 및 분석
-<img width="1531" height="771" alt="image" src="https://github.com/user-attachments/assets/b078923d-d760-4d10-9d84-9756a9009289" />
+  <img width="1531" height="771" alt="image" src="https://github.com/user-attachments/assets/b078923d-d760-4d10-9d84-9756a9009289" />
 
 ### TeamWork
 
