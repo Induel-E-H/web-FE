@@ -1,7 +1,12 @@
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { PageFlip } from './PageFlip';
+
+vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
+  useBreakpoint: vi.fn().mockReturnValue('desktop'),
+}));
 
 describe('PageFlip', () => {
   const defaultProps = {
@@ -94,6 +99,54 @@ describe('PageFlip', () => {
   it('flipBackContent가 렌더링된다', () => {
     const { getByText } = render(<PageFlip {...defaultProps} />);
     expect(getByText('back')).toBeInTheDocument();
+  });
+
+  describe('모바일 breakpoint (isVertical=true)', () => {
+    afterEach(() => {
+      vi.mocked(useBreakpoint).mockReturnValue('desktop');
+    });
+
+    it('mobile breakpoint에서 forward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('mobile');
+      const { container } = render(
+        <PageFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='forward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-page-flip-panel'),
+      ).toBeInTheDocument();
+    });
+
+    it('mobile breakpoint에서 backward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('mobile');
+      const { container } = render(
+        <PageFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='backward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-page-flip-panel--backward'),
+      ).toBeInTheDocument();
+    });
+
+    it('tablet breakpoint에서 forward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('tablet');
+      const { container } = render(
+        <PageFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='forward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-page-flip-panel'),
+      ).toBeInTheDocument();
+    });
   });
 
   describe('direction별 flip front/back 클래스', () => {

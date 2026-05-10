@@ -324,4 +324,135 @@ describe('useHoldNavigation', () => {
       expect(chainResult).toBe(false);
     });
   });
+
+  describe('비-Arrow 키 이벤트', () => {
+    it('ArrowLeft·Right 외의 keydown은 navigate를 호출하지 않는다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      const navigateLeft = vi.fn();
+      act(() => {
+        result.current.syncCallbacks(navigateLeft, vi.fn());
+      });
+      act(() => {
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+      });
+      expect(navigateLeft).not.toHaveBeenCalled();
+      expect(result.current.isHoldChaining).toBe(false);
+    });
+  });
+
+  describe('chainHoldFlip + clearHoldDirection 상호작용', () => {
+    it('chainHoldFlip 후 clearHoldDirection 호출 시 타이머 내부에서 아무것도 실행되지 않는다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      const navigateRightRapid = vi.fn();
+      act(() => {
+        result.current.syncCallbacks(
+          vi.fn(),
+          vi.fn(),
+          vi.fn(),
+          navigateRightRapid,
+        );
+        result.current.beginContinuousFlip('right');
+        result.current.chainHoldFlip();
+        result.current.clearHoldDirection();
+      });
+      act(() => {
+        vi.runAllTimers();
+      });
+      expect(navigateRightRapid).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('chainHoldFlip 비경계 케이스', () => {
+    it('left rapid flip 후 holdDirection이 유지되면 leftBoundary 콜백이 호출되지 않는다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      const leftBoundary = vi.fn();
+      act(() => {
+        result.current.syncBoundaryCallbacks(leftBoundary, vi.fn());
+        result.current.syncCallbacks(vi.fn(), vi.fn(), vi.fn());
+        result.current.beginContinuousFlip('left');
+        result.current.chainHoldFlip();
+      });
+      act(() => {
+        vi.runAllTimers();
+      });
+      expect(leftBoundary).not.toHaveBeenCalled();
+    });
+
+    it('right rapid flip 후 holdDirection이 유지되면 rightBoundary 콜백이 호출되지 않는다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      const rightBoundary = vi.fn();
+      act(() => {
+        result.current.syncBoundaryCallbacks(vi.fn(), rightBoundary);
+        result.current.syncCallbacks(vi.fn(), vi.fn(), vi.fn(), vi.fn());
+        result.current.beginContinuousFlip('right');
+        result.current.chainHoldFlip();
+      });
+      act(() => {
+        vi.runAllTimers();
+      });
+      expect(rightBoundary).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('keyup 이벤트', () => {
+    it('ArrowLeft keyup(holdDirection=left)은 holdDirection을 클리어한다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      act(() => {
+        result.current.syncCallbacks(vi.fn(), vi.fn());
+        result.current.beginContinuousFlip('left');
+      });
+      act(() => {
+        window.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowLeft' }));
+      });
+      let chainResult = true;
+      act(() => {
+        chainResult = result.current.chainHoldFlip();
+      });
+      expect(chainResult).toBe(false);
+    });
+
+    it('Space keyup은 endContinuousFlip을 트리거한다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      act(() => {
+        result.current.syncCallbacks(vi.fn(), vi.fn());
+        result.current.beginContinuousFlip('right');
+        result.current.chainHoldFlip();
+      });
+      expect(result.current.isHoldChaining).toBe(true);
+      act(() => {
+        window.dispatchEvent(new KeyboardEvent('keyup', { key: ' ' }));
+      });
+      expect(result.current.isHoldChaining).toBe(false);
+    });
+
+    it('Enter keyup은 endContinuousFlip을 트리거한다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      act(() => {
+        result.current.syncCallbacks(vi.fn(), vi.fn());
+        result.current.beginContinuousFlip('left');
+        result.current.chainHoldFlip();
+      });
+      expect(result.current.isHoldChaining).toBe(true);
+      act(() => {
+        window.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+      });
+      expect(result.current.isHoldChaining).toBe(false);
+    });
+
+    it('ArrowRight keyup 시 holdDirection이 "right"가 아니면 holdDirection이 유지된다', () => {
+      const { result } = renderHook(() => useHoldNavigation());
+      act(() => {
+        result.current.syncCallbacks(vi.fn(), vi.fn());
+        result.current.beginContinuousFlip('left');
+      });
+      act(() => {
+        window.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
+      });
+      let chainResult = false;
+      act(() => {
+        chainResult = result.current.chainHoldFlip();
+      });
+      expect(chainResult).toBe(true);
+    });
+  });
 });

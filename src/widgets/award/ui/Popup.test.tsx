@@ -31,6 +31,12 @@ vi.mock('@entities/award', async (importOriginal) => {
         date: '2020-01-03',
         issuer: '기관',
       },
+      {
+        id: 4,
+        category: '당선작',
+        date: '2020-01-04',
+        issuer: '기관',
+      },
     ],
   };
 });
@@ -83,6 +89,16 @@ describe('AwardPopup', () => {
         'src',
         'popup-image.webp',
       );
+    });
+  });
+
+  describe('title 폴백', () => {
+    it('award.title이 없으면 "수상 이미지"로 대체된다', () => {
+      useAwardStore.setState({ selectedId: 3 });
+      render(<AwardPopup />);
+      expect(
+        screen.getByRole('dialog', { name: '수상 이미지 수상 이미지' }),
+      ).toBeInTheDocument();
     });
   });
 

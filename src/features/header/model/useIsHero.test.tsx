@@ -52,6 +52,33 @@ describe('useIsHero', () => {
     vi.unstubAllGlobals();
   });
 
+  describe('DEV_WIDGET 환경 (resetModules)', () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    });
+
+    it('VITE_DEV_WIDGET="hero"이고 경로가 "/"이면 초기값이 true이다', async () => {
+      vi.resetModules();
+      vi.stubEnv('VITE_DEV_WIDGET', 'hero');
+      const { useIsHero: freshHook } = await import('./useIsHero');
+      const { result } = renderHook(() => freshHook(), {
+        wrapper: createWrapper('/'),
+      });
+      expect(result.current).toBe(true);
+    });
+
+    it('VITE_DEV_WIDGET="map"이고 경로가 "/"이면 초기값이 false이다', async () => {
+      vi.resetModules();
+      vi.stubEnv('VITE_DEV_WIDGET', 'map');
+      const { useIsHero: freshHook } = await import('./useIsHero');
+      const { result } = renderHook(() => freshHook(), {
+        wrapper: createWrapper('/'),
+      });
+      expect(result.current).toBe(false);
+    });
+  });
+
   describe('초기 상태', () => {
     it('홈 경로("/")에서는 초기값이 true이다', () => {
       const { result } = renderHook(() => useIsHero(), {

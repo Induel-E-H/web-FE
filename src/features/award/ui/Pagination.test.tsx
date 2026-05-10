@@ -87,6 +87,14 @@ describe('Pagination', () => {
     });
   });
 
+  describe('연도 필터 적용', () => {
+    it('activeYear가 특정 연도이면 해당 연도 항목만 필터링된다', () => {
+      useAwardStore.setState({ activeYear: 2020 });
+      render(<Pagination />);
+      expect(screen.getByText('1/3')).toBeInTheDocument();
+    });
+  });
+
   describe('클릭 이벤트', () => {
     it('dot 클릭 시 스토어의 currentPage가 변경된다', () => {
       render(<Pagination />);

@@ -143,6 +143,17 @@ describe('useWaveBackground', () => {
     });
   });
 
+  describe('canvas ref 미연결 시', () => {
+    it('canvas가 마운트되지 않으면 Three.js 초기화가 실행되지 않는다', () => {
+      function NoCanvas() {
+        useWaveBackground();
+        return null;
+      }
+      render(<NoCanvas />);
+      expect(mockCreateScene).not.toHaveBeenCalled();
+    });
+  });
+
   describe('Three.js 초기화 실패 시', () => {
     it('createScene에서 에러 발생 시 cleanup 함수가 호출되지 않는다', () => {
       mockCreateScene.mockImplementationOnce(() => {

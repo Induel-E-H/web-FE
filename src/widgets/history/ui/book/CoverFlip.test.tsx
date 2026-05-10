@@ -1,7 +1,12 @@
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
 import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { BookCoverFlip } from './CoverFlip';
+
+vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
+  useBreakpoint: vi.fn().mockReturnValue('desktop'),
+}));
 
 describe('BookCoverFlip', () => {
   const defaultProps = {
@@ -70,5 +75,53 @@ describe('BookCoverFlip', () => {
     expect(
       container.querySelector('.history__book-cover-flip-panel--hidden'),
     ).toBeInTheDocument();
+  });
+
+  describe('모바일 breakpoint (isVertical=true)', () => {
+    afterEach(() => {
+      vi.mocked(useBreakpoint).mockReturnValue('desktop');
+    });
+
+    it('mobile breakpoint에서 forward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('mobile');
+      const { container } = render(
+        <BookCoverFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='forward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-cover-flip'),
+      ).toBeInTheDocument();
+    });
+
+    it('mobile breakpoint에서 backward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('mobile');
+      const { container } = render(
+        <BookCoverFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='backward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-cover-flip-panel--backward'),
+      ).toBeInTheDocument();
+    });
+
+    it('tablet breakpoint에서 forward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('tablet');
+      const { container } = render(
+        <BookCoverFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='forward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-cover-flip'),
+      ).toBeInTheDocument();
+    });
   });
 });
