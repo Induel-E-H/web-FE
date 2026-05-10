@@ -37,8 +37,11 @@ vi.mock('@shared/lib/three/core/createCamera', () => ({
 vi.mock('@shared/lib/three/core/createLights', () => ({
   createLights: mockCreateLights,
 }));
+const mockIsWebGL2Supported = vi.hoisted(() => vi.fn(() => true));
+
 vi.mock('@shared/lib/three/core/createRenderer', () => ({
   createRenderer: mockCreateRenderer,
+  isWebGL2Supported: mockIsWebGL2Supported,
 }));
 vi.mock('@shared/lib/three/core/createScene', () => ({
   createScene: mockCreateScene,
@@ -51,8 +54,8 @@ vi.mock('@shared/lib/three/utils/attachResizeHandler', () => ({
 }));
 
 function WaveCanvas() {
-  const ref = useWaveBackground();
-  return <canvas ref={ref} />;
+  const { canvasRef } = useWaveBackground();
+  return <canvas ref={canvasRef} />;
 }
 
 describe('useWaveBackground', () => {
@@ -185,6 +188,27 @@ describe('useWaveBackground', () => {
       mockCreateWaveTubes.mockImplementationOnce(() => {
         throw new Error('Geometry creation failed');
       });
+
+      const { unmount } = render(<WaveCanvas />);
+      unmount();
+
+      expect(mockCancelAnimation).not.toHaveBeenCalled();
+      expect(mockRemoveResizeListener).not.toHaveBeenCalled();
+      expect(mockDispose).not.toHaveBeenCalled();
+    });
+
+    it('WebGL2 미지원 시 Three.js 초기화 함수들이 호출되지 않는다', () => {
+      mockIsWebGL2Supported.mockReturnValueOnce(false);
+
+      render(<WaveCanvas />);
+
+      expect(mockCreateScene).not.toHaveBeenCalled();
+      expect(mockCreateCamera).not.toHaveBeenCalled();
+      expect(mockCreateRenderer).not.toHaveBeenCalled();
+    });
+
+    it('WebGL2 미지원 시 언마운트해도 cleanup 함수가 호출되지 않는다', () => {
+      mockIsWebGL2Supported.mockReturnValueOnce(false);
 
       const { unmount } = render(<WaveCanvas />);
       unmount();

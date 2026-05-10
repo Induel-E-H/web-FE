@@ -98,21 +98,64 @@
   --typo-contentW: #6f6f6f;
 }
 
-html {
-  overflow-y: scroll;
-}
-
-* {
-  font-family: var(--font-pretendard);
-  font-variant-numeric: tabular-nums;
-  font-style: normal;
-  line-height: 1.4;
+/* ─── Box Model ──────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+/* ─── Document ───────────────────────────────────────────────────────────── */
+html {
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+body,
+input,
+button,
+select,
+textarea,
+optgroup {
+  font-family: var(--font-pretendard);
+  font-size: 1rem;
+  line-height: 1.4;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
   letter-spacing: -0.025em;
-  background-color: transparent;
+}
+
+/* ─── Media ──────────────────────────────────────────────────────────────── */
+img,
+svg,
+video,
+canvas {
+  display: block;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────────────── */
+table {
+  border-collapse: collapse;
+}
+
+/* ─── Interactives ───────────────────────────────────────────────────────── */
+button {
+  background: none;
   border: none;
+  cursor: pointer;
+}
+
+a,
+[role='button'] {
+  cursor: pointer;
 }
 
 *:focus {
@@ -124,6 +167,19 @@ html {
   outline-offset: 2px;
 }
 
+/* ─── Reduced Motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Accessibility ──────────────────────────────────────────────────────── */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -153,24 +209,4 @@ html {
 
 .skip-link:focus {
   top: 0;
-}
-
-p,
-span,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-li,
-label,
-time,
-address {
-  cursor: default;
-}
-
-button *,
-a * {
-  cursor: pointer;
 }

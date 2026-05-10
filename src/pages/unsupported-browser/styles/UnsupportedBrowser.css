@@ -1,0 +1,161 @@
+.unsupported-browser {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1007;
+  padding: 3rem 2rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+}
+
+.unsupported-browser__content {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.unsupported-browser__icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.75rem;
+  color: #e7c889;
+}
+
+.unsupported-browser__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f6f3f0;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.unsupported-browser__desc {
+  font-size: 0.9375rem;
+  color: #b79d86;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.unsupported-browser__versions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.unsupported-browser__version {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.unsupported-browser__version--full {
+  background-color: rgba(89, 161, 79, 0.12);
+  color: #7dc470;
+  border: 1px solid rgba(89, 161, 79, 0.28);
+}
+
+.unsupported-browser__version--limited {
+  background-color: rgba(231, 200, 137, 0.1);
+  color: #e7c889;
+  border: 1px solid rgba(231, 200, 137, 0.24);
+}
+
+.unsupported-browser__version--none {
+  background-color: rgba(255, 100, 100, 0.08);
+  color: #ff8080;
+  border: 1px solid rgba(255, 100, 100, 0.2);
+}
+
+.unsupported-browser__cta {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background-color: #4285f4;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.unsupported-browser__cta:hover {
+  background-color: #3267d6;
+}
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .unsupported-browser {
+    padding: 2.5rem 1.75rem;
+  }
+
+  .unsupported-browser__content {
+    max-width: 420px;
+  }
+
+  .unsupported-browser__icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.5rem;
+  }
+
+  .unsupported-browser__title {
+    font-size: 1.375rem;
+  }
+}
+
+/* Mobile (≤767px) */
+@media (max-width: 767px) {
+  .unsupported-browser {
+    padding: 2rem 1.25rem;
+    align-items: flex-start;
+    padding-top: 3.5rem;
+  }
+
+  .unsupported-browser__content {
+    max-width: 100%;
+  }
+
+  .unsupported-browser__icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 1.25rem;
+  }
+
+  .unsupported-browser__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .unsupported-browser__desc {
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .unsupported-browser__version {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .unsupported-browser__versions {
+    margin-bottom: 1.5rem;
+  }
+
+  .unsupported-browser__cta {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+}
