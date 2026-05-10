@@ -30,6 +30,7 @@ export const baseConfig: UserConfig = {
   },
   build: {
     target: 'esnext',
+    cssCodeSplit: true,
     cssMinify: 'lightningcss',
     chunkSizeWarningLimit: 500,
     rollupOptions: {
