@@ -195,12 +195,12 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Desktop
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 100|🟢 100|🟠 77|🟢 100|
+  |🟢 97|🟢 100|🟠 77|🟢 100|
 
 - Mobile
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 98|🟢 100|🟠 73|🟢 100|
+  |🟢 92|🟢 100|🟠 73|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
@@ -224,6 +224,10 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 
 - Storybook 기반 컴포넌트 명세화
 - Vitest & Storybook 연동으로 UI 단위 테스트 환경 구축
+- Vitest Coverage
+  |% Stmts|% Branch|% Funcs|% Lines|
+  |---|---|---|---|
+  |🟢 99.64|🟢 98.93|🟢 99.06|🟢 99.76|
 
 ### Observability
 
