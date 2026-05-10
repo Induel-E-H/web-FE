@@ -15,7 +15,6 @@ export function PatentPopup({
       <img
         src={getPatentImage(patentId)}
         alt={`${patentTitle} 특허증 이미지`}
-        loading='lazy'
       />
     </Popup>
   );
