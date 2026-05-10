@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import type { Breakpoint } from '@shared/lib/breakpoint';
 
@@ -10,6 +10,7 @@ import { useHoldNavigation } from './events/useHoldNavigation';
 import type { PageConfig } from './pageRegistry';
 import { getPageRegistry } from './pageRegistry';
 import type { FlipDirection, IndexItem, NavigationStep } from './types';
+import { useHistoryStore } from './useHistoryStore';
 
 function pageCountToShadowCount(pages: number): number {
   if (pages >= 10) return 3;
@@ -34,14 +35,14 @@ function computeGlobalSpreadIndex(
 export function useBookNavigation(breakpoint: Breakpoint) {
   const pageRegistry = getPageRegistry(breakpoint);
 
-  const [activeItem, setActiveItem] = useState<IndexItem>('List');
-  const [pageIndices, setPageIndices] = useState<Record<IndexItem, number>>(
-    () =>
-      Object.fromEntries(INDEX_LIST.map((item) => [item, 0])) as Record<
-        IndexItem,
-        number
-      >,
-  );
+  const activeItem = useHistoryStore((s) => s.activeItem);
+  const pageIndices = useHistoryStore((s) => s.pageIndices);
+  const isFlipping = useHistoryStore((s) => s.isFlipping);
+  const flipDirection = useHistoryStore((s) => s.flipDirection);
+  const currentFlipDuration = useHistoryStore((s) => s.currentFlipDuration);
+  const isRapidFlipping = useHistoryStore((s) => s.isRapidFlipping);
+  const tabActiveItem = useHistoryStore((s) => s.tabActiveItem);
+  const isHoldChaining = useHistoryStore((s) => s.isHoldChaining);
 
   const activeIndex = INDEX_LIST.indexOf(activeItem);
   const rawPageIndex = pageIndices[activeItem];
@@ -73,24 +74,18 @@ export function useBookNavigation(breakpoint: Breakpoint) {
   }
 
   const {
-    isFlipping,
-    flipDirection,
-    currentFlipDuration,
     isAnimatingRef,
     setOnAnimationComplete,
     startFlipAnimation,
     cleanup: flipCleanup,
   } = useFlipAnimation();
   const {
-    isRapidFlipping,
-    tabActiveItem,
     startRapidSequence,
     chainNextStep,
     updateTabActiveItem,
     cleanup: rapidCleanup,
   } = useRapidFlip(startFlipAnimation);
   const {
-    isHoldChaining,
     clearHoldDirection,
     beginContinuousFlip,
     chainHoldFlip,
@@ -100,14 +95,15 @@ export function useBookNavigation(breakpoint: Breakpoint) {
   } = useHoldNavigation();
 
   function applyNavigationStep(step: NavigationStep) {
-    setPageIndices((prev) => ({ ...prev, [step.item]: step.pageIndex }));
-    setActiveItem(step.item);
+    useHistoryStore.getState().setPageIndices((prev) => ({
+      ...prev,
+      [step.item]: step.pageIndex,
+    }));
+    useHistoryStore.getState().setActiveItem(step.item);
   }
 
   setOnAnimationComplete(() => {
-    // rapid 체이닝 우선
     if (chainNextStep(applyNavigationStep)) return;
-    // hold 체이닝
     chainHoldFlip();
   });
 
@@ -116,19 +112,27 @@ export function useBookNavigation(breakpoint: Breakpoint) {
       clearHoldDirection();
       return;
     }
+    const { activeItem: cur, pageIndices: curIdx } = useHistoryStore.getState();
+    const curActiveIndex = INDEX_LIST.indexOf(cur);
+    const curTotalPages = pageRegistry[cur].totalPages;
+    const curPageIndex = Math.min(curIdx[cur], curTotalPages - 1);
+
     startFlipAnimation(
       'backward',
       () => {
-        if (currentPageIndex > 0) {
-          setPageIndices((prev) => ({
+        if (curPageIndex > 0) {
+          useHistoryStore.getState().setPageIndices((prev) => ({
             ...prev,
-            [activeItem]: prev[activeItem] - 1,
+            [cur]: prev[cur] - 1,
           }));
-        } else if (activeIndex > 0) {
-          const prev = INDEX_LIST[activeIndex - 1];
+        } else if (curActiveIndex > 0) {
+          const prev = INDEX_LIST[curActiveIndex - 1];
           const prevTotalPages = pageRegistry[prev].totalPages;
-          setPageIndices((p) => ({ ...p, [prev]: prevTotalPages - 1 }));
-          setActiveItem(prev);
+          useHistoryStore.getState().setPageIndices((p) => ({
+            ...p,
+            [prev]: prevTotalPages - 1,
+          }));
+          useHistoryStore.getState().setActiveItem(prev);
           updateTabActiveItem(prev);
         }
       },
@@ -141,18 +145,26 @@ export function useBookNavigation(breakpoint: Breakpoint) {
       clearHoldDirection();
       return;
     }
+    const { activeItem: cur, pageIndices: curIdx } = useHistoryStore.getState();
+    const curActiveIndex = INDEX_LIST.indexOf(cur);
+    const curTotalPages = pageRegistry[cur].totalPages;
+    const curPageIndex = Math.min(curIdx[cur], curTotalPages - 1);
+
     startFlipAnimation(
       'forward',
       () => {
-        if (currentPageIndex < totalPages - 1) {
-          setPageIndices((prev) => ({
+        if (curPageIndex < curTotalPages - 1) {
+          useHistoryStore.getState().setPageIndices((prev) => ({
             ...prev,
-            [activeItem]: prev[activeItem] + 1,
+            [cur]: prev[cur] + 1,
           }));
-        } else if (activeIndex < INDEX_LIST.length - 1) {
-          const next = INDEX_LIST[activeIndex + 1];
-          setPageIndices((p) => ({ ...p, [next]: 0 }));
-          setActiveItem(next);
+        } else if (curActiveIndex < INDEX_LIST.length - 1) {
+          const next = INDEX_LIST[curActiveIndex + 1];
+          useHistoryStore.getState().setPageIndices((p) => ({
+            ...p,
+            [next]: 0,
+          }));
+          useHistoryStore.getState().setActiveItem(next);
           updateTabActiveItem(next);
         }
       },
@@ -165,40 +177,50 @@ export function useBookNavigation(breakpoint: Breakpoint) {
     pageIndex = 0,
     useRapidFlip = false,
   ) {
+    const { activeItem: cur, pageIndices: curIdx } = useHistoryStore.getState();
+    const curActiveIndex = INDEX_LIST.indexOf(cur);
+    const curTotalPages = pageRegistry[cur].totalPages;
+    const curPageIndex = Math.min(curIdx[cur], curTotalPages - 1);
     const newIndex = INDEX_LIST.indexOf(item);
-    if (newIndex === activeIndex && pageIndex === currentPageIndex) return;
+
+    if (newIndex === curActiveIndex && pageIndex === curPageIndex) return;
     if (isAnimatingRef.current) return;
 
     let direction: FlipDirection;
-    if (newIndex !== activeIndex) {
-      direction = newIndex > activeIndex ? 'forward' : 'backward';
+    if (newIndex !== curActiveIndex) {
+      direction = newIndex > curActiveIndex ? 'forward' : 'backward';
     } else {
-      direction = pageIndex > currentPageIndex ? 'forward' : 'backward';
+      direction = pageIndex > curPageIndex ? 'forward' : 'backward';
     }
 
     if (!useRapidFlip) {
       startFlipAnimation(direction, () => {
-        setPageIndices((prev) => ({ ...prev, [item]: pageIndex }));
-        setActiveItem(item);
+        useHistoryStore.getState().setPageIndices((prev) => ({
+          ...prev,
+          [item]: pageIndex,
+        }));
+        useHistoryStore.getState().setActiveItem(item);
         updateTabActiveItem(item);
       });
       return;
     }
 
     const steps = buildRapidSteps({
-      activeIndex,
-      currentPageIndex,
+      activeIndex: curActiveIndex,
+      currentPageIndex: curPageIndex,
       targetItem: item,
       targetPageIndex: pageIndex,
       direction,
       getLastPageIndex: (i) => pageRegistry[i].totalPages - 1,
     });
 
-    // 카테고리 1칸 이동은 일반 flip으로 처리 (300ms rapid는 시각적으로 순간이동처럼 보임)
     if (steps.length === 1) {
       startFlipAnimation(direction, () => {
-        setPageIndices((prev) => ({ ...prev, [item]: pageIndex }));
-        setActiveItem(item);
+        useHistoryStore.getState().setPageIndices((prev) => ({
+          ...prev,
+          [item]: pageIndex,
+        }));
+        useHistoryStore.getState().setActiveItem(item);
         updateTabActiveItem(item);
       });
       return;

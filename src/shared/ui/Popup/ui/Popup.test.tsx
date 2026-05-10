@@ -134,19 +134,6 @@ describe('Popup', () => {
     });
   });
 
-  describe('스크롤 잠금', () => {
-    it('마운트 시 body overflow가 hidden으로 설정된다', () => {
-      renderPopup();
-      expect(document.body.style.overflow).toBe('hidden');
-    });
-
-    it('언마운트 시 body overflow가 복원된다', () => {
-      const { unmount } = renderPopup();
-      unmount();
-      expect(document.body.style.overflow).toBe('');
-    });
-  });
-
   describe('variant prop', () => {
     it('variant=gallery이면 popup--gallery 클래스가 적용된다', () => {
       render(

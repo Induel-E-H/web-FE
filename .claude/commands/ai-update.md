@@ -81,7 +81,3 @@ Apply only the changes identified in Step 2.
 ## Step 4: Confirm
 
 After editing, briefly summarize in Korean what was updated and what was left unchanged.
-
-```
-
-```

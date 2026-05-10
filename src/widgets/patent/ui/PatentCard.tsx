@@ -6,10 +6,10 @@ import { InfoCard } from '@shared/ui/InfoCard';
 import '../styles/PatentCard.css';
 
 export function PatentCard({
-  item,
+  patent,
   onClick,
 }: {
-  item: PatentValidType;
+  patent: PatentValidType;
   onClick: () => void;
 }) {
   return (
@@ -17,11 +17,11 @@ export function PatentCard({
       className='patent__card'
       icon={<IoDocumentTextOutline />}
       year={{
-        text: `${item.filingDate.slice(0, 4)}년 출원`,
-        dateTime: item.filingDate.replace(/\. /g, '-'),
+        text: `${patent.filingDate.slice(0, 4)}년 출원`,
+        dateTime: patent.filingDate.replace(/\. /g, '-'),
       }}
-      title={item.title}
-      secondary={item.serialNumber}
+      title={patent.title}
+      secondary={patent.serialNumber}
       onClick={onClick}
     />
   );

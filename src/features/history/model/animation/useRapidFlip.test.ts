@@ -2,6 +2,7 @@ import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { RAPID_FLIP_DURATION } from '../constants';
+import { useHistoryStore } from '../useHistoryStore';
 import { useRapidFlip } from './useRapidFlip';
 
 describe('useRapidFlip', () => {
@@ -13,7 +14,8 @@ describe('useRapidFlip', () => {
 
   beforeEach(() => {
     vi.useFakeTimers();
-    mockStartFlipAnimation = vi.fn() as unknown as (
+    useHistoryStore.getState().reset();
+    mockStartFlipAnimation = vi.fn() as (
       direction: import('../types').FlipDirection,
       onComplete: () => void,
       duration?: number,
@@ -22,6 +24,7 @@ describe('useRapidFlip', () => {
 
   afterEach(() => {
     vi.useRealTimers();
+    useHistoryStore.getState().reset();
   });
 
   it('초기 상태: isRapidFlipping=false, tabActiveItem="List"', () => {
@@ -153,6 +156,47 @@ describe('useRapidFlip', () => {
       vi.runAllTimers();
     });
     expect(mockStartFlipAnimation).toHaveBeenCalledOnce();
+  });
+
+  it('chainNextStep이 마지막 스텝이 아니면 onComplete 시 isRapidFlipping이 유지된다', () => {
+    let capturedOnComplete: (() => void) | undefined;
+
+    (mockStartFlipAnimation as ReturnType<typeof vi.fn>).mockImplementation(
+      (_dir: string, onComplete: () => void) => {
+        capturedOnComplete = onComplete;
+      },
+    );
+
+    const { result } = renderHook(() => useRapidFlip(mockStartFlipAnimation));
+
+    // 3개 스텝: step1(첫 번째 소비) + step2 + step3 남음
+    act(() => {
+      result.current.startRapidSequence(
+        [
+          { item: 'Content' as const, pageIndex: 0 },
+          { item: 'Timeline' as const, pageIndex: 0 },
+          { item: 'Milestones' as const, pageIndex: 0 },
+        ],
+        'forward',
+        'Milestones',
+        vi.fn(),
+      );
+    });
+
+    // step2 체인 (stepsRef에 step3 남아 있어 isLast=false)
+    act(() => {
+      result.current.chainNextStep(vi.fn());
+    });
+    act(() => {
+      vi.runAllTimers();
+    });
+
+    // onComplete 호출 — isLast=false이므로 isRapidFlipping 여전히 true
+    act(() => {
+      capturedOnComplete?.();
+    });
+
+    expect(result.current.isRapidFlipping).toBe(true);
   });
 
   it('마지막 스텝이 완료되면 isRapidFlipping이 false가 된다', () => {

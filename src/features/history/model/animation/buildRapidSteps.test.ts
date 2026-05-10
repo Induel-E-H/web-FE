@@ -127,6 +127,31 @@ describe('buildRapidSteps', () => {
       expect(steps).toHaveLength(3);
     });
 
+    it('forward로 targetPageIndex>0에 도착할 때 approach 페이지가 생성된다', () => {
+      // List → Content page 2: approach Content p0, p1, then terminal Content p2
+      const steps = buildRapidSteps({
+        activeIndex: 0,
+        currentPageIndex: 0,
+        targetItem: 'Content',
+        targetPageIndex: 2,
+        direction: 'forward',
+        getLastPageIndex,
+      });
+      expect(steps.some((s) => s.item === 'Content' && s.pageIndex === 0)).toBe(
+        true,
+      );
+      expect(steps.some((s) => s.item === 'Content' && s.pageIndex === 1)).toBe(
+        true,
+      );
+      expect(steps[steps.length - 1]).toEqual(
+        expect.objectContaining({
+          item: 'Content',
+          pageIndex: 2,
+          duration: RAPID_FLIP_DURATION,
+        }),
+      );
+    });
+
     it('forward로 targetPageIndex=0에 도착할 때 approach 페이지가 없다', () => {
       // List → Content page 0: 출발 source 없음, approach 없음, 스텝 1개
       const steps = buildRapidSteps({

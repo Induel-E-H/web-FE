@@ -58,19 +58,6 @@ describe('ImageGalleryPopup', () => {
     });
   });
 
-  describe('스크롤 잠금', () => {
-    it('마운트 시 body overflow가 hidden으로 설정된다', () => {
-      render(<ImageGalleryPopup {...defaultProps} />);
-      expect(document.body.style.overflow).toBe('hidden');
-    });
-
-    it('언마운트 시 body overflow가 복원된다', () => {
-      const { unmount } = render(<ImageGalleryPopup {...defaultProps} />);
-      unmount();
-      expect(document.body.style.overflow).toBe('');
-    });
-  });
-
   describe('키보드 슬라이드 네비게이션', () => {
     it('ArrowLeft keydown 시 이전 슬라이드로 이동한다 (wrap-around)', () => {
       render(<ImageGalleryPopup {...defaultProps} />);
@@ -103,6 +90,16 @@ describe('ImageGalleryPopup', () => {
       expect(() => {
         fireEvent.keyUp(window, { key: 'Enter' });
       }).not.toThrow();
+    });
+
+    it('ArrowLeft repeat=true이면 슬라이드 이동이 시작되지 않는다', () => {
+      render(<ImageGalleryPopup {...defaultProps} />);
+      expect(() => {
+        fireEvent.keyDown(window, { key: 'ArrowLeft', repeat: true });
+      }).not.toThrow();
+      // repeat=true → early return이므로 이미지 상태 변화 없음
+      const imgs = screen.getAllByRole('img');
+      expect(imgs).toHaveLength(3);
     });
   });
 

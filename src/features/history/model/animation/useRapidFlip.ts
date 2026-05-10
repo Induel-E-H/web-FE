@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { RAPID_FLIP_DURATION } from '../constants';
 import type { FlipDirection, IndexItem, NavigationStep } from '../types';
+import { useHistoryStore } from '../useHistoryStore';
 
 export function useRapidFlip(
   startFlipAnimation: (
@@ -10,8 +11,8 @@ export function useRapidFlip(
     duration?: number,
   ) => void,
 ) {
-  const [isRapidFlipping, setIsRapidFlipping] = useState(false);
-  const [tabActiveItem, setTabActiveItem] = useState<IndexItem>('List');
+  const isRapidFlipping = useHistoryStore((s) => s.isRapidFlipping);
+  const tabActiveItem = useHistoryStore((s) => s.tabActiveItem);
 
   const stepsRef = useRef<NavigationStep[]>([]);
   const directionRef = useRef<FlipDirection>('forward');
@@ -27,15 +28,17 @@ export function useRapidFlip(
     stepsRef.current = steps;
     directionRef.current = direction;
 
-    setIsRapidFlipping(true);
-    setTabActiveItem(targetItem);
+    useHistoryStore.setState({
+      isRapidFlipping: true,
+      tabActiveItem: targetItem,
+    });
 
     const isLast = steps.length === 0;
     startFlipAnimation(
       direction,
       () => {
         applyStep(firstStep);
-        if (isLast) setIsRapidFlipping(false);
+        if (isLast) useHistoryStore.setState({ isRapidFlipping: false });
       },
       firstStep.duration ?? RAPID_FLIP_DURATION,
     );
@@ -52,7 +55,7 @@ export function useRapidFlip(
         directionRef.current,
         () => {
           applyStep(step);
-          if (isLast) setIsRapidFlipping(false);
+          if (isLast) useHistoryStore.setState({ isRapidFlipping: false });
         },
         step.duration ?? RAPID_FLIP_DURATION,
       );
@@ -62,7 +65,7 @@ export function useRapidFlip(
   }
 
   function updateTabActiveItem(item: IndexItem) {
-    setTabActiveItem(item);
+    useHistoryStore.setState({ tabActiveItem: item });
   }
 
   function cleanup() {

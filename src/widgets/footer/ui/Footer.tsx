@@ -16,7 +16,7 @@ export function Footer() {
             <img src={induelIcon} alt='인들이앤에이치 로고' loading='lazy' />
           </div>
           <div className='footer__company_name'>
-            <p className='footer__company_name-kor'>(주) {COMPANY.NAME_KO}</p>
+            <p className='footer__company_name-kor'>{COMPANY.NAME_KR}</p>
             <p className='footer__company_name-eng'>{COMPANY.NAME_EN_FULL}</p>
           </div>
         </div>

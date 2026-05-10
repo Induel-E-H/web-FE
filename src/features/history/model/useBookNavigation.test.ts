@@ -1,16 +1,19 @@
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { FLIP_DURATION } from './constants';
+import { FLIP_DURATION, RAPID_FLIP_DURATION } from './constants';
 import { useBookNavigation } from './useBookNavigation';
+import { useHistoryStore } from './useHistoryStore';
 
 describe('useBookNavigation', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    useHistoryStore.getState().reset();
   });
 
   afterEach(() => {
     vi.useRealTimers();
+    useHistoryStore.getState().reset();
   });
 
   it('초기 activeItem은 List이다', () => {
@@ -70,6 +73,23 @@ describe('useBookNavigation', () => {
     });
   });
 
+  describe('navigateLeft — 카테고리 경계 이동', () => {
+    it('Content 첫 페이지에서 left 시 List 마지막 페이지로 이동한다', () => {
+      useHistoryStore.setState({
+        activeItem: 'Content',
+        pageIndices: { List: 0, Content: 0, Timeline: 0, Milestones: 0 },
+      });
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+      act(() => {
+        result.current.beginContinuousFlip('left');
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      expect(result.current.activeItem).toBe('List');
+    });
+  });
+
   describe('navigateToCategory', () => {
     it('현재 위치와 동일한 카테고리/페이지로 이동 시 무시된다', () => {
       const { result } = renderHook(() => useBookNavigation('desktop'));
@@ -105,6 +125,43 @@ describe('useBookNavigation', () => {
       });
       expect(result.current.activeItem).toBe('Timeline');
     });
+
+    it('애니메이션 중 재호출은 무시된다 (isAnimatingRef guard)', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+      act(() => {
+        result.current.navigateToCategory('Content', 0);
+      });
+      expect(result.current.isFlipping).toBe(true);
+      act(() => {
+        result.current.navigateToCategory('Timeline', 0);
+      });
+      expect(result.current.flipDirection).toBe('forward');
+      expect(result.current.activeItem).toBe('List');
+    });
+
+    it('같은 카테고리 다음 페이지로 이동 시 forward 방향으로 flip된다', () => {
+      useHistoryStore.setState({
+        activeItem: 'Content',
+        pageIndices: { List: 0, Content: 0, Timeline: 0, Milestones: 0 },
+      });
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+      act(() => {
+        result.current.navigateToCategory('Content', 1);
+      });
+      expect(result.current.flipDirection).toBe('forward');
+    });
+
+    it('같은 카테고리 이전 페이지로 이동 시 backward 방향으로 flip된다', () => {
+      useHistoryStore.setState({
+        activeItem: 'Content',
+        pageIndices: { List: 0, Content: 2, Timeline: 0, Milestones: 0 },
+      });
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+      act(() => {
+        result.current.navigateToCategory('Content', 0);
+      });
+      expect(result.current.flipDirection).toBe('backward');
+    });
   });
 
   describe('shadow count', () => {
@@ -128,6 +185,44 @@ describe('useBookNavigation', () => {
     it('syncCoverCallbacks가 반환값에 포함된다', () => {
       const { result } = renderHook(() => useBookNavigation('desktop'));
       expect(typeof result.current.syncCoverCallbacks).toBe('function');
+    });
+  });
+
+  describe('rapid flip 콜백 (navigateLeft/Right with RAPID_FLIP_DURATION)', () => {
+    it('hold chaining 시 navigateRight가 RAPID_FLIP_DURATION으로 실행된다', () => {
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.beginContinuousFlip('right');
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      act(() => {
+        vi.runAllTimers();
+      });
+
+      expect(result.current.currentFlipDuration).toBe(RAPID_FLIP_DURATION);
+    });
+
+    it('hold chaining 시 navigateLeft가 RAPID_FLIP_DURATION으로 실행된다', () => {
+      useHistoryStore.setState({
+        activeItem: 'Content',
+        pageIndices: { List: 0, Content: 2, Timeline: 0, Milestones: 0 },
+      });
+      const { result } = renderHook(() => useBookNavigation('desktop'));
+
+      act(() => {
+        result.current.beginContinuousFlip('left');
+      });
+      act(() => {
+        vi.advanceTimersByTime(FLIP_DURATION);
+      });
+      act(() => {
+        vi.runAllTimers();
+      });
+
+      expect(result.current.currentFlipDuration).toBe(RAPID_FLIP_DURATION);
     });
   });
 

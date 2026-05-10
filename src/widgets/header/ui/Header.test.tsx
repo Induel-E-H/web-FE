@@ -1,5 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 
+import { COMPANY } from '@shared/constant';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Header } from '@widgets/header';
@@ -8,6 +9,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 const mockSmoothScrollTo = vi.hoisted(() => vi.fn());
 const mockUseIsHero = vi.hoisted(() => vi.fn(() => true));
 const mockNavigate = vi.hoisted(() => vi.fn());
+
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: { children: unknown }) => children,
+  motion: new Proxy(
+    {},
+    {
+      get: (_, key: string) => key,
+    },
+  ),
+}));
 
 vi.mock('react-icons/rx', () => ({
   RxHamburgerMenu: () => <svg data-testid='hamburger-icon' />,
@@ -19,7 +30,7 @@ vi.mock('@shared/lib/scroll/smoothScrollTo', () => ({
   smoothScrollTo: mockSmoothScrollTo,
 }));
 
-vi.mock('../model/useIsHero', () => ({
+vi.mock('@features/header/model/useIsHero', () => ({
   useIsHero: mockUseIsHero,
 }));
 
@@ -33,7 +44,7 @@ const mockUseHeaderVisibility = vi.hoisted(() =>
   })),
 );
 
-vi.mock('../model/useHeaderVisibility', () => ({
+vi.mock('@features/header/model/useHeaderVisibility', () => ({
   useHeaderVisibility: mockUseHeaderVisibility,
 }));
 
@@ -69,12 +80,14 @@ describe('Header', () => {
 
     it('로고 이미지가 렌더링된다', () => {
       renderHeader();
-      expect(screen.getByAltText('인들이앤에이치 로고')).toBeInTheDocument();
+      expect(
+        screen.getByAltText(`${COMPANY.NAME_KR} 로고`),
+      ).toBeInTheDocument();
     });
 
     it('회사명 텍스트가 표시된다', () => {
       renderHeader();
-      expect(screen.getByText('인들이앤에이치')).toBeInTheDocument();
+      expect(screen.getByText(COMPANY.NAME_KR)).toBeInTheDocument();
     });
 
     it('NAV_ITEMS의 모든 버튼이 nav 안에 렌더링된다', () => {
@@ -287,6 +300,20 @@ describe('Header', () => {
       expect(
         container.querySelector('.header__mobile-menu'),
       ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('onNavClick prop', () => {
+    it('onNavClick이 제공되면 nav 클릭 시 onNavClick이 selector와 함께 호출된다', async () => {
+      const onNavClick = vi.fn();
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <Header onNavClick={onNavClick} />
+        </MemoryRouter>,
+      );
+      await userEvent.click(screen.getAllByText('VISION')[0]);
+      expect(onNavClick).toHaveBeenCalledWith('.vision');
+      expect(mockSmoothScrollTo).not.toHaveBeenCalled();
     });
   });
 

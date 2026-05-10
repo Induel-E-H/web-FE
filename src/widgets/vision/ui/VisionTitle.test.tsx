@@ -1,14 +1,29 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { VisionTitle } from './VisionTitle';
 
+const elementCallbackMap = new Map<Element, IntersectionObserverCallback>();
+const mockObserve = vi.fn();
+const mockDisconnect = vi.fn();
+
 beforeEach(() => {
+  elementCallbackMap.clear();
+  mockObserve.mockClear();
+  mockDisconnect.mockClear();
   vi.stubGlobal(
     'IntersectionObserver',
     class {
-      observe = vi.fn();
-      disconnect = vi.fn();
+      private cb: IntersectionObserverCallback;
+      constructor(cb: IntersectionObserverCallback) {
+        this.cb = cb;
+      }
+      observe = (el: Element) => {
+        elementCallbackMap.set(el, this.cb);
+        mockObserve(el);
+      };
+      unobserve = vi.fn();
+      disconnect = mockDisconnect;
     },
   );
 });
@@ -35,6 +50,33 @@ describe('VisionTitle', () => {
     it('hr 구분선이 렌더링된다', () => {
       const { container } = render(<VisionTitle />);
       expect(container.querySelector('hr')).toBeInTheDocument();
+    });
+  });
+
+  describe('스크롤 애니메이션 (isVisible)', () => {
+    it('요소가 뷰포트에 진입하면 animate 상태가 변경된다', () => {
+      const { container } = render(<VisionTitle />);
+      const el = container.querySelector('.vision__title')!;
+      const cb = elementCallbackMap.get(el);
+
+      act(() => {
+        cb?.(
+          [
+            {
+              isIntersecting: true,
+              boundingClientRect: { top: -100 } as DOMRectReadOnly,
+              intersectionRatio: 1,
+              intersectionRect: {} as DOMRectReadOnly,
+              rootBounds: null,
+              target: el,
+              time: 0,
+            },
+          ],
+          {} as IntersectionObserver,
+        );
+      });
+
+      expect(container.querySelector('.vision__title')).toBeInTheDocument();
     });
   });
 });

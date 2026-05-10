@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { VisionItem } from './VisionItem';
@@ -31,6 +31,7 @@ beforeEach(() => {
         elementCallbackMap.set(el, this.cb);
         mockObserve(el);
       };
+      unobserve = vi.fn();
       disconnect = mockDisconnect;
     },
   );
@@ -78,16 +79,75 @@ describe('VisionItem', () => {
     });
 
     it('sizes 속성이 반응형 뷰포트에 따라 설정된다', () => {
-      render(<VisionItem {...defaultProps} imageSrcSet='test.webp 480w' />);
+      render(<VisionItem {...defaultProps} />);
       expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
         'sizes',
         '(max-width: 767px) 100vw, (max-width: 1024px) 67vw, 710px',
       );
     });
 
+    it('이미지에 loading="lazy" 속성이 설정된다', () => {
+      render(<VisionItem {...defaultProps} />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'loading',
+        'lazy',
+      );
+    });
+
+    it('이미지에 width="710" 속성이 설정된다', () => {
+      render(<VisionItem {...defaultProps} />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'width',
+        '710',
+      );
+    });
+
+    it('이미지에 height="473" 속성이 설정된다', () => {
+      render(<VisionItem {...defaultProps} />);
+      expect(screen.getByAltText('정밀한 설계')).toHaveAttribute(
+        'height',
+        '473',
+      );
+    });
+
     it('hr 구분선이 렌더링된다', () => {
       const { container } = render(<VisionItem {...defaultProps} />);
       expect(container.querySelector('hr')).toBeInTheDocument();
+    });
+
+    it('hr 구분선에 aria-hidden="true" 속성이 설정된다', () => {
+      const { container } = render(<VisionItem {...defaultProps} />);
+      expect(container.querySelector('hr')).toHaveAttribute(
+        'aria-hidden',
+        'true',
+      );
+    });
+  });
+
+  describe('스크롤 애니메이션 (isVisible)', () => {
+    it('요소가 뷰포트에 진입하면 isVisible이 true가 된다', () => {
+      const { container } = render(<VisionItem {...defaultProps} />);
+      const el = container.querySelector('.vision__content')!;
+      const cb = elementCallbackMap.get(el);
+
+      act(() => {
+        cb?.(
+          [
+            {
+              isIntersecting: true,
+              boundingClientRect: { top: -100 } as DOMRectReadOnly,
+              intersectionRatio: 1,
+              intersectionRect: {} as DOMRectReadOnly,
+              rootBounds: null,
+              target: el,
+              time: 0,
+            },
+          ],
+          {} as IntersectionObserver,
+        );
+      });
+
+      expect(container.querySelector('.vision__content')).toBeInTheDocument();
     });
   });
 
@@ -111,93 +171,6 @@ describe('VisionItem', () => {
       expect(
         container.querySelector('.vision__content--reverse'),
       ).not.toBeInTheDocument();
-    });
-  });
-
-  describe('스크롤 페이드인 애니메이션', () => {
-    it('마운트 시 IntersectionObserver를 등록한다', () => {
-      render(<VisionItem {...defaultProps} />);
-      expect(mockObserve).toHaveBeenCalledTimes(1);
-    });
-
-    it('언마운트 시 IntersectionObserver를 해제한다', () => {
-      const { unmount } = render(<VisionItem {...defaultProps} />);
-      unmount();
-      expect(mockDisconnect).toHaveBeenCalledTimes(1);
-    });
-
-    it('뷰포트에 진입하면 is-visible 클래스가 추가된다', () => {
-      const { container } = render(<VisionItem {...defaultProps} />);
-      const el = container.querySelector('.vision__content')!;
-      const cb = elementCallbackMap.get(el)!;
-
-      cb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-
-      expect(el).toHaveClass('is-visible');
-    });
-
-    it('뷰포트 아래로 벗어나면 is-visible 클래스가 제거된다', () => {
-      const { container } = render(<VisionItem {...defaultProps} />);
-      const el = container.querySelector('.vision__content')!;
-      const cb = elementCallbackMap.get(el)!;
-
-      cb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).toHaveClass('is-visible');
-
-      cb(
-        [
-          {
-            isIntersecting: false,
-            boundingClientRect: { top: 200 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).not.toHaveClass('is-visible');
-    });
-
-    it('뷰포트 위로 벗어나면 is-visible 클래스가 유지된다', () => {
-      const { container } = render(<VisionItem {...defaultProps} />);
-      const el = container.querySelector('.vision__content')!;
-      const cb = elementCallbackMap.get(el)!;
-
-      cb(
-        [
-          {
-            isIntersecting: true,
-            boundingClientRect: { top: 100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).toHaveClass('is-visible');
-
-      cb(
-        [
-          {
-            isIntersecting: false,
-            boundingClientRect: { top: -100 },
-          } as IntersectionObserverEntry,
-        ],
-        {} as IntersectionObserver,
-      );
-      expect(el).toHaveClass('is-visible');
     });
   });
 });

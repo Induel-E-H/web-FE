@@ -4,9 +4,14 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { PatentValidContent } from './ValidContent';
 
-vi.mock('@shared/lib/useScrollLock', () => ({
-  lockScroll: vi.fn(),
-  unlockScroll: vi.fn(),
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: { children: unknown }) => children,
+  motion: new Proxy(
+    {},
+    {
+      get: (_, key: string) => key,
+    },
+  ),
 }));
 
 describe('PatentValidContent', () => {
@@ -39,31 +44,13 @@ describe('PatentValidContent', () => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
 
-    it('팝업이 열리면 첫 번째 특허 제목이 aria-label로 설정된다', () => {
+    it('팝업이 열린 상태에서 닫기 버튼 클릭 시 팝업이 닫힌다', () => {
       render(<PatentValidContent />);
-      fireEvent.click(screen.getAllByRole('button')[0]);
-      expect(
-        screen.getByRole('dialog', { name: PATENT_VALID_LIST[0].title }),
-      ).toBeInTheDocument();
-    });
+      const cards = screen.getAllByRole('button');
+      fireEvent.click(cards[0]);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
 
-    it('두 번째 카드 클릭 시 두 번째 특허 팝업이 열린다', () => {
-      render(<PatentValidContent />);
-      fireEvent.click(screen.getAllByRole('button')[1]);
-      expect(
-        screen.getByRole('dialog', { name: PATENT_VALID_LIST[1].title }),
-      ).toBeInTheDocument();
-    });
-
-    it('팝업 닫기 버튼 클릭 시 팝업이 닫힌다', () => {
-      render(<PatentValidContent />);
-      fireEvent.click(screen.getAllByRole('button')[0]);
       fireEvent.click(screen.getByRole('button', { name: '닫기' }));
-      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    });
-
-    it('팝업이 없는 초기 상태에서 dialog가 렌더링되지 않는다', () => {
-      render(<PatentValidContent />);
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
   });

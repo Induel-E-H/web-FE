@@ -1,13 +1,8 @@
-import { useState } from 'react';
-
-import { YEAR_ALL, YEAR_LIST } from './constant';
+import { YEAR_LIST } from './constant';
+import { useAwardStore } from './useAwardStore';
 
 export function useYearFilter() {
-  const [activeYear, setActiveYear] = useState<string | number>(YEAR_ALL);
-
-  function handleYearChange(year: string | number): void {
-    setActiveYear(year);
-  }
-
+  const activeYear = useAwardStore((s) => s.activeYear);
+  const handleYearChange = useAwardStore((s) => s.handleYearChange);
   return { activeYear, yearList: YEAR_LIST, handleYearChange };
 }

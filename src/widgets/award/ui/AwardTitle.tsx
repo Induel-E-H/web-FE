@@ -4,6 +4,11 @@ import '../styles/AwardTitle.css';
 
 export function AwardTitle() {
   return (
-    <SectionTitle subTitle='AWARD' title='수상 기록' className='award__title' />
+    <SectionTitle
+      subTitle='AWARD'
+      title='수상 기록'
+      variant='reverse'
+      className='award__title'
+    />
   );
 }

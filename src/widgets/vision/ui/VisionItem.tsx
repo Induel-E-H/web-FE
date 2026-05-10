@@ -1,4 +1,5 @@
-import { useIntersectionAnimation } from '@shared/lib/useIntersectionAnimation';
+import { useScrollAnimation } from '@shared/lib/animation/useScrollAnimation';
+import { motion } from 'framer-motion';
 
 import '../styles/VisionItem.css';
 
@@ -19,12 +20,15 @@ export function VisionItem({
   index,
 }: VisionItemProps) {
   const isReverse = index % 2 !== 0;
-  const ref = useIntersectionAnimation<HTMLDivElement>();
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>();
 
   return (
-    <div
+    <motion.div
       ref={ref}
       className={`vision__content${isReverse ? ' vision__content--reverse' : ''}`}
+      initial={false}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       <div className='vision__content__image'>
         <img
@@ -47,6 +51,6 @@ export function VisionItem({
         </div>
         <p className='vision__content__description'>{description}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

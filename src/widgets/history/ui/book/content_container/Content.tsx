@@ -9,6 +9,7 @@ import {
 } from '@entities/history';
 import { getArtworkIndex, preloadContentImages } from '@features/history';
 import type { PageSide } from '@features/history';
+import { AnimatePresence } from 'framer-motion';
 
 import '../../../styles/book/content_container/Content.css';
 import { ImageGalleryPopup } from '../../ImageGalleryPopup';
@@ -72,6 +73,7 @@ function ContentItem({
 
     function measure() {
       const articleHeight = article!.clientHeight;
+      if (!articleHeight) return;
       const textHeight = text!.clientHeight;
       const gap = parseFloat(getComputedStyle(article!).gap) || 0;
       const available = articleHeight - textHeight - gap;
@@ -86,12 +88,24 @@ function ContentItem({
     return () => ro.disconnect();
   }, [imageSrc]);
 
-  async function handleImageClick(e: React.MouseEvent) {
-    e.stopPropagation();
-    e.preventDefault();
+  async function openImageGallery() {
     const images = await getAllContentImages(index);
     setContentImages(images);
     setShowPopup(true);
+  }
+
+  function handleImageClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    e.preventDefault();
+    void openImageGallery();
+  }
+
+  function handleImageKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      void openImageGallery();
+    }
   }
 
   function handlePopupClose() {
@@ -123,10 +137,7 @@ function ContentItem({
           <h3 className='content__title-kor'>{item.title}</h3>
           <h3 className='content__title-eng'>{item.titleEng}</h3>
         </div>
-        <SubTitleContent
-          subTitle={item.subTitle as SubTitleProp}
-          content={item.content as ContentProp}
-        />
+        <SubTitleContent subTitle={item.subTitle} content={item.content} />
         <dl className='content__caption'>
           <div className='content__caption-col'>
             {item.time && (
@@ -162,13 +173,11 @@ function ContentItem({
         <figure
           className={`content__image${imageSrc ? ' content__image--has-image' : ''}`}
           onMouseDown={(e) => imageSrc && e.stopPropagation()}
-          onClick={
-            imageSrc
-              ? (e) => {
-                  void handleImageClick(e);
-                }
-              : undefined
-          }
+          onClick={imageSrc ? handleImageClick : undefined}
+          onKeyDown={imageSrc ? handleImageKeyDown : undefined}
+          role={imageSrc ? 'button' : undefined}
+          tabIndex={imageSrc ? 0 : undefined}
+          aria-label={imageSrc ? '이미지 확대 보기' : undefined}
         >
           {imageSrc && (
             <>
@@ -180,15 +189,18 @@ function ContentItem({
           )}
         </figure>
       )}
-      {showPopup &&
-        createPortal(
-          <ImageGalleryPopup
-            title={item.title}
-            images={contentImages}
-            onClose={handlePopupClose}
-          />,
-          document.body,
-        )}
+      {createPortal(
+        <AnimatePresence>
+          {showPopup && (
+            <ImageGalleryPopup
+              title={item.title}
+              images={contentImages}
+              onClose={handlePopupClose}
+            />
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </article>
   );
 }

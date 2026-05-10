@@ -11,6 +11,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ContentPage } from './Content';
 
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: { children: unknown }) => children,
+  motion: new Proxy(
+    {},
+    {
+      get: (_, key: string) => key,
+    },
+  ),
+}));
+
 vi.mock('@features/history/model/helpers', async (importOriginal) => {
   const actual =
     await importOriginal<typeof import('@features/history/model/helpers')>();
@@ -195,6 +205,49 @@ describe('ContentPage', () => {
       await waitFor(() => {
         expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
       });
+    });
+
+    it('figure에서 Enter 키 입력 시 팝업이 열린다 (handleImageKeyDown)', async () => {
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector(
+        'figure.content__image--has-image',
+      ) as HTMLElement;
+      fireEvent.keyDown(figure, { key: 'Enter' });
+      await waitFor(() => {
+        expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
+      });
+    });
+
+    it('figure에서 Space 키 입력 시 팝업이 열린다 (handleImageKeyDown)', async () => {
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector(
+        'figure.content__image--has-image',
+      ) as HTMLElement;
+      fireEvent.keyDown(figure, { key: ' ' });
+      await waitFor(() => {
+        expect(document.querySelector('.popup__overlay')).toBeInTheDocument();
+      });
+    });
+
+    it('figure에서 기타 키 입력 시 팝업이 열리지 않는다 (handleImageKeyDown)', () => {
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector(
+        'figure.content__image--has-image',
+      ) as HTMLElement;
+      fireEvent.keyDown(figure, { key: 'Tab' });
+      expect(document.querySelector('.popup__overlay')).not.toBeInTheDocument();
+    });
+
+    it('imageSrc가 없으면 figure에 이미지 관련 속성이 설정되지 않는다', () => {
+      vi.spyOn(entityHistory, 'getThumbnailImage').mockReturnValue(
+        null as never,
+      );
+      const { container } = render(<ContentPage side='left' pageIndex={0} />);
+      const figure = container.querySelector('figure.content__image');
+      expect(figure).toBeInTheDocument();
+      expect(figure).not.toHaveAttribute('role');
+      expect(figure).not.toHaveAttribute('tabIndex');
+      expect(figure).not.toHaveAttribute('aria-label');
     });
 
     it('팝업 닫기 버튼 클릭 시 팝업이 닫힌다 (handlePopupClose)', async () => {

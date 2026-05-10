@@ -37,8 +37,11 @@ vi.mock('@shared/lib/three/core/createCamera', () => ({
 vi.mock('@shared/lib/three/core/createLights', () => ({
   createLights: mockCreateLights,
 }));
+const mockIsWebGL2Supported = vi.hoisted(() => vi.fn(() => true));
+
 vi.mock('@shared/lib/three/core/createRenderer', () => ({
   createRenderer: mockCreateRenderer,
+  isWebGL2Supported: mockIsWebGL2Supported,
 }));
 vi.mock('@shared/lib/three/core/createScene', () => ({
   createScene: mockCreateScene,
@@ -51,8 +54,8 @@ vi.mock('@shared/lib/three/utils/attachResizeHandler', () => ({
 }));
 
 function WaveCanvas() {
-  const ref = useWaveBackground();
-  return <canvas ref={ref} />;
+  const { canvasRef } = useWaveBackground();
+  return <canvas ref={canvasRef} />;
 }
 
 describe('useWaveBackground', () => {
@@ -143,6 +146,17 @@ describe('useWaveBackground', () => {
     });
   });
 
+  describe('canvas ref 미연결 시', () => {
+    it('canvas가 마운트되지 않으면 Three.js 초기화가 실행되지 않는다', () => {
+      function NoCanvas() {
+        useWaveBackground();
+        return null;
+      }
+      render(<NoCanvas />);
+      expect(mockCreateScene).not.toHaveBeenCalled();
+    });
+  });
+
   describe('Three.js 초기화 실패 시', () => {
     it('createScene에서 에러 발생 시 cleanup 함수가 호출되지 않는다', () => {
       mockCreateScene.mockImplementationOnce(() => {
@@ -174,6 +188,27 @@ describe('useWaveBackground', () => {
       mockCreateWaveTubes.mockImplementationOnce(() => {
         throw new Error('Geometry creation failed');
       });
+
+      const { unmount } = render(<WaveCanvas />);
+      unmount();
+
+      expect(mockCancelAnimation).not.toHaveBeenCalled();
+      expect(mockRemoveResizeListener).not.toHaveBeenCalled();
+      expect(mockDispose).not.toHaveBeenCalled();
+    });
+
+    it('WebGL2 미지원 시 Three.js 초기화 함수들이 호출되지 않는다', () => {
+      mockIsWebGL2Supported.mockReturnValueOnce(false);
+
+      render(<WaveCanvas />);
+
+      expect(mockCreateScene).not.toHaveBeenCalled();
+      expect(mockCreateCamera).not.toHaveBeenCalled();
+      expect(mockCreateRenderer).not.toHaveBeenCalled();
+    });
+
+    it('WebGL2 미지원 시 언마운트해도 cleanup 함수가 호출되지 않는다', () => {
+      mockIsWebGL2Supported.mockReturnValueOnce(false);
 
       const { unmount } = render(<WaveCanvas />);
       unmount();

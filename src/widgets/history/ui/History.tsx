@@ -5,6 +5,7 @@ import { PAGE_SIDE, RAPID_FLIP_DURATION } from '@features/history';
 import type { IndexItem } from '@features/history';
 import { useBookCoverState } from '@features/history';
 import { useBookNavigation } from '@features/history';
+import { BOOK_STATE } from '@features/history';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 
 import '../styles/History.css';
@@ -30,15 +31,11 @@ export function History() {
 
   const {
     activeItem,
-    tabActiveItem,
     currentPageIndex,
     canGoLeft,
     canGoRight,
     isFlipping,
     flipDirection,
-    currentFlipDuration,
-    isRapidFlipping,
-    isHoldChaining,
     nextPageIndex,
     nextActiveItem,
     prevPageIndex,
@@ -56,13 +53,13 @@ export function History() {
   useEffect(() => {
     syncBoundaryCallbacks(
       (duration) => {
-        if (bookState === 'open' && !isAnimatingRef.current) {
+        if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
           closingFront();
           startFlipAnimation('backward', onFrontClosed, duration);
         }
       },
       (duration) => {
-        if (bookState === 'open' && !isAnimatingRef.current) {
+        if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
           closingBack();
           startFlipAnimation('forward', onBackClosed, duration);
         }
@@ -86,6 +83,9 @@ export function History() {
     );
   });
 
+  const [pageAnnouncement, setPageAnnouncement] = useState('');
+  const prevIsFlippingRef = useRef(false);
+
   const [pendingCategory, setPendingCategory] = useState<IndexItem | null>(
     null,
   );
@@ -93,7 +93,7 @@ export function History() {
 
   useEffect(() => {
     if (
-      bookState === 'open' &&
+      bookState === BOOK_STATE.OPEN &&
       pendingCategory !== null &&
       !pendingFiredRef.current
     ) {
@@ -130,7 +130,6 @@ export function History() {
 
   const isCoverFlip =
     bookState.startsWith('opening') || bookState.startsWith('closing');
-  const isBookOpen = bookState !== 'cover-front' && bookState !== 'cover-back';
 
   const leftSlot = (
     <BookPageSlot side={PAGE_SIDE.LEFT} shadowCount={leftShadowCount}>
@@ -188,7 +187,7 @@ export function History() {
 
   function handleLeftMouseDown() {
     if (!canGoLeft) {
-      if (bookState === 'open' && !isAnimatingRef.current) {
+      if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
         closingFront();
         startFlipAnimation('backward', onFrontClosed);
       }
@@ -199,7 +198,7 @@ export function History() {
 
   function handleRightMouseDown() {
     if (!canGoRight) {
-      if (bookState === 'open' && !isAnimatingRef.current) {
+      if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
         closingBack();
         startFlipAnimation('forward', onBackClosed);
       }
@@ -226,24 +225,29 @@ export function History() {
 
   const pageIsFlipping = !isCoverFlip && isFlipping;
 
+  useEffect(() => {
+    const wasFlipping = prevIsFlippingRef.current;
+    prevIsFlippingRef.current = pageIsFlipping;
+    if (wasFlipping && !pageIsFlipping && bookState === BOOK_STATE.OPEN) {
+      setPageAnnouncement(`${activeItem} ${currentPageIndex + 1}페이지`);
+    }
+  }, [activeItem, currentPageIndex, pageIsFlipping, bookState]);
+
+  const leftAriaLabel = canGoLeft ? '이전 페이지로 이동' : '앞표지로 돌아가기';
+  const rightAriaLabel = canGoRight
+    ? '다음 페이지로 이동'
+    : '뒤표지로 돌아가기';
+
   return (
     <section id='history' className='history' aria-label='회사 역사'>
+      <div className='sr-only' aria-live='polite' aria-atomic='true'>
+        {pageAnnouncement}
+      </div>
       <HistoryTitle />
-      <HistoryCategory
-        tabActiveItem={tabActiveItem}
-        navigateToCategory={handleNavigateToCategory}
-      />
+      <HistoryCategory navigateToCategory={handleNavigateToCategory} />
       <div className='history__book'>
         <BookSide
           side={PAGE_SIDE.LEFT}
-          bookState={bookState}
-          isBookOpen={isBookOpen}
-          isCoverFlip={isCoverFlip}
-          isFlipping={pageIsFlipping}
-          isRapidFlipping={isRapidFlipping}
-          isHoldChaining={isHoldChaining}
-          flipDirection={flipDirection}
-          currentFlipDuration={currentFlipDuration}
           staticPageContent={staticLeftContent}
           flipFrontPageContent={flipFrontContent}
           flipBackPageContent={flipBackContent}
@@ -252,17 +256,10 @@ export function History() {
           onBackCoverClick={handleBackCoverClick}
           coverFrontContent={coverFrontContent}
           coverBackContent={coverBackContent}
+          ariaLabel={leftAriaLabel}
         />
         <BookSide
           side={PAGE_SIDE.RIGHT}
-          bookState={bookState}
-          isBookOpen={isBookOpen}
-          isCoverFlip={isCoverFlip}
-          isFlipping={pageIsFlipping}
-          isRapidFlipping={isRapidFlipping}
-          isHoldChaining={isHoldChaining}
-          flipDirection={flipDirection}
-          currentFlipDuration={currentFlipDuration}
           staticPageContent={staticRightContent}
           flipFrontPageContent={flipFrontContent}
           flipBackPageContent={flipBackContent}
@@ -271,6 +268,7 @@ export function History() {
           onFrontCoverClick={handleFrontCoverClick}
           coverFrontContent={coverFrontContent}
           coverBackContent={coverBackContent}
+          ariaLabel={rightAriaLabel}
         />
       </div>
     </section>

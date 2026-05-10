@@ -27,6 +27,7 @@ gh issue list -R Induel-E-H/web-FE --state open --json number,title,labels --lim
 - `✅ test` — test code
 - `⚙️ chore` — config / environment setup
 - `🧹 clean` — minor code cleanup
+- `⚡️ Performance` — Performance Improvement
 
 **Label** — pick one:
 

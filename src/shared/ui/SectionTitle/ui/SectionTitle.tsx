@@ -3,6 +3,7 @@ import '../styles/SectionTitle.css';
 type SectionTitleProps = {
   subTitle: string;
   title: string;
+  variant?: 'default' | 'reverse';
   className?: string;
   ref?: React.Ref<HTMLElement | null>;
 };
@@ -10,10 +11,17 @@ type SectionTitleProps = {
 export function SectionTitle({
   subTitle: label,
   title: heading,
+  variant = 'default',
   className,
   ref,
 }: SectionTitleProps) {
-  const rootClass = ['section-title', className].filter(Boolean).join(' ');
+  const rootClass = [
+    'section-title',
+    variant === 'reverse' && 'section-title--reverse',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <hgroup ref={ref} className={rootClass}>

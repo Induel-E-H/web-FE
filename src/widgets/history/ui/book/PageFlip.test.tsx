@@ -1,7 +1,12 @@
-import { act, render } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import { render } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { PageFlip } from './PageFlip';
+
+vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
+  useBreakpoint: vi.fn().mockReturnValue('desktop'),
+}));
 
 describe('PageFlip', () => {
   const defaultProps = {
@@ -13,15 +18,6 @@ describe('PageFlip', () => {
     isRapidFlipping: false,
     isHoldChaining: false,
   };
-
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.runOnlyPendingTimers();
-    vi.useRealTimers();
-  });
 
   it('초기에 --hidden 클래스가 있다', () => {
     const { container } = render(<PageFlip {...defaultProps} />);
@@ -73,30 +69,26 @@ describe('PageFlip', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('isFlipping=true이면 rAF 이후 flipping 클래스가 추가된다', () => {
+  it('isFlipping=true이면 --hidden 클래스가 없다', () => {
     const { container } = render(
       <PageFlip {...defaultProps} isFlipping={true} />,
     );
-    act(() => {
-      vi.runAllTimers();
-    });
-    const panel = container.querySelector('.history__book-page-flip-panel')!;
-    expect(panel.classList.contains('flipping')).toBe(true);
+    expect(
+      container.querySelector('.history__book-page-flip-panel--hidden'),
+    ).not.toBeInTheDocument();
   });
 
-  it('isFlipping=true → false로 변경 시 flipping 클래스가 제거된다', () => {
+  it('isFlipping=true → false로 변경 시 --hidden 클래스가 추가된다', () => {
     const { container, rerender } = render(
       <PageFlip {...defaultProps} isFlipping={true} />,
     );
-    act(() => {
-      vi.runAllTimers();
-    });
+    expect(
+      container.querySelector('.history__book-page-flip-panel--hidden'),
+    ).not.toBeInTheDocument();
     rerender(<PageFlip {...defaultProps} isFlipping={false} />);
-    act(() => {
-      vi.runAllTimers();
-    });
-    const panel = container.querySelector('.history__book-page-flip-panel')!;
-    expect(panel.classList.contains('flipping')).toBe(false);
+    expect(
+      container.querySelector('.history__book-page-flip-panel--hidden'),
+    ).toBeInTheDocument();
   });
 
   it('flipFrontContent가 렌더링된다', () => {
@@ -107,6 +99,54 @@ describe('PageFlip', () => {
   it('flipBackContent가 렌더링된다', () => {
     const { getByText } = render(<PageFlip {...defaultProps} />);
     expect(getByText('back')).toBeInTheDocument();
+  });
+
+  describe('모바일 breakpoint (isVertical=true)', () => {
+    afterEach(() => {
+      vi.mocked(useBreakpoint).mockReturnValue('desktop');
+    });
+
+    it('mobile breakpoint에서 forward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('mobile');
+      const { container } = render(
+        <PageFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='forward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-page-flip-panel'),
+      ).toBeInTheDocument();
+    });
+
+    it('mobile breakpoint에서 backward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('mobile');
+      const { container } = render(
+        <PageFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='backward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-page-flip-panel--backward'),
+      ).toBeInTheDocument();
+    });
+
+    it('tablet breakpoint에서 forward flip으로 렌더링된다', () => {
+      vi.mocked(useBreakpoint).mockReturnValue('tablet');
+      const { container } = render(
+        <PageFlip
+          {...defaultProps}
+          isFlipping={true}
+          flipDirection='forward'
+        />,
+      );
+      expect(
+        container.querySelector('.history__book-page-flip-panel'),
+      ).toBeInTheDocument();
+    });
   });
 
   describe('direction별 flip front/back 클래스', () => {

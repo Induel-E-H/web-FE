@@ -15,7 +15,7 @@ export function BookPageOuterShadow({
       : Array.from({ length: count }, (_, i) => i + 1);
 
   return (
-    <div className='history__book-page-outer-shadow'>
+    <div className='history__book-page-outer-shadow' aria-hidden='true'>
       {count
         ? levels.map((level) => (
             <div

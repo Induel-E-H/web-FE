@@ -10,7 +10,7 @@ export function AwardCard({
   onClick,
 }: {
   award: AwardItem;
-  onClick: (id: number) => void;
+  onClick: () => void;
 }) {
   return (
     <InfoCard
@@ -22,7 +22,7 @@ export function AwardCard({
       }}
       title={award.title}
       secondary={award.issuer}
-      onClick={() => onClick(award.id)}
+      onClick={onClick}
     />
   );
 }

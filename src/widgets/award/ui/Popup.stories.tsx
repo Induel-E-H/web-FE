@@ -1,22 +1,17 @@
+import { useAwardStore } from '@features/award';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 
 import { AwardPopup } from './Popup';
 
 const meta = {
   title: 'Widgets/Award/Popup',
   component: AwardPopup,
-  args: {
-    onClose: fn(),
-    awardId: 0,
-    awardTitle: '수상 이미지',
-  },
   parameters: {
     layout: 'fullscreen',
     docs: {
       description: {
         component:
-          '수상 카드 클릭 시 열리는 팝업. 해당 수상 이미지를 전체화면 오버레이로 표시하며, 닫기 버튼 또는 배경 클릭으로 닫힙니다.',
+          '수상 카드 클릭 시 열리는 팝업. Zustand 스토어의 selectedId가 null이 아닌 경우에만 렌더링됩니다. 수상 이미지를 전체화면 오버레이로 표시하며, 닫기 버튼 또는 배경 클릭으로 닫힙니다.',
       },
     },
   },
@@ -27,6 +22,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: '팝업 열림',
+  decorators: [
+    (Story) => {
+      useAwardStore.setState({ selectedId: 0 });
+      return <Story />;
+    },
+  ],
   parameters: {
     docs: {
       description: {

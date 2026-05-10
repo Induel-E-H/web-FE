@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
-import { useLayoutEffect, useRef } from 'react';
+
+import { useBreakpoint } from '@shared/lib/breakpoint/useBreakpoint';
+import { motion } from 'framer-motion';
 
 import '../../styles/book/PageFlip.css';
 import { BookPageOuterShadow } from './BookPageOuterShadow';
@@ -21,47 +23,35 @@ export function PageFlip({
   isRapidFlipping: boolean;
   isHoldChaining: boolean;
 }) {
-  const flipPanelRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const panel = flipPanelRef.current;
-    if (!panel) return;
-
-    if (!isFlipping) {
-      panel.style.transition = 'none';
-      panel.classList.remove('flipping');
-      panel.classList.remove('history__book-page-flip-panel--animating');
-      panel.classList.add('history__book-page-flip-panel--hidden');
-
-      requestAnimationFrame(() => {
-        if (flipPanelRef.current) {
-          flipPanelRef.current.style.transition = '';
-        }
-      });
-    } else {
-      panel.style.transition = 'none';
-      panel.classList.remove('history__book-page-flip-panel--hidden');
-      panel.classList.remove('flipping');
-      panel.classList.add('history__book-page-flip-panel--animating');
-
-      panel.getBoundingClientRect();
-
-      panel.style.transition = `transform ${flipDuration / 1000}s ease-in-out`;
-
-      requestAnimationFrame(() => {
-        if (flipPanelRef.current) {
-          flipPanelRef.current.classList.add('flipping');
-        }
-      });
-    }
-  }, [isFlipping, flipDuration]);
-
+  const breakpoint = useBreakpoint();
+  const isVertical = breakpoint !== 'desktop';
   const shouldApplyRapidClass = isRapidFlipping || isHoldChaining;
 
+  const rotateX =
+    isFlipping && isVertical ? (flipDirection === 'forward' ? 180 : -180) : 0;
+  const rotateY =
+    isFlipping && !isVertical ? (flipDirection === 'forward' ? -180 : 180) : 0;
+
+  const transformOrigin = isVertical
+    ? flipDirection === 'forward'
+      ? 'top'
+      : 'bottom'
+    : flipDirection === 'forward'
+      ? 'left center'
+      : 'right center';
+
   return (
-    <div
-      ref={flipPanelRef}
-      className={`history__book-page-flip-panel history__book-page-flip-panel--${flipDirection} history__book-page-flip-panel--hidden${shouldApplyRapidClass ? ' history__book-page--rapid' : ''}`}
+    <motion.div
+      key={String(isFlipping)}
+      className={`history__book-page-flip-panel history__book-page-flip-panel--${flipDirection}${!isFlipping ? ' history__book-page-flip-panel--hidden' : ''}${shouldApplyRapidClass ? ' history__book-page--rapid' : ''}`}
+      style={{ transformOrigin, transformStyle: 'preserve-3d' }}
+      initial={{ rotateX: 0, rotateY: 0 }}
+      animate={{ rotateX, rotateY }}
+      transition={
+        isFlipping
+          ? { type: 'tween', duration: flipDuration / 1000, ease: 'easeInOut' }
+          : { duration: 0 }
+      }
     >
       <div
         className={`history__book-page-flip-front ${flipDirection === 'forward' ? 'history__book-page-right' : 'history__book-page-left'}`}
@@ -74,8 +64,9 @@ export function PageFlip({
           <BookPageOuterShadow side={'left'} count={0} />
         )}
       </div>
-      <div
+      <motion.div
         className={`history__book-page-flip-back ${flipDirection === 'forward' ? 'history__book-page-left' : 'history__book-page-right'}`}
+        style={isVertical ? { rotateX: -180 } : { rotateY: 180 }}
       >
         {flipDirection === 'forward' && (
           <BookPageOuterShadow side={'left'} count={0} />
@@ -84,7 +75,7 @@ export function PageFlip({
         {flipDirection !== 'forward' && (
           <BookPageOuterShadow side={'left'} count={0} />
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

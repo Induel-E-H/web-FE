@@ -38,6 +38,30 @@ describe('Map', () => {
       expect(section).toBeInTheDocument();
       expect(section).toHaveClass('map');
     });
+
+    it('section에 id="map" 속성이 있다', () => {
+      const { container } = render(<Map />);
+
+      expect(container.querySelector('section')).toHaveAttribute('id', 'map');
+    });
+
+    it('section에 aria-label="찾아오시는 길" 속성이 있다', () => {
+      render(<Map />);
+
+      expect(
+        screen.getByRole('region', { name: '찾아오시는 길' }),
+      ).toBeInTheDocument();
+    });
+
+    it('Naver 가용 상태에서 .map__content div에 aria-label 속성이 있다', () => {
+      const { container } = render(<Map />);
+
+      const mapContent = container.querySelector('div.map__content');
+      expect(mapContent).toHaveAttribute(
+        'aria-label',
+        '인들이앤에이치 본사 위치 지도',
+      );
+    });
   });
 
   describe('useEffect — makeMap 호출', () => {
@@ -94,6 +118,24 @@ describe('Map', () => {
 
       expect(mockMakeMap).not.toHaveBeenCalled();
     });
+
+    it('fallback iframe에 loading="lazy" 속성이 있다', () => {
+      setNaverMaps(false);
+      render(<Map />);
+
+      expect(
+        screen.getByTitle('인들이앤에이치 본사 위치 지도'),
+      ).toHaveAttribute('loading', 'lazy');
+    });
+
+    it('fallback iframe에 map__content--fallback 클래스가 있다', () => {
+      setNaverMaps(false);
+      render(<Map />);
+
+      expect(screen.getByTitle('인들이앤에이치 본사 위치 지도')).toHaveClass(
+        'map__content--fallback',
+      );
+    });
   });
 
   describe('fallback — makeMap 실행 중 오류', () => {
@@ -109,6 +151,50 @@ describe('Map', () => {
         expect(
           screen.getByTitle('인들이앤에이치 본사 위치 지도'),
         ).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('기존 스크립트 존재 시 (Strict Mode 재실행)', () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      document
+        .querySelectorAll('script[src*="oapi.map.naver.com"]')
+        .forEach((el) => el.remove());
+    });
+
+    it('기존 스크립트가 있고 Naver 가용 시 queueMicrotask로 makeMap이 호출된다', async () => {
+      setNaverMaps(true);
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-key');
+
+      const script = document.createElement('script');
+      script.src =
+        'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=test-key';
+      document.head.appendChild(script);
+
+      render(<Map />);
+
+      await waitFor(() => {
+        expect(mockMakeMap).toHaveBeenCalled();
+      });
+    });
+
+    it('기존 스크립트가 있고 Naver 미가용 시 load 이벤트 대기한다', async () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-key');
+
+      const script = document.createElement('script');
+      script.src =
+        'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=test-key';
+      document.head.appendChild(script);
+
+      render(<Map />);
+
+      setNaverMaps(true);
+      script.dispatchEvent(new Event('load'));
+
+      await waitFor(() => {
+        expect(mockMakeMap).toHaveBeenCalled();
       });
     });
   });

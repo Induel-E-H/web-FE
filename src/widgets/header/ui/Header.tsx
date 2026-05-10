@@ -2,18 +2,23 @@ import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useHeaderVisibility } from '@features/header';
+import { useIsHero } from '@features/header';
 import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 import { smoothScrollTo } from '@shared/lib/scroll';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { NAV_ITEMS } from '../model/navItems';
-import { useHeaderVisibility } from '../model/useHeaderVisibility';
-import { useIsHero } from '../model/useIsHero';
 import '../styles/Header.css';
 
 const HERO_SELECTOR = '.hero';
 
-export function Header() {
+interface HeaderProps {
+  onNavClick?: (selector: string) => void;
+}
+
+export function Header({ onNavClick }: HeaderProps = {}) {
   const isHero = useIsHero();
   const { hidden, onNavScrollStart, onNavScrollEnd } = useHeaderVisibility();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,6 +27,10 @@ export function Header() {
   const isHome = location.pathname === '/';
 
   function scrollTo(selector: string) {
+    if (onNavClick) {
+      onNavClick(selector);
+      return;
+    }
     if (!isHome) {
       void navigate('/', { state: { scrollTo: selector } });
       return;
@@ -62,11 +71,11 @@ export function Header() {
         <div className='header__logo_icon-frame'>
           <img
             src={induelIcon}
-            alt={`${COMPANY.NAME_KO} 로고`}
+            alt={`${COMPANY.NAME_KR} 로고`}
             className='header__logo_icon'
           />
         </div>
-        <span>{COMPANY.NAME_KO}</span>
+        <span>{COMPANY.NAME_KR}</span>
       </button>
 
       <nav className='header__nav' aria-label='데스크탑 메뉴'>
@@ -83,15 +92,21 @@ export function Header() {
         <RxHamburgerMenu aria-hidden='true' />
       </button>
 
-      {menuOpen && (
-        <nav
-          id='mobile-menu'
-          className='header__mobile-menu'
-          aria-label='모바일 메뉴'
-        >
-          {navItems}
-        </nav>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id='mobile-menu'
+            className='header__mobile-menu'
+            aria-label='모바일 메뉴'
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            {navItems}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -1,7 +1,39 @@
+import type { ReactNode } from 'react';
+
+import { useAwardStore } from '@features/award';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Award } from './Award';
+
+vi.mock('framer-motion', async () => {
+  const { createElement } = await import('react');
+  return {
+    AnimatePresence: ({ children }: { children: ReactNode }) => children,
+    motion: new Proxy(
+      {},
+      {
+        get:
+          (_, tag: string) =>
+          ({ animate, style, children, ...rest }: Record<string, unknown>) =>
+            createElement(
+              tag,
+              {
+                ...rest,
+                style:
+                  (animate as { x?: string } | undefined)?.x !== undefined
+                    ? {
+                        ...(style as object),
+                        transform: `translateX(${(animate as { x: string }).x})`,
+                      }
+                    : style,
+              },
+              children as ReactNode,
+            ),
+      },
+    ),
+  };
+});
 
 const mockUseBreakpoint = vi.hoisted(() => vi.fn().mockReturnValue('desktop'));
 vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
@@ -25,11 +57,13 @@ describe('Award', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockUseBreakpoint.mockReturnValue('desktop');
+    useAwardStore.getState().reset();
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   });
 
   afterEach(() => {
+    useAwardStore.getState().reset();
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   });
@@ -62,14 +96,6 @@ describe('Award', () => {
       fireEvent.click(document.querySelectorAll('button.award__card')[0]);
 
       expect(screen.getByRole('dialog')).toBeInTheDocument();
-    });
-
-    it('카드 클릭 시 body overflow가 hidden으로 설정된다', () => {
-      render(<Award />);
-
-      fireEvent.click(document.querySelectorAll('button.award__card')[0]);
-
-      expect(document.body.style.overflow).toBe('hidden');
     });
   });
 

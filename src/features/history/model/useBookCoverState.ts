@@ -1,40 +1,40 @@
-import { useState } from 'react';
-
-import type { BookState } from './types';
+import { BOOK_STATE } from './constants';
+import { useHistoryStore } from './useHistoryStore';
 
 export function useBookCoverState() {
-  const [bookState, setBookState] = useState<BookState>('cover-front');
+  const bookState = useHistoryStore((s) => s.bookState);
+  const { setBookState } = useHistoryStore.getState();
 
   function openingFront() {
-    if (bookState !== 'cover-front') return;
-    setBookState('opening-front');
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.COVER_FRONT) return;
+    setBookState(BOOK_STATE.OPENING_FRONT);
   }
 
   function onOpened() {
-    setBookState('open');
+    setBookState(BOOK_STATE.OPEN);
   }
 
   function closingFront() {
-    if (bookState !== 'open') return;
-    setBookState('closing-front');
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.OPEN) return;
+    setBookState(BOOK_STATE.CLOSING_FRONT);
   }
 
   function onFrontClosed() {
-    setBookState('cover-front');
+    setBookState(BOOK_STATE.COVER_FRONT);
   }
 
   function closingBack() {
-    if (bookState !== 'open') return;
-    setBookState('closing-back');
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.OPEN) return;
+    setBookState(BOOK_STATE.CLOSING_BACK);
   }
 
   function onBackClosed() {
-    setBookState('cover-back');
+    setBookState(BOOK_STATE.COVER_BACK);
   }
 
   function openingBack() {
-    if (bookState !== 'cover-back') return;
-    setBookState('opening-back');
+    if (useHistoryStore.getState().bookState !== BOOK_STATE.COVER_BACK) return;
+    setBookState(BOOK_STATE.OPENING_BACK);
   }
 
   return {

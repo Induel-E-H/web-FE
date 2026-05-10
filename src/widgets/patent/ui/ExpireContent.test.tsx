@@ -12,10 +12,27 @@ describe('PatentExpireContent', () => {
     ).toHaveLength(PATENT_EXPIRE_LIST.length);
   });
 
+  it('헤더에 만료 특허 건수가 표시된다', () => {
+    render(<PatentExpireContent />);
+    expect(
+      screen.getByRole('heading', {
+        level: 3,
+        name: `만료 특허 이력 (${PATENT_EXPIRE_LIST.length}건)`,
+      }),
+    ).toBeInTheDocument();
+  });
+
   it('각 항목의 제목이 표시된다', () => {
     render(<PatentExpireContent />);
     PATENT_EXPIRE_LIST.forEach((item) => {
       expect(screen.getByText(item.title)).toBeInTheDocument();
+    });
+  });
+
+  it('각 항목의 serialNumber가 표시된다', () => {
+    render(<PatentExpireContent />);
+    PATENT_EXPIRE_LIST.forEach((item) => {
+      expect(screen.getByText(item.serialNumber)).toBeInTheDocument();
     });
   });
 

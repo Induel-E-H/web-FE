@@ -2,18 +2,16 @@
 
 You are a CTO-level front-end engineer and product designer who provides an effective, scalable and sustainable interface over time.
 
-Core Objectives: Ensure design consistency, responsive integrity, and production-grade front-end quality across all platforms.
-
-Philosophy: Clarity > Decoration. Usability > Complexity. Scalability > Short term convenience.
-
-Standards: Follow the latest front-end architecture, component-centric design, and accessibility best practices; all outputs must be ready for implementation.
-
-Language: Always respond in Korean. (Technical terms remain in English).
+- Core Objectives: Ensure design consistency, responsive integrity, and production-grade front-end quality across all platforms.
+- Philosophy: Clarity > Decoration. Usability > Complexity. Scalability > Short term convenience.
+- Standards: Follow the latest front-end architecture, component-centric design, and accessibility best practices; all outputs must be ready for implementation.
 
 # Engineering Rule
 
 1. Web load speed should be fast.
 2. Follow the FSD (Feature-Sliced Design) directory pattern.
+   - Each FSD slice must expose its public API through index.ts only.
+   - External layers must import exclusively from index.ts, not from internal paths.
 3. Styling: Plain CSS (`.css` files co-located within each FSD slice's `styles/` directory). Do NOT use CSS Modules.
 
 # Project Overview
@@ -31,14 +29,8 @@ A website for an urban landscape, exterior design, and engineering investment co
 ## Development
 
 npm run dev # Start dev server on port 5173 (all widgets)
-npm run dev:hero # Hero widget only
-npm run dev:vision # Vision widget only
-npm run dev:history # History widget only
-npm run dev:award # Award widget only
-npm run dev:patent # Patent widget only
-npm run dev:map # Map widget only
-npm run dev:footer # Footer widget only
-npm run build # Alias for build:staging
+npm run dev:{domain} # domain widget only
+npm run build # Alias for build:prod
 npm run build:staging # TypeScript check + staging build
 npm run build:prod # TypeScript check + production build
 npm run preview # Preview production build
@@ -80,6 +72,11 @@ Branch naming: `{prefix}/{name}`
 
 Example: `feat/hero-section`, `fix/map-marker-crash`
 
+## Docs
+
+Using Storybook Library
+All \*.stories.ts(x) files must have a 1:1 correspondence with their source files.
+
 # Tech Stack
 
 - React 19.2.5 (React Compiler Enabled)
@@ -92,6 +89,9 @@ Example: `feat/hero-section`, `fix/map-marker-crash`
 - Storybook ^10.3.5 — component documentation and visual/interaction testing
 - ESLint
 - Prettier
+- Framer Motion
+- Zustand
+- Lightning CSS
 
 # Architecture & Configuration
 
@@ -112,6 +112,8 @@ Configured in `vitest.config.ts` with two projects:
 - **`storybook`**: runs in Playwright Chromium (headless), driven by `@storybook/addon-vitest`
 
 Coverage uses `v8` provider; reports to `text` and `json-summary`.
+All \*.test.ts(x) files must have a 1:1 correspondence with their source files.
+They must be co-located in the same directory as the source file.
 
 ## TypeScript Configuration
 
@@ -135,10 +137,6 @@ Both configs use:
 - Local: `vite.config.ts` (hot reload port 5173)
 - Docker: `vite.config.docker.ts` (watch polling via volume mount)
 
-## Git Hooks
-
-- **Pre-commit**: Runs `lint-staged` which auto-formats all staged files with Prettier
-
 # Deployment
 
 - **Platform**: Netlify
@@ -148,200 +146,54 @@ Both configs use:
 # Project Structure
 
 ```
-src/
-  ├── main.tsx                             # Entry point (React 19 StrictMode)
-  ├── vite-env.d.ts
-  ├── app/                                 # App layer
-  │   ├── App.tsx                          # Root component
-  │   └── styles/
-  │       ├── fonts.css                    # Font definitions
-  │       └── index.css                    # Global styles
-  ├── pages/                               # Pages layer
-  │   ├── home/
-  │   │   ├── Home.tsx
-  │   │   └── index.ts
-  │   └── privacy-policy/
-  │       ├── PrivacyPolicy.tsx
-  │       ├── styles/PrivacyPolicy.css
-  │       └── index.ts
-  ├── widgets/                             # Widgets layer
-  │   ├── hero/                            # Hero section (Page 1)
-  │   │   ├── ui/
-  │   │   │   ├── Hero.tsx
-  │   │   │   └── HeroBackground.tsx       # Three.js wave background
-  │   │   ├── model/
-  │   │   │   ├── heroConfig.ts
-  │   │   │   └── useWaveBackground.ts
-  │   │   ├── styles/Hero.css
-  │   │   └── index.ts
-  │   ├── header/                          # Global navigation header
-  │   │   ├── ui/Header.tsx
-  │   │   ├── model/
-  │   │   │   ├── navItems.ts
-  │   │   │   ├── useHeaderVisibility.ts
-  │   │   │   ├── useIsHero.ts
-  │   │   │   └── useScrollDirection.ts
-  │   │   └── styles/Header.css
-  │   ├── vision/                          # Future Vision (Pages 2-4)
-  │   │   ├── ui/
-  │   │   │   ├── Vision.tsx
-  │   │   │   ├── VisionItem.tsx
-  │   │   │   └── VisionTitle.tsx
-  │   │   ├── styles/
-  │   │   │   ├── Vision.css
-  │   │   │   ├── VisionItem.css
-  │   │   │   └── VisionTitle.css
-  │   │   └── index.ts
-  │   ├── history/                         # Company History (Page 5) — book-flip UI
-  │   │   ├── ui/
-  │   │   │   ├── book/
-  │   │   │   │   ├── content_container/   # Content, List, Milestones, Timeline
-  │   │   │   │   ├── BackCover.tsx
-  │   │   │   │   ├── BookPageSide.tsx
-  │   │   │   │   ├── BookSide.tsx
-  │   │   │   │   ├── Cover.tsx
-  │   │   │   │   ├── CoverFlip.tsx
-  │   │   │   │   ├── FrontCover.tsx
-  │   │   │   │   ├── PageFlip.tsx
-  │   │   │   │   └── PageTitle.tsx
-  │   │   │   ├── Category.tsx
-  │   │   │   ├── History.tsx
-  │   │   │   ├── HistoryTitle.tsx
-  │   │   │   └── ImageGalleryPopup.tsx
-  │   │   ├── styles/
-  │   │   │   ├── book/                    # Per-component book CSS files
-  │   │   │   ├── Category.css
-  │   │   │   ├── History.css
-  │   │   │   ├── HistoryTitle.css
-  │   │   │   └── ImageGalleryPopup.css
-  │   │   └── index.ts
-  │   ├── award/                           # Awards (Page 6)
-  │   │   ├── ui/
-  │   │   │   ├── Award.tsx
-  │   │   │   ├── AwardTitle.tsx
-  │   │   │   ├── Card.tsx
-  │   │   │   ├── Count.tsx
-  │   │   │   ├── Popup.tsx
-  │   │   │   └── Viewport.tsx
-  │   │   ├── model/
-  │   │   │   ├── image.ts
-  │   │   │   └── responsive.ts
-  │   │   ├── styles/
-  │   │   └── index.ts
-  │   ├── patent/                          # Patents (Page 6)
-  │   │   ├── ui/
-  │   │   │   ├── Card.tsx
-  │   │   │   ├── ExpireContent.tsx
-  │   │   │   ├── Patent.tsx
-  │   │   │   ├── PatentTitle.tsx
-  │   │   │   └── ValidContent.tsx
-  │   │   ├── styles/
-  │   │   └── index.ts
-  │   ├── map/                             # Map & Directions (Page 7)
-  │   │   ├── ui/
-  │   │   │   ├── Map.tsx
-  │   │   │   ├── MapCard.tsx
-  │   │   │   └── MapTitle.tsx
-  │   │   ├── model/
-  │   │   │   ├── map.ts
-  │   │   │   ├── mapInfoCard.ts
-  │   │   │   └── mapMarker.ts
-  │   │   ├── styles/
-  │   │   └── index.ts
-  │   └── footer/                          # Footer (Page 7)
-  │       ├── ui/Footer.tsx
-  │       ├── styles/Footer.css
-  │       └── index.ts
-  ├── features/                            # Features layer
-  │   ├── award/                           # Award year-filter & pagination
-  │   │   ├── ui/
-  │   │   │   ├── Pagination.tsx
-  │   │   │   └── YearCategory.tsx
-  │   │   ├── model/
-  │   │   │   ├── constant.ts
-  │   │   │   ├── pagination.ts
-  │   │   │   └── useYearFilter.ts
-  │   │   ├── styles/
-  │   │   └── index.ts
-  │   └── history/                         # History book navigation logic
-  │       ├── model/
-  │       │   ├── animation/
-  │       │   │   ├── buildRapidSteps.ts
-  │       │   │   ├── useFlipAnimation.ts
-  │       │   │   └── useRapidFlip.ts
-  │       │   ├── events/useHoldNavigation.ts
-  │       │   ├── constants.ts
-  │       │   ├── helpers.ts
-  │       │   ├── pageRegistry.ts
-  │       │   ├── types.ts
-  │       │   ├── useBookCoverState.ts
-  │       │   └── useBookNavigation.ts
-  │       └── index.ts
-  ├── entities/                            # Entities layer
-  │   ├── award/
-  │   │   ├── model/
-  │   │   │   ├── awardList.ts
-  │   │   │   └── types.ts
-  │   │   └── index.ts
-  │   ├── history/
-  │   │   ├── model/
-  │   │   │   ├── artworkData.ts
-  │   │   │   ├── milestonesData.ts
-  │   │   │   └── timelineData.ts
-  │   │   └── index.ts
-  │   ├── map/
-  │   │   ├── model/transportInfo.ts
-  │   │   └── index.ts
-  │   ├── patent/
-  │   │   ├── model/patentListData.ts
-  │   │   └── index.ts
-  │   └── vision/
-  │       ├── model/visionData.ts
-  │       └── index.ts
-  ├── shared/                              # Shared layer
-  │   ├── assets/
-  │   │   ├── fonts/                       # Pretendard & BookendBatang subset woff2 + CSS
-  │   │   └── induel-icon.svg
-  │   ├── constant/
-  │   │   ├── company.ts                   # Company info constants
-  │   │   └── index.ts
-  │   ├── lib/
-  │   │   ├── breakpoint/useBreakpoint.ts  # Responsive breakpoint hook
-  │   │   ├── console/banner.ts            # Console branding banner
-  │   │   ├── ordinal/getOrdinalSuffix.ts
-  │   │   ├── scroll/smoothScrollTo.ts
-  │   │   ├── three/                       # Three.js utilities
-  │   │   │   ├── animation/waveAnimation.ts
-  │   │   │   ├── core/
-  │   │   │   │   ├── createCamera.ts
-  │   │   │   │   ├── createLights.ts
-  │   │   │   │   ├── createRenderer.ts
-  │   │   │   │   └── createScene.ts
-  │   │   │   ├── objects/
-  │   │   │   │   ├── createWaveTubes.ts
-  │   │   │   │   └── type.ts
-  │   │   │   └── utils/attachResizeHandler.ts
-  │   │   ├── useScrollLock/useScrollLock.ts
-  │   │   └── useSlideGesture/useSlideGesture.ts
-  │   └── ui/                              # Shared UI components
-  │       ├── ImageSlider/
-  │       │   ├── ui/ImageSlider.tsx
-  │       │   ├── model/useSliderNavigation.ts
-  │       │   ├── styles/ImageSlider.css
-  │       │   └── index.ts
-  │       ├── InfoCard/
-  │       │   ├── ui/InfoCard.tsx
-  │       │   ├── styles/InfoCard.css
-  │       │   └── index.ts
-  │       ├── Popup/
-  │       │   ├── ui/Popup.tsx
-  │       │   ├── styles/Popup.css
-  │       │   └── index.ts
-  │       └── SectionTitle/
-  │           ├── SectionTitle.tsx
-  │           ├── SectionTitle.css
-  │           └── index.ts
-  └── test/
-      ├── setup.ts                         # Vitest global setup
-      └── vitest.d.ts
+src
+  ├── main.tsx                            # Entry point (React 19 StrictMode)
+  ├── vite-env.d.ts                       # VITE environment variable type
+  ├── app                                 # App layer
+  ├── pages                               # Pages layer
+  │   ├── home                            # Main Page
+  │   └── privacy-policy                  # Privacy Policy Page
+  ├── widgets                             # Widgets layer
+  │   ├── hero                            # Hero section (Page 1)
+  │   ├── header                          # Global navigation header
+  │   ├── vision                          # Future Vision (Pages 2-4)
+  │   ├── history                         # Company History (Page 5) — book-flip UI
+  │   │   └── ui
+  │   │       └── book                    # History Book Component
+  │   │           └── content_container   # Content, List, Milestones, Timeline
+  │   ├── award                           # Awards (Page 6)
+  │   ├── patent                          # Patents (Page 6)
+  │   ├── map                             # Map & Directions (Page 7)
+  │   └── footer                          # Footer (Page 7)
+  ├── features                            # Features layer
+  │   ├── award                           # Award year-filter & pagination
+  │   ├── header                          # Header Visibility and Hero Check
+  │   └── history                         # History book navigation logic
+  │       └── model
+  │           └── animation               # Flip Animation
+  ├── entities                            # Entities layer
+  │   ├── award                           # Award Image and Data
+  │   ├── history                         # History Image and Data
+  │   ├── map                             # Map Image and Data
+  │   ├── patent                          # Patent Image and Data
+  │   └── vision                          # Vision Image and Data
+  ├── shared                              # Shared layer
+  │   ├── assets                          # Fonts and Icon
+  │   ├── constant                        # Company Information
+  │   ├── lib
+  │   │   ├── analytics                   # Google Analytics Load
+  │   │   ├── animation                   # Animation with Framer Motion
+  │   │   ├── breakpoint                  # Responsive breakpoint hook
+  │   │   ├── console                     # Console branding banner
+  │   │   ├── ordinal                     # Ordinal number utility
+  │   │   ├── preload                     # Image preload
+  │   │   ├── scroll                      # Header Scroll
+  │   │   ├── three                       # Three.js utilities
+  │   │   └── useSlideGesture             # Image Slider hand slide gesture
+  │   └── ui                              # Shared UI components
+  │       ├── ImageSlider
+  │       ├── InfoCard
+  │       ├── Popup
+  │       └── SectionTitle
+  └── test                                # Vitest config
 ```
