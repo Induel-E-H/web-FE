@@ -8,6 +8,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'vite.config.ts'
+      - '.lighthouserc.*.cjs'
   workflow_dispatch:
 
 jobs:
