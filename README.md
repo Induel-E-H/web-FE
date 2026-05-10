@@ -195,12 +195,12 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Desktop
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 97|🟢 100|🟠 77|🟢 100|
+  |🟢 95+|🟢 100|🟠 75+|🟢 100|
 
 - Mobile
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 92|🟢 100|🟠 73|🟢 100|
+  |🟢 90+|🟢 100|🟠 70+|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
@@ -209,7 +209,6 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - ThreeJS 렌더링 성능 최적화 (디바이스별 분기 처리)
 
 <img width="285" height="74" alt="image" src="https://github.com/user-attachments/assets/ca3ecfc5-ca4b-476b-821f-c35954c36e9b" />
-
 
 ### Compatibility
 
@@ -241,7 +240,7 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Vitest Coverage
   |% Stmts|% Branch|% Funcs|% Lines|
   |---|---|---|---|
-  |🟢 99.64|🟢 98.93|🟢 99.06|🟢 99.76|
+  |🟢 99+|🟢 98+|🟢 98+|🟢 99+|
 
 ### Observability
 
