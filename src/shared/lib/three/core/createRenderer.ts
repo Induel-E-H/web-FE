@@ -1,6 +1,15 @@
 import { isMobileViewport } from '@shared/lib/breakpoint';
 import { WebGLRenderer } from 'three';
 
+export function isWebGL2Supported(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return canvas.getContext('webgl2') !== null;
+  } catch {
+    return false;
+  }
+}
+
 const RENDER_SCALE = 0.5;
 
 export function createRenderer(canvas: HTMLCanvasElement) {

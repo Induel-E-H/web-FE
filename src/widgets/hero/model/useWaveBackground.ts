@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   attachResizeHandler,
@@ -7,13 +7,17 @@ import {
   createRenderer,
   createScene,
   createWaveTubes,
+  isWebGL2Supported,
   startWaveAnimation,
 } from '@shared/lib/three';
 
 export function useWaveBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [webglSupported] = useState(isWebGL2Supported);
 
   useEffect(() => {
+    if (!webglSupported) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -42,7 +46,7 @@ export function useWaveBackground() {
       removeResizeListener?.();
       renderer?.dispose();
     };
-  }, []);
+  }, [webglSupported]);
 
-  return canvasRef;
+  return { canvasRef, webglSupported };
 }
