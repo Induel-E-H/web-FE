@@ -10,7 +10,9 @@ export function getArtworkIndex(pageIndex: number, side: PageSide): number {
 }
 
 export function preloadContentImages(pageIndex: number): void {
-  const adjacentIndices = [
+  const indices = [
+    getArtworkIndex(pageIndex, 'left'),
+    getArtworkIndex(pageIndex, 'right'),
     getArtworkIndex(pageIndex + 1, 'left'),
     getArtworkIndex(pageIndex + 1, 'right'),
     getArtworkIndex(pageIndex - 1, 'left'),
@@ -18,7 +20,7 @@ export function preloadContentImages(pageIndex: number): void {
   ];
 
   preloadImages(
-    adjacentIndices
+    indices
       .filter((idx) => idx >= 0 && idx < artworks.length)
       .map((idx) => getThumbnailImage(idx)),
   );

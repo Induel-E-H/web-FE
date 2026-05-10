@@ -16,11 +16,7 @@ export function AwardPopup() {
       ariaLabel={`${title} 수상 이미지`}
       onClose={() => setSelectedId(null)}
     >
-      <img
-        src={getAwardImage(selectedId)}
-        alt={`${title} 수상 이미지`}
-        loading='lazy'
-      />
+      <img src={getAwardImage(selectedId)} alt={`${title} 수상 이미지`} />
     </Popup>
   );
 }
