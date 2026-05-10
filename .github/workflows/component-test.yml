@@ -2,7 +2,7 @@ name: Component Test
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, main]
   workflow_dispatch:
 
 jobs:
@@ -13,20 +13,40 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Check relevant paths
+        id: paths
+        if: github.event_name == 'pull_request'
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            relevant:
+              - 'src/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'vitest.config.ts'
+
       - name: Setup Node.js
+        if: steps.paths.outputs.relevant != 'false'
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: 'npm'
 
       - name: Install dependencies
+        if: steps.paths.outputs.relevant != 'false'
         run: npm ci
+
       - name: Run Vitest with coverage
+        if: steps.paths.outputs.relevant != 'false'
         run: npm run test:coverage
 
       - name: Save PR number
         if: always() && github.event_name == 'pull_request'
         run: echo ${{ github.event.pull_request.number }} > pr_number.txt
+
+      - name: Mark as skipped
+        if: steps.paths.outputs.relevant == 'false' && github.event_name == 'pull_request'
+        run: touch skipped.txt
 
       - name: Upload results
         if: always() && github.event_name == 'pull_request'
@@ -36,3 +56,4 @@ jobs:
           path: |
             coverage/
             pr_number.txt
+            skipped.txt

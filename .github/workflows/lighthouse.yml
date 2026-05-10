@@ -2,7 +2,13 @@ name: Lighthouse CI
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, main]
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vite.config.ts'
+      - '.lighthouserc.*.cjs'
   workflow_dispatch:
 
 jobs:

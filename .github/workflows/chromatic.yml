@@ -2,7 +2,10 @@ name: 'Chromatic Deployment'
 
 on:
   pull_request_target:
-    branches: [develop]
+    branches: [develop, main]
+    paths:
+      - '.storybook/**'
+      - 'src/**'
 
   workflow_dispatch:
 

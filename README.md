@@ -62,7 +62,7 @@ color: #333;
 line-height: 1.4;
 word-break: keep-all;
 ">
-2025. 12. 20 ~ 2026. 04. 30
+2025. 12. 20 ~ 2026. 05. 20
 </div>
 </div>
 </div>
@@ -195,18 +195,29 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Desktop
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 100|🟢 100|🟠 77|🟢 100|
+  |🟢 95+|🟢 100|🟠 75+|🟢 100|
 
 - Mobile
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 98|🟢 100|🟠 73|🟢 100|
+  |🟢 90+|🟢 100|🟠 70+|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
 
-- 이미지 용량 45.6GB -> 79MB **99.83%** 절감 (JPG, PNG, TIF -> WebP 최적화, 해상도 기반 용량 제한 적용: 썸네일 100KB, 일반 이미지 200KB)
+- 이미지 용량 45.6GB -> 78MB **99.83%** 절감 (JPG, PNG, TIF -> WebP 최적화, 해상도 기반 용량 제한 적용: 썸네일 100KB, 일반 이미지 200KB)
 - ThreeJS 렌더링 성능 최적화 (디바이스별 분기 처리)
+
+<img width="285" height="74" alt="image" src="https://github.com/user-attachments/assets/ca3ecfc5-ca4b-476b-821f-c35954c36e9b" />
+
+### Compatibility
+
+- Chrome 80 이하 브라우저는 WebGL 및 최신 CSS 기능 지원 한계를 고려하여 Unsupported Browser 페이지로 분기
+- Chrome 81~90 환경은 성능 저하 가능성을 고려해 Framer Motion 애니메이션을 축소 적용
+- Lightning CSS 기반 트랜스파일 및 자동 Vendor Prefixing으로 레거시 브라우저 대응
+- WebGL 미지원 환경에서는 Three.js 렌더링 대신 정적 이미지를 제공하는 Fallback 구조 적용
+
+<img width="1101" height="719" alt="image" src="https://github.com/user-attachments/assets/bd2baedb-afa3-4acf-b9db-a425c595fdf0" />
 
 ### Architecture
 
@@ -220,15 +231,23 @@ Google Analytics 적용을 위한 법적 요구사항을 충족하며
 - Chromatic & Storybook 기반 시각 회귀 테스트 적용
 - Netlify DNS 기반 도메인 및 배포 환경 관리
 
+<img width="314" height="339" alt="image" src="https://github.com/user-attachments/assets/f4f3a730-d8eb-43a5-b6d2-a01de7e7a90b" />
+
 ### Test & Docs
 
 - Storybook 기반 컴포넌트 명세화
 - Vitest & Storybook 연동으로 UI 단위 테스트 환경 구축
+- Vitest Coverage
+  |% Stmts|% Branch|% Funcs|% Lines|
+  |---|---|---|---|
+  |🟢 99+|🟢 98+|🟢 98+|🟢 99+|
 
 ### Observability
 
 - Google Analytics 도입에 따른 개인정보 처리방침 페이지 구현으로 법적 요구사항 대응
 - Google Analytics / Search Console 기반 사용자 유입 및 검색 성과 모니터링
+- Google Analytics 이벤트 트래킹을 통한 사용자 행동 데이터 수집 및 분석
+  <img width="1531" height="771" alt="image" src="https://github.com/user-attachments/assets/b078923d-d760-4d10-9d84-9756a9009289" />
 
 ### TeamWork
 

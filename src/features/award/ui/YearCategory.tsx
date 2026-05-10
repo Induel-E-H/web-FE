@@ -1,3 +1,5 @@
+import { trackAwardYearFilter } from '@shared/lib/analytics';
+
 import { YEAR_LIST } from '../model/constant';
 import { useAwardStore } from '../model/useAwardStore';
 import '../styles/YearCategory.css';
@@ -16,7 +18,10 @@ export function YearCategory() {
             key={year}
             aria-current={isActive ? 'true' : undefined}
             className={isActive ? 'award__year_category--active' : ''}
-            onClick={() => handleYearChange(year)}
+            onClick={() => {
+              trackAwardYearFilter(year);
+              handleYearChange(year);
+            }}
           >
             {year}
           </button>
