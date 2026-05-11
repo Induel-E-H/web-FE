@@ -50,6 +50,6 @@ describe('MapMarker', () => {
     const { container } = render(<MapMarker />);
     const image = container.querySelector('image');
     expect(image).toBeInTheDocument();
-    expect(image?.getAttribute('href')).toBe('/induel-icon.svg');
+    expect(image?.getAttribute('href')).toBe('/favicon.svg');
   });
 });

@@ -34,7 +34,7 @@ export function MapMarker() {
         y='12'
         width='16'
         height='18'
-        href='/induel-icon.svg'
+        href='/favicon.svg'
         preserveAspectRatio='xMidYMid meet'
       />
     </svg>
