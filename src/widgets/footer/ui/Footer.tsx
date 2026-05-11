@@ -13,11 +13,7 @@ export function Footer() {
       <div className='footer__top'>
         <div className='footer__company'>
           <div className='footer__icon-frame'>
-            <img
-              src='/induel-icon.svg'
-              alt='인들이앤에이치 로고'
-              loading='lazy'
-            />
+            <img src='/favicon.svg' alt='인들이앤에이치 로고' loading='lazy' />
           </div>
           <div className='footer__company_name'>
             <p className='footer__company_name-kor'>{COMPANY.NAME_KR}</p>

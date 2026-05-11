@@ -31,7 +31,7 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
         transition={{ duration: 1.2, ease: 'easeOut' }}
       >
         <img
-          src='/induel-icon.svg'
+          src='/favicon.svg'
           alt='인들이앤에이치 로고'
           className='hero__logo'
           fetchPriority='high'
