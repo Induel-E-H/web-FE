@@ -32,8 +32,7 @@
 }
 
 .hero__logo {
-  height: 16.67vmax;
-  aspect-ratio: 649 / 748;
+  height: 16.341vmax;
   filter: drop-shadow(0 0 2.08vmax var(--black));
 }
 

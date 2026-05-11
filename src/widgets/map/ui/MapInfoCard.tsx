@@ -1,4 +1,3 @@
-import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 
 import '../styles/MapInfoCard.css';
@@ -9,7 +8,7 @@ export function MapInfoCard() {
       <div className='map__info__card'>
         <div className='map__info__header'>
           <img
-            src={induelIcon}
+            src='/induel-icon.svg'
             className='map__info__logo'
             alt=''
             aria-hidden='true'
