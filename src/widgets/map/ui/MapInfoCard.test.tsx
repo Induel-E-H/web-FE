@@ -1,10 +1,8 @@
 import { COMPANY } from '@shared/constant';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { MapInfoCard } from './MapInfoCard';
-
-vi.mock('@shared/assets', () => ({ induelIcon: 'induel-icon.svg' }));
 
 describe('MapInfoCard', () => {
   it('회사 한글 이름이 렌더링된다', () => {

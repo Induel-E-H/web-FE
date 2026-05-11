@@ -1,9 +1,7 @@
 import { render } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { MapMarker } from './MapMarker';
-
-vi.mock('@shared/assets', () => ({ induelIcon: 'induel-icon.svg' }));
 
 describe('MapMarker', () => {
   it('SVG 루트 요소가 map__marker 클래스로 렌더링된다', () => {
@@ -52,6 +50,6 @@ describe('MapMarker', () => {
     const { container } = render(<MapMarker />);
     const image = container.querySelector('image');
     expect(image).toBeInTheDocument();
-    expect(image?.getAttribute('href')).toBe('induel-icon.svg');
+    expect(image?.getAttribute('href')).toBe('/induel-icon.svg');
   });
 });

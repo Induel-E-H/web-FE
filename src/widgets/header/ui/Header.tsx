@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useHeaderVisibility } from '@features/header';
 import { useIsHero } from '@features/header';
-import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 import { trackNavLogoClick, trackNavMenuClick } from '@shared/lib/analytics';
 import { smoothScrollTo } from '@shared/lib/scroll';
@@ -78,7 +77,7 @@ export function Header({ onNavClick }: HeaderProps = {}) {
       <button className='header__logo' onClick={handleLogoClick}>
         <div className='header__logo_icon-frame'>
           <img
-            src={induelIcon}
+            src='/induel-icon.svg'
             alt={`${COMPANY.NAME_KR} 로고`}
             className='header__logo_icon'
           />

@@ -24,8 +24,6 @@ vi.mock('react-icons/rx', () => ({
   RxHamburgerMenu: () => <svg data-testid='hamburger-icon' />,
 }));
 
-vi.mock('@shared/assets', () => ({ induelIcon: 'induel-icon.svg' }));
-
 vi.mock('@shared/lib/scroll/smoothScrollTo', () => ({
   smoothScrollTo: mockSmoothScrollTo,
 }));

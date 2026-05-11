@@ -1,5 +1,3 @@
-import { induelIcon } from '@shared/assets';
-
 import '../styles/MapMarker.css';
 
 export function MapMarker() {
@@ -36,7 +34,7 @@ export function MapMarker() {
         y='12'
         width='16'
         height='18'
-        href={induelIcon}
+        href='/induel-icon.svg'
         preserveAspectRatio='xMidYMid meet'
       />
     </svg>
