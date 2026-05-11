@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
-import { induelIcon } from '@shared/assets';
 import { COMPANY } from '@shared/constant';
 import { motion } from 'framer-motion';
 
@@ -32,7 +31,7 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
         transition={{ duration: 1.2, ease: 'easeOut' }}
       >
         <img
-          src={induelIcon}
+          src='/induel-icon.svg'
           alt='인들이앤에이치 로고'
           className='hero__logo'
           fetchPriority='high'
