@@ -77,7 +77,7 @@ export function Header({ onNavClick }: HeaderProps = {}) {
       <button className='header__logo' onClick={handleLogoClick}>
         <div className='header__logo_icon-frame'>
           <img
-            src='/induel-icon.svg'
+            src='/favicon.svg'
             alt={`${COMPANY.NAME_KR} 로고`}
             className='header__logo_icon'
           />

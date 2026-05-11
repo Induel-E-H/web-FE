@@ -8,7 +8,7 @@ export function MapInfoCard() {
       <div className='map__info__card'>
         <div className='map__info__header'>
           <img
-            src='/induel-icon.svg'
+            src='/favicon.svg'
             className='map__info__logo'
             alt=''
             aria-hidden='true'
