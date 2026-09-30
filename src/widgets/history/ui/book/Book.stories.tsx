@@ -18,6 +18,7 @@ const meta = {
         {leaf.item} {leaf.pageIndex + 1} ({leaf.side})
       </p>
     ),
+    targetLeaf: null,
     onPageChange: fn(),
     onSettled: fn(),
     onHoldStart: fn(),

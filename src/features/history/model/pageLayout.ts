@@ -1,7 +1,7 @@
 import { artworks } from '@entities/history';
 import type { Breakpoint } from '@shared/lib/breakpoint';
 
-import { INDEX_LIST, PAGE_SIDE } from './constants';
+import { CHAIN_EDGE_FLIPS, INDEX_LIST, PAGE_SIDE } from './constants';
 import { getArtworkIndex } from './helpers';
 import {
   getPageRegistry,
@@ -185,6 +185,25 @@ export function getLeafKey(leaf: Leaf, index: number): string {
   return leaf.kind === 'page'
     ? `${leaf.item}-${leaf.pageIndex}-${leaf.side}`
     : `${leaf.kind}-${index}`;
+}
+
+/** 펼침면 앞뒤로 내용을 미리 그려 두는 장 수 (두 펼침면씩) */
+const RENDER_REACH = 4;
+/** 여러 장 이동의 목적지 앞뒤로 그려 두는 장 수. 가운데를 건너뛴 뒤 넘기는 펼침면까지 덮는다. */
+const TARGET_REACH = (CHAIN_EDGE_FLIPS + 1) * 2;
+
+/**
+ * 장의 내용을 그릴지 정한다. 멀리 있는 장은 빈 종이로 두어 이미지를 한꺼번에 받지 않는다.
+ * 여러 장 이동(target)은 가운데를 건너뛰어 목적지 근처에 바로 도착하므로, 출발할 때부터 그쪽도 그려 둔다.
+ */
+export function shouldRenderLeaf(
+  index: number,
+  head: number,
+  target: number | null,
+): boolean {
+  if (index >= head - RENDER_REACH && index <= head + 1 + RENDER_REACH)
+    return true;
+  return target !== null && Math.abs(index - target) <= TARGET_REACH;
 }
 
 /** 표지 안쪽 장은 표지와 함께 딱딱하게 넘어간다 (앞·뒤표지는 엔진의 hardCovers 가 처리) */

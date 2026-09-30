@@ -28,11 +28,14 @@ export function History() {
   const bookRef = useRef<FlipBookHandle>(null);
   const chain = useFlipChain(bookRef);
   const [page, setPage] = useState(0);
+  const [targetLeaf, setTargetLeaf] = useState<number | null>(null);
 
   const activeItem = getLeafItem(leaves, page);
 
   function navigate(item: IndexItem, pageIndex = 0) {
-    chain.flipTo(findLeafIndex(leaves, item, pageIndex));
+    const target = findLeafIndex(leaves, item, pageIndex);
+    setTargetLeaf(target);
+    chain.flipTo(target);
   }
 
   function handleNavigateToCategory(item: IndexItem) {
@@ -81,6 +84,7 @@ export function History() {
           leaves={leaves}
           landscape={breakpoint === 'desktop'}
           renderPage={renderPage}
+          targetLeaf={targetLeaf}
           onPageChange={handlePageChange}
           onSettled={chain.onSettled}
           onHoldStart={chain.startHold}

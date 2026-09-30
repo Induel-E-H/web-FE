@@ -13,6 +13,7 @@ import {
   getPaperStack,
   hasPageContent,
   isHardLeaf,
+  shouldRenderLeaf,
 } from './pageLayout';
 import { getPageRegistry } from './pageRegistry';
 
@@ -293,5 +294,20 @@ describe('장 도우미', () => {
     expect(isHardLeaf({ kind: 'inside-back' })).toBe(true);
     expect(isHardLeaf({ kind: 'cover-front' })).toBe(false);
     expect(isHardLeaf(page)).toBe(false);
+  });
+});
+
+describe('shouldRenderLeaf', () => {
+  it('펼침면 앞뒤 두 펼침면(4장)까지만 그린다', () => {
+    expect(shouldRenderLeaf(6, 11, null)).toBe(false);
+    expect(shouldRenderLeaf(7, 11, null)).toBe(true);
+    expect(shouldRenderLeaf(16, 11, null)).toBe(true);
+    expect(shouldRenderLeaf(17, 11, null)).toBe(false);
+  });
+
+  it('여러 장 이동의 목적지 앞뒤도 그린다', () => {
+    expect(shouldRenderLeaf(40, 3, null)).toBe(false);
+    expect(shouldRenderLeaf(40, 3, 45)).toBe(true);
+    expect(shouldRenderLeaf(40, 3, 51)).toBe(false);
   });
 });

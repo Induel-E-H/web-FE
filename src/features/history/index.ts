@@ -11,6 +11,7 @@ export {
   getLeafKey,
   getPaperStack,
   isHardLeaf,
+  shouldRenderLeaf,
 } from './model/pageLayout';
 export type { Leaf, PageLeaf } from './model/pageLayout';
 export { INDEX_LIST, PAGE_SIDE, FLIP_DURATION } from './model/constants';

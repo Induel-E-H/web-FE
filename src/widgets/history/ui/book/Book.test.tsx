@@ -52,7 +52,7 @@ class MockResizeObserver {
 const leaves = buildLeaves('desktop');
 const lastLeaf = leaves.length - 1;
 
-function setup(landscape = true) {
+function setup(landscape = true, targetLeaf: number | null = null) {
   const props = {
     bookRef: { current: null as FlipBookHandle | null },
     leaves,
@@ -63,7 +63,7 @@ function setup(landscape = true) {
     onHoldStart: vi.fn(),
     onHoldEnd: vi.fn(),
   };
-  const utils = render(<Book {...props} />);
+  const utils = render(<Book {...props} targetLeaf={targetLeaf} />);
   const stage = utils.container.querySelector('.history__book-stage')!;
   const body = () => utils.container.querySelector('.history__book-body')!;
   return { ...utils, props, stage, body };
@@ -101,7 +101,7 @@ describe('Book', () => {
 
   describe('렌더링', () => {
     it('모든 장을 렌더링하고 표지는 표지 콘텐츠로 채운다', () => {
-      const { container, props } = setup();
+      const { container } = setup();
       expect(container.querySelectorAll('.history__leaf')).toHaveLength(
         leaves.length,
       );
@@ -115,9 +115,6 @@ describe('Book', () => {
         container.querySelector('.history__title-page'),
       ).toBeInTheDocument();
       expect(container.querySelector('.history__colophon')).toBeInTheDocument();
-      expect(props.renderPage).toHaveBeenCalledTimes(
-        leaves.filter((leaf) => leaf.kind === 'page').length,
-      );
     });
 
     it('표지 안쪽 장은 하드 페이지로 표시한다', () => {
@@ -371,34 +368,26 @@ describe('Book', () => {
     });
   });
 
-  describe('표지 안쪽 하드 페이지 동기화', () => {
-    function mountWithEngine(classes: string[]) {
-      const elements = classes.map((cls) => {
-        const el = document.createElement('div');
-        el.dataset.density = 'hard';
-        el.className = cls;
-        return el;
-      });
-      const engine = {
-        isReady: () => true,
-        isAnimating: () => false,
-        getPageCount: () => elements.length,
-        getPageElement: (i: number) => elements[i] ?? null,
-        updateFromHtml: vi.fn(),
-      };
-      flipbook.engine = engine;
-      setup();
-      return { engine, elements };
-    }
+  describe('장 내용 그리기', () => {
+    const renderedLeaves = (renderPage: ReturnType<typeof vi.fn>) =>
+      renderPage.mock.calls.map(([leaf]) =>
+        leaves.indexOf(leaf as (typeof leaves)[number]),
+      );
 
-    it('엔진이 soft 로 읽은 hard 장이 있으면 다시 로드한다', () => {
-      const { engine, elements } = mountWithEngine(['--hard', '--soft']);
-      expect(engine.updateFromHtml).toHaveBeenCalledWith(elements);
+    it('펼침면 근처 장만 내용을 그리고 먼 장은 빈 종이로 둔다', () => {
+      const { props } = setup();
+      const rendered = renderedLeaves(props.renderPage);
+      expect(rendered.length).toBeGreaterThan(0);
+      expect(Math.max(...rendered)).toBeLessThanOrEqual(5);
+      expect(document.querySelectorAll('.history__leaf--page')).toHaveLength(
+        leaves.filter((leaf) => leaf.kind === 'page').length,
+      );
     });
 
-    it('모두 제대로 읽혔으면 다시 로드하지 않는다', () => {
-      const { engine } = mountWithEngine(['--hard', '--hard']);
-      expect(engine.updateFromHtml).not.toHaveBeenCalled();
+    it('여러 장 이동의 목적지 근처도 미리 그린다', () => {
+      const target = lastLeaf - 6;
+      const { props } = setup(true, target);
+      expect(renderedLeaves(props.renderPage)).toContain(target);
     });
   });
 
@@ -494,6 +483,7 @@ describe('Book', () => {
           renderPage={() =>
             createPortal(<div data-testid='popup' />, document.body)
           }
+          targetLeaf={null}
           onPageChange={vi.fn()}
           onSettled={vi.fn()}
           onHoldStart={vi.fn()}

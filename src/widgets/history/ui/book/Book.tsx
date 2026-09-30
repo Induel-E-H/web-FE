@@ -1,5 +1,5 @@
 import type { CSSProperties, PointerEvent, ReactNode, RefObject } from 'react';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import {
   MdChevronLeft,
   MdChevronRight,
@@ -14,6 +14,7 @@ import {
   getLeafKey,
   getPaperStack,
   isHardLeaf,
+  shouldRenderLeaf,
   useBookGestures,
 } from '@features/history';
 import type { ChainDirection, Leaf, PageLeaf } from '@features/history';
@@ -40,6 +41,8 @@ interface BookProps {
   leaves: readonly Leaf[];
   landscape: boolean;
   renderPage: (leaf: PageLeaf) => ReactNode;
+  /** 여러 장 이동의 목적지 장. 도착하기 전에 그 근처 내용을 미리 그려 둔다. */
+  targetLeaf: number | null;
   onPageChange: (snapshot: BookSnapshot) => void;
   onSettled: () => void;
   onHoldStart: (direction: ChainDirection) => void;
@@ -51,6 +54,7 @@ export function Book({
   leaves,
   landscape,
   renderPage,
+  targetLeaf,
   onPageChange,
   onSettled,
   onHoldStart,
@@ -78,22 +82,6 @@ export function Book({
     observer.observe(stage);
     return () => observer.disconnect();
   }, []);
-
-  // lazyRadius 로 멀리 있던 장은 자리표시자로 먼저 로드되어, 엔진이 표지 안쪽의
-  // data-density='hard' 를 놓친다. 실제 장으로 바뀐 뒤 쉬고 있을 때 한 번 다시 읽힌다.
-  function syncHardLeaves() {
-    const engine = bookRef.current?.pageFlip();
-    if (!engine?.isReady() || engine.isAnimating()) return;
-    const elements = Array.from({ length: engine.getPageCount() }, (_, i) =>
-      engine.getPageElement(i),
-    ).filter((el): el is HTMLElement => el !== null);
-    const stale = elements.some(
-      (el) => el.dataset.density === 'hard' && !el.classList.contains('--hard'),
-    );
-    if (stale) engine.updateFromHtml(elements);
-  }
-
-  useEffect(syncHardLeaves);
 
   const lastLeaf = leaves.length - 1;
   const closed = page === 0 ? 'front' : page >= lastLeaf ? 'back' : null;
@@ -166,7 +154,6 @@ export function Book({
     setBodyFlag('lifted', false);
     setBodyFlag('closing-front', false);
     setBodyFlag('closing-back', false);
-    syncHardLeaves();
     onSettled();
   }
 
@@ -234,7 +221,6 @@ export function Book({
               }
               flippingTime={FLIP_DURATION}
               maxShadowOpacity={0.5}
-              lazyRadius={2}
               controls={landscape ? 'auto' : 'none'}
               controlLabels={{ previous: '이전 페이지', next: '다음 페이지' }}
               aria-label='회사 연혁'
@@ -264,7 +250,9 @@ export function Book({
                     {leaf.kind === 'cover-back' && <BackCoverInner />}
                     {leaf.kind === 'title' && <TitlePage />}
                     {leaf.kind === 'colophon' && <ColophonPage />}
-                    {leaf.kind === 'page' && renderPage(leaf)}
+                    {leaf.kind === 'page' &&
+                      shouldRenderLeaf(i, page, targetLeaf) &&
+                      renderPage(leaf)}
                   </div>
                 </div>
               ))}
