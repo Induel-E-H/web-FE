@@ -129,7 +129,7 @@ export function Home() {
       </a>
       <Header />
       <main id='main-content'>
-        <Hero showScrollArrow={true} />
+        <Hero showScrollArrow={showScrollArrow} />
         <Vision />
         <div ref={prefetchTriggerRef} aria-hidden='true' />
         <LazySection name='history'>
