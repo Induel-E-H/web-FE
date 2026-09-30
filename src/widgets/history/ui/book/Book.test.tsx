@@ -1,5 +1,6 @@
 import { useImperativeHandle } from 'react';
 import type { ReactNode, Ref } from 'react';
+import { createPortal } from 'react-dom';
 
 import { buildLeaves } from '@features/history';
 import type {
@@ -482,6 +483,27 @@ describe('Book', () => {
       swipe(stage, 500, 440, 200);
       expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
       expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
+    });
+
+    it('포털로 띄운 팝업(책 영역 밖)에서 민 것은 책을 넘기지 않는다', () => {
+      render(
+        <Book
+          bookRef={{ current: null }}
+          leaves={leaves}
+          landscape={false}
+          renderPage={() =>
+            createPortal(<div data-testid='popup' />, document.body)
+          }
+          onPageChange={vi.fn()}
+          onSettled={vi.fn()}
+          onHoldStart={vi.fn()}
+          onHoldEnd={vi.fn()}
+        />,
+      );
+      const popup = screen.getAllByTestId('popup')[0];
+      fireEvent.pointerDown(popup, { button: 0, clientX: 800, clientY: 300 });
+      fireEvent.pointerUp(popup, { clientX: 600, clientY: 300 });
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
     });
 
     it('표지를 탭해도 넘기지 않는다', () => {

@@ -183,6 +183,9 @@ export function Book({
   function handlePointerDown(e: PointerEvent<HTMLDivElement>) {
     suppressClickRef.current = false;
     if (e.button !== 0) return;
+    // 이미지 팝업처럼 포털로 띄운 요소의 이벤트도 React 트리를 따라 여기까지 올라온다.
+    // 실제 책 영역에서 시작한 입력만 스와이프·꾹 누르기로 다룬다.
+    if (!e.currentTarget.contains(e.target as Node)) return;
     swipeStartRef.current = { x: e.clientX, y: e.clientY };
     const rect = e.currentTarget.getBoundingClientRect();
     const direction: ChainDirection =
