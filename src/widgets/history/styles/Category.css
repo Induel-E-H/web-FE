@@ -1,55 +1,33 @@
 .history__category {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
 
-  align-items: center;
-  justify-content: center;
+  gap: 4px;
+  padding: 4px;
 
-  gap: 1.56vmax;
+  border: 1px solid var(--overlay-white-10);
+  border-radius: 999px;
+  background-color: rgb(var(--white-rgb) / var(--alpha-05));
 }
 
 .history__category button {
+  min-height: 40px;
+  padding: 0 clamp(14px, 2vw, 22px);
+
+  border-radius: 999px;
+
   font-weight: var(--pretendard-semibold);
-  font-size: max(16px, 1.04vw);
-  color: var(--white);
+  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  color: var(--brown-200);
 
   cursor: pointer;
 }
 
 .history__category button.active {
-  color: var(--brown-300);
+  background-color: var(--accent-gold-400);
+  color: var(--history-bg);
 }
 
-.history__category span {
-  font-weight: var(--pretendard-semibold);
-  font-size: max(16px, 1.04vw);
-  color: var(--white);
-}
-
-@media (max-width: 1024px) {
-  .history__category {
-    gap: 3.91vw;
-  }
-
-  .history__category button {
-    font-size: 1.95vw;
-  }
-
-  .history__category span {
-    font-size: 1.95vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .history__category {
-    gap: clamp(14px, 4vw, 20px);
-  }
-
-  .history__category button {
-    font-size: clamp(11px, 3.2vw, 16px);
-  }
-
-  .history__category span {
-    font-size: clamp(11px, 3.2vw, 16px);
-  }
+.history__category button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
 }

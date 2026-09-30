@@ -523,8 +523,18 @@
 .history__book-controls {
   display: flex;
   justify-content: center;
+  align-items: center;
 
-  gap: 4vw;
+  gap: 16px;
+}
+
+.history__book-pager {
+  min-width: 5em;
+
+  color: var(--brown-200);
+  font-size: 14px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 .history__book-controls button {

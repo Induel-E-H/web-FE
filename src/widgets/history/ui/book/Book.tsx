@@ -85,6 +85,8 @@ export function Book({
 
   const lastLeaf = leaves.length - 1;
   const closed = page === 0 ? 'front' : page >= lastLeaf ? 'back' : null;
+  // 펼침면 시작 장은 0, 1, 3, ..., lastLeaf 이므로 ceil(page / 2) 가 펼침면 번호다. 표지는 번호에서 뺀다.
+  const spreadCount = leaves.length / 2 - 1;
   // 넘김이 끝날 때만 page 가 바뀌므로, 두께는 다 넘어간 뒤 부드럽게 바뀐다.
   const stack = getPaperStack(leaves, page);
   // 가로(PC)는 펼침면 전체, 태블릿/모바일은 펼침면의 왼쪽 장만 화면에 보이고 오른쪽 장은 화면 밖에 둔다.
@@ -222,8 +224,7 @@ export function Book({
               }
               flippingTime={FLIP_DURATION}
               maxShadowOpacity={0.5}
-              controls={landscape ? 'auto' : 'none'}
-              controlLabels={{ previous: '이전 페이지', next: '다음 페이지' }}
+              controls='none'
               aria-label='회사 연혁'
               roleDescription='책'
               liveRegionText={(_, __, info) =>
@@ -271,28 +272,29 @@ export function Book({
           </p>
         )}
       </div>
-      {!landscape && (
-        <div className='history__book-controls'>
-          <button
-            type='button'
-            aria-label='이전 페이지'
-            disabled={page === 0}
-            {...gestures.holdButton('prev')}
-            onClick={() => bookRef.current?.flipPrev()}
-          >
-            <MdChevronLeft aria-hidden='true' />
-          </button>
-          <button
-            type='button'
-            aria-label='다음 페이지'
-            disabled={page >= lastLeaf}
-            {...gestures.holdButton('next')}
-            onClick={() => bookRef.current?.flipNext()}
-          >
-            <MdChevronRight aria-hidden='true' />
-          </button>
-        </div>
-      )}
+      <div className='history__book-controls'>
+        <button
+          type='button'
+          aria-label='이전 페이지'
+          disabled={page === 0}
+          {...gestures.holdButton('prev')}
+          onClick={() => bookRef.current?.flipPrev()}
+        >
+          <MdChevronLeft aria-hidden='true' />
+        </button>
+        <span className='history__book-pager'>
+          {closed ? '표지' : Math.ceil(page / 2)} / {spreadCount}
+        </span>
+        <button
+          type='button'
+          aria-label='다음 페이지'
+          disabled={page >= lastLeaf}
+          {...gestures.holdButton('next')}
+          onClick={() => bookRef.current?.flipNext()}
+        >
+          <MdChevronRight aria-hidden='true' />
+        </button>
+      </div>
     </>
   );
 }

@@ -83,7 +83,7 @@ describe('History', () => {
   describe('활성 카테고리', () => {
     it('처음에는 List 가 활성이다', () => {
       render(<History />);
-      expect(screen.getByRole('button', { name: 'List' })).toHaveClass(
+      expect(screen.getByRole('button', { name: '목차' })).toHaveClass(
         'active',
       );
     });
@@ -91,7 +91,7 @@ describe('History', () => {
     it('펼친 페이지의 카테고리가 활성화된다', () => {
       render(<History />);
       turnTo(findLeafIndex(leaves, 'Timeline'));
-      expect(screen.getByRole('button', { name: 'Timeline' })).toHaveClass(
+      expect(screen.getByRole('button', { name: '연혁' })).toHaveClass(
         'active',
       );
     });
@@ -100,7 +100,7 @@ describe('History', () => {
   describe('카테고리 이동', () => {
     it('카테고리를 누르면 이벤트를 기록하고 해당 방향으로 넘기기 시작한다', () => {
       render(<History />);
-      fireEvent.click(screen.getByRole('button', { name: 'Milestones' }));
+      fireEvent.click(screen.getByRole('button', { name: '주요 성과' }));
       expect(trackHistoryCategoryChange).toHaveBeenCalledWith('Milestones');
       expect(engine.handle.flipNext).toHaveBeenCalledTimes(1);
     });
@@ -108,7 +108,7 @@ describe('History', () => {
     it('앞쪽 카테고리는 뒤로 넘긴다', () => {
       render(<History />);
       turnTo(findLeafIndex(leaves, 'Timeline'));
-      fireEvent.click(screen.getByRole('button', { name: 'List' }));
+      fireEvent.click(screen.getByRole('button', { name: '목차' }));
       expect(engine.handle.flipPrev).toHaveBeenCalledTimes(1);
     });
   });
@@ -139,7 +139,7 @@ describe('History', () => {
     it('여러 장 연속 이동 중에는 페이지 넘김을 기록하지 않는다', () => {
       render(<History />);
       turnTo(1);
-      fireEvent.click(screen.getByRole('button', { name: 'Milestones' }));
+      fireEvent.click(screen.getByRole('button', { name: '주요 성과' }));
       vi.mocked(trackHistoryPageTurn).mockClear();
       turnTo(3);
       expect(trackHistoryPageTurn).not.toHaveBeenCalled();

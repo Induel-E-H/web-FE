@@ -130,7 +130,7 @@ describe('Book', () => {
         height: STAGE.height,
         hardCovers: true,
         usePortrait: false,
-        controls: 'auto',
+        controls: 'none',
       });
     });
 
@@ -529,12 +529,25 @@ describe('Book', () => {
     });
   });
 
-  describe('세로 모드 버튼', () => {
-    it('가로 모드에는 버튼이 없다', () => {
+  describe('이전/다음 버튼', () => {
+    it('가로 모드에도 버튼이 있다', () => {
       setup(true);
       expect(
-        screen.queryByRole('button', { name: '다음 페이지' }),
-      ).not.toBeInTheDocument();
+        screen.getByRole('button', { name: '다음 페이지' }),
+      ).toBeInTheDocument();
+    });
+
+    it('표지에서는 표지, 펼치면 펼침면 번호와 전체 펼침면 수를 보여 준다', () => {
+      const { container } = setup();
+      const pager = () => container.querySelector('.history__book-pager');
+      const total = leaves.length / 2 - 1;
+      expect(pager()).toHaveTextContent(`표지 / ${total}`);
+      turnTo(1);
+      expect(pager()).toHaveTextContent(`1 / ${total}`);
+      turnTo(3);
+      expect(pager()).toHaveTextContent(`2 / ${total}`);
+      turnTo(lastLeaf);
+      expect(pager()).toHaveTextContent(`표지 / ${total}`);
     });
 
     it('이전/다음 버튼으로 책을 넘긴다', () => {
