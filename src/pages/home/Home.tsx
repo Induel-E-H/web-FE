@@ -30,10 +30,12 @@ function prefetchLazyWidgets() {
 const DEV_WIDGET = import.meta.env.VITE_DEV_WIDGET;
 const isStaging = import.meta.env.MODE === 'staging';
 const isProduction = import.meta.env.MODE === 'production';
+const showScrollArrow =
+  isProduction || import.meta.env.VITE_SHOW_DOWN_ICON === 'true';
 
 const DEV_WIDGET_MAP: Record<string, ReactNode> = {
   header: <Header />,
-  hero: <Hero showScrollArrow={false} />,
+  hero: <Hero showScrollArrow={showScrollArrow} />,
   vision: <Vision />,
   history: <History />,
   award: <Award />,
@@ -127,7 +129,7 @@ export function Home() {
       </a>
       <Header />
       <main id='main-content'>
-        <Hero showScrollArrow={isProduction} />
+        <Hero showScrollArrow={true} />
         <Vision />
         <div ref={prefetchTriggerRef} aria-hidden='true' />
         <LazySection name='history'>
