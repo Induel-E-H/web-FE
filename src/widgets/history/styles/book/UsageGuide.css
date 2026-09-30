@@ -76,6 +76,8 @@
 
   color: var(--mauve-200);
 
+  /* 설명 문자열 안의 줄바꿈 문자를 화면에서도 줄바꿈으로 보여 준다 */
+  white-space: pre-line;
   word-break: keep-all;
 }
 
