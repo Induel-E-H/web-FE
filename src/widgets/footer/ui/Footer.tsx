@@ -5,6 +5,15 @@ import { trackPrivacyPolicyClick } from '@shared/lib/analytics';
 
 import '../styles/Footer.css';
 
+const INFO = [
+  ['대표이사', COMPANY.CEO],
+  ['사업자등록번호', COMPANY.BUSINESS_NO],
+  ['주소', COMPANY.ADDRESS_FULL],
+  ['TEL', COMPANY.PHONE_DISPLAY],
+  ['FAX', COMPANY.FAX],
+  ['EMAIL', COMPANY.EMAIL],
+] as const;
+
 export function Footer() {
   const navigate = useNavigate();
 
@@ -15,65 +24,32 @@ export function Footer() {
           <div className='footer__icon-frame'>
             <img src='/favicon.svg' alt='인들이앤에이치 로고' loading='lazy' />
           </div>
-          <div className='footer__company_name'>
-            <p className='footer__company_name-kor'>{COMPANY.NAME_KR}</p>
-            <p className='footer__company_name-eng'>{COMPANY.NAME_EN_FULL}</p>
+          <div>
+            <strong>{COMPANY.NAME_KR}</strong>
+            {COMPANY.NAME_EN_FULL}
           </div>
         </div>
-        <div className='footer__information'>
-          <button
-            onClick={() => {
-              trackPrivacyPolicyClick();
-              void navigate('/privacy_policy');
-            }}
-          >
-            <b>개인정보처리방침</b>
-          </button>
-        </div>
+        <button
+          type='button'
+          className='footer__privacy'
+          onClick={() => {
+            trackPrivacyPolicyClick();
+            void navigate('/privacy_policy');
+          }}
+        >
+          개인정보처리방침
+        </button>
       </div>
-      <hr />
-      <div className='footer__content'>
-        <div className='footer__left'>
-          <div className='footer__company_owner'>
-            <div className='footer__row'>
-              <span>대표이사</span>
-              <span>{COMPANY.CEO}</span>
-            </div>
-            <p className='footer__company_split' aria-hidden='true'>
-              |
-            </p>
-            <div className='footer__row'>
-              <span>사업자 등록 번호</span>
-              <span>{COMPANY.BUSINESS_NO}</span>
-            </div>
+      <dl className='footer__info'>
+        {INFO.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
           </div>
-          <div className='footer__row'>
-            <span>주소</span>
-            <span>{COMPANY.ADDRESS_FULL}</span>
-          </div>
-        </div>
-        <div className='footer__right'>
-          <div className='footer__contact'>
-            <div className='footer__row'>
-              <span>TEL</span>
-              <span>{COMPANY.PHONE_DISPLAY}</span>
-            </div>
-            <p className='footer__company_split' aria-hidden='true'>
-              |
-            </p>
-            <div className='footer__row'>
-              <span>FAX</span>
-              <span>{COMPANY.FAX}</span>
-            </div>
-          </div>
-          <div className='footer__row'>
-            <span>EMAIL</span>
-            <span>{COMPANY.EMAIL}</span>
-          </div>
-        </div>
-      </div>
+        ))}
+      </dl>
       <p className='footer__copyright'>
-        ⓒ {new Date(COMPANY.ESTABLISHED).getFullYear()}-
+        © {new Date(COMPANY.ESTABLISHED).getFullYear()}–
         {new Date().getFullYear()} {COMPANY.NAME_EN_FULL}. All rights reserved.
       </p>
     </footer>
