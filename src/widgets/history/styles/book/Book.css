@@ -204,7 +204,8 @@
   padding: 0.78vmax 1.2vmax;
 }
 
-/* 책 가운데 굴곡: 제본선으로 갈수록 어둡게 휘어 들어가는 음영 + 바깥쪽 모서리 음영 */
+/* 책 굴곡: 제본선 골짜기 → 볼록한 하이라이트 → 바깥쪽으로 다시 휘어 내려가는 음영,
+   제본선 위·아래 끝은 종이가 가라앉아 조금 더 어둡다 */
 :is(
   .history__leaf--page,
   .history__leaf--title,
@@ -227,15 +228,24 @@
     .history__leaf--blank
   )::after {
   background:
+    radial-gradient(ellipse 24% 5% at 100% 0%, rgb(0 0 0 / 0.12), transparent),
+    radial-gradient(
+      ellipse 24% 5% at 100% 100%,
+      rgb(0 0 0 / 0.12),
+      transparent
+    ),
     linear-gradient(
       to left,
-      rgb(0 0 0 / 0.28) 0%,
-      rgb(0 0 0 / 0.12) 2.5%,
-      rgb(0 0 0 / 0.04) 6%,
-      rgb(255 255 255 / 0.12) 9%,
-      transparent 14%
-    ),
-    linear-gradient(to right, rgb(0 0 0 / 0.08), transparent 1.5%);
+      rgb(0 0 0 / 0.32) 0%,
+      rgb(0 0 0 / 0.16) 2%,
+      rgb(0 0 0 / 0.06) 5%,
+      rgb(255 255 255 / 0.22) 9%,
+      rgb(255 255 255 / 0.08) 16%,
+      transparent 26%,
+      transparent 70%,
+      rgb(0 0 0 / 0.06) 94%,
+      rgb(0 0 0 / 0.12) 100%
+    );
 }
 
 .stf__item.--right
@@ -246,15 +256,20 @@
     .history__leaf--blank
   )::after {
   background:
+    radial-gradient(ellipse 24% 5% at 0% 0%, rgb(0 0 0 / 0.12), transparent),
+    radial-gradient(ellipse 24% 5% at 0% 100%, rgb(0 0 0 / 0.12), transparent),
     linear-gradient(
       to right,
-      rgb(0 0 0 / 0.28) 0%,
-      rgb(0 0 0 / 0.12) 2.5%,
-      rgb(0 0 0 / 0.04) 6%,
-      rgb(255 255 255 / 0.12) 9%,
-      transparent 14%
-    ),
-    linear-gradient(to left, rgb(0 0 0 / 0.08), transparent 1.5%);
+      rgb(0 0 0 / 0.32) 0%,
+      rgb(0 0 0 / 0.16) 2%,
+      rgb(0 0 0 / 0.06) 5%,
+      rgb(255 255 255 / 0.22) 9%,
+      rgb(255 255 255 / 0.08) 16%,
+      transparent 26%,
+      transparent 70%,
+      rgb(0 0 0 / 0.06) 94%,
+      rgb(0 0 0 / 0.12) 100%
+    );
 }
 
 .history__leaf--cover-front {
