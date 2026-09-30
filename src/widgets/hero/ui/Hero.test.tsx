@@ -4,11 +4,6 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { Hero } from './Hero';
 
-const HeroBackgroundMock = vi.hoisted(() =>
-  vi.fn(() => <canvas aria-hidden='true' />),
-);
-vi.mock('./HeroBackground', () => ({ default: HeroBackgroundMock }));
-
 vi.mock('react-icons/io', () => ({
   IoIosArrowDown: (props: Record<string, unknown>) => (
     <svg data-testid='arrow-down-icon' {...props} />
@@ -77,10 +72,35 @@ describe('Hero', () => {
       expect(section).toHaveClass('hero');
     });
 
-    it('HeroBackground canvas가 렌더링된다', () => {
+    it('배경 영상이 자동재생·음소거·반복·인라인으로 렌더링된다', () => {
       const { container } = render(<Hero showScrollArrow={false} />);
 
-      expect(container.querySelector('canvas')).toBeInTheDocument();
+      const video = container.querySelector('video');
+      expect(video).toBeInTheDocument();
+      expect(video?.autoplay).toBe(true);
+      expect(video?.muted).toBe(true);
+      expect(video?.loop).toBe(true);
+      expect(video).toHaveAttribute('playsinline');
+    });
+
+    it('모바일 영상 source가 media 조건과 함께 데스크톱보다 먼저 위치한다', () => {
+      const { container } = render(<Hero showScrollArrow={false} />);
+
+      const sources = container.querySelectorAll('source');
+      expect(sources).toHaveLength(4);
+      expect(sources[0]).toHaveAttribute('media', '(max-width: 767px)');
+      expect(sources[1]).toHaveAttribute('media', '(max-width: 767px)');
+      expect(sources[2]).not.toHaveAttribute('media');
+      expect(sources[3]).not.toHaveAttribute('media');
+    });
+
+    it('배경은 스크린 리더에서 숨겨진다', () => {
+      const { container } = render(<Hero showScrollArrow={false} />);
+
+      expect(container.querySelector('.hero__background')).toHaveAttribute(
+        'aria-hidden',
+        'true',
+      );
     });
 
     it('회사명과 영문명이 hgroup으로 묶인다', () => {
