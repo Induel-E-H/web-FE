@@ -207,6 +207,7 @@ export function Book({
               className='history__book-stack history__book-stack--right'
               aria-hidden='true'
             />
+            <div className='history__book-focus-ring' aria-hidden='true' />
             <HTMLFlipBook
               key={landscape ? 'landscape' : 'half'}
               ref={bookRef}

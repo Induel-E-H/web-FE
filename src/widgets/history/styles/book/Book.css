@@ -550,6 +550,44 @@
   cursor: default;
 }
 
+/* 키보드 포커스 테두리. 엔진은 펼침면 전체에 그리므로 끄고, 실제로 보이는 책(커버 포함)에 맞춰 다시 그린다.
+   닫힌 책은 표지가 있는 절반, 반쪽 보기는 화면에 보이는 왼쪽 장만 감싼다. */
+.history__book-body .history__flipbook:focus-visible {
+  outline: none;
+}
+
+.history__book-focus-ring {
+  position: absolute;
+  inset: calc(-1 * var(--board-pad)) calc(-1 * var(--cover-side));
+
+  display: none;
+
+  border-radius: var(--leaf-radius);
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+
+  pointer-events: none;
+}
+
+.history__book-body:has(.history__flipbook:focus-visible)
+  > .history__book-focus-ring {
+  display: block;
+}
+
+.history__book-body--closed-front > .history__book-focus-ring {
+  left: 50%;
+
+  border-radius: 0 var(--leaf-radius) var(--leaf-radius) 0;
+}
+
+.history__book-body--closed-back > .history__book-focus-ring,
+.history__book-body--half:not(.history__book-body--closed-front)
+  > .history__book-focus-ring {
+  right: 50%;
+
+  border-radius: var(--leaf-radius) 0 0 var(--leaf-radius);
+}
+
 .history__book-controls button:focus-visible {
   outline: 2px solid var(--white);
   outline-offset: 2px;
