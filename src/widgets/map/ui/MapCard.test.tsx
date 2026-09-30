@@ -3,6 +3,7 @@ import { COMPANY } from '@shared/constant';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import { NAVER_DIRECTIONS_URL } from '../model/constant';
 import { MapCard } from './MapCard';
 
 describe('MapCard', () => {
@@ -21,7 +22,7 @@ describe('MapCard', () => {
     it('전화 링크가 올바르게 렌더링된다', () => {
       render(<MapCard />);
 
-      const link = screen.getByRole('link');
+      const link = screen.getByRole('link', { name: COMPANY.PHONE_DISPLAY });
       expect(link).toHaveAttribute('href', `tel:${COMPANY.PHONE}`);
     });
 
@@ -31,10 +32,27 @@ describe('MapCard', () => {
       expect(screen.getByText(COMPANY.PHONE_DISPLAY)).toBeInTheDocument();
     });
 
-    it('"문의 전화:" 텍스트가 존재한다', () => {
+    it('"문의 전화:" 텍스트가 표시되지 않는다', () => {
       render(<MapCard />);
 
-      expect(screen.getByText('문의 전화:')).toBeInTheDocument();
+      expect(screen.queryByText('문의 전화:')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('길찾기 버튼', () => {
+    it('네이버 지도 길찾기 URL로 연결된다', () => {
+      render(<MapCard />);
+
+      const link = screen.getByRole('link', { name: /길찾기/ });
+      expect(link).toHaveAttribute('href', NAVER_DIRECTIONS_URL);
+    });
+
+    it('새 탭에서 안전하게 열린다', () => {
+      render(<MapCard />);
+
+      const link = screen.getByRole('link', { name: /길찾기/ });
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
   });
 

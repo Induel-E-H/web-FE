@@ -1,8 +1,9 @@
-import { FiPhoneCall } from 'react-icons/fi';
+import { FiArrowUpRight, FiPhoneCall } from 'react-icons/fi';
 
 import { TRANSPORT_ITEMS } from '@entities/map';
 import { COMPANY } from '@shared/constant';
 
+import { NAVER_DIRECTIONS_URL } from '../model/constant';
 import '../styles/MapCard.css';
 
 export function MapCard() {
@@ -30,13 +31,22 @@ export function MapCard() {
 
       <hr aria-hidden='true' />
 
-      <a href={`tel:${COMPANY.PHONE}`} className='map__description_call'>
-        <FiPhoneCall aria-hidden='true' />
-        <div className='map__description_call_text'>
-          <span>문의 전화:</span>
+      <div className='map__actions'>
+        <a href={`tel:${COMPANY.PHONE}`} className='map__description_call'>
+          <FiPhoneCall aria-hidden='true' />
           <span>{COMPANY.PHONE_DISPLAY}</span>
-        </div>
-      </a>
+        </a>
+        <a
+          href={NAVER_DIRECTIONS_URL}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='map__directions'
+          aria-label='네이버 지도 길찾기 (새 탭에서 열림)'
+        >
+          <span>길찾기</span>
+          <FiArrowUpRight aria-hidden='true' />
+        </a>
+      </div>
     </address>
   );
 }
