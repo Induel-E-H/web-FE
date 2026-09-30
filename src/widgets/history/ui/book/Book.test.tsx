@@ -147,6 +147,7 @@ describe('Book', () => {
         width: STAGE.width,
         usePortrait: false,
         controls: 'none',
+        pointerInput: [],
       });
       expect(body()).toHaveClass('history__book-body--half');
       expect(body()).toHaveStyle({ width: `${STAGE.width * 2}px` });
@@ -453,6 +454,41 @@ describe('Book', () => {
       fireEvent.click(stage.querySelector('.history__leaf')!);
       expect(props.onHoldEnd).toHaveBeenCalledTimes(1);
       expect(onClick).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('반쪽 보기 스와이프', () => {
+    function swipe(stage: Element, fromX: number, toX: number, dy = 0) {
+      fireEvent.pointerDown(stage, { button: 0, clientX: fromX, clientY: 300 });
+      fireEvent.pointerUp(stage, { clientX: toX, clientY: 300 + dy });
+    }
+
+    it('오른쪽 → 왼쪽으로 밀면 다음 장으로 넘긴다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 800, 600);
+      expect(flipbook.handle.flipNext).toHaveBeenCalledTimes(1);
+      expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
+    });
+
+    it('왼쪽 → 오른쪽으로 밀면 이전 장으로 넘긴다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 200, 400);
+      expect(flipbook.handle.flipPrev).toHaveBeenCalledTimes(1);
+    });
+
+    it('짧게 밀거나 세로로 더 많이 밀면 넘기지 않는다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 500, 480);
+      swipe(stage, 500, 440, 200);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+      expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
+    });
+
+    it('가로(PC) 모드는 엔진의 드래그 넘김을 그대로 쓴다', () => {
+      const { stage } = setup(true);
+      swipe(stage, 800, 600);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+      expect(flipbook.props?.pointerInput).toEqual(['mouse', 'touch', 'pen']);
     });
   });
 

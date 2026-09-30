@@ -27,6 +27,12 @@ import { TitlePage } from './TitlePage';
 
 const HOLD_DELAY = 400;
 const HOLD_MOVE_TOLERANCE = 8;
+const SWIPE_DISTANCE = 40;
+
+// 반쪽 보기(태블릿/모바일)는 다음 장이 화면 밖 오른쪽에 있어 엔진이 손가락을 왼쪽 장을
+// 잡는 것으로 해석해 엉뚱한 방향으로 접는다. 엔진 포인터 넘김을 끄고 스와이프를 직접 판정한다.
+const ENGINE_POINTERS_SPREAD = ['mouse', 'touch', 'pen'] as const;
+const ENGINE_POINTERS_HALF = [] as const;
 
 interface BookProps {
   bookRef: RefObject<FlipBookHandle | null>;
@@ -80,6 +86,7 @@ export function Book({
   const stageRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const holdRef = useRef<Hold | null>(null);
+  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
   const suppressClickRef = useRef(false);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [page, setPage] = useState(0);
@@ -172,6 +179,7 @@ export function Book({
   function handlePointerDown(e: PointerEvent<HTMLDivElement>) {
     suppressClickRef.current = false;
     if (e.button !== 0) return;
+    swipeStartRef.current = { x: e.clientX, y: e.clientY };
     const rect = e.currentTarget.getBoundingClientRect();
     const direction: ChainDirection =
       e.clientX < rect.left + rect.width / 2 ? 'prev' : 'next';
@@ -196,10 +204,22 @@ export function Book({
   // 꾹 누르기가 끝난 pointerup/click 은 엔진과 페이지 콘텐츠에 전달하지 않는다.
   function handlePointerEnd(e: PointerEvent<HTMLDivElement>) {
     const hold = clearHold();
-    if (!hold?.active) return;
-    e.stopPropagation();
+    const swipeStart = swipeStartRef.current;
+    swipeStartRef.current = null;
+    if (hold?.active) {
+      e.stopPropagation();
+      suppressClickRef.current = true;
+      onHoldEnd();
+      return;
+    }
+    if (landscape || !swipeStart || e.type !== 'pointerup') return;
+    const dx = e.clientX - swipeStart.x;
+    const dy = e.clientY - swipeStart.y;
+    // 반쪽 보기 스와이프: 오른쪽 → 왼쪽이면 다음 장, 왼쪽 → 오른쪽이면 이전 장
+    if (Math.abs(dx) < SWIPE_DISTANCE || Math.abs(dx) < Math.abs(dy)) return;
     suppressClickRef.current = true;
-    onHoldEnd();
+    if (dx < 0) bookRef.current?.flipNext();
+    else bookRef.current?.flipPrev();
   }
 
   function handleClickCapture(e: MouseEvent<HTMLDivElement>) {
@@ -259,6 +279,9 @@ export function Book({
               hardCovers
               usePortrait={false}
               respectReducedMotion={false}
+              pointerInput={
+                landscape ? ENGINE_POINTERS_SPREAD : ENGINE_POINTERS_HALF
+              }
               flippingTime={FLIP_DURATION}
               maxShadowOpacity={0.5}
               lazyRadius={2}
