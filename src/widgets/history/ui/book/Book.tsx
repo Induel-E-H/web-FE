@@ -277,6 +277,7 @@ export function Book({
             type='button'
             aria-label='이전 페이지'
             disabled={page === 0}
+            {...gestures.holdButton('prev')}
             onClick={() => bookRef.current?.flipPrev()}
           >
             <MdChevronLeft aria-hidden='true' />
@@ -285,6 +286,7 @@ export function Book({
             type='button'
             aria-label='다음 페이지'
             disabled={page >= lastLeaf}
+            {...gestures.holdButton('next')}
             onClick={() => bookRef.current?.flipNext()}
           >
             <MdChevronRight aria-hidden='true' />

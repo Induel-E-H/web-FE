@@ -122,6 +122,38 @@ describe('useBookGestures', () => {
     });
   });
 
+  describe('holdButton', () => {
+    it('누르고 있으면 지정한 방향으로 시작하고, 떠나면 멈춘다', () => {
+      const { g, stage, onHoldStart, onHoldEnd } = setup(true);
+      const prev = g.holdButton('prev');
+      prev.onPointerDown(pointer(stage, 'pointerdown', 900));
+      act(() => {
+        vi.advanceTimersByTime(HOLD_DELAY);
+      });
+      expect(onHoldStart).toHaveBeenCalledWith('prev');
+      prev.onPointerLeave(pointer(stage, 'pointerleave', 900));
+      expect(onHoldEnd).toHaveBeenCalledTimes(1);
+    });
+
+    it('짧게 누르면 연속 넘김 없이 click 을 그대로 둔다', () => {
+      const { g, stage, onHoldStart, onHoldEnd } = setup(true);
+      const next = g.holdButton('next');
+      next.onPointerDown(pointer(stage, 'pointerdown', 100));
+      next.onPointerUp(pointer(stage, 'pointerup', 100));
+      act(() => {
+        vi.advanceTimersByTime(HOLD_DELAY);
+      });
+      const preventDefault = vi.fn();
+      next.onClickCapture({
+        stopPropagation: vi.fn(),
+        preventDefault,
+      } as unknown as MouseEvent<HTMLElement>);
+      expect(onHoldStart).not.toHaveBeenCalled();
+      expect(onHoldEnd).not.toHaveBeenCalled();
+      expect(preventDefault).not.toHaveBeenCalled();
+    });
+  });
+
   describe('스와이프', () => {
     it('오른쪽 → 왼쪽이면 다음 장, 반대면 이전 장으로 넘긴다', () => {
       const { g, stage, book } = setup(true);

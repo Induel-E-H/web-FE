@@ -546,6 +546,21 @@ describe('Book', () => {
       expect(flipbook.handle.flipPrev).toHaveBeenCalled();
     });
 
+    it('버튼을 꾹 누르면 그 방향으로 연속 넘기고, 떼면 멈추며 한 장 더 넘기지 않는다', () => {
+      const { props } = setup(false);
+      const next = screen.getByRole('button', { name: '다음 페이지' });
+      fireEvent.pointerDown(next, { button: 0, clientX: 10, clientY: 10 });
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      expect(props.onHoldStart).toHaveBeenCalledWith('next');
+
+      fireEvent.pointerUp(next);
+      fireEvent.click(next);
+      expect(props.onHoldEnd).toHaveBeenCalledTimes(1);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+    });
+
     it('양 끝에서는 해당 방향 버튼이 비활성화된다', () => {
       setup(false);
       expect(

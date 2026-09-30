@@ -543,6 +543,11 @@
 
   background: transparent;
   cursor: pointer;
+
+  /* 꾹 눌러 연속으로 넘길 때 모바일 선택·메뉴가 뜨지 않게 한다 */
+  -webkit-touch-callout: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .history__book-controls button:disabled {
