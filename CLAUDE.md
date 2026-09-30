@@ -191,7 +191,6 @@ src
   │   │   └── useSlideGesture             # Image Slider hand slide gesture
   │   └── ui                              # Shared UI components
   │       ├── ImageSlider
-  │       ├── InfoCard
   │       ├── Popup
   │       └── SectionTitle
   └── test                                # Vitest config

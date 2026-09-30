@@ -1,7 +1,6 @@
-import { IoDocumentTextOutline } from 'react-icons/io5';
+import { TbCertificate } from 'react-icons/tb';
 
 import type { PatentValidType } from '@entities/patent';
-import { InfoCard } from '@shared/ui/InfoCard';
 
 import '../styles/PatentCard.css';
 
@@ -13,16 +12,31 @@ export function PatentCard({
   onClick: () => void;
 }) {
   return (
-    <InfoCard
+    <button
+      type='button'
       className='patent__card'
-      icon={<IoDocumentTextOutline />}
-      year={{
-        text: `${patent.filingDate.slice(0, 4)}년 출원`,
-        dateTime: patent.filingDate.replace(/\. /g, '-'),
+      onMouseDown={(e) => {
+        e.preventDefault();
+        e.currentTarget.focus({ preventScroll: true });
       }}
-      title={patent.title}
-      secondary={patent.serialNumber}
       onClick={onClick}
-    />
+    >
+      <span className='patent__card__top'>
+        <span className='patent__card__seal' aria-hidden='true'>
+          <TbCertificate />
+        </span>
+        <time
+          className='patent__card__year'
+          dateTime={patent.filingDate.replace(/\. /g, '-')}
+        >
+          {patent.filingDate.slice(0, 4)}년 출원
+        </time>
+      </span>
+      <span className='patent__card__title'>{patent.title}</span>
+      <span className='patent__card__serial'>
+        <small>등록번호</small>
+        {patent.serialNumber}
+      </span>
+    </button>
   );
 }

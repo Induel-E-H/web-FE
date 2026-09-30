@@ -17,7 +17,7 @@ describe('PatentExpireContent', () => {
     expect(
       screen.getByRole('heading', {
         level: 3,
-        name: `만료 특허 이력 (${PATENT_EXPIRE_LIST.length}건)`,
+        name: `만료 특허 이력 ${PATENT_EXPIRE_LIST.length}건`,
       }),
     ).toBeInTheDocument();
   });

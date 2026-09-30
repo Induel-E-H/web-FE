@@ -18,7 +18,10 @@ describe('PatentValidContent', () => {
   it('유효 특허 건수가 표시된다', () => {
     render(<PatentValidContent />);
     expect(
-      screen.getByText(`유효 특허증 (${PATENT_VALID_LIST.length}건)`),
+      screen.getByRole('heading', {
+        level: 3,
+        name: `유효 특허증 ${PATENT_VALID_LIST.length}건`,
+      }),
     ).toBeInTheDocument();
   });
 
