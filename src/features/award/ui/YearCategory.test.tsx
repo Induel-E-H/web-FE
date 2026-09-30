@@ -73,17 +73,5 @@ describe('YearCategory', () => {
       fireEvent.click(screen.getByText(YEAR_ALL));
       expect(useAwardStore.getState().activeYear).toBe(YEAR_ALL);
     });
-
-    it('연도 버튼 클릭 시 currentPage가 0으로 리셋된다', () => {
-      useAwardStore.setState({ currentPage: 3 });
-      render(<YearCategory />);
-      const yearButtons = screen
-        .getAllByRole('button')
-        .filter((btn) => btn.textContent !== YEAR_ALL);
-      if (yearButtons.length > 0) {
-        fireEvent.click(yearButtons[0]);
-        expect(useAwardStore.getState().currentPage).toBe(0);
-      }
-    });
   });
 });

@@ -1,62 +1,48 @@
-.award__card_viewport {
-  display: flex;
-  flex-direction: column;
-
+.award__list {
   width: 100%;
-  height: 93.3vh;
-  overflow: hidden;
 }
 
-.award__card_slider {
-  display: flex;
-
-  width: 100%;
-  height: 100%;
-}
-
-.award__card_page {
+.award__year_group {
   display: grid;
+  grid-template-columns: 120px 1fr;
 
-  flex: 0 0 100%;
-  height: 100%;
-  padding: 0.5vmax;
-  overflow: hidden;
+  gap: 24px;
+  padding-block: 28px;
 
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  border-top: 1px solid var(--brown-100);
+}
 
-  column-gap: 3.91vmax;
-  row-gap: 2.6vmax;
+.award__year_group:last-child {
+  border-bottom: 1px solid var(--brown-100);
+}
+
+.award__year {
+  font-family: var(--font-bookendbatang);
+  font-weight: var(--bookendbatang-bold);
+  font-size: clamp(28px, 2.4vw, 36px);
+  line-height: 1;
+
+  color: #8a6a2f;
+}
+
+.award__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+  gap: 12px;
+
+  list-style: none;
 }
 
 @media (max-width: 1024px) {
-  .award__card_viewport {
-    height: 69vh;
-  }
-
-  .award__card_page {
-    padding: 0.5vw;
-
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-
-    column-gap: 2.6vw;
-    row-gap: 2.6vw;
+  .award__year_group {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
 @media (max-width: 767px) {
-  .award__card_viewport {
-    height: 70.59vh;
-  }
-
-  .award__card_page {
-    padding: clamp(3px, 1vw, 5px);
-
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-
-    column-gap: clamp(14px, 4vw, 20px);
-    row-gap: clamp(14px, 4vw, 20px);
+  .award__grid {
+    grid-template-columns: 1fr;
   }
 }

@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Page 6에 위치하는 Award 위젯. 연도 필터, 카드 그리드, 페이지네이션, 팝업을 포함하는 수상 기록 섹션입니다.',
+          'Page 6에 위치하는 Award 위젯. 연도 필터, 연도별 카드 그룹, 팝업을 포함하는 수상 기록 섹션입니다.',
       },
     },
   },
@@ -24,7 +24,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '카드 5×2 레이아웃, 슬라이드 방식 페이지 전환.',
+        story: '연도별로 묶인 가로형 카드 목록.',
       },
     },
   },

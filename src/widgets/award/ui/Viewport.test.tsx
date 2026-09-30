@@ -1,73 +1,35 @@
-import type { ReactNode, SetStateAction } from 'react';
-
 import { useAwardStore } from '@features/award';
-import { act, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Viewport } from './Viewport';
 
-vi.mock('framer-motion', async () => {
-  const { createElement } = await import('react');
-  return {
-    motion: new Proxy(
-      {},
-      {
-        get:
-          (_, tag: string) =>
-          ({ animate, style, children, ...rest }: Record<string, unknown>) =>
-            createElement(
-              tag,
-              {
-                ...rest,
-                style:
-                  (animate as { x?: string } | undefined)?.x !== undefined
-                    ? {
-                        ...(style as object),
-                        transform: `translateX(${(animate as { x: string }).x})`,
-                      }
-                    : style,
-              },
-              children as ReactNode,
-            ),
-      },
-    ),
-  };
-});
-
-let capturedDispatch: ((v: SetStateAction<number>) => void) | undefined;
-
-vi.mock('@shared/lib/useSlideGesture/useSlideGesture', () => ({
-  useSlideGesture: vi
-    .fn()
-    .mockImplementation((dispatch: (v: SetStateAction<number>) => void) => {
-      capturedDispatch = dispatch;
-      return {
-        ref: { current: null },
-        onTouchStart: vi.fn(),
-        onTouchEnd: vi.fn(),
-      };
-    }),
-}));
-
-vi.mock('@shared/lib/breakpoint', () => ({
-  useBreakpoint: vi.fn().mockReturnValue('mobile'),
-}));
-
 vi.mock('@entities/award', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@entities/award')>();
-  // mobile itemsPerPage=4, 8개이면 totalPages=2 (transform 변경 테스트 가능)
-  const mockList = Array.from({ length: 8 }, (_, i) => ({
-    id: i,
-    title: `수상 ${i}`,
-    category: '당선작',
-    date: `${2020 - i}-01-01`,
-    issuer: '기관',
-  }));
-  return {
-    ...actual,
-    getAwardImage: vi.fn().mockReturnValue('mock.webp'),
-    AWARD_LIST: mockList,
-  };
+  const mockList = [
+    {
+      id: 0,
+      title: '수상 A',
+      category: '당선작',
+      date: '2008. 01. 01',
+      issuer: '기관',
+    },
+    {
+      id: 1,
+      title: '수상 B',
+      category: '당선작',
+      date: '2014. 05. 01',
+      issuer: '기관',
+    },
+    {
+      id: 2,
+      title: '수상 C',
+      category: '당선작',
+      date: '2008. 07. 01',
+      issuer: '기관',
+    },
+  ];
+  return { ...actual, AWARD_LIST: mockList };
 });
 
 describe('Viewport', () => {
@@ -80,58 +42,45 @@ describe('Viewport', () => {
   });
 
   describe('렌더링', () => {
-    it('div.award__card_viewport로 렌더링된다', () => {
-      const { container } = render(<Viewport />);
+    it('"수상 목록" region으로 렌더링된다', () => {
+      render(<Viewport />);
       expect(
-        container.querySelector('div.award__card_viewport'),
+        screen.getByRole('region', { name: '수상 목록' }),
       ).toBeInTheDocument();
     });
 
-    it('totalPages 수만큼 award__card_page가 렌더링된다', () => {
-      const { container } = render(<Viewport />);
-      // 8 items / 4 per page = 2 pages
-      expect(container.querySelectorAll('.award__card_page')).toHaveLength(2);
+    it('연도별로 그룹이 만들어지고 최신 연도가 먼저 온다', () => {
+      render(<Viewport />);
+      const years = screen
+        .getAllByRole('heading', { level: 3 })
+        .map((el) => el.textContent);
+      expect(years).toEqual(['2014', '2008']);
     });
 
-    it('페이지당 itemsPerPage 수만큼 카드가 렌더링된다', () => {
+    it('같은 연도 안에서는 최신 날짜가 먼저 온다', () => {
       const { container } = render(<Viewport />);
-      const firstPage = container.querySelector('.award__card_page');
-      expect(firstPage?.querySelectorAll('button.award__card')).toHaveLength(4);
+      const group2008 = container.querySelectorAll('.award__year_group')[1];
+      const titles = [...group2008.querySelectorAll('.award__card__title')].map(
+        (el) => el.textContent,
+      );
+      expect(titles).toEqual(['수상 C', '수상 A']);
     });
   });
 
-  describe('슬라이더 transform', () => {
-    it('currentPage 변경 시 transform이 달라진다', () => {
-      const { container: c0, unmount: u0 } = render(<Viewport />);
-      const t0 = (c0.querySelector('.award__card_slider') as HTMLElement).style
-        .transform;
-      u0();
-
-      useAwardStore.setState({ currentPage: 1 });
-      const { container: c1 } = render(<Viewport />);
-      const t1 = (c1.querySelector('.award__card_slider') as HTMLElement).style
-        .transform;
-
-      expect(t0).not.toBe(t1);
+  describe('연도 필터', () => {
+    it('activeYear가 지정되면 해당 연도 그룹만 렌더링된다', () => {
+      useAwardStore.setState({ activeYear: 2008 });
+      const { container } = render(<Viewport />);
+      expect(container.querySelectorAll('.award__year_group')).toHaveLength(1);
+      expect(container.querySelectorAll('button.award__card')).toHaveLength(2);
     });
   });
 
-  describe('dispatchPage 함수형 dispatch', () => {
-    it('function 형식으로 전달하면 현재 currentPage를 인자로 계산한다', () => {
-      useAwardStore.setState({ currentPage: 1 });
+  describe('카드 클릭', () => {
+    it('카드 클릭 시 selectedId가 해당 award.id로 설정된다', () => {
       render(<Viewport />);
-      act(() => {
-        capturedDispatch?.((prev) => prev + 1);
-      });
-      expect(useAwardStore.getState().currentPage).toBe(2);
-    });
-
-    it('number 형식으로 전달하면 바로 currentPage로 설정한다', () => {
-      render(<Viewport />);
-      act(() => {
-        capturedDispatch?.(3);
-      });
-      expect(useAwardStore.getState().currentPage).toBe(3);
+      fireEvent.click(screen.getByRole('button', { name: /^수상 B/ }));
+      expect(useAwardStore.getState().selectedId).toBe(1);
     });
   });
 });
