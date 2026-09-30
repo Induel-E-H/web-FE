@@ -30,6 +30,8 @@
   padding: 3.13vmax 4.17vmax 2.34vmax 4.17vmax;
 
   background-color: var(--history-bg);
+
+  overflow: hidden;
 }
 
 .history__book {
@@ -39,18 +41,12 @@
   height: 100%;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
 
-  gap: 0;
-}
+  min-height: 0;
 
-.history__book-left,
-.history__book-right {
-  flex: 1;
-
-  position: relative;
-
-  height: 100%;
+  gap: 2vw;
 }
 
 @media (max-width: 1024px) {
@@ -63,10 +59,12 @@
   }
 
   .history__book {
-    width: 68.49vw;
+    align-self: stretch;
+
+    width: auto;
     height: 100%;
 
-    flex-direction: column;
+    margin-right: -6.51vw;
   }
 }
 
@@ -81,7 +79,7 @@
   }
 
   .history__book {
-    width: clamp(291px, 83.2vw, 416px);
+    margin-right: calc(-1 * clamp(14px, 4vw, 20px));
   }
 }
 

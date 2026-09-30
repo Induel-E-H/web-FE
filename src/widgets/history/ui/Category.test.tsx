@@ -1,22 +1,15 @@
-import { INDEX_LIST, useHistoryStore } from '@features/history';
+import { INDEX_LIST } from '@features/history';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { HistoryCategory } from './Category';
 
 const defaultProps = {
+  activeItem: 'List' as const,
   navigateToCategory: vi.fn(),
 };
 
 describe('HistoryCategory', () => {
-  beforeEach(() => {
-    useHistoryStore.getState().reset();
-  });
-
-  afterEach(() => {
-    useHistoryStore.getState().reset();
-  });
-
   describe('렌더링', () => {
     it('navigation 역할로 렌더링된다', () => {
       render(<HistoryCategory {...defaultProps} />);
@@ -44,9 +37,8 @@ describe('HistoryCategory', () => {
   });
 
   describe('활성 상태', () => {
-    it('스토어의 tabActiveItem 버튼은 aria-current=true이다', () => {
-      useHistoryStore.setState({ tabActiveItem: 'Timeline' });
-      render(<HistoryCategory {...defaultProps} />);
+    it('activeItem 버튼은 aria-current=true이다', () => {
+      render(<HistoryCategory {...defaultProps} activeItem='Timeline' />);
       expect(screen.getByText('Timeline')).toHaveAttribute(
         'aria-current',
         'true',
@@ -54,20 +46,17 @@ describe('HistoryCategory', () => {
     });
 
     it('비활성 버튼은 aria-current가 없다', () => {
-      useHistoryStore.setState({ tabActiveItem: 'Timeline' });
-      render(<HistoryCategory {...defaultProps} />);
+      render(<HistoryCategory {...defaultProps} activeItem='Timeline' />);
       expect(screen.getByText('List')).not.toHaveAttribute('aria-current');
     });
 
     it('활성 버튼에 active 클래스가 적용된다', () => {
-      useHistoryStore.setState({ tabActiveItem: 'Content' });
-      render(<HistoryCategory {...defaultProps} />);
+      render(<HistoryCategory {...defaultProps} activeItem='Content' />);
       expect(screen.getByText('Content')).toHaveClass('active');
     });
 
     it('비활성 버튼에는 active 클래스가 없다', () => {
-      useHistoryStore.setState({ tabActiveItem: 'Content' });
-      render(<HistoryCategory {...defaultProps} />);
+      render(<HistoryCategory {...defaultProps} activeItem='Content' />);
       expect(screen.getByText('List')).not.toHaveClass('active');
     });
   });
@@ -75,20 +64,30 @@ describe('HistoryCategory', () => {
   describe('클릭 이벤트', () => {
     it('버튼 클릭 시 navigateToCategory가 해당 항목으로 호출된다', () => {
       const navigateToCategory = vi.fn();
-      render(<HistoryCategory navigateToCategory={navigateToCategory} />);
+      render(
+        <HistoryCategory
+          {...defaultProps}
+          navigateToCategory={navigateToCategory}
+        />,
+      );
 
       fireEvent.click(screen.getByText('Timeline'));
 
-      expect(navigateToCategory).toHaveBeenCalledWith('Timeline', 0, true);
+      expect(navigateToCategory).toHaveBeenCalledWith('Timeline');
     });
 
-    it('버튼 클릭 시 pageIndex=0, useRapidFlip=true로 호출된다', () => {
+    it('다른 항목 클릭 시 해당 항목으로 호출된다', () => {
       const navigateToCategory = vi.fn();
-      render(<HistoryCategory navigateToCategory={navigateToCategory} />);
+      render(
+        <HistoryCategory
+          {...defaultProps}
+          navigateToCategory={navigateToCategory}
+        />,
+      );
 
       fireEvent.click(screen.getByText('Milestones'));
 
-      expect(navigateToCategory).toHaveBeenCalledWith('Milestones', 0, true);
+      expect(navigateToCategory).toHaveBeenCalledWith('Milestones');
     });
   });
 });
