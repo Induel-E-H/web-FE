@@ -27,11 +27,23 @@
 
   gap: 1.19vmax;
 
-  padding: 3.13vmax 4.17vmax 2.34vmax 4.17vmax;
+  padding: 3.13vmax var(--section-padding-x) 2.34vmax;
 
   background-color: var(--history-bg);
 
   overflow: hidden;
+}
+
+.history__top {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 16px;
 }
 
 .history__book {
@@ -55,7 +67,7 @@
 
     gap: 1.11vw;
 
-    padding: 7.81vw 6.51vw 3.91vw 6.51vw;
+    padding: 7.81vw var(--section-padding-x) 3.91vw;
   }
 
   .history__book {
@@ -64,7 +76,7 @@
     width: auto;
     height: 100%;
 
-    margin-right: -6.51vw;
+    margin-right: calc(-1 * var(--section-padding-x));
   }
 }
 
@@ -74,12 +86,21 @@
 
     gap: clamp(8px, 2vw, 10px);
 
-    padding: clamp(56px, 16vw, 80px) clamp(14px, 4vw, 20px)
-      clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
+    padding: clamp(56px, 16vw, 80px) var(--section-padding-x)
+      clamp(14px, 4vw, 20px);
+  }
+
+  .history__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .history__top .history__category {
+    align-self: center;
   }
 
   .history__book {
-    margin-right: calc(-1 * clamp(14px, 4vw, 20px));
+    margin-right: calc(-1 * var(--section-padding-x));
   }
 }
 

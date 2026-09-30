@@ -73,11 +73,13 @@ export function History() {
 
   return (
     <section id='history' className='history' aria-label='회사 역사'>
-      <HistoryTitle />
-      <HistoryCategory
-        activeItem={activeItem}
-        navigateToCategory={handleNavigateToCategory}
-      />
+      <div className='history__top'>
+        <HistoryTitle />
+        <HistoryCategory
+          activeItem={activeItem}
+          navigateToCategory={handleNavigateToCategory}
+        />
+      </div>
       <div className='history__book'>
         <Book
           bookRef={bookRef}
