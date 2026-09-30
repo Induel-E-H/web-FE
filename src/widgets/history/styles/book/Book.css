@@ -411,8 +411,14 @@
 }
 
 /* 반쪽 보기: 펼침면 왼쪽 장만 화면에 두고 오른쪽 장은 화면 밖. 닫힌 앞표지(오른쪽 장)는 화면 안으로 당긴다 */
+/* 닫혀 있을 때는 표지 오른쪽 끝(커버 여유분·둥근 모서리)까지 화면 안에 보이도록 조금 더 당긴다.
+   펼치면 translate 가 풀리며 왼쪽 장만 보이는 자리로 돌아간다. */
 .history__book-body--half.history__book-body--closed-front {
-  translate: -50% 0;
+  translate: calc(-50% - 2 * var(--cover-side)) 0;
+}
+
+.history__book-body--half.history__book-body--closed-back {
+  translate: calc(-1 * var(--cover-side)) 0;
 }
 
 @media (max-width: 1024px) {
@@ -423,10 +429,6 @@
     justify-content: flex-start;
 
     padding-right: 0;
-  }
-
-  .history__leaf--cover-front {
-    border-radius: 0;
   }
 
   .history__leaf--page {
