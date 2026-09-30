@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
   gap: 0.78vmax;
-  padding: 3.65vmax 13.54vmax;
+  padding: 3.65vmax var(--section-padding-x);
   overflow: hidden;
   background-color: var(--surface-warm);
 }
@@ -18,7 +18,7 @@
 @media (max-width: 1024px) {
   .vision {
     gap: 2.6vw;
-    padding: 7.81vw 6.51vw 6.51vw 6.51vw;
+    padding: 7.81vw var(--section-padding-x) 6.51vw;
   }
 
   .vision__main {
@@ -29,8 +29,8 @@
 @media (max-width: 767px) {
   .vision {
     gap: clamp(14px, 4vw, 20px);
-    padding: clamp(56px, 16vw, 80px) clamp(14px, 4vw, 20px)
-      clamp(14px, 4vw, 20px) clamp(14px, 4vw, 20px);
+    padding: clamp(56px, 16vw, 80px) var(--section-padding-x)
+      clamp(14px, 4vw, 20px);
   }
 
   .vision__main {

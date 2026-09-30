@@ -15,7 +15,7 @@
 
   gap: 3.125vmax;
 
-  padding: 3.13vmax 14.58vmax;
+  padding: 3.13vmax var(--section-padding-x);
 
   background-color: var(--brown-800);
 }
@@ -24,7 +24,7 @@
   .patent {
     gap: 5.21vw;
 
-    padding: 7.81vw 3.91vw 5.86vw;
+    padding: 7.81vw var(--section-padding-x) 5.86vw;
   }
 }
 
@@ -32,7 +32,7 @@
   .patent {
     gap: clamp(28px, 8vw, 40px);
 
-    padding: clamp(56px, 16vw, 80px) clamp(14px, 4vw, 20px)
+    padding: clamp(56px, 16vw, 80px) var(--section-padding-x)
       clamp(14px, 4vw, 20px);
   }
 }

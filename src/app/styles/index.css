@@ -96,6 +96,21 @@
 
   /* Typography */
   --typo-contentW: #6f6f6f;
+
+  /* Layout */
+  --section-padding-x: 14.58vmax;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-padding-x: 3.91vw;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --section-padding-x: clamp(14px, 4vw, 20px);
+  }
 }
 
 /* ─── Box Model ──────────────────────────────────────────────────────────── */
