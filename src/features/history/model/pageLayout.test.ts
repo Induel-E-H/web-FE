@@ -1,3 +1,4 @@
+import { artworks } from '@entities/history';
 import { describe, expect, it } from 'vitest';
 
 import { INDEX_LIST } from './constants';
@@ -7,6 +8,7 @@ import {
   getAdjacentHead,
   getLeafItem,
   getPaperStack,
+  hasPageContent,
 } from './pageLayout';
 import { getPageRegistry } from './pageRegistry';
 
@@ -76,6 +78,27 @@ describe('buildLeaves', () => {
       for (let i = 2; i < leaves.length - 1; i += 2) {
         expect(leaves[i]).toEqual({ kind: 'blank' });
       }
+    });
+
+    it('내용이 없는 쪽(홀수 개의 마지막 오른쪽)은 넘김 순서에서 뺀다', () => {
+      leaves.forEach((leaf) => {
+        if (leaf.kind === 'page') {
+          expect(hasPageContent(leaf, 'mobile')).toBe(true);
+        }
+      });
+      const content = leaves.filter(
+        (leaf) => leaf.kind === 'page' && leaf.item === 'Content',
+      );
+      expect(content).toHaveLength(artworks.length);
+    });
+
+    it('판권면 다음이 바로 뒤표지이다 (뒤표지 안쪽이 따로 한 쪽이 되지 않는다)', () => {
+      expect(leaves.some((leaf) => leaf.kind === 'inside-back')).toBe(false);
+      expect(leaves.slice(-3)).toEqual([
+        { kind: 'colophon' },
+        { kind: 'blank' },
+        { kind: 'cover-back' },
+      ]);
     });
 
     it('List 좌/우가 각각 한 장씩 보인다', () => {
@@ -184,5 +207,37 @@ describe('getAdjacentHead', () => {
     expect(getAdjacentHead(1, 'prev', last)).toBe(0);
     expect(getAdjacentHead(0, 'prev', last)).toBe(0);
     expect(getAdjacentHead(last, 'prev', last)).toBe(last - 2);
+  });
+});
+
+describe('hasPageContent', () => {
+  const page = (
+    item: 'List' | 'Content' | 'Timeline' | 'Milestones',
+    pageIndex: number,
+    side: 'left' | 'right',
+  ) => ({ kind: 'page' as const, item, pageIndex, side });
+
+  it('Content 는 작품 수를 넘는 쪽이 비어 있다', () => {
+    const lastIndex = artworks.length - 1;
+    const lastPage = Math.floor(lastIndex / 2);
+    const lastSide = lastIndex % 2 === 0 ? 'left' : 'right';
+    expect(hasPageContent(page('Content', lastPage, lastSide), 'desktop')).toBe(
+      true,
+    );
+    expect(
+      hasPageContent(page('Content', lastPage + 1, 'left'), 'desktop'),
+    ).toBe(false);
+  });
+
+  it('Milestones 는 브레이크포인트별 연도 구간 수를 넘는 쪽이 비어 있다', () => {
+    expect(hasPageContent(page('Milestones', 3, 'left'), 'mobile')).toBe(true);
+    expect(hasPageContent(page('Milestones', 3, 'right'), 'mobile')).toBe(
+      false,
+    );
+  });
+
+  it('List 와 Timeline 은 항상 내용이 있다', () => {
+    expect(hasPageContent(page('List', 0, 'right'), 'mobile')).toBe(true);
+    expect(hasPageContent(page('Timeline', 0, 'right'), 'mobile')).toBe(true);
   });
 });

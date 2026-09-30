@@ -1,7 +1,12 @@
+import { artworks } from '@entities/history';
 import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import { INDEX_LIST, PAGE_SIDE } from './constants';
-import { getPageRegistry } from './pageRegistry';
+import { getArtworkIndex } from './helpers';
+import {
+  getPageRegistry,
+  MILESTONES_YEAR_RANGES_BY_BREAKPOINT,
+} from './pageRegistry';
 import type { IndexItem, PageSide } from './types';
 
 export type PageLeaf = {
@@ -20,6 +25,19 @@ export type Leaf =
   | { kind: 'inside-back' } // 뒤표지 안쪽 (하드)
   | { kind: 'cover-back' } // 뒤표지
   | PageLeaf;
+
+/**
+ * 좌/우 두 쪽으로 나눠 담다 보니 항목 수가 홀수면 마지막 오른쪽 쪽이 빈다
+ * (Content 의 작품, Milestones 의 연도 구간).
+ */
+export function hasPageContent(leaf: PageLeaf, breakpoint: Breakpoint) {
+  const index = getArtworkIndex(leaf.pageIndex, leaf.side);
+  if (leaf.item === 'Content') return index < artworks.length;
+  if (leaf.item === 'Milestones') {
+    return index < MILESTONES_YEAR_RANGES_BY_BREAKPOINT[breakpoint].length;
+  }
+  return true;
+}
 
 function buildReadingOrder(breakpoint: Breakpoint): Leaf[] {
   const registry = getPageRegistry(breakpoint);
@@ -50,13 +68,24 @@ function buildReadingOrder(breakpoint: Breakpoint): Leaf[] {
  * - desktop: [표지] [표지안쪽|속지] [List 좌|우] ... [판권면|뒤표지안쪽] [뒤표지]
  * - tablet/mobile(반쪽 보기): 펼침면의 왼쪽만 보이므로 읽는 순서의 각 장을 왼쪽에 두고
  *   오른쪽(화면 밖)에는 빈 장을 끼워, 다음 장이 오른쪽에서 넘어오게 한다.
+ *   [표지] [표지안쪽|빈] [속지|빈] ... [판권면|빈] [뒤표지]
  */
 export function buildLeaves(breakpoint: Breakpoint): Leaf[] {
   const order = buildReadingOrder(breakpoint);
+  // 반쪽 보기는 한 쪽씩 넘기므로
+  // - 내용이 없는 쪽은 빈 장이 통째로 보이지 않게 뺀다.
+  // - 뒤표지 안쪽은 따로 한 쪽이 되어 뒤표지가 두 장처럼 보이므로 뺀다.
+  //   (판권면 다음에 뒤표지가 오른쪽에서 넘어와 덮으며 닫힌다)
   const body =
     breakpoint === 'desktop'
       ? order
-      : order.flatMap((leaf): Leaf[] => [leaf, { kind: 'blank' }]);
+      : order
+          .filter((leaf) =>
+            leaf.kind === 'page'
+              ? hasPageContent(leaf, breakpoint)
+              : leaf.kind !== 'inside-back',
+          )
+          .flatMap((leaf): Leaf[] => [leaf, { kind: 'blank' }]);
   return [{ kind: 'cover-front' }, ...body, { kind: 'cover-back' }];
 }
 
