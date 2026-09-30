@@ -4,11 +4,15 @@ import { describe, expect, it } from 'vitest';
 import { INDEX_LIST } from './constants';
 import {
   buildLeaves,
+  describeLeaf,
   findLeafIndex,
   getAdjacentHead,
+  getClosingSide,
   getLeafItem,
+  getLeafKey,
   getPaperStack,
   hasPageContent,
+  isHardLeaf,
 } from './pageLayout';
 import { getPageRegistry } from './pageRegistry';
 
@@ -239,5 +243,55 @@ describe('hasPageContent', () => {
   it('List 와 Timeline 은 항상 내용이 있다', () => {
     expect(hasPageContent(page('List', 0, 'right'), 'mobile')).toBe(true);
     expect(hasPageContent(page('Timeline', 0, 'right'), 'mobile')).toBe(true);
+  });
+});
+
+describe('getClosingSide', () => {
+  const last = 21;
+
+  it('첫 내부 펼침면에서 뒤로 넘기면 앞표지로 닫힌다', () => {
+    expect(getClosingSide(1, 'prev', last)).toBe('front');
+  });
+
+  it('마지막 내부 펼침면에서 앞으로 넘기면 뒤표지로 닫힌다', () => {
+    expect(getClosingSide(last - 2, 'next', last)).toBe('back');
+  });
+
+  it('표지를 여는 넘김이나 내부 넘김은 닫힘이 아니다', () => {
+    expect(getClosingSide(0, 'next', last)).toBeNull();
+    expect(getClosingSide(last, 'prev', last)).toBeNull();
+    expect(getClosingSide(5, 'prev', last)).toBeNull();
+    expect(getClosingSide(0, 'prev', last)).toBeNull();
+  });
+});
+
+describe('장 도우미', () => {
+  const page = {
+    kind: 'page' as const,
+    item: 'Content' as const,
+    pageIndex: 2,
+    side: 'right' as const,
+  };
+
+  it('describeLeaf: 페이지는 카테고리와 쪽 번호, 표지류는 이름, 빈 장은 빈 문자열', () => {
+    expect(describeLeaf(page)).toBe('Content 3페이지');
+    expect(describeLeaf({ kind: 'cover-front' })).toBe('앞표지');
+    expect(describeLeaf({ kind: 'colophon' })).toBe('판권면');
+    expect(describeLeaf({ kind: 'blank' })).toBe('');
+    expect(describeLeaf(undefined)).toBe('');
+  });
+
+  it('getLeafKey: 페이지는 내용 기준, 그 외는 종류와 위치 기준으로 고유하다', () => {
+    expect(getLeafKey(page, 7)).toBe('Content-2-right');
+    expect(getLeafKey({ kind: 'blank' }, 4)).toBe('blank-4');
+    const keys = buildLeaves('mobile').map(getLeafKey);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it('isHardLeaf: 표지 안쪽 장만 하드이다', () => {
+    expect(isHardLeaf({ kind: 'inside-front' })).toBe(true);
+    expect(isHardLeaf({ kind: 'inside-back' })).toBe(true);
+    expect(isHardLeaf({ kind: 'cover-front' })).toBe(false);
+    expect(isHardLeaf(page)).toBe(false);
   });
 });

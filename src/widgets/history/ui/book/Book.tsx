@@ -1,10 +1,4 @@
-import type {
-  CSSProperties,
-  MouseEvent,
-  PointerEvent,
-  ReactNode,
-  RefObject,
-} from 'react';
+import type { CSSProperties, PointerEvent, ReactNode, RefObject } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   MdChevronLeft,
@@ -13,13 +7,19 @@ import {
 } from 'react-icons/md';
 
 import {
+  describeLeaf,
   FLIP_DURATION,
   getAdjacentHead,
+  getClosingSide,
+  getLeafKey,
   getPaperStack,
+  isHardLeaf,
+  useBookGestures,
 } from '@features/history';
 import type { ChainDirection, Leaf, PageLeaf } from '@features/history';
 import HTMLFlipBook, {
   type BookSnapshot,
+  type FlipbookEventMap,
   type FlipBookHandle,
 } from '@gullabs/react-flipbook';
 
@@ -28,10 +28,6 @@ import { BackCoverInner } from './BackCover';
 import { ColophonPage } from './ColophonPage';
 import { FrontCoverInner } from './FrontCover';
 import { TitlePage } from './TitlePage';
-
-const HOLD_DELAY = 400;
-const HOLD_MOVE_TOLERANCE = 8;
-const SWIPE_DISTANCE = 40;
 
 // 반쪽 보기(태블릿/모바일)는 다음 장이 화면 밖 오른쪽에 있어 엔진이 손가락을 왼쪽 장을
 // 잡는 것으로 해석해 엉뚱한 방향으로 접는다. 엔진 포인터 넘김을 끄고 스와이프를 직접 판정한다.
@@ -49,34 +45,6 @@ interface BookProps {
   onHoldEnd: () => void;
 }
 
-type Hold = { x: number; y: number; timer: number; active: boolean };
-
-const LEAF_LABEL: Record<Exclude<Leaf['kind'], 'page'>, string> = {
-  'cover-front': '앞표지',
-  'inside-front': '앞표지 안쪽',
-  title: '속지',
-  colophon: '판권면',
-  blank: '',
-  'inside-back': '뒤표지 안쪽',
-  'cover-back': '뒤표지',
-};
-
-function leafKey(leaf: Leaf, index: number) {
-  return leaf.kind === 'page'
-    ? `${leaf.item}-${leaf.pageIndex}-${leaf.side}`
-    : `${leaf.kind}-${index}`;
-}
-
-function describeLeaf(leaf: Leaf | undefined) {
-  if (!leaf) return '';
-  if (leaf.kind === 'page') return `${leaf.item} ${leaf.pageIndex + 1}페이지`;
-  return LEAF_LABEL[leaf.kind];
-}
-
-function isHardLeaf(leaf: Leaf) {
-  return leaf.kind === 'inside-front' || leaf.kind === 'inside-back';
-}
-
 export function Book({
   bookRef,
   leaves,
@@ -89,12 +57,15 @@ export function Book({
 }: BookProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
-  const holdRef = useRef<Hold | null>(null);
-  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
-  const suppressClickRef = useRef(false);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [page, setPage] = useState(0);
   const pageRef = useRef(0);
+  const gestures = useBookGestures({
+    bookRef,
+    swipe: !landscape,
+    onHoldStart,
+    onHoldEnd,
+  });
 
   useLayoutEffect(() => {
     const stage = stageRef.current;
@@ -173,67 +144,38 @@ export function Book({
     body.style.setProperty('--stack-right', String(right));
   }
 
-  function clearHold() {
-    const hold = holdRef.current;
-    holdRef.current = null;
-    if (hold) window.clearTimeout(hold.timer);
-    return hold;
-  }
-
-  function handlePointerDown(e: PointerEvent<HTMLDivElement>) {
-    suppressClickRef.current = false;
-    if (e.button !== 0) return;
-    // 이미지 팝업처럼 포털로 띄운 요소의 이벤트도 React 트리를 따라 여기까지 올라온다.
-    // 실제 책 영역에서 시작한 입력만 스와이프·꾹 누르기로 다룬다.
-    if (!e.currentTarget.contains(e.target as Node)) return;
-    swipeStartRef.current = { x: e.clientX, y: e.clientY };
-    const rect = e.currentTarget.getBoundingClientRect();
-    const direction: ChainDirection =
-      e.clientX < rect.left + rect.width / 2 ? 'prev' : 'next';
-    const hold: Hold = { x: e.clientX, y: e.clientY, timer: 0, active: false };
-    hold.timer = window.setTimeout(() => {
-      hold.active = true;
-      bookRef.current?.cancelTurn();
-      onHoldStart(direction);
-    }, HOLD_DELAY);
-    clearHold();
-    holdRef.current = hold;
-  }
-
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
     updateHover(e);
-    const hold = holdRef.current;
-    if (!hold || hold.active) return;
-    const moved = Math.hypot(e.clientX - hold.x, e.clientY - hold.y);
-    if (moved > HOLD_MOVE_TOLERANCE) clearHold();
+    gestures.onPointerMove(e);
   }
 
-  // 꾹 누르기가 끝난 pointerup/click 은 엔진과 페이지 콘텐츠에 전달하지 않는다.
-  function handlePointerEnd(e: PointerEvent<HTMLDivElement>) {
-    const hold = clearHold();
-    const swipeStart = swipeStartRef.current;
-    swipeStartRef.current = null;
-    if (hold?.active) {
-      e.stopPropagation();
-      suppressClickRef.current = true;
-      onHoldEnd();
-      return;
-    }
-    if (landscape || !swipeStart || e.type !== 'pointerup') return;
-    const dx = e.clientX - swipeStart.x;
-    const dy = e.clientY - swipeStart.y;
-    // 반쪽 보기 스와이프: 오른쪽 → 왼쪽이면 다음 장, 왼쪽 → 오른쪽이면 이전 장
-    if (Math.abs(dx) < SWIPE_DISTANCE || Math.abs(dx) < Math.abs(dy)) return;
-    suppressClickRef.current = true;
-    if (dx < 0) bookRef.current?.flipNext();
-    else bookRef.current?.flipPrev();
+  function handleChangeState({ state }: FlipbookEventMap['changeState']) {
+    const moving = state === 'flipping' || state === 'user_fold';
+    // 떠 있는 닫힌 책을 열면, 표지가 다 넘어갈 때까지 떠 있다가 내려온다.
+    const head = pageRef.current;
+    const isClosed = head === 0 || head === lastLeaf;
+    const hovered = bodyRef.current?.classList.contains(
+      'history__book-body--hover',
+    );
+    if (moving && isClosed && hovered) setBodyFlag('lifted', true);
+    setBodyFlag('turning', moving);
+    if (state !== 'read') return;
+    // 드래그를 취소해 제자리로 돌아온 경우까지 현재 펼침면 두께로 맞춘다.
+    applyStack(pageRef.current);
+    setBodyFlag('lifted', false);
+    setBodyFlag('closing-front', false);
+    setBodyFlag('closing-back', false);
+    syncHardLeaves();
+    onSettled();
   }
 
-  function handleClickCapture(e: MouseEvent<HTMLDivElement>) {
-    if (!suppressClickRef.current) return;
-    suppressClickRef.current = false;
-    e.stopPropagation();
-    e.preventDefault();
+  // 넘김이 시작되면 도착할 펼침면 두께로 바꾸고, 표지로 닫히는 넘김이면 넘어가는 쪽 커버 판을 숨긴다.
+  function handleTurnProgress({ direction }: FlipbookEventMap['turnProgress']) {
+    const head = pageRef.current;
+    applyStack(getAdjacentHead(head, direction, lastLeaf));
+    const closing = getClosingSide(head, direction, lastLeaf);
+    setBodyFlag('closing-front', closing === 'front');
+    setBodyFlag('closing-back', closing === 'back');
   }
 
   const bodyClassName = [
@@ -249,11 +191,11 @@ export function Book({
       <div
         ref={stageRef}
         className='history__book-stage'
-        onPointerDownCapture={handlePointerDown}
+        onPointerDownCapture={gestures.onPointerDown}
         onPointerMoveCapture={handlePointerMove}
-        onPointerUpCapture={handlePointerEnd}
-        onPointerCancelCapture={handlePointerEnd}
-        onClickCapture={handleClickCapture}
+        onPointerUpCapture={gestures.onPointerEnd}
+        onPointerCancelCapture={gestures.onPointerEnd}
+        onClickCapture={gestures.onClickCapture}
         onPointerLeave={() => setBodyFlag('hover', false)}
       >
         {pageWidth > 0 && size.height > 0 && (
@@ -305,48 +247,12 @@ export function Book({
               onLoaded={sync}
               onPagesChanged={sync}
               onPageChange={handlePageChange}
-              onChangeState={({ state }) => {
-                const moving = state === 'flipping' || state === 'user_fold';
-                // 떠 있는 닫힌 책을 열면, 표지가 다 넘어갈 때까지 떠 있다가 내려온다.
-                const head = pageRef.current;
-                const isClosed = head === 0 || head === lastLeaf;
-                if (
-                  moving &&
-                  isClosed &&
-                  bodyRef.current?.classList.contains(
-                    'history__book-body--hover',
-                  )
-                ) {
-                  setBodyFlag('lifted', true);
-                }
-                setBodyFlag('turning', moving);
-                if (state === 'read') {
-                  // 드래그를 취소해 제자리로 돌아온 경우까지 현재 펼침면 두께로 맞춘다.
-                  applyStack(pageRef.current);
-                  setBodyFlag('lifted', false);
-                  setBodyFlag('closing-front', false);
-                  setBodyFlag('closing-back', false);
-                  syncHardLeaves();
-                  onSettled();
-                }
-              }}
-              // 표지로 닫히는 동안에는 넘어가는 쪽 커버 판만 미리 숨긴다.
-              onTurnProgress={({ direction }) => {
-                const head = pageRef.current;
-                applyStack(getAdjacentHead(head, direction, lastLeaf));
-                setBodyFlag(
-                  'closing-front',
-                  direction === 'prev' && head === 1,
-                );
-                setBodyFlag(
-                  'closing-back',
-                  direction === 'next' && head === lastLeaf - 2,
-                );
-              }}
+              onChangeState={handleChangeState}
+              onTurnProgress={handleTurnProgress}
             >
               {leaves.map((leaf, i) => (
                 <div
-                  key={leafKey(leaf, i)}
+                  key={getLeafKey(leaf, i)}
                   data-density={isHardLeaf(leaf) ? 'hard' : undefined}
                 >
                   <div className={`history__leaf history__leaf--${leaf.kind}`}>

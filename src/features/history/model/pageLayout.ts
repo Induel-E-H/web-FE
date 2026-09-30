@@ -148,3 +148,46 @@ export function getAdjacentHead(
     return head === 0 ? 1 : Math.min(head + 2, lastLeaf);
   return head <= 1 ? 0 : head === lastLeaf ? lastLeaf - 2 : head - 2;
 }
+
+/**
+ * 이번 넘김이 표지로 책을 닫는 넘김이면 닫히는 쪽을 돌려준다.
+ * (앞표지로 닫히면 왼쪽, 뒤표지로 닫히면 오른쪽 커버가 넘어간다)
+ */
+export function getClosingSide(
+  head: number,
+  direction: 'next' | 'prev',
+  lastLeaf: number,
+): 'front' | 'back' | null {
+  const target = getAdjacentHead(head, direction, lastLeaf);
+  if (target === 0 && head !== 0) return 'front';
+  if (target === lastLeaf && head !== lastLeaf) return 'back';
+  return null;
+}
+
+const LEAF_LABEL: Record<Exclude<Leaf['kind'], 'page'>, string> = {
+  'cover-front': '앞표지',
+  'inside-front': '앞표지 안쪽',
+  title: '속지',
+  colophon: '판권면',
+  blank: '',
+  'inside-back': '뒤표지 안쪽',
+  'cover-back': '뒤표지',
+};
+
+/** 스크린 리더 안내용 장 이름. 반쪽 보기의 빈 장은 빈 문자열이다. */
+export function describeLeaf(leaf: Leaf | undefined): string {
+  if (!leaf) return '';
+  if (leaf.kind === 'page') return `${leaf.item} ${leaf.pageIndex + 1}페이지`;
+  return LEAF_LABEL[leaf.kind];
+}
+
+export function getLeafKey(leaf: Leaf, index: number): string {
+  return leaf.kind === 'page'
+    ? `${leaf.item}-${leaf.pageIndex}-${leaf.side}`
+    : `${leaf.kind}-${index}`;
+}
+
+/** 표지 안쪽 장은 표지와 함께 딱딱하게 넘어간다 (앞·뒤표지는 엔진의 hardCovers 가 처리) */
+export function isHardLeaf(leaf: Leaf): boolean {
+  return leaf.kind === 'inside-front' || leaf.kind === 'inside-back';
+}
