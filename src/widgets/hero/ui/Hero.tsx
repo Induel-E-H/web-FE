@@ -1,29 +1,35 @@
-import { lazy, Suspense } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
 import { COMPANY } from '@shared/constant';
 import { motion } from 'framer-motion';
 
-import backgroundFallback from '../assets/background-fallback.webp';
+import waveDesktopMp4 from '../assets/hero-wave-desktop.mp4';
+import waveDesktopWebm from '../assets/hero-wave-desktop.webm';
+import waveMobileMp4 from '../assets/hero-wave-mobile.mp4';
+import waveMobileWebm from '../assets/hero-wave-mobile.webm';
 import '../styles/Hero.css';
 
-const HeroBackground = lazy(() => import('./HeroBackground'));
+const MOBILE_MEDIA = '(max-width: 767px)';
 
 export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
     <section id='hero' className='hero' aria-label='회사 소개'>
-      <Suspense
-        fallback={
-          <img
-            src={backgroundFallback}
-            className='hero__background hero__background--fallback'
-            aria-hidden='true'
-            alt=''
-          />
-        }
-      >
-        <HeroBackground />
-      </Suspense>
+      {/* Poster is a CSS background so it follows the breakpoint. */}
+      <div className='hero__background' aria-hidden='true'>
+        <video
+          className='hero__video'
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload='auto'
+        >
+          <source src={waveMobileWebm} type='video/webm' media={MOBILE_MEDIA} />
+          <source src={waveMobileMp4} type='video/mp4' media={MOBILE_MEDIA} />
+          <source src={waveDesktopWebm} type='video/webm' />
+          <source src={waveDesktopMp4} type='video/mp4' />
+        </video>
+      </div>
       <motion.div
         className='hero__company'
         initial={{ opacity: 0, y: 20 }}
