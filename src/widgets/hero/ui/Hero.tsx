@@ -1,5 +1,3 @@
-import { IoIosArrowDown } from 'react-icons/io';
-
 import { COMPANY } from '@shared/constant';
 
 import waveDesktopMp4 from '../assets/hero-wave-desktop.mp4';
@@ -47,7 +45,9 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
         </div>
       </div>
       {showScrollArrow ? (
-        <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
+        <span className='hero__scroll-cue' aria-hidden='true'>
+          SCROLL
+        </span>
       ) : (
         <p
           style={{
