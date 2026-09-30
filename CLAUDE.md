@@ -166,7 +166,7 @@ src
   │   ├── map                             # Map & Directions (Page 7)
   │   └── footer                          # Footer (Page 7)
   ├── features                            # Features layer
-  │   ├── award                           # Award year-filter & pagination
+  │   ├── award                           # Award year-filter
   │   ├── header                          # Header Visibility and Hero Check
   │   └── history                         # History book navigation logic
   │       └── model
