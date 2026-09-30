@@ -6,7 +6,7 @@
 
   align-items: center;
   gap: 1.56vmax;
-  padding: 3.13vmax 5.21vmax;
+  padding: 3.13vmax var(--section-padding-x);
 
   background-color: var(--surface-warm);
 }
@@ -33,7 +33,7 @@
 @media (max-width: 1024px) {
   .award {
     gap: 1.95vw;
-    padding: 9.15vw 7.63vw 4.58vw;
+    padding: 9.15vw var(--section-padding-x) 4.58vw;
   }
 
   .award__content {
@@ -46,7 +46,7 @@
 @media (max-width: 767px) {
   .award {
     gap: clamp(14px, 4vw, 20px);
-    padding: clamp(56px, 16vw, 80px) clamp(14px, 4vw, 20px)
+    padding: clamp(56px, 16vw, 80px) var(--section-padding-x)
       clamp(14px, 4vw, 20px);
   }
 
