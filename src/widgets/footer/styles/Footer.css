@@ -94,6 +94,11 @@
   margin: 0;
 }
 
+.footer__info a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .footer__copyright {
   font-size: 13px;
   color: var(--brown-300);

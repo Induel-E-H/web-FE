@@ -5,14 +5,14 @@ import { trackPrivacyPolicyClick } from '@shared/lib/analytics';
 
 import '../styles/Footer.css';
 
-const INFO = [
+const INFO: [label: string, value: string, href?: string][] = [
   ['대표이사', COMPANY.CEO],
   ['사업자등록번호', COMPANY.BUSINESS_NO],
   ['주소', COMPANY.ADDRESS_FULL],
-  ['TEL', COMPANY.PHONE_DISPLAY],
+  ['TEL', COMPANY.PHONE_DISPLAY, `tel:${COMPANY.PHONE}`],
   ['FAX', COMPANY.FAX],
-  ['EMAIL', COMPANY.EMAIL],
-] as const;
+  ['EMAIL', COMPANY.EMAIL, `mailto:${COMPANY.EMAIL}`],
+];
 
 export function Footer() {
   const navigate = useNavigate();
@@ -41,10 +41,10 @@ export function Footer() {
         </button>
       </div>
       <dl className='footer__info'>
-        {INFO.map(([label, value]) => (
+        {INFO.map(([label, value, href]) => (
           <div key={label}>
             <dt>{label}</dt>
-            <dd>{value}</dd>
+            <dd>{href ? <a href={href}>{value}</a> : value}</dd>
           </div>
         ))}
       </dl>

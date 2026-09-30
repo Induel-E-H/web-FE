@@ -102,6 +102,28 @@ describe('Footer', () => {
       renderFooter();
       expect(screen.getByText(COMPANY.EMAIL)).toBeInTheDocument();
     });
+
+    it('전화번호를 누르면 전화를 걸 수 있다', () => {
+      renderFooter();
+      expect(
+        screen.getByRole('link', { name: COMPANY.PHONE_DISPLAY }),
+      ).toHaveAttribute('href', `tel:${COMPANY.PHONE}`);
+    });
+
+    it('이메일을 누르면 메일을 보낼 수 있다', () => {
+      renderFooter();
+      expect(screen.getByRole('link', { name: COMPANY.EMAIL })).toHaveAttribute(
+        'href',
+        `mailto:${COMPANY.EMAIL}`,
+      );
+    });
+
+    it('팩스 번호는 링크가 아니다', () => {
+      renderFooter();
+      expect(
+        screen.queryByRole('link', { name: COMPANY.FAX }),
+      ).not.toBeInTheDocument();
+    });
   });
 
   describe('주소 표시', () => {
