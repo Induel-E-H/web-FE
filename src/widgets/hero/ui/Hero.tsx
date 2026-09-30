@@ -1,7 +1,6 @@
 import { IoIosArrowDown } from 'react-icons/io';
 
 import { COMPANY } from '@shared/constant';
-import { motion } from 'framer-motion';
 
 import waveDesktopMp4 from '../assets/hero-wave-desktop.mp4';
 import waveDesktopWebm from '../assets/hero-wave-desktop.webm';
@@ -30,12 +29,7 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
           <source src={waveDesktopMp4} type='video/mp4' />
         </video>
       </div>
-      <motion.div
-        className='hero__company'
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-      >
+      <div className='hero__company'>
         <img
           src='/favicon.svg'
           alt='인들이앤에이치 로고'
@@ -51,7 +45,7 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
             SINCE {COMPANY.ESTABLISHED_DISPLAY}
           </time>
         </div>
-      </motion.div>
+      </div>
       {showScrollArrow ? (
         <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
       ) : (
