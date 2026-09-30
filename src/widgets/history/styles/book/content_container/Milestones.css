@@ -61,6 +61,8 @@
 
 @media (max-width: 1024px) {
   .milestones__container {
+    justify-content: flex-start;
+
     gap: 1.3vw;
   }
 

@@ -24,16 +24,8 @@
 }
 
 @media (max-width: 1024px) {
-  .book-page-title hr {
-    display: none;
-  }
-
   .book-page-title h3 {
     font-size: 2.34vw;
-  }
-
-  .history__book-page-right .book-page-title {
-    display: none;
   }
 }
 

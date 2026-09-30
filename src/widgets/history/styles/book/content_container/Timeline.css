@@ -45,12 +45,18 @@
 }
 
 @media (max-width: 1024px) {
+  /* 한 쪽씩 보이는 반쪽 보기에서는 List·Milestones 처럼 제목을 맨 위에 두고,
+     목록은 제목 아래 남은 공간의 가운데에 둔다 */
   .timeline__container {
+    justify-content: flex-start;
+
     gap: 1.3vw;
   }
 
   .timeline__ul {
     height: 30.67vh;
+
+    margin-block: auto;
   }
 
   .timeline__ul li {
