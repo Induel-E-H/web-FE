@@ -1,5 +1,7 @@
 .history__book-stage {
   --board-pad: 0.78vmax;
+  /* 커버의 좌우 여유분은 쌓인 종이 두께(최대 --board-pad)보다 넓어야 두께 바깥으로 커버가 남는다 */
+  --cover-side: calc(var(--board-pad) * 1.8);
   --leaf-radius: 0.78vmax;
 
   position: relative;
@@ -12,7 +14,7 @@
   flex: 1;
   min-height: 0;
 
-  padding: var(--board-pad);
+  padding: var(--board-pad) var(--cover-side);
 
   -webkit-touch-callout: none;
   user-select: none;
@@ -49,7 +51,7 @@
 }
 
 .history__book-body::before {
-  left: calc(-1 * var(--board-pad));
+  left: calc(-1 * var(--cover-side));
   right: 50%;
 
   border-radius: var(--leaf-radius) 0 0 var(--leaf-radius);
@@ -57,9 +59,51 @@
 
 .history__book-body::after {
   left: 50%;
-  right: calc(-1 * var(--board-pad));
+  right: calc(-1 * var(--cover-side));
 
   border-radius: 0 var(--leaf-radius) var(--leaf-radius) 0;
+}
+
+/* 쌓인 종이 두께: 페이지 바깥 가장자리와 커버 사이에 종이 단면을 그린다.
+   폭은 쌓인 양(--stack-left/right, 0~1)에 비례하고 최대 커버 여유분(--board-pad)까지다. */
+.history__book-stack {
+  /* 흰 종이가 테두리 1px 안쪽부터 칠해지므로 두께도 같은 높이로 맞추고, 그 1px 에 붙인다 */
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+
+  background: repeating-linear-gradient(
+    var(--stack-direction),
+    #fbf8f2 0,
+    #fbf8f2 1px,
+    #d8d0c4 1px,
+    #d8d0c4 2px
+  );
+
+  pointer-events: none;
+
+  /* 페이지가 넘어가는 동안(약 0.6초) 함께 변한다 */
+  transition:
+    width 0.6s ease,
+    opacity 0.3s ease;
+}
+
+.history__book-stack--left {
+  --stack-direction: to left;
+
+  right: calc(100% - 1px);
+  width: calc(var(--board-pad) * var(--stack-left, 0));
+
+  box-shadow: inset -2px 0 3px rgb(0 0 0 / 0.12);
+}
+
+.history__book-stack--right {
+  --stack-direction: to right;
+
+  left: calc(100% - 1px);
+  width: calc(var(--board-pad) * var(--stack-right, 0));
+
+  box-shadow: inset 2px 0 3px rgb(0 0 0 / 0.12);
 }
 
 .history__flipbook {
@@ -130,7 +174,7 @@
 .history__leaf--inside-front,
 .history__leaf--inside-back {
   position: absolute;
-  inset: calc(-1 * var(--board-pad));
+  inset: calc(-1 * var(--board-pad)) calc(-1 * var(--cover-side));
 
   width: auto;
   height: auto;
@@ -263,6 +307,15 @@
   .history__book-body--closing-back
 )::after {
   opacity: 0;
+}
+
+/* 넘어가는 쪽 커버와 함께 그쪽 종이 두께도 숨긴다 */
+:is(.history__book-body--closed-front, .history__book-body--closing-front)
+  > .history__book-stack--left,
+:is(.history__book-body--closed-back, .history__book-body--closing-back)
+  > .history__book-stack--right {
+  opacity: 0;
+  transition: none;
 }
 
 /* 닫히기 시작하면 넘어가는 쪽 커버는 바로 숨긴다 (서서히 사라지면 잔상처럼 보인다) */

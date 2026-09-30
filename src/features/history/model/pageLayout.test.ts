@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
 import { INDEX_LIST } from './constants';
-import { buildLeaves, findLeafIndex, getLeafItem } from './pageLayout';
+import {
+  buildLeaves,
+  findLeafIndex,
+  getAdjacentHead,
+  getLeafItem,
+  getPaperStack,
+} from './pageLayout';
 import { getPageRegistry } from './pageRegistry';
 
 function contentPageCount(breakpoint: 'desktop' | 'tablet' | 'mobile') {
@@ -121,5 +127,62 @@ describe('getLeafItem', () => {
   it('콘텐츠 뒤쪽 장은 마지막 카테고리를 반환한다', () => {
     expect(getLeafItem(leaves, leaves.length - 2)).toBe('Milestones');
     expect(getLeafItem(leaves, leaves.length - 1)).toBe('Milestones');
+  });
+});
+
+describe('getPaperStack', () => {
+  const leaves = buildLeaves('desktop');
+  const last = leaves.length - 1;
+
+  it('앞표지로 닫혀 있거나 막 연 펼침면은 왼쪽에 두께가 없고 오른쪽이 가득이다', () => {
+    expect(getPaperStack(leaves, 0)).toEqual({ left: 0, right: 1 });
+    expect(getPaperStack(leaves, 1)).toEqual({ left: 0, right: 1 });
+  });
+
+  it('List 첫 펼침면은 왼쪽이 속지와 한 장이라 왼쪽 두께가 없다', () => {
+    const list = findLeafIndex(leaves, 'List');
+    expect(getPaperStack(leaves, list).left).toBe(0);
+  });
+
+  it('마지막 내부 펼침면은 오른쪽이 판권면 한 장이라 오른쪽 두께가 없다', () => {
+    expect(getPaperStack(leaves, last - 2).right).toBe(0);
+  });
+
+  it('뒤표지로 닫혀 있으면 왼쪽이 가득이고 오른쪽 두께가 없다', () => {
+    expect(getPaperStack(leaves, last)).toEqual({ left: 1, right: 0 });
+  });
+
+  it('넘길수록 왼쪽은 두꺼워지고 오른쪽은 얇아진다', () => {
+    const early = getPaperStack(leaves, findLeafIndex(leaves, 'Content'));
+    const late = getPaperStack(leaves, findLeafIndex(leaves, 'Milestones'));
+    expect(late.left).toBeGreaterThan(early.left);
+    expect(late.right).toBeLessThan(early.right);
+  });
+
+  it('깔린 장이 한 장이라도 있으면 최소 두께 이상이다', () => {
+    const { left, right } = getPaperStack(
+      leaves,
+      findLeafIndex(leaves, 'Content'),
+    );
+    expect(left).toBeGreaterThanOrEqual(0.2);
+    expect(right).toBeGreaterThanOrEqual(0.2);
+  });
+});
+
+describe('getAdjacentHead', () => {
+  const last = 21;
+
+  it('앞으로 넘기면 표지 → 1, 이후 두 장씩, 끝은 뒤표지이다', () => {
+    expect(getAdjacentHead(0, 'next', last)).toBe(1);
+    expect(getAdjacentHead(1, 'next', last)).toBe(3);
+    expect(getAdjacentHead(last - 2, 'next', last)).toBe(last);
+    expect(getAdjacentHead(last, 'next', last)).toBe(last);
+  });
+
+  it('뒤로 넘기면 두 장씩, 1 → 표지, 뒤표지 → 마지막 내부 펼침면이다', () => {
+    expect(getAdjacentHead(5, 'prev', last)).toBe(3);
+    expect(getAdjacentHead(1, 'prev', last)).toBe(0);
+    expect(getAdjacentHead(0, 'prev', last)).toBe(0);
+    expect(getAdjacentHead(last, 'prev', last)).toBe(last - 2);
   });
 });

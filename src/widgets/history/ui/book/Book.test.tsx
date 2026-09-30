@@ -303,6 +303,22 @@ describe('Book', () => {
       expect(el).not.toHaveClass('history__book-body--lifted');
     });
 
+    it('펼친 위치에 따라 양쪽 종이 두께 변수를 넘긴다', () => {
+      const { body } = setup();
+      const el = body() as HTMLElement;
+      const stackOf = () => ({
+        left: Number(el.style.getPropertyValue('--stack-left')),
+        right: Number(el.style.getPropertyValue('--stack-right')),
+      });
+      expect(stackOf()).toEqual({ left: 0, right: 1 });
+      turnTo(3);
+      const early = stackOf();
+      turnTo(lastLeaf - 4);
+      const late = stackOf();
+      expect(late.left).toBeGreaterThan(early.left);
+      expect(late.right).toBeLessThan(early.right);
+    });
+
     it('넘기는 중 상태 변화로 책을 다시 렌더링하지 않는다', () => {
       const { props } = setup();
       const renders = props.renderPage.mock.calls.length;

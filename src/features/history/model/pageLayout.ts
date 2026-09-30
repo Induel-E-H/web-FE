@@ -79,3 +79,43 @@ export function getLeafItem(leaves: readonly Leaf[], index: number): IndexItem {
   const firstPage = leaves.findIndex((l) => l.kind === 'page');
   return index < firstPage ? INDEX_LIST[0] : INDEX_LIST[INDEX_LIST.length - 1];
 }
+
+const MIN_STACK = 0.2;
+
+/**
+ * 펼친 위치(head: 펼침면의 첫 장)에서 왼쪽·오른쪽에 쌓인 종이 두께를 0~1 로 계산한다.
+ * 엔진에서 한 장의 종이는 (2k, 2k+1) 두 면이고, 첫 장(표지)과 마지막 장(뒤표지)은 커버다.
+ * 지금 펼쳐져 보이는 맨 위 장은 두께에 넣지 않는다 (그 아래에 깔린 장만 두께가 된다).
+ * 한 장이라도 깔려 있으면 최소 MIN_STACK 만큼은 보이게 한다.
+ */
+export function getPaperStack(
+  leaves: readonly Leaf[],
+  head: number,
+): { left: number; right: number } {
+  const lastLeaf = leaves.length - 1;
+  const sheets = Math.max(0, (lastLeaf - 3) / 2);
+  let leftSheets = 0;
+  for (let k = 1; k <= sheets; k++) {
+    if (2 * k + 1 <= head) leftSheets += 1;
+  }
+  const rightSheets = sheets - leftSheets;
+  const toStack = (visible: number) => {
+    const under = visible - 1;
+    if (under <= 0 || sheets <= 1) return 0;
+    return MIN_STACK + (1 - MIN_STACK) * (under / (sheets - 1));
+  };
+  return { left: toStack(leftSheets), right: toStack(rightSheets) };
+}
+
+/**
+ * 한 장 넘긴 뒤의 펼침면 시작 장. 하드커버라 펼침면 시작 장은 0, 1, 3, 5, ..., lastLeaf 이다.
+ */
+export function getAdjacentHead(
+  head: number,
+  direction: 'next' | 'prev',
+  lastLeaf: number,
+): number {
+  if (direction === 'next')
+    return head === 0 ? 1 : Math.min(head + 2, lastLeaf);
+  return head <= 1 ? 0 : head === lastLeaf ? lastLeaf - 2 : head - 2;
+}

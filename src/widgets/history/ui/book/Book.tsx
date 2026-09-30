@@ -1,8 +1,18 @@
-import type { MouseEvent, PointerEvent, ReactNode, RefObject } from 'react';
+import type {
+  CSSProperties,
+  MouseEvent,
+  PointerEvent,
+  ReactNode,
+  RefObject,
+} from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
-import { FLIP_DURATION } from '@features/history';
+import {
+  FLIP_DURATION,
+  getAdjacentHead,
+  getPaperStack,
+} from '@features/history';
 import type { ChainDirection, Leaf, PageLeaf } from '@features/history';
 import HTMLFlipBook, {
   type BookSnapshot,
@@ -104,6 +114,8 @@ export function Book({
 
   const lastLeaf = leaves.length - 1;
   const closed = page === 0 ? 'front' : page >= lastLeaf ? 'back' : null;
+  // 넘김이 끝날 때만 page 가 바뀌므로, 두께는 다 넘어간 뒤 부드럽게 바뀐다.
+  const stack = getPaperStack(leaves, page);
   // 가로(PC)는 펼침면 전체, 태블릿/모바일은 펼침면의 왼쪽 장만 화면에 보이고 오른쪽 장은 화면 밖에 둔다.
   const pageWidth = landscape ? Math.floor(size.width / 2) : size.width;
 
@@ -138,6 +150,16 @@ export function Book({
       'hover',
       x >= w / 4 && x <= (w * 3) / 4 && y >= 0 && y <= body.offsetHeight,
     );
+  }
+
+  // 넘김이 시작되면 도착할 펼침면의 두께로 바로 바꿔, 넘어가는 페이지와 함께 두께가 움직이게 한다.
+  // (넘기는 중 재렌더를 피하려고 DOM 에 직접 쓴다. 넘김이 끝나면 React 가 같은 값을 다시 쓴다.)
+  function applyStack(head: number) {
+    const body = bodyRef.current;
+    if (!body) return;
+    const { left, right } = getPaperStack(leaves, head);
+    body.style.setProperty('--stack-left', String(left));
+    body.style.setProperty('--stack-right', String(right));
   }
 
   function clearHold() {
@@ -211,11 +233,23 @@ export function Book({
           <div
             ref={bodyRef}
             className={bodyClassName}
-            style={{
-              width: pageWidth * 2,
-              height: size.height,
-            }}
+            style={
+              {
+                width: pageWidth * 2,
+                height: size.height,
+                '--stack-left': stack.left,
+                '--stack-right': stack.right,
+              } as CSSProperties
+            }
           >
+            <div
+              className='history__book-stack history__book-stack--left'
+              aria-hidden='true'
+            />
+            <div
+              className='history__book-stack history__book-stack--right'
+              aria-hidden='true'
+            />
             <HTMLFlipBook
               key={landscape ? 'landscape' : 'half'}
               ref={bookRef}
@@ -257,6 +291,8 @@ export function Book({
                 }
                 setBodyFlag('turning', moving);
                 if (state === 'read') {
+                  // 드래그를 취소해 제자리로 돌아온 경우까지 현재 펼침면 두께로 맞춘다.
+                  applyStack(pageRef.current);
                   setBodyFlag('lifted', false);
                   setBodyFlag('closing-front', false);
                   setBodyFlag('closing-back', false);
@@ -267,6 +303,7 @@ export function Book({
               // 표지로 닫히는 동안에는 넘어가는 쪽 커버 판만 미리 숨긴다.
               onTurnProgress={({ direction }) => {
                 const head = pageRef.current;
+                applyStack(getAdjacentHead(head, direction, lastLeaf));
                 setBodyFlag(
                   'closing-front',
                   direction === 'prev' && head === 1,
