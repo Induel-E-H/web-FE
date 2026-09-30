@@ -1,12 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  BOOK_STATE,
   FLIP_DURATION,
   INDEX_LIST,
-  MAX_SOURCE_PAGE_FLIPS,
   PAGE_SIDE,
-  PASS_THROUGH_FLIP_DURATION,
   RAPID_FLIP_DURATION,
 } from './constants';
 
@@ -43,47 +40,8 @@ describe('constants', () => {
       expect(RAPID_FLIP_DURATION).toBe(300);
     });
 
-    it('PASS_THROUGH_FLIP_DURATION은 150이다', () => {
-      expect(PASS_THROUGH_FLIP_DURATION).toBe(150);
-    });
-
-    it('MAX_SOURCE_PAGE_FLIPS는 3이다', () => {
-      expect(MAX_SOURCE_PAGE_FLIPS).toBe(3);
-    });
-
     it('RAPID_FLIP_DURATION이 FLIP_DURATION보다 작다', () => {
       expect(RAPID_FLIP_DURATION).toBeLessThan(FLIP_DURATION);
-    });
-
-    it('PASS_THROUGH_FLIP_DURATION이 RAPID_FLIP_DURATION보다 작다', () => {
-      expect(PASS_THROUGH_FLIP_DURATION).toBeLessThan(RAPID_FLIP_DURATION);
-    });
-  });
-
-  describe('BOOK_STATE', () => {
-    it('7개의 키를 가진다', () => {
-      expect(Object.keys(BOOK_STATE)).toHaveLength(7);
-    });
-
-    it('모든 값이 문자열이다', () => {
-      Object.values(BOOK_STATE).forEach((value) => {
-        expect(typeof value).toBe('string');
-      });
-    });
-
-    it('모든 값이 유일하다', () => {
-      const values = Object.values(BOOK_STATE);
-      expect(new Set(values).size).toBe(values.length);
-    });
-
-    it('각 상태 값이 올바르다', () => {
-      expect(BOOK_STATE.COVER_FRONT).toBe('cover-front');
-      expect(BOOK_STATE.OPENING_FRONT).toBe('opening-front');
-      expect(BOOK_STATE.OPEN).toBe('open');
-      expect(BOOK_STATE.CLOSING_FRONT).toBe('closing-front');
-      expect(BOOK_STATE.COVER_BACK).toBe('cover-back');
-      expect(BOOK_STATE.OPENING_BACK).toBe('opening-back');
-      expect(BOOK_STATE.CLOSING_BACK).toBe('closing-back');
     });
   });
 });

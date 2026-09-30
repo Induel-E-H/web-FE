@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import '../../styles/History.css';
-import { BackCoverInner } from './BackCover';
+import { TitlePage } from './TitlePage';
 
 const meta = {
-  title: 'Widgets/History/Book/BackCover',
-  component: BackCoverInner,
+  title: 'Widgets/History/Book/TitlePage',
+  component: TitlePage,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          '책의 마지막 장(하드커버)에 들어가는 뒤 표지 콘텐츠. EXHIBITION · ENVIRONMENTAL · INTERIOR 키워드를 표시합니다.',
+          '앞표지 안쪽 맞은편에 오는 속지(제목 페이지). 표지와 List 사이를 분리합니다.',
       },
     },
   },
@@ -22,14 +22,18 @@ const meta = {
         style={{ height: 'auto', minHeight: 'auto', padding: '2rem' }}
       >
         <div
-          style={{ position: 'relative', width: '620px', height: '662.5px' }}
+          style={{
+            width: '620px',
+            height: '662.5px',
+            backgroundColor: 'var(--white)',
+          }}
         >
           <Story />
         </div>
       </section>
     ),
   ],
-} satisfies Meta<typeof BackCoverInner>;
+} satisfies Meta<typeof TitlePage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

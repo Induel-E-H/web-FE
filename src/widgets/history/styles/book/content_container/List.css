@@ -68,7 +68,7 @@
 
 @media (max-width: 767px) {
   .list__container {
-    gap: clamp(4px, 1.33vw, 7px);
+    gap: clamp(9px, 2.67vw, 13px);
   }
 
   .list__ul li::before {

@@ -23,6 +23,7 @@
     "preview": "vite preview",
     "format": "prettier . --write",
     "prepare": "husky",
+    "postinstall": "patch-package",
     "commit": "cz",
     "test": "vitest --project=unit",
     "test:storybook": "vitest --project=storybook",
@@ -32,6 +33,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@gullabs/react-flipbook": "^3.2.1",
     "framer-motion": "^12.38.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
@@ -83,6 +85,7 @@
     "jsdom": "^29.1.1",
     "lightningcss": "^1.32.0",
     "lint-staged": "^15.5.2",
+    "patch-package": "^8.0.1",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
     "storybook": "^10.3.5",
