@@ -28,6 +28,7 @@ import { BackCoverInner } from './BackCover';
 import { ColophonPage } from './ColophonPage';
 import { FrontCoverInner } from './FrontCover';
 import { TitlePage } from './TitlePage';
+import { UsageGuide } from './UsageGuide';
 
 // 반쪽 보기(태블릿/모바일)는 다음 장이 화면 밖 오른쪽에 있어 엔진이 손가락을 왼쪽 장을
 // 잡는 것으로 해석해 엉뚱한 방향으로 접는다. 엔진 포인터 넘김을 끄고 스와이프를 직접 판정한다.
@@ -257,6 +258,9 @@ export function Book({
                 >
                   <div className={`history__leaf history__leaf--${leaf.kind}`}>
                     {leaf.kind === 'cover-front' && <FrontCoverInner />}
+                    {leaf.kind === 'inside-front' && (
+                      <UsageGuide landscape={landscape} />
+                    )}
                     {leaf.kind === 'cover-back' && <BackCoverInner />}
                     {leaf.kind === 'title' && <TitlePage />}
                     {leaf.kind === 'colophon' && <ColophonPage />}
