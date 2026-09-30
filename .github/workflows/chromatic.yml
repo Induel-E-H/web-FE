@@ -1,7 +1,7 @@
 name: 'Chromatic Deployment'
 
 on:
-  pull_request_target:
+  pull_request:
     branches: [develop, main]
     paths:
       - '.storybook/**'
@@ -15,21 +15,23 @@ permissions:
 
 jobs:
   chromatic:
-    if: github.actor != 'dependabot[bot]'
+    # fork PR은 secret 미전달 → 같은 repo 브랜치 PR과 수동 실행만 허용
+    if: >-
+      github.actor != 'dependabot[bot]' &&
+      (github.event_name == 'workflow_dispatch' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
-
     steps:
-      # 1) PR 코드 checkout (핵심)
+      # 1) checkout
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
 
       # 2) install
       - run: yarn
 
       # 3) Chromatic 실행
-      - uses: chromaui/action@latest
+      - uses: chromaui/action@v18
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
