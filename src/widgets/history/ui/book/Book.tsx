@@ -6,7 +6,11 @@ import type {
   RefObject,
 } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import {
+  MdChevronLeft,
+  MdChevronRight,
+  MdOutlineSwipeLeft,
+} from 'react-icons/md';
 
 import {
   FLIP_DURATION,
@@ -353,6 +357,16 @@ export function Book({
               ))}
             </HTMLFlipBook>
           </div>
+        )}
+        {!landscape && closed && (
+          <p className='history__book-guide' role='note'>
+            <MdOutlineSwipeLeft aria-hidden='true' />
+            <span>
+              옆으로 밀거나
+              <br />
+              아래 버튼을 눌러 넘겨 보세요
+            </span>
+          </p>
         )}
       </div>
       {!landscape && (

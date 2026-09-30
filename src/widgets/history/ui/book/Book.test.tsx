@@ -484,6 +484,31 @@ describe('Book', () => {
       expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
     });
 
+    it('표지를 탭해도 넘기지 않는다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 500, 502);
+      turnTo(lastLeaf);
+      swipe(stage, 500, 500);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+      expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
+    });
+
+    it('닫혀 있을 때 스와이프·버튼 안내를 띄우고 펼치면 없앤다', () => {
+      setup(false);
+      expect(screen.getByRole('note')).toHaveTextContent(
+        '옆으로 밀거나아래 버튼을 눌러 넘겨 보세요',
+      );
+      turnTo(3);
+      expect(screen.queryByRole('note')).not.toBeInTheDocument();
+      turnTo(lastLeaf);
+      expect(screen.getByRole('note')).toBeInTheDocument();
+    });
+
+    it('가로(PC) 모드에는 안내가 없다', () => {
+      setup(true);
+      expect(screen.queryByRole('note')).not.toBeInTheDocument();
+    });
+
     it('가로(PC) 모드는 엔진의 드래그 넘김을 그대로 쓴다', () => {
       const { stage } = setup(true);
       swipe(stage, 800, 600);
