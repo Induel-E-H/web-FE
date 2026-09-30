@@ -82,7 +82,6 @@ All \*.stories.ts(x) files must have a 1:1 correspondence with their source file
 - React 19.2.5 (React Compiler Enabled)
 - Vite (rolldown-vite@7.2.5)
 - TypeScript 5.9.3
-- Three.js ^0.184.0 — 3D wave background animation in the Hero section (`src/shared/lib/three/`)
 - react-router-dom ^7.14.2 — client-side routing
 - react-icons ^5.6.0 — icon library
 - Vitest ^4.1.2 — unit and component testing
@@ -102,7 +101,8 @@ All \*.stories.ts(x) files must have a 1:1 correspondence with their source file
   - Automatically optimizes React components
   - Impacts dev and build performance but improves runtime performance
 - **Plugins**: `vite-tsconfig-paths` for TypeScript path aliases; `vite-plugin-sitemap` for SEO sitemap generation (`https://induel.co.kr`)
-- **Manual chunks**: `vendor-three` (Three.js) and `vendor-react` (React/React DOM/React Router) split for better caching
+- **Manual chunks**: `vendor-react` (React/React DOM/React Router) split for better caching
+- **Hero background**: pre-rendered looping video (`src/widgets/hero/assets/hero-wave-*`, webm + mp4, mobile/desktop via `<source media>`), poster as CSS background
 
 ## Testing
 
@@ -188,7 +188,6 @@ src
   │   │   ├── ordinal                     # Ordinal number utility
   │   │   ├── preload                     # Image preload
   │   │   ├── scroll                      # Header Scroll
-  │   │   ├── three                       # Three.js utilities
   │   │   └── useSlideGesture             # Image Slider hand slide gesture
   │   └── ui                              # Shared UI components
   │       ├── ImageSlider

@@ -8,16 +8,22 @@
 
 .hero__background {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -1;
-  filter: blur(10px);
-  transform: scale(1.2);
-  transform-origin: center;
+  background: var(--black) url('../assets/hero-wave-desktop-poster.webp')
+    center / cover no-repeat;
 }
 
-.hero__background--fallback {
+.hero__video {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .hero__background {
+    background-image: url('../assets/hero-wave-mobile-poster.webp');
+  }
 }
 
 .hero__company {
