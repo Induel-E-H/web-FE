@@ -32,6 +32,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@gullabs/react-flipbook": "^3.2.1",
     "framer-motion": "^12.38.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
