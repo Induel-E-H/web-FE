@@ -4,7 +4,7 @@
 
   width: 100%;
 
-  gap: 1.56vmax;
+  gap: clamp(20px, 1.6vw, 28px);
 }
 
 .patent__content__title {
@@ -73,10 +73,6 @@
 }
 
 @media (max-width: 1024px) {
-  .patent__content {
-    gap: 2.6vw;
-  }
-
   .patent__content__item__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -85,10 +81,6 @@
 }
 
 @media (max-width: 767px) {
-  .patent__content {
-    gap: clamp(19px, 5.33vw, 27px);
-  }
-
   .patent__content__item__list {
     grid-template-columns: 1fr;
     grid-template-rows: none;

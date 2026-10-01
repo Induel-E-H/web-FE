@@ -7,25 +7,25 @@
 .history__front-cover-spine {
   position: absolute;
   top: 0;
-  left: 1.3vmax;
+  left: clamp(11px, 4.04cqmin, 26px);
 
-  width: 0.83vmax;
+  width: clamp(7px, 2.58cqmin, 17px);
   height: 100%;
 
   background-color: var(--mauve-800);
-  box-shadow: inset 0 0 0.21vmax var(--shadow-06);
+  box-shadow: inset 0 0 3px var(--shadow-06);
   border: none;
 }
 
 .history__front-cover-text {
   position: absolute;
-  right: 3.65vmax;
-  bottom: 5.21vmax;
+  right: clamp(32px, 11.35cqmin, 74px);
+  bottom: clamp(45px, 16.2cqmin, 105px);
 
   display: flex;
   flex-direction: column;
 
-  gap: 1.88vmax;
+  gap: clamp(16px, 5.85cqmin, 38px);
 }
 
 .history__front-cover-title,
@@ -80,36 +80,4 @@
   font-size: clamp(20px, 8.6cqmin, 40px);
 
   line-height: 100%;
-}
-
-@media (max-width: 1024px) {
-  .history__front-cover-spine {
-    left: 2.604vw;
-
-    width: 1.563vw;
-
-    box-shadow: inset 0 0 4px var(--shadow-06);
-  }
-
-  .history__front-cover-text {
-    right: 4.948vw;
-    bottom: 4.297vw;
-
-    gap: 2.604vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .history__front-cover-spine {
-    left: clamp(9px, 2.667vw, 13px);
-
-    width: clamp(9px, 2.667vw, 13px);
-  }
-
-  .history__front-cover-text {
-    right: clamp(14px, 4vw, 20px);
-    bottom: clamp(23px, 6.667vw, 33px);
-
-    gap: clamp(19px, 5.333vw, 27px);
-  }
 }

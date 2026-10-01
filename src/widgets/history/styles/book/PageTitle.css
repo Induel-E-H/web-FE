@@ -3,7 +3,7 @@
   flex-direction: column;
 
   align-items: center;
-  gap: 1.04vmax;
+  gap: clamp(9px, 3.23cqmin, 21px);
 }
 
 .book-page-title--hidden {
@@ -13,7 +13,7 @@
 .book-page-title hr {
   border: none;
   border-top: 1px solid var(--book-page-hr);
-  width: 16.35vmax;
+  width: clamp(141px, 50.85cqmin, 330px);
 }
 
 .book-page-title h3 {

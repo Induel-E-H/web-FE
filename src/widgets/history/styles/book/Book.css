@@ -1,8 +1,8 @@
 .history__book-stage {
-  --board-pad: 0.78vmax;
+  --board-pad: clamp(4px, 1.3vw - 2px, 14px);
   /* 커버의 좌우 여유분은 쌓인 종이 두께(최대 --board-pad)보다 넓어야 두께 바깥으로 커버가 남는다 */
   --cover-side: calc(var(--board-pad) * 1.8);
-  --leaf-radius: 0.78vmax;
+  --leaf-radius: clamp(12px, 0.5vw + 8px, 16px);
 
   /* 커버 굴곡: 책등 쪽이 접혀 들어가며 어둡고, 바깥 모서리는 둥글게 말려 빛을 받은 뒤 어두워진다.
      -l 은 책등이 오른쪽(왼쪽 커버), -r 은 책등이 왼쪽(오른쪽 커버) */
@@ -35,14 +35,14 @@
       var(--shadow-04) 60%,
       transparent
     )
-    right / 0.9vmax 100% no-repeat;
+    right / clamp(8px, 0.9vw, 18px) 100% no-repeat;
   --spine-accent-r: linear-gradient(
       to right,
       var(--shadow-05),
       var(--shadow-04) 60%,
       transparent
     )
-    left / 0.9vmax 100% no-repeat;
+    left / clamp(8px, 0.9vw, 18px) 100% no-repeat;
 
   position: relative;
 
@@ -85,7 +85,7 @@
   bottom: calc(-1 * var(--board-pad));
 
   background-color: var(--mauve-700);
-  box-shadow: 0 0.8vmax 1.2vmax -0.4vmax var(--shadow-05);
+  box-shadow: 0 12px 18px -6px var(--shadow-05);
 
   transition: opacity 0.3s ease;
 }
@@ -246,7 +246,7 @@
 }
 
 .history__leaf--page {
-  padding: 0.78vmax 1.2vmax;
+  padding: clamp(9px, 0.78vw, 16px) clamp(12px, 1.2vw, 24px);
 }
 
 /* 책 굴곡: 제본선 골짜기 → 볼록한 하이라이트 → 바깥쪽으로 다시 휘어 내려가는 음영,
@@ -344,14 +344,16 @@
   content: '';
 
   position: absolute;
-  inset: 0.78vmax 0 0.78vmax 0.78vmax;
+  inset: clamp(6px, 0.78vw, 15px) 0 clamp(6px, 0.78vw, 15px)
+    clamp(6px, 0.78vw, 15px);
 
   background-color: var(--mauve-600);
-  box-shadow: inset 0 0 1.04vmax var(--shadow-05);
+  box-shadow: inset 0 0 15px var(--shadow-05);
 }
 
 .history__leaf--inside-back::before {
-  inset: 0.78vmax 0.78vmax 0.78vmax 0;
+  inset: clamp(6px, 0.78vw, 15px) clamp(6px, 0.78vw, 15px)
+    clamp(6px, 0.78vw, 15px) 0;
 }
 
 /* 표지 장에도 커버와 같은 굴곡을 입힌다. 표지 안쪽은 펼친 책 뒤 커버와 이어지므로 책등 골도 같이 둔다. */
@@ -443,20 +445,20 @@
     .history__book-body--closed-front,
     .history__book-body--closed-back
   ) {
-    filter: drop-shadow(0 0.4vmax 0.6vmax rgb(0 0 0 / 0.35));
+    filter: drop-shadow(0 6px 9px rgb(0 0 0 / 0.35));
   }
 
   .history__book-body--landscape:is(
       .history__book-body--closed-front,
       .history__book-body--closed-back
     ).history__book-body--hover:not(.history__book-body--turning) {
-    transform: translateY(-0.8vmax);
-    filter: drop-shadow(0 1.6vmax 1.6vmax rgb(0 0 0 / 0.5));
+    transform: translateY(-12px);
+    filter: drop-shadow(0 23px 23px rgb(0 0 0 / 0.5));
   }
 
   /* 떠 있는 상태로 표지를 여는 동안은 계속 떠 있고, 다 열리면(lifted 해제) 내려온다 */
   .history__book-body.history__book-body--lifted {
-    transform: translateY(-0.8vmax);
+    transform: translateY(-12px);
   }
 }
 
@@ -622,27 +624,13 @@
 
 @media (max-width: 1024px) {
   .history__book-stage {
-    --board-pad: 1.302vw;
-    --leaf-radius: 1.953vw;
-
     justify-content: flex-start;
 
     padding-right: 0;
   }
 
   .history__leaf--page {
-    padding: 1.953vw 2.604vw 1.953vw 1.953vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .history__book-stage {
-    --board-pad: clamp(4px, 1.333vw, 7px);
-    --leaf-radius: clamp(14px, 4vw, 20px);
-  }
-
-  .history__leaf--page {
-    padding: clamp(9px, 2.667vw, 13px) clamp(9px, 2.667vw, 13px)
-      clamp(9px, 2.667vw, 13px) clamp(6px, 2vw, 10px);
+    padding: clamp(9px, 1.95vw, 20px) clamp(9px, 2.6vw, 27px)
+      clamp(9px, 1.95vw, 20px) clamp(6px, 1.95vw, 20px);
   }
 }
