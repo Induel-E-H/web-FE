@@ -7,9 +7,16 @@
   --fs-book-xl: max(22px, min(6.26cqmin, 20.1px + 2.07cqmin));
   --fs-book-2xl: max(28px, min(7.2cqmin, 23.1px + 2.38cqmin));
   --history-extra: min(7.8vw + 128px, 300px);
+  --book-title-top: clamp(16px, 7cqmin, 56px);
+  --book-title-height: calc(
+    var(--book-title-top) + (var(--fs-book-lg) + var(--fs-book-2xs)) * 1.4 +
+      clamp(4px, 1.2cqmin, 10px)
+  );
   --fs-book-caption: max(9px, min(2.4cqmin, 7.7px + 0.79cqmin));
   --history-bg: #1a1410;
   --book-page-hr: #606060;
+  --book-ink: var(--brown-800);
+  --book-ink-sub: var(--brown-500);
   --book-shadow-dark: #b9b9b9;
   --book-shadow-dark-line: #828282;
   --book-shadow-mid: #cdcdcd;
@@ -25,6 +32,9 @@
     #f5e6a8 75%,
     #b08d57 100%
   );
+
+  position: relative;
+  z-index: 1;
 
   display: flex;
   flex-direction: column;
@@ -44,7 +54,7 @@
 
   background-color: var(--history-bg);
 
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 .history__top {
@@ -83,6 +93,8 @@
       max(100svh, calc((100vw - var(--section-padding-x)) * 1.3 + 320px)),
       120svh
     );
+
+    overflow: hidden;
   }
 
   .history__book {

@@ -16,7 +16,7 @@ export function TimelinePage({ side }: { side: PageSide }) {
 
   return (
     <div className='timeline__container'>
-      <BookPageTitle title='Timeline' hidden={isRight} />
+      <BookPageTitle title='Timeline' label='연혁' hidden={isRight} />
       <ul className='timeline__ul'>
         {Array.from({ length: maxPerPage }, (_, i) => {
           const item = items[i];

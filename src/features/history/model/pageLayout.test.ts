@@ -2,6 +2,7 @@ import { artworks } from '@entities/history';
 import { describe, expect, it } from 'vitest';
 
 import { INDEX_LIST } from './constants';
+import { getListPageCount } from './helpers';
 import {
   buildLeaves,
   describeLeaf,
@@ -15,7 +16,10 @@ import {
   isHardLeaf,
   shouldRenderLeaf,
 } from './pageLayout';
-import { getPageRegistry } from './pageRegistry';
+import {
+  getPageRegistry,
+  MILESTONES_YEAR_RANGES_BY_BREAKPOINT,
+} from './pageRegistry';
 
 function contentPageCount(breakpoint: 'desktop' | 'tablet' | 'mobile') {
   const registry = getPageRegistry(breakpoint);
@@ -106,25 +110,26 @@ describe('buildLeaves', () => {
       ]);
     });
 
-    it('List 좌/우가 각각 한 장씩 보인다', () => {
+    it('List 는 목차 쪽 수만큼 보인다', () => {
       const list = leaves.filter(
         (leaf) => leaf.kind === 'page' && leaf.item === 'List',
       );
-      expect(list).toHaveLength(2);
+      expect(list).toHaveLength(getListPageCount());
     });
   });
 });
 
 describe('findLeafIndex', () => {
   const leaves = buildLeaves('desktop');
+  const contentStart = 3 + getPageRegistry('desktop').List.totalPages * 2;
 
   it('카테고리 첫 페이지의 왼쪽 장 인덱스를 반환한다', () => {
     expect(findLeafIndex(leaves, 'List')).toBe(3);
-    expect(findLeafIndex(leaves, 'Content')).toBe(5);
+    expect(findLeafIndex(leaves, 'Content')).toBe(contentStart);
   });
 
   it('pageIndex 를 반영한다', () => {
-    expect(findLeafIndex(leaves, 'Content', 2)).toBe(9);
+    expect(findLeafIndex(leaves, 'Content', 2)).toBe(contentStart + 4);
   });
 
   it('없는 페이지는 -1 을 반환한다', () => {
@@ -235,15 +240,29 @@ describe('hasPageContent', () => {
   });
 
   it('Milestones 는 브레이크포인트별 연도 구간 수를 넘는 쪽이 비어 있다', () => {
-    expect(hasPageContent(page('Milestones', 3, 'left'), 'mobile')).toBe(true);
-    expect(hasPageContent(page('Milestones', 3, 'right'), 'mobile')).toBe(
-      false,
-    );
+    const ranges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT.mobile;
+    const lastIndex = ranges.length - 1;
+    const pageOf = (index: number) =>
+      page(
+        'Milestones',
+        Math.floor(index / 2),
+        index % 2 === 0 ? 'left' : 'right',
+      );
+    expect(hasPageContent(pageOf(lastIndex), 'mobile')).toBe(true);
+    expect(hasPageContent(pageOf(lastIndex + 1), 'mobile')).toBe(false);
   });
 
   it('List 와 Timeline 은 항상 내용이 있다', () => {
+    expect(hasPageContent(page('List', 0, 'right'), 'desktop')).toBe(true);
     expect(hasPageContent(page('List', 0, 'right'), 'mobile')).toBe(true);
     expect(hasPageContent(page('Timeline', 0, 'right'), 'mobile')).toBe(true);
+  });
+
+  it('mobile List 는 작품 수를 넘는 쪽이 비어 있다', () => {
+    const lastPage = Math.ceil(getListPageCount() / 2);
+    expect(hasPageContent(page('List', lastPage, 'left'), 'mobile')).toBe(
+      false,
+    );
   });
 });
 

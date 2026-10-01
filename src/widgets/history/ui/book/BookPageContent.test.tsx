@@ -70,7 +70,7 @@ describe('BookPageContent', () => {
         />,
       );
       expect(
-        screen.getByRole('heading', { level: 3, name: 'Timeline' }),
+        screen.getByRole('heading', { level: 3, name: '연혁' }),
       ).toBeInTheDocument();
     });
   });
@@ -87,7 +87,7 @@ describe('BookPageContent', () => {
         />,
       );
       expect(
-        screen.getByRole('heading', { level: 3, name: 'Milestones' }),
+        screen.getByRole('heading', { level: 3, name: '주요 성과' }),
       ).toBeInTheDocument();
     });
   });

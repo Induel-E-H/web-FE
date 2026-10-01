@@ -2,7 +2,7 @@ import { artworks } from '@entities/history';
 import type { Breakpoint } from '@shared/lib/breakpoint';
 
 import { CHAIN_EDGE_FLIPS, INDEX_LIST, PAGE_SIDE } from './constants';
-import { getArtworkIndex } from './helpers';
+import { getArtworkIndex, getListRange } from './helpers';
 import {
   getPageRegistry,
   MILESTONES_YEAR_RANGES_BY_BREAKPOINT,
@@ -32,6 +32,10 @@ export type Leaf =
  */
 export function hasPageContent(leaf: PageLeaf, breakpoint: Breakpoint) {
   const index = getArtworkIndex(leaf.pageIndex, leaf.side);
+  if (leaf.item === 'List') {
+    const [start] = getListRange(leaf.pageIndex, leaf.side);
+    return start < artworks.length;
+  }
   if (leaf.item === 'Content') return index < artworks.length;
   if (leaf.item === 'Milestones') {
     return index < MILESTONES_YEAR_RANGES_BY_BREAKPOINT[breakpoint].length;

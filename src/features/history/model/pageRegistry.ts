@@ -1,6 +1,7 @@
 import { artworks } from '@entities/history';
 import type { Breakpoint } from '@shared/lib/breakpoint';
 
+import { getListPageCount } from './helpers';
 import type { IndexItem } from './types';
 
 export const MILESTONES_YEAR_RANGES_BY_BREAKPOINT: Record<
@@ -8,29 +9,30 @@ export const MILESTONES_YEAR_RANGES_BY_BREAKPOINT: Record<
   readonly (readonly [number, number])[]
 > = {
   desktop: [
-    [2003, 2006],
-    [2007, 2009],
-    [2010, 2012],
-    [2013, 2015],
-    [2016, 2018],
-    [2019, 2019],
+    [2003, 2005],
+    [2006, 2008],
+    [2009, 2011],
+    [2012, 2014],
+    [2015, 2017],
+    [2018, 2019],
   ],
   tablet: [
-    [2003, 2006],
-    [2007, 2009],
-    [2010, 2012],
-    [2013, 2015],
-    [2016, 2018],
-    [2019, 2019],
+    [2003, 2005],
+    [2006, 2008],
+    [2009, 2011],
+    [2012, 2014],
+    [2015, 2017],
+    [2018, 2019],
   ],
   mobile: [
     [2003, 2005],
-    [2006, 2007],
-    [2008, 2009],
-    [2010, 2012],
-    [2013, 2015],
-    [2016, 2018],
-    [2019, 2019],
+    [2006, 2008],
+    [2009, 2010],
+    [2011, 2011],
+    [2012, 2014],
+    [2015, 2016],
+    [2017, 2017],
+    [2018, 2019],
   ],
 };
 
@@ -48,7 +50,9 @@ export function getPageRegistry(
 
   const ranges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT[breakpoint];
   const registry: Record<IndexItem, PageConfig> = {
-    List: { totalPages: 1 },
+    List: {
+      totalPages: Math.ceil(getListPageCount() / 2),
+    },
     Content: { totalPages: Math.ceil(artworks.length / 2) },
     Timeline: { totalPages: 1 },
     Milestones: { totalPages: Math.ceil(ranges.length / 2) },

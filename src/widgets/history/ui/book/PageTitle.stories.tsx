@@ -7,13 +7,14 @@ const meta = {
   component: BookPageTitle,
   args: {
     title: 'List',
+    label: '목차',
   },
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          '페이지 제목 컴포넌트. h3 타이틀 양쪽에 hr 선을 배치하여 책 페이지 스타일을 표현합니다. hidden prop으로 레이아웃 공간을 유지하면서 숨길 수 있습니다.',
+          '페이지 제목 컴포넌트. 한글 제목(h3) 양옆에 금색 가는 줄을 두고, 아래에 영문 제목을 작게 표시합니다. hidden prop으로 레이아웃 공간을 유지하면서 숨길 수 있습니다.',
       },
     },
   },
@@ -24,11 +25,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: 'List 타이틀',
-  args: { title: 'List' },
+  args: { title: 'List', label: '목차' },
   parameters: {
     docs: {
       description: {
-        story: 'h3 타이틀 양쪽에 hr 선이 배치된 기본 형태.',
+        story: '한글 제목 양옆에 장식 줄, 아래에 영문 제목이 있는 기본 형태.',
       },
     },
   },
@@ -36,7 +37,7 @@ export const Default: Story = {
 
 export const Timeline: Story = {
   name: 'Timeline 타이틀',
-  args: { title: 'Timeline' },
+  args: { title: 'Timeline', label: '연혁' },
   parameters: {
     docs: {
       description: {
@@ -46,13 +47,13 @@ export const Timeline: Story = {
   },
 };
 
-export const Milestones: Story = {
-  name: 'Milestones 타이틀',
-  args: { title: 'Milestones' },
+export const Achievements: Story = {
+  name: 'Achievements 타이틀',
+  args: { title: 'Achievements', label: '주요 성과' },
   parameters: {
     docs: {
       description: {
-        story: 'Milestones 페이지용 타이틀.',
+        story: '주요 성과(Milestones) 페이지용 타이틀.',
       },
     },
   },
@@ -60,7 +61,7 @@ export const Milestones: Story = {
 
 export const Hidden: Story = {
   name: '숨긴 타이틀',
-  args: { title: 'List', hidden: true },
+  args: { title: 'List', label: '목차', hidden: true },
   parameters: {
     docs: {
       description: {

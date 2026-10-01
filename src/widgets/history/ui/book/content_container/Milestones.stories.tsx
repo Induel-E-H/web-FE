@@ -40,7 +40,7 @@ const meta = {
     docs: {
       description: {
         component:
-          '연도별 이정표 페이지. breakpoint에 따라 연도 범위가 달라지며, pageIndex로 표시할 페이지를 지정합니다. 첫 번째 페이지(index 0 좌측)에만 "Milestones" 타이틀이 표시됩니다.',
+          '연도별 이정표 페이지. breakpoint에 따라 연도 범위가 달라지며, pageIndex로 표시할 페이지를 지정합니다. 첫 번째 페이지(index 0 좌측)에만 "주요 성과 / Achievements" 타이틀이 표시됩니다.',
       },
     },
   },
@@ -50,7 +50,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const FirstSpread: Story = {
-  name: '1페이지 좌측 (2003-2006)',
+  name: '1페이지 좌측 (2003-2005)',
   render: (args) => (
     <BookPageWrapper side='left'>
       <MilestonesPage
@@ -65,14 +65,14 @@ export const FirstSpread: Story = {
     docs: {
       description: {
         story:
-          '첫 번째 펼침면 좌측. "Milestones" 타이틀과 2003~2006년 이정표가 표시됩니다.',
+          '첫 번째 펼침면 좌측. "주요 성과 / Achievements" 타이틀과 2003~2005년 이정표가 표시됩니다.',
       },
     },
   },
 };
 
 export const FirstSpreadRight: Story = {
-  name: '1페이지 우측 (2007-2009)',
+  name: '1페이지 우측 (2006-2008)',
   render: (args) => (
     <BookPageWrapper side='right'>
       <MilestonesPage
@@ -94,7 +94,7 @@ export const FirstSpreadRight: Story = {
 };
 
 export const SecondSpread: Story = {
-  name: '2페이지 좌측 (2010-2012)',
+  name: '2페이지 좌측 (2009-2011)',
   render: (args) => (
     <BookPageWrapper side='left'>
       <MilestonesPage
@@ -108,7 +108,7 @@ export const SecondSpread: Story = {
   parameters: {
     docs: {
       description: {
-        story: '두 번째 펼침면 좌측. 2010~2012년 이정표가 표시됩니다.',
+        story: '두 번째 펼침면 좌측. 2009~2011년 이정표가 표시됩니다.',
       },
     },
   },
