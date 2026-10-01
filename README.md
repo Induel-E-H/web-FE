@@ -130,7 +130,6 @@ AI 기반 이미지 생성과 키워드 구조화를 통해
 - 책 넘김 엔진(`@gullabs/react-flipbook`)의 모서리 접힘 버그는 `patch-package`로 직접 패치
 
 <img width="2476" height="1291" alt="image" src="https://github.com/user-attachments/assets/71dec15e-f3be-4766-a7b1-ceb104e351f4" />
-<img width="1839" height="892" alt="after" src="https://github.com/user-attachments/assets/0777dd06-2839-443f-9632-dd02a2de845a" />
 
 ### Award
 
