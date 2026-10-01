@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useHeaderVisibility } from '@features/header';
-import { useIsHero } from '@features/header';
+import { useHeaderVisibility, useIsHero } from '@features/header';
 import { COMPANY } from '@shared/constant';
 import { trackNavLogoClick, trackNavMenuClick } from '@shared/lib/analytics';
+import { cx } from '@shared/lib/classNames';
 import { smoothScrollTo } from '@shared/lib/scroll';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -65,14 +65,12 @@ export function Header({ onNavClick }: HeaderProps = {}) {
 
   return (
     <header
-      className={[
+      className={cx(
         'header',
-        isHero ? 'header--hero' : '',
-        hidden && !menuOpen ? 'header--hidden' : '',
-        menuOpen && isHero ? 'header--menu-open' : '',
-      ]
-        .filter(Boolean)
-        .join(' ')}
+        isHero && 'header--hero',
+        hidden && !menuOpen && 'header--hidden',
+        menuOpen && isHero && 'header--menu-open',
+      )}
     >
       <button className='header__logo' onClick={handleLogoClick}>
         <div className='header__logo_icon-frame'>
