@@ -55,7 +55,7 @@
 
 .content__title-kor {
   font-weight: var(--bookendbatang-bold);
-  font-size: max(20px, 1.46vw);
+  font-size: var(--fs-xl);
 
   color: var(--black);
   word-break: keep-all;
@@ -65,7 +65,7 @@
 .content__title-eng {
   font-family: var(--font-pretendard);
   font-weight: var(--pretendard-extrabold);
-  font-size: max(12px, 0.73vw);
+  font-size: var(--fs-2xs);
 
   color: var(--black);
   word-break: keep-all;
@@ -79,14 +79,14 @@
 
 .content__subtitle {
   font-weight: var(--bookendbatang-bold);
-  font-size: max(12px, 0.833vw);
+  font-size: var(--fs-book);
 
   color: var(--black);
 }
 
 .content__body {
   font-weight: var(--bookendbatang-bold);
-  font-size: max(11px, 0.729vw);
+  font-size: var(--fs-book);
 
   color: var(--typo-contentW);
 
@@ -121,7 +121,7 @@
 
 .content__caption dt {
   font-weight: var(--bookendbatang-regular);
-  font-size: max(9px, 0.625vw);
+  font-size: var(--fs-book-caption);
 
   color: var(--typo-contentW);
   white-space: nowrap;
@@ -130,7 +130,7 @@
 
 .content__caption dd {
   font-weight: var(--bookendbatang-regular);
-  font-size: max(9px, 0.625vw);
+  font-size: var(--fs-book-caption);
 
   color: var(--typo-contentW);
   min-width: 0;
@@ -200,32 +200,8 @@
     gap: 1.04vw;
   }
 
-  .content__title-kor {
-    font-size: 2.6vw;
-  }
-
-  .content__title-eng {
-    font-size: 1.56vw;
-  }
-
-  .content__subtitle {
-    font-size: 1.82vw;
-  }
-
-  .content__body {
-    font-size: 1.56vw;
-  }
-
   .content__caption-row {
     gap: 0.26vw;
-  }
-
-  .content__caption dt {
-    font-size: 1.3vw;
-  }
-
-  .content__caption dd {
-    font-size: 1.3vw;
   }
 
   .content__image {
@@ -245,32 +221,8 @@
     gap: clamp(4px, 1.333vw, 7px);
   }
 
-  .content__title-kor {
-    font-size: clamp(13px, 3.733vw, 19px);
-  }
-
-  .content__title-eng {
-    font-size: clamp(9px, 2.67vw, 13px);
-  }
-
-  .content__subtitle {
-    font-size: clamp(8px, 2.13vw, 11px);
-  }
-
-  .content__body {
-    font-size: clamp(8px, 2.13vw, 11px);
-  }
-
   .content__caption-row {
     gap: clamp(2px, 0.53vw, 3px);
-  }
-
-  .content__caption dt {
-    font-size: clamp(8px, 2.13vw, 11px);
-  }
-
-  .content__caption dd {
-    font-size: clamp(8px, 2.13vw, 11px);
   }
 
   .content__image {

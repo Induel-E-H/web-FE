@@ -31,12 +31,12 @@
 .map__info__name {
   color: var(--white);
   font-weight: var(--pretendard-bold);
-  font-size: max(13px, 0.833vw);
+  font-size: var(--fs-sm);
 }
 
 .map__info__subtitle {
   color: var(--overlay-white-50);
-  font-size: max(10px, 0.625vw);
+  font-size: var(--fs-2xs);
 }
 
 .map__info__body {
@@ -72,13 +72,13 @@
 
 .map__info__phone,
 .map__info__address-main {
-  font-size: max(12px, 0.729vw);
+  font-size: var(--fs-sm);
   color: var(--brown-800);
   text-decoration: none;
 }
 
 .map__info__address-sub {
-  font-size: max(10px, 0.625vw);
+  font-size: var(--fs-2xs);
   color: var(--gray-700);
 }
 
@@ -110,23 +110,6 @@
 
   .map__info__icon {
     width: 1.5vmin;
-  }
-
-  .map__info__name {
-    font-size: clamp(14px, 1.8vmin, 18px);
-  }
-
-  .map__info__subtitle {
-    font-size: clamp(11px, 1.3vmin, 14px);
-  }
-
-  .map__info__phone,
-  .map__info__address-main {
-    font-size: clamp(12px, 1.6vmin, 16px);
-  }
-
-  .map__info__address-sub {
-    font-size: clamp(10px, 1.3vmin, 14px);
   }
 }
 
@@ -163,23 +146,6 @@
 
   .map__info__icon {
     width: 3vmin;
-  }
-
-  .map__info__name {
-    font-size: 4.2vmin;
-  }
-
-  .map__info__subtitle {
-    font-size: 3.2vmin;
-  }
-
-  .map__info__phone,
-  .map__info__address-main {
-    font-size: 3.5vmin;
-  }
-
-  .map__info__address-sub {
-    font-size: 3vmin;
   }
 
   .map__info__tail {

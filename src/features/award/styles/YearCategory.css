@@ -27,7 +27,7 @@
   cursor: pointer;
 
   font-family: var(--font-pretendard);
-  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  font-size: var(--fs-sm);
   font-weight: var(--pretendard-semibold);
 
   color: var(--brown-600);

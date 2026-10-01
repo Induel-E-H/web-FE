@@ -18,19 +18,7 @@
 
 .book-page-title h3 {
   font-weight: var(--pretendard-bold);
-  font-size: max(22px, 1.56vw);
+  font-size: var(--fs-lg);
 
   color: var(--black);
-}
-
-@media (max-width: 1024px) {
-  .book-page-title h3 {
-    font-size: 2.34vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .book-page-title h3 {
-    font-size: clamp(14px, 4vw, 20px);
-  }
 }

@@ -171,6 +171,7 @@
 
 .history__leaf {
   position: relative;
+  container-type: size;
 
   display: flex;
 
@@ -487,7 +488,7 @@
   backdrop-filter: blur(4px);
 
   color: var(--white);
-  font-size: 14px;
+  font-size: var(--fs-sm);
   line-height: 1.5;
   text-align: center;
   white-space: nowrap;
@@ -532,7 +533,7 @@
   min-width: 5em;
 
   color: var(--brown-200);
-  font-size: 14px;
+  font-size: var(--fs-sm);
   text-align: center;
   font-variant-numeric: tabular-nums;
 }

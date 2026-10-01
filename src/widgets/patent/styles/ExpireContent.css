@@ -22,7 +22,7 @@
   gap: 10px;
 
   font-weight: var(--pretendard-bold);
-  font-size: clamp(18px, 1rem + 0.5vw, 22px);
+  font-size: var(--fs-lg);
   color: var(--brown-50);
 }
 
@@ -37,7 +37,7 @@
   border-radius: 999px;
   background-color: rgb(var(--white-rgb) / var(--alpha-15));
 
-  font-size: 14px;
+  font-size: var(--fs-sm);
   color: var(--brown-100);
 }
 
@@ -91,14 +91,14 @@
 
 .patent__expiration__item__content span:first-child {
   font-weight: var(--pretendard-bold);
-  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  font-size: var(--fs-sm);
 
   color: var(--accent-gold-400);
 }
 
 .patent__expiration__item__content span:last-child {
   font-weight: var(--pretendard-regular);
-  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  font-size: var(--fs-sm);
 
   color: var(--brown-50);
 }
@@ -112,7 +112,7 @@
 
 .patent__expiration__serial {
   font-weight: var(--pretendard-regular);
-  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  font-size: var(--fs-sm);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 

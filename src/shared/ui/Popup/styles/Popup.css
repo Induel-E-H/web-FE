@@ -62,7 +62,7 @@
 
 .popup__title {
   font-family: var(--font-bookendbatang);
-  font-size: clamp(18px, 1rem + 1vw, 32px);
+  font-size: var(--fs-xl);
   font-weight: var(--bookendbatang-bold);
   color: var(--black);
 }

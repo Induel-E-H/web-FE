@@ -16,7 +16,7 @@
 
 .history__colophon-name {
   font-family: var(--font-bookendbatang);
-  font-size: max(22px, 1.67vw);
+  font-size: var(--fs-xl);
   font-weight: var(--bookendbatang-bold);
 
   letter-spacing: 0.15em;
@@ -24,7 +24,7 @@
 
 .history__colophon-full,
 .history__colophon-fields {
-  font-size: max(11px, 0.63vw);
+  font-size: var(--fs-2xs);
 
   letter-spacing: 0.2em;
 }
@@ -44,7 +44,7 @@
 
   gap: 0.36vmax;
 
-  font-size: max(11px, 0.68vw);
+  font-size: var(--fs-2xs);
 }
 
 .history__colophon-info div {
@@ -64,10 +64,6 @@
     gap: 1.3vw;
 
     padding: 6.5vw 3.9vw;
-  }
-
-  .history__colophon-name {
-    font-size: 5.2vw;
   }
 
   .history__colophon-info {

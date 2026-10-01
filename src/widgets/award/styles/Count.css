@@ -26,7 +26,7 @@
 
 .award__count p {
   font-weight: var(--pretendard-semibold);
-  font-size: max(12px, 0.78vw);
+  font-size: var(--fs-sm);
 }
 
 @media (max-width: 1024px) {
@@ -42,10 +42,6 @@
     width: 2.21vw;
     height: 2.21vw;
   }
-
-  .award__count p {
-    font-size: 1.56vw;
-  }
 }
 
 @media (max-width: 767px) {
@@ -60,9 +56,5 @@
   .award__count__icon {
     width: clamp(13px, 3.73vw, 19px);
     height: clamp(13px, 3.73vw, 19px);
-  }
-
-  .award__count p {
-    font-size: clamp(9px, 2.67vw, 13px);
   }
 }
