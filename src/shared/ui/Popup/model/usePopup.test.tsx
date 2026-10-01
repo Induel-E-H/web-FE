@@ -139,6 +139,63 @@ describe('usePopup', () => {
     });
   });
 
+  describe('touchmove 동작', () => {
+    function ScrollablePopup() {
+      const dialogRef = useRef<HTMLDivElement>(null);
+      usePopup(dialogRef, vi.fn());
+      return (
+        <div ref={dialogRef} role='dialog' tabIndex={-1}>
+          <div data-testid='scroll-area' style={{ overflowY: 'auto' }}>
+            <p data-testid='scroll-content'>내용</p>
+          </div>
+          <p data-testid='static-content'>고정 내용</p>
+        </div>
+      );
+    }
+
+    function dispatchTouchMove(target: Element | Document) {
+      const event = new Event('touchmove', { bubbles: true, cancelable: true });
+      const preventSpy = vi.spyOn(event, 'preventDefault');
+      target.dispatchEvent(event);
+      return preventSpy;
+    }
+
+    function makeOverflowing(el: HTMLElement, overflowing: boolean) {
+      Object.defineProperty(el, 'clientHeight', { value: 100 });
+      Object.defineProperty(el, 'scrollHeight', {
+        value: overflowing ? 300 : 100,
+      });
+    }
+
+    it('다이얼로그 밖 touchmove → preventDefault 호출', () => {
+      render(<ScrollablePopup />);
+      expect(dispatchTouchMove(document.body)).toHaveBeenCalled();
+    });
+
+    it('내용이 넘치는 스크롤 영역 안 touchmove → preventDefault 미호출', () => {
+      render(<ScrollablePopup />);
+      makeOverflowing(screen.getByTestId('scroll-area'), true);
+      expect(
+        dispatchTouchMove(screen.getByTestId('scroll-content')),
+      ).not.toHaveBeenCalled();
+    });
+
+    it('내용이 넘치지 않는 스크롤 영역 안 touchmove → preventDefault 호출', () => {
+      render(<ScrollablePopup />);
+      makeOverflowing(screen.getByTestId('scroll-area'), false);
+      expect(
+        dispatchTouchMove(screen.getByTestId('scroll-content')),
+      ).toHaveBeenCalled();
+    });
+
+    it('스크롤 영역이 아닌 다이얼로그 안 touchmove → preventDefault 호출', () => {
+      render(<ScrollablePopup />);
+      expect(
+        dispatchTouchMove(screen.getByTestId('static-content')),
+      ).toHaveBeenCalled();
+    });
+  });
+
   describe('Tab 포커스 트랩 (포커스 가능 요소 있음)', () => {
     let originalDescriptor: PropertyDescriptor | undefined;
 

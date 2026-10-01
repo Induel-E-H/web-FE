@@ -105,11 +105,48 @@ describe('History', () => {
       expect(engine.handle.flipNext).toHaveBeenCalledTimes(1);
     });
 
+    it('본문 카테고리를 누르면 첫 본문 장을 목적지로 정한다', () => {
+      render(<History />);
+      fireEvent.click(screen.getByRole('button', { name: '본문' }));
+      expect(trackHistoryCategoryChange).toHaveBeenCalledWith('Content');
+      expect(engine.props?.targetLeaf).toBe(findLeafIndex(leaves, 'Content'));
+    });
+
     it('앞쪽 카테고리는 뒤로 넘긴다', () => {
       render(<History />);
       turnTo(findLeafIndex(leaves, 'Timeline'));
       fireEvent.click(screen.getByRole('button', { name: '목차' }));
       expect(engine.handle.flipPrev).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('목차 항목 이동', () => {
+    function getListItemClick() {
+      const leaf = leaves.find((l) => l.kind === 'page');
+      if (!leaf || leaf.kind !== 'page') throw new Error('page leaf 없음');
+      const element = engine.props!.renderPage(leaf) as {
+        props: { onListItemClick: (index: number) => void };
+      };
+      return element.props.onListItemClick;
+    }
+
+    it('목차 항목을 누르면 그 작품이 있는 본문 장을 목적지로 정하고 넘긴다', () => {
+      render(<History />);
+      const onListItemClick = getListItemClick();
+      act(() => onListItemClick(5));
+      expect(engine.props?.targetLeaf).toBe(
+        findLeafIndex(leaves, 'Content', 2),
+      );
+      expect(engine.handle.flipNext).toHaveBeenCalledTimes(1);
+    });
+
+    it('한 장에 두 작품씩 담기므로 이웃한 두 항목은 같은 장으로 이동한다', () => {
+      render(<History />);
+      const onListItemClick = getListItemClick();
+      act(() => onListItemClick(2));
+      const first = engine.props?.targetLeaf;
+      act(() => onListItemClick(3));
+      expect(engine.props?.targetLeaf).toBe(first);
     });
   });
 

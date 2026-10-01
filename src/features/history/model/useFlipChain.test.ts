@@ -89,6 +89,33 @@ describe('useFlipChain', () => {
       expect(handle.flipPrev).toHaveBeenCalled();
     });
 
+    it('먼 뒤쪽 목적지도 가운데를 즉시 건너뛰고 앞뒤만 넘긴다', () => {
+      const { chain, settleAll, visible, handle } = setup();
+      chain.flipTo(37);
+      settleAll();
+      vi.mocked(handle.turnToPage).mockClear();
+      chain.flipTo(1);
+      settleAll();
+      expect(visible()).toContain(1);
+      expect(handle.turnToPage).toHaveBeenCalledTimes(1);
+      expect(handle.flipPrev).toHaveBeenCalledTimes(CHAIN_EDGE_FLIPS * 2);
+    });
+
+    it('넘김이 거절돼도 이전 폴드가 진행 중이면 체인을 유지한다', () => {
+      const { chain, handle } = setup();
+      vi.mocked(handle.flipNext).mockReturnValueOnce(false);
+      vi.spyOn(handle.pageFlip()!, 'isAnimating').mockReturnValue(true);
+      chain.flipTo(9);
+      expect(chain.isChaining()).toBe(true);
+    });
+
+    it('넘김이 거절되고 진행 중인 폴드도 없으면 체인을 멈춘다', () => {
+      const { chain, handle } = setup();
+      vi.mocked(handle.flipNext).mockReturnValueOnce(false);
+      chain.flipTo(9);
+      expect(chain.isChaining()).toBe(false);
+    });
+
     it('이미 보이는 페이지면 아무것도 하지 않는다', () => {
       const { chain, handle } = setup();
       chain.flipTo(0);
