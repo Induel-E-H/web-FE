@@ -74,3 +74,38 @@
   gap: clamp(8px, 0.4rem + 0.4vw, 16px);
   border-radius: clamp(8px, 0.8vw, 12px);
 }
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .popup {
+    --popup-height: calc(100svh - 16px);
+
+    width: min(92vw, var(--popup-height) * 0.75 + 48px);
+    height: var(--popup-height);
+    padding: 8px;
+    flex-direction: row-reverse;
+    gap: 4px;
+  }
+
+  .popup > img {
+    min-width: 0;
+  }
+
+  .popup__header {
+    align-items: flex-start;
+  }
+
+  .popup--gallery {
+    width: 95vw;
+    padding: 10px 14px;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .popup--gallery .popup__header {
+    align-items: center;
+  }
+
+  .popup__title {
+    font-size: var(--fs-lg);
+  }
+}
