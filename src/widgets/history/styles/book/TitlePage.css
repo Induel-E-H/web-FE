@@ -21,7 +21,7 @@
 }
 
 .history__title-page-company {
-  font-size: var(--fs-xs);
+  font-size: var(--fs-book-xs);
   font-weight: var(--pretendard-semibold);
 
   letter-spacing: 0.3em;
@@ -29,20 +29,20 @@
 
 .history__title-page-heading {
   font-family: var(--font-bookendbatang);
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-book-2xl);
   font-weight: var(--bookendbatang-bold);
 
   letter-spacing: 0.15em;
 }
 
 .history__title-page-sub {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-book-sm);
 
   letter-spacing: 0.2em;
 }
 
 .history__title-page-years {
-  font-size: var(--fs-xs);
+  font-size: var(--fs-book-xs);
 
   letter-spacing: 0.2em;
 }

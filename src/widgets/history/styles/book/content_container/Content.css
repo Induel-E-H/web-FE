@@ -55,7 +55,7 @@
 
 .content__title-kor {
   font-weight: var(--bookendbatang-bold);
-  font-size: var(--fs-xl);
+  font-size: var(--fs-book-xl);
 
   color: var(--black);
   word-break: keep-all;
@@ -65,7 +65,7 @@
 .content__title-eng {
   font-family: var(--font-pretendard);
   font-weight: var(--pretendard-extrabold);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-book-sm);
 
   color: var(--black);
   word-break: keep-all;

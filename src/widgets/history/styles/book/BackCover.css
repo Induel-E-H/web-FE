@@ -29,7 +29,7 @@
 }
 
 .history__back-cover-word {
-  font-size: var(--fs-xl);
+  font-size: var(--fs-book-xl);
   font-weight: var(--pretendard-semibold);
 
   letter-spacing: 0.1em;

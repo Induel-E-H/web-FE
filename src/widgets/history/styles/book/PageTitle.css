@@ -18,7 +18,7 @@
 
 .book-page-title h3 {
   font-weight: var(--pretendard-bold);
-  font-size: var(--fs-lg);
+  font-size: var(--fs-book-lg);
 
   color: var(--black);
 }

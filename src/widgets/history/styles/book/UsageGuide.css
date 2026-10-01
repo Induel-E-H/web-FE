@@ -19,7 +19,7 @@
 
 .history__usage-title {
   font-family: var(--font-bookendbatang);
-  font-size: var(--fs-lg);
+  font-size: var(--fs-book-lg);
   font-weight: var(--bookendbatang-bold);
 
   letter-spacing: 0.08em;
@@ -57,7 +57,7 @@
 
   gap: 0.5vmax;
 
-  font-size: var(--fs-sm);
+  font-size: var(--fs-book-sm);
   font-weight: var(--pretendard-semibold);
 }
 
@@ -71,7 +71,7 @@
 .history__usage-item dd {
   padding-left: calc(max(18px, 1.15vw) + 0.5vmax);
 
-  font-size: var(--fs-xs);
+  font-size: var(--fs-book-xs);
   line-height: 1.6;
 
   color: var(--mauve-200);

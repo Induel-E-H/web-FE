@@ -1,6 +1,12 @@
 .history {
-  --fs-book: clamp(11px, min(3cqi, 3cqh), var(--fs-sm));
-  --fs-book-caption: clamp(9px, min(2.4cqi, 2.4cqh), var(--fs-2xs));
+  --fs-book: max(11px, min(3cqmin, 9.6px + 0.99cqmin));
+  --fs-book-2xs: max(12px, min(2.5cqmin, 8px + 0.83cqmin));
+  --fs-book-xs: max(13px, min(2.7cqmin, 8.7px + 0.89cqmin));
+  --fs-book-sm: max(14px, min(3.13cqmin, 10px + 1.03cqmin));
+  --fs-book-lg: max(18px, min(4.6cqmin, 14.8px + 1.52cqmin));
+  --fs-book-xl: max(22px, min(6.26cqmin, 20.1px + 2.07cqmin));
+  --fs-book-2xl: max(28px, min(7.2cqmin, 23.1px + 2.38cqmin));
+  --fs-book-caption: max(9px, min(2.4cqmin, 7.7px + 0.79cqmin));
   --history-bg: #1a1410;
   --book-page-hr: #606060;
   --book-shadow-dark: #b9b9b9;

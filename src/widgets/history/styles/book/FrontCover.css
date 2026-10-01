@@ -48,7 +48,7 @@
 }
 
 .history__front-cover-title span {
-  font-size: clamp(20px, 0.8rem + 2.2vw, 48px);
+  font-size: clamp(20px, 9.6cqmin, 48px);
   font-weight: var(--pretendard-semibold);
 
   line-height: 100%;
@@ -70,14 +70,14 @@
 
 .history__front-cover-year-number {
   font-family: var(--font-bookendbatang);
-  font-size: clamp(64px, 1.5rem + 6vw, 128px);
+  font-size: clamp(64px, 23.8cqmin, 128px);
 
   line-height: 100%;
 }
 
 .history__front-cover-year-ordinal {
   font-family: var(--font-bookendbatang);
-  font-size: clamp(20px, 0.8rem + 2vw, 40px);
+  font-size: clamp(20px, 8.6cqmin, 40px);
 
   line-height: 100%;
 }
