@@ -8,7 +8,14 @@
 
   overflow-x: auto;
   scrollbar-width: none;
-  mask-image: linear-gradient(90deg, var(--black) 90%, transparent);
+}
+
+.award__year_category--more {
+  mask-image: linear-gradient(
+    90deg,
+    var(--black) calc(100% - 32px),
+    transparent
+  );
 }
 
 .award__year_category::-webkit-scrollbar {

@@ -74,4 +74,29 @@ describe('YearCategory', () => {
       expect(useAwardStore.getState().activeYear).toBe(YEAR_ALL);
     });
   });
+
+  describe('오른쪽 끝 흐림', () => {
+    function scrollTo(nav: HTMLElement, scrollLeft: number) {
+      Object.defineProperties(nav, {
+        clientWidth: { configurable: true, value: 300 },
+        scrollWidth: { configurable: true, value: 500 },
+        scrollLeft: { configurable: true, value: scrollLeft },
+      });
+      fireEvent.scroll(nav);
+    }
+
+    it('오른쪽에 더 볼 연도가 있으면 흐림 클래스를 붙인다', () => {
+      render(<YearCategory />);
+      const nav = screen.getByRole('navigation', { name: '연도 필터' });
+      scrollTo(nav, 0);
+      expect(nav).toHaveClass('award__year_category--more');
+    });
+
+    it('끝까지 스크롤하면 흐림 클래스를 뗀다', () => {
+      render(<YearCategory />);
+      const nav = screen.getByRole('navigation', { name: '연도 필터' });
+      scrollTo(nav, 200);
+      expect(nav).not.toHaveClass('award__year_category--more');
+    });
+  });
 });
