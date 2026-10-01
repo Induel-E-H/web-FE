@@ -1,7 +1,7 @@
 import { artworks } from '@entities/history';
 import type { Breakpoint } from '@shared/lib/breakpoint';
 
-import { LIST_ITEMS_PER_PAGE } from './constants';
+import { getListPageCount } from './helpers';
 import type { IndexItem } from './types';
 
 export const MILESTONES_YEAR_RANGES_BY_BREAKPOINT: Record<
@@ -51,7 +51,7 @@ export function getPageRegistry(
   const ranges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT[breakpoint];
   const registry: Record<IndexItem, PageConfig> = {
     List: {
-      totalPages: Math.ceil(artworks.length / (LIST_ITEMS_PER_PAGE * 2)),
+      totalPages: Math.ceil(getListPageCount() / 2),
     },
     Content: { totalPages: Math.ceil(artworks.length / 2) },
     Timeline: { totalPages: 1 },

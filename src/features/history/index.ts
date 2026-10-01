@@ -18,10 +18,12 @@ export {
   INDEX_LIST,
   PAGE_SIDE,
   FLIP_DURATION,
+  LIST_ITEMS_FIRST_PAGE,
   LIST_ITEMS_PER_PAGE,
 } from './model/constants';
 export {
   getArtworkIndex,
+  getListPageCount,
   getListRange,
   preloadContentImages,
 } from './model/helpers';

@@ -1,7 +1,8 @@
 import { artworks } from '@entities/history';
 import { describe, expect, it } from 'vitest';
 
-import { INDEX_LIST, LIST_ITEMS_PER_PAGE } from './constants';
+import { INDEX_LIST } from './constants';
+import { getListPageCount } from './helpers';
 import {
   buildLeaves,
   describeLeaf,
@@ -109,13 +110,11 @@ describe('buildLeaves', () => {
       ]);
     });
 
-    it('List 는 한 쪽에 LIST_ITEMS_PER_PAGE 개씩 나눈 쪽 수만큼 보인다', () => {
+    it('List 는 목차 쪽 수만큼 보인다', () => {
       const list = leaves.filter(
         (leaf) => leaf.kind === 'page' && leaf.item === 'List',
       );
-      expect(list).toHaveLength(
-        Math.ceil(artworks.length / LIST_ITEMS_PER_PAGE),
-      );
+      expect(list).toHaveLength(getListPageCount());
     });
   });
 });
@@ -260,7 +259,7 @@ describe('hasPageContent', () => {
   });
 
   it('mobile List 는 작품 수를 넘는 쪽이 비어 있다', () => {
-    const lastPage = Math.ceil(artworks.length / (LIST_ITEMS_PER_PAGE * 2));
+    const lastPage = Math.ceil(getListPageCount() / 2);
     expect(hasPageContent(page('List', lastPage, 'left'), 'mobile')).toBe(
       false,
     );

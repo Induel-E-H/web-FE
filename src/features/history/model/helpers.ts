@@ -1,7 +1,11 @@
 import { artworks, getThumbnailImage } from '@entities/history';
 import { preloadImages } from '@shared/lib/preload/preloadImages';
 
-import { LIST_ITEMS_PER_PAGE, PAGE_SIDE } from './constants';
+import {
+  LIST_ITEMS_FIRST_PAGE,
+  LIST_ITEMS_PER_PAGE,
+  PAGE_SIDE,
+} from './constants';
 import type { PageSide } from './types';
 
 export function getArtworkIndex(pageIndex: number, side: PageSide): number {
@@ -13,8 +17,15 @@ export function getListRange(
   pageIndex: number,
   side: PageSide,
 ): [number, number] {
-  const start = getArtworkIndex(pageIndex, side) * LIST_ITEMS_PER_PAGE;
+  const page = getArtworkIndex(pageIndex, side);
+  if (page === 0) return [0, Math.min(LIST_ITEMS_FIRST_PAGE, artworks.length)];
+  const start = LIST_ITEMS_FIRST_PAGE + (page - 1) * LIST_ITEMS_PER_PAGE;
   return [start, Math.min(start + LIST_ITEMS_PER_PAGE, artworks.length)];
+}
+
+export function getListPageCount(): number {
+  const rest = Math.max(0, artworks.length - LIST_ITEMS_FIRST_PAGE);
+  return 1 + Math.ceil(rest / LIST_ITEMS_PER_PAGE);
 }
 
 export function preloadContentImages(pageIndex: number): void {

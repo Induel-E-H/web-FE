@@ -7,6 +7,11 @@
   --fs-book-xl: max(22px, min(6.26cqmin, 20.1px + 2.07cqmin));
   --fs-book-2xl: max(28px, min(7.2cqmin, 23.1px + 2.38cqmin));
   --history-extra: min(7.8vw + 128px, 300px);
+  --book-title-top: clamp(16px, 7cqmin, 56px);
+  --book-title-height: calc(
+    var(--book-title-top) + (var(--fs-book-lg) + var(--fs-book-2xs)) * 1.4 +
+      clamp(4px, 1.2cqmin, 10px)
+  );
   --fs-book-caption: max(9px, min(2.4cqmin, 7.7px + 0.79cqmin));
   --history-bg: #1a1410;
   --book-page-hr: #606060;

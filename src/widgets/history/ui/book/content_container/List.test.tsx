@@ -1,5 +1,5 @@
 import { artworks } from '@entities/history';
-import { LIST_ITEMS_PER_PAGE } from '@features/history';
+import { LIST_ITEMS_FIRST_PAGE, LIST_ITEMS_PER_PAGE } from '@features/history';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -19,19 +19,17 @@ describe('ListPage', () => {
       ).toBeInTheDocument();
     });
 
-    it('첫 쪽은 앞에서부터 LIST_ITEMS_PER_PAGE 개의 작품 버튼을 렌더링한다', () => {
+    it('첫 쪽은 앞에서부터 LIST_ITEMS_FIRST_PAGE 개의 작품 버튼을 렌더링한다', () => {
       render(<ListPage side='left' />);
       const buttons = screen.getAllByRole('button');
-      expect(buttons).toHaveLength(LIST_ITEMS_PER_PAGE);
+      expect(buttons).toHaveLength(LIST_ITEMS_FIRST_PAGE);
       expect(buttons[0]).toHaveTextContent(artworks[0].title);
     });
 
     it('첫 쪽에서 타이틀 h3이 보인다', () => {
       render(<ListPage side='left' />);
-      const heading = screen.getByRole('heading', { level: 3 });
-      expect(heading).toHaveTextContent('목차');
-      expect(heading.closest('.book-page-title')).not.toHaveClass(
-        'book-page-title--hidden',
+      expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(
+        '목차',
       );
     });
 
@@ -39,19 +37,22 @@ describe('ListPage', () => {
       ['right', 0],
       ['left', 1],
     ] as const)(
-      '첫 쪽이 아니면(side=%s, pageIndex=%i) 타이틀이 hidden 상태이다',
+      '첫 쪽이 아니면(side=%s, pageIndex=%i) 타이틀이 없다',
       (side, pageIndex) => {
         render(<ListPage side={side} pageIndex={pageIndex} />);
         expect(
-          screen.getByRole('heading', { level: 3 }).closest('.book-page-title'),
-        ).toHaveClass('book-page-title--hidden');
+          screen.queryByRole('heading', { level: 3 }),
+        ).not.toBeInTheDocument();
       },
     );
 
-    it('다음 쪽은 앞쪽에 이어지는 작품부터 렌더링한다', () => {
+    it('다음 쪽은 앞쪽에 이어지는 작품부터 LIST_ITEMS_PER_PAGE 개를 렌더링한다', () => {
       render(<ListPage side='right' />);
       const buttons = screen.getAllByRole('button');
-      expect(buttons[0]).toHaveTextContent(artworks[LIST_ITEMS_PER_PAGE].title);
+      expect(buttons[0]).toHaveTextContent(
+        artworks[LIST_ITEMS_FIRST_PAGE].title,
+      );
+      expect(buttons).toHaveLength(LIST_ITEMS_PER_PAGE);
     });
   });
 
@@ -67,7 +68,7 @@ describe('ListPage', () => {
       const onItemClick = vi.fn();
       render(<ListPage side='right' onItemClick={onItemClick} />);
       fireEvent.click(screen.getAllByRole('button')[0]);
-      expect(onItemClick).toHaveBeenCalledWith(LIST_ITEMS_PER_PAGE);
+      expect(onItemClick).toHaveBeenCalledWith(LIST_ITEMS_FIRST_PAGE);
     });
 
     it('onItemClick이 없어도 클릭 시 오류가 발생하지 않는다', () => {

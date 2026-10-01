@@ -1,8 +1,13 @@
 import { preloadImages } from '@shared/lib/preload/preloadImages';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { LIST_ITEMS_PER_PAGE } from './constants';
-import { getArtworkIndex, getListRange, preloadContentImages } from './helpers';
+import { LIST_ITEMS_FIRST_PAGE, LIST_ITEMS_PER_PAGE } from './constants';
+import {
+  getArtworkIndex,
+  getListPageCount,
+  getListRange,
+  preloadContentImages,
+} from './helpers';
 
 vi.mock('@entities/history', () => ({
   artworks: Array.from({ length: 10 }),
@@ -96,8 +101,20 @@ describe('preloadContentImages', () => {
 });
 
 describe('getListRange (artworks.length=10)', () => {
-  it('쪽마다 LIST_ITEMS_PER_PAGE 개씩 이어서 담고, 작품 수를 넘지 않는다', () => {
+  it('첫 쪽은 LIST_ITEMS_FIRST_PAGE 개까지 담고, 작품 수를 넘지 않는다', () => {
     expect(getListRange(0, 'left')).toEqual([0, 10]);
-    expect(getListRange(0, 'right')).toEqual([LIST_ITEMS_PER_PAGE, 10]);
+  });
+
+  it('둘째 쪽부터는 LIST_ITEMS_PER_PAGE 개씩 이어서 담는다', () => {
+    expect(getListRange(0, 'right')[0]).toBe(LIST_ITEMS_FIRST_PAGE);
+    expect(getListRange(1, 'left')[0]).toBe(
+      LIST_ITEMS_FIRST_PAGE + LIST_ITEMS_PER_PAGE,
+    );
+  });
+});
+
+describe('getListPageCount (artworks.length=10)', () => {
+  it('첫 쪽에 다 들어가면 1쪽이다', () => {
+    expect(getListPageCount()).toBe(1);
   });
 });
