@@ -1,4 +1,4 @@
-import { AWARD_LIST, getAwardImage } from '@entities/award';
+import { AWARD_IMAGE_RATIO, AWARD_LIST, getAwardImage } from '@entities/award';
 import { useAwardStore } from '@features/award';
 import { Popup } from '@shared/ui/Popup';
 
@@ -14,6 +14,7 @@ export function AwardPopup() {
   return (
     <Popup
       ariaLabel={`${title} 수상 이미지`}
+      mediaRatio={AWARD_IMAGE_RATIO}
       onClose={() => setSelectedId(null)}
     >
       <img src={getAwardImage(selectedId)} alt={`${title} 수상 이미지`} />

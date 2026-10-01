@@ -13,19 +13,34 @@
 }
 
 .popup {
-  --popup-width: min(92vw, 72svh);
+  --popup-media-ratio: 0.75;
+  --popup-max-width: 92vw;
+  --popup-max-height: 88svh;
+  --popup-padding: clamp(14px, 1.5vw, 24px);
+  --popup-gap: clamp(8px, 1vw, 16px);
+  --popup-close-size: clamp(20px, 1rem + 0.8vw, 30px);
+  --popup-chrome: calc(
+    2 * var(--popup-padding) + var(--popup-close-size) + var(--popup-gap)
+  );
 
   position: relative;
-  width: var(--popup-width);
-  height: min(88svh, var(--popup-width) * 1.3);
-  padding: clamp(14px, 1.5vw, 24px);
-  padding-bottom: clamp(32px, 4vw, 60px);
+  width: min(
+    var(--popup-max-width),
+    (var(--popup-max-height) - var(--popup-chrome)) * var(--popup-media-ratio) +
+      2 * var(--popup-padding)
+  );
+  height: min(
+    var(--popup-max-height),
+    (var(--popup-max-width) - 2 * var(--popup-padding)) /
+      var(--popup-media-ratio) + var(--popup-chrome)
+  );
+  padding: var(--popup-padding);
   border-radius: clamp(8px, 1vw, 12px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   overscroll-behavior: contain;
-  gap: clamp(8px, 1vw, 16px);
+  gap: var(--popup-gap);
   background-color: var(--white);
 }
 
@@ -42,7 +57,7 @@
 }
 
 .popup__close {
-  font-size: clamp(20px, 1rem + 0.8vw, 30px);
+  font-size: var(--popup-close-size);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,13 +92,18 @@
 
 @media (orientation: landscape) and (max-height: 600px) {
   .popup {
-    --popup-height: calc(100svh - 16px);
+    --popup-max-height: calc(100svh - 16px);
+    --popup-padding: 8px;
+    --popup-gap: 4px;
 
-    width: min(92vw, var(--popup-height) * 0.75 + 48px);
-    height: var(--popup-height);
-    padding: 8px;
+    width: min(
+      var(--popup-max-width),
+      (var(--popup-max-height) - 2 * var(--popup-padding)) *
+        var(--popup-media-ratio) + 2 * var(--popup-padding) +
+        var(--popup-close-size) + var(--popup-gap)
+    );
+    height: var(--popup-max-height);
     flex-direction: row-reverse;
-    gap: 4px;
   }
 
   .popup > img {

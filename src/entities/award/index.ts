@@ -1,3 +1,3 @@
 export type { AwardItem } from './model/types';
 export { AWARD_LIST } from './model/awardList';
-export { getAwardImage } from './model/awardImages';
+export { AWARD_IMAGE_RATIO, getAwardImage } from './model/awardImages';
