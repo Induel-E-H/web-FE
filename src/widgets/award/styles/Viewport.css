@@ -22,7 +22,7 @@
   font-size: var(--fs-2xl);
   line-height: 1;
 
-  color: var(--award-year-color);
+  color: var(--accent-brown-700);
 }
 
 .award__grid {
