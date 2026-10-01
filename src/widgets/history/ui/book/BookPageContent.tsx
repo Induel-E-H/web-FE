@@ -23,7 +23,13 @@ export function BookPageContent({
 }: BookPageContentProps) {
   switch (item) {
     case 'List':
-      return <ListPage side={side} onItemClick={onListItemClick} />;
+      return (
+        <ListPage
+          side={side}
+          pageIndex={pageIndex}
+          onItemClick={onListItemClick}
+        />
+      );
     case 'Content':
       return <ContentPage side={side} pageIndex={pageIndex} />;
     case 'Timeline':

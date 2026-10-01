@@ -12,14 +12,15 @@
 }
 
 .list__ul {
-  width: 100%;
+  width: fit-content;
+  min-width: 80%;
+  max-width: 100%;
   flex: 1;
   min-height: 0;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: repeat(14, auto);
-  grid-auto-flow: column;
   list-style: none;
 
   align-content: space-between;
@@ -27,10 +28,11 @@
 
 .list__ul li {
   display: flex;
+  min-width: 0;
 
   align-items: center;
 
-  gap: 1.93%;
+  gap: 0.5em;
 }
 
 .list__ul li::before {
@@ -42,6 +44,11 @@
 }
 
 .list__ul button {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   cursor: pointer;
 
   font-weight: var(--pretendard-semibold);

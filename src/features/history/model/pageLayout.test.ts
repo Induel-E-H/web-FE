@@ -1,7 +1,7 @@
 import { artworks } from '@entities/history';
 import { describe, expect, it } from 'vitest';
 
-import { INDEX_LIST } from './constants';
+import { INDEX_LIST, LIST_ITEMS_PER_PAGE } from './constants';
 import {
   buildLeaves,
   describeLeaf,
@@ -106,25 +106,28 @@ describe('buildLeaves', () => {
       ]);
     });
 
-    it('List 좌/우가 각각 한 장씩 보인다', () => {
+    it('List 는 한 쪽에 LIST_ITEMS_PER_PAGE 개씩 나눈 쪽 수만큼 보인다', () => {
       const list = leaves.filter(
         (leaf) => leaf.kind === 'page' && leaf.item === 'List',
       );
-      expect(list).toHaveLength(2);
+      expect(list).toHaveLength(
+        Math.ceil(artworks.length / LIST_ITEMS_PER_PAGE),
+      );
     });
   });
 });
 
 describe('findLeafIndex', () => {
   const leaves = buildLeaves('desktop');
+  const contentStart = 3 + getPageRegistry('desktop').List.totalPages * 2;
 
   it('카테고리 첫 페이지의 왼쪽 장 인덱스를 반환한다', () => {
     expect(findLeafIndex(leaves, 'List')).toBe(3);
-    expect(findLeafIndex(leaves, 'Content')).toBe(5);
+    expect(findLeafIndex(leaves, 'Content')).toBe(contentStart);
   });
 
   it('pageIndex 를 반영한다', () => {
-    expect(findLeafIndex(leaves, 'Content', 2)).toBe(9);
+    expect(findLeafIndex(leaves, 'Content', 2)).toBe(contentStart + 4);
   });
 
   it('없는 페이지는 -1 을 반환한다', () => {
@@ -242,8 +245,16 @@ describe('hasPageContent', () => {
   });
 
   it('List 와 Timeline 은 항상 내용이 있다', () => {
+    expect(hasPageContent(page('List', 0, 'right'), 'desktop')).toBe(true);
     expect(hasPageContent(page('List', 0, 'right'), 'mobile')).toBe(true);
     expect(hasPageContent(page('Timeline', 0, 'right'), 'mobile')).toBe(true);
+  });
+
+  it('mobile List 는 작품 수를 넘는 쪽이 비어 있다', () => {
+    const lastPage = Math.ceil(artworks.length / (LIST_ITEMS_PER_PAGE * 2));
+    expect(hasPageContent(page('List', lastPage, 'left'), 'mobile')).toBe(
+      false,
+    );
   });
 });
 

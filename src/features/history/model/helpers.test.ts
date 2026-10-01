@@ -1,7 +1,8 @@
 import { preloadImages } from '@shared/lib/preload/preloadImages';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getArtworkIndex, preloadContentImages } from './helpers';
+import { LIST_ITEMS_PER_PAGE } from './constants';
+import { getArtworkIndex, getListRange, preloadContentImages } from './helpers';
 
 vi.mock('@entities/history', () => ({
   artworks: Array.from({ length: 10 }),
@@ -91,5 +92,12 @@ describe('preloadContentImages', () => {
     preloadContentImages(100);
     const arg = vi.mocked(preloadImages).mock.calls[0][0];
     expect(arg).toHaveLength(0);
+  });
+});
+
+describe('getListRange (artworks.length=10)', () => {
+  it('쪽마다 LIST_ITEMS_PER_PAGE 개씩 이어서 담고, 작품 수를 넘지 않는다', () => {
+    expect(getListRange(0, 'left')).toEqual([0, 10]);
+    expect(getListRange(0, 'right')).toEqual([LIST_ITEMS_PER_PAGE, 10]);
   });
 });

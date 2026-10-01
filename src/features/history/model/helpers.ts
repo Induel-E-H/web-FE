@@ -1,12 +1,20 @@
 import { artworks, getThumbnailImage } from '@entities/history';
 import { preloadImages } from '@shared/lib/preload/preloadImages';
 
-import { PAGE_SIDE } from './constants';
+import { LIST_ITEMS_PER_PAGE, PAGE_SIDE } from './constants';
 import type { PageSide } from './types';
 
 export function getArtworkIndex(pageIndex: number, side: PageSide): number {
   const isLeft = side === PAGE_SIDE.LEFT;
   return pageIndex * 2 + (isLeft ? 0 : 1);
+}
+
+export function getListRange(
+  pageIndex: number,
+  side: PageSide,
+): [number, number] {
+  const start = getArtworkIndex(pageIndex, side) * LIST_ITEMS_PER_PAGE;
+  return [start, Math.min(start + LIST_ITEMS_PER_PAGE, artworks.length)];
 }
 
 export function preloadContentImages(pageIndex: number): void {
