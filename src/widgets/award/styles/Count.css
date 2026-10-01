@@ -9,9 +9,9 @@
   width: fit-content;
   height: fit-content;
 
-  gap: 6px;
+  gap: 8px;
 
-  padding: 6px 12px;
+  padding: 8px 16px;
 
   border-radius: 999px;
 
@@ -20,11 +20,29 @@
 }
 
 .award__count__icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .award__count p {
   font-weight: var(--pretendard-semibold);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-body);
+}
+
+@media (max-width: 767px) {
+  .award__count {
+    flex-shrink: 0;
+    gap: 6px;
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+
+  .award__count__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .award__count p {
+    font-size: var(--fs-sm);
+  }
 }
