@@ -279,12 +279,12 @@ npm run dev:history    # 위젯 하나만 띄우기 (hero, vision, history, awar
 - Desktop
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 95+|🟢 100|🟠 75+|🟢 100|
+  |🟢 98+|🟢 96+|🟠 75+|🟢 100|
 
 - Mobile
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 90+|🟢 100|🟠 70+|🟢 100|
+  |🟢 94+|🟢 96+|🟠 73+|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
