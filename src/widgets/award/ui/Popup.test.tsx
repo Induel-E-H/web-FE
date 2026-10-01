@@ -1,3 +1,4 @@
+import { AWARD_IMAGE_RATIO } from '@entities/award';
 import { useAwardStore } from '@features/award';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -54,6 +55,16 @@ describe('AwardPopup', () => {
     it('selectedId가 null이면 렌더링되지 않는다', () => {
       render(<AwardPopup />);
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+
+    it('수상 이미지 비율을 팝업에 전달한다', () => {
+      useAwardStore.setState({ selectedId: 1 });
+      render(<AwardPopup />);
+      expect(
+        screen
+          .getByRole('dialog')
+          .style.getPropertyValue('--popup-media-ratio'),
+      ).toBe(String(AWARD_IMAGE_RATIO));
     });
 
     it('dialog 역할로 렌더링된다', () => {

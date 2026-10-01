@@ -22,6 +22,8 @@ const AWARD_IMAGES = [
   img9,
 ];
 
+export const AWARD_IMAGE_RATIO = 1241 / 1755;
+
 export function getAwardImage(id: number): string {
   const image = AWARD_IMAGES[id];
   if (!image) {

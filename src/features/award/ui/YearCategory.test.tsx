@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { YEAR_ALL } from '../model/constant';
 import { useAwardStore } from '../model/useAwardStore';
@@ -72,6 +72,63 @@ describe('YearCategory', () => {
       render(<YearCategory />);
       fireEvent.click(screen.getByText(YEAR_ALL));
       expect(useAwardStore.getState().activeYear).toBe(YEAR_ALL);
+    });
+  });
+
+  describe('오른쪽 끝 흐림', () => {
+    function scrollTo(nav: HTMLElement, scrollLeft: number) {
+      Object.defineProperties(nav, {
+        clientWidth: { configurable: true, value: 300 },
+        scrollWidth: { configurable: true, value: 500 },
+        scrollLeft: { configurable: true, value: scrollLeft },
+      });
+      fireEvent.scroll(nav);
+    }
+
+    it('오른쪽에 더 볼 연도가 있으면 흐림 클래스를 붙인다', () => {
+      render(<YearCategory />);
+      const nav = screen.getByRole('navigation', { name: '연도 필터' });
+      scrollTo(nav, 0);
+      expect(nav).toHaveClass('award__year_category--more');
+    });
+
+    it('처음 크기를 잴 때 넘치는 연도가 있으면 흐림 클래스를 붙인다', () => {
+      const OriginalResizeObserver = globalThis.ResizeObserver;
+      vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(
+        500,
+      );
+      vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(
+        300,
+      );
+      vi.stubGlobal(
+        'ResizeObserver',
+        class {
+          callback: () => void;
+          constructor(callback: () => void) {
+            this.callback = callback;
+          }
+          observe() {
+            this.callback();
+          }
+          disconnect() {}
+        },
+      );
+      try {
+        render(<YearCategory />);
+        expect(
+          screen.getByRole('navigation', { name: '연도 필터' }),
+        ).toHaveClass('award__year_category--more');
+      } finally {
+        vi.restoreAllMocks();
+        vi.stubGlobal('ResizeObserver', OriginalResizeObserver);
+      }
+    });
+
+    it('끝까지 스크롤하면 흐림 클래스를 뗀다', () => {
+      render(<YearCategory />);
+      const nav = screen.getByRole('navigation', { name: '연도 필터' });
+      scrollTo(nav, 200);
+      expect(nav).not.toHaveClass('award__year_category--more');
     });
   });
 });
