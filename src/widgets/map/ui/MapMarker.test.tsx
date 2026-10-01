@@ -24,6 +24,13 @@ describe('MapMarker', () => {
     expect(container.querySelector('#pinGrad')).toBeInTheDocument();
   });
 
+  it('그라디언트 시작·끝 stop에 색을 지정하는 클래스가 있다', () => {
+    const { container } = render(<MapMarker />);
+    const stops = container.querySelectorAll('#pinGrad stop');
+    expect(stops[0]).toHaveClass('map__marker__stop-start');
+    expect(stops[1]).toHaveClass('map__marker__stop-end');
+  });
+
   it('map__marker__body path가 렌더링된다', () => {
     const { container } = render(<MapMarker />);
     expect(container.querySelector('.map__marker__body')).toBeInTheDocument();

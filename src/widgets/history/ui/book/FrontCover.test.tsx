@@ -1,3 +1,4 @@
+import { ESTABLISHED_YEAR } from '@shared/constant';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
@@ -14,6 +15,13 @@ describe('FrontCoverInner', () => {
     render(<FrontCoverInner />);
     const yearEl = document.querySelector('.history__front-cover-year-number');
     expect(yearEl).toBeInTheDocument();
+  });
+
+  it('연도 숫자는 설립 이후 햇수다', () => {
+    render(<FrontCoverInner />);
+    expect(
+      document.querySelector('.history__front-cover-year-number'),
+    ).toHaveTextContent(String(new Date().getFullYear() - ESTABLISHED_YEAR));
   });
 });
 
