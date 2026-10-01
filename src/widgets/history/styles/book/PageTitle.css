@@ -3,6 +3,7 @@
   flex-direction: column;
 
   align-items: center;
+  padding-top: clamp(16px, 7cqmin, 56px);
   gap: clamp(4px, 1.2cqmin, 10px);
 }
 
@@ -27,11 +28,6 @@
 
   background-color: currentColor;
   opacity: 0.6;
-}
-
-.book-page-title__ornament {
-  font-size: var(--fs-book-xs);
-  line-height: 1;
 }
 
 .book-page-title h3 {

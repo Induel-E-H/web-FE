@@ -6,7 +6,7 @@
   height: 100%;
 
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   gap: clamp(22px, 8.09cqmin, 52px);
 }

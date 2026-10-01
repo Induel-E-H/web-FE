@@ -19,12 +19,10 @@ describe('BookPageTitle', () => {
       expect(en).toHaveAttribute('lang', 'en');
     });
 
-    it('장식 줄과 ✦ 장식은 aria-hidden=true이다', () => {
+    it('양옆 장식 줄은 aria-hidden=true이다', () => {
       const { container } = render(<BookPageTitle title='List' label='목차' />);
-      const decorations = container.querySelectorAll(
-        '.book-page-title__line, .book-page-title__ornament',
-      );
-      expect(decorations).toHaveLength(4);
+      const decorations = container.querySelectorAll('.book-page-title__line');
+      expect(decorations).toHaveLength(2);
       decorations.forEach((el) => {
         expect(el).toHaveAttribute('aria-hidden', 'true');
       });
