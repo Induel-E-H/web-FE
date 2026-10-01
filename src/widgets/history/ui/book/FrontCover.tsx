@@ -1,9 +1,7 @@
-import { COMPANY } from '@shared/constant';
+import { ESTABLISHED_YEAR } from '@shared/constant';
 import { getOrdinalSuffix } from '@shared/lib/ordinal';
 
 import '../../styles/book/FrontCover.css';
-
-const ESTABLISHED_YEAR = new Date(COMPANY.ESTABLISHED).getFullYear();
 
 export function FrontCoverInner() {
   const years = new Date().getFullYear() - ESTABLISHED_YEAR;

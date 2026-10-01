@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { COMPANY } from '@shared/constant';
+import { COMPANY, ESTABLISHED_YEAR } from '@shared/constant';
 import { trackPrivacyPolicyClick } from '@shared/lib/analytics';
 
 import '../styles/Footer.css';
@@ -49,8 +49,8 @@ export function Footer() {
         ))}
       </dl>
       <p className='footer__copyright'>
-        © {new Date(COMPANY.ESTABLISHED).getFullYear()}–
-        {new Date().getFullYear()} {COMPANY.NAME_EN_FULL}. All rights reserved.
+        © {ESTABLISHED_YEAR}–{new Date().getFullYear()} {COMPANY.NAME_EN_FULL}.
+        All rights reserved.
       </p>
     </footer>
   );

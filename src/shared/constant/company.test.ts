@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { COMPANY } from './company';
+import { COMPANY, ESTABLISHED_YEAR } from './company';
 
 describe('COMPANY 상수', () => {
   describe('회사명', () => {
@@ -72,6 +72,20 @@ describe('COMPANY 상수', () => {
 
     it('경도가 129.0968이다', () => {
       expect(COMPANY.LNG).toBe(129.0968);
+    });
+  });
+
+  describe('파생 상수', () => {
+    it('설립 연도는 2000이다', () => {
+      expect(ESTABLISHED_YEAR).toBe(2000);
+    });
+
+    it('사업 분야는 EXHIBITION, ENVIRONMENTAL, INTERIOR 순서다', () => {
+      expect(COMPANY.FIELDS).toEqual([
+        'EXHIBITION',
+        'ENVIRONMENTAL',
+        'INTERIOR',
+      ]);
     });
   });
 });

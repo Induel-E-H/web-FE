@@ -1,8 +1,6 @@
-import { COMPANY } from '@shared/constant';
+import { COMPANY, ESTABLISHED_YEAR } from '@shared/constant';
 
 import '../../styles/book/TitlePage.css';
-
-const ESTABLISHED_YEAR = new Date(COMPANY.ESTABLISHED).getFullYear();
 
 export function TitlePage() {
   return (

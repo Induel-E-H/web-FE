@@ -14,4 +14,7 @@ export const COMPANY = {
   ESTABLISHED_DISPLAY: '2000.04.27',
   LAT: 35.13488,
   LNG: 129.0968,
+  FIELDS: ['EXHIBITION', 'ENVIRONMENTAL', 'INTERIOR'],
 } as const;
+
+export const ESTABLISHED_YEAR = new Date(COMPANY.ESTABLISHED).getFullYear();
