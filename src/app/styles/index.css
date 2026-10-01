@@ -97,6 +97,17 @@
   /* Typography */
   --typo-contentW: #6f6f6f;
 
+  --fs-2xs: 12px;
+  --fs-xs: 13px;
+  --fs-sm: clamp(14px, 0.85rem + 0.1vw, 15px);
+  --fs-body: clamp(15px, 0.9rem + 0.2vw, 17px);
+  --fs-md: clamp(17px, 1rem + 0.2vw, 19px);
+  --fs-lg: clamp(18px, 1rem + 0.5vw, 22px);
+  --fs-xl: clamp(22px, 1.1rem + 1vw, 30px);
+  --fs-2xl: clamp(28px, 2.4vw, 36px);
+  --fs-h2: clamp(32px, 1.6rem + 2vw, 56px);
+  --fs-display: clamp(40px, 2rem + 2vw, 64px);
+
   /* Layout */
   --section-padding-x: 14.58vmax;
 }

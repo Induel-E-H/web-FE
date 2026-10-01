@@ -1,4 +1,6 @@
 .history {
+  --fs-book: clamp(11px, min(3cqi, 3cqh), var(--fs-sm));
+  --fs-book-caption: clamp(9px, min(2.4cqi, 2.4cqh), var(--fs-2xs));
   --history-bg: #1a1410;
   --book-page-hr: #606060;
   --book-shadow-dark: #b9b9b9;

@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 22.14vmax;
+  min-height: 22.14vmax;
   overflow: hidden;
 }
 
@@ -29,13 +29,15 @@
 }
 
 .vision__content__image {
+  position: relative;
   flex: 1;
-  height: 100%;
   overflow: hidden;
   flex-shrink: 0;
 }
 
 .vision__content__image img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -50,7 +52,6 @@
   display: flex;
   flex-direction: column;
   width: 45.43%;
-  height: 100%;
   justify-content: center;
   gap: 1.3vmax;
   padding: 0 3.39vmax;
@@ -65,7 +66,7 @@
 
 .vision__content__index {
   font-weight: var(--pretendard-regular);
-  font-size: max(11px, 0.729vw);
+  font-size: var(--fs-xs);
   color: var(--color-index);
 }
 
@@ -83,13 +84,13 @@
 }
 
 .vision__content__title__main h3 {
-  font-size: max(40px, 3.13vw);
+  font-size: var(--fs-display);
   color: var(--color-main-h3);
   transform: skewX(-10deg);
 }
 
 .vision__content__title__main h4 {
-  font-size: max(15px, 1.04vw);
+  font-size: var(--fs-lg);
   color: var(--color-main-h4);
 }
 
@@ -101,7 +102,7 @@
 
 .vision__content__description {
   font-weight: var(--pretendard-regular);
-  font-size: max(12px, 0.78vw);
+  font-size: var(--fs-body);
   line-height: 2;
   color: var(--color-description);
   word-break: keep-all;
@@ -110,7 +111,7 @@
 
 @media (max-width: 1024px) {
   .vision__content {
-    height: 55.34vw;
+    min-height: 55.34vw;
   }
 
   .vision__content__text {
@@ -123,46 +124,32 @@
     gap: 1.95vw;
   }
 
-  .vision__content__index {
-    font-size: 1.563vw;
-  }
-
   .vision__content__title__main {
     gap: 0.65vw;
-  }
-
-  .vision__content__title__main h3 {
-    font-size: 5.21vw;
-  }
-
-  .vision__content__title__main h4 {
-    font-size: 1.95vw;
   }
 
   .vision__content__title hr {
     width: 4.56vw;
     border-top-width: 1px;
   }
-
-  .vision__content__description {
-    font-size: 1.56vw;
-  }
 }
 
 @media (max-width: 767px) {
   .vision__content {
     flex-direction: column;
-    height: 62.5svh;
+    min-height: 62.5svh;
   }
 
   .vision__content__image {
+    flex: none;
     width: 100%;
     height: clamp(190px, 54.4vw, 272px);
   }
 
   .vision__content__text {
+    flex: 1;
     width: 100%;
-    height: clamp(206px, 58.93vw, 295px);
+    min-height: clamp(206px, 58.93vw, 295px);
     gap: clamp(14px, 4vw, 20px);
     padding: 0 clamp(28px, 8vw, 40px);
   }
@@ -171,28 +158,12 @@
     gap: clamp(9px, 2.67vw, 13px);
   }
 
-  .vision__content__index {
-    font-size: clamp(9px, 2.667vw, 13px);
-  }
-
   .vision__content__title__main {
     gap: clamp(4px, 1.33vw, 7px);
-  }
-
-  .vision__content__title__main h3 {
-    font-size: clamp(28px, 8vw, 40px);
-  }
-
-  .vision__content__title__main h4 {
-    font-size: clamp(11px, 3.2vw, 16px);
   }
 
   .vision__content__title hr {
     width: clamp(33px, 9.33vw, 47px);
     border-top-width: 1px;
-  }
-
-  .vision__content__description {
-    font-size: clamp(9px, 2.67vw, 13px);
   }
 }

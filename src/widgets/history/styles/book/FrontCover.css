@@ -48,7 +48,7 @@
 }
 
 .history__front-cover-title span {
-  font-size: max(36px, 2.86vw);
+  font-size: clamp(20px, 0.8rem + 2.2vw, 48px);
   font-weight: var(--pretendard-semibold);
 
   line-height: 100%;
@@ -70,14 +70,14 @@
 
 .history__front-cover-year-number {
   font-family: var(--font-bookendbatang);
-  font-size: max(70px, 7.29vw);
+  font-size: clamp(64px, 1.5rem + 6vw, 128px);
 
   line-height: 100%;
 }
 
 .history__front-cover-year-ordinal {
   font-family: var(--font-bookendbatang);
-  font-size: max(32px, 2.6vw);
+  font-size: clamp(20px, 0.8rem + 2vw, 40px);
 
   line-height: 100%;
 }
@@ -97,18 +97,6 @@
 
     gap: 2.604vw;
   }
-
-  .history__front-cover-title span {
-    font-size: 3.906vw;
-  }
-
-  .history__front-cover-year-number {
-    font-size: 13.021vw;
-  }
-
-  .history__front-cover-year-ordinal {
-    font-size: 3.906vw;
-  }
 }
 
 @media (max-width: 767px) {
@@ -123,17 +111,5 @@
     bottom: clamp(23px, 6.667vw, 33px);
 
     gap: clamp(19px, 5.333vw, 27px);
-  }
-
-  .history__front-cover-title span {
-    font-size: clamp(19px, 5.333vw, 27px);
-  }
-
-  .history__front-cover-year-number {
-    font-size: clamp(65px, 18.667vw, 93px);
-  }
-
-  .history__front-cover-year-ordinal {
-    font-size: clamp(19px, 5.333vw, 27px);
   }
 }

@@ -28,7 +28,7 @@
 
   gap: 0.5em;
 
-  font-size: max(11px, 0.729vw);
+  font-size: var(--fs-book);
   font-weight: var(--pretendard-semibold);
 
   color: var(--typo-contentW);
@@ -37,7 +37,7 @@
 .timeline__ul li::before {
   content: '•';
   flex-shrink: 0;
-  font-size: max(11px, 0.729vw);
+  font-size: var(--fs-book);
 }
 
 .timeline__ul-placeholder {
@@ -58,14 +58,6 @@
 
     margin-block: auto;
   }
-
-  .timeline__ul li {
-    font-size: 1.56vw;
-  }
-
-  .timeline__ul li::before {
-    font-size: 1.56vw;
-  }
 }
 
 @media (max-width: 767px) {
@@ -75,13 +67,5 @@
 
   .timeline__ul {
     height: 28.82vh;
-  }
-
-  .timeline__ul li {
-    font-size: clamp(8px, 2.13vw, 11px);
-  }
-
-  .timeline__ul li::before {
-    font-size: clamp(8px, 2.13vw, 11px);
   }
 }

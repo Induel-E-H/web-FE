@@ -4,7 +4,7 @@
 
   background-color: var(--brown-900);
 
-  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  font-size: var(--fs-sm);
   line-height: 1.7;
   color: var(--brown-100);
 }
@@ -51,7 +51,7 @@
 .footer__company strong {
   display: block;
 
-  font-size: clamp(18px, 1rem + 0.5vw, 22px);
+  font-size: var(--fs-lg);
   color: var(--white);
 }
 
@@ -100,7 +100,7 @@
 }
 
 .footer__copyright {
-  font-size: 13px;
+  font-size: var(--fs-xs);
   color: var(--brown-300);
   text-align: center;
 }

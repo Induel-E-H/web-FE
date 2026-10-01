@@ -16,7 +16,7 @@
   border-radius: 999px;
 
   font-weight: var(--pretendard-semibold);
-  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  font-size: var(--fs-sm);
   color: var(--brown-200);
 
   cursor: pointer;

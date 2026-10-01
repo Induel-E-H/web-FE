@@ -38,14 +38,14 @@
   color: var(--typo-contentW);
   flex-shrink: 0;
 
-  font-size: max(11px, 0.729vw);
+  font-size: var(--fs-book);
 }
 
 .list__ul button {
   cursor: pointer;
 
   font-weight: var(--pretendard-semibold);
-  font-size: max(11px, 0.729vw);
+  font-size: var(--fs-book);
 
   color: var(--typo-contentW);
 
@@ -56,14 +56,6 @@
   .list__container {
     gap: 1.3vw;
   }
-
-  .list__ul li::before {
-    font-size: 1.3vw;
-  }
-
-  .list__ul button {
-    font-size: 1.3vw;
-  }
 }
 
 @media (max-width: 767px) {
@@ -71,12 +63,7 @@
     gap: clamp(9px, 2.67vw, 13px);
   }
 
-  .list__ul li::before {
-    font-size: clamp(8px, 2.133vw, 11px);
-  }
-
   .list__ul button {
-    font-size: clamp(8px, 2.133vw, 11px);
     -webkit-tap-highlight-color: transparent;
   }
 }

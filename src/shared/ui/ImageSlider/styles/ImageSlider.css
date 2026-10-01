@@ -89,7 +89,7 @@
   color: var(--white);
   padding: clamp(2px, 0.3vw, 6px) clamp(8px, 0.8vw, 16px);
   border-radius: 999px;
-  font-size: clamp(12px, 0.7rem + 0.2vw, 15px);
+  font-size: var(--fs-xs);
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.2s;
