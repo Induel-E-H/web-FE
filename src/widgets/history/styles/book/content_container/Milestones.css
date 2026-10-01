@@ -44,7 +44,8 @@
 .milestones__ul li {
   display: flex;
 
-  gap: 1.93%;
+  gap: 0.5em;
+  word-break: keep-all;
 
   font-size: var(--fs-book);
   font-weight: var(--pretendard-regular);

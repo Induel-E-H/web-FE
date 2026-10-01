@@ -90,6 +90,9 @@
 }
 
 .patent__expiration__item__content span:first-child {
+  flex-shrink: 0;
+  min-width: 3ch;
+
   font-weight: var(--pretendard-bold);
   font-size: var(--fs-sm);
 
@@ -97,6 +100,8 @@
 }
 
 .patent__expiration__item__content span:last-child {
+  word-break: keep-all;
+
   font-weight: var(--pretendard-regular);
   font-size: var(--fs-sm);
 
