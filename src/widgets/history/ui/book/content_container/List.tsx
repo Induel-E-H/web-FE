@@ -22,7 +22,7 @@ export function ListPage({
 
   return (
     <nav className='list__container' aria-label='작품 목록'>
-      <BookPageTitle title='List' hidden={!isFirstPage} />
+      <BookPageTitle title='List' label='목차' hidden={!isFirstPage} />
       <ul className='list__ul'>
         {items.map((item, i) => (
           <li key={item.title}>

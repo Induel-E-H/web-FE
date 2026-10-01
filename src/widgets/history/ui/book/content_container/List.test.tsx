@@ -29,7 +29,7 @@ describe('ListPage', () => {
     it('첫 쪽에서 타이틀 h3이 보인다', () => {
       render(<ListPage side='left' />);
       const heading = screen.getByRole('heading', { level: 3 });
-      expect(heading).toHaveTextContent('List');
+      expect(heading).toHaveTextContent('목차');
       expect(heading.closest('.book-page-title')).not.toHaveClass(
         'book-page-title--hidden',
       );

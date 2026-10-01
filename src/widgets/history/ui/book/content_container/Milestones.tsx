@@ -38,7 +38,7 @@ export function MilestonesPage({
 
   return (
     <div className='milestones__container'>
-      {showTitle && <BookPageTitle title='Milestones' />}
+      {showTitle && <BookPageTitle title='Achievements' label='주요 성과' />}
       <div className='milestones__content'>
         {items.map((group) => (
           <div key={group.year} className='milestones__year-group'>

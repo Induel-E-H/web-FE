@@ -17,7 +17,7 @@ const TABLE_OF_CONTENTS: Usage = {
   icon: MdOutlineListAlt,
   label: '목차로 이동',
   description:
-    'List 페이지의 "작품명"을 누르면 그 작품 페이지로 넘어가요.\n위쪽 List · Content · Timeline · Milestones 탭도 같아요.',
+    'List 페이지의 "작품명"을 누르면 그 작품 페이지로 넘어가요.\n위쪽 목차 · 본문 · 연혁 · 주요 성과 탭도 같아요.',
 };
 
 const SPREAD_USAGES: readonly Usage[] = [

@@ -13,7 +13,7 @@ describe('TimelinePage', () => {
     it('left side에서 타이틀 h3이 보인다', () => {
       render(<TimelinePage side='left' />);
       expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(
-        'Timeline',
+        '연혁',
       );
     });
 
