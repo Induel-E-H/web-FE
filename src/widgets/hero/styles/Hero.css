@@ -1,6 +1,6 @@
 .hero {
   --hero-since-size: clamp(16px, 0.7rem + 1.5vw, 40px);
-  --hero-since-bottom: min(clamp(48px, 6vw + 26px, 94px), 7svh);
+  --hero-since-bottom: clamp(56px, 6vw + 30px, 94px);
 
   position: relative;
   width: 100%;
@@ -208,5 +208,51 @@
 
   .hero__scroll-cue::after {
     height: 16px;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: landscape) and (max-height: 600px) {
+  .hero {
+    --hero-since-size: min(clamp(16px, 0.7rem + 1.5vw, 40px), 6svh);
+  }
+
+  .hero__company {
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    translate: -50% -50%;
+    flex-direction: row;
+    justify-content: center;
+    gap: clamp(24px, 4vw, 48px);
+    padding-top: 0;
+  }
+
+  .hero__company::after {
+    display: none;
+  }
+
+  .hero__logo {
+    order: 0;
+    height: min(clamp(120px, 16.34vw, 240px), 46svh);
+  }
+
+  .hero__company-text,
+  .hero__company-text hgroup {
+    order: 0;
+    align-items: flex-end;
+  }
+
+  .hero__company-name {
+    font-size: min(clamp(32px, 1.3rem + 5.2vw, 120px), 14svh);
+  }
+
+  .hero__company-name-en {
+    font-size: min(clamp(18px, 0.8rem + 1.95vw, 50px), 6svh);
+  }
+
+  .hero__established {
+    position: static;
+    transform: none;
   }
 }
