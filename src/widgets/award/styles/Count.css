@@ -13,7 +13,7 @@
 
   padding: 8px 16px;
 
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 
   background-color: var(--count-bg);
   color: var(--brown-800);

@@ -35,7 +35,7 @@
   height: 28px;
   padding: 0 8px;
 
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background-color: var(--accent-gold-600);
 
   font-size: var(--fs-sm);

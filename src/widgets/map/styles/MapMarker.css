@@ -3,6 +3,14 @@
   aspect-ratio: 11/14;
 }
 
+.map__marker__stop-start {
+  stop-color: var(--brown-700);
+}
+
+.map__marker__stop-end {
+  stop-color: var(--brown-900);
+}
+
 .map__marker__shadow {
   fill: var(--shadow-04);
 }

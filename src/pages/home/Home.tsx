@@ -48,15 +48,7 @@ function DevWidgetView({ name }: { name: string }) {
   const widget = DEV_WIDGET_MAP[name];
   if (!widget) {
     return (
-      <div
-        style={{
-          padding: '2rem',
-          fontFamily: 'monospace',
-          color: '#fff',
-          background: '#111',
-          minHeight: '100vh',
-        }}
-      >
+      <div className='home__dev-missing'>
         <p>⚠️ 위젯 &quot;{name}&quot;을 찾을 수 없습니다.</p>
         <p>등록된 위젯: {Object.keys(DEV_WIDGET_MAP).join(', ')}</p>
         <p>DEV_WIDGET_MAP에 등록 후 다시 실행하세요.</p>

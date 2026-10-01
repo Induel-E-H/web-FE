@@ -49,23 +49,7 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
           SCROLL
         </span>
       ) : (
-        <p
-          style={{
-            position: 'absolute',
-            bottom: '2.34%',
-            width: '100%',
-            textAlign: 'center',
-            whiteSpace: 'nowrap',
-            textShadow: `
-              0 0 40px rgb(0, 0, 0, 1),
-              0 0 20px rgb(0, 0, 0, 1),
-              0 0 60px rgb(0, 0, 0, 1)
-            `,
-            color: 'white',
-          }}
-        >
-          현재 개발중입니다!
-        </p>
+        <p className='hero__dev-notice'>현재 개발중입니다!</p>
       )}
     </section>
   );

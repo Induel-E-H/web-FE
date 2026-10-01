@@ -94,6 +94,19 @@
   color: var(--white);
 }
 
+.hero__dev-notice {
+  position: absolute;
+  bottom: 2.34%;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow:
+    0 0 40px var(--black),
+    0 0 20px var(--black),
+    0 0 60px var(--black);
+  color: var(--white);
+}
+
 .hero__scroll-cue {
   position: absolute;
   left: 50%;
@@ -118,7 +131,6 @@
   animation: scroll-cue 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Line draws down from the top, then retracts toward the bottom. */
 @keyframes scroll-cue {
   0% {
     transform: scaleY(0);

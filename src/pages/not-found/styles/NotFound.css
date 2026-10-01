@@ -17,7 +17,7 @@
 
 .not-found__code {
   font-size: clamp(72px, 3rem + 6vw, 160px);
-  font-weight: 900;
+  font-weight: var(--pretendard-black);
   line-height: 1;
   letter-spacing: -0.05em;
   color: var(--accent-gold-400);
@@ -26,14 +26,14 @@
 
 .not-found__title {
   font-size: var(--fs-xl);
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   color: var(--white);
   letter-spacing: -0.03em;
 }
 
 .not-found__desc {
   font-size: var(--fs-body);
-  font-weight: 400;
+  font-weight: var(--pretendard-regular);
   color: var(--brown-300);
   line-height: 1.6;
 }
@@ -44,12 +44,12 @@
   background-color: var(--accent-gold-400);
   color: var(--brown-900);
   font-size: var(--fs-sm);
-  font-weight: 700;
+  font-weight: var(--pretendard-bold);
   border-radius: 0.25rem;
   letter-spacing: -0.02em;
   transition:
-    background-color 0.2s ease,
-    transform 0.15s ease;
+    background-color var(--duration-base) ease,
+    transform var(--duration-fast) ease;
 }
 
 .not-found__btn:hover {

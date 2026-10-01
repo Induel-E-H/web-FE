@@ -1,4 +1,6 @@
 .award {
+  --award-year-color: #8a6a2f;
+
   display: flex;
   flex-direction: column;
 
