@@ -96,7 +96,6 @@
   background-color: #3267d6;
 }
 
-/* Tablet (≤1024px) */
 @media (max-width: 1024px) {
   .unsupported-browser {
     padding: 2.5rem 1.75rem;
@@ -113,7 +112,6 @@
   }
 }
 
-/* Mobile (≤767px) */
 @media (max-width: 767px) {
   .unsupported-browser {
     padding: 2rem 1.25rem;
