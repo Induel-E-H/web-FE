@@ -9,8 +9,6 @@
   align-items: flex-start;
   justify-content: space-between;
   padding: clamp(20px, 2.6vw, 48px) clamp(24px, 4vw, 64px);
-
-  --map-gold: var(--accent-gold-500);
 }
 
 .map__card_content h3 {
@@ -62,7 +60,7 @@
 .map__description_text h4 {
   font-weight: var(--pretendard-bold);
   font-size: var(--fs-sm);
-  color: var(--map-gold);
+  color: var(--accent-brown-700);
 }
 
 .map__description__content {
