@@ -1,0 +1,588 @@
+import { useImperativeHandle } from 'react';
+import type { ReactNode, Ref } from 'react';
+import { createPortal } from 'react-dom';
+
+import { buildLeaves } from '@features/history';
+import type {
+  FlipBookHandle,
+  HTMLFlipBookProps,
+} from '@gullabs/react-flipbook';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { Book } from './Book';
+
+const flipbook = vi.hoisted(() => ({
+  props: null as HTMLFlipBookProps | null,
+  engine: null as object | null,
+  handle: {
+    flipNext: vi.fn(),
+    flipPrev: vi.fn(),
+    cancelTurn: vi.fn(),
+    pageFlip: vi.fn((): unknown => flipbook.engine),
+  },
+}));
+
+vi.mock('@gullabs/react-flipbook', () => ({
+  default: function MockFlipBook(
+    props: HTMLFlipBookProps & { children?: ReactNode; ref?: Ref<unknown> },
+  ) {
+    flipbook.props = props;
+    useImperativeHandle(props.ref, () => flipbook.handle);
+    return <div data-testid='flipbook'>{props.children}</div>;
+  },
+}));
+
+const STAGE = { width: 1000, height: 600 };
+
+class MockResizeObserver {
+  private cb: ResizeObserverCallback;
+  constructor(cb: ResizeObserverCallback) {
+    this.cb = cb;
+  }
+  observe() {
+    this.cb(
+      [{ contentRect: STAGE } as ResizeObserverEntry],
+      this as unknown as ResizeObserver,
+    );
+  }
+  disconnect() {}
+}
+
+const leaves = buildLeaves('desktop');
+const lastLeaf = leaves.length - 1;
+
+function setup(landscape = true, targetLeaf: number | null = null) {
+  const props = {
+    bookRef: { current: null as FlipBookHandle | null },
+    leaves,
+    landscape,
+    renderPage: vi.fn(() => <p>page</p>),
+    onPageChange: vi.fn(),
+    onSettled: vi.fn(),
+    onHoldStart: vi.fn(),
+    onHoldEnd: vi.fn(),
+  };
+  const utils = render(<Book {...props} targetLeaf={targetLeaf} />);
+  const stage = utils.container.querySelector('.history__book-stage')!;
+  const body = () => utils.container.querySelector('.history__book-body')!;
+  return { ...utils, props, stage, body };
+}
+
+function turnTo(page: number) {
+  act(() =>
+    flipbook.props?.onPageChange?.({
+      page,
+      pageCount: leaves.length,
+      orientation: 'landscape',
+      visiblePages: [page],
+    }),
+  );
+}
+
+describe('Book', () => {
+  beforeEach(() => {
+    vi.stubGlobal('ResizeObserver', MockResizeObserver);
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      left: 0,
+      top: 0,
+      width: STAGE.width,
+    } as DOMRect);
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+    Object.values(flipbook.handle).forEach((fn) => fn.mockClear());
+    flipbook.engine = null;
+  });
+
+  describe('렌더링', () => {
+    it('모든 장을 렌더링하고 표지는 표지 콘텐츠로 채운다', () => {
+      const { container } = setup();
+      expect(container.querySelectorAll('.history__leaf')).toHaveLength(
+        leaves.length,
+      );
+      expect(
+        container.querySelector('.history__front-cover-inner'),
+      ).toBeInTheDocument();
+      expect(
+        container.querySelector('.history__back-cover-inner'),
+      ).toBeInTheDocument();
+      expect(
+        container.querySelector('.history__title-page'),
+      ).toBeInTheDocument();
+      expect(container.querySelector('.history__colophon')).toBeInTheDocument();
+    });
+
+    it('표지 안쪽 장은 하드 페이지로 표시한다', () => {
+      const { container } = setup();
+      const inside = container.querySelector('.history__leaf--inside-front');
+      expect(inside?.parentElement).toHaveAttribute('data-density', 'hard');
+    });
+
+    it('가로 모드는 한 페이지 폭을 무대의 절반으로, 하드커버로 설정한다', () => {
+      setup(true);
+      expect(flipbook.props).toMatchObject({
+        width: STAGE.width / 2,
+        height: STAGE.height,
+        hardCovers: true,
+        usePortrait: false,
+        controls: 'none',
+      });
+    });
+
+    it('OS 의 애니메이션 줄이기 설정과 무관하게 넘김 애니메이션을 재생한다', () => {
+      setup();
+      expect(flipbook.props?.respectReducedMotion).toBe(false);
+    });
+
+    it('반쪽 보기는 한 장이 무대 전체 폭이고 오른쪽 장은 화면 밖에 둔다', () => {
+      const { body } = setup(false);
+      expect(flipbook.props).toMatchObject({
+        width: STAGE.width,
+        usePortrait: false,
+        controls: 'none',
+        pointerInput: [],
+      });
+      expect(body()).toHaveClass('history__book-body--half');
+      expect(body()).toHaveStyle({ width: `${STAGE.width * 2}px` });
+    });
+  });
+
+  describe('닫힌 책 상태', () => {
+    it('처음에는 앞표지로 닫혀 있다', () => {
+      const { body } = setup();
+      expect(body()).toHaveClass('history__book-body--closed-front');
+    });
+
+    it('펼치면 닫힘 클래스가 사라진다', () => {
+      const { body } = setup();
+      turnTo(3);
+      expect(body()).not.toHaveClass('history__book-body--closed-front');
+      expect(body()).not.toHaveClass('history__book-body--closed-back');
+    });
+
+    it('마지막 장이면 뒤표지로 닫힌다', () => {
+      const { body } = setup();
+      turnTo(lastLeaf);
+      expect(body()).toHaveClass('history__book-body--closed-back');
+    });
+
+    it('넘기는 중에는 turning 클래스를 붙이고 끝나면 뗀다', () => {
+      const { body } = setup();
+      act(() => flipbook.props?.onChangeState?.({ state: 'flipping' }));
+      expect(body()).toHaveClass('history__book-body--turning');
+      act(() => flipbook.props?.onChangeState?.({ state: 'read' }));
+      expect(body()).not.toHaveClass('history__book-body--turning');
+    });
+
+    it('앞표지로 닫히는 넘김 동안에는 closing-front 만 붙인다', () => {
+      const { body } = setup();
+      turnTo(1);
+      act(() =>
+        flipbook.props?.onTurnProgress?.({ progress: 0.2, direction: 'prev' }),
+      );
+      expect(body()).toHaveClass('history__book-body--closing-front');
+      expect(body()).not.toHaveClass('history__book-body--closing-back');
+      act(() => flipbook.props?.onChangeState?.({ state: 'read' }));
+      expect(body()).not.toHaveClass('history__book-body--closing-front');
+    });
+
+    it('뒤표지로 닫히는 넘김 동안에는 closing-back 만 붙인다', () => {
+      const { body } = setup();
+      turnTo(lastLeaf - 2);
+      act(() =>
+        flipbook.props?.onTurnProgress?.({ progress: 0.2, direction: 'next' }),
+      );
+      expect(body()).toHaveClass('history__book-body--closing-back');
+      expect(body()).not.toHaveClass('history__book-body--closing-front');
+      act(() => flipbook.props?.onChangeState?.({ state: 'read' }));
+      expect(body()).not.toHaveClass('history__book-body--closing-back');
+    });
+
+    it('표지로 닫히지 않는 넘김에는 closing 클래스를 붙이지 않는다', () => {
+      const { body } = setup();
+      turnTo(3);
+      act(() =>
+        flipbook.props?.onTurnProgress?.({ progress: 0.2, direction: 'prev' }),
+      );
+      expect(body()).not.toHaveClass('history__book-body--closing-front');
+      expect(body()).not.toHaveClass('history__book-body--closing-back');
+    });
+
+    it('모서리 접힘 미리보기(fold_corner)는 넘김으로 보지 않는다', () => {
+      const { body } = setup();
+      act(() => flipbook.props?.onChangeState?.({ state: 'fold_corner' }));
+      expect(body()).not.toHaveClass('history__book-body--turning');
+    });
+
+    function hoverSetup(landscape = true) {
+      const utils = setup(landscape);
+      const el = utils.body() as HTMLElement;
+      Object.defineProperty(el, 'offsetWidth', { value: 1000 });
+      Object.defineProperty(el, 'offsetHeight', { value: 600 });
+      return { ...utils, el };
+    }
+
+    it('마우스를 표지 영역(본체 가운데 절반)에 올리면 hover 클래스를 붙인다', () => {
+      const { stage, el } = hoverSetup();
+      fireEvent.pointerMove(stage, {
+        clientX: 500,
+        clientY: 300,
+        pointerType: 'mouse',
+      });
+      expect(el).toHaveClass('history__book-body--hover');
+      fireEvent.pointerMove(stage, {
+        clientX: 100,
+        clientY: 300,
+        pointerType: 'mouse',
+      });
+      expect(el).not.toHaveClass('history__book-body--hover');
+    });
+
+    it('무대를 벗어나면 hover 클래스를 뗀다', () => {
+      const { stage, el } = hoverSetup();
+      fireEvent.pointerMove(stage, {
+        clientX: 500,
+        clientY: 300,
+        pointerType: 'mouse',
+      });
+      fireEvent.pointerLeave(stage);
+      expect(el).not.toHaveClass('history__book-body--hover');
+    });
+
+    it('터치나 반쪽 보기에서는 hover 를 쓰지 않는다', () => {
+      const touch = hoverSetup();
+      fireEvent.pointerMove(touch.stage, {
+        clientX: 500,
+        clientY: 300,
+        pointerType: 'touch',
+      });
+      expect(touch.el).not.toHaveClass('history__book-body--hover');
+      touch.unmount();
+
+      const half = hoverSetup(false);
+      fireEvent.pointerMove(half.stage, {
+        clientX: 500,
+        clientY: 300,
+        pointerType: 'mouse',
+      });
+      expect(half.el).not.toHaveClass('history__book-body--hover');
+    });
+
+    it('떠 있는 닫힌 책을 열면 다 열릴 때까지 떠 있다가 내려온다', () => {
+      const { stage, el } = hoverSetup();
+      fireEvent.pointerMove(stage, {
+        clientX: 500,
+        clientY: 300,
+        pointerType: 'mouse',
+      });
+      act(() => flipbook.props?.onChangeState?.({ state: 'flipping' }));
+      expect(el).toHaveClass('history__book-body--lifted');
+      act(() => flipbook.props?.onChangeState?.({ state: 'read' }));
+      expect(el).not.toHaveClass('history__book-body--lifted');
+    });
+
+    it('hover 하지 않았거나 펼친 상태에서 넘길 때는 띄우지 않는다', () => {
+      const { stage, el } = hoverSetup();
+      act(() => flipbook.props?.onChangeState?.({ state: 'flipping' }));
+      expect(el).not.toHaveClass('history__book-body--lifted');
+      act(() => flipbook.props?.onChangeState?.({ state: 'read' }));
+
+      turnTo(3);
+      fireEvent.pointerMove(stage, {
+        clientX: 500,
+        clientY: 300,
+        pointerType: 'mouse',
+      });
+      act(() => flipbook.props?.onChangeState?.({ state: 'flipping' }));
+      expect(el).not.toHaveClass('history__book-body--lifted');
+    });
+
+    it('펼친 위치에 따라 양쪽 종이 두께 변수를 넘긴다', () => {
+      const { body } = setup();
+      const el = body() as HTMLElement;
+      const stackOf = () => ({
+        left: Number(el.style.getPropertyValue('--stack-left')),
+        right: Number(el.style.getPropertyValue('--stack-right')),
+      });
+      expect(stackOf()).toEqual({ left: 0, right: 1 });
+      turnTo(3);
+      const early = stackOf();
+      turnTo(lastLeaf - 4);
+      const late = stackOf();
+      expect(late.left).toBeGreaterThan(early.left);
+      expect(late.right).toBeLessThan(early.right);
+    });
+
+    it('넘기는 중 상태 변화로 책을 다시 렌더링하지 않는다', () => {
+      const { props } = setup();
+      const renders = props.renderPage.mock.calls.length;
+      act(() => flipbook.props?.onChangeState?.({ state: 'flipping' }));
+      expect(props.renderPage).toHaveBeenCalledTimes(renders);
+    });
+  });
+
+  describe('이벤트', () => {
+    it('페이지가 바뀌면 onPageChange 를 호출한다', () => {
+      const { props } = setup();
+      turnTo(3);
+      expect(props.onPageChange).toHaveBeenCalledWith(
+        expect.objectContaining({ page: 3 }),
+      );
+    });
+
+    it('read 상태가 되면 onSettled 를 호출한다', () => {
+      const { props } = setup();
+      act(() => flipbook.props?.onChangeState?.({ state: 'flipping' }));
+      expect(props.onSettled).not.toHaveBeenCalled();
+      act(() => flipbook.props?.onChangeState?.({ state: 'read' }));
+      expect(props.onSettled).toHaveBeenCalledTimes(1);
+    });
+
+    it('liveRegionText 를 한국어로 안내한다', () => {
+      setup();
+      const text = flipbook.props?.liveRegionText?.(0, leaves.length, {
+        pages: [3, 4],
+        orientation: 'landscape',
+        hardCovers: true,
+      });
+      expect(text).toBe('List 1페이지, List 1페이지');
+      expect(
+        flipbook.props?.liveRegionText?.(0, leaves.length, {
+          pages: [leaves.length - 3, leaves.length - 2],
+          orientation: 'landscape',
+          hardCovers: true,
+        }),
+      ).toBe('판권면, 뒤표지 안쪽');
+      expect(
+        flipbook.props?.liveRegionText?.(0, leaves.length, {
+          pages: [0],
+          orientation: 'landscape',
+          hardCovers: true,
+        }),
+      ).toBe('앞표지');
+    });
+  });
+
+  describe('장 내용 그리기', () => {
+    const renderedLeaves = (renderPage: ReturnType<typeof vi.fn>) =>
+      renderPage.mock.calls.map(([leaf]) =>
+        leaves.indexOf(leaf as (typeof leaves)[number]),
+      );
+
+    it('펼침면 근처 장만 내용을 그리고 먼 장은 빈 종이로 둔다', () => {
+      const { props } = setup();
+      const rendered = renderedLeaves(props.renderPage);
+      expect(rendered.length).toBeGreaterThan(0);
+      expect(Math.max(...rendered)).toBeLessThanOrEqual(5);
+      expect(document.querySelectorAll('.history__leaf--page')).toHaveLength(
+        leaves.filter((leaf) => leaf.kind === 'page').length,
+      );
+    });
+
+    it('여러 장 이동의 목적지 근처도 미리 그린다', () => {
+      const target = lastLeaf - 6;
+      const { props } = setup(true, target);
+      expect(renderedLeaves(props.renderPage)).toContain(target);
+    });
+  });
+
+  describe('꾹 누르기', () => {
+    it('오른쪽을 누르고 있으면 next 로 연속 넘김을 시작한다', () => {
+      const { stage, props } = setup();
+      fireEvent.pointerDown(stage, { button: 0, clientX: 800, clientY: 100 });
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      expect(flipbook.handle.cancelTurn).toHaveBeenCalled();
+      expect(props.onHoldStart).toHaveBeenCalledWith('next');
+    });
+
+    it('왼쪽을 누르고 있으면 prev 로 시작한다', () => {
+      const { stage, props } = setup();
+      fireEvent.pointerDown(stage, { button: 0, clientX: 100, clientY: 100 });
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      expect(props.onHoldStart).toHaveBeenCalledWith('prev');
+    });
+
+    it('시간 전에 떼면 연속 넘김이 시작되지 않는다', () => {
+      const { stage, props } = setup();
+      fireEvent.pointerDown(stage, { button: 0, clientX: 800, clientY: 100 });
+      fireEvent.pointerUp(stage);
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      expect(props.onHoldStart).not.toHaveBeenCalled();
+      expect(props.onHoldEnd).not.toHaveBeenCalled();
+    });
+
+    it('드래그로 움직이면 연속 넘김이 취소된다', () => {
+      const { stage, props } = setup();
+      fireEvent.pointerDown(stage, { button: 0, clientX: 800, clientY: 100 });
+      fireEvent.pointerMove(stage, { clientX: 760, clientY: 100 });
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      expect(props.onHoldStart).not.toHaveBeenCalled();
+    });
+
+    it('떼면 onHoldEnd 를 호출하고 뒤따르는 click 은 막는다', () => {
+      const { stage, props } = setup();
+      const onClick = vi.fn();
+      stage.addEventListener('click', onClick);
+      fireEvent.pointerDown(stage, { button: 0, clientX: 800, clientY: 100 });
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      fireEvent.pointerUp(stage);
+      fireEvent.click(stage.querySelector('.history__leaf')!);
+      expect(props.onHoldEnd).toHaveBeenCalledTimes(1);
+      expect(onClick).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('반쪽 보기 스와이프', () => {
+    function swipe(stage: Element, fromX: number, toX: number, dy = 0) {
+      fireEvent.pointerDown(stage, { button: 0, clientX: fromX, clientY: 300 });
+      fireEvent.pointerUp(stage, { clientX: toX, clientY: 300 + dy });
+    }
+
+    it('오른쪽 → 왼쪽으로 밀면 다음 장으로 넘긴다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 800, 600);
+      expect(flipbook.handle.flipNext).toHaveBeenCalledTimes(1);
+      expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
+    });
+
+    it('왼쪽 → 오른쪽으로 밀면 이전 장으로 넘긴다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 200, 400);
+      expect(flipbook.handle.flipPrev).toHaveBeenCalledTimes(1);
+    });
+
+    it('짧게 밀거나 세로로 더 많이 밀면 넘기지 않는다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 500, 480);
+      swipe(stage, 500, 440, 200);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+      expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
+    });
+
+    it('포털로 띄운 팝업(책 영역 밖)에서 민 것은 책을 넘기지 않는다', () => {
+      render(
+        <Book
+          bookRef={{ current: null }}
+          leaves={leaves}
+          landscape={false}
+          renderPage={() =>
+            createPortal(<div data-testid='popup' />, document.body)
+          }
+          targetLeaf={null}
+          onPageChange={vi.fn()}
+          onSettled={vi.fn()}
+          onHoldStart={vi.fn()}
+          onHoldEnd={vi.fn()}
+        />,
+      );
+      const popup = screen.getAllByTestId('popup')[0];
+      fireEvent.pointerDown(popup, { button: 0, clientX: 800, clientY: 300 });
+      fireEvent.pointerUp(popup, { clientX: 600, clientY: 300 });
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+    });
+
+    it('표지를 탭해도 넘기지 않는다', () => {
+      const { stage } = setup(false);
+      swipe(stage, 500, 502);
+      turnTo(lastLeaf);
+      swipe(stage, 500, 500);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+      expect(flipbook.handle.flipPrev).not.toHaveBeenCalled();
+    });
+
+    it('닫혀 있을 때 스와이프·버튼 안내를 띄우고 펼치면 없앤다', () => {
+      setup(false);
+      expect(screen.getByRole('note')).toHaveTextContent(
+        '옆으로 밀거나아래 버튼을 눌러 넘겨 보세요',
+      );
+      turnTo(3);
+      expect(screen.queryByRole('note')).not.toBeInTheDocument();
+      turnTo(lastLeaf);
+      expect(screen.getByRole('note')).toBeInTheDocument();
+    });
+
+    it('가로(PC) 모드에는 안내가 없다', () => {
+      setup(true);
+      expect(screen.queryByRole('note')).not.toBeInTheDocument();
+    });
+
+    it('가로(PC) 모드는 엔진의 드래그 넘김을 그대로 쓴다', () => {
+      const { stage } = setup(true);
+      swipe(stage, 800, 600);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+      expect(flipbook.props?.pointerInput).toEqual(['mouse', 'touch', 'pen']);
+    });
+  });
+
+  describe('이전/다음 버튼', () => {
+    it('가로 모드에도 버튼이 있다', () => {
+      setup(true);
+      expect(
+        screen.getByRole('button', { name: '다음 페이지' }),
+      ).toBeInTheDocument();
+    });
+
+    it('표지에서는 표지, 펼치면 펼침면 번호와 전체 펼침면 수를 보여 준다', () => {
+      const { container } = setup();
+      const pager = () => container.querySelector('.history__book-pager');
+      const total = leaves.length / 2 - 1;
+      expect(pager()).toHaveTextContent(`표지 / ${total}`);
+      turnTo(1);
+      expect(pager()).toHaveTextContent(`1 / ${total}`);
+      turnTo(3);
+      expect(pager()).toHaveTextContent(`2 / ${total}`);
+      turnTo(lastLeaf);
+      expect(pager()).toHaveTextContent(`표지 / ${total}`);
+    });
+
+    it('이전/다음 버튼으로 책을 넘긴다', () => {
+      setup(false);
+      fireEvent.click(screen.getByRole('button', { name: '다음 페이지' }));
+      expect(flipbook.handle.flipNext).toHaveBeenCalled();
+      turnTo(3);
+      fireEvent.click(screen.getByRole('button', { name: '이전 페이지' }));
+      expect(flipbook.handle.flipPrev).toHaveBeenCalled();
+    });
+
+    it('버튼을 꾹 누르면 그 방향으로 연속 넘기고, 떼면 멈추며 한 장 더 넘기지 않는다', () => {
+      const { props } = setup(false);
+      const next = screen.getByRole('button', { name: '다음 페이지' });
+      fireEvent.pointerDown(next, { button: 0, clientX: 10, clientY: 10 });
+      act(() => {
+        vi.advanceTimersByTime(400);
+      });
+      expect(props.onHoldStart).toHaveBeenCalledWith('next');
+
+      fireEvent.pointerUp(next);
+      fireEvent.click(next);
+      expect(props.onHoldEnd).toHaveBeenCalledTimes(1);
+      expect(flipbook.handle.flipNext).not.toHaveBeenCalled();
+    });
+
+    it('양 끝에서는 해당 방향 버튼이 비활성화된다', () => {
+      setup(false);
+      expect(
+        screen.getByRole('button', { name: '이전 페이지' }),
+      ).toBeDisabled();
+      turnTo(lastLeaf);
+      expect(
+        screen.getByRole('button', { name: '다음 페이지' }),
+      ).toBeDisabled();
+    });
+  });
+});

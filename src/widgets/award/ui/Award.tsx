@@ -1,7 +1,7 @@
 import { useMemo, useRef } from 'react';
 
 import { AWARD_LIST, getAwardImage } from '@entities/award';
-import { Pagination, useAwardStore, YearCategory } from '@features/award';
+import { useAwardStore, YearCategory } from '@features/award';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 import { usePreloadOnVisible } from '@shared/lib/preload/usePreloadOnVisible';
 import { AnimatePresence } from 'framer-motion';
@@ -20,9 +20,9 @@ export function Award() {
   );
   usePreloadOnVisible(sectionRef, awardImageUrls);
 
-  const breakpoint = useBreakpoint();
-  const showPagination = breakpoint !== 'desktop';
   const selectedId = useAwardStore((s) => s.selectedId);
+  const isMobile = useBreakpoint() === 'mobile';
+  const count = <AwardCount awardList={AWARD_LIST} />;
 
   return (
     <section
@@ -33,13 +33,17 @@ export function Award() {
     >
       <div className='award__top'>
         <AwardTitle />
-        <AwardCount awardList={AWARD_LIST} />
+        {isMobile && count}
       </div>
 
       <div className='award__content'>
-        <YearCategory />
+        <div className='award__filter'>
+          <div className='award__filter-years'>
+            <YearCategory />
+          </div>
+          {!isMobile && count}
+        </div>
         <Viewport />
-        {showPagination && <Pagination />}
         <AnimatePresence>
           {selectedId !== null && <AwardPopup key='award-popup' />}
         </AnimatePresence>

@@ -13,10 +13,10 @@ const firstRangeItems = milestonesData.filter(
 
 describe('MilestonesPage', () => {
   describe('타이틀', () => {
-    it('pageIndex=0, side=left(dataIndex=0)이면 "Milestones" 타이틀이 보인다', () => {
+    it('pageIndex=0, side=left(dataIndex=0)이면 "주요 성과" 타이틀이 보인다', () => {
       render(<MilestonesPage side='left' pageIndex={0} breakpoint='desktop' />);
       expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(
-        'Milestones',
+        '주요 성과',
       );
     });
 

@@ -1,31 +1,14 @@
-const MARKER_DESKTOP_VMAX = 2.292;
-const MARKER_TABLET_VMIN = 7;
-const MARKER_MOBILE_VMIN = 10;
+const MARKER_MIN_PX = 32;
+const MARKER_MAX_PX = 48;
+const MARKER_VW = 2.29;
 
 function getMarkerConfig() {
-  const width = window.innerWidth;
-
-  const maxPx = Math.max(window.innerWidth, window.innerHeight);
-  const minPx = Math.min(window.innerWidth, window.innerHeight);
-
-  const vmaxPx = maxPx / 100;
-  const vminPx = minPx / 100;
-
-  let size: number;
-  let unitPx: number;
-
-  if (width <= 767) {
-    size = MARKER_MOBILE_VMIN;
-    unitPx = vminPx;
-  } else if (width <= 1024) {
-    size = MARKER_TABLET_VMIN;
-    unitPx = vminPx;
-  } else {
-    size = MARKER_DESKTOP_VMAX;
-    unitPx = vmaxPx;
-  }
-
-  const iconW = Math.round(size * unitPx);
+  const iconW = Math.round(
+    Math.min(
+      MARKER_MAX_PX,
+      Math.max(MARKER_MIN_PX, (MARKER_VW * window.innerWidth) / 100),
+    ),
+  );
   const iconH = Math.round((iconW * 56) / 44);
 
   return {

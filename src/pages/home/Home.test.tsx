@@ -6,7 +6,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Home } from './Home';
 
-// widget 및 util mock
 vi.mock('@shared/lib/scroll', () => ({
   smoothScrollTo: vi.fn(),
 }));
@@ -271,6 +270,24 @@ describe('Home', () => {
       });
       expect(screen.getByTestId('header')).toBeInTheDocument();
       expect(screen.getByTestId('hero')).toBeInTheDocument();
+    });
+
+    it('VITE_SHOW_DOWN_ICON=true이면 hero 위젯에 showScrollArrow=true가 전달된다', async () => {
+      vi.stubEnv('VITE_DEV_WIDGET', 'hero');
+      vi.stubEnv('VITE_SHOW_DOWN_ICON', 'true');
+      const { Home: DynamicHome } = await import('./Home');
+      await act(async () => {
+        render(
+          <MemoryRouter>
+            <DynamicHome />
+          </MemoryRouter>,
+        );
+        await Promise.resolve();
+      });
+      expect(screen.getByTestId('hero')).toHaveAttribute(
+        'data-show-scroll-arrow',
+        'true',
+      );
     });
 
     it('footer 위젯이면 Header 없이 footer만 렌더링된다', async () => {

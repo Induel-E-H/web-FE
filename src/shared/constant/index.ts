@@ -1,1 +1,1 @@
-export { COMPANY } from './company';
+export { COMPANY, ESTABLISHED_YEAR } from './company';

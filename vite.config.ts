@@ -36,7 +36,6 @@ export const baseConfig: UserConfig = {
     rollupOptions: {
       output: {
         manualChunks(id: string) {
-          if (id.includes('node_modules/three')) return 'vendor-three';
           if (
             id.includes('node_modules/react') ||
             id.includes('node_modules/react-dom') ||

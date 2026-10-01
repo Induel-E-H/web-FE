@@ -51,25 +51,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5vmax;
-  height: 2.5vmax;
+  width: clamp(28px, 2.5vw, 48px);
+  height: clamp(28px, 2.5vw, 48px);
   background: var(--shadow-06);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   color: var(--white);
-  font-size: 1.25vmax;
+  font-size: clamp(16px, 1.25vw, 24px);
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-base);
   z-index: 1;
 }
 
 .image-slider__nav--prev {
-  left: 0.8vmax;
+  left: clamp(4px, 0.8vw, 16px);
 }
 
 .image-slider__nav--next {
-  right: 0.8vmax;
+  right: clamp(4px, 0.8vw, 16px);
 }
 
 .image-slider__frame:hover .image-slider__nav {
@@ -82,64 +82,20 @@
 
 .image-slider__indicator {
   position: absolute;
-  bottom: 0.8vmax;
+  bottom: clamp(4px, 0.8vw, 16px);
   left: 50%;
   transform: translateX(-50%);
   background: var(--overlay-black-50);
   color: var(--white);
-  padding: 0.26vmax 0.78vmax;
-  border-radius: 1vmax;
-  font-size: max(12px, 0.78vw);
+  padding: clamp(2px, 0.3vw, 6px) clamp(8px, 0.8vw, 16px);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-base);
   z-index: 2;
 }
 
 .image-slider__frame:hover .image-slider__indicator {
   opacity: 1;
-}
-
-@media (max-width: 1024px) {
-  .image-slider__nav {
-    width: 5vw;
-    height: 5vw;
-  }
-
-  .image-slider__nav--prev {
-    left: 1.56vw;
-  }
-
-  .image-slider__nav--next {
-    right: 1.56vw;
-  }
-
-  .image-slider__indicator {
-    bottom: 1.56vw;
-    padding: 0.52vw 1.56vw;
-    border-radius: 2vw;
-    font-size: 1.56vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .image-slider__nav {
-    width: clamp(26px, 7.47vw, 37px);
-    height: clamp(26px, 7.47vw, 37px);
-  }
-
-  .image-slider__nav--prev {
-    left: 0;
-  }
-
-  .image-slider__nav--next {
-    right: 0;
-  }
-
-  .image-slider__indicator {
-    bottom: 0;
-    padding: clamp(2px, 0.53vw, 3px) clamp(8px, 2.133vw, 11px);
-    border-radius: clamp(9px, 2.67vw, 13px);
-    font-size: clamp(9px, 2.67vw, 13px);
-  }
 }

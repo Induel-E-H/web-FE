@@ -1,32 +1,33 @@
 .header {
-  --nav-hover: #74584b;
+  --header-bg: rgb(var(--surface-dark-rgb) / 0.72);
 
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: var(--z-header);
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 2.604vmax;
-  height: 3.33vmax;
+  padding: 0 var(--section-padding-x);
+  height: var(--header-height);
   justify-content: space-between;
-  background-color: var(--white);
+  background-color: var(--header-bg);
+  backdrop-filter: blur(12px);
   transition:
-    transform 0.3s ease,
-    background-color 0.3s ease,
-    color 0.3s ease;
-  box-shadow: 0 0.2vmax 0.6vmax var(--shadow-01);
+    transform var(--duration-slow) ease,
+    background-color var(--duration-slow) ease,
+    color var(--duration-slow) ease;
 }
 
 .header--hero {
   background-color: transparent;
-  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .header--hero.header--menu-open {
-  background-color: var(--black);
+  background-color: var(--header-bg);
+  backdrop-filter: blur(12px);
 }
 
 .header--hidden {
@@ -41,26 +42,26 @@ body[data-popup-open] .header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.521vmax;
+  gap: clamp(8px, 0.8vw, 12px);
   cursor: pointer;
   user-select: none;
 }
 
 .header__logo_icon-frame {
   flex-shrink: 0;
-  width: max(18px, 1.667vmax);
-  height: max(18px, 1.667vmax);
+  width: clamp(24px, 1.8vw, 36px);
+  height: clamp(24px, 1.8vw, 36px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.26vmax;
-  border-radius: 0.26vmax;
+  padding: 4px;
+  border-radius: clamp(4px, 0.5vw, 7px);
   background-color: var(--white);
-  box-shadow: 0 0 0.208vmax var(--shadow-07);
+  box-shadow: 0 0 4px var(--shadow-07);
   transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.2s ease;
+    background-color var(--duration-slow) ease,
+    box-shadow var(--duration-slow) ease,
+    opacity var(--duration-base) ease;
 }
 
 .header--hero .header__logo_icon-frame {
@@ -76,11 +77,7 @@ body[data-popup-open] .header {
 
 .header__logo span {
   font-weight: var(--pretendard-bold);
-  font-size: max(14px, 0.938vw);
-  color: var(--brown-800);
-}
-
-.header--hero .header__logo span {
+  font-size: var(--fs-body);
   color: var(--white);
 }
 
@@ -88,21 +85,18 @@ body[data-popup-open] .header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2.604vmax;
+  gap: clamp(24px, 2.6vw, 48px);
 }
 
 .header__nav button {
   font-weight: var(--pretendard-semibold);
-  font-size: max(14px, 0.833vw);
-  color: var(--brown-800);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  color: var(--white);
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-}
-
-.header--hero .header__nav button {
-  color: var(--white);
 }
 
 .header__hamburger {
@@ -111,13 +105,9 @@ body[data-popup-open] .header {
   border: none;
   cursor: pointer;
   padding: 0;
-  font-size: max(24px, 1.667vw);
+  font-size: 28px;
   align-items: center;
   justify-content: center;
-  color: var(--brown-800);
-}
-
-.header--hero .header__hamburger {
   color: var(--white);
 }
 
@@ -126,20 +116,21 @@ body[data-popup-open] .header {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: var(--white);
+  /* Nested backdrop-filter can't blur the page, so keep this panel near-opaque. */
+  background-color: rgb(var(--surface-dark-rgb) / 0.95);
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgb(var(--brown-800-rgb) / var(--alpha-10));
+  border-top: 1px solid rgb(var(--white-rgb) / var(--alpha-10));
 }
 
 .header__mobile-menu button {
-  padding: 0.729vmax 0.781vmax;
+  padding: 16px var(--section-padding-x);
   font-weight: var(--pretendard-semibold);
-  font-size: max(11px, 0.729vw);
-  color: var(--brown-800);
+  font-size: var(--fs-sm);
+  color: var(--white);
   background: none;
   border: none;
-  border-bottom: 0.052vw solid rgb(var(--brown-800-rgb) / var(--alpha-10));
+  border-bottom: 1px solid rgb(var(--white-rgb) / var(--alpha-10));
   cursor: pointer;
   text-align: left;
 }
@@ -148,111 +139,37 @@ body[data-popup-open] .header {
   border-bottom: none;
 }
 
-.header--hero .header__mobile-menu {
-  background-color: var(--black);
-  border-top-color: rgb(var(--white-rgb) / var(--alpha-10));
-}
-
-.header--hero .header__mobile-menu button {
-  color: var(--white);
-  border-bottom-color: rgb(var(--white-rgb) / var(--alpha-10));
-}
-
 .header__nav button,
 .header__hamburger,
 .header__mobile-menu button,
 .header__logo span {
   transition:
-    color 0.3s ease,
-    opacity 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.15s ease;
+    color var(--duration-slow) ease,
+    opacity var(--duration-base) ease,
+    background-color var(--duration-base) ease,
+    transform var(--duration-fast) ease;
 }
 
 .header__nav button:hover {
-  color: var(--nav-hover);
+  color: var(--accent-gold-400);
 }
 
 .header__mobile-menu button:hover {
-  background-color: rgb(var(--brown-800-rgb) / var(--alpha-05));
-}
-
-.header__mobile-menu button:active {
-  background-color: rgb(var(--brown-800-rgb) / var(--alpha-10));
-}
-
-.header--hero .header__mobile-menu button:hover {
   background-color: rgb(var(--white-rgb) / var(--alpha-10));
 }
 
-.header--hero .header__mobile-menu button:active {
+.header__mobile-menu button:active {
   background-color: rgb(var(--white-rgb) / var(--alpha-15));
 }
 
-@media (max-width: 1024px) {
-  .header {
-    padding: 0 3.91vw;
-    height: 7.29vw;
-  }
-
-  .header__logo {
-    gap: 1.3vw;
-  }
-
-  .header__logo_icon-frame {
-    width: 3.65vw;
-    height: 3.65vw;
-    padding: 3.8%;
-    border-radius: 0.66vw;
-    box-shadow: 0 0 4px var(--shadow-07);
-  }
-
-  .header__logo span {
-    font-size: 2.08vw;
-  }
-
-  .header__nav {
-    gap: 3.26vw;
-  }
-
-  .header__nav button {
-    font-size: 1.82vw;
-  }
-}
-
 @media (max-width: 767px) {
-  .header {
-    padding: 0 clamp(14px, 4vw, 20px);
-    height: clamp(52px, 14.94vw, 75px);
-  }
-
-  .header__logo {
-    gap: clamp(9px, 2.67vw, 13px);
-  }
-
-  .header__logo_icon-frame {
-    width: clamp(26px, 7.47vw, 37px);
-    height: clamp(26px, 7.47vw, 37px);
-    border-radius: clamp(4px, 1.32vw, 7px);
-  }
-
-  .header__logo span {
-    font-size: clamp(15px, 4.27vw, 21px);
-  }
-
   .header__nav {
     display: none;
   }
 
   .header__hamburger {
     display: flex;
-    width: clamp(30px, 8.53vw, 43px);
-    height: clamp(30px, 8.53vw, 43px);
-    font-size: clamp(22px, 6.35vw, 32px);
-  }
-
-  .header__mobile-menu button {
-    padding: clamp(13px, 3.73vw, 19px) clamp(14px, 4vw, 20px);
-    font-size: clamp(13px, 3.73vw, 19px);
+    width: 44px;
+    height: 44px;
   }
 }

@@ -27,6 +27,7 @@
 
 .unsupported-browser__title {
   font-size: 1.5rem;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem);
   font-weight: 700;
   color: #f6f3f0;
   margin-bottom: 1rem;
@@ -35,6 +36,7 @@
 
 .unsupported-browser__desc {
   font-size: 0.9375rem;
+  font-size: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   color: #b79d86;
   line-height: 1.7;
   margin-bottom: 1.75rem;
@@ -55,6 +57,7 @@
   padding: 0.75rem 1rem;
   border-radius: 8px;
   font-size: 0.875rem;
+  font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
   font-weight: 500;
 }
 
@@ -93,7 +96,6 @@
   background-color: #3267d6;
 }
 
-/* Tablet (≤1024px) */
 @media (max-width: 1024px) {
   .unsupported-browser {
     padding: 2.5rem 1.75rem;
@@ -108,13 +110,8 @@
     height: 64px;
     margin-bottom: 1.5rem;
   }
-
-  .unsupported-browser__title {
-    font-size: 1.375rem;
-  }
 }
 
-/* Mobile (≤767px) */
 @media (max-width: 767px) {
   .unsupported-browser {
     padding: 2rem 1.25rem;
@@ -133,18 +130,15 @@
   }
 
   .unsupported-browser__title {
-    font-size: 1.25rem;
     margin-bottom: 0.875rem;
   }
 
   .unsupported-browser__desc {
-    font-size: 0.875rem;
     margin-bottom: 1.5rem;
   }
 
   .unsupported-browser__version {
     padding: 0.625rem 0.875rem;
-    font-size: 0.8125rem;
   }
 
   .unsupported-browser__versions {
@@ -155,7 +149,6 @@
     display: block;
     width: 100%;
     padding: 1rem;
-    font-size: 0.9375rem;
     text-align: center;
   }
 }

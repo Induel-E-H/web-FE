@@ -1,26 +1,26 @@
-import type { CSSProperties } from 'react';
-
 import '../../styles/book/PageTitle.css';
 
 export function BookPageTitle({
   title,
+  label,
   hidden,
-  hrWidth,
 }: {
   title: string;
+  label: string;
   hidden?: boolean;
-  hrWidth?: string;
 }) {
   return (
     <div
       className={`book-page-title${hidden ? ' book-page-title--hidden' : ''}`}
-      style={
-        hrWidth ? ({ '--title-hr-width': hrWidth } as CSSProperties) : undefined
-      }
     >
-      <hr aria-hidden='true' />
-      <h3>{title}</h3>
-      <hr aria-hidden='true' />
+      <div className='book-page-title__rule'>
+        <span className='book-page-title__line' aria-hidden='true' />
+        <h3>{label}</h3>
+        <span className='book-page-title__line' aria-hidden='true' />
+      </div>
+      <p className='book-page-title__en' lang='en'>
+        {title}
+      </p>
     </div>
   );
 }

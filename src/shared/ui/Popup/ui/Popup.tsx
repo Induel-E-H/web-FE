@@ -1,4 +1,4 @@
-import { type ReactNode, useRef } from 'react';
+import { type CSSProperties, type ReactNode, useRef } from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -10,6 +10,7 @@ type PopupProps = {
   ariaLabel: string;
   title?: string;
   variant?: 'default' | 'gallery';
+  mediaRatio?: number;
   onClose: () => void;
   children: ReactNode;
 };
@@ -18,6 +19,7 @@ export function Popup({
   ariaLabel,
   title,
   variant = 'default',
+  mediaRatio,
   onClose,
   children,
 }: PopupProps) {
@@ -48,11 +50,16 @@ export function Popup({
         aria-modal='true'
         aria-label={ariaLabel}
         className={dialogClassName}
+        style={
+          mediaRatio
+            ? ({ '--popup-media-ratio': mediaRatio } as CSSProperties)
+            : undefined
+        }
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
       >
         <PopupHeader

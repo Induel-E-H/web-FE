@@ -1,0 +1,48 @@
+.history__title-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  gap: clamp(9px, 3.23cqmin, 21px);
+
+  color: var(--mauve-700);
+  text-align: center;
+}
+
+.history__title-page hr {
+  width: 20%;
+
+  border: none;
+  border-top: 1px solid var(--book-page-hr);
+}
+
+.history__title-page-company {
+  font-size: var(--fs-book-xs);
+  font-weight: var(--pretendard-semibold);
+
+  letter-spacing: 0.3em;
+}
+
+.history__title-page-heading {
+  font-family: var(--font-bookendbatang);
+  font-size: var(--fs-book-2xl);
+  font-weight: var(--bookendbatang-bold);
+
+  letter-spacing: 0.15em;
+}
+
+.history__title-page-sub {
+  font-size: var(--fs-book-sm);
+
+  letter-spacing: 0.2em;
+}
+
+.history__title-page-years {
+  font-size: var(--fs-book-xs);
+
+  letter-spacing: 0.2em;
+}

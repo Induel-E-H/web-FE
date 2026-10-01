@@ -1,6 +1,14 @@
 .map__marker {
-  width: 2.292vmax;
+  width: clamp(32px, 2.29vw, 48px);
   aspect-ratio: 11/14;
+}
+
+.map__marker__stop-start {
+  stop-color: var(--brown-700);
+}
+
+.map__marker__stop-end {
+  stop-color: var(--brown-900);
 }
 
 .map__marker__shadow {
@@ -17,16 +25,4 @@
 
 .map__marker__circle {
   fill: var(--white);
-}
-
-@media (max-width: 1024px) {
-  .map__marker {
-    width: 7vmin;
-  }
-}
-
-@media (max-width: 767px) {
-  .map__marker {
-    width: 10vmin;
-  }
 }

@@ -61,9 +61,9 @@ describe('Footer', () => {
       expect(screen.getByText('대표이사')).toBeInTheDocument();
     });
 
-    it('"사업자 등록 번호" 라벨이 표시된다', () => {
+    it('"사업자등록번호" 라벨이 표시된다', () => {
       renderFooter();
-      expect(screen.getByText('사업자 등록 번호')).toBeInTheDocument();
+      expect(screen.getByText('사업자등록번호')).toBeInTheDocument();
     });
 
     it('"주소" 라벨이 표시된다', () => {
@@ -101,6 +101,28 @@ describe('Footer', () => {
     it('이메일 주소가 표시된다', () => {
       renderFooter();
       expect(screen.getByText(COMPANY.EMAIL)).toBeInTheDocument();
+    });
+
+    it('전화번호를 누르면 전화를 걸 수 있다', () => {
+      renderFooter();
+      expect(
+        screen.getByRole('link', { name: COMPANY.PHONE_DISPLAY }),
+      ).toHaveAttribute('href', `tel:${COMPANY.PHONE}`);
+    });
+
+    it('이메일을 누르면 메일을 보낼 수 있다', () => {
+      renderFooter();
+      expect(screen.getByRole('link', { name: COMPANY.EMAIL })).toHaveAttribute(
+        'href',
+        `mailto:${COMPANY.EMAIL}`,
+      );
+    });
+
+    it('팩스 번호는 링크가 아니다', () => {
+      renderFooter();
+      expect(
+        screen.queryByRole('link', { name: COMPANY.FAX }),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -164,15 +186,9 @@ describe('Footer', () => {
       expect(container.querySelector('footer')).toHaveClass('footer');
     });
 
-    it('hr 구분선이 렌더링된다', () => {
+    it('회사 정보가 dl 목록의 항목 6개로 렌더링된다', () => {
       const { container } = renderFooter();
-      expect(container.querySelector('hr')).toBeInTheDocument();
-    });
-
-    it('구분자 | 요소에 aria-hidden="true"가 설정된다', () => {
-      const { container } = renderFooter();
-      const separators = container.querySelectorAll('p[aria-hidden="true"]');
-      expect(separators).toHaveLength(2);
+      expect(container.querySelectorAll('dl.footer__info dt')).toHaveLength(6);
     });
   });
 

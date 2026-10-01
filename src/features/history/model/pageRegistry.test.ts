@@ -1,6 +1,7 @@
 import { artworks } from '@entities/history';
 import { describe, expect, it } from 'vitest';
 
+import { getListPageCount } from './helpers';
 import {
   getPageRegistry,
   MILESTONES_YEAR_RANGES_BY_BREAKPOINT,
@@ -53,10 +54,14 @@ describe('getPageRegistry', () => {
     expect(registry).toHaveProperty('Milestones');
   });
 
-  it('List와 Timeline의 totalPages는 1이다', () => {
+  it('Timeline의 totalPages는 1이다', () => {
     const registry = getPageRegistry('desktop');
-    expect(registry.List.totalPages).toBe(1);
     expect(registry.Timeline.totalPages).toBe(1);
+  });
+
+  it('List의 totalPages는 목차 쪽 수를 2로 나눈 올림값이다', () => {
+    const registry = getPageRegistry('desktop');
+    expect(registry.List.totalPages).toBe(Math.ceil(getListPageCount() / 2));
   });
 
   it('Content의 totalPages는 작품 수를 2로 나눈 올림값이다', () => {

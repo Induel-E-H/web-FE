@@ -1,3 +1,4 @@
+import { PATENT_IMAGE_RATIO } from '@entities/patent';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -13,6 +14,17 @@ vi.mock('@entities/patent', async (importOriginal) => {
 
 describe('PatentPopup', () => {
   describe('렌더링', () => {
+    it('특허증 이미지 비율을 팝업에 전달한다', () => {
+      render(
+        <PatentPopup patentId={1} patentTitle='의자 특허' onClose={vi.fn()} />,
+      );
+      expect(
+        screen
+          .getByRole('dialog')
+          .style.getPropertyValue('--popup-media-ratio'),
+      ).toBe(String(PATENT_IMAGE_RATIO));
+    });
+
     it('dialog 역할로 렌더링된다', () => {
       render(
         <PatentPopup patentId={1} patentTitle='의자 특허' onClose={vi.fn()} />,

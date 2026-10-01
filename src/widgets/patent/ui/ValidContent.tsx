@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { FaRegCheckCircle } from 'react-icons/fa';
 
 import { getPatentImage, PATENT_VALID_LIST } from '@entities/patent';
 import { trackPatentCardOpen } from '@shared/lib/analytics';
@@ -22,13 +21,12 @@ export function PatentValidContent() {
   return (
     <article ref={articleRef} className='patent__content'>
       <header className='patent__content__title'>
-        <div className='patent__content__title__text'>
-          <FaRegCheckCircle
-            className='patent__content__icon'
-            aria-hidden='true'
-          />
-          <h3>유효 특허증 ({PATENT_VALID_LIST.length}건)</h3>
-        </div>
+        <h3 aria-label={`유효 특허증 ${PATENT_VALID_LIST.length}건`}>
+          유효 특허증
+          <span className='patent__content__badge'>
+            {PATENT_VALID_LIST.length}
+          </span>
+        </h3>
         <hr aria-hidden='true' />
       </header>
       <ul className='patent__content__item__list'>

@@ -1,3 +1,5 @@
+import { cx } from '@shared/lib/classNames';
+
 import '../styles/SectionTitle.css';
 
 type SectionTitleProps = {
@@ -15,13 +17,11 @@ export function SectionTitle({
   className,
   ref,
 }: SectionTitleProps) {
-  const rootClass = [
+  const rootClass = cx(
     'section-title',
     variant === 'reverse' && 'section-title--reverse',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   return (
     <hgroup ref={ref} className={rootClass}>

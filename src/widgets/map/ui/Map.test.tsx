@@ -290,6 +290,27 @@ describe('Map', () => {
 
       existingScript.remove();
     });
+
+    it('이미 있는 스크립트의 load 리스너는 언마운트 시 해제된다', () => {
+      setNaverMaps(false);
+      vi.stubEnv('VITE_NAVER_MAP_API_KEY', 'test-api-key');
+
+      const existingScript = document.createElement('script');
+      existingScript.src =
+        'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=test-api-key';
+      document.head.appendChild(existingScript);
+      const removeSpy = vi.spyOn(existingScript, 'removeEventListener');
+
+      const { unmount } = render(<Map />);
+      unmount();
+
+      expect(removeSpy).toHaveBeenCalledWith('load', expect.any(Function));
+      expect(
+        document.querySelectorAll('script[src*="oapi.map.naver.com"]'),
+      ).toHaveLength(1);
+
+      existingScript.remove();
+    });
   });
 
   describe('fallback — 인증 실패 (401)', () => {

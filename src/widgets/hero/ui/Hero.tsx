@@ -1,35 +1,33 @@
-import { lazy, Suspense } from 'react';
-import { IoIosArrowDown } from 'react-icons/io';
-
 import { COMPANY } from '@shared/constant';
-import { motion } from 'framer-motion';
 
-import backgroundFallback from '../assets/background-fallback.webp';
+import waveDesktopMp4 from '../assets/hero-wave-desktop.mp4';
+import waveDesktopWebm from '../assets/hero-wave-desktop.webm';
+import waveMobileMp4 from '../assets/hero-wave-mobile.mp4';
+import waveMobileWebm from '../assets/hero-wave-mobile.webm';
 import '../styles/Hero.css';
 
-const HeroBackground = lazy(() => import('./HeroBackground'));
+const MOBILE_MEDIA = '(max-width: 767px)';
 
 export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
   return (
     <section id='hero' className='hero' aria-label='회사 소개'>
-      <Suspense
-        fallback={
-          <img
-            src={backgroundFallback}
-            className='hero__background hero__background--fallback'
-            aria-hidden='true'
-            alt=''
-          />
-        }
-      >
-        <HeroBackground />
-      </Suspense>
-      <motion.div
-        className='hero__company'
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-      >
+      {/* Poster is a CSS background so it follows the breakpoint. */}
+      <div className='hero__background' aria-hidden='true'>
+        <video
+          className='hero__video'
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload='auto'
+        >
+          <source src={waveMobileWebm} type='video/webm' media={MOBILE_MEDIA} />
+          <source src={waveMobileMp4} type='video/mp4' media={MOBILE_MEDIA} />
+          <source src={waveDesktopWebm} type='video/webm' />
+          <source src={waveDesktopMp4} type='video/mp4' />
+        </video>
+      </div>
+      <div className='hero__company'>
         <img
           src='/favicon.svg'
           alt='인들이앤에이치 로고'
@@ -45,27 +43,13 @@ export function Hero({ showScrollArrow }: { showScrollArrow: boolean }) {
             SINCE {COMPANY.ESTABLISHED_DISPLAY}
           </time>
         </div>
-      </motion.div>
+      </div>
       {showScrollArrow ? (
-        <IoIosArrowDown className='hero__down-icon' aria-hidden='true' />
+        <span className='hero__scroll-cue' aria-hidden='true'>
+          SCROLL
+        </span>
       ) : (
-        <p
-          style={{
-            position: 'absolute',
-            bottom: '2.34%',
-            width: '100%',
-            textAlign: 'center',
-            whiteSpace: 'nowrap',
-            textShadow: `
-              0 0 40px rgb(0, 0, 0, 1),
-              0 0 20px rgb(0, 0, 0, 1),
-              0 0 60px rgb(0, 0, 0, 1)
-            `,
-            color: 'white',
-          }}
-        >
-          현재 개발중입니다!
-        </p>
+        <p className='hero__dev-notice'>현재 개발중입니다!</p>
       )}
     </section>
   );

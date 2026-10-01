@@ -23,6 +23,7 @@
     "preview": "vite preview",
     "format": "prettier . --write",
     "prepare": "husky",
+    "postinstall": "patch-package",
     "commit": "cz",
     "test": "vitest --project=unit",
     "test:storybook": "vitest --project=storybook",
@@ -32,13 +33,13 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@gullabs/react-flipbook": "^3.2.1",
     "framer-motion": "^12.38.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-ga4": "^3.0.1",
     "react-icons": "^5.6.0",
     "react-router-dom": "^7.15.0",
-    "three": "^0.184.0",
     "zustand": "^5.0.13"
   },
   "devDependencies": {
@@ -60,7 +61,6 @@
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@types/three": "^0.184.1",
     "@vitejs/plugin-react": "^5.1.4",
     "@vitest/browser": "^4.1.5",
     "@vitest/browser-playwright": "^4.1.4",
@@ -85,6 +85,7 @@
     "jsdom": "^29.1.1",
     "lightningcss": "^1.32.0",
     "lint-staged": "^15.5.2",
+    "patch-package": "^8.0.1",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
     "storybook": "^10.3.5",

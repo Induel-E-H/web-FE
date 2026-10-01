@@ -1,7 +1,15 @@
-import { RAPID_FLIP_DURATION, useHistoryStore } from '@features/history';
-import { act, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { ComponentProps } from 'react';
 
+import { buildLeaves, findLeafIndex } from '@features/history';
+import {
+  trackHistoryCategoryChange,
+  trackHistoryCoverOpen,
+  trackHistoryPageTurn,
+} from '@shared/lib/analytics';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import type { Book } from './book/Book';
 import { History } from './History';
 
 // useBreakpoint가 모듈 로드 시 window.matchMedia를 호출하므로 모듈 자체를 mock
@@ -9,499 +17,169 @@ vi.mock('@shared/lib/breakpoint/useBreakpoint', () => ({
   useBreakpoint: () => 'desktop' as const,
 }));
 
+vi.mock('@shared/lib/analytics', () => ({
+  trackHistoryCategoryChange: vi.fn(),
+  trackHistoryCoverOpen: vi.fn(),
+  trackHistoryPageTurn: vi.fn(),
+  trackHistoryArtworkGalleryOpen: vi.fn(),
+}));
+
+const engine = vi.hoisted(() => ({
+  visible: [0] as number[],
+  handle: {
+    flipNext: vi.fn(() => true),
+    flipPrev: vi.fn(() => true),
+    turnToPage: vi.fn(() => true),
+    pageFlip: () => ({
+      getVisiblePages: () => engine.visible,
+      isAnimating: () => false,
+      updateSettings: vi.fn(),
+    }),
+  },
+  props: null as ComponentProps<typeof Book> | null,
+}));
+
+vi.mock('./book/Book', () => ({
+  Book: (props: ComponentProps<typeof Book>) => {
+    engine.props = props;
+    (props.bookRef as { current: unknown }).current = engine.handle;
+    return <div data-testid='book' />;
+  },
+}));
+
+const leaves = buildLeaves('desktop');
+
+function turnTo(page: number) {
+  engine.visible = [page];
+  act(() =>
+    engine.props?.onPageChange({
+      page,
+      pageCount: leaves.length,
+      orientation: 'landscape',
+      visiblePages: [page],
+    }),
+  );
+}
+
 describe('History', () => {
   beforeEach(() => {
-    vi.useFakeTimers();
+    engine.visible = [0];
+    vi.clearAllMocks();
   });
 
-  afterEach(() => {
-    vi.runOnlyPendingTimers();
-    vi.useRealTimers();
-    vi.unstubAllGlobals();
-    useHistoryStore.getState().reset();
-  });
-
-  it('history 섹션이 렌더링된다', () => {
-    const { container } = render(<History />);
-    expect(container.querySelector('.history')).toBeInTheDocument();
-  });
-
-  it('HistoryTitle이 렌더링된다', () => {
+  it('타이틀, 카테고리, 책을 렌더링한다', () => {
     const { container } = render(<History />);
     expect(container.querySelector('.history__title')).toBeInTheDocument();
-  });
-
-  it('HistoryCategory가 렌더링된다', () => {
-    const { container } = render(<History />);
     expect(container.querySelector('.history__category')).toBeInTheDocument();
+    expect(screen.getByTestId('book')).toBeInTheDocument();
   });
 
-  it('history__book 영역이 렌더링된다', () => {
-    const { container } = render(<History />);
-    expect(container.querySelector('.history__book')).toBeInTheDocument();
-  });
-
-  it('초기 상태에서 앞표지(BookFrontCover)가 렌더링된다', () => {
-    const { container } = render(<History />);
-    expect(
-      container.querySelector('.history__front-cover'),
-    ).toBeInTheDocument();
-  });
-
-  it('초기 상태에서 HistoryCategory의 List 탭이 active이다', () => {
+  it('책에 앞표지부터 뒤표지까지의 장 목록을 가로 모드로 전달한다', () => {
     render(<History />);
-    const listTab = screen.getByRole('button', { name: 'List' });
-    expect(listTab).toHaveClass('active');
+    expect(engine.props?.leaves).toEqual(leaves);
+    expect(engine.props?.landscape).toBe(true);
   });
 
-  describe('앞표지 클릭 — handleFrontCoverClick', () => {
-    it('앞표지 클릭 후 400ms 경과 시 bookState가 opening-front로 변경된다', () => {
-      // BookFrontCover는 requestAnimationFrame으로 centered=true가 된 후에만 클릭을 허용한다.
-      vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
-        cb(0);
-        return 0;
-      });
-      vi.stubGlobal('cancelAnimationFrame', () => {});
-
-      const { container } = render(<History />);
-      const frontCover = container.querySelector('.history__front-cover');
-      act(() => {
-        fireEvent.click(frontCover!);
-      });
-      act(() => {
-        vi.advanceTimersByTime(400); // COVER_MOVE_DURATION
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-front');
-    });
-  });
-
-  describe('왼쪽 페이지 mousedown — handleLeftMouseDown', () => {
-    it('책이 open이고 canGoLeft=false(pageIndex=0)이면 closing-front로 변경된다', () => {
-      useHistoryStore.setState({ bookState: 'open' });
-      const { container } = render(<History />);
-      const leftPage = container.querySelector('.history__book-page-left');
-      fireEvent.mouseDown(leftPage!);
-      expect(useHistoryStore.getState().bookState).toBe('closing-front');
-    });
-
-    it('책이 open이고 canGoLeft=true이면 backward flip이 시작된다', () => {
-      useHistoryStore.setState({
-        bookState: 'open',
-        activeItem: 'Content',
-        pageIndices: { List: 0, Content: 1, Timeline: 0, Milestones: 0 },
-      });
-      const { container } = render(<History />);
-      const leftPage = container.querySelector('.history__book-page-left');
-      fireEvent.mouseDown(leftPage!);
-      expect(useHistoryStore.getState().isFlipping).toBe(true);
-      expect(useHistoryStore.getState().flipDirection).toBe('backward');
-    });
-  });
-
-  describe('키보드 경계 내비게이션', () => {
-    it('open 상태에서 ArrowLeft 키 입력 시 왼쪽 경계 콜백이 호출되어 closing-front로 변경된다', () => {
-      useHistoryStore.setState({ bookState: 'open' }); // List page 0 → canGoLeft=false
+  describe('활성 카테고리', () => {
+    it('처음에는 List 가 활성이다', () => {
       render(<History />);
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('closing-front');
+      expect(screen.getByRole('button', { name: '목차' })).toHaveClass(
+        'active',
+      );
     });
 
-    it('open 상태 마지막 페이지에서 ArrowRight 키 입력 시 오른쪽 경계 콜백이 호출되어 closing-back으로 변경된다', () => {
-      useHistoryStore.setState({
-        bookState: 'open',
-        activeItem: 'Milestones',
-        pageIndices: { List: 0, Content: 0, Timeline: 0, Milestones: 2 },
-      });
+    it('펼친 페이지의 카테고리가 활성화된다', () => {
       render(<History />);
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowRight' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('closing-back');
-    });
-
-    it('앞표지 상태에서 ArrowRight 키 입력 시 opening-front로 변경된다', () => {
-      render(<History />); // bookState='cover-front' (기본값)
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowRight' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-front');
-    });
-
-    it('뒤표지 상태에서 ArrowLeft 키 입력 시 opening-back으로 변경된다', () => {
-      useHistoryStore.setState({ bookState: 'cover-back' });
-      render(<History />);
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-back');
+      turnTo(findLeafIndex(leaves, 'Timeline'));
+      expect(screen.getByRole('button', { name: '연혁' })).toHaveClass(
+        'active',
+      );
     });
   });
 
-  describe('표지 클릭 — 애니메이션 중 재클릭 무시', () => {
-    it('앞표지 클릭 중 isAnimating=true이면 두 번째 클릭이 무시된다', () => {
-      vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
-        cb(0);
-        return 0;
-      });
-      vi.stubGlobal('cancelAnimationFrame', () => {});
-      const { container } = render(<History />);
-
-      const firstFrontCover = container.querySelector('.history__front-cover');
-      act(() => {
-        fireEvent.click(firstFrontCover!);
-      });
-      act(() => {
-        vi.advanceTimersByTime(400);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-front');
-
-      // bookState 리셋 → BookFrontCover 재마운트 (centered=true via RAF stub)
-      act(() => {
-        useHistoryStore.setState({ bookState: 'cover-front' });
-      });
-      // 재마운트된 DOM 요소를 새로 쿼리
-      const secondFrontCover = container.querySelector('.history__front-cover');
-      act(() => {
-        fireEvent.click(secondFrontCover!);
-      });
-      // 400ms 진행: handleFrontCoverClick 호출되지만 isAnimatingRef=true → 즉시 반환
-      act(() => {
-        vi.advanceTimersByTime(400);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-front');
+  describe('카테고리 이동', () => {
+    it('카테고리를 누르면 이벤트를 기록하고 해당 방향으로 넘기기 시작한다', () => {
+      render(<History />);
+      fireEvent.click(screen.getByRole('button', { name: '주요 성과' }));
+      expect(trackHistoryCategoryChange).toHaveBeenCalledWith('Milestones');
+      expect(engine.handle.flipNext).toHaveBeenCalledTimes(1);
     });
 
-    it('뒤표지 클릭 중 isAnimating=true이면 두 번째 클릭이 무시된다', () => {
-      vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
-        cb(0);
-        return 0;
-      });
-      vi.stubGlobal('cancelAnimationFrame', () => {});
-      useHistoryStore.setState({ bookState: 'cover-back' });
-      const { container } = render(<History />);
+    it('본문 카테고리를 누르면 첫 본문 장을 목적지로 정한다', () => {
+      render(<History />);
+      fireEvent.click(screen.getByRole('button', { name: '본문' }));
+      expect(trackHistoryCategoryChange).toHaveBeenCalledWith('Content');
+      expect(engine.props?.targetLeaf).toBe(findLeafIndex(leaves, 'Content'));
+    });
 
-      const firstBackCover = container.querySelector('.history__back-cover');
-      act(() => {
-        fireEvent.click(firstBackCover!);
-      });
-      act(() => {
-        vi.advanceTimersByTime(400);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-back');
-
-      act(() => {
-        useHistoryStore.setState({ bookState: 'cover-back' });
-      });
-      const secondBackCover = container.querySelector('.history__back-cover');
-      act(() => {
-        fireEvent.click(secondBackCover!);
-      });
-      act(() => {
-        vi.advanceTimersByTime(400);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-back');
+    it('앞쪽 카테고리는 뒤로 넘긴다', () => {
+      render(<History />);
+      turnTo(findLeafIndex(leaves, 'Timeline'));
+      fireEvent.click(screen.getByRole('button', { name: '목차' }));
+      expect(engine.handle.flipPrev).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('키보드 경계 콜백 — non-open 상태에서 무시', () => {
-    it('cover-front 상태에서 ArrowLeft 키 입력 시 경계 콜백이 아무것도 하지 않는다', () => {
-      render(<History />); // bookState='cover-front'
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-front');
+  describe('목차 항목 이동', () => {
+    function getListItemClick() {
+      const leaf = leaves.find((l) => l.kind === 'page');
+      if (!leaf || leaf.kind !== 'page') throw new Error('page leaf 없음');
+      const element = engine.props!.renderPage(leaf) as {
+        props: { onListItemClick: (index: number) => void };
+      };
+      return element.props.onListItemClick;
+    }
+
+    it('목차 항목을 누르면 그 작품이 있는 본문 장을 목적지로 정하고 넘긴다', () => {
+      render(<History />);
+      const onListItemClick = getListItemClick();
+      act(() => onListItemClick(5));
+      expect(engine.props?.targetLeaf).toBe(
+        findLeafIndex(leaves, 'Content', 2),
+      );
+      expect(engine.handle.flipNext).toHaveBeenCalledTimes(1);
     });
 
-    it('cover-back 상태에서 ArrowRight 키 입력 시 경계 콜백이 아무것도 하지 않는다', () => {
-      useHistoryStore.setState({
-        bookState: 'cover-back',
-        activeItem: 'Milestones',
-        pageIndices: { List: 0, Content: 0, Timeline: 0, Milestones: 2 },
-      });
+    it('한 장에 두 작품씩 담기므로 이웃한 두 항목은 같은 장으로 이동한다', () => {
       render(<History />);
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowRight' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-back');
-    });
-
-    it('cover-front에서 ArrowRight 키를 두 번 누르면 두 번째 커버 열기가 무시된다', () => {
-      render(<History />);
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowRight' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-front');
-
-      act(() => {
-        useHistoryStore.setState({ bookState: 'cover-front' });
-      });
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowRight' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-front');
-    });
-
-    it('cover-back에서 ArrowLeft 키를 두 번 누르면 두 번째 커버 열기가 무시된다', () => {
-      useHistoryStore.setState({ bookState: 'cover-back' });
-      render(<History />);
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-back');
-
-      act(() => {
-        useHistoryStore.setState({ bookState: 'cover-back' });
-      });
-      act(() => {
-        window.dispatchEvent(
-          new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
-        );
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-back');
+      const onListItemClick = getListItemClick();
+      act(() => onListItemClick(2));
+      const first = engine.props?.targetLeaf;
+      act(() => onListItemClick(3));
+      expect(engine.props?.targetLeaf).toBe(first);
     });
   });
 
-  describe('애니메이션 진행 중 이벤트 보호', () => {
-    it('open 상태에서 isAnimating=true이면 leftMouseDown이 closingFront를 재호출하지 않는다', () => {
-      useHistoryStore.setState({ bookState: 'open' });
-      const { container } = render(<History />);
-      const leftPage = container.querySelector('.history__book-page-left');
-
-      fireEvent.mouseDown(leftPage!);
-      expect(useHistoryStore.getState().bookState).toBe('closing-front');
-
-      act(() => {
-        useHistoryStore.setState({ bookState: 'open' });
-      });
-      fireEvent.mouseDown(leftPage!);
-      expect(useHistoryStore.getState().bookState).toBe('open');
-    });
-
-    it('open 상태에서 isAnimating=true이면 rightMouseDown이 closingBack을 재호출하지 않는다', () => {
-      useHistoryStore.setState({
-        bookState: 'open',
-        activeItem: 'Milestones',
-        pageIndices: { List: 0, Content: 0, Timeline: 0, Milestones: 2 },
-      });
-      const { container } = render(<History />);
-      const rightPage = container.querySelector('.history__book-page-right');
-
-      fireEvent.mouseDown(rightPage!);
-      expect(useHistoryStore.getState().bookState).toBe('closing-back');
-
-      act(() => {
-        useHistoryStore.setState({ bookState: 'open' });
-      });
-      fireEvent.mouseDown(rightPage!);
-      expect(useHistoryStore.getState().bookState).toBe('open');
-    });
-
-    it('cover-front 상태에서 isAnimating=true이면 카테고리 클릭이 무시된다', () => {
+  describe('분석 이벤트', () => {
+    it('앞표지에서 넘기면 cover open(front)을 기록한다', () => {
       render(<History />);
-      const timelineBtn = screen.getByRole('button', { name: 'Timeline' });
-
-      act(() => {
-        fireEvent.click(timelineBtn);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-front');
-
-      act(() => {
-        useHistoryStore.setState({ bookState: 'cover-front' });
-      });
-      act(() => {
-        fireEvent.click(timelineBtn);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-front');
+      turnTo(1);
+      expect(trackHistoryCoverOpen).toHaveBeenCalledWith('front');
     });
 
-    it('cover-back 상태에서 isAnimating=true이면 카테고리 클릭이 무시된다', () => {
-      useHistoryStore.setState({ bookState: 'cover-back' });
+    it('뒤표지에서 넘기면 cover open(back)을 기록한다', () => {
       render(<History />);
-      const contentBtn = screen.getByRole('button', { name: 'Content' });
-
-      act(() => {
-        fireEvent.click(contentBtn);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-back');
-
-      act(() => {
-        useHistoryStore.setState({ bookState: 'cover-back' });
-      });
-      act(() => {
-        fireEvent.click(contentBtn);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('cover-back');
+      turnTo(leaves.length - 1);
+      turnTo(leaves.length - 3);
+      expect(trackHistoryCoverOpen).toHaveBeenCalledWith('back');
     });
-  });
 
-  describe('카테고리 클릭 — handleNavigateToCategory', () => {
-    it('책이 open 상태에서 Content 탭 클릭 시 플립 애니메이션이 시작된다', () => {
-      useHistoryStore.setState({ bookState: 'open' });
+    it('페이지를 넘긴 방향을 기록한다', () => {
       render(<History />);
-      const contentBtn = screen.getByRole('button', { name: 'Content' });
-      fireEvent.click(contentBtn);
-      // navigateToCategory → startFlipAnimation → isFlipping=true (동기 변경)
-      expect(useHistoryStore.getState().isFlipping).toBe(true);
-      expect(useHistoryStore.getState().flipDirection).toBe('forward');
+      turnTo(1);
+      turnTo(3);
+      expect(trackHistoryPageTurn).toHaveBeenLastCalledWith('forward');
+      turnTo(1);
+      expect(trackHistoryPageTurn).toHaveBeenLastCalledWith('backward');
     });
 
-    it('앞표지 상태에서 카테고리 클릭 시 bookState가 opening-front로 변경된다', () => {
+    it('여러 장 연속 이동 중에는 페이지 넘김을 기록하지 않는다', () => {
       render(<History />);
-      const timelineBtn = screen.getByRole('button', { name: 'Timeline' });
-      fireEvent.click(timelineBtn);
-      // handleNavigateToCategory → openingFront() 동기 호출
-      expect(useHistoryStore.getState().bookState).toBe('opening-front');
-    });
-
-    it('뒤표지 상태에서 카테고리 클릭 시 bookState가 opening-back으로 변경된다', () => {
-      useHistoryStore.setState({ bookState: 'cover-back' });
-      render(<History />);
-      const contentBtn = screen.getByRole('button', { name: 'Content' });
-      fireEvent.click(contentBtn);
-      expect(useHistoryStore.getState().bookState).toBe('opening-back');
-    });
-  });
-
-  describe('오른쪽 페이지 mousedown — handleRightMouseDown', () => {
-    it('책이 open이고 canGoRight=true이면 forward flip이 시작된다', () => {
-      useHistoryStore.setState({ bookState: 'open' });
-      const { container } = render(<History />);
-      const rightPage = container.querySelector('.history__book-page-right');
-      fireEvent.mouseDown(rightPage!);
-      expect(useHistoryStore.getState().isFlipping).toBe(true);
-      expect(useHistoryStore.getState().flipDirection).toBe('forward');
-    });
-
-    it('책이 open이고 canGoRight=false(마지막 페이지)이면 closing-back으로 변경된다', () => {
-      useHistoryStore.setState({
-        bookState: 'open',
-        activeItem: 'Milestones',
-        pageIndices: { List: 0, Content: 0, Timeline: 0, Milestones: 2 },
-      });
-      const { container } = render(<History />);
-      const rightPage = container.querySelector('.history__book-page-right');
-      fireEvent.mouseDown(rightPage!);
-      expect(useHistoryStore.getState().bookState).toBe('closing-back');
-    });
-  });
-
-  describe('뒤표지 클릭 — handleBackCoverClick', () => {
-    it('뒤표지 클릭 후 400ms 경과 시 bookState가 opening-back으로 변경된다', () => {
-      vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
-        cb(0);
-        return 0;
-      });
-      vi.stubGlobal('cancelAnimationFrame', () => {});
-      useHistoryStore.setState({ bookState: 'cover-back' });
-      const { container } = render(<History />);
-      const backCover = container.querySelector('.history__back-cover');
-      act(() => {
-        fireEvent.click(backCover!);
-      });
-      act(() => {
-        vi.advanceTimersByTime(400);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-back');
-    });
-  });
-
-  describe('flipDirection 분기 렌더링', () => {
-    it('bookState=opening-front이면 isCoverFlip=true 경로로 정상 렌더링된다', () => {
-      useHistoryStore.setState({ bookState: 'opening-front' });
-      const { container } = render(<History />);
-      expect(container.querySelector('.history__book')).toBeInTheDocument();
-    });
-
-    it('flipDirection=forward이면 forward 경로로 정상 렌더링된다', () => {
-      useHistoryStore.setState({
-        bookState: 'open',
-        isFlipping: true,
-        flipDirection: 'forward',
-      });
-      const { container } = render(<History />);
-      expect(container.querySelector('.history__book')).toBeInTheDocument();
-    });
-
-    it('flipDirection=backward이면 backward 경로로 정상 렌더링된다', () => {
-      useHistoryStore.setState({
-        bookState: 'open',
-        activeItem: 'Content',
-        isFlipping: true,
-        flipDirection: 'backward',
-      });
-      const { container } = render(<History />);
-      expect(container.querySelector('.history__book')).toBeInTheDocument();
-    });
-  });
-
-  describe('리스트 항목 클릭 — handleListItemClick', () => {
-    it('List 페이지 항목 클릭 시 Content로 flip이 시작된다', () => {
-      useHistoryStore.setState({ bookState: 'open' });
-      const { container } = render(<History />);
-      const listButtons = container.querySelectorAll('.list__ul button');
-      fireEvent.click(listButtons[0]);
-      expect(useHistoryStore.getState().isFlipping).toBe(true);
-    });
-  });
-
-  describe('pendingCategory useEffect', () => {
-    it('앞표지에서 카테고리 클릭 후 flip 완료 시 해당 카테고리 탐색이 시작된다', () => {
-      render(<History />);
-      const timelineBtn = screen.getByRole('button', { name: 'Timeline' });
-      act(() => {
-        fireEvent.click(timelineBtn);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('opening-front');
-
-      act(() => {
-        vi.advanceTimersByTime(RAPID_FLIP_DURATION);
-      });
-      expect(useHistoryStore.getState().bookState).toBe('open');
-
-      act(() => {
-        vi.runAllTimers();
-      });
-      expect(useHistoryStore.getState().activeItem).toBe('Timeline');
-    });
-  });
-
-  describe('페이지 flip 완료 후 aria-live 안내', () => {
-    it('flip 완료 후 aria-live 영역에 페이지 정보가 표시된다', () => {
-      useHistoryStore.setState({ bookState: 'open' });
-      const { container } = render(<History />);
-      const rightPage = container.querySelector('.history__book-page-right');
-
-      act(() => {
-        fireEvent.mouseDown(rightPage!);
-        window.dispatchEvent(new MouseEvent('mouseup'));
-      });
-
-      act(() => {
-        vi.runAllTimers();
-      });
-
-      const liveRegion = container.querySelector('[aria-live="polite"]');
-      expect(liveRegion?.textContent).not.toBe('');
+      turnTo(1);
+      fireEvent.click(screen.getByRole('button', { name: '주요 성과' }));
+      vi.mocked(trackHistoryPageTurn).mockClear();
+      turnTo(3);
+      expect(trackHistoryPageTurn).not.toHaveBeenCalled();
     });
   });
 });

@@ -2,50 +2,60 @@
   display: flex;
   flex-direction: row;
 
-  justify-content: flex-end;
+  width: 100%;
+  gap: 8px;
+  padding-block: 4px;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.award__year_category--more {
+  mask-image: linear-gradient(
+    90deg,
+    var(--black) calc(100% - 32px),
+    transparent
+  );
+}
+
+.award__year_category::-webkit-scrollbar {
+  display: none;
 }
 
 .award__year_category button {
+  flex: none;
+
+  min-height: 40px;
+  padding: 0 18px;
+
+  border: 1px solid var(--brown-200);
+  border-radius: var(--radius-pill);
   background: none;
-  border: none;
   cursor: pointer;
 
-  padding: 0 0.8vmax;
+  font-family: var(--font-pretendard);
+  font-size: var(--fs-sm);
+  font-weight: var(--pretendard-semibold);
 
-  font-size: max(12px, 0.834vw);
-  font-weight: var(--pretendard-regular);
-
-  color: var(--brown-500);
-  border-bottom: 2px solid var(--brown-300);
+  color: var(--brown-600);
 
   transition:
-    color 0.3s,
-    border-color 0.3s;
+    color var(--duration-base),
+    background-color var(--duration-base),
+    border-color var(--duration-base);
+}
+
+.award__year_category button:hover {
+  border-color: var(--brown-400);
 }
 
 .award__year_category button.award__year_category--active {
-  font-weight: var(--pretendard-semibold);
-
-  color: var(--brown-700);
-  border-bottom-color: var(--brown-700);
+  border-color: var(--brown-800);
+  background-color: var(--brown-800);
+  color: var(--white);
 }
 
-@media (max-width: 1024px) {
-  .award__year_category button {
-    padding: 0 1.5vw;
-
-    font-size: 2.08vw;
-
-    border-bottom: 2px solid var(--brown-200);
-  }
-}
-
-@media (max-width: 767px) {
-  .award__year_category button {
-    padding: 0 clamp(8px, 2vw, 10px);
-
-    font-size: clamp(13px, 3.73vw, 19px);
-
-    border-bottom: 2px solid var(--brown-200);
-  }
+.award__year_category button:focus-visible {
+  outline: 2px solid var(--accent-gold-600);
+  outline-offset: 2px;
 }

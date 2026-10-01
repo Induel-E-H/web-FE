@@ -138,30 +138,27 @@ describe('mapMarker', () => {
       expect(MockPoint).toHaveBeenCalledOnce();
     });
 
-    it('모바일에서 vmin 기반으로 아이콘 크기가 계산된다', () => {
+    it('좁은 화면에서는 최소 크기(32px)로 계산된다', () => {
       stubWindowSize(375, 812);
       makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
       const [w, h] = MockSize.mock.calls[0] as [number, number];
-      expect(w).toBeGreaterThan(0);
+      expect(w).toBe(32);
       expect(h).toBeGreaterThan(w);
     });
 
-    it('태블릿에서 vmin 기반으로 아이콘 크기가 계산된다', () => {
-      stubWindowSize(768, 1024);
-      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
-      const [w, h] = MockSize.mock.calls[0] as [number, number];
-      expect(w).toBeGreaterThan(0);
-      expect(h).toBeGreaterThan(w);
-    });
-
-    it('데스크탑에서 vmax 기반으로 아이콘 크기가 계산된다', () => {
-      // width=1920, height=1080: vmaxPx=19.2, iconW=round(2.292*19.2)=44
+    it('화면 폭의 2.29%로 아이콘 크기가 계산된다', () => {
+      // width=1920: round(2.29 * 19.2) = 44
       stubWindowSize(1920, 1080);
       makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
       const [w] = MockSize.mock.calls[0] as [number, number];
-      // vmin(minPx=1080) 기반이었다면 round(2.292*10.8)=25가 되어야 함
-      // vmax(maxPx=1920) 기반이면 44 → 두 값이 다름으로 vmax 경로 확인
       expect(w).toBe(44);
+    });
+
+    it('넓은 화면에서는 최대 크기(48px)로 계산된다', () => {
+      stubWindowSize(2560, 1440);
+      makeMapMarker(mockMap as unknown as naver.maps.Map, TEST_SVG);
+      const [w] = MockSize.mock.calls[0] as [number, number];
+      expect(w).toBe(48);
     });
 
     it('anchorY가 iconH의 54/56 비율로 계산된다', () => {

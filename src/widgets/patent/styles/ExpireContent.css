@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
 
-  gap: 1.56vmax;
+  gap: clamp(20px, 1.6vw, 28px);
 }
 
 .patent__expiration__title {
@@ -12,36 +12,40 @@
 
   width: 100%;
 
-  gap: 0.52vmax;
+  gap: 16px;
 }
 
-.patent__expiration__title__text {
+.patent__expiration__title h3 {
   display: flex;
-  flex-direction: row;
-
   align-items: center;
 
-  gap: 0.52vmax;
+  gap: 10px;
+
+  font-weight: var(--pretendard-bold);
+  font-size: var(--fs-lg);
+  color: var(--brown-50);
 }
 
-.patent__expiration__icon {
-  width: 0.83vmax;
-  height: 1.04vmax;
+.patent__expiration__badge {
+  display: inline-grid;
+  place-items: center;
 
-  color: var(--patent-expire-icon);
-}
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
 
-.patent__expiration__title__text h3 {
-  font-weight: var(--pretendard-semibold);
-  font-size: max(15px, 1.04vw);
-  color: var(--white);
+  border-radius: var(--radius-pill);
+  background-color: rgb(var(--white-rgb) / var(--alpha-15));
+
+  font-size: var(--fs-sm);
+  color: var(--brown-100);
 }
 
 .patent__expiration__title hr {
   width: 100%;
 
   border: none;
-  border-top: 1px solid var(--patent-divider);
+  border-top: 1px solid rgb(var(--white-rgb) / var(--alpha-15));
 }
 
 .patent__expiration__content {
@@ -50,8 +54,8 @@
   grid-template-rows: repeat(5, auto);
   grid-auto-flow: column;
 
-  column-gap: 2.08vmax;
-  row-gap: 1.3vmax;
+  column-gap: clamp(24px, 2.08vw, 40px);
+  row-gap: clamp(16px, 1.3vw, 24px);
 
   list-style: none;
   margin: 0;
@@ -64,7 +68,7 @@
 
   width: 100%;
 
-  gap: 0.63vmax;
+  gap: clamp(8px, 0.63vw, 12px);
 }
 
 .patent__expiration__item__text {
@@ -72,6 +76,8 @@
   flex-direction: row;
 
   justify-content: space-between;
+
+  gap: 12px;
 }
 
 .patent__expiration__item__content {
@@ -80,21 +86,26 @@
 
   align-items: center;
 
-  gap: 1.25vmax;
+  gap: clamp(18px, 1.25vw + 6px, 28px);
 }
 
 .patent__expiration__item__content span:first-child {
-  font-weight: var(--pretendard-semibold);
-  font-size: max(12px, 0.78vw);
+  flex-shrink: 0;
+  min-width: 3ch;
 
-  color: var(--accent-gold-600);
+  font-weight: var(--pretendard-bold);
+  font-size: var(--fs-sm);
+
+  color: var(--accent-gold-400);
 }
 
 .patent__expiration__item__content span:last-child {
-  font-weight: var(--pretendard-semibold);
-  font-size: max(12px, 0.78vw);
+  word-break: keep-all;
 
-  color: var(--patent-text-secondary);
+  font-weight: var(--pretendard-regular);
+  font-size: var(--fs-sm);
+
+  color: var(--brown-50);
 }
 
 .patent__expiration__item hr {
@@ -105,107 +116,19 @@
 }
 
 .patent__expiration__serial {
-  font-weight: var(--pretendard-semibold);
-  font-size: max(10px, 0.625vw);
+  font-weight: var(--pretendard-regular);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 
-  color: var(--patent-serial);
+  color: var(--brown-300);
 }
 
 @media (max-width: 1024px) {
-  .patent__expiration {
-    gap: 2.6vw;
-  }
-
-  .patent__expiration__title {
-    gap: 1.56vw;
-  }
-
-  .patent__expiration__title__text {
-    gap: 1.3vw;
-  }
-
-  .patent__expiration__icon {
-    width: 2.08vw;
-    height: 2.6vw;
-  }
-
-  .patent__expiration__title__text h3 {
-    font-size: 2.6vw;
-  }
-
   .patent__expiration__content {
     display: flex;
     flex-direction: column;
 
-    gap: 3.26vw;
-  }
-
-  .patent__expiration__item {
-    width: 100%;
-
-    gap: 1.3vw;
-  }
-
-  .patent__expiration__item__content {
-    gap: 3.13vw;
-  }
-
-  .patent__expiration__item__content span:first-child {
-    font-size: 1.95vw;
-  }
-
-  .patent__expiration__item__content span:last-child {
-    font-size: 1.95vw;
-  }
-
-  .patent__expiration__serial {
-    font-size: 1.5625vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .patent__expiration {
-    gap: clamp(19px, 5.3vw, 27px);
-  }
-
-  .patent__expiration__title {
-    gap: clamp(11px, 3.2vw, 16px);
-  }
-
-  .patent__expiration__title__text {
-    gap: clamp(9px, 2.67vw, 13px);
-  }
-
-  .patent__expiration__icon {
-    width: clamp(15px, 4.26vw, 21px);
-    height: clamp(19px, 5.33vw, 27px);
-  }
-
-  .patent__expiration__title__text h3 {
-    font-size: clamp(13px, 3.73vw, 19px);
-  }
-
-  .patent__expiration__content {
-    gap: clamp(23px, 6.67vw, 33px);
-  }
-
-  .patent__expiration__item {
-    gap: clamp(8px, 2.13vw, 11px);
-  }
-
-  .patent__expiration__item__content {
-    gap: clamp(23px, 6.5vw, 33px);
-  }
-
-  .patent__expiration__item__content span:first-child {
-    font-size: clamp(11px, 3.2vw, 16px);
-  }
-
-  .patent__expiration__item__content span:last-child {
-    font-size: clamp(11px, 3.2vw, 16px);
-  }
-
-  .patent__expiration__serial {
-    font-size: clamp(11px, 3.2vw, 16px);
+    gap: clamp(20px, 3vw, 32px);
   }
 }

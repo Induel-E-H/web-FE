@@ -1,15 +1,14 @@
-import type { ReactNode } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import {
-  PAGE_SIDE,
+  buildLeaves,
+  findLeafIndex,
+  getLeafItem,
   preloadContentImages,
-  RAPID_FLIP_DURATION,
+  useFlipChain,
 } from '@features/history';
-import type { IndexItem } from '@features/history';
-import { useBookCoverState } from '@features/history';
-import { useBookNavigation } from '@features/history';
-import { BOOK_STATE } from '@features/history';
+import type { IndexItem, PageLeaf } from '@features/history';
+import type { BookSnapshot, FlipBookHandle } from '@gullabs/react-flipbook';
 import {
   trackHistoryCategoryChange,
   trackHistoryCoverOpen,
@@ -18,274 +17,80 @@ import {
 import { useBreakpoint } from '@shared/lib/breakpoint';
 
 import '../styles/History.css';
+import { Book } from './book/Book';
 import { BookPageContent } from './book/BookPageContent';
-import { BookPageSlot } from './book/BookPageSlot';
-import { BookSide } from './book/BookSide';
-import { buildCoverContent } from './book/CoverContent';
 import { HistoryCategory } from './Category';
 import { HistoryTitle } from './HistoryTitle';
 
 export function History() {
   const breakpoint = useBreakpoint();
-  const {
-    bookState,
-    openingFront,
-    onOpened,
-    closingFront,
-    onFrontClosed,
-    closingBack,
-    onBackClosed,
-    openingBack,
-  } = useBookCoverState();
+  const leaves = buildLeaves(breakpoint);
+  const bookRef = useRef<FlipBookHandle>(null);
+  const chain = useFlipChain(bookRef);
+  const [page, setPage] = useState(0);
+  const [targetLeaf, setTargetLeaf] = useState<number | null>(null);
 
-  const {
-    activeItem,
-    currentPageIndex,
-    canGoLeft,
-    canGoRight,
-    isFlipping,
-    flipDirection,
-    nextPageIndex,
-    nextActiveItem,
-    prevPageIndex,
-    prevActiveItem,
-    navigateToCategory,
-    beginContinuousFlip,
-    syncBoundaryCallbacks,
-    syncCoverCallbacks,
-    leftShadowCount,
-    rightShadowCount,
-    startFlipAnimation,
-    isAnimatingRef,
-  } = useBookNavigation(breakpoint);
+  const activeItem = getLeafItem(leaves, page);
 
-  useEffect(() => {
-    syncBoundaryCallbacks(
-      (duration) => {
-        if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
-          closingFront();
-          startFlipAnimation('backward', onFrontClosed, duration);
-        }
-      },
-      (duration) => {
-        if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
-          closingBack();
-          startFlipAnimation('forward', onBackClosed, duration);
-        }
-      },
-    );
-    syncCoverCallbacks(
-      bookState === 'cover-front',
-      bookState === 'cover-back',
-      (duration) => {
-        if (!isAnimatingRef.current) {
-          openingFront();
-          startFlipAnimation('forward', onOpened, duration);
-        }
-      },
-      (duration) => {
-        if (!isAnimatingRef.current) {
-          openingBack();
-          startFlipAnimation('backward', onOpened, duration);
-        }
-      },
-    );
-  });
+  function navigate(item: IndexItem, pageIndex = 0) {
+    const target = findLeafIndex(leaves, item, pageIndex);
+    setTargetLeaf(target);
+    chain.flipTo(target);
+  }
 
-  const [pageAnnouncement, setPageAnnouncement] = useState('');
-  const prevIsFlippingRef = useRef(false);
-
-  const [pendingCategory, setPendingCategory] = useState<IndexItem | null>(
-    null,
-  );
-  const pendingFiredRef = useRef(false);
-
-  useEffect(() => {
-    if (
-      bookState === BOOK_STATE.OPEN &&
-      pendingCategory !== null &&
-      !pendingFiredRef.current
-    ) {
-      pendingFiredRef.current = true;
-      const cat = pendingCategory;
-      setTimeout(() => {
-        pendingFiredRef.current = false;
-        setPendingCategory(null);
-        navigateToCategory(cat, 0, true);
-      }, 0);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookState, pendingCategory]);
+  function handleNavigateToCategory(item: IndexItem) {
+    trackHistoryCategoryChange(item);
+    if (item === 'Content') preloadContentImages(0);
+    navigate(item);
+  }
 
   function handleListItemClick(index: number) {
     const pageIndex = Math.floor(index / 2);
     preloadContentImages(pageIndex);
-    navigateToCategory('Content', pageIndex, true);
+    navigate('Content', pageIndex);
   }
 
-  function page(
-    item: IndexItem,
-    pageIndex: number,
-    side: typeof PAGE_SIDE.LEFT | typeof PAGE_SIDE.RIGHT,
-  ): ReactNode {
+  function handlePageChange(snapshot: BookSnapshot) {
+    const prev = page;
+    setPage(snapshot.page);
+    if (chain.isChaining()) return;
+    if (prev === 0) trackHistoryCoverOpen('front');
+    else if (prev === snapshot.pageCount - 1) trackHistoryCoverOpen('back');
+    else trackHistoryPageTurn(snapshot.page > prev ? 'forward' : 'backward');
+  }
+
+  function renderPage(leaf: PageLeaf) {
     return (
       <BookPageContent
-        side={side}
-        pageIndex={pageIndex}
-        item={item}
+        side={leaf.side}
+        pageIndex={leaf.pageIndex}
+        item={leaf.item}
         breakpoint={breakpoint}
         onListItemClick={handleListItemClick}
       />
     );
   }
 
-  const isCoverFlip =
-    bookState.startsWith('opening') || bookState.startsWith('closing');
-
-  const leftSlot = (
-    <BookPageSlot side={PAGE_SIDE.LEFT} shadowCount={leftShadowCount}>
-      {page(activeItem, currentPageIndex, PAGE_SIDE.LEFT)}
-    </BookPageSlot>
-  );
-  const rightSlot = (
-    <BookPageSlot side={PAGE_SIDE.RIGHT} shadowCount={rightShadowCount}>
-      {page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT)}
-    </BookPageSlot>
-  );
-
-  const { coverFrontContent, coverBackContent } = buildCoverContent(
-    bookState,
-    leftSlot,
-    rightSlot,
-  );
-
-  let staticLeftContent: ReactNode;
-  let staticRightContent: ReactNode;
-  let flipFrontContent: ReactNode;
-  let flipBackContent: ReactNode;
-
-  if (isCoverFlip) {
-    staticLeftContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
-    staticRightContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
-  } else if (flipDirection === 'forward') {
-    staticLeftContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
-    staticRightContent = page(nextActiveItem, nextPageIndex, PAGE_SIDE.RIGHT);
-    flipFrontContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
-    flipBackContent = page(nextActiveItem, nextPageIndex, PAGE_SIDE.LEFT);
-  } else if (flipDirection === 'backward') {
-    staticLeftContent = page(prevActiveItem, prevPageIndex, PAGE_SIDE.LEFT);
-    staticRightContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
-    flipFrontContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
-    flipBackContent = page(prevActiveItem, prevPageIndex, PAGE_SIDE.RIGHT);
-  } else {
-    staticLeftContent = page(activeItem, currentPageIndex, PAGE_SIDE.LEFT);
-    staticRightContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
-    flipFrontContent = page(activeItem, currentPageIndex, PAGE_SIDE.RIGHT);
-    flipBackContent = null;
-  }
-
-  function handleFrontCoverClick() {
-    if (isAnimatingRef.current) return;
-    trackHistoryCoverOpen('front');
-    openingFront();
-    startFlipAnimation('forward', onOpened);
-  }
-
-  function handleBackCoverClick() {
-    if (isAnimatingRef.current) return;
-    trackHistoryCoverOpen('back');
-    openingBack();
-    startFlipAnimation('backward', onOpened);
-  }
-
-  function handleLeftMouseDown() {
-    if (!canGoLeft) {
-      if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
-        closingFront();
-        startFlipAnimation('backward', onFrontClosed);
-      }
-      return;
-    }
-    trackHistoryPageTurn('backward');
-    beginContinuousFlip(PAGE_SIDE.LEFT);
-  }
-
-  function handleRightMouseDown() {
-    if (!canGoRight) {
-      if (bookState === BOOK_STATE.OPEN && !isAnimatingRef.current) {
-        closingBack();
-        startFlipAnimation('forward', onBackClosed);
-      }
-      return;
-    }
-    trackHistoryPageTurn('forward');
-    beginContinuousFlip(PAGE_SIDE.RIGHT);
-  }
-
-  function handleNavigateToCategory(item: IndexItem) {
-    trackHistoryCategoryChange(String(item));
-    if (item === 'Content') preloadContentImages(0);
-    if (bookState === 'cover-front') {
-      if (isAnimatingRef.current) return;
-      setPendingCategory(item);
-      openingFront();
-      startFlipAnimation('forward', onOpened, RAPID_FLIP_DURATION);
-    } else if (bookState === 'cover-back') {
-      if (isAnimatingRef.current) return;
-      setPendingCategory(item);
-      openingBack();
-      startFlipAnimation('backward', onOpened, RAPID_FLIP_DURATION);
-    } else {
-      navigateToCategory(item, 0, true);
-    }
-  }
-
-  const pageIsFlipping = !isCoverFlip && isFlipping;
-
-  useEffect(() => {
-    const wasFlipping = prevIsFlippingRef.current;
-    prevIsFlippingRef.current = pageIsFlipping;
-    if (wasFlipping && !pageIsFlipping && bookState === BOOK_STATE.OPEN) {
-      setPageAnnouncement(`${activeItem} ${currentPageIndex + 1}페이지`);
-    }
-  }, [activeItem, currentPageIndex, pageIsFlipping, bookState]);
-
-  const leftAriaLabel = canGoLeft ? '이전 페이지로 이동' : '앞표지로 돌아가기';
-  const rightAriaLabel = canGoRight
-    ? '다음 페이지로 이동'
-    : '뒤표지로 돌아가기';
-
   return (
     <section id='history' className='history' aria-label='회사 역사'>
-      <div className='sr-only' aria-live='polite' aria-atomic='true'>
-        {pageAnnouncement}
-      </div>
-      <HistoryTitle />
-      <HistoryCategory navigateToCategory={handleNavigateToCategory} />
-      <div className='history__book'>
-        <BookSide
-          side={PAGE_SIDE.LEFT}
-          staticPageContent={staticLeftContent}
-          flipFrontPageContent={flipFrontContent}
-          flipBackPageContent={flipBackContent}
-          shadowCount={leftShadowCount}
-          onMouseDown={handleLeftMouseDown}
-          onBackCoverClick={handleBackCoverClick}
-          coverFrontContent={coverFrontContent}
-          coverBackContent={coverBackContent}
-          ariaLabel={leftAriaLabel}
+      <div className='history__top'>
+        <HistoryTitle />
+        <HistoryCategory
+          activeItem={activeItem}
+          navigateToCategory={handleNavigateToCategory}
         />
-        <BookSide
-          side={PAGE_SIDE.RIGHT}
-          staticPageContent={staticRightContent}
-          flipFrontPageContent={flipFrontContent}
-          flipBackPageContent={flipBackContent}
-          shadowCount={rightShadowCount}
-          onMouseDown={handleRightMouseDown}
-          onFrontCoverClick={handleFrontCoverClick}
-          coverFrontContent={coverFrontContent}
-          coverBackContent={coverBackContent}
-          ariaLabel={rightAriaLabel}
+      </div>
+      <div className='history__book'>
+        <Book
+          bookRef={bookRef}
+          leaves={leaves}
+          landscape={breakpoint === 'desktop'}
+          renderPage={renderPage}
+          targetLeaf={targetLeaf}
+          onPageChange={handlePageChange}
+          onSettled={chain.onSettled}
+          onHoldStart={chain.startHold}
+          onHoldEnd={chain.stopHold}
         />
       </div>
     </section>

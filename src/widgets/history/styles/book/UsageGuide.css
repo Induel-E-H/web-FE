@@ -1,0 +1,82 @@
+/* 앞표지 안쪽 면지 위에 적힌 사용법. 면지(::before)보다 위에 놓는다. */
+.history__usage {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  gap: clamp(16px, 5.6cqmin, 36px);
+
+  padding: clamp(26px, 9.33cqmin, 60px) clamp(28px, 9.95cqmin, 65px);
+
+  color: var(--mauve-50);
+}
+
+.history__usage-title {
+  font-family: var(--font-bookendbatang);
+  font-size: var(--fs-book-lg);
+  font-weight: var(--bookendbatang-bold);
+
+  letter-spacing: 0.08em;
+
+  color: var(--accent-gold-200);
+}
+
+.history__usage-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: clamp(11px, 4.04cqmin, 26px);
+}
+
+.history__usage-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: clamp(3px, 0.93cqmin, 6px);
+
+  padding-bottom: clamp(11px, 4.04cqmin, 26px);
+
+  border-bottom: 1px solid rgb(var(--white-rgb) / 0.12);
+}
+
+.history__usage-item:last-child {
+  padding-bottom: 0;
+
+  border-bottom: none;
+}
+
+.history__usage-item dt {
+  display: flex;
+  align-items: center;
+
+  gap: clamp(4px, 1.55cqmin, 10px);
+
+  font-size: var(--fs-book-sm);
+  font-weight: var(--pretendard-semibold);
+}
+
+.history__usage-item dt svg {
+  flex-shrink: 0;
+
+  font-size: clamp(18px, 3.6cqmin, 24px);
+  color: var(--accent-gold-200);
+}
+
+.history__usage-item dd {
+  padding-left: calc(clamp(18px, 3.6cqmin, 24px) + clamp(4px, 1.56cqmin, 10px));
+
+  font-size: var(--fs-book-xs);
+  line-height: 1.6;
+
+  color: var(--mauve-200);
+
+  /* 설명 문자열 안의 줄바꿈 문자를 화면에서도 줄바꿈으로 보여 준다 */
+  white-space: pre-line;
+  word-break: keep-all;
+}

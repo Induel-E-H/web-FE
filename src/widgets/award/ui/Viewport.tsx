@@ -1,88 +1,53 @@
 import { useMemo } from 'react';
 
-import { AWARD_LIST } from '@entities/award';
+import { AWARD_LIST, type AwardItem } from '@entities/award';
 import { useAwardStore, YEAR_ALL } from '@features/award';
-import { getItemsPerPage } from '@features/award';
 import { trackAwardCardOpen } from '@shared/lib/analytics';
-import { useBreakpoint } from '@shared/lib/breakpoint';
-import { useSlideGesture } from '@shared/lib/useSlideGesture';
-import { motion } from 'framer-motion';
 
 import '../styles/Viewport.css';
 import { AwardCard } from './AwardCard';
 
-export function Viewport({
-  itemsPerPage: itemsPerPageProp,
-}: {
-  itemsPerPage?: number;
-}) {
+export function Viewport() {
   const activeYear = useAwardStore((s) => s.activeYear);
-  const currentPage = useAwardStore((s) => s.currentPage);
-  const setCurrentPage = useAwardStore((s) => s.setCurrentPage);
   const setSelectedId = useAwardStore((s) => s.setSelectedId);
-  const breakpoint = useBreakpoint();
-  const itemsPerPage = itemsPerPageProp ?? getItemsPerPage(breakpoint);
 
-  const filteredList = useMemo(() => {
+  const yearGroups = useMemo(() => {
     const list =
       activeYear === YEAR_ALL
         ? AWARD_LIST
         : AWARD_LIST.filter((award) =>
             award.date.startsWith(String(activeYear)),
           );
-    return [...list].sort((a, b) => b.date.localeCompare(a.date));
+    const groups = new Map<string, AwardItem[]>();
+    [...list]
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .forEach((award) => {
+        const year = award.date.slice(0, 4);
+        groups.set(year, [...(groups.get(year) ?? []), award]);
+      });
+    return [...groups];
   }, [activeYear]);
 
-  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
-  const safePage = Math.min(currentPage, Math.max(0, totalPages - 1));
-
-  function dispatchPage(valueOrFn: React.SetStateAction<number>) {
-    const next =
-      typeof valueOrFn === 'function'
-        ? valueOrFn(useAwardStore.getState().currentPage)
-        : valueOrFn;
-    setCurrentPage(next);
-  }
-
-  const { ref, onTouchStart, onTouchEnd } = useSlideGesture(
-    dispatchPage,
-    totalPages,
-  );
-
-  function getPageItems(pageIndex: number) {
-    const start = pageIndex * itemsPerPage;
-    return filteredList.slice(start, start + itemsPerPage);
-  }
-
   return (
-    <div
-      ref={ref}
-      className='award__card_viewport'
-      role='region'
-      aria-label='수상 목록'
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-    >
-      <motion.div
-        className='award__card_slider'
-        animate={{ x: `-${safePage * 100}%` }}
-        transition={{ type: 'tween', duration: 0.4, ease: 'easeOut' }}
-      >
-        {Array.from({ length: totalPages }, (_, pageIndex) => (
-          <div key={pageIndex} className='award__card_page'>
-            {getPageItems(pageIndex).map((award) => (
-              <AwardCard
-                key={award.id}
-                award={award}
-                onClick={() => {
-                  trackAwardCardOpen(award.title);
-                  setSelectedId(award.id);
-                }}
-              />
+    <div className='award__list' role='region' aria-label='수상 목록'>
+      {yearGroups.map(([year, awards]) => (
+        <div key={year} className='award__year_group'>
+          <h3 className='award__year'>{year}</h3>
+          <ul className='award__grid'>
+            {awards.map((award) => (
+              <li key={award.id}>
+                <AwardCard
+                  award={award}
+                  onClick={() => {
+                    trackAwardCardOpen(award.title);
+                    setSelectedId(award.id);
+                  }}
+                />
+              </li>
             ))}
-          </div>
-        ))}
-      </motion.div>
+          </ul>
+        </div>
+      ))}
     </div>
   );
 }

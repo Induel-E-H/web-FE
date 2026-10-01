@@ -14,6 +14,28 @@ function renderPopup(onClose = vi.fn(), title?: string) {
 
 describe('Popup', () => {
   describe('렌더링', () => {
+    it('mediaRatio를 --popup-media-ratio 변수로 전달한다', () => {
+      render(
+        <Popup ariaLabel='비율 팝업' mediaRatio={0.7} onClose={vi.fn()}>
+          <p>팝업 내용</p>
+        </Popup>,
+      );
+      expect(
+        screen
+          .getByRole('dialog')
+          .style.getPropertyValue('--popup-media-ratio'),
+      ).toBe('0.7');
+    });
+
+    it('mediaRatio가 없으면 비율 변수를 지정하지 않는다', () => {
+      renderPopup();
+      expect(
+        screen
+          .getByRole('dialog')
+          .style.getPropertyValue('--popup-media-ratio'),
+      ).toBe('');
+    });
+
     it('dialog 역할로 렌더링된다', () => {
       renderPopup();
       expect(screen.getByRole('dialog')).toBeInTheDocument();

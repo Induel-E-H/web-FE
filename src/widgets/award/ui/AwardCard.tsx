@@ -1,7 +1,6 @@
 import { FiAward } from 'react-icons/fi';
 
 import type { AwardItem } from '@entities/award';
-import { InfoCard } from '@shared/ui/InfoCard';
 
 import '../styles/AwardCard.css';
 
@@ -13,16 +12,21 @@ export function AwardCard({
   onClick: () => void;
 }) {
   return (
-    <InfoCard
+    <button
+      type='button'
       className='award__card'
-      icon={<FiAward />}
-      year={{
-        text: award.date.slice(0, 4),
-        dateTime: award.date.replace(/\. /g, '-'),
+      onMouseDown={(e) => {
+        e.preventDefault();
+        e.currentTarget.focus({ preventScroll: true });
       }}
-      title={award.title}
-      secondary={award.issuer}
       onClick={onClick}
-    />
+      aria-label={`${award.title} - ${award.date.slice(0, 4)}, ${award.issuer}`}
+    >
+      <FiAward className='award__card__icon' aria-hidden='true' />
+      <span className='award__card__text' aria-hidden='true'>
+        <span className='award__card__title'>{award.title}</span>
+        <span className='award__card__issuer'>{award.issuer}</span>
+      </span>
+    </button>
   );
 }

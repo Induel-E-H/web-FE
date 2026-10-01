@@ -5,10 +5,10 @@
   width: 100%;
   height: 100%;
 
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
-  gap: 1.04vmax;
+  gap: clamp(9px, 3.23cqmin, 21px);
 }
 
 .milestones__content {
@@ -26,13 +26,13 @@
   display: flex;
   flex-direction: column;
 
-  gap: 0.26vmax;
+  gap: clamp(2px, 0.81cqmin, 5px);
 }
 
 .milestones__year {
   font-weight: var(--pretendard-bold);
-  font-size: max(12px, 0.833vw);
-  color: var(--black);
+  font-size: var(--fs-book);
+  color: var(--book-ink);
 }
 
 .milestones__ul {
@@ -44,70 +44,27 @@
 .milestones__ul li {
   display: flex;
 
-  gap: 1.93%;
+  gap: 0.5em;
+  word-break: keep-all;
 
-  font-size: max(11px, 0.729vw);
-  font-weight: var(--pretendard-regular);
+  font-size: var(--fs-book);
+  font-weight: var(--pretendard-medium);
 
-  color: var(--black);
+  color: var(--book-ink);
 }
 
 .milestones__ul li::before {
   content: '•';
   flex-shrink: 0;
 
-  font-size: max(11px, 0.729vw);
+  font-size: var(--fs-book);
+
+  color: var(--book-ink-sub);
 }
 
 @media (max-width: 1024px) {
-  .milestones__container {
-    gap: 1.3vw;
-  }
-
   .milestones__content {
     align-items: flex-start;
     gap: 0;
-  }
-
-  .milestones__year-group {
-    gap: 0.39vw;
-  }
-
-  .milestones__year {
-    font-size: 1.56vw;
-  }
-
-  .milestones__ul li {
-    gap: 0.39vw;
-
-    font-size: 1.3vw;
-  }
-
-  .milestones__ul li::before {
-    font-size: 1.3vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .milestones__container {
-    gap: clamp(9px, 2.67vw, 13px);
-  }
-
-  .milestones__year-group {
-    gap: clamp(2px, 0.8vw, 4px);
-  }
-
-  .milestones__year {
-    font-size: clamp(8px, 2.4vw, 12px);
-  }
-
-  .milestones__ul li {
-    gap: clamp(3px, 1vw, 5px);
-
-    font-size: clamp(8px, 2.13vw, 11px);
-  }
-
-  .milestones__ul li::before {
-    font-size: clamp(8px, 2.13vw, 11px);
   }
 }

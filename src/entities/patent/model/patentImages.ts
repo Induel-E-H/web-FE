@@ -6,6 +6,8 @@ import img4 from '../assets/4.webp';
 
 const PATENT_IMAGES = [img0, img1, img2, img3, img4];
 
+export const PATENT_IMAGE_RATIO = 1097 / 1276;
+
 export function getPatentImage(id: number): string {
   const image = PATENT_IMAGES[id];
   if (!image) {

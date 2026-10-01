@@ -1,4 +1,5 @@
 import { artworks } from '@entities/history';
+import { LIST_ITEMS_FIRST_PAGE, LIST_ITEMS_PER_PAGE } from '@features/history';
 import { useBreakpoint } from '@shared/lib/breakpoint';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -9,8 +10,6 @@ vi.mock('@shared/lib/breakpoint', () => ({
   useBreakpoint: vi.fn().mockReturnValue('desktop'),
 }));
 
-const midpoint = Math.ceil(artworks.length / 2);
-
 describe('ListPage', () => {
   describe('렌더링', () => {
     it('"작품 목록" 레이블의 nav가 렌더링된다', () => {
@@ -20,32 +19,40 @@ describe('ListPage', () => {
       ).toBeInTheDocument();
     });
 
-    it('left side는 앞쪽 절반의 작품 버튼을 렌더링한다', () => {
+    it('첫 쪽은 앞에서부터 LIST_ITEMS_FIRST_PAGE 개의 작품 버튼을 렌더링한다', () => {
       render(<ListPage side='left' />);
       const buttons = screen.getAllByRole('button');
-      expect(buttons).toHaveLength(midpoint);
+      expect(buttons).toHaveLength(LIST_ITEMS_FIRST_PAGE);
       expect(buttons[0]).toHaveTextContent(artworks[0].title);
     });
 
-    it('right side는 뒷쪽 절반의 작품 버튼을 렌더링한다', () => {
-      render(<ListPage side='right' />);
-      const buttons = screen.getAllByRole('button');
-      expect(buttons[0]).toHaveTextContent(artworks[midpoint].title);
-    });
-
-    it('left side에서 타이틀 h3이 보인다', () => {
+    it('첫 쪽에서 타이틀 h3이 보인다', () => {
       render(<ListPage side='left' />);
       expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(
-        'List',
+        '목차',
       );
     });
 
-    it('right side에서 타이틀은 hidden 상태이다', () => {
+    it.each([
+      ['right', 0],
+      ['left', 1],
+    ] as const)(
+      '첫 쪽이 아니면(side=%s, pageIndex=%i) 타이틀이 없다',
+      (side, pageIndex) => {
+        render(<ListPage side={side} pageIndex={pageIndex} />);
+        expect(
+          screen.queryByRole('heading', { level: 3 }),
+        ).not.toBeInTheDocument();
+      },
+    );
+
+    it('다음 쪽은 앞쪽에 이어지는 작품부터 LIST_ITEMS_PER_PAGE 개를 렌더링한다', () => {
       render(<ListPage side='right' />);
-      const heading = screen.getByRole('heading', { level: 3 });
-      expect(heading.closest('.book-page-title')).toHaveClass(
-        'book-page-title--hidden',
+      const buttons = screen.getAllByRole('button');
+      expect(buttons[0]).toHaveTextContent(
+        artworks[LIST_ITEMS_FIRST_PAGE].title,
       );
+      expect(buttons).toHaveLength(LIST_ITEMS_PER_PAGE);
     });
   });
 
@@ -57,11 +64,11 @@ describe('ListPage', () => {
       expect(onItemClick).toHaveBeenCalledWith(0);
     });
 
-    it('right side 첫 번째 버튼 클릭 시 midpoint 인덱스로 호출된다', () => {
+    it('다음 쪽 첫 번째 버튼 클릭 시 이어지는 작품 인덱스로 호출된다', () => {
       const onItemClick = vi.fn();
       render(<ListPage side='right' onItemClick={onItemClick} />);
       fireEvent.click(screen.getAllByRole('button')[0]);
-      expect(onItemClick).toHaveBeenCalledWith(midpoint);
+      expect(onItemClick).toHaveBeenCalledWith(LIST_ITEMS_FIRST_PAGE);
     });
 
     it('onItemClick이 없어도 클릭 시 오류가 발생하지 않는다', () => {
