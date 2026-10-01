@@ -1,26 +1,26 @@
 .home__fallback--history {
   min-height: max(100svh, 640px);
-  background-color: #1a1410;
+  background-color: var(--surface-dark);
 }
 
 .home__fallback--award {
   min-height: 100svh;
-  background-color: #faf7f2;
+  background-color: var(--surface-warm);
 }
 
 .home__fallback--patent {
   min-height: 100svh;
-  background-color: #38271d;
+  background-color: var(--brown-800);
 }
 
 .home__fallback--map {
   min-height: 85.11svh;
-  background-color: #faf7f2;
+  background-color: var(--surface-warm);
 }
 
 .home__fallback--footer {
   min-height: 300px;
-  background-color: #38271d;
+  background-color: var(--brown-800);
 }
 
 @media (max-width: 1024px) {
@@ -33,4 +33,12 @@
   .home__fallback--footer {
     min-height: 480px;
   }
+}
+
+.home__dev-missing {
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: monospace;
+  color: var(--white);
+  background-color: var(--surface-dark);
 }

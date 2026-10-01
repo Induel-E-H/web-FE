@@ -1,11 +1,11 @@
 .header {
-  --header-bg: rgb(26 21 18 / 0.72);
+  --header-bg: rgb(var(--surface-dark-rgb) / 0.72);
 
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: var(--z-header);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,9 +15,9 @@
   background-color: var(--header-bg);
   backdrop-filter: blur(12px);
   transition:
-    transform 0.3s ease,
-    background-color 0.3s ease,
-    color 0.3s ease;
+    transform var(--duration-slow) ease,
+    background-color var(--duration-slow) ease,
+    color var(--duration-slow) ease;
 }
 
 .header--hero {
@@ -59,9 +59,9 @@ body[data-popup-open] .header {
   background-color: var(--white);
   box-shadow: 0 0 4px var(--shadow-07);
   transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.2s ease;
+    background-color var(--duration-slow) ease,
+    box-shadow var(--duration-slow) ease,
+    opacity var(--duration-base) ease;
 }
 
 .header--hero .header__logo_icon-frame {
@@ -117,7 +117,7 @@ body[data-popup-open] .header {
   left: 0;
   right: 0;
   /* Nested backdrop-filter can't blur the page, so keep this panel near-opaque. */
-  background-color: rgb(26 21 18 / 0.95);
+  background-color: rgb(var(--surface-dark-rgb) / 0.95);
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgb(var(--white-rgb) / var(--alpha-10));
@@ -144,10 +144,10 @@ body[data-popup-open] .header {
 .header__mobile-menu button,
 .header__logo span {
   transition:
-    color 0.3s ease,
-    opacity 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.15s ease;
+    color var(--duration-slow) ease,
+    opacity var(--duration-base) ease,
+    background-color var(--duration-base) ease,
+    transform var(--duration-fast) ease;
 }
 
 .header__nav button:hover {

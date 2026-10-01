@@ -8,23 +8,23 @@
      -l 은 책등이 오른쪽(왼쪽 커버), -r 은 책등이 왼쪽(오른쪽 커버) */
   --cover-curve-l: linear-gradient(
     to left,
-    rgb(0 0 0 / 0.3) 0%,
-    rgb(0 0 0 / 0.1) 1.5%,
-    rgb(255 255 255 / 0.07) 4%,
+    rgb(var(--black-rgb) / 0.3) 0%,
+    rgb(var(--black-rgb) / 0.1) 1.5%,
+    rgb(var(--white-rgb) / 0.07) 4%,
     transparent 12%,
     transparent 82%,
-    rgb(255 255 255 / 0.06) 95%,
-    rgb(0 0 0 / 0.22) 100%
+    rgb(var(--white-rgb) / 0.06) 95%,
+    rgb(var(--black-rgb) / 0.22) 100%
   );
   --cover-curve-r: linear-gradient(
     to right,
-    rgb(0 0 0 / 0.3) 0%,
-    rgb(0 0 0 / 0.1) 1.5%,
-    rgb(255 255 255 / 0.07) 4%,
+    rgb(var(--black-rgb) / 0.3) 0%,
+    rgb(var(--black-rgb) / 0.1) 1.5%,
+    rgb(var(--white-rgb) / 0.07) 4%,
     transparent 12%,
     transparent 82%,
-    rgb(255 255 255 / 0.06) 95%,
-    rgb(0 0 0 / 0.22) 100%
+    rgb(var(--white-rgb) / 0.06) 95%,
+    rgb(var(--black-rgb) / 0.22) 100%
   );
 
   /* 펼친 책 가운데 책등 골: 페이지 위·아래로 드러난 커버의 가운데를 어둡게 한다.
@@ -87,7 +87,7 @@
   background-color: var(--mauve-700);
   box-shadow: 0 12px 18px -6px var(--shadow-05);
 
-  transition: opacity 0.3s ease;
+  transition: opacity var(--duration-slow) ease;
 }
 
 .history__book-body::before {
@@ -118,10 +118,10 @@
 
   background: repeating-linear-gradient(
     var(--stack-direction),
-    #fbf8f2 0,
-    #fbf8f2 1px,
-    #d8d0c4 1px,
-    #d8d0c4 2px
+    var(--book-paper-edge) 0,
+    var(--book-paper-edge) 1px,
+    var(--book-paper-edge-line) 1px,
+    var(--book-paper-edge-line) 2px
   );
 
   pointer-events: none;
@@ -129,7 +129,7 @@
   /* 페이지가 넘어가는 동안(약 0.6초) 함께 변한다 */
   transition:
     width 0.6s ease,
-    opacity 0.3s ease;
+    opacity var(--duration-slow) ease;
 }
 
 .history__book-stack--left {
@@ -138,7 +138,7 @@
   right: calc(100% - 1px);
   width: calc(var(--board-pad) * var(--stack-left, 0));
 
-  box-shadow: inset -2px 0 3px rgb(0 0 0 / 0.12);
+  box-shadow: inset -2px 0 3px rgb(var(--black-rgb) / 0.12);
 }
 
 .history__book-stack--right {
@@ -147,7 +147,7 @@
   left: calc(100% - 1px);
   width: calc(var(--board-pad) * var(--stack-right, 0));
 
-  box-shadow: inset 2px 0 3px rgb(0 0 0 / 0.12);
+  box-shadow: inset 2px 0 3px rgb(var(--black-rgb) / 0.12);
 }
 
 .history__flipbook {
@@ -166,8 +166,6 @@
 .history__flipbook .stf__item::before {
   display: none;
 }
-
-/* ---------- Leaf ---------- */
 
 .history__leaf {
   position: relative;
@@ -273,23 +271,27 @@
     .history__leaf--blank
   )::after {
   background:
-    radial-gradient(ellipse 24% 5% at 100% 0%, rgb(0 0 0 / 0.12), transparent),
+    radial-gradient(
+      ellipse 24% 5% at 100% 0%,
+      rgb(var(--black-rgb) / 0.12),
+      transparent
+    ),
     radial-gradient(
       ellipse 24% 5% at 100% 100%,
-      rgb(0 0 0 / 0.12),
+      rgb(var(--black-rgb) / 0.12),
       transparent
     ),
     linear-gradient(
       to left,
-      rgb(0 0 0 / 0.32) 0%,
-      rgb(0 0 0 / 0.16) 2%,
-      rgb(0 0 0 / 0.06) 5%,
-      rgb(255 255 255 / 0.22) 9%,
-      rgb(255 255 255 / 0.08) 16%,
+      rgb(var(--black-rgb) / 0.32) 0%,
+      rgb(var(--black-rgb) / 0.16) 2%,
+      rgb(var(--black-rgb) / 0.06) 5%,
+      rgb(var(--white-rgb) / 0.22) 9%,
+      rgb(var(--white-rgb) / 0.08) 16%,
       transparent 26%,
       transparent 70%,
-      rgb(0 0 0 / 0.06) 94%,
-      rgb(0 0 0 / 0.12) 100%
+      rgb(var(--black-rgb) / 0.06) 94%,
+      rgb(var(--black-rgb) / 0.12) 100%
     );
 }
 
@@ -301,19 +303,27 @@
     .history__leaf--blank
   )::after {
   background:
-    radial-gradient(ellipse 24% 5% at 0% 0%, rgb(0 0 0 / 0.12), transparent),
-    radial-gradient(ellipse 24% 5% at 0% 100%, rgb(0 0 0 / 0.12), transparent),
+    radial-gradient(
+      ellipse 24% 5% at 0% 0%,
+      rgb(var(--black-rgb) / 0.12),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 24% 5% at 0% 100%,
+      rgb(var(--black-rgb) / 0.12),
+      transparent
+    ),
     linear-gradient(
       to right,
-      rgb(0 0 0 / 0.32) 0%,
-      rgb(0 0 0 / 0.16) 2%,
-      rgb(0 0 0 / 0.06) 5%,
-      rgb(255 255 255 / 0.22) 9%,
-      rgb(255 255 255 / 0.08) 16%,
+      rgb(var(--black-rgb) / 0.32) 0%,
+      rgb(var(--black-rgb) / 0.16) 2%,
+      rgb(var(--black-rgb) / 0.06) 5%,
+      rgb(var(--white-rgb) / 0.22) 9%,
+      rgb(var(--white-rgb) / 0.08) 16%,
       transparent 26%,
       transparent 70%,
-      rgb(0 0 0 / 0.06) 94%,
-      rgb(0 0 0 / 0.12) 100%
+      rgb(var(--black-rgb) / 0.06) 94%,
+      rgb(var(--black-rgb) / 0.12) 100%
     );
 }
 
@@ -389,8 +399,6 @@
   background: var(--spine-accent-r), var(--cover-curve-r);
 }
 
-/* ---------- 닫힌 책 ---------- */
-
 /* 앞표지 쪽으로 닫혀 있거나 닫히는 중에는 왼쪽 커버가, 뒤표지 쪽이면 오른쪽 커버가 비어 있다.
    반대편 커버는 페이지 묶음 아래에 그대로 남는다. */
 :is(
@@ -445,7 +453,7 @@
     .history__book-body--closed-front,
     .history__book-body--closed-back
   ) {
-    filter: drop-shadow(0 6px 9px rgb(0 0 0 / 0.35));
+    filter: drop-shadow(0 6px 9px rgb(var(--black-rgb) / 0.35));
   }
 
   .history__book-body--landscape:is(
@@ -453,7 +461,7 @@
       .history__book-body--closed-back
     ).history__book-body--hover:not(.history__book-body--turning) {
     transform: translateY(-12px);
-    filter: drop-shadow(0 23px 23px rgb(0 0 0 / 0.5));
+    filter: drop-shadow(0 23px 23px rgb(var(--black-rgb) / 0.5));
   }
 
   /* 떠 있는 상태로 표지를 여는 동안은 계속 떠 있고, 다 열리면(lifted 해제) 내려온다 */
@@ -467,8 +475,6 @@
   translate: none;
   filter: none;
 }
-
-/* ---------- Tablet / Mobile: 한 페이지씩 ---------- */
 
 /* 닫힌 책 위 넘기기 안내 (반쪽 보기). 터치는 그대로 책으로 통과시킨다. */
 .history__book-guide {
@@ -485,8 +491,8 @@
 
   padding: 16px 20px;
 
-  border-radius: 12px;
-  background-color: rgb(0 0 0 / 0.55);
+  border-radius: var(--radius-lg);
+  background-color: rgb(var(--black-rgb) / 0.55);
   backdrop-filter: blur(4px);
 
   color: var(--white);
@@ -498,7 +504,7 @@
   translate: -50% -50%;
   pointer-events: none;
 
-  transition: opacity 0.2s ease;
+  transition: opacity var(--duration-base) ease;
 }
 
 .history__book-guide svg {
@@ -581,7 +587,7 @@
   display: none;
 
   border-radius: var(--leaf-radius);
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--book-focus-ring);
   outline-offset: 2px;
 
   pointer-events: none;

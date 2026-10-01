@@ -23,6 +23,7 @@ import HTMLFlipBook, {
   type FlipbookEventMap,
   type FlipBookHandle,
 } from '@gullabs/react-flipbook';
+import { cx } from '@shared/lib/classNames';
 
 import '../../styles/book/Book.css';
 import { BackCoverInner } from './BackCover';
@@ -168,13 +169,11 @@ export function Book({
     setBodyFlag('closing-back', closing === 'back');
   }
 
-  const bodyClassName = [
+  const bodyClassName = cx(
     'history__book-body',
     landscape ? 'history__book-body--landscape' : 'history__book-body--half',
-    closed ? `history__book-body--closed-${closed}` : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+    closed && `history__book-body--closed-${closed}`,
+  );
 
   return (
     <>

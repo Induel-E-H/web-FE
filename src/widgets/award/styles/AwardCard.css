@@ -1,5 +1,5 @@
 .award__card {
-  --award-card-bg: #f0eadc;
+  --award-card-bg: var(--surface-cream);
   --award-card-secondary: #635c4f;
 
   display: grid;
@@ -12,16 +12,16 @@
   padding: 20px;
 
   border: 1px solid transparent;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background-color: var(--award-card-bg);
   cursor: pointer;
 
   text-align: left;
 
   transition:
-    border-color 0.2s,
-    transform 0.2s,
-    box-shadow 0.2s;
+    border-color var(--duration-base),
+    transform var(--duration-base),
+    box-shadow var(--duration-base);
 }
 
 .award__card:hover {

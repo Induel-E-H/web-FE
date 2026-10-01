@@ -10,7 +10,7 @@
   justify-content: space-between;
   padding: clamp(20px, 2.6vw, 48px) clamp(24px, 4vw, 64px);
 
-  --map-gold: #b8924a;
+  --map-gold: var(--accent-gold-500);
 }
 
 .map__card_content h3 {
@@ -105,8 +105,8 @@
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
+    background-color var(--duration-base) ease,
+    border-color var(--duration-base) ease;
 }
 
 .map__description_call:active,
@@ -141,7 +141,6 @@
 }
 
 @media (max-width: 1024px) {
-  /* Info panel takes its content height; the map fills the rest. */
   .map__content {
     flex: 1;
     min-height: 280px;

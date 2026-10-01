@@ -13,7 +13,7 @@
       clamp(4px, 1.2cqmin, 10px)
   );
   --fs-book-caption: max(9px, min(2.4cqmin, 7.7px + 0.79cqmin));
-  --history-bg: #1a1410;
+  --history-bg: var(--surface-dark);
   --book-page-hr: #606060;
   --book-ink: var(--brown-800);
   --book-ink-sub: var(--brown-500);
@@ -24,12 +24,15 @@
   --book-shadow-light: #e1e1e1;
   --book-shadow-light-line: #b4b4b4;
   --book-page-inner-shadow: #999999;
+  --book-paper-edge: #fbf8f2;
+  --book-paper-edge-line: #d8d0c4;
+  --book-focus-ring: #2563eb;
   --gold-gradient: linear-gradient(
     90deg,
     #b08d57 0%,
-    #f5e6a8 25%,
+    var(--accent-gold-200) 25%,
     #fff6c7 50%,
-    #f5e6a8 75%,
+    var(--accent-gold-200) 75%,
     #b08d57 100%
   );
 

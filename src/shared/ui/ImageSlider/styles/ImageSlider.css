@@ -60,7 +60,7 @@
   color: var(--white);
   font-size: clamp(16px, 1.25vw, 24px);
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-base);
   z-index: 1;
 }
 
@@ -88,11 +88,11 @@
   background: var(--overlay-black-50);
   color: var(--white);
   padding: clamp(2px, 0.3vw, 6px) clamp(8px, 0.8vw, 16px);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-size: var(--fs-xs);
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-base);
   z-index: 2;
 }
 

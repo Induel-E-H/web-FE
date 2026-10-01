@@ -6,7 +6,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Home } from './Home';
 
-// widget 및 util mock
 vi.mock('@shared/lib/scroll', () => ({
   smoothScrollTo: vi.fn(),
 }));

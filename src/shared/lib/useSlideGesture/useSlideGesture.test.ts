@@ -5,7 +5,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useSlideGesture } from './useSlideGesture';
 
-// 테스트용 래퍼 컴포넌트 팩토리
 function makeWrapper(
   setPage: React.Dispatch<React.SetStateAction<number>>,
   totalPages: number,
@@ -42,7 +41,6 @@ describe('useSlideGesture', () => {
       const { getByTestId } = render(createElement(Wrapper));
       const el = getByTestId('slider');
 
-      // touchStart 없이 touchEnd만 발생
       fireEvent.touchEnd(el, { changedTouches: [{ clientX: 50 }] });
 
       expect(mockSetPage).not.toHaveBeenCalled();
@@ -200,7 +198,6 @@ describe('useSlideGesture', () => {
 
       unmount();
 
-      // 언마운트 후 wheel 이벤트를 발생시켜도 setPage가 호출되지 않는다
       el.dispatchEvent(
         new WheelEvent('wheel', {
           deltaX: 100,
@@ -229,14 +226,12 @@ describe('useSlideGesture', () => {
       const { getByTestId } = render(createElement(Wrapper));
       const el = getByTestId('slider');
 
-      // 첫 번째 슬라이드 — 쿨다운 시작
       act(() => {
         fireEvent.touchStart(el, { touches: [{ clientX: 200 }] });
         fireEvent.touchEnd(el, { changedTouches: [{ clientX: 100 }] });
       });
       expect(mockSetPage).toHaveBeenCalledTimes(1);
 
-      // 쿨다운 중 두 번째 슬라이드 — 무시되어야 함
       act(() => {
         fireEvent.touchStart(el, { touches: [{ clientX: 200 }] });
         fireEvent.touchEnd(el, { changedTouches: [{ clientX: 100 }] });
@@ -256,7 +251,6 @@ describe('useSlideGesture', () => {
       });
       expect(mockSetPage).toHaveBeenCalledTimes(1);
 
-      // 쿨다운 해제
       act(() => {
         vi.advanceTimersByTime(400);
       });
@@ -278,7 +272,6 @@ describe('useSlideGesture', () => {
         { initialProps: { totalPages: 3 } },
       );
 
-      // totalPages를 5로 변경 후 재렌더링
       rerender({ totalPages: 5 });
 
       // 업데이트된 ref를 통해 슬라이드 시 totalPages-1(4)로 클램핑되는지 확인

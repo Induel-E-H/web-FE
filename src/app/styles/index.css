@@ -8,13 +8,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* White & Black */
   --white: #ffffff;
   --white-rgb: 255 255 255;
   --black: #000000;
   --black-rgb: 0 0 0;
 
-  /* Alpha overlays */
   --alpha-05: 0.05;
   --alpha-10: 0.1;
   --alpha-15: 0.15;
@@ -24,20 +22,19 @@
   --alpha-50: 0.5;
   --alpha-60: 0.6;
 
-  /* Brown */
   --brown-50: #f6f3f0;
   --brown-100: #e6ded6;
   --brown-200: #d2c2b3;
   --brown-300: #b79d86;
   --brown-400: #947761;
   --brown-500: #6b4f3a;
+  --brown-500-rgb: 107 79 58;
   --brown-600: #5a4231;
   --brown-700: #4a3527;
   --brown-800: #38271d;
   --brown-800-rgb: 56 39 29;
   --brown-900: #241812;
 
-  /* Gray */
   --gray-50: #fafafa;
   --gray-100: #f5f5f5;
   --gray-200: #eeeeee;
@@ -49,7 +46,6 @@
   --gray-800: #424242;
   --gray-900: #212121;
 
-  /* Mauve */
   --mauve-50: #f8f3f5;
   --mauve-100: #f1e6eb;
   --mauve-200: #e3cdd6;
@@ -61,15 +57,15 @@
   --mauve-800: #3a222a;
   --mauve-900: #241518;
 
-  /* Accent */
+  --accent-gold-200: #f5e6a8;
   --accent-gold-400: #e7c889;
+  --accent-gold-500: #b8924a;
+  --accent-gold-500-rgb: 184 146 74;
   --accent-gold-600: #c9a96e;
   --accent-brown-700: #8a6d2f;
 
-  /* Brand Color */
   --brand-color: var(--brown-800);
 
-  /* Shadows */
   --shadow-01: rgb(var(--black-rgb) / var(--alpha-05));
   --shadow-02: rgb(var(--black-rgb) / var(--alpha-10));
   --shadow-03: rgb(var(--black-rgb) / var(--alpha-15));
@@ -79,7 +75,6 @@
   --shadow-07: rgb(var(--black-rgb) / var(--alpha-50));
   --shadow-08: rgb(var(--black-rgb) / var(--alpha-60));
 
-  /* Overlay */
   --overlay-black-10: rgb(var(--black-rgb) / var(--alpha-10));
   --overlay-black-30: rgb(var(--black-rgb) / var(--alpha-30));
   --overlay-black-50: rgb(var(--black-rgb) / var(--alpha-50));
@@ -88,13 +83,13 @@
   --overlay-white-30: rgb(var(--white-rgb) / var(--alpha-30));
   --overlay-white-50: rgb(var(--white-rgb) / var(--alpha-50));
 
-  /* Surface */
   --surface-warm: #faf7f2;
   --surface-light: #f9fafb;
   --surface-cream: #f0ead6;
   --surface-beige: #f5f5dc;
+  --surface-dark: #1a1410;
+  --surface-dark-rgb: 26 20 16;
 
-  /* Typography */
   --typo-contentW: #6f6f6f;
 
   --fs-2xs: 12px;
@@ -108,14 +103,23 @@
   --fs-h2: clamp(32px, 1.6rem + 2vw, 56px);
   --fs-display: clamp(40px, 2rem + 2vw, 64px);
 
-  /* Layout */
   --section-padding-x: max(clamp(14px, 4vw, 40px), min(41vw - 370px, 14.58vw));
   --header-height: clamp(56px, 2vw + 48px, 64px);
   --section-padding-y: clamp(56px, 4vw, 80px);
   --section-title-gap: clamp(28px, 1.5rem + 2vw, 60px);
+
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  --duration-fast: 0.15s;
+  --duration-base: 0.2s;
+  --duration-slow: 0.3s;
+
+  --z-header: 1000;
+  --z-popup: 1001;
+  --z-skip-link: 9999;
 }
 
-/* ─── Box Model ──────────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -124,7 +128,6 @@
   padding: 0;
 }
 
-/* ─── Document ───────────────────────────────────────────────────────────── */
 html {
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
@@ -135,7 +138,6 @@ body {
   min-height: 100dvh;
 }
 
-/* ─── Typography ─────────────────────────────────────────────────────────── */
 body,
 input,
 button,
@@ -150,7 +152,6 @@ optgroup {
   letter-spacing: -0.025em;
 }
 
-/* ─── Media ──────────────────────────────────────────────────────────────── */
 img,
 svg,
 video,
@@ -158,12 +159,10 @@ canvas {
   display: block;
 }
 
-/* ─── Tables ─────────────────────────────────────────────────────────────── */
 table {
   border-collapse: collapse;
 }
 
-/* ─── Interactives ───────────────────────────────────────────────────────── */
 button {
   background: none;
   border: none;
@@ -184,7 +183,6 @@ a,
   outline-offset: 2px;
 }
 
-/* ─── Accessibility ──────────────────────────────────────────────────────── */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -201,12 +199,12 @@ a,
   position: absolute;
   top: -100%;
   left: 1rem;
-  z-index: 9999;
+  z-index: var(--z-skip-link);
   padding: 0.5rem 1rem;
   background: var(--brown-400);
   color: var(--white);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: var(--pretendard-semibold);
   border-radius: 0 0 4px 4px;
   text-decoration: none;
   transition: top 0.1s;

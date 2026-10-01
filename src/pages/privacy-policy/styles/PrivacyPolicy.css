@@ -63,7 +63,7 @@
   background-color: var(--brown-50);
   border-radius: 6px;
   border: 1px solid var(--brown-100);
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow var(--duration-base) ease;
 }
 
 .privacy-policy__highlight-card:hover {
@@ -123,7 +123,7 @@
   text-decoration: none;
   display: block;
   padding: 2px 0;
-  transition: color 0.15s ease;
+  transition: color var(--duration-fast) ease;
 }
 
 .privacy-policy__toc-list li a:hover {
@@ -304,7 +304,7 @@
   font-weight: var(--pretendard-regular);
   color: var(--brown-400);
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform var(--duration-base) ease;
 }
 
 .privacy-policy__cookie-details[open] .privacy-policy__cookie-summary::after {
@@ -371,8 +371,8 @@
   border-radius: 3px;
   cursor: pointer;
   transition:
-    background-color 0.2s ease,
-    transform 0.15s ease;
+    background-color var(--duration-base) ease,
+    transform var(--duration-fast) ease;
 }
 
 .privacy-policy__back-btn:hover {

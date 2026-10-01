@@ -1,9 +1,9 @@
 .patent__card {
-  --patent-card-bg: #efe8da;
+  --patent-card-bg: var(--surface-cream);
   --patent-card-bg-light: #f4eee2;
-  --patent-card-border: rgb(184 146 74 / 0.28);
-  --patent-card-line: rgb(107 79 58 / 0.3);
-  --patent-card-gold: #b8924a;
+  --patent-card-border: rgb(var(--accent-gold-500-rgb) / 0.28);
+  --patent-card-line: rgb(var(--brown-500-rgb) / var(--alpha-30));
+  --patent-card-gold: var(--accent-gold-500);
 
   position: relative;
 
@@ -17,7 +17,7 @@
   padding: 39px 20px 33px;
 
   border: 1px solid var(--patent-card-border);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: linear-gradient(
     160deg,
     var(--patent-card-bg-light),
@@ -55,7 +55,7 @@
   transform: translateY(-4px);
 
   border-color: var(--patent-card-gold);
-  box-shadow: 0 18px 36px rgb(0 0 0 / 0.35);
+  box-shadow: 0 18px 36px rgb(var(--black-rgb) / 0.35);
 }
 
 .patent__card:focus-visible {
@@ -76,7 +76,7 @@
   width: 40px;
   height: 40px;
 
-  border: 1px solid rgb(184 146 74 / 0.5);
+  border: 1px solid rgb(var(--accent-gold-500-rgb) / var(--alpha-50));
   border-radius: 50%;
 
   font-size: 20px;

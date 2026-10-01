@@ -24,7 +24,7 @@
 
   letter-spacing: 0.08em;
 
-  color: #f5e6a8;
+  color: var(--accent-gold-200);
 }
 
 .history__usage-list {
@@ -42,7 +42,7 @@
 
   padding-bottom: clamp(11px, 4.04cqmin, 26px);
 
-  border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  border-bottom: 1px solid rgb(var(--white-rgb) / 0.12);
 }
 
 .history__usage-item:last-child {
@@ -65,7 +65,7 @@
   flex-shrink: 0;
 
   font-size: clamp(18px, 3.6cqmin, 24px);
-  color: #f5e6a8;
+  color: var(--accent-gold-200);
 }
 
 .history__usage-item dd {

@@ -9,8 +9,8 @@ export function MapMarker() {
     >
       <defs>
         <radialGradient id='pinGrad' cx='38%' cy='28%' r='62%'>
-          <stop offset='0%' stopColor='#4a3527' />
-          <stop offset='100%' stopColor='#241812' />
+          <stop className='map__marker__stop-start' offset='0%' />
+          <stop className='map__marker__stop-end' offset='100%' />
         </radialGradient>
       </defs>
       <ellipse
