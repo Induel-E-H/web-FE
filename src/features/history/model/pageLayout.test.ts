@@ -15,7 +15,10 @@ import {
   isHardLeaf,
   shouldRenderLeaf,
 } from './pageLayout';
-import { getPageRegistry } from './pageRegistry';
+import {
+  getPageRegistry,
+  MILESTONES_YEAR_RANGES_BY_BREAKPOINT,
+} from './pageRegistry';
 
 function contentPageCount(breakpoint: 'desktop' | 'tablet' | 'mobile') {
   const registry = getPageRegistry(breakpoint);
@@ -238,10 +241,16 @@ describe('hasPageContent', () => {
   });
 
   it('Milestones 는 브레이크포인트별 연도 구간 수를 넘는 쪽이 비어 있다', () => {
-    expect(hasPageContent(page('Milestones', 3, 'left'), 'mobile')).toBe(true);
-    expect(hasPageContent(page('Milestones', 3, 'right'), 'mobile')).toBe(
-      false,
-    );
+    const ranges = MILESTONES_YEAR_RANGES_BY_BREAKPOINT.mobile;
+    const lastIndex = ranges.length - 1;
+    const pageOf = (index: number) =>
+      page(
+        'Milestones',
+        Math.floor(index / 2),
+        index % 2 === 0 ? 'left' : 'right',
+      );
+    expect(hasPageContent(pageOf(lastIndex), 'mobile')).toBe(true);
+    expect(hasPageContent(pageOf(lastIndex + 1), 'mobile')).toBe(false);
   });
 
   it('List 와 Timeline 은 항상 내용이 있다', () => {
