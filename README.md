@@ -130,6 +130,7 @@ AI 기반 이미지 생성과 키워드 구조화를 통해
 - 책 넘김 엔진(`@gullabs/react-flipbook`)의 모서리 접힘 버그는 `patch-package`로 직접 패치
 
 <img width="2476" height="1291" alt="image" src="https://github.com/user-attachments/assets/71dec15e-f3be-4766-a7b1-ceb104e351f4" />
+<img width="1839" height="892" alt="after" src="https://github.com/user-attachments/assets/0777dd06-2839-443f-9632-dd02a2de845a" />
 
 ### Award
 
@@ -279,12 +280,12 @@ npm run dev:history    # 위젯 하나만 띄우기 (hero, vision, history, awar
 - Desktop
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 98+|🟢 100|🟠 75+|🟢 100|
+  |🟢 100|🟢 100|🟠 75+|🟢 100|
 
 - Mobile
   |Performance|Accessibility|Best Practice|SEO|
   |---|---|---|---|
-  |🟢 94+|🟢 100|🟠 73+|🟢 100|
+  |🟢 95+|🟢 100|🟠 73+|🟢 100|
 - 웹 접근성 개선 (ARIA 속성 및 키보드 네비게이션 지원)
 
 ### Optimization
