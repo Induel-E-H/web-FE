@@ -1,5 +1,5 @@
 .patent__card {
-  --patent-card-bg: #efe8da;
+  --patent-card-bg: var(--surface-cream);
   --patent-card-bg-light: #f4eee2;
   --patent-card-border: rgb(var(--accent-gold-500-rgb) / 0.28);
   --patent-card-line: rgb(var(--brown-500-rgb) / var(--alpha-30));

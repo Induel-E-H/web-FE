@@ -1,5 +1,5 @@
 .award__card {
-  --award-card-bg: #f0eadc;
+  --award-card-bg: var(--surface-cream);
   --award-card-secondary: #635c4f;
 
   display: grid;

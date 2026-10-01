@@ -1,6 +1,5 @@
 .header {
-  --header-bg-rgb: 26 21 18;
-  --header-bg: rgb(var(--header-bg-rgb) / 0.72);
+  --header-bg: rgb(var(--surface-dark-rgb) / 0.72);
 
   position: fixed;
   top: 0;
@@ -118,7 +117,7 @@ body[data-popup-open] .header {
   left: 0;
   right: 0;
   /* Nested backdrop-filter can't blur the page, so keep this panel near-opaque. */
-  background-color: rgb(var(--header-bg-rgb) / 0.95);
+  background-color: rgb(var(--surface-dark-rgb) / 0.95);
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgb(var(--white-rgb) / var(--alpha-10));
