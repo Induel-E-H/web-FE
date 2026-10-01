@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
 
       # 2) install
-      - run: yarn
+      - run: npm ci
 
       # 3) Chromatic 실행
       - uses: chromaui/action@v18
