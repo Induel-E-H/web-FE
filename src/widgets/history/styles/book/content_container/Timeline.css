@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
 
-  gap: 2.6vmax;
+  gap: clamp(22px, 8.09cqmin, 52px);
 }
 
 .timeline__ul {
@@ -17,7 +17,7 @@
 
   width: 100%;
 
-  height: 39.36vh;
+  height: 62cqh;
   justify-content: space-between;
 
   list-style: none;
@@ -49,23 +49,17 @@
      목록은 제목 아래 남은 공간의 가운데에 둔다 */
   .timeline__container {
     justify-content: flex-start;
-
-    gap: 1.3vw;
   }
 
   .timeline__ul {
-    height: 30.67vh;
+    height: 45cqh;
 
     margin-block: auto;
   }
 }
 
 @media (max-width: 767px) {
-  .timeline__container {
-    gap: clamp(9px, 2.67vw, 13px);
-  }
-
   .timeline__ul {
-    height: 28.82vh;
+    height: 60cqh;
   }
 }

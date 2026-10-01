@@ -109,19 +109,10 @@
   --fs-display: clamp(40px, 2rem + 2vw, 64px);
 
   /* Layout */
-  --section-padding-x: 14.58vmax;
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --section-padding-x: 3.91vw;
-  }
-}
-
-@media (max-width: 767px) {
-  :root {
-    --section-padding-x: clamp(14px, 4vw, 20px);
-  }
+  --section-padding-x: max(clamp(14px, 4vw, 40px), min(41vw - 370px, 14.58vw));
+  --header-height: clamp(56px, 2vw + 48px, 64px);
+  --section-padding-y: clamp(56px, 4vw, 80px);
+  --section-title-gap: clamp(28px, 1.5rem + 2vw, 60px);
 }
 
 /* ─── Box Model ──────────────────────────────────────────────────────────── */

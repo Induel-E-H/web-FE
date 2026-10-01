@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: clamp(16px, 2vw, 24px);
-  padding: clamp(56px, 5vw, 80px) var(--section-padding-x);
+  gap: var(--section-title-gap);
+  padding: var(--section-padding-y) var(--section-padding-x);
   overflow: hidden;
   background-color: var(--surface-warm);
 }

@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
 
-  gap: 1.04vmax;
+  gap: clamp(9px, 3.23cqmin, 21px);
 }
 
 .milestones__content {
@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
 
-  gap: 0.26vmax;
+  gap: clamp(2px, 0.81cqmin, 5px);
 }
 
 .milestones__year {
@@ -44,7 +44,8 @@
 .milestones__ul li {
   display: flex;
 
-  gap: 1.93%;
+  gap: 0.5em;
+  word-break: keep-all;
 
   font-size: var(--fs-book);
   font-weight: var(--pretendard-regular);
@@ -62,34 +63,10 @@
 @media (max-width: 1024px) {
   .milestones__container {
     justify-content: flex-start;
-
-    gap: 1.3vw;
   }
 
   .milestones__content {
     align-items: flex-start;
     gap: 0;
-  }
-
-  .milestones__year-group {
-    gap: 0.39vw;
-  }
-
-  .milestones__ul li {
-    gap: 0.39vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .milestones__container {
-    gap: clamp(9px, 2.67vw, 13px);
-  }
-
-  .milestones__year-group {
-    gap: clamp(2px, 0.8vw, 4px);
-  }
-
-  .milestones__ul li {
-    gap: clamp(3px, 1vw, 5px);
   }
 }

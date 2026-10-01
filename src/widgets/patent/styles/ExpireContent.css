@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
 
-  gap: 1.56vmax;
+  gap: clamp(20px, 1.6vw, 28px);
 }
 
 .patent__expiration__title {
@@ -54,8 +54,8 @@
   grid-template-rows: repeat(5, auto);
   grid-auto-flow: column;
 
-  column-gap: 2.08vmax;
-  row-gap: 1.3vmax;
+  column-gap: clamp(24px, 2.08vw, 40px);
+  row-gap: clamp(16px, 1.3vw, 24px);
 
   list-style: none;
   margin: 0;
@@ -68,7 +68,7 @@
 
   width: 100%;
 
-  gap: 0.63vmax;
+  gap: clamp(8px, 0.63vw, 12px);
 }
 
 .patent__expiration__item__text {
@@ -86,10 +86,13 @@
 
   align-items: center;
 
-  gap: 1.25vmax;
+  gap: clamp(18px, 1.25vw + 6px, 28px);
 }
 
 .patent__expiration__item__content span:first-child {
+  flex-shrink: 0;
+  min-width: 3ch;
+
   font-weight: var(--pretendard-bold);
   font-size: var(--fs-sm);
 
@@ -97,6 +100,8 @@
 }
 
 .patent__expiration__item__content span:last-child {
+  word-break: keep-all;
+
   font-weight: var(--pretendard-regular);
   font-size: var(--fs-sm);
 
@@ -120,42 +125,10 @@
 }
 
 @media (max-width: 1024px) {
-  .patent__expiration {
-    gap: 2.6vw;
-  }
-
   .patent__expiration__content {
     display: flex;
     flex-direction: column;
 
-    gap: 3.26vw;
-  }
-
-  .patent__expiration__item {
-    width: 100%;
-
-    gap: 1.3vw;
-  }
-
-  .patent__expiration__item__content {
-    gap: 3.13vw;
-  }
-}
-
-@media (max-width: 767px) {
-  .patent__expiration {
-    gap: clamp(19px, 5.3vw, 27px);
-  }
-
-  .patent__expiration__content {
-    gap: clamp(23px, 6.67vw, 33px);
-  }
-
-  .patent__expiration__item {
-    gap: clamp(8px, 2.13vw, 11px);
-  }
-
-  .patent__expiration__item__content {
-    gap: clamp(23px, 6.5vw, 33px);
+    gap: clamp(20px, 3vw, 32px);
   }
 }

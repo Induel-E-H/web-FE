@@ -7,16 +7,16 @@
   width: 100%;
   height: 100%;
 
-  gap: 0.52vmax;
+  gap: clamp(4px, 1.62cqmin, 10px);
 
-  padding: 2.6vmax 1.56vmax;
+  padding: clamp(22px, 8.09cqmin, 52px) clamp(13px, 4.85cqmin, 31px);
 
   color: var(--mauve-700);
 }
 
 .history__colophon-name {
   font-family: var(--font-bookendbatang);
-  font-size: var(--fs-xl);
+  font-size: var(--fs-book-xl);
   font-weight: var(--bookendbatang-bold);
 
   letter-spacing: 0.15em;
@@ -24,7 +24,7 @@
 
 .history__colophon-full,
 .history__colophon-fields {
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-book-2xs);
 
   letter-spacing: 0.2em;
 }
@@ -32,7 +32,7 @@
 .history__colophon hr {
   width: 100%;
 
-  margin: 0.78vmax 0;
+  margin: clamp(7px, 2.43cqmin, 16px) 0;
 
   border: none;
   border-top: 1px solid var(--book-page-hr);
@@ -42,31 +42,19 @@
   display: flex;
   flex-direction: column;
 
-  gap: 0.36vmax;
+  gap: clamp(3px, 1.12cqmin, 7px);
 
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-book-2xs);
 }
 
 .history__colophon-info div {
   display: flex;
 
-  gap: 1.04vmax;
+  gap: clamp(9px, 3.23cqmin, 21px);
 }
 
 .history__colophon-info dt {
   min-width: 2.6em;
 
   font-weight: var(--pretendard-semibold);
-}
-
-@media (max-width: 1024px) {
-  .history__colophon {
-    gap: 1.3vw;
-
-    padding: 6.5vw 3.9vw;
-  }
-
-  .history__colophon-info {
-    gap: 1vw;
-  }
 }

@@ -1,40 +1,36 @@
 .home__fallback--history {
-  min-height: 100vh;
+  min-height: max(100svh, 640px);
   background-color: #1a1410;
 }
 
 .home__fallback--award {
-  min-height: 100vh;
+  min-height: 100svh;
   background-color: #faf7f2;
 }
 
 .home__fallback--patent {
-  min-height: 100vh;
+  min-height: 100svh;
   background-color: #38271d;
 }
 
 .home__fallback--map {
-  min-height: 85.11vh;
+  min-height: 85.11svh;
   background-color: #faf7f2;
 }
 
 .home__fallback--footer {
-  min-height: 13.54vmax;
+  min-height: 300px;
   background-color: #38271d;
 }
 
 @media (max-width: 1024px) {
   .home__fallback--map {
-    min-height: 100vh;
-  }
-
-  .home__fallback--footer {
-    min-height: 31.25vw;
+    min-height: 100svh;
   }
 }
 
 @media (max-width: 767px) {
   .home__fallback--footer {
-    min-height: clamp(187px, 53.33vw, 267px);
+    min-height: 480px;
   }
 }
