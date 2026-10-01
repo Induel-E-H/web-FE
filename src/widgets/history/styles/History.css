@@ -15,6 +15,8 @@
   --fs-book-caption: max(9px, min(2.4cqmin, 7.7px + 0.79cqmin));
   --history-bg: #1a1410;
   --book-page-hr: #606060;
+  --book-ink: var(--brown-800);
+  --book-ink-sub: var(--brown-500);
   --book-shadow-dark: #b9b9b9;
   --book-shadow-dark-line: #828282;
   --book-shadow-mid: #cdcdcd;

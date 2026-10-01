@@ -46,7 +46,7 @@
 
 .list__ul li::before {
   content: '•';
-  color: var(--typo-contentW);
+  color: var(--book-ink-sub);
   flex-shrink: 0;
 
   font-size: var(--fs-book);
@@ -60,10 +60,10 @@
 
   cursor: pointer;
 
-  font-weight: var(--pretendard-semibold);
+  font-weight: var(--pretendard-medium);
   font-size: var(--fs-book);
 
-  color: var(--typo-contentW);
+  color: var(--book-ink);
 
   text-align: left;
 }

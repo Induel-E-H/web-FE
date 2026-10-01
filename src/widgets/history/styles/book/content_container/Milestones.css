@@ -32,7 +32,7 @@
 .milestones__year {
   font-weight: var(--pretendard-bold);
   font-size: var(--fs-book);
-  color: var(--black);
+  color: var(--book-ink);
 }
 
 .milestones__ul {
@@ -48,9 +48,9 @@
   word-break: keep-all;
 
   font-size: var(--fs-book);
-  font-weight: var(--pretendard-regular);
+  font-weight: var(--pretendard-medium);
 
-  color: var(--black);
+  color: var(--book-ink);
 }
 
 .milestones__ul li::before {
@@ -58,6 +58,8 @@
   flex-shrink: 0;
 
   font-size: var(--fs-book);
+
+  color: var(--book-ink-sub);
 }
 
 @media (max-width: 1024px) {

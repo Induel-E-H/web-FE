@@ -43,7 +43,7 @@
   letter-spacing: 0.2em;
   white-space: nowrap;
 
-  color: var(--black);
+  color: var(--book-ink);
 }
 
 .book-page-title__en {
@@ -55,5 +55,5 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
 
-  color: var(--typo-contentW);
+  color: var(--book-ink-sub);
 }

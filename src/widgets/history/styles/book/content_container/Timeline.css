@@ -30,15 +30,26 @@
   gap: 0.5em;
 
   font-size: var(--fs-book);
-  font-weight: var(--pretendard-semibold);
+  font-weight: var(--pretendard-medium);
 
-  color: var(--typo-contentW);
+  color: var(--book-ink);
 }
 
 .timeline__ul li::before {
   content: '•';
   flex-shrink: 0;
   font-size: var(--fs-book);
+
+  color: var(--book-ink-sub);
+}
+
+.timeline__ul time {
+  flex-shrink: 0;
+
+  font-weight: var(--pretendard-semibold);
+  font-variant-numeric: tabular-nums;
+
+  color: var(--book-ink-sub);
 }
 
 .timeline__ul-placeholder {

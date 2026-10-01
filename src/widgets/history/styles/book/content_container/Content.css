@@ -57,7 +57,7 @@
   font-weight: var(--bookendbatang-bold);
   font-size: var(--fs-book-xl);
 
-  color: var(--black);
+  color: var(--book-ink);
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -67,7 +67,7 @@
   font-weight: var(--pretendard-extrabold);
   font-size: var(--fs-book-sm);
 
-  color: var(--black);
+  color: var(--book-ink);
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -81,14 +81,14 @@
   font-weight: var(--bookendbatang-bold);
   font-size: var(--fs-book);
 
-  color: var(--black);
+  color: var(--book-ink);
 }
 
 .content__body {
   font-weight: var(--bookendbatang-bold);
   font-size: var(--fs-book);
 
-  color: var(--typo-contentW);
+  color: var(--book-ink-sub);
 
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -123,7 +123,7 @@
   font-weight: var(--bookendbatang-regular);
   font-size: var(--fs-book-caption);
 
-  color: var(--typo-contentW);
+  color: var(--book-ink-sub);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -132,7 +132,7 @@
   font-weight: var(--bookendbatang-regular);
   font-size: var(--fs-book-caption);
 
-  color: var(--typo-contentW);
+  color: var(--book-ink-sub);
   min-width: 0;
   word-break: keep-all;
   overflow-wrap: break-word;
