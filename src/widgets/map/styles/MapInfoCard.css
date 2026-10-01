@@ -1,31 +1,30 @@
 .map__info__card {
   background: var(--white);
-  border-radius: 0.65vmax;
+  border-radius: clamp(10px, 0.625vw, 13px);
   overflow: hidden;
-  box-shadow: 0 0.417vmax 1.25vmax var(--shadow-03);
-  width: 15vmax;
-  min-width: 240px;
+  box-shadow: 0 6px 18px var(--shadow-03);
+  width: clamp(240px, 15vw, 300px);
 }
 
 .map__info__tail {
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid var(--white);
+  border-left: clamp(8px, 0.5vw, 10px) solid transparent;
+  border-right: clamp(8px, 0.5vw, 10px) solid transparent;
+  border-top: clamp(8px, 0.5vw, 10px) solid var(--white);
   margin: 0 auto;
 }
 
 .map__info__header {
   background: var(--brand-color);
-  padding: 0.65vmax 0.75vmax;
+  padding: clamp(10px, 0.625vw, 13px) clamp(12px, 0.75vw, 15px);
   display: flex;
   align-items: center;
-  gap: 0.55vmax;
+  gap: clamp(8px, 0.5vw, 10px);
 }
 
 .map__info__logo {
-  width: 1.3vmax;
+  width: clamp(20px, 1.25vw, 25px);
 }
 
 .map__info__name {
@@ -40,16 +39,16 @@
 }
 
 .map__info__body {
-  padding: 0.65vmax 0.75vmax;
+  padding: clamp(10px, 0.625vw, 13px) clamp(12px, 0.75vw, 15px);
   display: flex;
   flex-direction: column;
-  gap: 0.5vmax;
+  gap: clamp(8px, 0.5vw, 10px);
 }
 
 .map__info__row {
   display: flex;
   align-items: center;
-  gap: 0.5vmax;
+  gap: clamp(8px, 0.5vw, 10px);
 }
 
 .map__info__row--top {
@@ -57,17 +56,17 @@
 }
 
 .map__info__icon-box {
-  width: 1.4vmax;
-  height: 1.4vmax;
+  width: clamp(22px, 1.375vw, 28px);
+  height: clamp(22px, 1.375vw, 28px);
   background: var(--brown-50);
-  border-radius: 0.38vmax;
+  border-radius: clamp(6px, 0.375vw, 8px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .map__info__icon {
-  width: 0.8vmax;
+  width: clamp(12px, 0.75vw, 15px);
 }
 
 .map__info__phone,
@@ -80,77 +79,4 @@
 .map__info__address-sub {
   font-size: var(--fs-2xs);
   color: var(--gray-700);
-}
-
-@media (max-width: 1024px) {
-  .map__info__card {
-    width: 28.65vmin;
-    border-radius: 0.8vmin;
-    box-shadow: 0 0.5vmin 1.2vmin var(--shadow-03);
-  }
-
-  .map__info__header {
-    padding: 1.2vmin 1.3vmin;
-    gap: 0.9vmin;
-  }
-
-  .map__info__logo {
-    width: 2.4vmin;
-  }
-
-  .map__info__body {
-    padding: 1.2vmin 1.3vmin;
-    gap: 0.9vmin;
-  }
-
-  .map__info__icon-box {
-    width: 2.4vmin;
-    height: 2.4vmin;
-  }
-
-  .map__info__icon {
-    width: 1.5vmin;
-  }
-}
-
-@media (max-width: 767px) {
-  .map__info__card {
-    width: 69.5vmin;
-    border-radius: 2.6vmin;
-    box-shadow: 0 0.8vmin 3vmin var(--shadow-02);
-  }
-
-  .map__info__header {
-    padding: 3.2vmin 3.7vmin;
-    gap: 2.6vmin;
-  }
-
-  .map__info__logo {
-    width: 5.8vmin;
-  }
-
-  .map__info__body {
-    padding: 3.2vmin 3.7vmin;
-    gap: 2.6vmin;
-  }
-
-  .map__info__row {
-    gap: 2.6vmin;
-  }
-
-  .map__info__icon-box {
-    width: 5.8vmin;
-    height: 5.8vmin;
-    border-radius: 1.6vmin;
-  }
-
-  .map__info__icon {
-    width: 3vmin;
-  }
-
-  .map__info__tail {
-    border-left: 1.6vmin solid transparent;
-    border-right: 1.6vmin solid transparent;
-    border-top: 1.6vmin solid var(--white);
-  }
 }

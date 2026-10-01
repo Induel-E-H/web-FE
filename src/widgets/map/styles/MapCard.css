@@ -1,16 +1,14 @@
 .map__content {
   width: 58.33%;
-  height: 100%;
 }
 
 .map__card_content {
   display: flex;
   flex-direction: column;
   width: 41.67%;
-  height: 100%;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 2.6vmax 3.65vmax;
+  padding: clamp(20px, 2.6vw, 48px) clamp(24px, 4vw, 64px);
 
   --map-gold: #b8924a;
 }
@@ -26,14 +24,14 @@
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: clamp(16px, 4svh - 16px, 48px);
 }
 
 .map__description li {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  gap: 0.78vmax;
+  gap: 12px;
 }
 
 .map__icon_frame {
@@ -58,7 +56,7 @@
 .map__description_text {
   display: flex;
   flex-direction: column;
-  gap: 0.26vmax;
+  gap: 4px;
 }
 
 .map__description_text h4 {
@@ -156,15 +154,6 @@
     gap: 16px;
     width: 100%;
     height: auto;
-    padding: 2.6vw 9.11vw;
-  }
-
-  .map__description li {
-    gap: 1.95vw;
-  }
-
-  .map__description_text {
-    gap: 0.65vw;
   }
 
   .map__card_content hr {
@@ -173,21 +162,9 @@
 }
 
 @media (max-width: 767px) {
-  .map__card_content {
-    padding: clamp(14px, 4vw, 20px) clamp(28px, 8vw, 40px);
-  }
-
   .map__description_call,
   .map__directions {
     padding: 0 12px;
-  }
-
-  .map__description li {
-    gap: clamp(9px, 2.67vw, 13px);
-  }
-
-  .map__description_text {
-    gap: 0;
   }
 
   .map__card_content hr {
