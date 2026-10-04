@@ -16,7 +16,7 @@ jobs:
       - name: Check relevant paths
         id: paths
         if: github.event_name == 'pull_request'
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         with:
           filters: |
             relevant:
