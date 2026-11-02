@@ -97,12 +97,14 @@ export function findLeafIndex(
   leaves: readonly Leaf[],
   item: IndexItem,
   pageIndex = 0,
+  side: PageSide = PAGE_SIDE.LEFT,
 ): number {
   return leaves.findIndex(
     (leaf) =>
       leaf.kind === 'page' &&
       leaf.item === item &&
-      leaf.pageIndex === pageIndex,
+      leaf.pageIndex === pageIndex &&
+      leaf.side === side,
   );
 }
 
