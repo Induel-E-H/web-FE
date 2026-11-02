@@ -132,6 +132,18 @@ describe('findLeafIndex', () => {
     expect(findLeafIndex(leaves, 'Content', 2)).toBe(contentStart + 4);
   });
 
+  it('side 를 반영한다', () => {
+    expect(findLeafIndex(leaves, 'Content', 2, 'right')).toBe(contentStart + 5);
+  });
+
+  it('반쪽 보기에서 오른쪽 장은 왼쪽 장과 다른 펼침면에 있다', () => {
+    const mobile = buildLeaves('mobile');
+    const left = findLeafIndex(mobile, 'Content', 0, 'left');
+    const right = findLeafIndex(mobile, 'Content', 0, 'right');
+    expect(mobile[right]).toMatchObject({ item: 'Content', side: 'right' });
+    expect(right).toBe(left + 2);
+  });
+
   it('없는 페이지는 -1 을 반환한다', () => {
     expect(findLeafIndex(leaves, 'List', 5)).toBe(-1);
   });

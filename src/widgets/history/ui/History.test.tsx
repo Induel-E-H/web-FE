@@ -135,18 +135,22 @@ describe('History', () => {
       const onListItemClick = getListItemClick();
       act(() => onListItemClick(5));
       expect(engine.props?.targetLeaf).toBe(
-        findLeafIndex(leaves, 'Content', 2),
+        findLeafIndex(leaves, 'Content', 2, 'right'),
       );
       expect(engine.handle.flipNext).toHaveBeenCalledTimes(1);
     });
 
-    it('한 장에 두 작품씩 담기므로 이웃한 두 항목은 같은 장으로 이동한다', () => {
+    it('짝수 번째 작품은 왼쪽 장, 홀수 번째 작품은 오른쪽 장으로 이동한다', () => {
       render(<History />);
       const onListItemClick = getListItemClick();
       act(() => onListItemClick(2));
-      const first = engine.props?.targetLeaf;
+      expect(engine.props?.targetLeaf).toBe(
+        findLeafIndex(leaves, 'Content', 1, 'left'),
+      );
       act(() => onListItemClick(3));
-      expect(engine.props?.targetLeaf).toBe(first);
+      expect(engine.props?.targetLeaf).toBe(
+        findLeafIndex(leaves, 'Content', 1, 'right'),
+      );
     });
   });
 
