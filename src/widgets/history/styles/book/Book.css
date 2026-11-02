@@ -353,17 +353,17 @@
 .history__leaf--inside-back::before {
   content: '';
 
+  /* 면지는 페이지 자리에 딱 맞춘다. 종이가 넘어가며 표지 안쪽이 드러날 때 엔진이 페이지 크기로
+     잘라 그리는데, 그 바깥 여백이 뒤의 커버와 같아야 잘린 경계가 보이지 않는다. */
   position: absolute;
-  inset: clamp(6px, 0.78vw, 15px) 0 clamp(6px, 0.78vw, 15px)
-    clamp(6px, 0.78vw, 15px);
+  inset: var(--board-pad) 0 var(--board-pad) var(--cover-side);
 
   background-color: var(--mauve-600);
   box-shadow: inset 0 0 15px var(--shadow-05);
 }
 
 .history__leaf--inside-back::before {
-  inset: clamp(6px, 0.78vw, 15px) clamp(6px, 0.78vw, 15px)
-    clamp(6px, 0.78vw, 15px) 0;
+  inset: var(--board-pad) var(--cover-side) var(--board-pad) 0;
 }
 
 /* 표지 장에도 커버와 같은 굴곡을 입힌다. 표지 안쪽은 펼친 책 뒤 커버와 이어지므로 책등 골도 같이 둔다. */
@@ -427,15 +427,18 @@
   transition: none;
 }
 
-/* 표지가 빈 공간 위로 넘어가는 동안(열기·닫기)에는 엔진의 하드 페이지 그림자를 그리지 않는다.
-   아래에 페이지가 없어 어두운 사각형만 남기 때문이다. */
-:is(
-    .history__book-body--closed-front,
-    .history__book-body--closed-back,
-    .history__book-body--closing-front,
-    .history__book-body--closing-back
+/* 하드 장(표지·표지 안쪽) 넘김은 모두 표지 열기·닫기라, 아래에 페이지가 없어 어두운 사각형만 남는다. */
+.history__book-body :is(.stf__hardShadow, .stf__hardInnerShadow) {
+  display: none !important;
+}
+
+/* 넘기는 종이 아래로 표지 안쪽이 드러나는 동안(엔진이 보이는 장의 --simple 을 뗀다)
+   종이 그림자는 페이지 크기로만 그려져 커버 여백과 단차가 생기므로 그리지 않는다. */
+.history__book-body:has(
+    .stf__item.--shown:not(.--simple)
+      > :is(.history__leaf--inside-front, .history__leaf--inside-back)
   )
-  :is(.stf__hardShadow, .stf__hardInnerShadow) {
+  :is(.stf__outerShadow, .stf__innerShadow) {
   display: none !important;
 }
 
